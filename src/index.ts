@@ -24,6 +24,8 @@ export { default as SCardContent } from './components/ui/card/SCardContent.vue'
 export { default as SCardFooter } from './components/ui/card/SCardFooter.vue'
 export { default as SCardMedia } from './components/ui/card/SCardMedia.vue'
 export { default as SCardActions } from './components/ui/card/SCardActions.vue'
+// Glass Card
+export { default as SGlassCard } from './components/ui/card/SGlassCard.vue'
 // Morphing Card
 export {
   SMorphingCard,

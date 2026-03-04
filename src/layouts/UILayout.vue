@@ -37,6 +37,7 @@ const uiNavigation = [
   { name: 'Dialog', href: '/ui/dialog', icon: 'comment-question-outline' },
   { name: 'Drawer', href: '/ui/drawer', icon: 'dock-bottom' },
   { name: 'Dropdown', href: '/ui/dropdown', icon: 'menu-down' },
+  { name: 'Glass Card', href: '/ui/glass-card', icon: 'blur' },
   { name: 'Icons', href: '/ui/icons', icon: 'emoticon' },
   { name: 'Input', href: '/ui/input', icon: 'form-textbox' },
   { name: 'Modal', href: '/ui/modal', icon: 'forum-outline' },

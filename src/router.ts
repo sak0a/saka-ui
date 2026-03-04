@@ -161,6 +161,11 @@ const router = createRouter({
                     name: 'ui-dialog',
                     component: () => import('./views/ui/DialogView.vue')
                 },
+                {
+                    path: 'glass-card',
+                    name: 'ui-glass-card',
+                    component: () => import('./views/ui/GlassCardView.vue')
+                },
             ]
         },
         {
