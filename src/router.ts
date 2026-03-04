@@ -22,6 +22,11 @@ const router = createRouter({
                     component: () => import('./views/ui/TabsView.vue')
                 },
                 {
+                    path: 'glass-button',
+                    name: 'ui-glass-button',
+                    component: () => import('./views/ui/GlassButtonView.vue')
+                },
+                {
                     path: 'icons',
                     name: 'ui-icons',
                     component: () => import('./views/ui/IconsView.vue')
