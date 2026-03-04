@@ -434,7 +434,7 @@ defineExpose({
   transition: opacity 0.2s ease-out;
 }
 
-/* === GLASS REFRACTION + BLUR (backdrop layer) === */
+/* === GLASS BLUR (backdrop layer) === */
 .s-glass-card::after {
   content: '';
   position: absolute;
@@ -443,9 +443,6 @@ defineExpose({
   z-index: -1;
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
-  filter: url(#s-glass-refract);
-  overflow: hidden;
-  isolation: isolate;
   pointer-events: none;
 }
 
