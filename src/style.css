@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Theme Variables - Light Mode (Default) */
+  --s-bg-primary: #ffffff;
+  --s-bg-secondary: #f9fafb;
+  --s-bg-tertiary: #f3f4f6;
+  --s-text-primary: #111827;
+  --s-text-secondary: #4b5563;
+  --s-text-tertiary: #9ca3af;
+  --s-border: #e5e7eb;
+  --s-border-hover: #d1d5db;
+  --s-border-subtle: rgba(0, 0, 0, 0.06);
+  --s-primary: #059669;
+  --s-primary-hover: #10b981;
+  --s-primary-alpha: rgba(5, 150, 105, 0.15);
+  --s-primary-rgb: 5, 150, 105;
+
+  font-family: "Geist", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--s-text-primary);
+  background-color: var(--s-bg-primary);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+:root.dark {
+  /* Theme Variables - Dark Mode */
+  --s-bg-primary: #0a0a0a;
+  /* neutral-950 */
+  --s-bg-secondary: #171717;
+  /* neutral-900 */
+  --s-bg-tertiary: #262626;
+  /* neutral-800 */
+  --s-text-primary: #f5f5f5;
+  /* neutral-50 */
+  --s-text-secondary: #a3a3a3;
+  /* neutral-400 */
+  --s-text-tertiary: #737373;
+  /* neutral-500 */
+  --s-border: #262626;
+  /* neutral-800 */
+  --s-border-hover: #404040;
+  /* neutral-700 */
+  --s-border-subtle: rgba(255, 255, 255, 0.06);
+  --s-primary: #63e2b7;
+  --s-primary-hover: #7fe7c4;
+  --s-primary-alpha: rgba(99, 226, 183, 0.2);
+  --s-primary-rgb: 99, 226, 183;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
