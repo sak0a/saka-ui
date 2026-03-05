@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 interface TocItem {
   id: string
@@ -143,14 +146,15 @@ onUnmounted(() => {
 <template>
   <nav 
     v-if="tocItems.length > 0"
-    class="w-44 shrink-0 hidden xl:block"
+    v-bind="$attrs"
+    :class="cn('w-44 shrink-0 hidden xl:block')"
     aria-label="Table of contents"
   >
     <div class="sticky top-8">
-      <h4 class="text-[10px] font-semibold text-(--s-text-tertiary) uppercase tracking-wider mb-2">
+      <h4 class="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">
         On this page
       </h4>
-      <ul class="space-y-0.5 border-l border-(--s-border)">
+      <ul class="space-y-0.5 border-l border-border">
         <li v-for="item in tocItems" :key="item.id">
           <button
             @click="scrollToSection(item.id)"
@@ -158,8 +162,8 @@ onUnmounted(() => {
               'block w-full text-left py-1 -ml-px border-l-2 transition-all duration-200 leading-tight',
               item.level === 2 ? 'pl-3 text-xs' : 'pl-5 text-[11px]',
               activeId === item.id
-                ? 'border-(--s-primary) text-(--s-primary) font-medium'
-                : 'border-transparent text-(--s-text-tertiary) hover:text-(--s-text-primary) hover:border-(--s-border-strong)'
+                ? 'border-primary text-primary font-medium'
+                : 'border-transparent text-muted-foreground hover:text-foreground hover:border-input'
             ]"
           >
             {{ item.text }}

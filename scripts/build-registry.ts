@@ -51,7 +51,26 @@ const manifests: ComponentManifest[] = componentNames.map((name) => {
   return JSON.parse(readFileSync(manifestPath, 'utf-8'))
 })
 
-// 4. Collect all files to copy (deduplicated)
+// 4. Copy shared lib files (always included)
+const LIB_FILES = ['lib/utils.ts']
+
+for (const libFile of LIB_FILES) {
+  const srcPath = resolve(SRC, libFile)
+  const destPath = resolve(SOURCE_OUT, libFile)
+
+  if (!existsSync(srcPath)) {
+    throw new Error(`Shared lib file not found: ${srcPath}`)
+  }
+
+  mkdirSync(dirname(destPath), { recursive: true })
+
+  let content = readFileSync(srcPath, 'utf-8')
+  content = rewriteImports(content, libFile)
+  writeFileSync(destPath, content, 'utf-8')
+  console.log(`  ✓ ${libFile} (shared lib)`)
+}
+
+// 5. Collect all component files to copy (deduplicated)
 const filesToCopy = new Set<string>()
 const composablesToCopy = new Set<string>()
 
@@ -64,8 +83,8 @@ for (const manifest of manifests) {
   }
 }
 
-// 5. Copy component files
-let copiedCount = 0
+// 6. Copy component files
+let copiedCount = LIB_FILES.length
 for (const filePath of filesToCopy) {
   const srcPath = resolve(SRC, filePath)
   const destPath = resolve(SOURCE_OUT, filePath)
@@ -84,7 +103,7 @@ for (const filePath of filesToCopy) {
   console.log(`  ✓ ${filePath}`)
 }
 
-// 6. Copy composable files
+// 7. Copy composable files
 for (const composableName of composablesToCopy) {
   const fileName = `${composableName}.ts`
   const srcPath = resolve(SRC, 'composables', fileName)

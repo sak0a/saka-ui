@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 // Type definitions
 export interface ApiProp {
@@ -120,35 +123,35 @@ const tableData = computed(() => {
 </script>
 
 <template>
-  <article>
-    <h3 class="text-xl font-semibold text-(--s-text-primary) mt-4 mb-2 ">{{ title }}</h3>
-    <div class="overflow-x-auto rounded-xl border border-(--s-border)">
+  <article v-bind="$attrs">
+    <h3 class="text-xl font-semibold text-foreground mt-4 mb-2 ">{{ title }}</h3>
+    <div class="overflow-x-auto rounded-xl border border-border">
       <table class="w-full text-sm text-left">
-        <thead class="text-(--s-text-secondary) bg-(--s-bg-secondary) text-xs uppercase tracking-wider">
+        <thead class="text-muted-foreground bg-muted text-xs uppercase tracking-wider">
           <tr>
             <th v-for="col in columns" :key="col.key" class="py-3 px-4">
               {{ col.label }}
             </th>
           </tr>
         </thead>
-        <tbody class="text-(--s-text-secondary) bg-(--s-bg-secondary)/40">
+        <tbody class="text-muted-foreground bg-muted/40">
           <template v-for="(row, index) in tableData" :key="index">
             <!-- Category row (for props with categories) -->
             <tr v-if="type === 'props' && (row as ApiProp & { isCategory?: boolean }).isCategory" 
-                class="border-t border-(--s-border) bg-(--s-bg-tertiary)/30">
+                class="border-t border-border bg-accent/30">
               <td :colspan="columns.length" 
-                  class="py-2 px-4 text-xs font-semibold uppercase tracking-wider text-(--s-text-tertiary)">
+                  class="py-2 px-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 {{ row.name }}
               </td>
             </tr>
             <!-- Regular data row -->
-            <tr v-else class="border-t border-(--s-border)">
+            <tr v-else class="border-t border-border">
               <!-- Name column (always first, styled as code) -->
               <td class="py-3 px-4">
                 <code class="text-emerald-400 font-mono">{{ row.name }}</code>
               </td>
               <!-- Type column (props only) -->
-              <td v-if="type === 'props'" class="py-3 px-4 text-(--s-text-secondary)">
+              <td v-if="type === 'props'" class="py-3 px-4 text-muted-foreground">
                 {{ (row as ApiProp).type }}
               </td>
               <!-- Default column (props only) -->
@@ -156,11 +159,11 @@ const tableData = computed(() => {
                 {{ (row as ApiProp).default ?? '—' }}
               </td>
               <!-- Payload column (events only) -->
-              <td v-if="type === 'events'" class="py-3 px-4 text-(--s-text-secondary)">
+              <td v-if="type === 'events'" class="py-3 px-4 text-muted-foreground">
                 {{ (row as ApiEvent).payload || '—' }}
               </td>
               <!-- Props column (slots only) -->
-              <td v-if="type === 'slots'" class="py-3 px-4 text-(--s-text-secondary)">
+              <td v-if="type === 'slots'" class="py-3 px-4 text-muted-foreground">
                 {{ (row as ApiSlot).props || '—' }}
               </td>
               <!-- Description column (always last) -->

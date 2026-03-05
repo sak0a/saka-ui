@@ -4,6 +4,7 @@ import { resolve } from 'path'
 export interface SakaUIConfig {
   componentDir: string
   composableDir: string
+  libDir: string
   typescript: boolean
   overwrite: boolean
 }
@@ -11,6 +12,7 @@ export interface SakaUIConfig {
 export const DEFAULT_CONFIG: SakaUIConfig = {
   componentDir: 'src/components/ui',
   composableDir: 'src/composables',
+  libDir: 'src/lib',
   typescript: true,
   overwrite: false,
 }

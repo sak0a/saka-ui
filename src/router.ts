@@ -179,7 +179,17 @@ const router = createRouter({
             children: [
                 {
                     path: '',
-                    redirect: '/docs/form-validation'
+                    redirect: '/docs/styling-guide'
+                },
+                {
+                    path: 'styling-guide',
+                    name: 'docs-styling-guide',
+                    component: () => import('./views/docs/StylingGuideView.vue')
+                },
+                {
+                    path: 'customization',
+                    name: 'docs-customization',
+                    component: () => import('./views/docs/CustomizationView.vue')
                 },
                 {
                     path: 'form-validation',

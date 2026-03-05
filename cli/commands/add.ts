@@ -1,7 +1,7 @@
 import prompts from 'prompts'
 import { readConfig, configExists } from '../utils/config.js'
 import { findRegistryRoot, readRegistryIndex, resolveDependencies, type ComponentManifest } from '../utils/registry.js'
-import { copyComponentFiles, copyComposableFiles } from '../utils/copy.js'
+import { copyComponentFiles, copyComposableFiles, copyLibFiles } from '../utils/copy.js'
 import { log } from '../utils/logger.js'
 import { resolve } from 'path'
 
@@ -74,6 +74,10 @@ export async function addCommand(components: string[], opts: { yes?: boolean } =
   }
 
   log.blank()
+
+  // Copy shared lib files (utils.ts etc.) if not already present
+  copyLibFiles(sourceRoot, config, cwd)
+
   for (const manifest of allManifests) {
     copyComponentFiles(manifest, sourceRoot, config, cwd)
   }

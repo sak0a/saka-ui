@@ -37,6 +37,7 @@ const uiNavigation = [
   { name: 'Dialog', href: '/ui/dialog', icon: 'comment-question-outline' },
   { name: 'Drawer', href: '/ui/drawer', icon: 'dock-bottom' },
   { name: 'Dropdown', href: '/ui/dropdown', icon: 'menu-down' },
+  { name: 'Glass Button', href: '/ui/glass-button', icon: 'blur' },
   { name: 'Glass Card', href: '/ui/glass-card', icon: 'blur' },
   { name: 'Icons', href: '/ui/icons', icon: 'emoticon' },
   { name: 'Input', href: '/ui/input', icon: 'form-textbox' },
@@ -57,6 +58,8 @@ const uiNavigation = [
 
 // Docs navigation (for /docs)
 const docsNavigation = [
+  { name: 'Styling Guide', href: '/docs/styling-guide', icon: 'palette-swatch-variant' },
+  { name: 'Customization', href: '/docs/customization', icon: 'tune-variant' },
   { name: 'Form Validation', href: '/docs/form-validation', icon: 'check-decagram' },
   { name: 'useTheme', href: '/docs/use-theme', icon: 'palette-swatch' },
   { name: 'useClipboard', href: '/docs/use-clipboard', icon: 'content-copy' },
@@ -92,9 +95,9 @@ const getThemeIcon = () => {
 </script>
 
 <template>
-  <div class="h-screen bg-(--s-bg-primary) text-(--s-text-primary) flex overflow-hidden transition-colors duration-300">
+  <div class="h-screen bg-background text-foreground flex overflow-hidden transition-colors duration-300">
     <!-- Sidebar -->
-    <aside class="w-64 border-r border-(--s-border) bg-(--s-bg-primary) hidden md:flex flex-col h-full transition-colors duration-300">
+    <aside class="w-64 border-r border-border bg-background hidden md:flex flex-col h-full transition-colors duration-300">
       <!-- Header -->
       <div class="p-6 shrink-0 flex items-center justify-between">
         <router-link to="/ui" class="text-xl font-bold bg-linear-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity">
@@ -102,7 +105,7 @@ const getThemeIcon = () => {
         </router-link>
         <button 
           @click="toggleTheme" 
-          class="p-2 rounded-lg hover:bg-(--s-bg-secondary) transition-colors text-(--s-text-secondary) hover:text-(--s-text-primary)"
+          class="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
           :title="'Theme: ' + theme"
         >
           <span :class="['mdi', getThemeIcon(), 'text-xl']"></span>
@@ -118,8 +121,8 @@ const getThemeIcon = () => {
             :to="topic.href"
             class="flex-1 flex flex-col items-center gap-1 px-2 py-2 rounded-lg transition-colors text-xs"
             :class="route.path.startsWith(topic.match) 
-              ? 'bg-(--s-primary-alpha) text-(--s-primary) font-medium' 
-              : 'text-(--s-text-secondary) hover:bg-(--s-bg-secondary) hover:text-(--s-text-primary)'"
+              ? 'bg-primary/15 text-primary font-medium' 
+              : 'text-muted-foreground hover:bg-muted hover:text-foreground'"
           >
             <span :class="['mdi mdi-' + topic.icon, 'text-lg']"></span>
             {{ topic.name }}
@@ -128,7 +131,7 @@ const getThemeIcon = () => {
       </div>
 
       <!-- Divider -->
-      <div class="mx-4 border-t border-(--s-border)"></div>
+      <div class="mx-4 border-t border-border"></div>
 
       <!-- Content Navigation -->
       <nav class="flex-1 overflow-y-auto mt-3 px-4 space-y-1 pb-8">
@@ -137,8 +140,8 @@ const getThemeIcon = () => {
           :key="item.name"
           :to="item.href"
           class="flex items-center gap-3 px-2 py-0.5 rounded-lg transition-colors"
-          active-class="bg-(--s-primary-alpha) text-(--s-primary) font-medium"
-          inactive-class="text-(--s-text-secondary) hover:bg-(--s-bg-secondary) hover:text-(--s-text-primary)"
+          active-class="bg-primary/15 text-primary font-medium"
+          inactive-class="text-muted-foreground hover:bg-muted hover:text-foreground"
         >
           <span :class="['mdi mdi-' + item.icon, 'text-lg']"></span>
           {{ item.name }}
@@ -147,7 +150,7 @@ const getThemeIcon = () => {
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 overflow-y-auto overscroll-contain bg-(--s-bg-secondary) transition-colors duration-300">
+    <main class="flex-1 overflow-y-auto overscroll-contain bg-muted transition-colors duration-300">
       <div class="p-8 w-full">
         <div class="max-w-7xl mx-auto flex gap-8">
           <!-- Page content -->

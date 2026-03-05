@@ -6,10 +6,45 @@ import { log } from './logger.js'
 
 const PROVENANCE_PREFIX = '// @saka-ui/registry'
 
+const LIB_FILES = ['lib/utils.ts']
+
 export interface CopyResult {
   file: string
   dest: string
   skipped: boolean
+}
+
+export function copyLibFiles(
+  registrySourceRoot: string,
+  config: SakaUIConfig,
+  cwd: string
+): CopyResult[] {
+  const results: CopyResult[] = []
+
+  for (const libFile of LIB_FILES) {
+    const srcPath = resolve(registrySourceRoot, libFile)
+    const fileName = libFile.replace(/^lib\//, '')
+    const destPath = resolve(cwd, config.libDir, fileName)
+
+    if (existsSync(destPath) && !config.overwrite) {
+      results.push({ file: libFile, dest: destPath, skipped: true })
+      continue
+    }
+
+    if (!existsSync(srcPath)) {
+      log.warn(`Registry lib file missing: ${libFile} (skipping)`)
+      continue
+    }
+
+    mkdirSync(dirname(destPath), { recursive: true })
+
+    const content = readFileSync(srcPath, 'utf-8')
+    writeFileSync(destPath, content, 'utf-8')
+    log.success(`Copied: ${config.libDir}/${fileName}`)
+    results.push({ file: libFile, dest: destPath, skipped: false })
+  }
+
+  return results
 }
 
 export function copyComponentFiles(
@@ -57,6 +92,7 @@ export function copyComponentFiles(
     }
 
     content = rewriteComposableImports(content, destPath, config, cwd)
+    content = rewriteLibImports(content, destPath, config, cwd)
 
     writeFileSync(destPath, content, 'utf-8')
     log.success(`Copied: ${config.componentDir}/${relativeToCUI}`)
@@ -124,6 +160,26 @@ function rewriteComposableImports(
     (_match, prefix, _dots, composablePath, suffix) => {
       const absoluteComposable = resolve(composableDir, composablePath)
       let rel = relative(destDir, absoluteComposable)
+      if (!rel.startsWith('.')) rel = `./${rel}`
+      return `${prefix}${rel}${suffix}`
+    }
+  )
+}
+
+function rewriteLibImports(
+  content: string,
+  destFilePath: string,
+  config: SakaUIConfig,
+  cwd: string
+): string {
+  const destDir = dirname(destFilePath)
+  const libDir = resolve(cwd, config.libDir)
+
+  return content.replace(
+    /(from\s+['"])(\.\.\/)*lib\/([^'"]+)(['"])/g,
+    (_match, prefix, _dots, libPath, suffix) => {
+      const absoluteLib = resolve(libDir, libPath)
+      let rel = relative(destDir, absoluteLib)
       if (!rel.startsWith('.')) rel = `./${rel}`
       return `${prefix}${rel}${suffix}`
     }

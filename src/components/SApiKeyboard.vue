@@ -17,6 +17,10 @@ interface Props {
   columns?: 2 | 3 | 4
 }
 
+import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
+
 withDefaults(defineProps<Props>(), {
   title: 'Keyboard Shortcuts',
   variant: 'grid',
@@ -30,12 +34,12 @@ const normalizeKeys = (keys: string | string[]): string[] => {
 </script>
 
 <template>
-  <article>
-    <h3 class="text-xl font-semibold text-(--s-text-primary) mt-4 mb-2">{{ title }}</h3>
+  <article v-bind="$attrs">
+    <h3 class="text-xl font-semibold text-foreground mt-4 mb-2">{{ title }}</h3>
     
     <!-- Grid variant -->
     <div v-if="variant === 'grid'" 
-         class="bg-(--s-bg-secondary)/50 p-6 rounded-xl border border-(--s-border)">
+         class="bg-muted/50 p-6 rounded-xl border border-border">
       <div 
         class="grid gap-4"
         :class="{
@@ -54,37 +58,37 @@ const normalizeKeys = (keys: string | string[]): string[] => {
         >
           <span class="flex items-center gap-1">
             <template v-for="(key, keyIndex) in normalizeKeys(shortcut.keys)" :key="keyIndex">
-              <span v-if="keyIndex > 0" class="text-(--s-text-tertiary) text-xs">/</span>
-              <kbd class="px-2 py-1 bg-(--s-bg-tertiary) rounded text-xs font-mono text-(--s-text-primary)">
+              <span v-if="keyIndex > 0" class="text-muted-foreground text-xs">/</span>
+              <kbd class="px-2 py-1 bg-accent rounded text-xs font-mono text-foreground">
                 {{ key }}
               </kbd>
             </template>
           </span>
-          <span class="text-sm text-(--s-text-secondary)">{{ shortcut.action }}</span>
+          <span class="text-sm text-muted-foreground">{{ shortcut.action }}</span>
         </div>
       </div>
     </div>
 
     <!-- Table variant -->
-    <div v-else class="overflow-x-auto rounded-xl border border-(--s-border)">
+    <div v-else class="overflow-x-auto rounded-xl border border-border">
       <table class="w-full text-sm text-left">
-        <thead class="text-(--s-text-secondary) bg-(--s-bg-secondary) text-xs uppercase tracking-wider">
+        <thead class="text-muted-foreground bg-muted text-xs uppercase tracking-wider">
           <tr>
             <th class="py-3 px-4">Key</th>
             <th class="py-3 px-4">Action</th>
           </tr>
         </thead>
-        <tbody class="text-(--s-text-secondary) bg-(--s-bg-secondary)/40">
+        <tbody class="text-muted-foreground bg-muted/40">
           <tr 
             v-for="(shortcut, index) in shortcuts" 
             :key="index"
-            class="border-t border-(--s-border)"
+            class="border-t border-border"
           >
             <td class="py-3 px-4">
               <span class="flex items-center gap-1">
                 <template v-for="(key, keyIndex) in normalizeKeys(shortcut.keys)" :key="keyIndex">
-                  <span v-if="keyIndex > 0" class="text-(--s-text-tertiary) text-xs mx-1">/</span>
-                  <kbd class="px-2 py-1 bg-(--s-bg-tertiary) rounded text-xs font-mono text-(--s-text-primary)">
+                  <span v-if="keyIndex > 0" class="text-muted-foreground text-xs mx-1">/</span>
+                  <kbd class="px-2 py-1 bg-accent rounded text-xs font-mono text-foreground">
                     {{ key }}
                   </kbd>
                 </template>
