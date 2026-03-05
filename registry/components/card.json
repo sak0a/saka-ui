@@ -1,0 +1,23 @@
+{
+  "name": "card",
+  "displayName": "SCard",
+  "description": "Card container with elevated, outlined, filled, ghost, and glass variants. Includes header, content, footer, media, and actions subcomponents.",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/card/index.ts",
+    "components/ui/card/SCard.vue",
+    "components/ui/card/SCardHeader.vue",
+    "components/ui/card/SCardContent.vue",
+    "components/ui/card/SCardFooter.vue",
+    "components/ui/card/SCardMedia.vue",
+    "components/ui/card/SCardActions.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}
