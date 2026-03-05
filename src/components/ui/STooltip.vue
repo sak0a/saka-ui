@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   placement?: 'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end' | 'right-start' | 'right-end'
   trigger?: 'hover' | 'click' | 'focus' | 'manual'
@@ -20,6 +22,7 @@ export interface Props {
   zIndex?: number
   interactive?: boolean
   transition?: string
+  tooltipClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -40,7 +43,8 @@ const props = withDefaults(defineProps<Props>(), {
   teleport: 'body',
   zIndex: 9999,
   interactive: false,
-  transition: 'tooltip-fade'
+  transition: 'tooltip-fade',
+  tooltipClass: undefined
 })
 
 const emit = defineEmits<{
@@ -418,7 +422,7 @@ defineExpose({
 </script>
 
 <template>
-  <div class="s-tooltip-wrapper inline-block">
+  <div class="s-tooltip-wrapper inline-block" v-bind="$attrs">
     <!-- Trigger slot -->
     <div
       ref="triggerRef"
@@ -439,7 +443,7 @@ defineExpose({
           v-show="isVisible"
           ref="tooltipRef"
           class="s-tooltip"
-          :class="themeClass"
+          :class="[themeClass, tooltipClass]"
           :style="tooltipStyle"
           role="tooltip"
           @mouseenter="handleTooltipMouseEnter"

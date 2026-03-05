@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject, ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
 import { SAccordionContextKey, type SAccordionContext } from './SAccordion.vue'
 
@@ -208,7 +210,8 @@ const headerFlexClass = computed(() => {
 </script>
 
 <template>
-  <div 
+  <div
+    v-bind="$attrs"
     class="s-accordion-item"
     :class="itemClasses"
   >

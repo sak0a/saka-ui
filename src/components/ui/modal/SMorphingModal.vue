@@ -20,6 +20,8 @@ export const SMorphingModalContextKey: InjectionKey<SMorphingModalContext> = Sym
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
 export interface Props {
@@ -368,6 +370,7 @@ defineExpose({
 
 <template>
   <div
+    v-bind="$attrs"
     class="s-morphing-modal-trigger-wrapper"
     :style="triggerWrapperStyle"
     :aria-hidden="isOpen"

@@ -2,6 +2,8 @@
 import { computed, ref, useSlots, onMounted, onUnmounted } from 'vue'
 import { useTheme } from '../../composables/useTheme'
 
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   // SButton parity props
   size?: 'xs' | 'small' | 'medium' | 'large' | 'xl'
@@ -305,7 +307,7 @@ const componentBindings = computed(() => {
 <template>
   <component
     :is="componentTag"
-    v-bind="componentBindings"
+    v-bind="{ ...$attrs, ...componentBindings }"
     class="s-glass-button relative inline-flex items-center justify-center font-medium overflow-hidden select-none focus:outline-none"
     :class="[
       sizeClasses,

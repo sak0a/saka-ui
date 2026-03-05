@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { computed, provide } from 'vue'
 
 interface Props {
@@ -40,6 +42,7 @@ const spacingValue = computed(() => {
 
 <template>
   <div
+    v-bind="$attrs"
     class="s-avatar-group flex items-center flex-row-reverse justify-end"
     :style="{ '--avatar-spacing': spacingValue }"
   >

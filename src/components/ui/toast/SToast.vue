@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
 import type { ToastType, ToastOptions } from '../../../composables/useToast'
 import { dismissToast, pauseToast, resumeToast } from '../../../composables/useToast'
@@ -157,6 +159,7 @@ const isLoading = computed(() => props.type === 'loading')
 
 <template>
   <div
+    v-bind="$attrs"
     class="s-toast relative flex items-start gap-3 p-4 rounded-xl border shadow-lg backdrop-blur-sm min-w-[320px] max-w-[420px] cursor-pointer transition-all duration-200"
     :class="[
       typeConfig.bg,

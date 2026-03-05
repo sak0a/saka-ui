@@ -17,6 +17,8 @@ const props = withDefaults(defineProps<Props>(), {
   bodyClass: ''
 })
 
+defineOptions({ inheritAttrs: false })
+
 const context = inject(SDataTableContextKey)
 
 const shouldAnimate = computed(() => {
@@ -30,8 +32,9 @@ const prefersReducedMotion = typeof window !== 'undefined'
 </script>
 
 <template>
-  <TransitionGroup 
+  <TransitionGroup
     v-if="shouldAnimate && !prefersReducedMotion"
+    v-bind="$attrs"
     name="s-table-row"
     tag="tbody"
     :class="['s-table-body', bodyClass]"
@@ -39,7 +42,7 @@ const prefersReducedMotion = typeof window !== 'undefined'
     <slot />
   </TransitionGroup>
   
-  <tbody v-else :class="['s-table-body', bodyClass]">
+  <tbody v-else v-bind="$attrs" :class="['s-table-body', bodyClass]">
     <slot />
   </tbody>
 </template>

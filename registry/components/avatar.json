@@ -1,0 +1,18 @@
+{
+  "name": "avatar",
+  "displayName": "SAvatar",
+  "description": "Avatar with image, fallback, and group layout support",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/avatar/index.ts",
+    "components/ui/avatar/SAvatar.vue",
+    "components/ui/avatar/SAvatarFallback.vue",
+    "components/ui/avatar/SAvatarGroup.vue",
+    "components/ui/avatar/SAvatarImage.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  }
+}

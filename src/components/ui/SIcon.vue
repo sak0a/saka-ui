@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, type Component } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   component?: Component
   size?: number | string
@@ -47,7 +49,7 @@ const computedStyle = computed(() => {
 </script>
 
 <template>
-  <i class="s-icon" :style="computedStyle" role="img">
+  <i class="s-icon" :style="computedStyle" role="img" v-bind="$attrs">
     <component :is="component" v-if="component" />
     <slot v-else />
   </i>

@@ -1,0 +1,17 @@
+{
+  "name": "alert",
+  "displayName": "SAlert",
+  "description": "Alert notification with success, warning, error, info variants, auto-dismiss, progress bar, and positioning",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/SAlert.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { ref, computed, watch, provide, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
 export interface SelectOption {
@@ -684,7 +686,7 @@ const floatLabelBackground = computed(() => {
 </script>
 
 <template>
-  <div class="s-select relative w-full" :class="labelLayoutClasses">
+  <div v-bind="$attrs" class="s-select relative w-full" :class="labelLayoutClasses">
     <!-- Static Label (traditional placement) -->
     <label 
       v-if="label && !labelPlaceholder" 

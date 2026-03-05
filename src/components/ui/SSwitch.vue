@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   modelValue?: boolean | string | number
   type?: 'inset' | 'outset'
@@ -16,6 +18,9 @@ export interface Props {
   uncheckedIcon?: string
   checkedText?: string
   uncheckedText?: string
+  trackClass?: string
+  thumbClass?: string
+  labelClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -32,7 +37,10 @@ const props = withDefaults(defineProps<Props>(), {
   checkedIcon: undefined,
   uncheckedIcon: undefined,
   checkedText: undefined,
-  uncheckedText: undefined
+  uncheckedText: undefined,
+  trackClass: undefined,
+  thumbClass: undefined,
+  labelClass: undefined
 })
 
 const emit = defineEmits<{
@@ -127,15 +135,16 @@ const trackStyle = computed(() => {
 </script>
 
 <template>
-  <div 
+  <div
+    v-bind="$attrs"
     class="s-switch-wrapper inline-flex items-center gap-2"
     :class="{ 'opacity-50 cursor-not-allowed': disabled }"
   >
     <!-- Label Before -->
-    <span 
-      v-if="labelBefore" 
+    <span
+      v-if="labelBefore"
       class="s-switch-label text-(--s-text-secondary)"
-      :class="sizeConfig.label"
+      :class="[sizeConfig.label, labelClass]"
     >
       {{ labelBefore }}
     </span>
@@ -152,7 +161,8 @@ const trackStyle = computed(() => {
         !hasTrackText && (isChecked ? '' : 'bg-(--s-bg-tertiary)'),
         hasTrackText && (isChecked ? '' : 'bg-(--s-bg-tertiary)'),
         { 'cursor-pointer': !disabled && !loading, 'cursor-not-allowed': disabled || loading },
-        { 'h-6': hasTrackText && size === 'medium', 'h-5': hasTrackText && size === 'small', 'h-7': hasTrackText && size === 'large' }
+        { 'h-6': hasTrackText && size === 'medium', 'h-5': hasTrackText && size === 'small', 'h-7': hasTrackText && size === 'large' },
+        trackClass
       ]"
       :style="trackStyle"
       @click="toggle"
@@ -181,9 +191,10 @@ const trackStyle = computed(() => {
         class="s-switch-thumb inline-flex items-center justify-center rounded-full bg-white shadow-md transition-all duration-300 ease-in-out z-10"
         :class="[
           hasTrackText ? 'w-5 h-5' : sizeConfig.thumb,
-          hasTrackText 
-            ? (isChecked ? 'ml-auto' : 'mr-auto') 
-            : (isChecked ? sizeConfig.thumbTranslate : 'translate-x-0.5')
+          hasTrackText
+            ? (isChecked ? 'ml-auto' : 'mr-auto')
+            : (isChecked ? sizeConfig.thumbTranslate : 'translate-x-0.5'),
+          thumbClass
         ]"
       >
         <!-- Loading Spinner -->
@@ -213,10 +224,10 @@ const trackStyle = computed(() => {
     </button>
     
     <!-- Label After -->
-    <span 
-      v-if="labelAfter" 
+    <span
+      v-if="labelAfter"
       class="s-switch-label text-(--s-text-secondary)"
-      :class="sizeConfig.label"
+      :class="[sizeConfig.label, labelClass]"
     >
       {{ labelAfter }}
     </span>

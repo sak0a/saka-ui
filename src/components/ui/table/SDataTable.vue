@@ -16,6 +16,8 @@ import {
 } from './index'
 import { useDataTable } from './useDataTable'
 
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   /** Table data array */
   data?: T[]
@@ -236,7 +238,8 @@ defineExpose({
 </script>
 
 <template>
-  <div 
+  <div
+    v-bind="$attrs"
     :class="wrapperClasses"
     :style="containerStyles"
     role="region"

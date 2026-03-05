@@ -3,6 +3,8 @@ import { provide, computed } from 'vue'
 import type { FormState } from '../../../composables/useForm'
 import { FORM_CONTEXT_KEY } from './index'
 
+defineOptions({ inheritAttrs: false })
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface Props {
   /** Form state from useForm */
@@ -53,7 +55,8 @@ const gapClass = computed(() => {
 </script>
 
 <template>
-  <form 
+  <form
+    v-bind="$attrs"
     class="s-form"
     :class="[gapClass, { 's-form--disabled': disabled }]"
     @submit="handleSubmit"

@@ -3,6 +3,8 @@
  * STabPane - Tab Panel Component
  * Used as a child of STabs to define tab content
  */
+defineOptions({ inheritAttrs: false })
+
 import { inject, onMounted, onUnmounted, computed, watch } from 'vue'
 import { STabsContextKey, type TabPaneInfo } from './STabs.vue'
 
@@ -67,7 +69,7 @@ const shouldMorph = computed(() => context?.animated ?? false)
     :name="shouldMorph ? 's-tab-morph' : 's-tab-fade'" 
     mode="out-in"
   >
-    <div v-if="isActive" :key="name" class="s-tab-pane">
+    <div v-if="isActive" :key="name" v-bind="$attrs" class="s-tab-pane">
       <slot />
     </div>
   </Transition>

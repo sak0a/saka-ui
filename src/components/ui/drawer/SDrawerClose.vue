@@ -5,6 +5,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject } from 'vue'
 import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
 
@@ -44,6 +46,7 @@ const variantClasses = {
 <template>
   <button
     type="button"
+    v-bind="$attrs"
     class="s-drawer-close flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150 outline-none focus:ring-2 focus:ring-(--s-primary)/30 focus:ring-offset-0"
     :class="[
       variantClasses[variant],

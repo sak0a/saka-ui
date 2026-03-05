@@ -5,6 +5,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject, onMounted, onBeforeUnmount } from 'vue'
 import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
 
@@ -55,6 +57,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div
+    v-bind="$attrs"
     class="s-drawer-header flex items-start justify-between gap-4 shrink-0"
     :class="[
       paddingClasses[padding],

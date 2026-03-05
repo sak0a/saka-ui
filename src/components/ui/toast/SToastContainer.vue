@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { computed, Teleport, TransitionGroup } from 'vue'
 import { getToasts, getToastConfig, type ToastPosition } from '../../../composables/useToast'
 import SToast from './SToast.vue'
@@ -71,6 +73,7 @@ const teleportTarget = computed(() => {
   <Teleport v-if="teleportTarget" :to="teleportTarget" :disabled="!teleportTarget">
     <div
       v-if="positionToasts.length > 0"
+      v-bind="$attrs"
       class="s-toast-container fixed flex flex-col pointer-events-none"
       :class="[positionClasses, isBottomPosition ? 'flex-col-reverse' : 'flex-col']"
       :style="{ 
@@ -118,6 +121,7 @@ const teleportTarget = computed(() => {
   <template v-else>
     <div
       v-if="positionToasts.length > 0"
+      v-bind="$attrs"
       class="s-toast-container fixed flex flex-col pointer-events-none"
       :class="[positionClasses, isBottomPosition ? 'flex-col-reverse' : 'flex-col']"
       :style="{ 

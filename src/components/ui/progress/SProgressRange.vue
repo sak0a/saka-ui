@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
 
 export interface RangeValue {
@@ -453,7 +455,8 @@ const maxHandleZIndex = computed(() => {
 </script>
 
 <template>
-  <div 
+  <div
+    v-bind="$attrs"
     class="s-progress-range"
     :class="[
       orientation === 'vertical' ? 'flex flex-col items-center' : 'w-full',

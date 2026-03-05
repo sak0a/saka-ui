@@ -62,6 +62,8 @@ defineSlots<{
   default?: (props: { row: unknown; value: unknown; index: number }) => unknown
 }>()
 
+defineOptions({ inheritAttrs: false })
+
 const context = inject(SDataTableContextKey)
 
 // Build column definition

@@ -1,0 +1,14 @@
+{
+  "name": "tooltip",
+  "displayName": "STooltip",
+  "description": "Tooltip with positioning, triggers, delays, and arrow indicator",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/STooltip.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  }
+}

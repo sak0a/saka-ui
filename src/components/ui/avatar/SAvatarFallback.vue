@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject, computed, ref, watchEffect } from 'vue'
 
 interface Props {
@@ -52,6 +54,7 @@ const customStyles = computed(() => {
 <template>
   <span
     v-if="shouldShow"
+    v-bind="$attrs"
     class="flex items-center justify-center w-full h-full uppercase font-medium"
     :style="customStyles"
   >

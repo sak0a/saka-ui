@@ -5,6 +5,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject } from 'vue'
 import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
 
@@ -38,6 +40,7 @@ const handleClick = (event: MouseEvent) => {
   <button
     v-else
     type="button"
+    v-bind="$attrs"
     :disabled="disabled"
     class="s-drawer-trigger"
     @click="handleClick"

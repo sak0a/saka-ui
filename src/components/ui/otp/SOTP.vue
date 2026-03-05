@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { ref, computed, watch, nextTick, onMounted, onUnmounted } from 'vue'
 
 export interface Props {
@@ -614,8 +616,9 @@ watch(() => props.error, (hasError) => {
 </script>
 
 <template>
-  <div 
+  <div
     ref="containerRef"
+    v-bind="$attrs"
     class="s-otp-wrapper flex flex-col items-center w-fit"
     :class="{ 'opacity-50 pointer-events-none': disabled }"
   >

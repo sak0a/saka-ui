@@ -6,6 +6,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject, computed } from 'vue'
 import { SMorphingModalContextKey } from './SMorphingModal.vue'
 
@@ -37,6 +39,7 @@ const isVisible = computed(() => context?.isExpanded.value ?? false)
   >
     <div
       v-if="isVisible"
+      v-bind="$attrs"
       class="s-morphing-modal-description text-(--s-text-secondary)"
       :class="descriptionClass"
     >

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject, computed, onMounted, onBeforeUnmount } from 'vue'
 import { SDropdownContextKey, type SDropdownContext } from './SDropdown.vue'
 
@@ -115,6 +117,7 @@ const handleClick = (event: MouseEvent) => {
         'bg-(--s-bg-tertiary)': isHighlighted && !disabled
       }
     ]"
+    v-bind="$attrs"
     @click="handleClick"
   >
     <!-- Checkbox for checkable items -->

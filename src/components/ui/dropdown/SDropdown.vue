@@ -47,6 +47,8 @@ export const SDropdownContextKey: InjectionKey<SDropdownContext> = Symbol('SDrop
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
 export interface Props {
@@ -558,7 +560,7 @@ defineExpose({
 </script>
 
 <template>
-  <div class="s-dropdown relative inline-block">
+  <div class="s-dropdown relative inline-block" v-bind="$attrs">
     <!-- Trigger -->
     <div
       ref="triggerRef"

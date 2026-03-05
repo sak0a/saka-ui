@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { provide, reactive, computed } from 'vue'
 
 export interface AvatarProps {
@@ -119,6 +121,7 @@ const statusPositionClasses = computed(() => {
 
 <template>
   <div
+    v-bind="$attrs"
     class="s-avatar relative inline-flex shrink-0 select-none"
     :style="{
       width: sizeValue,

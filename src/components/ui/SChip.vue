@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   variant?: 'filled' | 'outlined' | 'light'
   size?: 'small' | 'medium' | 'large'
   color?: string
   closable?: boolean
   disabled?: boolean
+  contentClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -78,13 +81,14 @@ const handleClick = () => {
 </script>
 
 <template>
-  <div 
+  <div
+    v-bind="$attrs"
     class="s-chip inline-flex items-center rounded-full font-medium transition-all duration-300"
     :class="[sizeClasses, { 'cursor-pointer hover:brightness-110 active:scale-95': !disabled }]"
     :style="computedStyle"
     @click="handleClick"
   >
-    <span class="chip-content">
+    <span class="chip-content" :class="contentClass">
       <slot />
     </span>
     <button

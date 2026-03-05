@@ -1,0 +1,19 @@
+{
+  "name": "toast",
+  "displayName": "SToast",
+  "description": "Toast notifications with container, auto-dismiss, stacking, and position variants",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/toast/index.ts",
+    "components/ui/toast/SToast.vue",
+    "components/ui/toast/SToastContainer.vue"
+  ],
+  "dependencies": [],
+  "composables": ["useToast"],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}

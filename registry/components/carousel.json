@@ -1,0 +1,19 @@
+{
+  "name": "carousel",
+  "displayName": "SCarousel",
+  "description": "Carousel/slider with slides, navigation, auto-play, and touch/swipe support",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/carousel/index.ts",
+    "components/ui/carousel/SCarousel.vue",
+    "components/ui/carousel/SCarouselSlide.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}

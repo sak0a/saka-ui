@@ -1,0 +1,16 @@
+{
+  "name": "option",
+  "displayName": "SOption",
+  "description": "Option and option group for use within SSelect",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/option/index.ts",
+    "components/ui/option/SOption.vue",
+    "components/ui/option/SOptionGroup.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  }
+}

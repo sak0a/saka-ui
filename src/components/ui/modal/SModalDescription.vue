@@ -6,6 +6,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject } from 'vue'
 import { SModalContextKey } from './SModal.vue'
 
@@ -27,6 +29,7 @@ const context = inject(SModalContextKey)
 <template>
   <component
     :is="as"
+    v-bind="$attrs"
     :id="context?.descriptionId"
     class="s-modal-description text-sm text-(--s-text-secondary) leading-relaxed"
     :class="descriptionClass"

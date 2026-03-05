@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { computed, ref, watch, onMounted } from 'vue'
 
 export interface Props {
@@ -244,7 +246,8 @@ watch(() => props.modelValue, (newVal) => {
 </script>
 
 <template>
-  <div 
+  <div
+    v-bind="$attrs"
     :class="[
       containerClasses,
       labelPosition === 'left' || labelPosition === 'right' ? 'flex items-center gap-3' : 'flex flex-col gap-1.5',

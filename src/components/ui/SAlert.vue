@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   variant?: 'success' | 'warning' | 'error' | 'info' | 'custom'
   size?: 'small' | 'medium' | 'large'
@@ -17,6 +19,8 @@ export interface Props {
   border?: 'none' | 'left' | 'top' | 'all'
   rounded?: boolean
   dismissible?: boolean
+  contentClass?: string
+  iconClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -34,7 +38,9 @@ const props = withDefaults(defineProps<Props>(), {
   elevation: true,
   border: 'left',
   rounded: true,
-  dismissible: false
+  dismissible: false,
+  contentClass: undefined,
+  iconClass: undefined
 })
 
 const emit = defineEmits<{
@@ -284,6 +290,7 @@ defineExpose({
   >
     <div
       v-show="isVisible"
+      v-bind="$attrs"
       class="s-alert relative overflow-hidden transition-all duration-300"
       :class="[
         variantColors.bg,
@@ -307,14 +314,14 @@ defineExpose({
     >
       <div class="flex items-start" :class="sizeClasses.gap">
         <!-- Icon -->
-        <div v-if="displayIcon" class="shrink-0" :class="variantColors.icon">
+        <div v-if="displayIcon" class="shrink-0" :class="[variantColors.icon, iconClass]">
           <slot name="icon">
             <span class="mdi" :class="[`mdi-${displayIcon}`, sizeClasses.iconSize]" />
           </slot>
         </div>
 
         <!-- Content -->
-        <div class="flex-1 min-w-0">
+        <div class="flex-1 min-w-0" :class="contentClass">
           <!-- Title -->
           <div v-if="title || $slots.title" :class="sizeClasses.titleSize">
             <slot name="title">

@@ -5,6 +5,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject } from 'vue'
 import { SMorphingModalContextKey } from './SMorphingModal.vue'
 
@@ -22,6 +24,7 @@ const context = inject(SMorphingModalContextKey)
 
 <template>
   <h2
+    v-bind="$attrs"
     :id="`${context?.uniqueId}-title`"
     class="s-morphing-modal-title text-lg font-semibold text-(--s-text-primary)"
     :class="titleClass"

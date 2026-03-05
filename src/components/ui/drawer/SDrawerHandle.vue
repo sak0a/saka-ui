@@ -5,6 +5,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject, computed } from 'vue'
 import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
 
@@ -39,6 +41,7 @@ const progressWidth = computed(() => {
 
 <template>
   <div
+    v-bind="$attrs"
     class="s-drawer-handle flex items-center justify-center py-3 cursor-grab active:cursor-grabbing"
     :class="handleClass"
   >

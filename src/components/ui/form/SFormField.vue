@@ -3,6 +3,8 @@ import { inject, computed, provide, type InjectionKey } from 'vue'
 import type { FormState, FieldState } from '../../../composables/useForm'
 import { FORM_CONTEXT_KEY } from './index'
 
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   /** Field name matching the key in useFormValidation config */
   name: string
@@ -53,7 +55,7 @@ provide(FIELD_CONTEXT_KEY, field.value)
 </script>
 
 <template>
-  <div class="s-form-field">
+  <div v-bind="$attrs" class="s-form-field">
     <!-- Slot for the actual input/component -->
     <slot 
       :field="field"

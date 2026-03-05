@@ -1,0 +1,26 @@
+{
+  "name": "table",
+  "displayName": "SDataTable",
+  "description": "Data table with sorting, filtering, pagination, selection, expandable rows, and skeleton loading",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/table/index.ts",
+    "components/ui/table/useDataTable.ts",
+    "components/ui/table/SDataTable.vue",
+    "components/ui/table/STableBody.vue",
+    "components/ui/table/STableCell.vue",
+    "components/ui/table/STableColumn.vue",
+    "components/ui/table/STableEmpty.vue",
+    "components/ui/table/STableHeader.vue",
+    "components/ui/table/STableRow.vue",
+    "components/ui/table/STableSkeleton.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}

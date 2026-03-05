@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 
 export interface Props {
@@ -677,8 +679,9 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div 
+  <div
     ref="containerRef"
+    v-bind="$attrs"
     class="s-color-picker"
     :class="[
       `s-color-picker--${size}`,

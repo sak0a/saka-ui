@@ -1,0 +1,17 @@
+{
+  "name": "chip",
+  "displayName": "SChip",
+  "description": "Chip/tag with filled, outlined, and light variants, closable, and disabled states",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/SChip.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}

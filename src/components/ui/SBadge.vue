@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   variant?: 'filled' | 'outlined' | 'light'
   size?: 'small' | 'medium' | 'large'
@@ -14,6 +16,7 @@ export interface Props {
   offset?: [number, number]
   standalone?: boolean
   pulse?: boolean
+  badgeClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -149,11 +152,11 @@ const handleClick = (e: MouseEvent) => {
 </script>
 
 <template>
-  <div v-if="standalone" class="s-badge-standalone inline-flex">
+  <div v-if="standalone" v-bind="$attrs" class="s-badge-standalone inline-flex">
     <span
       v-if="isVisible"
       class="s-badge inline-flex items-center justify-center rounded-full font-medium transition-all duration-200"
-      :class="[sizeClasses, { 'cursor-pointer hover:brightness-110': $attrs.onClick }]"
+      :class="[sizeClasses, { 'cursor-pointer hover:brightness-110': $attrs.onClick }, badgeClass]"
       :style="badgeStyle"
       @click="handleClick"
     >
@@ -161,16 +164,17 @@ const handleClick = (e: MouseEvent) => {
     </span>
   </div>
   
-  <div v-else class="s-badge-wrapper relative inline-flex">
+  <div v-else v-bind="$attrs" class="s-badge-wrapper relative inline-flex">
     <slot />
-    
+
     <span
       v-if="isVisible"
       class="s-badge absolute inline-flex items-center justify-center rounded-full font-medium transition-all duration-200"
       :class="[
-        sizeClasses, 
+        sizeClasses,
         { 'cursor-pointer hover:brightness-110': $attrs.onClick },
-        { 's-badge-pulse': pulse }
+        { 's-badge-pulse': pulse },
+        badgeClass
       ]"
       :style="{ ...badgeStyle, ...positionStyle }"
       @click="handleClick"

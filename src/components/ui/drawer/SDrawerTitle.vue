@@ -5,6 +5,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject, computed } from 'vue'
 import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
 
@@ -28,6 +30,7 @@ const tag = computed(() => props.as)
 <template>
   <component
     :is="tag"
+    v-bind="$attrs"
     :id="context?.titleId"
     class="text-lg font-semibold text-(--s-text-primary) tracking-tight"
     :class="titleClass"

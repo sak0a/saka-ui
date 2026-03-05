@@ -1,0 +1,21 @@
+{
+  "name": "dropdown",
+  "displayName": "SDropdown",
+  "description": "Dropdown menu with items, groups, dividers, and keyboard navigation",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/dropdown/index.ts",
+    "components/ui/dropdown/SDropdown.vue",
+    "components/ui/dropdown/SDropdownDivider.vue",
+    "components/ui/dropdown/SDropdownGroup.vue",
+    "components/ui/dropdown/SDropdownItem.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}

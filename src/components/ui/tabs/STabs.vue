@@ -38,6 +38,8 @@ export const STabsContextKey: InjectionKey<STabsContext> = Symbol('STabsContext'
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { provide, ref, computed, watch, nextTick, onMounted } from 'vue'
 
 // Props
@@ -356,7 +358,7 @@ provide(STabsContextKey, {
 </script>
 
 <template>
-  <div :class="containerClasses">
+  <div v-bind="$attrs" :class="containerClasses">
     <!-- Tabs -->
     <div 
       ref="tabsWrapperRef"

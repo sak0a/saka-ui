@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   // Core
   modelValue?: Date | Date[] | [Date, Date] | null
@@ -833,7 +835,7 @@ const teleportTarget = computed(() => {
 </script>
 
 <template>
-  <div :class="layoutClasses">
+  <div v-bind="$attrs" :class="layoutClasses">
     <!-- Label -->
     <label 
       v-if="label"

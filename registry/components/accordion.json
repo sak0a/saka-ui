@@ -1,0 +1,19 @@
+{
+  "name": "accordion",
+  "displayName": "SAccordion",
+  "description": "Accordion with collapsible items, multiple/single mode, and customizable styling",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/accordion/index.ts",
+    "components/ui/accordion/SAccordion.vue",
+    "components/ui/accordion/SAccordionItem.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}

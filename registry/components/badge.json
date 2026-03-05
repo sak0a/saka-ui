@@ -1,0 +1,14 @@
+{
+  "name": "badge",
+  "displayName": "SBadge",
+  "description": "Badge indicator with filled, outlined, and light variants, dot mode, pulse animation, and positioning",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/SBadge.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  }
+}

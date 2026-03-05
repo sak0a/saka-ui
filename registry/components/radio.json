@@ -1,0 +1,19 @@
+{
+  "name": "radio",
+  "displayName": "SRadio",
+  "description": "Radio button with radio group, sizes, colors, and label positioning",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/radio/index.ts",
+    "components/ui/radio/SRadio.vue",
+    "components/ui/radio/SRadioGroup.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "pagination",
+  "displayName": "SPagination",
+  "description": "Pagination with page buttons, navigation, per-page selector, and jump-to-page",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/pagination/index.ts",
+    "components/ui/pagination/SPagination.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}

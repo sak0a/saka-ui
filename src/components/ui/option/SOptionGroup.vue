@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { ref, provide, computed } from 'vue'
 
 export interface Props {
@@ -27,7 +29,7 @@ provide('s-option-group-disabled', computed(() => props.disabled))
 </script>
 
 <template>
-  <div class="s-option-group">
+  <div v-bind="$attrs" class="s-option-group">
     <!-- Group Header -->
     <div 
       class="flex items-center gap-2 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-(--s-text-tertiary)"

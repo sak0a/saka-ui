@@ -1,0 +1,19 @@
+{
+  "name": "tabs",
+  "displayName": "STabs",
+  "description": "Tabs with tab panes, dynamic tab management, and customizable styling",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/tabs/index.ts",
+    "components/ui/tabs/STabs.vue",
+    "components/ui/tabs/STabPane.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}

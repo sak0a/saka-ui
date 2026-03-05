@@ -28,6 +28,8 @@ const emit = defineEmits<{
   dblclick: [event: MouseEvent]
 }>()
 
+defineOptions({ inheritAttrs: false })
+
 const context = inject(SDataTableContextKey)
 
 const isHoverable = computed(() => {
@@ -69,6 +71,7 @@ const handleDblClick = (event: MouseEvent) => {
 
 <template>
   <tr
+    v-bind="$attrs"
     :class="rowClasses"
     :data-row-key="rowKey"
     :aria-selected="context?.selectionMode !== 'none' ? isSelected : undefined"

@@ -28,6 +28,8 @@ export const SDrawerContextKey: InjectionKey<SDrawerContext> = Symbol('SDrawerCo
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
 export interface Props {
@@ -553,6 +555,7 @@ defineExpose({
       <div
         v-if="isOpen"
         ref="drawerRef"
+        v-bind="$attrs"
         class="s-drawer fixed inset-0"
         :style="{ zIndex }"
         role="dialog"
@@ -690,6 +693,7 @@ defineExpose({
       <div
         v-if="isOpen"
         ref="drawerRef"
+        v-bind="$attrs"
         class="s-drawer fixed inset-0"
         :style="{ zIndex }"
         role="dialog"

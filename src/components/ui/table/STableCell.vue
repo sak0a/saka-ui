@@ -44,6 +44,8 @@ const props = withDefaults(defineProps<Props>(), {
   truncate: false
 })
 
+defineOptions({ inheritAttrs: false })
+
 const context = inject(SDataTableContextKey)
 
 // Get size from context
@@ -82,8 +84,9 @@ const cellStyles = computed(() => {
 </script>
 
 <template>
-  <th 
+  <th
     v-if="header"
+    v-bind="$attrs"
     :class="cellClasses"
     :style="cellStyles"
     :colspan="colspan"
@@ -92,8 +95,9 @@ const cellStyles = computed(() => {
   >
     <slot />
   </th>
-  <td 
+  <td
     v-else
+    v-bind="$attrs"
     :class="cellClasses"
     :style="cellStyles"
     :colspan="colspan"

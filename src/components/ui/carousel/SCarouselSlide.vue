@@ -26,6 +26,8 @@ export const SCarouselContextKey: InjectionKey<SCarouselContext> = Symbol('SCaro
 <script setup lang="ts">
 import { inject, ref, computed, onMounted, onUnmounted } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   lazy?: boolean
 }
@@ -78,6 +80,7 @@ const shouldLoad = computed(() => {
 <template>
   <div
     ref="slideRef"
+    v-bind="$attrs"
     class="s-carousel-slide shrink-0 w-full h-full relative overflow-hidden"
     :class="{
       's-carousel-slide--active': isActive,

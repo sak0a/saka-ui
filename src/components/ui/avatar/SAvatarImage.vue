@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { ref, inject, onMounted, watch } from 'vue'
 
 interface Props {
@@ -69,6 +71,7 @@ onMounted(() => {
 <template>
   <img
     v-if="src && !hasError"
+    v-bind="$attrs"
     ref="imageRef"
     :src="src"
     :alt="alt"

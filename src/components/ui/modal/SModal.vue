@@ -27,6 +27,8 @@ export const SModalContextKey: InjectionKey<SModalContext> = Symbol('SModalConte
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
 export interface Props {
@@ -442,6 +444,7 @@ defineExpose({
       <div
         v-if="isOpen"
         ref="modalRef"
+        v-bind="$attrs"
         class="s-modal fixed inset-0 flex overflow-hidden"
         :class="[positionClasses, fullscreen ? 'p-0' : 'p-4']"
         :style="{ zIndex: effectiveZIndex }"
@@ -550,6 +553,7 @@ defineExpose({
       <div
         v-if="isOpen"
         ref="modalRef"
+        v-bind="$attrs"
         class="s-modal fixed inset-0 flex overflow-hidden"
         :class="[positionClasses, fullscreen ? 'p-0' : 'p-4']"
         :style="{ zIndex: effectiveZIndex }"

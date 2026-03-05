@@ -2,6 +2,8 @@
 import { computed, provide, ref, watch } from 'vue'
 import SRadio from './SRadio.vue'
 
+defineOptions({ inheritAttrs: false })
+
 export interface RadioOption {
   value: any
   label: string
@@ -163,7 +165,8 @@ const handleKeydown = (e: KeyboardEvent) => {
 </script>
 
 <template>
-  <div 
+  <div
+    v-bind="$attrs"
     role="radiogroup"
     class="s-radio-group"
     :class="[

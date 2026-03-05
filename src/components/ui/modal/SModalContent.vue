@@ -5,6 +5,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   /** Padding size */
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
@@ -37,6 +39,7 @@ const paddingClasses = {
 
 <template>
   <div
+    v-bind="$attrs"
     class="s-modal-content flex-1"
     :class="[
       paddingClasses[padding],

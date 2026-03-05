@@ -41,6 +41,8 @@ const props = withDefaults(defineProps<Props>(), {
   progressiveDelay: 100
 })
 
+defineOptions({ inheritAttrs: false })
+
 const context = inject(SDataTableContextKey)
 
 const columnCount = computed(() => {
@@ -75,7 +77,7 @@ const animationClass = computed(() => {
 </script>
 
 <template>
-  <tbody class="s-table-skeleton-body">
+  <tbody v-bind="$attrs" class="s-table-skeleton-body">
     <tr
       v-for="(widths, rowIndex) in rowWidths"
       :key="`skeleton-row-${rowIndex}`"

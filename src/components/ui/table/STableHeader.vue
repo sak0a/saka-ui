@@ -14,6 +14,8 @@ const props = withDefaults(defineProps<Props>(), {
   headerClass: ''
 })
 
+defineOptions({ inheritAttrs: false })
+
 const context = inject(SDataTableContextKey)
 
 const headerClasses = computed(() => {
@@ -29,7 +31,7 @@ const headerClasses = computed(() => {
 </script>
 
 <template>
-  <thead :class="headerClasses">
+  <thead v-bind="$attrs" :class="headerClasses">
     <slot>
       <tr v-if="context">
         <th

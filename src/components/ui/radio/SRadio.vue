@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref, inject } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   modelValue?: any
   value?: any
@@ -15,6 +17,8 @@ export interface Props {
   required?: boolean
   name?: string
   error?: string
+  radioClass?: string
+  labelClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -30,7 +34,9 @@ const props = withDefaults(defineProps<Props>(), {
   icon: undefined,
   required: false,
   name: undefined,
-  error: undefined
+  error: undefined,
+  radioClass: undefined,
+  labelClass: undefined
 })
 
 const emit = defineEmits<{
@@ -154,6 +160,7 @@ const buttonStyle = computed(() => {
 </script>
 
 <template>
+  <div class="s-radio-container" v-bind="$attrs">
   <!-- Button Variant -->
   <button
     v-if="currentVariant === 'button'"
@@ -230,12 +237,13 @@ const buttonStyle = computed(() => {
       class="s-radio-outer relative inline-flex items-center justify-center shrink-0 rounded-full border-2 transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--s-primary)"
       :class="[
         sizeConfig.outer,
-        isChecked 
-          ? '' 
+        isChecked
+          ? ''
           : 'border-(--s-border) hover:border-(--s-text-tertiary)',
         currentVariant === 'filled' && isChecked ? 'border-transparent' : '',
         currentVariant === 'outlined' && isChecked ? 'border-2' : '',
-        { 'cursor-not-allowed': isDisabled || loading }
+        { 'cursor-not-allowed': isDisabled || loading },
+        radioClass
       ]"
       :style="radioStyle"
       @click.prevent="select"
@@ -302,7 +310,8 @@ const buttonStyle = computed(() => {
       class="s-radio-label text-(--s-text-secondary) transition-colors duration-200"
       :class="[
         sizeConfig.label,
-        { 'text-(--s-text-primary)': isChecked }
+        { 'text-(--s-text-primary)': isChecked },
+        labelClass
       ]"
     >
       <slot>{{ label }}</slot>
@@ -315,6 +324,7 @@ const buttonStyle = computed(() => {
     <span class="mdi mdi-alert-circle" />
     {{ error }}
   </p>
+  </div>
 </template>
 
 <style scoped>

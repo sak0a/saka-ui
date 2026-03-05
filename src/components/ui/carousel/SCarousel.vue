@@ -2,6 +2,8 @@
 import { provide, ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { SCarouselContextKey, type SCarouselContext } from './SCarouselSlide.vue'
 
+defineOptions({ inheritAttrs: false })
+
 export type CarouselEffect = 
   | 'slide' | 'fade' | 'cube' | 'flip' | 'coverflow' | 'cards'
   | 'zoom' | 'creative' | 'parallax' | 'stack' | 'swirl' | 'kenburns'
@@ -542,6 +544,7 @@ defineExpose({
 <template>
   <div
     ref="containerRef"
+    v-bind="$attrs"
     class="s-carousel relative overflow-hidden bg-(--s-bg-secondary) select-none"
     :class="[
       `s-carousel--${effect}`,

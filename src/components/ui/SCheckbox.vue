@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   modelValue?: boolean | string | number | any[]
   value?: any
@@ -16,6 +18,8 @@ export interface Props {
   required?: boolean
   name?: string
   error?: string
+  checkboxClass?: string
+  labelClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -32,7 +36,9 @@ const props = withDefaults(defineProps<Props>(), {
   icon: 'check',
   required: false,
   name: undefined,
-  error: undefined
+  error: undefined,
+  checkboxClass: undefined,
+  labelClass: undefined
 })
 
 const emit = defineEmits<{
@@ -138,7 +144,7 @@ const displayIcon = computed(() => {
 </script>
 
 <template>
-  <div class="s-checkbox-container">
+  <div class="s-checkbox-container" v-bind="$attrs">
     <label 
       class="s-checkbox-wrapper relative inline-flex items-center cursor-pointer select-none"
       :class="[
@@ -169,10 +175,11 @@ const displayIcon = computed(() => {
       :class="[
         sizeConfig.box,
         rounded ? 'rounded-full' : 'rounded-md',
-        isChecked || indeterminate 
-          ? 'border-transparent' 
+        isChecked || indeterminate
+          ? 'border-transparent'
           : 'border-(--s-border) bg-(--s-bg-primary) hover:border-(--s-text-tertiary)',
-        { 'cursor-not-allowed': disabled || loading }
+        { 'cursor-not-allowed': disabled || loading },
+        checkboxClass
       ]"
       :style="boxStyle"
       @click.prevent="toggle"
@@ -220,7 +227,8 @@ const displayIcon = computed(() => {
       class="s-checkbox-label text-(--s-text-secondary) transition-colors"
       :class="[
         sizeConfig.label,
-        { 'text-(--s-text-primary)': isChecked }
+        { 'text-(--s-text-primary)': isChecked },
+        labelClass
       ]"
     >
       <slot>{{ label }}</slot>

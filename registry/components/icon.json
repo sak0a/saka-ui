@@ -1,0 +1,17 @@
+{
+  "name": "icon",
+  "displayName": "SIcon",
+  "description": "Icon wrapper supporting MDI icon classes, custom SVG components, and sizing",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/SIcon.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}

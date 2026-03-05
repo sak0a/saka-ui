@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject, computed } from 'vue'
 
 export interface Props {
@@ -79,6 +81,7 @@ const sizeConfig = computed(() => {
 
 <template>
   <div
+    v-bind="$attrs"
     role="option"
     :aria-selected="isSelected"
     :aria-disabled="disabled"

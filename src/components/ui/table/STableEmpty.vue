@@ -33,6 +33,8 @@ const props = withDefaults(defineProps<Props>(), {
   colspan: 1
 })
 
+defineOptions({ inheritAttrs: false })
+
 defineSlots<{
   /** Custom icon */
   icon?: () => unknown
@@ -68,7 +70,7 @@ const containerClasses = computed(() => {
 </script>
 
 <template>
-  <tr class="s-table-empty-row">
+  <tr v-bind="$attrs" class="s-table-empty-row">
     <td :colspan="colspan" class="s-table-td p-0">
       <div :class="containerClasses">
         <!-- Icon -->

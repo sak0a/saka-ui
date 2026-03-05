@@ -1,0 +1,17 @@
+{
+  "name": "switch",
+  "displayName": "SSwitch",
+  "description": "Toggle switch with inset/outset types, sizes, colors, icons, and label text",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/SSwitch.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}

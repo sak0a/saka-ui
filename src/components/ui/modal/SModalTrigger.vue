@@ -5,6 +5,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   /** Trigger element type */
   as?: string
@@ -37,6 +39,7 @@ const handleClick = (event: MouseEvent) => {
 <template>
   <component
     :is="as"
+    v-bind="$attrs"
     :type="as === 'button' ? 'button' : undefined"
     class="s-modal-trigger inline-flex outline-none"
     :class="[

@@ -5,6 +5,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject, onMounted, onBeforeUnmount } from 'vue'
 import { SModalContextKey, type SModalContext } from './SModal.vue'
 
@@ -67,6 +69,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div
+    v-bind="$attrs"
     class="s-modal-footer flex items-center shrink-0"
     :class="[
       paddingClasses[padding],

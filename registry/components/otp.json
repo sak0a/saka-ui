@@ -1,0 +1,15 @@
+{
+  "name": "otp",
+  "displayName": "SOTP",
+  "description": "OTP/PIN input with configurable length, masked input, and auto-submit",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/otp/index.ts",
+    "components/ui/otp/SOTP.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  }
+}

@@ -5,6 +5,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject, onMounted, onBeforeUnmount } from 'vue'
 import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
 
@@ -70,6 +72,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div
+    v-bind="$attrs"
     class="s-drawer-footer flex items-center shrink-0"
     :class="[
       paddingClasses[padding],

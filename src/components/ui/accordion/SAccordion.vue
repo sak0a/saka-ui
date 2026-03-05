@@ -37,6 +37,8 @@ export const SAccordionContextKey: InjectionKey<SAccordionContext> = Symbol('SAc
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { provide, ref, computed, watch } from 'vue'
 
 export interface Props {
@@ -216,6 +218,7 @@ provide(SAccordionContextKey, {
 
 <template>
   <div
+    v-bind="$attrs"
     :class="accordionClasses"
     role="region"
     aria-label="Accordion"

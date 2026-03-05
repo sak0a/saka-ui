@@ -6,6 +6,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { ref, inject, onMounted, onBeforeUnmount, computed } from 'vue'
 import { SMorphingModalContextKey } from './SMorphingModal.vue'
 
@@ -60,6 +62,7 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="triggerRef"
+    v-bind="$attrs"
     class="s-morphing-modal-trigger cursor-pointer outline-none"
     :class="[
       disabled ? 'opacity-50 cursor-not-allowed' : '',

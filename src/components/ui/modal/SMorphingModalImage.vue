@@ -6,6 +6,8 @@
 </script>
 
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 export interface Props {
   /** Image source URL */
   src: string
@@ -26,6 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <img
+    v-bind="$attrs"
     :src="src"
     :alt="alt"
     class="s-morphing-modal-image w-full"

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
 import { inject, computed } from 'vue'
 import { SDropdownContextKey, type SDropdownContext } from './SDropdown.vue'
 
@@ -24,7 +26,7 @@ const sizeConfig = computed(() => ({
 </script>
 
 <template>
-  <div class="s-dropdown-group">
+  <div class="s-dropdown-group" v-bind="$attrs">
     <!-- Group header -->
     <div 
       class="font-semibold uppercase tracking-wider text-(--s-text-tertiary) flex items-center gap-2 sticky top-0 bg-(--s-bg-primary)/95 backdrop-blur-sm"

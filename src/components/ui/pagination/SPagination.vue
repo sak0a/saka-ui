@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref, watch, nextTick, onMounted, onBeforeUnmount, type VNode } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 // Types
 export type PaginationVariant = 'default' | 'outlined' | 'ghost' | 'minimal' | 'dots'
 export type PaginationSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
@@ -464,8 +466,9 @@ watch(() => props.pageSize, (newVal) => {
 </script>
 
 <template>
-  <nav 
+  <nav
     v-if="shouldShow"
+    v-bind="$attrs"
     class="s-pagination flex flex-wrap items-center"
     :class="[
       gapClasses,
