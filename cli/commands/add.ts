@@ -5,7 +5,7 @@ import { copyComponentFiles, copyComposableFiles } from '../utils/copy.js'
 import { log } from '../utils/logger.js'
 import { resolve } from 'path'
 
-export async function addCommand(components: string[]) {
+export async function addCommand(components: string[], opts: { yes?: boolean } = {}) {
   const cwd = process.cwd()
 
   if (!configExists(cwd)) {
@@ -57,12 +57,16 @@ export async function addCommand(components: string[]) {
   }
   log.blank()
 
-  const { proceed } = await prompts({
-    type: 'confirm',
-    name: 'proceed',
-    message: 'Proceed?',
-    initial: true,
-  })
+  let proceed = true
+  if (!opts.yes) {
+    const response = await prompts({
+      type: 'confirm',
+      name: 'proceed',
+      message: 'Proceed?',
+      initial: true,
+    })
+    proceed = response.proceed
+  }
 
   if (!proceed) {
     log.info('Aborted.')
