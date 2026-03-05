@@ -5,6 +5,7 @@ import { readFileSync } from 'fs'
 import { resolve } from 'path'
 import { initCommand } from './commands/init.js'
 import { addCommand } from './commands/add.js'
+import { listCommand } from './commands/list.js'
 
 const pkgPath = resolve(import.meta.dirname, '..', 'package.json')
 const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'))
@@ -24,5 +25,10 @@ program
   .description('Add components to your project')
   .argument('<components...>', 'Component names to add')
   .action(addCommand)
+
+program
+  .command('list')
+  .description('List available registry components')
+  .action(listCommand)
 
 program.parse()
