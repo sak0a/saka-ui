@@ -80,6 +80,8 @@ const props = withDefaults(defineProps<Props>(), {
   to: undefined
 })
 
+defineOptions({ inheritAttrs: false })
+
 const emit = defineEmits<{
   click: [event: MouseEvent]
 }>()
@@ -241,7 +243,7 @@ defineExpose({
   <component
     :is="componentTag"
     ref="cardRef"
-    v-bind="componentBindings"
+    v-bind="{ ...componentBindings, ...$attrs }"
     class="s-card relative overflow-hidden"
     :class="[
       sizeClasses,

@@ -20,6 +20,10 @@ export interface Props {
   ripple?: boolean
   animationType?: 'slide' | 'vertical' | 'scale' | 'rotate'
   animateInactive?: boolean
+  /** Custom class for content wrapper */
+  contentClass?: string
+  /** Custom class for icon elements */
+  iconClass?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -40,8 +44,12 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'button',
   ripple: true,
   animationType: 'slide',
-  animateInactive: false
+  animateInactive: false,
+  contentClass: undefined,
+  iconClass: undefined,
 })
+
+defineOptions({ inheritAttrs: false })
 
 const slots = useSlots()
 const hasAnimateSlot = computed(() => !!slots.animate)
@@ -205,7 +213,7 @@ const componentBindings = computed(() => {
 <template>
   <component
     :is="componentTag"
-    v-bind="componentBindings"
+    v-bind="{ ...componentBindings, ...$attrs }"
     class="s-button relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out overflow-hidden select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--s-primary)"
     :class="[
       sizeClasses,
@@ -247,34 +255,34 @@ const componentBindings = computed(() => {
     <!-- Default content wrapper -->
     <span 
       class="s-button__content flex items-center justify-center gap-2"
-      :class="{ 'opacity-0': loading && preserveSize }"
+      :class="[contentClass, { 'opacity-0': loading && preserveSize }]"
     >
       <!-- Left icon -->
       <template v-if="!loading || preserveSize">
         <slot name="icon-left">
-          <span 
-            v-if="iconLeft" 
-            :class="['mdi', `mdi-${iconLeft}`, iconSizes]"
+          <span
+            v-if="iconLeft"
+            :class="['mdi', `mdi-${iconLeft}`, iconSizes, iconClass]"
           />
         </slot>
       </template>
-      
+
       <!-- Content -->
       <span v-if="!iconOnly && (!loading || preserveSize)">
         <slot />
       </span>
-      
+
       <!-- Icon only content -->
       <template v-if="iconOnly && (!loading || preserveSize) && !iconLeft">
         <slot />
       </template>
-      
+
       <!-- Right icon -->
       <template v-if="!loading || preserveSize">
         <slot name="icon-right">
-          <span 
-            v-if="iconRight" 
-            :class="['mdi', `mdi-${iconRight}`, iconSizes]"
+          <span
+            v-if="iconRight"
+            :class="['mdi', `mdi-${iconRight}`, iconSizes, iconClass]"
           />
         </slot>
       </template>
