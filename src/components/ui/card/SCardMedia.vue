@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue'
+import { cn } from '~/lib/utils'
 import { cardContextKey, type CardContext } from './index'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Image source URL */
@@ -157,9 +160,10 @@ const handleError = () => {
 </script>
 
 <template>
-  <div 
-    class="s-card-media relative overflow-hidden"
-    :class="[
+  <div
+    v-bind="$attrs"
+    :class="cn(
+      's-card-media relative overflow-hidden',
       aspectRatioClasses,
       roundedClasses,
       positionClasses,
@@ -167,8 +171,9 @@ const handleError = () => {
         'rounded-t-lg': position === 'top' && rounded === 'inherit',
         'rounded-b-lg': position === 'bottom' && rounded === 'inherit',
         'w-1/3 shrink-0': cardContext.horizontal && (position === 'left' || position === 'right')
-      }
-    ]"
+      },
+      ($attrs.class as string)
+    )"
     :style="computedStyle"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
@@ -176,7 +181,7 @@ const handleError = () => {
     <!-- Skeleton loading -->
     <div 
       v-if="skeleton || cardContext.loading || (!isLoaded && !hasError)" 
-      class="absolute inset-0 bg-(--s-bg-tertiary) animate-pulse"
+      class="absolute inset-0 bg-accent animate-pulse"
     >
       <div class="absolute inset-0 s-card-media-shimmer" />
     </div>
@@ -235,7 +240,7 @@ const handleError = () => {
     <!-- Error state -->
     <div 
       v-if="hasError" 
-      class="absolute inset-0 flex flex-col items-center justify-center bg-(--s-bg-tertiary) text-(--s-text-tertiary)"
+      class="absolute inset-0 flex flex-col items-center justify-center bg-accent text-muted-foreground"
     >
       <span class="mdi mdi-image-broken-variant text-4xl mb-2" />
       <span class="text-sm">Failed to load media</span>
@@ -289,7 +294,7 @@ const handleError = () => {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--s-bg-secondary) 50%,
+    var(--s-muted) 50%,
     transparent 100%
   );
   background-size: 200% 100%;

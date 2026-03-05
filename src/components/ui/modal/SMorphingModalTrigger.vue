@@ -9,6 +9,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { ref, inject, onMounted, onBeforeUnmount, computed } from 'vue'
+import { cn } from '~/lib/utils'
 import { SMorphingModalContextKey } from './SMorphingModal.vue'
 
 export interface Props {
@@ -63,11 +64,7 @@ onBeforeUnmount(() => {
   <div
     ref="triggerRef"
     v-bind="$attrs"
-    class="s-morphing-modal-trigger cursor-pointer outline-none"
-    :class="[
-      disabled ? 'opacity-50 cursor-not-allowed' : '',
-      triggerClass
-    ]"
+    :class="cn('s-morphing-modal-trigger cursor-pointer outline-none', disabled ? 'opacity-50 cursor-not-allowed' : '', triggerClass, $attrs.class ?? '')"
     :style="{ 
       opacity: triggerOpacity,
       transitionProperty: 'opacity',

@@ -3,6 +3,7 @@
  * STableHeader - Standalone header component for custom table layouts
  */
 import { inject, computed } from 'vue'
+import { cn } from '~/lib/utils'
 import { SDataTableContextKey } from './index'
 
 interface Props {
@@ -24,14 +25,14 @@ const headerClasses = computed(() => {
     props.headerClass,
     {
       'sticky z-10': context?.stickyHeader,
-      'bg-(--s-bg-secondary)': true
+      'bg-muted': true
     }
   ]
 })
 </script>
 
 <template>
-  <thead v-bind="$attrs" :class="headerClasses">
+  <thead v-bind="$attrs" :class="cn(headerClasses, $attrs.class ?? '')">
     <slot>
       <tr v-if="context">
         <th
@@ -83,13 +84,13 @@ const headerClasses = computed(() => {
                 <span 
                   class="mdi mdi-chevron-up transition-transform -mb-1.5"
                   :class="{ 
-                    'text-(--s-primary)': context.sortState.value.column === column.key && context.sortState.value.direction === 'asc'
+                    'text-primary': context.sortState.value.column === column.key && context.sortState.value.direction === 'asc'
                   }"
                 />
                 <span 
                   class="mdi mdi-chevron-down transition-transform"
                   :class="{ 
-                    'text-(--s-primary)': context.sortState.value.column === column.key && context.sortState.value.direction === 'desc'
+                    'text-primary': context.sortState.value.column === column.key && context.sortState.value.direction === 'desc'
                   }"
                 />
               </span>
@@ -103,7 +104,7 @@ const headerClasses = computed(() => {
 
 <style scoped>
 .s-table-head {
-  background-color: var(--s-bg-secondary);
+  background-color: var(--s-muted);
 }
 
 .s-table-th {
@@ -112,7 +113,7 @@ const headerClasses = computed(() => {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--s-text-secondary);
+  color: var(--s-muted-foreground);
   white-space: nowrap;
 }
 
@@ -121,7 +122,7 @@ const headerClasses = computed(() => {
 }
 
 .s-table-th-sortable:hover {
-  background-color: var(--s-bg-tertiary);
+  background-color: var(--s-accent);
 }
 
 .s-table-th-sortable:focus-visible {

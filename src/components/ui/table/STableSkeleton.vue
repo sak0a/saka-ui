@@ -9,6 +9,7 @@
  * - Respects prefers-reduced-motion
  */
 import { inject, computed } from 'vue'
+import { cn } from '~/lib/utils'
 import { SDataTableContextKey } from './index'
 
 interface Props {
@@ -77,7 +78,7 @@ const animationClass = computed(() => {
 </script>
 
 <template>
-  <tbody v-bind="$attrs" class="s-table-skeleton-body">
+  <tbody v-bind="$attrs" :class="cn('s-table-skeleton-body', $attrs.class ?? '')">
     <tr
       v-for="(widths, rowIndex) in rowWidths"
       :key="`skeleton-row-${rowIndex}`"
@@ -126,7 +127,7 @@ const animationClass = computed(() => {
 .s-skeleton {
   height: 1rem;
   border-radius: 0.25rem;
-  background-color: var(--s-bg-tertiary);
+  background-color: var(--s-accent);
 }
 
 .s-skeleton-checkbox {
@@ -144,9 +145,9 @@ const animationClass = computed(() => {
 .s-skeleton-shimmer {
   background: linear-gradient(
     90deg,
-    var(--s-bg-tertiary) 25%,
-    var(--s-bg-secondary) 50%,
-    var(--s-bg-tertiary) 75%
+    var(--s-accent) 25%,
+    var(--s-muted) 50%,
+    var(--s-accent) 75%
   );
   background-size: 200% 100%;
   animation: skeleton-shimmer 1.5s infinite;
@@ -196,7 +197,7 @@ const animationClass = computed(() => {
   .s-skeleton-shimmer,
   .s-skeleton-pulse {
     animation: none;
-    background: var(--s-bg-tertiary);
+    background: var(--s-accent);
   }
   
   .s-table-row-skeleton {

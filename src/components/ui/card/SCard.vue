@@ -1,6 +1,41 @@
 <script setup lang="ts">
 import { computed, ref, provide } from 'vue'
+import { cn } from '~/lib/utils'
+import { cva, type VariantProps } from 'class-variance-authority'
 import { cardContextKey } from './index'
+
+const cardVariants = cva('s-card relative overflow-hidden', {
+  variants: {
+    variant: {
+      elevated: 'bg-card shadow-lg shadow-black/10 dark:shadow-black/40',
+      outlined: 'bg-transparent border border-border',
+      filled: 'bg-muted',
+      ghost: 'bg-transparent',
+      glass: 'bg-card/60 dark:bg-card/40 backdrop-blur-xl border border-border'
+    },
+    size: {
+      compact: 'p-3',
+      default: 'p-4 sm:p-5',
+      comfortable: 'p-5 sm:p-6 lg:p-8'
+    },
+    rounded: {
+      none: 'rounded-none',
+      sm: 'rounded-sm',
+      md: 'rounded-md',
+      lg: 'rounded-lg',
+      xl: 'rounded-xl',
+      '2xl': 'rounded-2xl',
+      full: 'rounded-3xl'
+    }
+  },
+  defaultVariants: {
+    variant: 'elevated',
+    size: 'default',
+    rounded: 'lg'
+  }
+})
+
+type CardVariants = VariantProps<typeof cardVariants>
 
 interface Props {
   /** Visual style variant */
@@ -116,18 +151,9 @@ const componentBindings = computed(() => {
   return bindings
 })
 
-// Size configurations
-const sizeClasses = computed(() => {
-  if (props.padding) return ''
-  const sizes = {
-    compact: 'p-3',
-    default: 'p-4 sm:p-5',
-    comfortable: 'p-5 sm:p-6 lg:p-8'
-  }
-  return sizes[props.size]
-})
 
-// Border radius
+
+// Radius classes (needed for sub-elements like gradient border spans)
 const radiusClasses = computed(() => {
   const radii = {
     none: 'rounded-none',
@@ -141,18 +167,10 @@ const radiusClasses = computed(() => {
   return radii[props.rounded]
 })
 
-// Variant styles - FIXED: removed white borders, using proper dark mode colors
-const variantClasses = computed(() => {
-  if (props.gradientBorder || props.gradientBg) return 'bg-(--s-bg-primary)'
-  
-  const variants = {
-    elevated: 'bg-(--s-bg-primary) shadow-lg shadow-black/10 dark:shadow-black/40',
-    outlined: 'bg-transparent border border-(--s-border-subtle)',
-    filled: 'bg-(--s-bg-secondary)',
-    ghost: 'bg-transparent',
-    glass: 'bg-(--s-bg-primary)/60 dark:bg-(--s-bg-primary)/40 backdrop-blur-xl border border-(--s-border-subtle)'
-  }
-  return variants[props.variant]
+// Computed variant class for gradient override
+const variantOverride = computed(() => {
+  if (props.gradientBorder || props.gradientBg) return 'bg-card'
+  return undefined
 })
 
 // Computed styles
@@ -244,11 +262,13 @@ defineExpose({
     :is="componentTag"
     ref="cardRef"
     v-bind="{ ...componentBindings, ...$attrs }"
-    class="s-card relative overflow-hidden"
-    :class="[
-      sizeClasses,
-      radiusClasses,
-      variantClasses,
+    :class="cn(
+      cardVariants({
+        variant: (gradientBorder || gradientBg) ? undefined : variant,
+        size: padding ? undefined : size,
+        rounded
+      }),
+      variantOverride,
       {
         // Layout
         'flex': horizontal,
@@ -276,8 +296,9 @@ defineExpose({
         // Gradient styles
         's-card-gradient-border': gradientBorder,
         's-card-gradient-bg': gradientBg
-      }
-    ]"
+      },
+      ($attrs.class as string)
+    )"
     :style="computedStyle"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
@@ -294,7 +315,7 @@ defineExpose({
       :style="{ background: gradientBorder }"
     >
       <span 
-        class="absolute inset-px bg-(--s-bg-primary)"
+        class="absolute inset-px bg-card"
         :class="radiusClasses"
       />
     </span>
@@ -317,12 +338,12 @@ defineExpose({
     <Transition name="fade">
       <div 
         v-if="loading" 
-        class="absolute inset-0 z-50 bg-(--s-bg-primary)/80 backdrop-blur-sm flex items-center justify-center"
+        class="absolute inset-0 z-50 bg-card/80 backdrop-blur-sm flex items-center justify-center"
       >
         <div class="s-card-shimmer absolute inset-0" />
         <div class="relative z-10 flex flex-col items-center gap-3">
-          <span class="mdi mdi-loading animate-spin text-2xl text-(--s-primary)" />
-          <span class="text-sm text-(--s-text-secondary)">Loading...</span>
+          <span class="mdi mdi-loading animate-spin text-2xl text-primary" />
+          <span class="text-sm text-muted-foreground">Loading...</span>
         </div>
       </div>
     </Transition>
@@ -335,7 +356,7 @@ defineExpose({
 <style scoped>
 .s-card {
   /* Custom property support */
-  background-color: var(--card-bg, var(--s-bg-primary));
+  background-color: var(--card-bg, var(--s-card));
   border-color: var(--card-border, transparent);
   transition: 
     transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -377,14 +398,14 @@ defineExpose({
 /* Outlined variant - border glow */
 .s-card-hoverable-outlined:hover {
   border-color: var(--s-primary);
-  box-shadow: 
+  box-shadow:
     0 0 0 1px var(--s-primary),
     0 8px 24px -8px rgba(var(--s-primary-rgb), 0.2);
 }
 
 /* Filled variant - subtle lift with bg change */
 .s-card-hoverable-filled:hover {
-  background-color: var(--s-bg-tertiary);
+  background-color: var(--s-accent);
   box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.15);
 }
 
@@ -410,7 +431,7 @@ defineExpose({
 
 /* Ghost variant - subtle bg appear */
 .s-card-hoverable-ghost:hover {
-  background-color: var(--s-bg-secondary);
+  background-color: var(--s-muted);
 }
 
 /* ===== PRESS EFFECT ===== */
@@ -460,7 +481,7 @@ defineExpose({
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--s-bg-tertiary) 50%,
+    var(--s-accent) 50%,
     transparent 100%
   );
   background-size: 200% 100%;

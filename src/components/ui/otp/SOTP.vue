@@ -2,6 +2,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { ref, computed, watch, nextTick, onMounted, onUnmounted, provide, toRef } from 'vue'
+import { cn } from '~/lib/utils'
 import type { SOTPVariant, SOTPSize, SOTPRounded, SOTPGap, SOTPMode, SOTPAnimation, SOTPEntryAnimation, SOTPInputAnimation, SOTPSuccessAnimation, SOTPErrorAnimation, SOTPVisualDefaults } from './types'
 import { SOTP_INJECTION_KEY } from './useOTPContext'
 import type { SOTPContext } from './useOTPContext'
@@ -196,11 +197,11 @@ const roundedConfig = computed(() => {
 // Variant classes
 const variantClasses = computed(() => {
   const base = {
-    outlined: 'border-2 bg-(--s-bg-primary) border-(--s-border)',
-    filled: 'border-2 border-transparent bg-(--s-bg-tertiary)',
-    underlined: 'border-b-2 border-t-0 border-l-0 border-r-0 rounded-none! bg-transparent border-(--s-border)',
+    outlined: 'border-2 bg-background border-border',
+    filled: 'border-2 border-transparent bg-accent',
+    underlined: 'border-b-2 border-t-0 border-l-0 border-r-0 rounded-none! bg-transparent border-border',
     ghost: 'border-2 border-transparent bg-transparent',
-    morphing: 'border-2 bg-(--s-bg-secondary) border-(--s-border) shadow-inner'
+    morphing: 'border-2 bg-muted border-border shadow-inner'
   }
   return base[props.variant]
 })
@@ -679,13 +680,16 @@ watch(() => props.error, (hasError) => {
   <div
     ref="containerRef"
     v-bind="$attrs"
-    class="s-otp-wrapper flex flex-col items-center w-fit"
-    :class="{ 'opacity-50 pointer-events-none': disabled }"
+    :class="cn(
+      's-otp-wrapper flex flex-col items-center w-fit',
+      disabled && 'opacity-50 pointer-events-none',
+      $attrs.class ?? ''
+    )"
   >
     <!-- Label -->
     <label
       v-if="label"
-      class="s-otp-label font-medium text-(--s-text-secondary) mb-3 text-center"
+      class="s-otp-label font-medium text-muted-foreground mb-3 text-center"
       :class="sizeConfig.label"
     >
       {{ label }}
@@ -700,7 +704,7 @@ watch(() => props.error, (hasError) => {
 
       <!-- Loading indicator -->
       <div v-if="loading" class="ml-3 flex items-center">
-        <span class="mdi mdi-loading animate-spin text-(--s-primary)" :class="sizeConfig.icon" />
+        <span class="mdi mdi-loading animate-spin text-primary" :class="sizeConfig.icon" />
       </div>
 
       <!-- Success checkmark overlay (global effect) -->
@@ -768,7 +772,7 @@ watch(() => props.error, (hasError) => {
         <p
           v-else-if="hint"
           key="hint"
-          class="text-(--s-text-tertiary)"
+          class="text-muted-foreground"
           :class="sizeConfig.hint"
         >
           {{ hint }}
@@ -789,8 +793,8 @@ watch(() => props.error, (hasError) => {
           class="text-sm transition-all duration-200"
           :class="[
             countdownValue > 0
-              ? 'text-(--s-text-tertiary) cursor-not-allowed'
-              : 'text-(--s-primary) hover:underline cursor-pointer'
+              ? 'text-muted-foreground cursor-not-allowed'
+              : 'text-primary hover:underline cursor-pointer'
           ]"
           :disabled="countdownValue > 0"
           @click="handleResend"

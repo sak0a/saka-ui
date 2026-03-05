@@ -50,6 +50,7 @@ export const SDropdownContextKey: InjectionKey<SDropdownContext> = Symbol('SDrop
 defineOptions({ inheritAttrs: false })
 
 import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { cn } from '~/lib/utils'
 
 export interface Props {
   /** Menu items (alternative to slots) */
@@ -229,9 +230,9 @@ const sizeConfig = computed(() => ({
 }[props.size]))
 
 const variantClasses = computed(() => ({
-  default: 'bg-(--s-bg-primary) border border-(--s-border) shadow-xl',
-  filled: 'bg-(--s-bg-secondary) border border-(--s-border) shadow-lg',
-  glass: 'bg-(--s-bg-primary)/80 backdrop-blur-xl border border-(--s-border)/50 shadow-2xl'
+  default: 'bg-background border border-border shadow-xl',
+  filled: 'bg-muted border border-border shadow-lg',
+  glass: 'bg-background/80 backdrop-blur-xl border border-border/50 shadow-2xl'
 }[props.variant]))
 
 // Animation classes
@@ -560,7 +561,7 @@ defineExpose({
 </script>
 
 <template>
-  <div class="s-dropdown relative inline-block" v-bind="$attrs">
+  <div :class="cn('s-dropdown relative inline-block', $attrs.class ?? '')" v-bind="$attrs">
     <!-- Trigger -->
     <div
       ref="triggerRef"
@@ -583,8 +584,8 @@ defineExpose({
           :class="[
             sizeConfig.trigger,
             disabled 
-              ? 'opacity-50 cursor-not-allowed bg-(--s-bg-tertiary) border-(--s-border) text-(--s-text-tertiary)' 
-              : 'bg-(--s-bg-secondary) border-(--s-border) text-(--s-text-primary) hover:bg-(--s-bg-tertiary) hover:border-(--s-border-hover) focus:ring-2 focus:ring-(--s-primary)/20'
+              ? 'opacity-50 cursor-not-allowed bg-accent border-border text-muted-foreground' 
+              : 'bg-muted border-border text-foreground hover:bg-accent hover:border-input focus:ring-2 focus:ring-primary/20'
           ]"
           :disabled="disabled"
         >
@@ -622,7 +623,7 @@ defineExpose({
           <!-- Arrow pointer -->
           <div
             v-if="arrow"
-            class="s-dropdown-arrow absolute w-2.5 h-2.5 rotate-45 bg-(--s-bg-primary) border border-(--s-border)"
+            class="s-dropdown-arrow absolute w-2.5 h-2.5 rotate-45 bg-background border border-border"
             :class="{
               'bottom-full left-4 -mb-1 border-b-0 border-r-0': menuPosition.placement.startsWith('bottom'),
               'top-full left-4 -mt-1 border-t-0 border-l-0': menuPosition.placement.startsWith('top'),
@@ -632,16 +633,16 @@ defineExpose({
           />
           
           <!-- Search input -->
-          <div v-if="searchable" class="p-2 border-b border-(--s-border)">
+          <div v-if="searchable" class="p-2 border-b border-border">
             <div class="relative">
-              <span class="absolute left-3 top-1/2 -translate-y-1/2 mdi mdi-magnify text-(--s-text-tertiary)" />
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 mdi mdi-magnify text-muted-foreground" />
               <input
                 ref="searchInputRef"
                 v-model="searchQuery"
                 type="text"
                 :placeholder="searchPlaceholder"
                 :class="sizeConfig.search"
-                class="w-full pl-9 pr-3 bg-(--s-bg-tertiary) border border-(--s-border) rounded-lg outline-none focus:border-(--s-primary) focus:ring-2 focus:ring-(--s-primary)/20 transition-all text-(--s-text-primary) placeholder:text-(--s-text-tertiary)"
+                class="w-full pl-9 pr-3 bg-accent border border-border rounded-lg outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-muted-foreground"
                 @keydown="handleKeydown"
               />
             </div>
@@ -661,13 +662,13 @@ defineExpose({
                 <!-- Divider -->
                 <div 
                   v-if="item.divider" 
-                  class="my-1 h-px bg-(--s-border)/60" 
+                  class="my-1 h-px bg-border/60" 
                 />
                 
                 <!-- Section header -->
                 <div 
                   v-else-if="item.header"
-                  class="px-2.5 pt-2 pb-1 text-[11px] font-semibold uppercase tracking-wider text-(--s-text-tertiary)"
+                  class="px-2.5 pt-2 pb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground"
                 >
                   {{ item.header }}
                 </div>
@@ -683,8 +684,8 @@ defineExpose({
                     {
                       'opacity-50 cursor-not-allowed': item.disabled,
                       'text-red-500 hover:bg-red-500/10': item.danger && !item.disabled,
-                      'text-(--s-text-primary) hover:bg-(--s-bg-tertiary)': !item.danger && !item.disabled,
-                      'bg-(--s-bg-tertiary)': highlightedIndex === index && !item.disabled
+                      'text-foreground hover:bg-accent': !item.danger && !item.disabled,
+                      'bg-accent': highlightedIndex === index && !item.disabled
                     }
                   ]"
                   @click="!item.disabled && selectItem(item.key)"
@@ -697,7 +698,7 @@ defineExpose({
                     :class="[
                       item.checked ? 'mdi-checkbox-marked' : 'mdi-checkbox-blank-outline',
                       sizeConfig.icon,
-                      item.checked ? '' : 'text-(--s-text-tertiary)'
+                      item.checked ? '' : 'text-muted-foreground'
                     ]"
                     :style="item.checked ? { color: color } : {}"
                   />
@@ -705,7 +706,7 @@ defineExpose({
                   <!-- Leading icon -->
                   <span 
                     v-else-if="item.icon"
-                    :class="['mdi', `mdi-${item.icon}`, sizeConfig.icon, 'mr-2.5', item.danger ? '' : 'text-(--s-text-secondary)']"
+                    :class="['mdi', `mdi-${item.icon}`, sizeConfig.icon, 'mr-2.5', item.danger ? '' : 'text-muted-foreground']"
                   />
 
                   <!-- Content -->
@@ -714,7 +715,7 @@ defineExpose({
                     <div 
                       v-if="item.description" 
                       class="text-xs truncate mt-0.5"
-                      :class="item.danger ? 'text-red-400' : 'text-(--s-text-tertiary)'"
+                      :class="item.danger ? 'text-red-400' : 'text-muted-foreground'"
                     >
                       {{ item.description }}
                     </div>
@@ -725,7 +726,7 @@ defineExpose({
                     <!-- Keyboard shortcut -->
                     <kbd 
                       v-if="item.shortcut"
-                      class="px-1.5 py-0.5 text-[10px] font-mono rounded bg-(--s-bg-tertiary) text-(--s-text-tertiary) border border-(--s-border)"
+                      class="px-1.5 py-0.5 text-[10px] font-mono rounded bg-accent text-muted-foreground border border-border"
                     >
                       {{ item.shortcut }}
                     </kbd>
@@ -733,13 +734,13 @@ defineExpose({
                     <!-- Trailing icon -->
                     <span 
                       v-if="item.trailingIcon"
-                      :class="['mdi', `mdi-${item.trailingIcon}`, sizeConfig.icon, 'text-(--s-text-tertiary)']"
+                      :class="['mdi', `mdi-${item.trailingIcon}`, sizeConfig.icon, 'text-muted-foreground']"
                     />
                     
                     <!-- Submenu indicator -->
                     <span 
                       v-if="item.children && item.children.length > 0"
-                      class="mdi mdi-chevron-right text-(--s-text-tertiary)"
+                      class="mdi mdi-chevron-right text-muted-foreground"
                       :class="sizeConfig.icon"
                     />
                   </div>
@@ -755,8 +756,8 @@ defineExpose({
               v-if="searchable && searchQuery && (!filteredItems || filteredItems.length === 0)"
               class="px-4 py-8 text-center"
             >
-              <span class="mdi mdi-magnify-close text-3xl text-(--s-text-tertiary) mb-2 block" />
-              <p class="text-sm text-(--s-text-secondary)">No results found</p>
+              <span class="mdi mdi-magnify-close text-3xl text-muted-foreground mb-2 block" />
+              <p class="text-sm text-muted-foreground">No results found</p>
             </div>
           </div>
 
@@ -820,7 +821,7 @@ defineExpose({
 }
 
 .s-dropdown-menu::-webkit-scrollbar-thumb:hover {
-  background: var(--s-border-hover);
+  background: var(--s-input);
 }
 
 /* Submenu positioning for bottom placements */

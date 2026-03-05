@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
+import { cn } from '~/lib/utils'
 import { cardContextKey, type CardContext } from './index'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Show divider above footer */
@@ -74,17 +77,19 @@ const computedStyle = computed(() => {
 </script>
 
 <template>
-  <div 
-    class="s-card-footer flex flex-wrap"
-    :class="[
+  <div
+    v-bind="$attrs"
+    :class="cn(
+      's-card-footer flex flex-wrap',
       justifyClasses,
       alignClasses,
       gapClasses,
       {
-        'pt-4 mt-4 border-t border-(--s-border-subtle)': divider,
+        'pt-4 mt-4 border-t border-border': divider,
         'flex-col sm:flex-row': stackOnMobile
-      }
-    ]"
+      },
+      ($attrs.class as string)
+    )"
     :style="computedStyle"
   >
     <slot />

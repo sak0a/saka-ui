@@ -8,6 +8,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { inject, onMounted, onBeforeUnmount } from 'vue'
+import { cn } from '~/lib/utils'
 import { SModalContextKey, type SModalContext } from './SModal.vue'
 
 export interface Props {
@@ -55,19 +56,14 @@ onBeforeUnmount(() => {
 <template>
   <div
     v-bind="$attrs"
-    class="s-modal-header flex items-start justify-between gap-4 shrink-0"
-    :class="[
-      paddingClasses[padding],
-      divider ? 'border-b border-(--s-border)' : '',
-      headerClass
-    ]"
+    :class="cn('s-modal-header flex items-start justify-between gap-4 shrink-0', paddingClasses[padding], divider ? 'border-b border-border' : '', headerClass, $attrs.class ?? '')"
   >
     <div class="flex-1 min-w-0">
       <!-- Title -->
       <h2
         v-if="title"
         :id="context?.titleId"
-        class="text-lg font-semibold text-(--s-text-primary) tracking-tight"
+        class="text-lg font-semibold text-foreground tracking-tight"
       >
         {{ title }}
       </h2>
@@ -79,7 +75,7 @@ onBeforeUnmount(() => {
       <p
         v-if="description"
         :id="context?.descriptionId"
-        class="mt-1.5 text-sm text-(--s-text-secondary) leading-relaxed"
+        class="mt-1.5 text-sm text-muted-foreground leading-relaxed"
       >
         {{ description }}
       </p>
@@ -95,7 +91,7 @@ onBeforeUnmount(() => {
     <button
       v-if="closable"
       type="button"
-      class="s-modal-close shrink-0 flex items-center justify-center w-8 h-8 -mt-1 -mr-2 rounded-lg text-(--s-text-tertiary) hover:text-(--s-text-primary) hover:bg-(--s-bg-tertiary) transition-all duration-150 outline-none focus:ring-2 focus:ring-(--s-primary)/30 focus:ring-offset-0"
+      class="s-modal-close shrink-0 flex items-center justify-center w-8 h-8 -mt-1 -mr-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-all duration-150 outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-0"
       aria-label="Close modal"
       @click="context?.close()"
     >

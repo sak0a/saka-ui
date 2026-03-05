@@ -2,6 +2,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { computed, provide } from 'vue'
+import { cn } from '~/lib/utils'
 
 interface Props {
   max?: number
@@ -16,7 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'md',
   spacing: 'normal',
   bordered: true,
-  borderColor: 'var(--s-bg-primary)'
+  borderColor: 'var(--s-background)'
 })
 
 // Provide group context to children
@@ -43,7 +44,7 @@ const spacingValue = computed(() => {
 <template>
   <div
     v-bind="$attrs"
-    class="s-avatar-group flex items-center flex-row-reverse justify-end"
+    :class="cn('s-avatar-group flex items-center flex-row-reverse justify-end', $attrs.class ?? '')"
     :style="{ '--avatar-spacing': spacingValue }"
   >
     <slot />
@@ -53,7 +54,7 @@ const spacingValue = computed(() => {
 <style scoped>
 .s-avatar-group :deep(.s-avatar) {
   margin-left: var(--avatar-spacing);
-  box-shadow: 0 0 0 2px var(--s-bg-primary);
+  box-shadow: 0 0 0 2px var(--s-background);
 }
 
 .s-avatar-group :deep(.s-avatar:first-child) {

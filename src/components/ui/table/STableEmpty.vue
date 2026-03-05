@@ -8,6 +8,7 @@
  * - Multiple visual variants
  */
 import { computed } from 'vue'
+import { cn } from '~/lib/utils'
 
 interface Props {
   /** Icon class (MDI icons) */
@@ -60,9 +61,9 @@ const containerClasses = computed(() => {
   const base = 's-table-empty flex flex-col items-center justify-center py-12'
   
   const variants = {
-    default: 'text-(--s-text-tertiary)',
-    minimal: 'text-(--s-text-secondary) py-8',
-    illustrated: 'text-(--s-text-tertiary) py-16'
+    default: 'text-muted-foreground',
+    minimal: 'text-muted-foreground py-8',
+    illustrated: 'text-muted-foreground py-16'
   }
   
   return `${base} ${variants[props.variant]}`
@@ -70,7 +71,7 @@ const containerClasses = computed(() => {
 </script>
 
 <template>
-  <tr v-bind="$attrs" class="s-table-empty-row">
+  <tr v-bind="$attrs" :class="cn('s-table-empty-row', $attrs.class ?? '')">
     <td :colspan="colspan" class="s-table-td p-0">
       <div :class="containerClasses">
         <!-- Icon -->

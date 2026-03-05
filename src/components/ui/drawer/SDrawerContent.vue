@@ -7,6 +7,8 @@
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
+import { cn } from '~/lib/utils'
+
 export interface Props {
   /** Padding size */
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
@@ -40,13 +42,14 @@ const paddingClasses = {
 <template>
   <div
     v-bind="$attrs"
-    class="s-drawer-content flex-1"
-    :class="[
+    :class="cn(
+      's-drawer-content flex-1',
       paddingClasses[padding],
       centered ? 'flex flex-col items-center justify-center text-center' : '',
       scrollable ? 'overflow-y-auto overscroll-contain' : 'overflow-hidden',
-      contentClass
-    ]"
+      contentClass,
+      $attrs.class ?? ''
+    )"
     :style="maxHeight ? { maxHeight } : {}"
   >
     <slot />
@@ -73,6 +76,6 @@ const paddingClasses = {
 }
 
 .s-drawer-content::-webkit-scrollbar-thumb:hover {
-  background: var(--s-border-hover);
+  background: var(--s-input);
 }
 </style>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
-import { inject, computed } from 'vue'
+import { inject, computed, type CSSProperties } from 'vue'
+import { cn } from '~/lib/utils'
 
 export interface Props {
   value: any
@@ -46,7 +47,9 @@ const index = selectContext?.registerOption(optionData) ?? -1
 
 const isSelected = computed(() => selectContext?.isSelected(props.value) ?? false)
 const isHighlighted = computed(() => selectContext?.highlightedIndex === index)
-const accentColor = computed(() => props.color ?? selectContext?.color ?? 'var(--s-primary)')
+
+const resolvedColor = computed(() => props.color ?? selectContext?.color)
+const hasCustomColor = computed(() => !!resolvedColor.value)
 
 const handleClick = () => {
   if (props.disabled) return
@@ -77,6 +80,26 @@ const sizeConfig = computed(() => {
   }
   return sizes[selectContext?.size as keyof typeof sizes] ?? sizes.medium
 })
+
+// Background style for selection/highlight
+const bgStyle = computed<CSSProperties>(() => {
+  if (isSelected.value && hasCustomColor.value) {
+    return {
+      backgroundColor: `color-mix(in srgb, ${resolvedColor.value} 15%, transparent)`
+    }
+  }
+  return {}
+})
+
+const bgClass = computed(() => {
+  if (isSelected.value && !hasCustomColor.value) {
+    return 'bg-primary/15'
+  }
+  if (!isSelected.value && (isHighlighted.value)) {
+    return 'bg-accent'
+  }
+  return ''
+})
 </script>
 
 <template>
@@ -85,38 +108,34 @@ const sizeConfig = computed(() => {
     role="option"
     :aria-selected="isSelected"
     :aria-disabled="disabled"
-    class="s-option relative flex items-center cursor-pointer transition-all duration-150 select-none"
-    :class="[
+    :class="cn(
+      's-option relative flex items-center cursor-pointer transition-all duration-150 select-none',
       sizeConfig.padding,
       sizeConfig.gap,
       {
         'opacity-50 cursor-not-allowed': disabled,
-        'text-(--s-text-primary)': isHighlighted || isSelected,
-        'text-(--s-text-secondary) hover:text-(--s-text-primary)': !isHighlighted && !isSelected && !disabled
+        'text-foreground': isHighlighted || isSelected,
+        'text-muted-foreground hover:text-foreground': !isHighlighted && !isSelected && !disabled
       }
-    ]"
+    )"
     @click="handleClick"
   >
     <!-- Highlight/Selection background -->
-    <div 
+    <div
       v-if="isHighlighted || isSelected"
       class="absolute inset-0 transition-all duration-150 rounded-lg mx-1"
       :class="[
-        isSelected ? 'opacity-100' : 'opacity-60'
+        isSelected ? 'opacity-100' : 'opacity-60',
+        bgClass
       ]"
-      :style="{ 
-        backgroundColor: isSelected 
-          ? `color-mix(in srgb, ${accentColor} 15%, transparent)` 
-          : 'var(--s-bg-tertiary)' 
-      }"
+      :style="bgStyle"
     />
 
     <!-- Icon -->
-    <span 
-      v-if="icon" 
-      class="relative z-10 shrink-0"
-      :class="['mdi', `mdi-${icon}`, sizeConfig.icon]"
-      :style="isSelected ? { color: accentColor } : {}"
+    <span
+      v-if="icon"
+      :class="cn('relative z-10 shrink-0 mdi', `mdi-${icon}`, sizeConfig.icon, isSelected && !hasCustomColor ? 'text-primary' : '')"
+      :style="isSelected && hasCustomColor ? { color: resolvedColor } : {}"
     />
 
     <!-- Content -->
@@ -127,9 +146,9 @@ const sizeConfig = computed(() => {
         </span>
         <slot name="suffix" />
       </div>
-      <p 
-        v-if="description" 
-        class="text-xs text-(--s-text-tertiary) truncate mt-0.5"
+      <p
+        v-if="description"
+        class="text-xs text-muted-foreground truncate mt-0.5"
       >
         {{ description }}
       </p>
@@ -144,11 +163,11 @@ const sizeConfig = computed(() => {
       leave-from-class="scale-100 opacity-100"
       leave-to-class="scale-0 opacity-0"
     >
-      <span 
+      <span
         v-if="isSelected"
         class="relative z-10 mdi mdi-check shrink-0"
-        :class="sizeConfig.icon"
-        :style="{ color: accentColor }"
+        :class="[sizeConfig.icon, !hasCustomColor ? 'text-primary' : '']"
+        :style="hasCustomColor ? { color: resolvedColor } : {}"
       />
     </Transition>
   </div>

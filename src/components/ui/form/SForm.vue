@@ -2,6 +2,7 @@
 import { provide, computed } from 'vue'
 import type { FormState } from '../../../composables/useForm'
 import { FORM_CONTEXT_KEY } from './index'
+import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -57,8 +58,7 @@ const gapClass = computed(() => {
 <template>
   <form
     v-bind="$attrs"
-    class="s-form"
-    :class="[gapClass, { 's-form--disabled': disabled }]"
+    :class="cn('s-form', gapClass, { 's-form--disabled': disabled })"
     @submit="handleSubmit"
   >
     <slot 

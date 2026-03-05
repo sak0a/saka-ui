@@ -8,6 +8,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { inject, computed } from 'vue'
+import { cn } from '~/lib/utils'
 import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
 
 export interface Props {
@@ -42,20 +43,19 @@ const progressWidth = computed(() => {
 <template>
   <div
     v-bind="$attrs"
-    class="s-drawer-handle flex items-center justify-center py-3 cursor-grab active:cursor-grabbing"
-    :class="handleClass"
+    :class="cn('s-drawer-handle flex items-center justify-center py-3 cursor-grab active:cursor-grabbing', handleClass, $attrs.class ?? '')"
   >
     <div 
-      class="relative rounded-full bg-(--s-text-tertiary)/30 transition-all duration-150 hover:bg-(--s-text-tertiary)/50"
+      class="relative rounded-full bg-muted-foreground/30 transition-all duration-150 hover:bg-muted-foreground/50"
       :class="[
         sizeClasses,
-        context?.isDragging?.value ? 'bg-(--s-text-tertiary)/50 scale-110' : ''
+        context?.isDragging?.value ? 'bg-muted-foreground/50 scale-110' : ''
       ]"
     >
       <!-- Progress indicator -->
       <div
         v-if="showProgress && context?.isDragging?.value"
-        class="absolute inset-y-0 left-0 rounded-full bg-(--s-primary) transition-none"
+        class="absolute inset-y-0 left-0 rounded-full bg-primary transition-none"
         :style="{ width: `${progressWidth}%` }"
       />
     </div>

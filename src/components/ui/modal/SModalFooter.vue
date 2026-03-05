@@ -8,6 +8,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { inject, onMounted, onBeforeUnmount } from 'vue'
+import { cn } from '~/lib/utils'
 import { SModalContextKey, type SModalContext } from './SModal.vue'
 
 export interface Props {
@@ -70,15 +71,7 @@ onBeforeUnmount(() => {
 <template>
   <div
     v-bind="$attrs"
-    class="s-modal-footer flex items-center shrink-0"
-    :class="[
-      paddingClasses[padding],
-      gapClasses[gap],
-      alignClasses[align],
-      divider ? 'border-t border-(--s-border)' : '',
-      stackOnMobile ? 'max-sm:flex-col max-sm:items-stretch' : '',
-      footerClass
-    ]"
+    :class="cn('s-modal-footer flex items-center shrink-0', paddingClasses[padding], gapClasses[gap], alignClasses[align], divider ? 'border-t border-border' : '', stackOnMobile ? 'max-sm:flex-col max-sm:items-stretch' : '', footerClass, $attrs.class ?? '')"
   >
     <slot />
   </div>

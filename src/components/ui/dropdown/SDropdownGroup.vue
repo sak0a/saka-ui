@@ -2,6 +2,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { inject, computed } from 'vue'
+import { cn } from '~/lib/utils'
 import { SDropdownContextKey, type SDropdownContext } from './SDropdown.vue'
 
 export interface Props {
@@ -26,10 +27,10 @@ const sizeConfig = computed(() => ({
 </script>
 
 <template>
-  <div class="s-dropdown-group" v-bind="$attrs">
+  <div :class="cn('s-dropdown-group', $attrs.class ?? '')" v-bind="$attrs">
     <!-- Group header -->
     <div 
-      class="font-semibold uppercase tracking-wider text-(--s-text-tertiary) flex items-center gap-2 sticky top-0 bg-(--s-bg-primary)/95 backdrop-blur-sm"
+      class="font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-2 sticky top-0 bg-background/95 backdrop-blur-sm"
       :class="sizeConfig"
     >
       <span v-if="icon" :class="['mdi', `mdi-${icon}`, 'text-xs']" />

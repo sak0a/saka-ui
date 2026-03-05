@@ -30,6 +30,7 @@ export const SModalContextKey: InjectionKey<SModalContext> = Symbol('SModalConte
 defineOptions({ inheritAttrs: false })
 
 import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { cn } from '~/lib/utils'
 
 export interface Props {
   /** Control modal visibility */
@@ -173,10 +174,10 @@ const positionClasses = computed(() => {
 })
 
 const variantClasses = computed(() => ({
-  default: 'bg-(--s-bg-primary) border border-(--s-border) shadow-2xl',
-  glass: 'bg-(--s-bg-primary)/80 backdrop-blur-2xl border border-(--s-border)/50 shadow-2xl',
-  bordered: 'bg-(--s-bg-primary) border-2 border-(--s-primary)/30 shadow-xl',
-  elevated: 'bg-(--s-bg-primary) shadow-[0_25px_80px_-12px_rgba(0,0,0,0.4)] dark:shadow-[0_25px_80px_-12px_rgba(0,0,0,0.8)]'
+  default: 'bg-background border border-border shadow-2xl',
+  glass: 'bg-background/80 backdrop-blur-2xl border border-border/50 shadow-2xl',
+  bordered: 'bg-background border-2 border-primary/30 shadow-xl',
+  elevated: 'bg-background shadow-[0_25px_80px_-12px_rgba(0,0,0,0.4)] dark:shadow-[0_25px_80px_-12px_rgba(0,0,0,0.8)]'
 }[props.variant]))
 
 // Animation configurations
@@ -445,8 +446,7 @@ defineExpose({
         v-if="isOpen"
         ref="modalRef"
         v-bind="$attrs"
-        class="s-modal fixed inset-0 flex overflow-hidden"
-        :class="[positionClasses, fullscreen ? 'p-0' : 'p-4']"
+        :class="cn('s-modal fixed inset-0 flex overflow-hidden', positionClasses, fullscreen ? 'p-0' : 'p-4', $attrs.class ?? '')"
         :style="{ zIndex: effectiveZIndex }"
         role="dialog"
         aria-modal="true"
@@ -494,20 +494,20 @@ defineExpose({
             <!-- Default Header (if title is provided and hideHeader is false) -->
             <div
               v-if="(title || closable) && !hideHeader && !$slots.header"
-              class="s-modal-header flex items-start justify-between gap-4 px-6 py-5 border-b border-(--s-border) shrink-0"
+              class="s-modal-header flex items-start justify-between gap-4 px-6 py-5 border-b border-border shrink-0"
             >
               <div class="flex-1 min-w-0">
                 <h2
                   v-if="title"
                   :id="titleId"
-                  class="text-lg font-semibold text-(--s-text-primary) tracking-tight"
+                  class="text-lg font-semibold text-foreground tracking-tight"
                 >
                   {{ title }}
                 </h2>
                 <p
                   v-if="description"
                   :id="descriptionId"
-                  class="mt-1.5 text-sm text-(--s-text-secondary)"
+                  class="mt-1.5 text-sm text-muted-foreground"
                 >
                   {{ description }}
                 </p>
@@ -516,7 +516,7 @@ defineExpose({
               <button
                 v-if="closable"
                 type="button"
-                class="s-modal-close shrink-0 flex items-center justify-center w-8 h-8 -mt-1 -mr-2 rounded-lg text-(--s-text-tertiary) hover:text-(--s-text-primary) hover:bg-(--s-bg-tertiary) transition-all duration-150 outline-none focus:ring-2 focus:ring-(--s-primary)/30"
+                class="s-modal-close shrink-0 flex items-center justify-center w-8 h-8 -mt-1 -mr-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-all duration-150 outline-none focus:ring-2 focus:ring-primary/30"
                 aria-label="Close modal"
                 @click="close"
               >
@@ -554,8 +554,7 @@ defineExpose({
         v-if="isOpen"
         ref="modalRef"
         v-bind="$attrs"
-        class="s-modal fixed inset-0 flex overflow-hidden"
-        :class="[positionClasses, fullscreen ? 'p-0' : 'p-4']"
+        :class="cn('s-modal fixed inset-0 flex overflow-hidden', positionClasses, fullscreen ? 'p-0' : 'p-4', $attrs.class ?? '')"
         :style="{ zIndex: effectiveZIndex }"
         role="dialog"
         aria-modal="true"

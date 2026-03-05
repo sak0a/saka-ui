@@ -2,6 +2,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { computed, ref, watch, onMounted } from 'vue'
+import { cn } from '~/lib/utils'
 
 export interface Props {
   // Core
@@ -56,10 +57,10 @@ const props = withDefaults(defineProps<Props>(), {
   orientation: 'horizontal',
   rounded: 'full',
   color: 'var(--s-primary)',
-  trackColor: 'var(--s-bg-tertiary)',
+  trackColor: 'var(--s-accent)',
   gradientColors: () => ['#06b6d4', '#3b82f6', '#8b5cf6'],
   bufferValue: 0,
-  bufferColor: 'var(--s-primary-alpha)',
+  bufferColor: 'color-mix(in srgb, var(--s-primary) 15%, transparent)',
   segments: 5,
   segmentGap: 3,
   animated: false,
@@ -248,11 +249,12 @@ watch(() => props.modelValue, (newVal) => {
 <template>
   <div
     v-bind="$attrs"
-    :class="[
+    :class="cn(
       containerClasses,
       labelPosition === 'left' || labelPosition === 'right' ? 'flex items-center gap-3' : 'flex flex-col gap-1.5',
-      labelPosition === 'right' && 'flex-row-reverse'
-    ]"
+      labelPosition === 'right' && 'flex-row-reverse',
+      $attrs.class ?? ''
+    )"
   >
     <!-- Label (top/left) -->
     <div 
@@ -260,10 +262,10 @@ watch(() => props.modelValue, (newVal) => {
       class="flex items-center justify-between gap-2"
       :class="sizeConfig.labelSize"
     >
-      <span class="text-(--s-text-secondary) font-medium">{{ label }}</span>
+      <span class="text-muted-foreground font-medium">{{ label }}</span>
       <span 
         v-if="showValue && valuePosition === 'top' && labelPosition === 'top'"
-        class="text-(--s-text-primary) font-semibold tabular-nums"
+        class="text-foreground font-semibold tabular-nums"
       >
         {{ displayValue }}
       </span>
@@ -378,7 +380,7 @@ watch(() => props.modelValue, (newVal) => {
       >
         <div 
           v-if="showValue && valuePosition === 'tooltip' && showTooltip && variant !== 'segments'"
-          class="absolute z-10 px-2 py-1 rounded-md bg-(--s-bg-secondary) border border-(--s-border) shadow-lg text-xs font-semibold text-(--s-text-primary) whitespace-nowrap pointer-events-none"
+          class="absolute z-10 px-2 py-1 rounded-md bg-muted border border-border shadow-lg text-xs font-semibold text-foreground whitespace-nowrap pointer-events-none"
           :style="{
             left: `${percentage}%`,
             transform: 'translateX(-50%)',
@@ -386,7 +388,7 @@ watch(() => props.modelValue, (newVal) => {
           }"
         >
           {{ displayValue }}
-          <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-(--s-bg-secondary)" />
+          <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-muted" />
         </div>
       </Transition>
 
@@ -395,7 +397,7 @@ watch(() => props.modelValue, (newVal) => {
     <!-- Value outside (right side) - using flex instead of absolute -->
     <span 
       v-if="showValue && valuePosition === 'outside'"
-      class="font-semibold tabular-nums text-(--s-text-primary) shrink-0 whitespace-nowrap"
+      class="font-semibold tabular-nums text-foreground shrink-0 whitespace-nowrap"
       :class="[
         sizeConfig.labelSize,
         orientation === 'horizontal' ? 'ml-3' : 'mb-2'
@@ -410,10 +412,10 @@ watch(() => props.modelValue, (newVal) => {
       class="flex items-center justify-between gap-2"
       :class="sizeConfig.labelSize"
     >
-      <span class="text-(--s-text-secondary) font-medium">{{ label }}</span>
+      <span class="text-muted-foreground font-medium">{{ label }}</span>
       <span 
         v-if="showValue && valuePosition === 'top' && labelPosition === 'bottom'"
-        class="text-(--s-text-primary) font-semibold tabular-nums"
+        class="text-foreground font-semibold tabular-nums"
       >
         {{ displayValue }}
       </span>

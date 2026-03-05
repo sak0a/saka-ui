@@ -6,6 +6,7 @@
  * pagination, and smooth animations.
  */
 import { provide, computed, toRef, watch, ref } from 'vue'
+import { cn } from '~/lib/utils'
 import { 
   SDataTableContextKey, 
   type TableColumn, 
@@ -175,7 +176,7 @@ const wrapperClasses = computed(() => {
     's-data-table-wrapper',
     'relative overflow-hidden rounded-xl',
     {
-      'border border-(--s-border)': props.variant === 'bordered',
+      'border border-border': props.variant === 'bordered',
     }
   ]
 })
@@ -240,7 +241,7 @@ defineExpose({
 <template>
   <div
     v-bind="$attrs"
-    :class="wrapperClasses"
+    :class="cn(wrapperClasses, $attrs.class ?? '')"
     :style="containerStyles"
     role="region"
     :aria-busy="loading"
@@ -273,7 +274,7 @@ defineExpose({
             class="s-table-head"
             :class="{ 
               'sticky z-10': stickyHeader,
-              'bg-(--s-bg-primary)': stickyHeader
+              'bg-background': stickyHeader
             }"
             :style="stickyHeader ? { top: stickyOffset } : {}"
           >
@@ -314,8 +315,8 @@ defineExpose({
                     'text-left': column.align === 'left' || !column.align,
                     'text-center': column.align === 'center',
                     'text-right': column.align === 'right',
-                    'sticky left-0 z-5 bg-(--s-bg-primary)': column.sticky === 'left',
-                    'sticky right-0 z-5 bg-(--s-bg-primary)': column.sticky === 'right'
+                    'sticky left-0 z-5 bg-background': column.sticky === 'left',
+                    'sticky right-0 z-5 bg-background': column.sticky === 'right'
                   }
                 ]"
                 :style="{
@@ -351,14 +352,14 @@ defineExpose({
                       <span 
                         class="mdi mdi-chevron-up transition-transform"
                         :class="{ 
-                          'text-(--s-primary)': table.sortState.value.column === column.key && table.sortState.value.direction === 'asc',
+                          'text-primary': table.sortState.value.column === column.key && table.sortState.value.direction === 'asc',
                           '-mb-1.5': true
                         }"
                       />
                       <span 
                         class="mdi mdi-chevron-down transition-transform"
                         :class="{ 
-                          'text-(--s-primary)': table.sortState.value.column === column.key && table.sortState.value.direction === 'desc'
+                          'text-primary': table.sortState.value.column === column.key && table.sortState.value.direction === 'desc'
                         }"
                       />
                     </span>
@@ -416,7 +417,7 @@ defineExpose({
                 class="s-table-td"
               >
                 <slot name="empty">
-                  <div class="s-table-empty flex flex-col items-center justify-center py-12 text-(--s-text-tertiary)">
+                  <div class="s-table-empty flex flex-col items-center justify-center py-12 text-muted-foreground">
                     <span :class="['mdi', emptyIcon, 'text-4xl mb-3 opacity-50']" />
                     <p class="text-sm">{{ emptyMessage }}</p>
                   </div>
@@ -476,8 +477,8 @@ defineExpose({
                     'text-left': column.align === 'left' || !column.align,
                     'text-center': column.align === 'center',
                     'text-right': column.align === 'right',
-                    'sticky left-0 bg-(--s-bg-primary)': column.sticky === 'left',
-                    'sticky right-0 bg-(--s-bg-primary)': column.sticky === 'right'
+                    'sticky left-0 bg-background': column.sticky === 'left',
+                    'sticky right-0 bg-background': column.sticky === 'right'
                   }
                 ]"
                 :style="{
@@ -543,20 +544,20 @@ defineExpose({
     >
       <div 
         v-if="pagination && !loading && table.paginatedData.value.length > 0"
-        class="s-table-pagination flex items-center justify-between px-4 py-3 border-t border-(--s-border)"
+        class="s-table-pagination flex items-center justify-between px-4 py-3 border-t border-border"
       >
-        <div class="flex items-center gap-2 text-sm text-(--s-text-secondary)">
+        <div class="flex items-center gap-2 text-sm text-muted-foreground">
           <span>Rows per page:</span>
           <select 
             :value="table.pagination.value.pageSize"
-            class="s-table-page-select bg-(--s-bg-secondary) border border-(--s-border) rounded px-2 py-1 text-sm"
+            class="s-table-page-select bg-muted border border-border rounded px-2 py-1 text-sm"
             @change="(e) => { table.setPageSize(Number((e.target as HTMLSelectElement).value)); emit('page-size-change', Number((e.target as HTMLSelectElement).value)) }"
           >
             <option v-for="size in pageSizeOptions" :key="size" :value="size">{{ size }}</option>
           </select>
         </div>
         
-        <div class="flex items-center gap-1 text-sm text-(--s-text-secondary)">
+        <div class="flex items-center gap-1 text-sm text-muted-foreground">
           <span>
             {{ ((table.pagination.value.page - 1) * table.pagination.value.pageSize) + 1 }}
             -
@@ -568,7 +569,7 @@ defineExpose({
         
         <div class="flex items-center gap-1">
           <button
-            class="s-table-page-btn p-1.5 rounded hover:bg-(--s-bg-secondary) disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            class="s-table-page-btn p-1.5 rounded hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             :disabled="table.pagination.value.page === 1"
             @click="table.goToPage(1)"
             aria-label="First page"
@@ -576,7 +577,7 @@ defineExpose({
             <span class="mdi mdi-chevron-double-left" />
           </button>
           <button
-            class="s-table-page-btn p-1.5 rounded hover:bg-(--s-bg-secondary) disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            class="s-table-page-btn p-1.5 rounded hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             :disabled="table.pagination.value.page === 1"
             @click="table.prevPage()"
             aria-label="Previous page"
@@ -584,7 +585,7 @@ defineExpose({
             <span class="mdi mdi-chevron-left" />
           </button>
           <button
-            class="s-table-page-btn p-1.5 rounded hover:bg-(--s-bg-secondary) disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            class="s-table-page-btn p-1.5 rounded hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             :disabled="table.pagination.value.page >= table.totalPages.value"
             @click="table.nextPage()"
             aria-label="Next page"
@@ -592,7 +593,7 @@ defineExpose({
             <span class="mdi mdi-chevron-right" />
           </button>
           <button
-            class="s-table-page-btn p-1.5 rounded hover:bg-(--s-bg-secondary) disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            class="s-table-page-btn p-1.5 rounded hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             :disabled="table.pagination.value.page >= table.totalPages.value"
             @click="table.goToPage(table.totalPages.value)"
             aria-label="Last page"
@@ -607,11 +608,11 @@ defineExpose({
     <Transition name="fade">
       <div 
         v-if="loading && table.paginatedData.value.length > 0"
-        class="absolute inset-0 bg-(--s-bg-primary)/60 backdrop-blur-sm flex items-center justify-center z-20"
+        class="absolute inset-0 bg-background/60 backdrop-blur-sm flex items-center justify-center z-20"
       >
         <div class="flex items-center gap-3">
-          <span class="mdi mdi-loading animate-spin text-xl text-(--s-primary)" />
-          <span class="text-sm text-(--s-text-secondary)">Loading...</span>
+          <span class="mdi mdi-loading animate-spin text-xl text-primary" />
+          <span class="text-sm text-muted-foreground">Loading...</span>
         </div>
       </div>
     </Transition>
@@ -641,9 +642,9 @@ const prefersReducedMotion = typeof window !== 'undefined'
 <style scoped>
 /* ===== CSS Variables ===== */
 .s-data-table-wrapper {
-  --table-header-bg: var(--s-bg-secondary);
-  --table-row-hover: var(--s-bg-tertiary);
-  --table-row-selected: var(--s-primary-alpha);
+  --table-header-bg: var(--s-muted);
+  --table-row-hover: var(--s-accent);
+  --table-row-selected: color-mix(in srgb, var(--s-primary) 15%, transparent);
   --table-border-color: var(--s-border);
 }
 
@@ -657,12 +658,12 @@ const prefersReducedMotion = typeof window !== 'undefined'
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--s-text-secondary);
+  color: var(--s-muted-foreground);
   white-space: nowrap;
 }
 
 .s-table-td {
-  color: var(--s-text-primary);
+  color: var(--s-foreground);
 }
 
 /* ===== Size Variants ===== */
@@ -705,7 +706,7 @@ const prefersReducedMotion = typeof window !== 'undefined'
 
 /* Striped */
 .s-table-striped .s-table-row-even {
-  background-color: var(--s-bg-secondary);
+  background-color: var(--s-muted);
 }
 
 /* Minimal */
@@ -743,7 +744,7 @@ const prefersReducedMotion = typeof window !== 'undefined'
 }
 
 .s-table-th-sortable:hover {
-  background-color: var(--s-bg-tertiary);
+  background-color: var(--s-accent);
 }
 
 .s-table-th-sortable:focus-visible {
@@ -768,9 +769,9 @@ const prefersReducedMotion = typeof window !== 'undefined'
 .s-skeleton {
   background: linear-gradient(
     90deg,
-    var(--s-bg-tertiary) 25%,
-    var(--s-bg-secondary) 50%,
-    var(--s-bg-tertiary) 75%
+    var(--s-accent) 25%,
+    var(--s-muted) 50%,
+    var(--s-accent) 75%
   );
   background-size: 200% 100%;
   animation: s-skeleton-shimmer 1.5s infinite;
@@ -819,7 +820,7 @@ const prefersReducedMotion = typeof window !== 'undefined'
 /* ===== Expansion Row ===== */
 .s-table-td-expansion {
   padding: 1rem;
-  background-color: var(--s-bg-secondary);
+  background-color: var(--s-muted);
 }
 
 /* ===== Reduced Motion ===== */
@@ -832,7 +833,7 @@ const prefersReducedMotion = typeof window !== 'undefined'
   
   .s-skeleton {
     animation: none;
-    background: var(--s-bg-tertiary);
+    background: var(--s-accent);
   }
 }
 

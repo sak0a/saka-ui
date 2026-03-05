@@ -8,6 +8,9 @@
 <script setup lang="ts">
 import { inject, computed, ref } from 'vue'
 import { SMorphingCardContextKey } from './SMorphingCard.vue'
+import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Image source */
@@ -62,22 +65,22 @@ const handleError = () => {
 
 <template>
   <div
-    class="s-morphing-card-image relative overflow-hidden bg-(--s-bg-secondary)"
-    :class="containerClass"
+    v-bind="$attrs"
+    :class="cn('s-morphing-card-image relative overflow-hidden bg-muted', containerClass)"
     :style="containerStyle"
   >
     <!-- Loading placeholder -->
     <div
       v-if="!isLoaded && !hasError"
-      class="absolute inset-0 flex items-center justify-center bg-(--s-bg-secondary)"
+      class="absolute inset-0 flex items-center justify-center bg-muted"
     >
-      <div class="w-8 h-8 border-2 border-(--s-border) border-t-(--s-primary) rounded-full animate-spin" />
+      <div class="w-8 h-8 border-2 border-border border-t-primary rounded-full animate-spin" />
     </div>
     
     <!-- Error placeholder -->
     <div
       v-if="hasError"
-      class="absolute inset-0 flex flex-col items-center justify-center bg-(--s-bg-secondary) text-(--s-text-tertiary)"
+      class="absolute inset-0 flex flex-col items-center justify-center bg-muted text-muted-foreground"
     >
       <span class="mdi mdi-image-broken-variant text-4xl mb-2" />
       <span class="text-sm">Failed to load image</span>

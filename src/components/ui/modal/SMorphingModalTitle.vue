@@ -8,6 +8,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { inject } from 'vue'
+import { cn } from '~/lib/utils'
 import { SMorphingModalContextKey } from './SMorphingModal.vue'
 
 export interface Props {
@@ -26,8 +27,7 @@ const context = inject(SMorphingModalContextKey)
   <h2
     v-bind="$attrs"
     :id="`${context?.uniqueId}-title`"
-    class="s-morphing-modal-title text-lg font-semibold text-(--s-text-primary)"
-    :class="titleClass"
+    :class="cn('s-morphing-modal-title text-lg font-semibold text-foreground', titleClass, $attrs.class ?? '')"
   >
     <slot />
   </h2>

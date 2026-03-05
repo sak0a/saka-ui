@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch, nextTick, onMounted, onBeforeUnmount, type VNode } from 'vue'
+import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -399,31 +400,31 @@ const getButtonClasses = (isActive: boolean, isDisabled: boolean) => {
   if (props.variant === 'default') {
     return isActive
       ? `${base} text-white shadow-md hover:shadow-lg`
-      : `${base} bg-(--s-bg-secondary) text-(--s-text-primary) hover:bg-(--s-bg-tertiary) border border-(--s-border)`
+      : `${base} bg-muted text-foreground hover:bg-accent border border-border`
   }
   
   if (props.variant === 'outlined') {
     return isActive
       ? `${base} border-2 text-white shadow-md`
-      : `${base} border-2 border-(--s-border) text-(--s-text-secondary) hover:border-(--s-text-tertiary) hover:text-(--s-text-primary)`
+      : `${base} border-2 border-border text-muted-foreground hover:border-muted-foreground hover:text-foreground`
   }
   
   if (props.variant === 'ghost') {
     return isActive
       ? `${base} text-white`
-      : `${base} text-(--s-text-secondary) hover:bg-(--s-bg-secondary) hover:text-(--s-text-primary)`
+      : `${base} text-muted-foreground hover:bg-muted hover:text-foreground`
   }
   
   if (props.variant === 'minimal') {
     return isActive
       ? `${base} font-bold`
-      : `${base} text-(--s-text-secondary) hover:text-(--s-text-primary)`
+      : `${base} text-muted-foreground hover:text-foreground`
   }
   
   if (props.variant === 'dots') {
     return isActive
       ? `${base} !w-3 !h-3 !min-w-3 !p-0 rounded-full shadow-md`
-      : `${base} !w-2 !h-2 !min-w-2 !p-0 rounded-full bg-(--s-text-tertiary) hover:bg-(--s-text-secondary)`
+      : `${base} !w-2 !h-2 !min-w-2 !p-0 rounded-full bg-muted-foreground hover:bg-muted-foreground`
   }
   
   return base
@@ -469,14 +470,13 @@ watch(() => props.pageSize, (newVal) => {
   <nav
     v-if="shouldShow"
     v-bind="$attrs"
-    class="s-pagination flex flex-wrap items-center"
-    :class="[
+    :class="cn(
+      's-pagination flex flex-wrap items-center',
       gapClasses,
-      {
-        'p-3 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)': background,
-        'opacity-60 pointer-events-none': disabled || loading
-      }
-    ]"
+      background && 'p-3 rounded-xl bg-muted border border-border',
+      (disabled || loading) && 'opacity-60 pointer-events-none',
+      $attrs.class ?? ''
+    )"
     role="navigation"
     aria-label="Pagination"
     tabindex="0"
@@ -486,7 +486,7 @@ watch(() => props.pageSize, (newVal) => {
     <Transition name="fade">
       <div 
         v-if="loading" 
-        class="absolute inset-0 flex items-center justify-center bg-(--s-bg-primary)/50 rounded-xl z-10"
+        class="absolute inset-0 flex items-center justify-center bg-background/50 rounded-xl z-10"
       >
         <span class="mdi mdi-loading animate-spin text-2xl" :style="{ color }"></span>
       </div>
@@ -495,7 +495,7 @@ watch(() => props.pageSize, (newVal) => {
     <!-- Total info -->
     <div 
       v-if="showTotal && !simple" 
-      class="flex items-center text-(--s-text-secondary) text-sm mr-2"
+      class="flex items-center text-muted-foreground text-sm mr-2"
     >
       <slot name="total" :total="total" :range="currentRange">
         <span>{{ totalText }}</span>
@@ -507,7 +507,7 @@ watch(() => props.pageSize, (newVal) => {
       <slot name="pageSize" :size="internalPageSize" :options="pageSizeOptions" :change="handlePageSizeChange">
         <select
           :value="internalPageSize"
-          class="h-9 px-2 rounded-lg bg-(--s-bg-secondary) border border-(--s-border) text-(--s-text-primary) text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-(--s-primary)/50"
+          class="h-9 px-2 rounded-lg bg-muted border border-border text-foreground text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50"
           :disabled="disabled || loading"
           @change="handlePageSizeChange"
         >
@@ -537,11 +537,11 @@ watch(() => props.pageSize, (newVal) => {
         </slot>
       </button>
       
-      <div class="flex items-center gap-2 px-4 text-(--s-text-primary) font-medium">
+      <div class="flex items-center gap-2 px-4 text-foreground font-medium">
         <slot name="simple-content" :current="currentPage" :total="totalPages">
           <span :style="{ color }">{{ currentPage }}</span>
-          <span class="text-(--s-text-tertiary)">/</span>
-          <span class="text-(--s-text-secondary)">{{ totalPages }}</span>
+          <span class="text-muted-foreground">/</span>
+          <span class="text-muted-foreground">{{ totalPages }}</span>
         </slot>
       </div>
       
@@ -606,7 +606,7 @@ watch(() => props.pageSize, (newVal) => {
             @mouseleave="handleEllipsisLeave('start')"
           >
             <span 
-              class="flex items-center justify-center text-(--s-text-tertiary) cursor-pointer hover:text-(--s-text-secondary) transition-colors"
+              class="flex items-center justify-center text-muted-foreground cursor-pointer hover:text-muted-foreground transition-colors"
               :class="sizeClasses"
             >
               <slot name="ellipsis">
@@ -625,7 +625,7 @@ watch(() => props.pageSize, (newVal) => {
             >
               <div 
                 v-if="ellipsisStartHover && hiddenPagesStart.length > 0"
-                class="absolute top-full left-1/2 -translate-x-1/2 mt-1 z-50 p-1.5 rounded-lg bg-(--s-bg-primary) border border-(--s-border) shadow-xl backdrop-blur-xl max-h-48 overflow-y-auto"
+                class="absolute top-full left-1/2 -translate-x-1/2 mt-1 z-50 p-1.5 rounded-lg bg-background border border-border shadow-xl backdrop-blur-xl max-h-48 overflow-y-auto"
                 @mouseenter="handleDropdownEnter('start')"
                 @mouseleave="handleDropdownLeave('start')"
               >
@@ -634,7 +634,7 @@ watch(() => props.pageSize, (newVal) => {
                     v-for="p in hiddenPagesStart"
                     :key="p"
                     type="button"
-                    class="flex items-center justify-center text-sm min-w-8 h-8 px-2 rounded-md text-(--s-text-secondary) hover:text-(--s-text-primary) hover:bg-(--s-bg-tertiary) transition-colors"
+                    class="flex items-center justify-center text-sm min-w-8 h-8 px-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
                     @click="selectFromDropdown(p)"
                   >
                     {{ p }}
@@ -653,7 +653,7 @@ watch(() => props.pageSize, (newVal) => {
             @mouseleave="handleEllipsisLeave('end')"
           >
             <span 
-              class="flex items-center justify-center text-(--s-text-tertiary) cursor-pointer hover:text-(--s-text-secondary) transition-colors"
+              class="flex items-center justify-center text-muted-foreground cursor-pointer hover:text-muted-foreground transition-colors"
               :class="sizeClasses"
             >
               <slot name="ellipsis">
@@ -672,7 +672,7 @@ watch(() => props.pageSize, (newVal) => {
             >
               <div 
                 v-if="ellipsisEndHover && hiddenPagesEnd.length > 0"
-                class="absolute top-full left-1/2 -translate-x-1/2 mt-1 z-50 p-1.5 rounded-lg bg-(--s-bg-primary) border border-(--s-border) shadow-xl backdrop-blur-xl max-h-48 overflow-y-auto"
+                class="absolute top-full left-1/2 -translate-x-1/2 mt-1 z-50 p-1.5 rounded-lg bg-background border border-border shadow-xl backdrop-blur-xl max-h-48 overflow-y-auto"
                 @mouseenter="handleDropdownEnter('end')"
                 @mouseleave="handleDropdownLeave('end')"
               >
@@ -681,7 +681,7 @@ watch(() => props.pageSize, (newVal) => {
                     v-for="p in hiddenPagesEnd"
                     :key="p"
                     type="button"
-                    class="flex items-center justify-center text-sm min-w-8 h-8 px-2 rounded-md text-(--s-text-secondary) hover:text-(--s-text-primary) hover:bg-(--s-bg-tertiary) transition-colors"
+                    class="flex items-center justify-center text-sm min-w-8 h-8 px-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
                     @click="selectFromDropdown(p)"
                   >
                     {{ p }}
@@ -751,13 +751,13 @@ watch(() => props.pageSize, (newVal) => {
     <!-- Quick jump -->
     <div v-if="showQuickJump && !simple" class="flex items-center gap-2 ml-2">
       <slot name="quickJump" :value="jumpValue" :jump="handleQuickJump">
-        <span class="text-sm text-(--s-text-secondary)">Go to</span>
+        <span class="text-sm text-muted-foreground">Go to</span>
         <input
           v-model="jumpValue"
           type="number"
           :min="1"
           :max="totalPages"
-          class="w-16 h-9 px-2 rounded-lg bg-(--s-bg-secondary) border border-(--s-border) text-(--s-text-primary) text-sm text-center focus:outline-none focus:ring-2 focus:ring-(--s-primary)/50 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          class="w-16 h-9 px-2 rounded-lg bg-muted border border-border text-foreground text-sm text-center focus:outline-none focus:ring-2 focus:ring-primary/50 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
           :disabled="disabled || loading"
           placeholder="#"
           @keydown.enter="handleQuickJump"
@@ -768,7 +768,7 @@ watch(() => props.pageSize, (newVal) => {
     <!-- Progress bar -->
     <div 
       v-if="showProgress" 
-      class="w-full h-1 mt-2 rounded-full bg-(--s-bg-tertiary) overflow-hidden"
+      class="w-full h-1 mt-2 rounded-full bg-accent overflow-hidden"
     >
       <div 
         class="h-full rounded-full transition-all duration-300 ease-out"
@@ -795,7 +795,7 @@ watch(() => props.pageSize, (newVal) => {
 
 button:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--s-bg-primary), 0 0 0 4px var(--s-primary);
+  box-shadow: 0 0 0 2px var(--s-background), 0 0 0 4px var(--s-primary);
 }
 
 /* Ripple effect for buttons */

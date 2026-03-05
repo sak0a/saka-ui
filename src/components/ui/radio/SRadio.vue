@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref, inject } from 'vue'
+import { computed, ref, inject, type CSSProperties } from 'vue'
+import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -25,7 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: undefined,
   value: undefined,
   size: 'medium',
-  color: 'var(--s-primary)',
+  color: undefined,
   disabled: false,
   loading: false,
   label: undefined,
@@ -62,16 +63,19 @@ const currentSize = computed(() => groupSize ?? props.size)
 const currentColor = computed(() => groupColor ?? props.color)
 const currentVariant = computed(() => groupVariant ?? props.variant)
 
+// Whether a custom color is set
+const hasCustomColor = computed(() => !!currentColor.value)
+
 // Determine checked state
 const isChecked = computed(() => currentValue.value === props.value)
 
 // Select this radio
 const select = (event: Event) => {
   if (isDisabled.value || props.loading) return
-  
+
   // Trigger ripple
   triggerRipple()
-  
+
   if (groupUpdate) {
     groupUpdate(props.value)
   } else {
@@ -126,8 +130,8 @@ const sizeConfig = computed(() => {
 })
 
 // Computed styles for the radio
-const radioStyle = computed(() => {
-  if (isChecked.value && currentVariant.value !== 'button') {
+const radioStyle = computed<CSSProperties>(() => {
+  if (isChecked.value && currentVariant.value !== 'button' && hasCustomColor.value) {
     return {
       borderColor: currentColor.value,
       boxShadow: `0 0 0 3px ${currentColor.value}20`
@@ -136,8 +140,8 @@ const radioStyle = computed(() => {
   return {}
 })
 
-const dotStyle = computed(() => {
-  if (isChecked.value) {
+const dotStyle = computed<CSSProperties>(() => {
+  if (isChecked.value && hasCustomColor.value) {
     return {
       backgroundColor: currentColor.value
     }
@@ -145,9 +149,9 @@ const dotStyle = computed(() => {
   return {}
 })
 
-const buttonStyle = computed(() => {
+const buttonStyle = computed<CSSProperties>(() => {
   if (currentVariant.value === 'button') {
-    if (isChecked.value) {
+    if (isChecked.value && hasCustomColor.value) {
       return {
         backgroundColor: currentColor.value,
         borderColor: currentColor.value,
@@ -169,51 +173,54 @@ const buttonStyle = computed(() => {
     :aria-checked="isChecked"
     :aria-disabled="isDisabled || loading"
     :disabled="isDisabled || loading"
-    class="s-radio-button relative inline-flex items-center justify-center border-2 rounded-lg font-medium transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--s-primary) select-none"
-    :class="[
+    :class="cn(
+      's-radio-button relative inline-flex items-center justify-center border-2 rounded-lg font-medium transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring select-none',
       sizeConfig.button,
-      isChecked 
-        ? 'border-transparent shadow-lg' 
-        : 'border-(--s-border) bg-(--s-bg-primary) text-(--s-text-secondary) hover:border-(--s-text-tertiary) hover:text-(--s-text-primary)',
+      isChecked
+        ? hasCustomColor
+          ? 'border-transparent shadow-lg'
+          : 'border-transparent shadow-lg bg-primary text-primary-foreground'
+        : 'border-border bg-background text-muted-foreground hover:border-input hover:text-foreground',
       { 'opacity-50 cursor-not-allowed': isDisabled || loading },
       { 'cursor-pointer': !isDisabled && !loading }
-    ]"
+    )"
     :style="buttonStyle"
     @click="select"
     @keydown="handleKeydown"
   >
     <!-- Loading Spinner -->
-    <span 
-      v-if="loading" 
+    <span
+      v-if="loading"
       class="mdi mdi-loading animate-spin mr-2"
     ></span>
-    
+
     <!-- Icon -->
-    <span 
-      v-if="icon && !loading" 
+    <span
+      v-if="icon && !loading"
       :class="['mdi', `mdi-${icon}`, 'mr-2']"
     ></span>
-    
+
     <!-- Label -->
     <slot>{{ label }}</slot>
-    
+
     <!-- Ripple Effect -->
-    <span 
-      v-if="isRippling" 
+    <span
+      v-if="isRippling"
       class="absolute inset-0 rounded-lg animate-ping opacity-20"
-      :style="{ backgroundColor: currentColor }"
+      :style="hasCustomColor ? { backgroundColor: currentColor } : {}"
+      :class="{ 'bg-primary': !hasCustomColor }"
     />
   </button>
 
   <!-- Standard Radio Variants -->
-  <label 
+  <label
     v-else
-    class="s-radio-wrapper relative inline-flex items-center cursor-pointer select-none"
-    :class="[
+    :class="cn(
+      's-radio-wrapper relative inline-flex items-center cursor-pointer select-none',
       sizeConfig.gap,
       { 'opacity-50 cursor-not-allowed': isDisabled },
       { 'flex-row-reverse': labelPosition === 'left' }
-    ]"
+    )"
   >
     <!-- Hidden input for form compatibility -->
     <input
@@ -227,49 +234,53 @@ const buttonStyle = computed(() => {
       class="sr-only"
       @change="select"
     />
-    
+
     <!-- Radio Circle -->
     <span
       role="radio"
       :aria-checked="isChecked"
       :aria-disabled="isDisabled || loading"
       tabindex="0"
-      class="s-radio-outer relative inline-flex items-center justify-center shrink-0 rounded-full border-2 transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--s-primary)"
-      :class="[
+      :class="cn(
+        's-radio-outer relative inline-flex items-center justify-center shrink-0 rounded-full border-2 transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
         sizeConfig.outer,
         isChecked
-          ? ''
-          : 'border-(--s-border) hover:border-(--s-text-tertiary)',
+          ? hasCustomColor
+            ? ''
+            : 'border-primary shadow-[0_0_0_3px_color-mix(in_srgb,var(--s-ring)_12%,transparent)]'
+          : 'border-border hover:border-input',
         currentVariant === 'filled' && isChecked ? 'border-transparent' : '',
         currentVariant === 'outlined' && isChecked ? 'border-2' : '',
         { 'cursor-not-allowed': isDisabled || loading },
         radioClass
-      ]"
+      )"
       :style="radioStyle"
       @click.prevent="select"
       @keydown="handleKeydown"
     >
       <!-- Ripple Effect -->
-      <span 
-        v-if="isRippling" 
+      <span
+        v-if="isRippling"
         class="absolute inset-0 rounded-full animate-ping opacity-30"
-        :style="{ backgroundColor: currentColor }"
+        :style="hasCustomColor ? { backgroundColor: currentColor } : {}"
+        :class="{ 'bg-primary': !hasCustomColor }"
       />
-      
+
       <!-- Background for filled variant -->
-      <span 
+      <span
         v-if="currentVariant === 'filled' && isChecked"
         class="absolute inset-0 rounded-full transition-all duration-300"
-        :style="{ backgroundColor: currentColor }"
+        :style="hasCustomColor ? { backgroundColor: currentColor } : {}"
+        :class="{ 'bg-primary': !hasCustomColor }"
       />
-      
+
       <!-- Loading Spinner -->
-      <span 
-        v-if="loading" 
+      <span
+        v-if="loading"
         class="mdi mdi-loading animate-spin z-10"
-        :class="[sizeConfig.icon, isChecked && currentVariant === 'filled' ? 'text-white' : 'text-(--s-text-primary)']"
+        :class="[sizeConfig.icon, isChecked && currentVariant === 'filled' ? 'text-white' : 'text-foreground']"
       />
-      
+
       <!-- Inner Dot / Icon -->
       <Transition
         enter-active-class="transition-all duration-300 ease-out"
@@ -279,46 +290,47 @@ const buttonStyle = computed(() => {
         leave-from-class="scale-100 opacity-100"
         leave-to-class="scale-0 opacity-0"
       >
-        <span 
+        <span
           v-if="isChecked && !loading"
           class="z-10"
           :class="currentVariant === 'filled' ? 'text-white' : ''"
         >
           <slot name="icon">
-            <span 
+            <span
               v-if="icon"
-              :class="['mdi', `mdi-${icon}`, sizeConfig.icon]"
-              :style="currentVariant !== 'filled' ? { color: currentColor } : {}"
+              :class="cn('mdi', `mdi-${icon}`, sizeConfig.icon, currentVariant !== 'filled' && !hasCustomColor ? 'text-primary' : '')"
+              :style="currentVariant !== 'filled' && hasCustomColor ? { color: currentColor } : {}"
             />
-            <span 
+            <span
               v-else
-              class="s-radio-inner block rounded-full transition-all duration-300"
-              :class="[
+              :class="cn(
+                's-radio-inner block rounded-full transition-all duration-300',
                 sizeConfig.inner,
-                currentVariant === 'filled' ? 'bg-white' : ''
-              ]"
-              :style="currentVariant !== 'filled' ? dotStyle : {}"
+                currentVariant === 'filled' ? 'bg-white' : '',
+                currentVariant !== 'filled' && !hasCustomColor ? 'bg-primary' : ''
+              )"
+              :style="currentVariant !== 'filled' && hasCustomColor ? dotStyle : {}"
             />
           </slot>
         </span>
       </Transition>
     </span>
-    
+
     <!-- Label -->
-    <span 
-      v-if="label || $slots.default" 
-      class="s-radio-label text-(--s-text-secondary) transition-colors duration-200"
-      :class="[
+    <span
+      v-if="label || $slots.default"
+      :class="cn(
+        's-radio-label text-muted-foreground transition-colors duration-200',
         sizeConfig.label,
-        { 'text-(--s-text-primary)': isChecked },
+        { 'text-foreground': isChecked },
         labelClass
-      ]"
+      )"
     >
       <slot>{{ label }}</slot>
       <span v-if="required" class="text-red-500 ml-0.5">*</span>
     </span>
   </label>
-  
+
   <!-- Error message -->
   <p v-if="error" class="mt-1 text-xs text-red-500 flex items-center gap-1">
     <span class="mdi mdi-alert-circle" />
@@ -330,7 +342,7 @@ const buttonStyle = computed(() => {
 <style scoped>
 .s-radio-outer {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  background: var(--s-bg-primary);
+  background: var(--s-background);
   overflow: hidden;
 }
 

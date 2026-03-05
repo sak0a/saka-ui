@@ -9,6 +9,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { inject } from 'vue'
+import { cn } from '~/lib/utils'
 import { SModalContextKey } from './SModal.vue'
 
 export interface Props {
@@ -31,8 +32,7 @@ const context = inject(SModalContextKey)
     :is="as"
     v-bind="$attrs"
     :id="context?.descriptionId"
-    class="s-modal-description text-sm text-(--s-text-secondary) leading-relaxed"
-    :class="descriptionClass"
+    :class="cn('s-modal-description text-sm text-muted-foreground leading-relaxed', descriptionClass, $attrs.class ?? '')"
   >
     <slot />
   </component>

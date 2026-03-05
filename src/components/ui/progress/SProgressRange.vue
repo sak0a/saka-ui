@@ -2,6 +2,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
+import { cn } from '~/lib/utils'
 
 export interface RangeValue {
   min: number
@@ -62,7 +63,7 @@ const props = withDefaults(defineProps<Props>(), {
   orientation: 'horizontal',
   rounded: 'full',
   color: 'var(--s-primary)',
-  trackColor: 'var(--s-bg-tertiary)',
+  trackColor: 'var(--s-accent)',
   activeTrackColor: undefined,
   handleColor: undefined,
   showValue: false,
@@ -457,11 +458,12 @@ const maxHandleZIndex = computed(() => {
 <template>
   <div
     v-bind="$attrs"
-    class="s-progress-range"
-    :class="[
+    :class="cn(
+      's-progress-range',
       orientation === 'vertical' ? 'flex flex-col items-center' : 'w-full',
-      disabled && 'opacity-50 cursor-not-allowed'
-    ]"
+      disabled && 'opacity-50 cursor-not-allowed',
+      $attrs.class ?? ''
+    )"
   >
     <!-- Label -->
     <div 
@@ -469,16 +471,16 @@ const maxHandleZIndex = computed(() => {
       class="flex items-center justify-between mb-2"
       :class="sizeConfig.fontSize"
     >
-      <span v-if="label" class="text-(--s-text-secondary) font-medium">{{ label }}</span>
+      <span v-if="label" class="text-muted-foreground font-medium">{{ label }}</span>
       <span 
         v-if="showValue && !range"
-        class="text-(--s-text-primary) font-semibold tabular-nums"
+        class="text-foreground font-semibold tabular-nums"
       >
         {{ formatValue(internalMin) }}
       </span>
       <span 
         v-else-if="showValue && range"
-        class="text-(--s-text-primary) font-semibold tabular-nums"
+        class="text-foreground font-semibold tabular-nums"
       >
         {{ formatValue(internalMin) }} – {{ formatValue(internalMax) }}
       </span>
@@ -543,7 +545,7 @@ const maxHandleZIndex = computed(() => {
               :class="[
                 (range ? tick.value >= internalMin && tick.value <= internalMax : tick.value <= internalMin)
                   ? 'bg-white'
-                  : 'bg-(--s-text-tertiary)'
+                  : 'bg-muted-foreground'
               ]"
             />
           </div>
@@ -593,7 +595,7 @@ const maxHandleZIndex = computed(() => {
         >
           <div 
             v-if="showTooltip && (isDragging && activeHandle === (range ? 'min' : 'single') || hoverHandle === (range ? 'min' : 'single'))"
-            class="absolute whitespace-nowrap px-2 py-1 rounded-md bg-(--s-bg-secondary) border border-(--s-border) shadow-lg text-xs font-semibold text-(--s-text-primary)"
+            class="absolute whitespace-nowrap px-2 py-1 rounded-md bg-muted border border-border shadow-lg text-xs font-semibold text-foreground"
             :class="[
               tooltipPosition === 'top' ? 'bottom-full mb-2' : 'top-full mt-2',
               'left-1/2 -translate-x-1/2'
@@ -648,7 +650,7 @@ const maxHandleZIndex = computed(() => {
         >
           <div 
             v-if="showTooltip && (isDragging && activeHandle === 'max' || hoverHandle === 'max')"
-            class="absolute whitespace-nowrap px-2 py-1 rounded-md bg-(--s-bg-secondary) border border-(--s-border) shadow-lg text-xs font-semibold text-(--s-text-primary)"
+            class="absolute whitespace-nowrap px-2 py-1 rounded-md bg-muted border border-border shadow-lg text-xs font-semibold text-foreground"
             :class="[
               tooltipPosition === 'top' ? 'bottom-full mb-2' : 'top-full mt-2',
               'left-1/2 -translate-x-1/2'
@@ -668,7 +670,7 @@ const maxHandleZIndex = computed(() => {
     >
       <div 
         v-if="showLabels"
-        class="flex justify-between text-xs text-(--s-text-tertiary)"
+        class="flex justify-between text-xs text-muted-foreground"
       >
         <span>{{ minLabel || formatValue(min) }}</span>
         <span>{{ maxLabel || formatValue(max) }}</span>
@@ -680,7 +682,7 @@ const maxHandleZIndex = computed(() => {
         <span 
           v-for="tick in ticks"
           :key="tick.value"
-          class="absolute text-xs text-(--s-text-tertiary) -translate-x-1/2"
+          class="absolute text-xs text-muted-foreground -translate-x-1/2"
           :style="{ left: `${tick.percent}%` }"
         >
           {{ tick.label }}
@@ -708,6 +710,6 @@ const maxHandleZIndex = computed(() => {
 }
 
 .s-progress-range__handle:focus-visible {
-  box-shadow: 0 0 0 3px var(--s-primary-alpha);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--s-primary) 15%, transparent);
 }
 </style>

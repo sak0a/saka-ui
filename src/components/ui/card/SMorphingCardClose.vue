@@ -7,6 +7,9 @@
 <script setup lang="ts">
 import { inject, computed } from 'vue'
 import { SMorphingCardContextKey } from './SMorphingCard.vue'
+import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Additional class */
@@ -58,8 +61,7 @@ const handleClose = () => {
     <button
       v-if="isVisible"
       type="button"
-      class="s-morphing-card-close flex items-center justify-center rounded-full bg-(--s-bg-primary)/80 backdrop-blur-sm text-(--s-text-tertiary) hover:text-(--s-text-primary) hover:bg-(--s-bg-secondary) border border-(--s-border)/50 shadow-lg transition-all duration-150 outline-none focus:ring-2 focus:ring-(--s-primary)/30 z-10"
-      :class="[positionClasses, sizeClasses, closeClass]"
+      :class="cn('s-morphing-card-close flex items-center justify-center rounded-full bg-background/80 backdrop-blur-sm text-muted-foreground hover:text-foreground hover:bg-muted border border-border/50 shadow-lg transition-all duration-150 outline-none focus:ring-2 focus:ring-primary/30 z-10', positionClasses, sizeClasses, closeClass)"
       aria-label="Close"
       @click="handleClose"
     >

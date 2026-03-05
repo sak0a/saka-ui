@@ -8,6 +8,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { inject, computed } from 'vue'
+import { cn } from '~/lib/utils'
 import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
 
 export interface Props {
@@ -32,8 +33,7 @@ const tag = computed(() => props.as)
     :is="tag"
     v-bind="$attrs"
     :id="context?.titleId"
-    class="text-lg font-semibold text-(--s-text-primary) tracking-tight"
-    :class="titleClass"
+    :class="cn('text-lg font-semibold text-foreground tracking-tight', titleClass, $attrs.class ?? '')"
   >
     <slot />
   </component>

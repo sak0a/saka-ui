@@ -7,6 +7,8 @@
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
+import { cn } from '~/lib/utils'
+
 export interface Props {
   /** Additional class */
   subtitleClass?: string
@@ -20,8 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
 <template>
   <p
     v-bind="$attrs"
-    class="s-morphing-modal-subtitle text-sm text-(--s-text-secondary)"
-    :class="subtitleClass"
+    :class="cn('s-morphing-modal-subtitle text-sm text-muted-foreground', subtitleClass, $attrs.class ?? '')"
   >
     <slot />
   </p>

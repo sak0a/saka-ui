@@ -8,6 +8,9 @@
 <script setup lang="ts">
 import { ref, inject, onMounted, onBeforeUnmount, computed } from 'vue'
 import { SMorphingCardContextKey } from './SMorphingCard.vue'
+import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Additional class for the trigger */
@@ -61,12 +64,13 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="triggerRef"
-    class="s-morphing-card-trigger relative rounded-2xl overflow-hidden bg-(--s-bg-primary) border border-(--s-border) shadow-lg transition-all duration-300"
-    :class="[
+    v-bind="$attrs"
+    :class="cn(
+      's-morphing-card-trigger relative rounded-2xl overflow-hidden bg-background border border-border shadow-lg transition-all duration-300',
       cursorClass,
-      disabled ? 'opacity-60' : 'hover:shadow-xl hover:scale-[1.02] hover:border-(--s-border-hover)',
+      disabled ? 'opacity-60' : 'hover:shadow-xl hover:scale-[1.02] hover:border-input',
       triggerClass
-    ]"
+    )"
     role="button"
     :tabindex="disabled ? -1 : 0"
     :aria-disabled="disabled"

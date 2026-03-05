@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
+import { cn } from '~/lib/utils'
 import { cardContextKey, type CardContext } from './index'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Justify content */
@@ -95,17 +98,19 @@ const computedStyle = computed(() => {
 </script>
 
 <template>
-  <div 
-    class="s-card-actions flex flex-wrap"
-    :class="[
+  <div
+    v-bind="$attrs"
+    :class="cn(
+      's-card-actions flex flex-wrap',
       justifyClasses,
       alignClasses,
       gapClasses,
       directionClasses,
       {
         'w-full': fullWidth
-      }
-    ]"
+      },
+      ($attrs.class as string)
+    )"
     :style="computedStyle"
   >
     <slot />

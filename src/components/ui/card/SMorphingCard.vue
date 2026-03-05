@@ -21,6 +21,9 @@ export const SMorphingCardContextKey: InjectionKey<SMorphingCardContext> = Symbo
 
 <script setup lang="ts">
 import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Control card expansion */
@@ -376,7 +379,7 @@ defineExpose({
 </script>
 
 <template>
-  <div class="s-morphing-card-wrapper">
+  <div v-bind="$attrs" :class="cn('s-morphing-card-wrapper')">
     <!-- Trigger Slot (always visible) -->
     <div
       class="s-morphing-card-trigger-wrapper"
@@ -410,7 +413,7 @@ defineExpose({
       <div
         v-if="isVisible"
         ref="contentRef"
-        class="s-morphing-card-content bg-(--s-bg-primary) shadow-2xl overflow-hidden outline-none border border-(--s-border)"
+        :class="cn('s-morphing-card-content bg-background shadow-2xl overflow-hidden outline-none border border-border')"
         :style="{ ...contentStyle, zIndex: zIndex + 1 }"
         role="dialog"
         aria-modal="true"

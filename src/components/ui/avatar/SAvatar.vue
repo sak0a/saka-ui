@@ -2,6 +2,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { provide, reactive, computed } from 'vue'
+import { cn } from '~/lib/utils'
 
 export interface AvatarProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | number
@@ -122,7 +123,7 @@ const statusPositionClasses = computed(() => {
 <template>
   <div
     v-bind="$attrs"
-    class="s-avatar relative inline-flex shrink-0 select-none"
+    :class="cn('s-avatar relative inline-flex shrink-0 select-none', $attrs.class ?? '')"
     :style="{
       width: sizeValue,
       height: sizeValue,
@@ -131,12 +132,12 @@ const statusPositionClasses = computed(() => {
   >
     <!-- Inner container for image/fallback with overflow hidden -->
     <div
-      class="s-avatar-inner relative w-full h-full flex items-center justify-center overflow-hidden bg-(--s-bg-tertiary) text-(--s-text-secondary)"
+      class="s-avatar-inner relative w-full h-full flex items-center justify-center overflow-hidden bg-accent text-muted-foreground"
       :class="[
         shapeClasses,
         {
           'ring-2': bordered,
-          'ring-3 ring-offset-2 ring-offset-(--s-bg-primary)': ring
+          'ring-3 ring-offset-2 ring-offset-background': ring
         }
       ]"
       :style="{
@@ -149,7 +150,7 @@ const statusPositionClasses = computed(() => {
     <!-- Status indicator (outside overflow container) -->
     <span
       v-if="status"
-      class="absolute z-10 rounded-full ring-2 ring-(--s-bg-primary)"
+      class="absolute z-10 rounded-full ring-2 ring-background"
       :class="statusPositionClasses"
       :style="{
         width: statusSize,

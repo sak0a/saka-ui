@@ -2,6 +2,9 @@
 import { computed, ref, provide, onMounted, onUnmounted } from 'vue'
 import { cardContextKey } from './index'
 import { useTheme } from '../../../composables/useTheme'
+import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 interface Props {
   /** Size preset affecting padding and spacing */
@@ -278,6 +281,21 @@ const computedStyle = computed(() => {
   return style
 })
 
+// Card classes for cn() merging
+const cardClasses = computed(() => cn(
+  's-glass-card relative overflow-hidden',
+  sizeClasses.value,
+  radiusClasses.value,
+  props.horizontal && 'flex',
+  props.horizontal && props.mediaRight && 'flex-row-reverse',
+  (props.clickable || props.href || props.to) && 'cursor-pointer',
+  props.disabled && 's-glass-card--disabled',
+  props.hoverable && !props.disabled && 's-glass-card--hoverable',
+  props.pressable && !props.disabled && 's-glass-card--pressable',
+  isPressed.value && 's-glass-card--pressed',
+  props.spotlight && 's-glass-card--spotlight',
+))
+
 // Event handlers
 const handleMouseEnter = () => {
   if (props.disabled) return
@@ -340,31 +358,8 @@ defineExpose({
   <component
     :is="componentTag"
     ref="cardRef"
-    v-bind="componentBindings"
-    class="s-glass-card relative overflow-hidden"
-    :class="[
-      sizeClasses,
-      radiusClasses,
-      {
-        // Layout
-        'flex': horizontal,
-        'flex-row-reverse': horizontal && mediaRight,
-
-        // Interactive states
-        'cursor-pointer': clickable || href || to,
-        's-glass-card--disabled': disabled,
-
-        // Hover
-        's-glass-card--hoverable': hoverable && !disabled,
-
-        // Press
-        's-glass-card--pressable': pressable && !disabled,
-        's-glass-card--pressed': isPressed,
-
-        // Spotlight
-        's-glass-card--spotlight': spotlight,
-      }
-    ]"
+    v-bind="{ ...componentBindings, ...$attrs }"
+    :class="cn(cardClasses, ($attrs.class as string))"
     :style="computedStyle"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"

@@ -8,6 +8,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { inject } from 'vue'
+import { cn } from '~/lib/utils'
 import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
 
 export interface Props {
@@ -42,7 +43,7 @@ const handleClick = (event: MouseEvent) => {
     type="button"
     v-bind="$attrs"
     :disabled="disabled"
-    class="s-drawer-trigger"
+    :class="cn('s-drawer-trigger', $attrs.class ?? '')"
     @click="handleClick"
   >
     <slot />

@@ -2,6 +2,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { computed } from 'vue'
+import { cn } from '~/lib/utils'
 import { useSOTPContext } from './useOTPContext'
 import type {
   SOTPVariant, SOTPSize, SOTPRounded,
@@ -77,11 +78,11 @@ const roundedConfig = computed(() => {
 // Variant classes
 const variantClasses = computed(() => {
   const base: Record<SOTPVariant, string> = {
-    outlined: 'border-2 bg-(--s-bg-primary) border-(--s-border)',
-    filled: 'border-2 border-transparent bg-(--s-bg-tertiary)',
-    underlined: 'border-b-2 border-t-0 border-l-0 border-r-0 rounded-none! bg-transparent border-(--s-border)',
+    outlined: 'border-2 bg-background border-border',
+    filled: 'border-2 border-transparent bg-accent',
+    underlined: 'border-b-2 border-t-0 border-l-0 border-r-0 rounded-none! bg-transparent border-border',
     ghost: 'border-2 border-transparent bg-transparent',
-    morphing: 'border-2 bg-(--s-bg-secondary) border-(--s-border) shadow-inner'
+    morphing: 'border-2 bg-muted border-border shadow-inner'
   }
   return base[r.value.variant]
 })
@@ -101,16 +102,16 @@ const isMorphing = computed(() => ctx.morphingIndices.value.has(props.index))
 <template>
   <div
     v-bind="$attrs"
-    class="s-otp-box relative flex items-center justify-center overflow-hidden transition-all duration-200"
     style="perspective: 500px;"
-    :class="[
+    :class="cn(
+      's-otp-box relative flex items-center justify-center overflow-hidden transition-all duration-200',
       sizeConfig.box,
       roundedConfig,
       variantClasses,
       {
         // Focus states
-        'ring-2 ring-(--s-primary)/40 border-(--s-primary)!': isFocused && r.variant !== 'underlined',
-        'border-(--s-primary)!': isFocused && r.variant === 'underlined',
+        'ring-2 ring-primary/40 border-primary!': isFocused && r.variant !== 'underlined',
+        'border-primary!': isFocused && r.variant === 'underlined',
 
         // Success state
         'border-emerald-500! ring-emerald-500/30': ctx.showSuccess.value,
@@ -139,12 +140,13 @@ const isMorphing = computed(() => ctx.morphingIndices.value.has(props.index))
         'animate-success-ripple': ctx.showSuccess.value && r.successAnimation === 'ripple',
 
         // Hover state
-        'hover:border-(--s-border-hover)': !ctx.disabled.value && !isFocused && !ctx.showSuccess.value && !ctx.showError.value && !ctx.error.value,
+        'hover:border-input': !ctx.disabled.value && !isFocused && !ctx.showSuccess.value && !ctx.showError.value && !ctx.error.value,
 
         // Morphing variant special styles
         'shadow-lg': r.variant === 'morphing' && isFocused
-      }
-    ]"
+      },
+      $attrs.class ?? ''
+    )"
     :style="{
       '--entry-delay': `${props.index * 50}ms`,
       animationDelay: `${props.index * 50}ms`
@@ -154,13 +156,13 @@ const isMorphing = computed(() => ctx.morphingIndices.value.has(props.index))
     <!-- Glow effect for morphing variant -->
     <div
       v-if="r.variant === 'morphing' && isFocused"
-      class="absolute inset-0 bg-gradient-to-br from-(--s-primary)/20 to-transparent animate-pulse rounded-inherit"
+      class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent animate-pulse rounded-inherit"
     />
 
     <!-- Background pulse on input -->
     <div
       v-if="isAnimating && r.inputAnimation !== 'none'"
-      class="absolute inset-0 bg-(--s-primary)/10 animate-ping-once rounded-inherit"
+      class="absolute inset-0 bg-primary/10 animate-ping-once rounded-inherit"
     />
 
     <!-- Hidden input -->
@@ -185,7 +187,7 @@ const isMorphing = computed(() => ctx.morphingIndices.value.has(props.index))
 
     <!-- Display character with morph animation -->
     <span
-      class="s-otp-char relative z-10 font-bold text-(--s-text-primary) select-none pointer-events-none flex items-center justify-center"
+      class="s-otp-char relative z-10 font-bold text-foreground select-none pointer-events-none flex items-center justify-center"
       :class="[
         sizeConfig.text,
         {
@@ -196,14 +198,14 @@ const isMorphing = computed(() => ctx.morphingIndices.value.has(props.index))
           'animate-rubber': isAnimating && !isMorphing && r.inputAnimation === 'rubber' && digit,
 
           // Placeholder styling
-          'text-(--s-text-tertiary)': !digit && !isMorphing,
+          'text-muted-foreground': !digit && !isMorphing,
           'opacity-60': !digit && !isMorphing,
 
           // Masked styling
-          'text-(--s-primary)': ctx.masked.value && digit,
+          'text-primary': ctx.masked.value && digit,
 
           // Active digit glow
-          'drop-shadow-[0_0_8px_rgba(var(--s-primary-rgb),0.5)]': isFocused && digit,
+          'drop-shadow-[0_0_8px_color-mix(in_srgb,var(--s-primary)_50%,transparent)]': isFocused && digit,
 
           // Success color
           'text-emerald-500!': ctx.showSuccess.value && digit,
@@ -259,7 +261,7 @@ const isMorphing = computed(() => ctx.morphingIndices.value.has(props.index))
     <!-- Cursor blink for empty focused -->
     <span
       v-if="isFocused && !digit && !ctx.disabled.value && !ctx.readonly.value"
-      class="absolute h-1/2 w-0.5 bg-(--s-primary) animate-blink rounded-full"
+      class="absolute h-1/2 w-0.5 bg-primary animate-blink rounded-full"
     />
   </div>
 </template>

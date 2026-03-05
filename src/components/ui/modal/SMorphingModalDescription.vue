@@ -9,6 +9,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { inject, computed } from 'vue'
+import { cn } from '~/lib/utils'
 import { SMorphingModalContextKey } from './SMorphingModal.vue'
 
 export interface Props {
@@ -40,8 +41,7 @@ const isVisible = computed(() => context?.isExpanded.value ?? false)
     <div
       v-if="isVisible"
       v-bind="$attrs"
-      class="s-morphing-modal-description text-(--s-text-secondary)"
-      :class="descriptionClass"
+      :class="cn('s-morphing-modal-description text-muted-foreground', descriptionClass, $attrs.class ?? '')"
     >
       <slot />
     </div>

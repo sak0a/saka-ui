@@ -8,6 +8,8 @@
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
+import { cn } from '~/lib/utils'
+
 export interface Props {
   /** Image source URL */
   src: string
@@ -31,11 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
     v-bind="$attrs"
     :src="src"
     :alt="alt"
-    class="s-morphing-modal-image w-full"
-    :class="[
-      imageClass,
-      `object-${objectFit}`
-    ]"
+    :class="cn('s-morphing-modal-image w-full', imageClass, `object-${objectFit}`, $attrs.class ?? '')"
   />
 </template>
 

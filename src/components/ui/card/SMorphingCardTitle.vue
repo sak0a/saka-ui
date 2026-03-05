@@ -7,6 +7,9 @@
 <script setup lang="ts">
 import { inject } from 'vue'
 import { SMorphingCardContextKey } from './SMorphingCard.vue'
+import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** HTML tag to use */
@@ -27,8 +30,8 @@ const context = inject(SMorphingCardContextKey)
   <component
     :is="as"
     :id="`${context?.uniqueId}-title`"
-    class="s-morphing-card-title text-xl font-semibold text-(--s-text-primary) tracking-tight"
-    :class="titleClass"
+    v-bind="$attrs"
+    :class="cn('s-morphing-card-title text-xl font-semibold text-foreground tracking-tight', titleClass)"
   >
     <slot />
   </component>

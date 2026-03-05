@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
+import { cn } from '~/lib/utils'
 import { cardContextKey, type CardContext } from './index'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Title text */
@@ -65,16 +68,18 @@ const computedStyle = computed(() => {
 </script>
 
 <template>
-  <div 
-    class="s-card-header"
-    :class="[
+  <div
+    v-bind="$attrs"
+    :class="cn(
+      's-card-header',
       {
         'flex items-center gap-3': layout === 'horizontal',
         'flex flex-col gap-2': layout === 'vertical',
-        'pb-4 border-b border-(--s-border-subtle)': divider
+        'pb-4 border-b border-border': divider
       },
-      alignmentClasses
-    ]"
+      alignmentClasses,
+      ($attrs.class as string)
+    )"
     :style="computedStyle"
   >
     <!-- Avatar/Icon -->
@@ -86,7 +91,7 @@ const computedStyle = computed(() => {
         <!-- Avatar with image -->
         <div 
           v-if="avatar" 
-          class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-(--s-border-subtle)"
+          class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-border"
         >
           <img 
             :src="avatar" 
@@ -98,7 +103,7 @@ const computedStyle = computed(() => {
         <!-- Avatar with fallback -->
         <div 
           v-else-if="avatarFallback" 
-          class="w-10 h-10 rounded-full bg-(--s-bg-tertiary) flex items-center justify-center text-sm font-semibold text-(--s-text-secondary)"
+          class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-sm font-semibold text-muted-foreground"
         >
           {{ avatarFallback }}
         </div>
@@ -106,7 +111,7 @@ const computedStyle = computed(() => {
         <!-- Icon -->
         <div 
           v-else-if="icon" 
-          class="w-10 h-10 rounded-xl bg-(--s-primary-alpha) flex items-center justify-center"
+          class="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center"
         >
           <span 
             class="mdi text-xl"
@@ -122,7 +127,7 @@ const computedStyle = computed(() => {
       <slot name="title">
         <h3 
           v-if="title" 
-          class="text-base font-semibold text-(--s-text-primary) leading-tight truncate"
+          class="text-base font-semibold text-foreground leading-tight truncate"
         >
           {{ title }}
         </h3>
@@ -131,7 +136,7 @@ const computedStyle = computed(() => {
       <slot name="subtitle">
         <p 
           v-if="subtitle" 
-          class="text-sm text-(--s-text-secondary) mt-0.5 truncate"
+          class="text-sm text-muted-foreground mt-0.5 truncate"
         >
           {{ subtitle }}
         </p>

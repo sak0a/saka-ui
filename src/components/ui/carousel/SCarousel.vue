@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { provide, ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
+import { cn } from '~/lib/utils'
 import { SCarouselContextKey, type SCarouselContext } from './SCarouselSlide.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -190,7 +191,7 @@ const arrowSizeClasses = computed(() => {
 const arrowStyleClasses = computed(() => {
   const styles: Record<string, string> = {
     'default': 'rounded-full',
-    'minimal': 'bg-transparent! shadow-none! hover:bg-(--s-bg-primary)/50!',
+    'minimal': 'bg-transparent! shadow-none! hover:bg-background/50!',
     'rounded': 'rounded-2xl',
     'square': 'rounded-lg'
   }
@@ -545,15 +546,14 @@ defineExpose({
   <div
     ref="containerRef"
     v-bind="$attrs"
-    class="s-carousel relative overflow-hidden bg-(--s-bg-secondary) select-none"
-    :class="[
+    :class="cn('s-carousel relative overflow-hidden bg-muted select-none', [
       `s-carousel--${effect}`,
       `s-carousel--${direction}`,
       { 's-carousel--dragging': isDragging },
       { 'cursor-grab': grabCursor && !isDragging },
       { 'cursor-grabbing': grabCursor && isDragging },
       containerClass
-    ]"
+    ], $attrs.class ?? '')"
     :style="containerStyle"
     tabindex="0"
     :role="a11y ? 'region' : undefined"
@@ -589,7 +589,7 @@ defineExpose({
       class="s-carousel__progress absolute bottom-0 left-0 right-0 h-1 bg-black/20 z-30"
     >
       <div
-        class="h-full bg-(--s-primary) transition-none"
+        class="h-full bg-primary transition-none"
         :style="{ width: `${progressPercent}%` }"
       />
     </div>
@@ -618,7 +618,7 @@ defineExpose({
         }"
       >
         <button
-          class="s-carousel__arrow s-carousel__arrow--prev flex items-center justify-center bg-(--s-bg-primary)/90 backdrop-blur-sm text-(--s-text-primary) shadow-lg transition-all duration-300 hover:scale-110 hover:bg-(--s-bg-primary) disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
+          class="s-carousel__arrow s-carousel__arrow--prev flex items-center justify-center bg-background/90 backdrop-blur-sm text-foreground shadow-lg transition-all duration-300 hover:scale-110 hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
           :class="[arrowSizeClasses, arrowStyleClasses]"
           :disabled="!canGoPrev"
           @click.stop="prev"
@@ -628,7 +628,7 @@ defineExpose({
         </button>
         
         <button
-          class="s-carousel__arrow s-carousel__arrow--next flex items-center justify-center bg-(--s-bg-primary)/90 backdrop-blur-sm text-(--s-text-primary) shadow-lg transition-all duration-300 hover:scale-110 hover:bg-(--s-bg-primary) disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
+          class="s-carousel__arrow s-carousel__arrow--next flex items-center justify-center bg-background/90 backdrop-blur-sm text-foreground shadow-lg transition-all duration-300 hover:scale-110 hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
           :class="[arrowSizeClasses, arrowStyleClasses]"
           :disabled="!canGoNext"
           @click.stop="next"
@@ -641,7 +641,7 @@ defineExpose({
       <!-- Side Arrow Placement (classic left/right or top/bottom) -->
       <template v-else>
         <button
-          class="s-carousel__arrow s-carousel__arrow--prev absolute z-20 flex items-center justify-center bg-(--s-bg-primary)/90 backdrop-blur-sm text-(--s-text-primary) shadow-lg transition-all duration-300 hover:scale-110 hover:bg-(--s-bg-primary) disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
+          class="s-carousel__arrow s-carousel__arrow--prev absolute z-20 flex items-center justify-center bg-background/90 backdrop-blur-sm text-foreground shadow-lg transition-all duration-300 hover:scale-110 hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
           :class="[
             arrowSizeClasses,
             arrowStyleClasses,
@@ -660,7 +660,7 @@ defineExpose({
         </button>
         
         <button
-          class="s-carousel__arrow s-carousel__arrow--next absolute z-20 flex items-center justify-center bg-(--s-bg-primary)/90 backdrop-blur-sm text-(--s-text-primary) shadow-lg transition-all duration-300 hover:scale-110 hover:bg-(--s-bg-primary) disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
+          class="s-carousel__arrow s-carousel__arrow--next absolute z-20 flex items-center justify-center bg-background/90 backdrop-blur-sm text-foreground shadow-lg transition-all duration-300 hover:scale-110 hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
           :class="[
             arrowSizeClasses,
             arrowStyleClasses,
@@ -699,8 +699,8 @@ defineExpose({
           :key="i - 1"
           class="s-carousel__dot w-2.5 h-2.5 rounded-full transition-all duration-300"
           :class="activeIndex === i - 1 
-            ? 'bg-(--s-primary) scale-125' 
-            : 'bg-(--s-text-tertiary)/50 hover:bg-(--s-text-secondary)'"
+            ? 'bg-primary scale-125' 
+            : 'bg-muted-foreground/50 hover:bg-muted-foreground'"
           role="tab"
           :aria-selected="activeIndex === i - 1"
           :aria-label="a11y ? `Go to slide ${i}` : undefined"
@@ -715,8 +715,8 @@ defineExpose({
           :key="i - 1"
           class="s-carousel__bar h-1 rounded-full transition-all duration-300"
           :class="activeIndex === i - 1 
-            ? 'bg-(--s-primary) w-8' 
-            : 'bg-(--s-text-tertiary)/50 hover:bg-(--s-text-secondary) w-4'"
+            ? 'bg-primary w-8' 
+            : 'bg-muted-foreground/50 hover:bg-muted-foreground w-4'"
           role="tab"
           :aria-selected="activeIndex === i - 1"
           @click.stop="goTo(i - 1)"
@@ -730,8 +730,8 @@ defineExpose({
           :key="i - 1"
           class="s-carousel__num w-7 h-7 rounded-full text-xs font-medium flex items-center justify-center transition-all duration-300"
           :class="activeIndex === i - 1 
-            ? 'bg-(--s-primary) text-white scale-110' 
-            : 'bg-(--s-bg-tertiary)/80 text-(--s-text-secondary) hover:bg-(--s-bg-primary)'"
+            ? 'bg-primary text-white scale-110' 
+            : 'bg-accent/80 text-muted-foreground hover:bg-background'"
           role="tab"
           :aria-selected="activeIndex === i - 1"
           @click.stop="goTo(i - 1)"
@@ -760,12 +760,12 @@ defineExpose({
         :key="i - 1"
         class="s-carousel__thumb w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300"
         :class="activeIndex === i - 1 
-          ? 'border-(--s-primary) scale-105 opacity-100' 
+          ? 'border-primary scale-105 opacity-100' 
           : 'border-transparent opacity-60 hover:opacity-80'"
         @click.stop="goTo(i - 1)"
       >
         <slot name="thumbnail" :index="i - 1" :isActive="activeIndex === i - 1">
-          <div class="w-full h-full bg-(--s-bg-tertiary)" />
+          <div class="w-full h-full bg-accent" />
         </slot>
       </button>
     </div>

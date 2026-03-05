@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, provide, ref, watch } from 'vue'
+import { cn } from '~/lib/utils'
 import SRadio from './SRadio.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -29,7 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
   options: () => [],
   orientation: 'vertical',
   size: 'medium',
-  color: 'var(--s-primary)',
+  color: undefined,
   variant: 'default',
   disabled: false,
   gap: 'normal',
@@ -109,13 +110,13 @@ const gridStyle = computed(() => {
 // Keyboard navigation
 const handleKeydown = (e: KeyboardEvent) => {
   if (!props.options?.length) return
-  
+
   const currentIndex = props.options.findIndex(opt => opt.value === internalValue.value)
   let newIndex = currentIndex
-  
+
   const isVertical = props.orientation === 'vertical'
   const isGrid = props.orientation === 'grid'
-  
+
   switch (e.key) {
     case 'ArrowDown':
       if (isVertical || isGrid) {
@@ -146,7 +147,7 @@ const handleKeydown = (e: KeyboardEvent) => {
       newIndex = currentIndex > 0 ? currentIndex - 1 : props.options.length - 1
       break
   }
-  
+
   // Skip disabled options
   while (props.options[newIndex]?.disabled && newIndex !== currentIndex) {
     if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
@@ -155,7 +156,7 @@ const handleKeydown = (e: KeyboardEvent) => {
       newIndex = newIndex < props.options.length - 1 ? newIndex + 1 : 0
     }
   }
-  
+
   if (newIndex !== currentIndex && !props.options[newIndex]?.disabled) {
     internalValue.value = props.options[newIndex].value
     emit('update:modelValue', props.options[newIndex].value)
@@ -168,11 +169,11 @@ const handleKeydown = (e: KeyboardEvent) => {
   <div
     v-bind="$attrs"
     role="radiogroup"
-    class="s-radio-group"
-    :class="[
+    :class="cn(
+      's-radio-group',
       layoutClass,
       { 'opacity-50': disabled }
-    ]"
+    )"
     :style="gridStyle"
     @keydown="handleKeydown"
   >
@@ -186,7 +187,7 @@ const handleKeydown = (e: KeyboardEvent) => {
       :icon="option.icon"
       :name="name"
     />
-    
+
     <!-- Or render slotted content -->
     <slot />
   </div>

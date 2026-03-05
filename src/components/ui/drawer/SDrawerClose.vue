@@ -8,6 +8,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { inject } from 'vue'
+import { cn } from '~/lib/utils'
 import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
 
 export interface Props {
@@ -37,9 +38,9 @@ const handleClose = () => {
 }
 
 const variantClasses = {
-  default: 'text-(--s-text-tertiary) hover:text-(--s-text-primary) hover:bg-(--s-bg-tertiary)',
-  ghost: 'text-(--s-text-tertiary) hover:text-(--s-text-primary)',
-  subtle: 'text-(--s-text-secondary) hover:text-(--s-text-primary) hover:bg-(--s-bg-secondary)'
+  default: 'text-muted-foreground hover:text-foreground hover:bg-accent',
+  ghost: 'text-muted-foreground hover:text-foreground',
+  subtle: 'text-muted-foreground hover:text-foreground hover:bg-muted'
 }
 </script>
 
@@ -47,12 +48,13 @@ const variantClasses = {
   <button
     type="button"
     v-bind="$attrs"
-    class="s-drawer-close flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150 outline-none focus:ring-2 focus:ring-(--s-primary)/30 focus:ring-offset-0"
-    :class="[
+    :class="cn(
+      's-drawer-close flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150 outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-0',
       variantClasses[variant],
       disabled ? 'opacity-50 cursor-not-allowed' : '',
-      closeClass
-    ]"
+      closeClass,
+      $attrs.class ?? ''
+    )"
     :disabled="disabled"
     aria-label="Close drawer"
     @click="handleClose"

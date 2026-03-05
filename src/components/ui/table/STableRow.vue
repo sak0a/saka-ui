@@ -3,6 +3,7 @@
  * STableRow - Table row component with selection and expansion support
  */
 import { inject, computed } from 'vue'
+import { cn } from '~/lib/utils'
 import { SDataTableContextKey } from './index'
 
 interface Props {
@@ -72,7 +73,7 @@ const handleDblClick = (event: MouseEvent) => {
 <template>
   <tr
     v-bind="$attrs"
-    :class="rowClasses"
+    :class="cn(rowClasses, $attrs.class ?? '')"
     :data-row-key="rowKey"
     :aria-selected="context?.selectionMode !== 'none' ? isSelected : undefined"
     @click="handleClick"
@@ -92,14 +93,14 @@ const handleDblClick = (event: MouseEvent) => {
 }
 
 .s-table-row-hoverable:hover {
-  background-color: var(--s-bg-tertiary);
+  background-color: var(--s-accent);
 }
 
 .s-table-row-selected {
-  background-color: var(--s-primary-alpha) !important;
+  background-color: color-mix(in srgb, var(--s-primary) 15%, transparent) !important;
 }
 
 .s-table-row-even {
-  background-color: var(--s-bg-secondary);
+  background-color: var(--s-muted);
 }
 </style>

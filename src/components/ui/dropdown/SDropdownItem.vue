@@ -2,6 +2,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { inject, computed, onMounted, onBeforeUnmount } from 'vue'
+import { cn } from '~/lib/utils'
 import { SDropdownContextKey, type SDropdownContext } from './SDropdown.vue'
 
 export interface Props {
@@ -107,16 +108,12 @@ const handleClick = (event: MouseEvent) => {
   <div
     role="menuitem"
     :tabindex="disabled ? -1 : 0"
-    class="s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none rounded-md group"
-    :class="[
-      sizeConfig.item,
-      {
+    :class="cn('s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none rounded-md group', sizeConfig.item, {
         'opacity-50 cursor-not-allowed': disabled,
         'text-red-500 hover:bg-red-500/10': danger && !disabled,
-        'text-(--s-text-primary) hover:bg-(--s-bg-tertiary)': !danger && !disabled,
-        'bg-(--s-bg-tertiary)': isHighlighted && !disabled
-      }
-    ]"
+        'text-foreground hover:bg-accent': !danger && !disabled,
+        'bg-accent': isHighlighted && !disabled
+      }, $attrs.class ?? '')"
     v-bind="$attrs"
     @click="handleClick"
   >
@@ -127,7 +124,7 @@ const handleClick = (event: MouseEvent) => {
       :class="[
         checked ? 'mdi-checkbox-marked' : 'mdi-checkbox-blank-outline',
         sizeConfig.icon,
-        checked ? '' : 'text-(--s-text-tertiary)'
+        checked ? '' : 'text-muted-foreground'
       ]"
       :style="checked ? { color: accentColor } : {}"
     />
@@ -135,7 +132,7 @@ const handleClick = (event: MouseEvent) => {
     <!-- Leading icon -->
     <span 
       v-else-if="icon"
-      :class="['mdi', `mdi-${icon}`, sizeConfig.icon, 'mr-2.5', danger ? '' : 'text-(--s-text-secondary) group-hover:text-(--s-text-primary)']"
+      :class="['mdi', `mdi-${icon}`, sizeConfig.icon, 'mr-2.5', danger ? '' : 'text-muted-foreground group-hover:text-foreground']"
     />
 
     <!-- Content -->
@@ -146,7 +143,7 @@ const handleClick = (event: MouseEvent) => {
       <div 
         v-if="description" 
         class="text-xs truncate mt-0.5"
-        :class="danger ? 'text-red-400' : 'text-(--s-text-tertiary)'"
+        :class="danger ? 'text-red-400' : 'text-muted-foreground'"
       >
         {{ description }}
       </div>
@@ -157,7 +154,7 @@ const handleClick = (event: MouseEvent) => {
       <!-- Keyboard shortcut -->
       <kbd 
         v-if="shortcut"
-        class="px-1.5 py-0.5 text-[10px] font-mono rounded bg-(--s-bg-primary) text-(--s-text-tertiary) border border-(--s-border)"
+        class="px-1.5 py-0.5 text-[10px] font-mono rounded bg-background text-muted-foreground border border-border"
       >
         {{ shortcut }}
       </kbd>
@@ -165,7 +162,7 @@ const handleClick = (event: MouseEvent) => {
       <!-- Trailing icon -->
       <span 
         v-if="trailingIcon"
-        :class="['mdi', `mdi-${trailingIcon}`, sizeConfig.icon, 'text-(--s-text-tertiary)']"
+        :class="['mdi', `mdi-${trailingIcon}`, sizeConfig.icon, 'text-muted-foreground']"
       />
       
       <!-- Custom trailing slot -->
@@ -177,6 +174,6 @@ const handleClick = (event: MouseEvent) => {
 <style scoped>
 .s-dropdown-item:focus-visible {
   outline: none;
-  background-color: var(--s-bg-tertiary);
+  background-color: var(--s-accent);
 }
 </style>

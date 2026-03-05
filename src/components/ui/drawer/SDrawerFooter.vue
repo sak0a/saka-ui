@@ -8,6 +8,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { inject, onMounted, onBeforeUnmount } from 'vue'
+import { cn } from '~/lib/utils'
 import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
 
 export interface Props {
@@ -73,16 +74,17 @@ onBeforeUnmount(() => {
 <template>
   <div
     v-bind="$attrs"
-    class="s-drawer-footer flex items-center shrink-0"
-    :class="[
+    :class="cn(
+      's-drawer-footer flex items-center shrink-0',
       paddingClasses[padding],
       gapClasses[gap],
       alignClasses[align],
-      divider ? 'border-t border-(--s-border)' : '',
+      divider ? 'border-t border-border' : '',
       stackOnMobile ? 'max-sm:flex-col max-sm:items-stretch' : '',
-      sticky ? 'sticky bottom-0 z-10 bg-(--s-bg-primary)' : '',
-      footerClass
-    ]"
+      sticky ? 'sticky bottom-0 z-10 bg-background' : '',
+      footerClass,
+      $attrs.class ?? ''
+    )"
   >
     <slot />
   </div>

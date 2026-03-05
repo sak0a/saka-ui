@@ -2,6 +2,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
+import { cn } from '~/lib/utils'
 import type { ToastType, ToastOptions } from '../../../composables/useToast'
 import { dismissToast, pauseToast, resumeToast } from '../../../composables/useToast'
 import SIcon from '../SIcon.vue'
@@ -127,12 +128,12 @@ const typeConfig = computed(() => {
       progress: 'bg-slate-500'
     },
     custom: {
-      bg: 'bg-(--s-bg-secondary)',
-      border: 'border-(--s-border)',
-      text: 'text-(--s-text-primary)',
+      bg: 'bg-muted',
+      border: 'border-border',
+      text: 'text-foreground',
       icon: 'bell',
-      iconColor: 'text-(--s-text-secondary)',
-      progress: 'bg-(--s-primary)'
+      iconColor: 'text-muted-foreground',
+      progress: 'bg-primary'
     }
   }
   return configs[props.type]
@@ -160,13 +161,14 @@ const isLoading = computed(() => props.type === 'loading')
 <template>
   <div
     v-bind="$attrs"
-    class="s-toast relative flex items-start gap-3 p-4 rounded-xl border shadow-lg backdrop-blur-sm min-w-[320px] max-w-[420px] cursor-pointer transition-all duration-200"
-    :class="[
+    :class="cn(
+      's-toast relative flex items-start gap-3 p-4 rounded-xl border shadow-lg backdrop-blur-sm min-w-[320px] max-w-[420px] cursor-pointer transition-all duration-200',
       typeConfig.bg,
       typeConfig.border,
       typeConfig.text,
-      { 'hover:scale-[1.02]': !isLoading }
-    ]"
+      !isLoading && 'hover:scale-[1.02]',
+      $attrs.class ?? ''
+    )"
     :style="customStyle"
     role="alert"
     aria-live="polite"

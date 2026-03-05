@@ -31,6 +31,7 @@ export const SDrawerContextKey: InjectionKey<SDrawerContext> = Symbol('SDrawerCo
 defineOptions({ inheritAttrs: false })
 
 import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { cn } from '~/lib/utils'
 
 export interface Props {
   /** Control drawer visibility */
@@ -213,20 +214,20 @@ const roundedClasses = computed(() => {
 })
 
 const variantClasses = computed(() => ({
-  default: 'bg-(--s-bg-primary) border-0 shadow-2xl',
-  glass: 'bg-(--s-bg-primary)/90 backdrop-blur-2xl border border-(--s-border)/50 shadow-2xl',
-  bordered: 'bg-(--s-bg-primary) border border-(--s-border) shadow-xl',
-  elevated: 'bg-(--s-bg-primary) shadow-[0_-25px_80px_-12px_rgba(0,0,0,0.3)] dark:shadow-[0_-25px_80px_-12px_rgba(0,0,0,0.7)]',
-  minimal: 'bg-(--s-bg-primary)'
+  default: 'bg-background border-0 shadow-2xl',
+  glass: 'bg-background/90 backdrop-blur-2xl border border-border/50 shadow-2xl',
+  bordered: 'bg-background border border-border shadow-xl',
+  elevated: 'bg-background shadow-[0_-25px_80px_-12px_rgba(0,0,0,0.3)] dark:shadow-[0_-25px_80px_-12px_rgba(0,0,0,0.7)]',
+  minimal: 'bg-background'
 }[props.variant]))
 
 const borderClasses = computed(() => {
   if (props.variant === 'default' || props.variant === 'minimal') {
     const borderMap = {
-      left: 'border-r border-(--s-border)',
-      right: 'border-l border-(--s-border)',
-      top: 'border-b border-(--s-border)',
-      bottom: 'border-t border-(--s-border)'
+      left: 'border-r border-border',
+      right: 'border-l border-border',
+      top: 'border-b border-border',
+      bottom: 'border-t border-border'
     }
     return props.rounded ? '' : borderMap[props.side]
   }
@@ -556,7 +557,7 @@ defineExpose({
         v-if="isOpen"
         ref="drawerRef"
         v-bind="$attrs"
-        class="s-drawer fixed inset-0"
+        :class="cn('s-drawer fixed inset-0', $attrs.class ?? '')"
         :style="{ zIndex }"
         role="dialog"
         aria-modal="true"
@@ -621,7 +622,7 @@ defineExpose({
               
               <!-- Visual handle container -->
               <div class="s-drawer-handle flex items-center justify-center py-4 pt-5">
-                <div class="w-12 h-1.5 rounded-full bg-(--s-text-tertiary)/40 transition-all duration-200 hover:bg-(--s-text-tertiary)/60 hover:w-16 hover:scale-105" />
+                <div class="w-12 h-1.5 rounded-full bg-muted-foreground/40 transition-all duration-200 hover:bg-muted-foreground/60 hover:w-16 hover:scale-105" />
               </div>
             </div>
 
@@ -629,7 +630,7 @@ defineExpose({
             <!-- Also serves as a drag target for swiping -->
             <div
               v-if="(title || closable) && !hideHeader && !$slots.header"
-              class="s-drawer-header flex items-start justify-between gap-4 px-6 py-5 border-b border-(--s-border) shrink-0"
+              class="s-drawer-header flex items-start justify-between gap-4 px-6 py-5 border-b border-border shrink-0"
               :class="swipeable && isVertical ? 'cursor-grab active:cursor-grabbing touch-none' : ''"
               @mousedown="swipeable && isVertical ? handleDragStart($event) : undefined"
               @mousemove="swipeable && isVertical ? handleDragMove($event) : undefined"
@@ -640,14 +641,14 @@ defineExpose({
                 <h2
                   v-if="title"
                   :id="titleId"
-                  class="text-lg font-semibold text-(--s-text-primary) tracking-tight"
+                  class="text-lg font-semibold text-foreground tracking-tight"
                 >
                   {{ title }}
                 </h2>
                 <p
                   v-if="description"
                   :id="descriptionId"
-                  class="mt-1.5 text-sm text-(--s-text-secondary)"
+                  class="mt-1.5 text-sm text-muted-foreground"
                 >
                   {{ description }}
                 </p>
@@ -656,7 +657,7 @@ defineExpose({
               <button
                 v-if="closable"
                 type="button"
-                class="s-drawer-close shrink-0 flex items-center justify-center w-8 h-8 -mt-1 -mr-2 rounded-lg text-(--s-text-tertiary) hover:text-(--s-text-primary) hover:bg-(--s-bg-tertiary) transition-all duration-150 outline-none focus:ring-2 focus:ring-(--s-primary)/30"
+                class="s-drawer-close shrink-0 flex items-center justify-center w-8 h-8 -mt-1 -mr-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-all duration-150 outline-none focus:ring-2 focus:ring-primary/30"
                 aria-label="Close drawer"
                 @click="close"
               >
@@ -694,7 +695,7 @@ defineExpose({
         v-if="isOpen"
         ref="drawerRef"
         v-bind="$attrs"
-        class="s-drawer fixed inset-0"
+        :class="cn('s-drawer fixed inset-0', $attrs.class ?? '')"
         :style="{ zIndex }"
         role="dialog"
         aria-modal="true"
@@ -786,7 +787,7 @@ defineExpose({
 /* Active state when dragging */
 .s-drawer-handle-zone:active .s-drawer-handle > div {
   transform: scaleY(1.3);
-  background-color: var(--s-text-secondary) !important;
+  background-color: var(--s-muted-foreground) !important;
 }
 
 @keyframes handle-pulse {

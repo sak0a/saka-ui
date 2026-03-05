@@ -23,6 +23,7 @@ export const SMorphingModalContextKey: InjectionKey<SMorphingModalContext> = Sym
 defineOptions({ inheritAttrs: false })
 
 import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { cn } from '~/lib/utils'
 
 export interface Props {
   /** Control modal visibility */
@@ -371,7 +372,7 @@ defineExpose({
 <template>
   <div
     v-bind="$attrs"
-    class="s-morphing-modal-trigger-wrapper"
+    :class="cn('s-morphing-modal-trigger-wrapper', $attrs.class ?? '')"
     :style="triggerWrapperStyle"
     :aria-hidden="isOpen"
   >
@@ -401,7 +402,7 @@ defineExpose({
     <div
       v-if="isVisible"
       ref="contentRef"
-      class="s-morphing-modal-content bg-(--s-bg-primary) shadow-2xl overflow-hidden outline-none border border-(--s-border)"
+      class="s-morphing-modal-content bg-background shadow-2xl overflow-hidden outline-none border border-border"
       :style="{ ...contentStyle, zIndex: zIndex + 1 }"
       role="dialog"
       aria-modal="true"

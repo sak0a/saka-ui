@@ -2,6 +2,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { ref, provide, computed } from 'vue'
+import { cn } from '~/lib/utils'
 
 export interface Props {
   label: string
@@ -29,21 +30,23 @@ provide('s-option-group-disabled', computed(() => props.disabled))
 </script>
 
 <template>
-  <div v-bind="$attrs" class="s-option-group">
+  <div v-bind="$attrs" :class="cn('s-option-group')">
     <!-- Group Header -->
-    <div 
-      class="flex items-center gap-2 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-(--s-text-tertiary)"
-      :class="{ 
-        'cursor-pointer hover:text-(--s-text-secondary)': collapsible,
-        'opacity-50': disabled 
-      }"
+    <div
+      :class="cn(
+        'flex items-center gap-2 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground',
+        {
+          'cursor-pointer hover:text-foreground': collapsible,
+          'opacity-50': disabled
+        }
+      )"
       @click="toggle"
     >
       <slot name="label">
         <span class="flex-1">{{ label }}</span>
       </slot>
-      <span 
-        v-if="collapsible" 
+      <span
+        v-if="collapsible"
         class="mdi transition-transform duration-200"
         :class="isCollapsed ? 'mdi-chevron-right' : 'mdi-chevron-down'"
       />

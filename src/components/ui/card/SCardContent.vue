@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
+import { cn } from '~/lib/utils'
 import { cardContextKey, type CardContext } from './index'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Custom padding */
@@ -60,9 +63,13 @@ const skeletonWidths = computed(() => {
 </script>
 
 <template>
-  <div 
-    class="s-card-content text-(--s-text-secondary)"
-    :class="alignClasses"
+  <div
+    v-bind="$attrs"
+    :class="cn(
+      's-card-content text-muted-foreground',
+      alignClasses,
+      ($attrs.class as string)
+    )"
     :style="computedStyle"
   >
     <!-- Skeleton loading state -->
@@ -71,7 +78,7 @@ const skeletonWidths = computed(() => {
         <div 
           v-for="(width, index) in skeletonWidths" 
           :key="index"
-          class="h-4 bg-(--s-bg-tertiary) rounded"
+          class="h-4 bg-accent rounded"
           :style="{ width }"
         />
       </div>
@@ -95,16 +102,16 @@ const skeletonWidths = computed(() => {
 }
 
 .s-card-content::-webkit-scrollbar-track {
-  background: var(--s-bg-tertiary);
+  background: var(--s-accent);
   border-radius: 3px;
 }
 
 .s-card-content::-webkit-scrollbar-thumb {
-  background: var(--s-border-hover);
+  background: var(--s-input);
   border-radius: 3px;
 }
 
 .s-card-content::-webkit-scrollbar-thumb:hover {
-  background: var(--s-text-tertiary);
+  background: var(--s-muted-foreground);
 }
 </style>

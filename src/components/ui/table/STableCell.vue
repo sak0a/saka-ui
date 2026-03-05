@@ -3,6 +3,7 @@
  * STableCell - Table cell component
  */
 import { inject, computed } from 'vue'
+import { cn } from '~/lib/utils'
 import { SDataTableContextKey, type ColumnAlign } from './index'
 
 interface Props {
@@ -67,8 +68,8 @@ const cellClasses = computed(() => {
       'text-left': props.align === 'left',
       'text-center': props.align === 'center',
       'text-right': props.align === 'right',
-      'sticky left-0 bg-(--s-bg-primary) z-5': props.sticky === 'left',
-      'sticky right-0 bg-(--s-bg-primary) z-5': props.sticky === 'right',
+      'sticky left-0 bg-background z-5': props.sticky === 'left',
+      'sticky right-0 bg-background z-5': props.sticky === 'right',
       'truncate': props.truncate
     }
   ]
@@ -87,7 +88,7 @@ const cellStyles = computed(() => {
   <th
     v-if="header"
     v-bind="$attrs"
-    :class="cellClasses"
+    :class="cn(cellClasses, $attrs.class ?? '')"
     :style="cellStyles"
     :colspan="colspan"
     :rowspan="rowspan"
@@ -98,7 +99,7 @@ const cellStyles = computed(() => {
   <td
     v-else
     v-bind="$attrs"
-    :class="cellClasses"
+    :class="cn(cellClasses, $attrs.class ?? '')"
     :style="cellStyles"
     :colspan="colspan"
     :rowspan="rowspan"
@@ -110,7 +111,7 @@ const cellStyles = computed(() => {
 <style scoped>
 .s-table-th,
 .s-table-td {
-  color: var(--s-text-primary);
+  color: var(--s-foreground);
 }
 
 .s-table-th {
@@ -118,7 +119,7 @@ const cellStyles = computed(() => {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--s-text-secondary);
+  color: var(--s-muted-foreground);
   white-space: nowrap;
 }
 

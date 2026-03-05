@@ -8,6 +8,9 @@
 <script setup lang="ts">
 import { inject, computed } from 'vue'
 import { SMorphingCardContextKey } from './SMorphingCard.vue'
+import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Additional class */
@@ -38,17 +41,17 @@ const isVisible = computed(() => props.alwaysShow || (context?.isExpanded.value 
   >
     <div
       v-if="isVisible"
-      class="s-morphing-card-description text-(--s-text-secondary) leading-relaxed"
-      :class="descriptionClass"
+      v-bind="$attrs"
+      :class="cn('s-morphing-card-description text-muted-foreground leading-relaxed', descriptionClass)"
     >
       <slot />
     </div>
   </Transition>
-  
+
   <div
     v-else
-    class="s-morphing-card-description text-(--s-text-secondary) leading-relaxed"
-    :class="descriptionClass"
+    v-bind="$attrs"
+    :class="cn('s-morphing-card-description text-muted-foreground leading-relaxed', descriptionClass)"
   >
     <slot />
   </div>
