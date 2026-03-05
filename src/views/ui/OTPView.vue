@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { SApiSection, SApiTable, SButton } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, ApiMethod } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
-import { SOTP } from '../../components/ui/otp'
+import { SOTP, SOTPSlot, SOTPGroup, SOTPSeparator } from '../../components/ui/otp'
 
 // Demo states
 const basicOtp = ref('')
@@ -52,7 +52,10 @@ const errorOtp = ref('')
 const customPlaceholderOtp = ref('')
 const customMaskOtp = ref('')
 const customDigitOtp = ref('')
-const customIconsOtp = ref('')
+
+// Compound demo
+const compoundOtp = ref('')
+const compoundMixedOtp = ref('')
 
 // Methods
 const simulateError = () => {
@@ -68,133 +71,283 @@ const handleResend = () => {
 }
 
 // Code snippets
-const basicCode = `<SOTP 
-  v-model="otp" 
+const basicCode = `<SOTP
+  v-model="otp"
   @complete="handleComplete"
-/>
+>
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
 
 // Numeric mode (default)
-<SOTP mode="numeric" />
+<SOTP v-model="otp" mode="numeric" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
 
 // Alphanumeric (A-Z, 0-9)
-<SOTP mode="alphanumeric" />
+<SOTP v-model="otp" mode="alphanumeric" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
 
 // Alphabetic only (A-Z)
-<SOTP mode="alphabetic" />`
+<SOTP v-model="otp" mode="alphabetic" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>`
 
 const variantsCode = `<!-- Outlined (default) -->
-<SOTP variant="outlined" />
+<SOTP v-model="otp" variant="outlined" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
 
 <!-- Filled -->
-<SOTP variant="filled" />
+<SOTP v-model="otp" variant="filled" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
 
 <!-- Underlined -->
-<SOTP variant="underlined" />
+<SOTP v-model="otp" variant="underlined" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
 
 <!-- Ghost -->
-<SOTP variant="ghost" />
+<SOTP v-model="otp" variant="ghost" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
 
 <!-- Morphing (with glow effects) -->
-<SOTP variant="morphing" />`
+<SOTP v-model="otp" variant="morphing" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>`
 
-const sizesCode = `<SOTP size="small" />
-<SOTP size="medium" />
-<SOTP size="large" />
-<SOTP size="xl" />`
+const sizesCode = `<SOTP v-model="otp" size="small" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
 
-const animationsCode = `<!-- Entry animations -->
-<SOTP entry-animation="scale" />
-<SOTP entry-animation="slide-up" />
-<SOTP entry-animation="rotate" />
-<SOTP entry-animation="blur" />
+<SOTP v-model="otp" size="medium" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
+
+<SOTP v-model="otp" size="large" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
+
+<SOTP v-model="otp" size="xl" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>`
+
+const animationsCode = `<!-- Entry animations (visual prop cascaded from SOTP) -->
+<SOTP v-model="otp" entry-animation="scale" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
 
 <!-- Input animations (on character entry) -->
-<SOTP input-animation="pop" />
-<SOTP input-animation="squeeze" />
-<SOTP input-animation="jelly" />
-<SOTP input-animation="rubber" />`
+<SOTP v-model="otp" input-animation="pop" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
+
+<SOTP v-model="otp" input-animation="squeeze" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
+
+<SOTP v-model="otp" input-animation="jelly" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
+
+<SOTP v-model="otp" input-animation="rubber" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>`
 
 const successCode = `<!-- Different success animations -->
-<SOTP success-animation="celebrate" />
-<SOTP success-animation="check" />
-<SOTP success-animation="confetti" />
-<SOTP success-animation="ripple" />`
+<SOTP v-model="otp" success-animation="celebrate" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
 
-const featuresCode = `<!-- With separator -->
-<SOTP 
-  separator="-" 
-  :separator-position="[3]" 
-/>
+<SOTP v-model="otp" success-animation="check" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
+
+<SOTP v-model="otp" success-animation="confetti" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
+
+<SOTP v-model="otp" success-animation="ripple" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>`
+
+const featuresCode = `<!-- With separator (XXX-XXX format) -->
+<SOTP v-model="otp" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot :index="0" />
+    <SOTPSlot :index="1" />
+    <SOTPSlot :index="2" />
+  </SOTPGroup>
+  <SOTPSeparator>-</SOTPSeparator>
+  <SOTPGroup>
+    <SOTPSlot :index="3" />
+    <SOTPSlot :index="4" />
+    <SOTPSlot :index="5" />
+  </SOTPGroup>
+</SOTP>
 
 <!-- Masked (hidden digits) -->
-<SOTP masked />
+<SOTP v-model="otp" masked :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>
 
 <!-- With countdown timer -->
-<SOTP 
-  :countdown="60" 
+<SOTP
+  v-model="otp"
+  :countdown="60"
   @resend="handleResend"
-/>
-
-<!-- Custom length -->
-<SOTP :length="4" />`
-
-const customSlotsCode = `<!-- Custom placeholder (empty state) -->
-<SOTP v-model="otp">
-  <template #placeholder="{ isFocused }">
-    <span 
-      class="mdi" 
-      :class="isFocused ? 'mdi-circle-outline' : 'mdi-minus'"
-    />
-  </template>
+  :auto-focus="false"
+>
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
 </SOTP>
 
-<!-- Custom mask (hidden input) -->
-<SOTP v-model="otp" masked>
-  <template #mask>
-    <span class="mdi mdi-asterisk" />
-  </template>
+<!-- Custom length (4 digits) -->
+<SOTP v-model="otp" :maxlength="4" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 4" :key="i" :index="i - 1" />
+  </SOTPGroup>
+</SOTP>`
+
+const compoundCode = `<!-- Simple: all slots share visual config from root -->
+<SOTP v-model="otp" variant="filled" size="large" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+  </SOTPGroup>
 </SOTP>
 
-<!-- Custom digit rendering -->
-<SOTP v-model="otp">
-  <template #digit="{ value }">
-    <span class="font-mono italic">{{ value }}</span>
-  </template>
+<!-- Grouped with separator -->
+<SOTP v-model="otp" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot :index="0" />
+    <SOTPSlot :index="1" />
+    <SOTPSlot :index="2" />
+  </SOTPGroup>
+  <SOTPSeparator>-</SOTPSeparator>
+  <SOTPGroup>
+    <SOTPSlot :index="3" />
+    <SOTPSlot :index="4" />
+    <SOTPSlot :index="5" />
+  </SOTPGroup>
 </SOTP>
 
-<!-- Icon-based design -->
-<SOTP v-model="otp">
-  <template #placeholder="{ isFocused }">
-    <span 
-      class="mdi text-xl transition-colors"
-      :class="isFocused ? 'mdi-lock-open-outline text-amber-500' : 'mdi-lock-outline'"
-    />
-  </template>
-  <template #digit="{ value }">
-    <span class="mdi mdi-check-circle text-emerald-500" />
-  </template>
+<!-- Per-slot overrides (mix variants) -->
+<SOTP v-model="otp" variant="outlined" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot :index="0" variant="filled" />
+    <SOTPSlot :index="1" />
+    <SOTPSlot :index="2" />
+    <SOTPSlot :index="3" />
+    <SOTPSlot :index="4" />
+    <SOTPSlot :index="5" variant="filled" />
+  </SOTPGroup>
+</SOTP>`
+
+const customSlotsCode = `<!-- Custom placeholder (empty state) — slot is on SOTPSlot -->
+<SOTP v-model="otp" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1">
+      <template #placeholder="{ isFocused }">
+        <span
+          class="mdi"
+          :class="isFocused ? 'mdi-circle-outline' : 'mdi-minus'"
+        />
+      </template>
+    </SOTPSlot>
+  </SOTPGroup>
+</SOTP>
+
+<!-- Custom mask (hidden input) — slot is on SOTPSlot -->
+<SOTP v-model="otp" masked :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1">
+      <template #mask>
+        <span class="mdi mdi-asterisk" />
+      </template>
+    </SOTPSlot>
+  </SOTPGroup>
+</SOTP>
+
+<!-- Custom digit rendering — slot is on SOTPSlot -->
+<SOTP v-model="otp" :auto-focus="false">
+  <SOTPGroup>
+    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1">
+      <template #digit="{ value }">
+        <span class="font-mono italic">{{ value }}</span>
+      </template>
+    </SOTPSlot>
+  </SOTPGroup>
 </SOTP>`
 
 // API Reference
 const otpProps: ApiProp[] = [
   { name: 'modelValue', type: 'string', default: "''", description: 'The OTP value (v-model)', category: 'Core' },
-  { name: 'length', type: 'number', default: '6', description: 'Number of OTP digits', category: 'Core' },
+  { name: 'maxlength', type: 'number', default: '6', description: 'Number of OTP digits (loop count for SOTPSlot must match)', category: 'Core' },
   { name: 'mode', type: "'numeric' | 'alphanumeric' | 'alphabetic' | 'any'", default: "'numeric'", description: 'Character type allowed', category: 'Core' },
-  { name: 'variant', type: "'outlined' | 'filled' | 'underlined' | 'ghost' | 'morphing'", default: "'outlined'", description: 'Visual style variant', category: 'Appearance' },
-  { name: 'size', type: "'small' | 'medium' | 'large' | 'xl'", default: "'medium'", description: 'Size of OTP boxes', category: 'Appearance' },
-  { name: 'color', type: 'string', default: 'var(--s-primary)', description: 'Primary color for focus/active states', category: 'Appearance' },
-  { name: 'rounded', type: "'none' | 'sm' | 'md' | 'lg' | 'full'", default: "'md'", description: 'Border radius of boxes', category: 'Appearance' },
-  { name: 'gap', type: "'tight' | 'normal' | 'wide'", default: "'normal'", description: 'Spacing between boxes', category: 'Appearance' },
-  { name: 'animation', type: "'none' | 'bounce' | 'shake' | 'pulse' | 'flip' | 'morph' | 'glow' | 'wave'", default: "'bounce'", description: 'General animation style', category: 'Animation' },
-  { name: 'entryAnimation', type: "'none' | 'fade' | 'slide-up' | 'slide-down' | 'scale' | 'rotate' | 'blur'", default: "'scale'", description: 'Animation when boxes appear', category: 'Animation' },
-  { name: 'inputAnimation', type: "'none' | 'pop' | 'squeeze' | 'jelly' | 'rubber'", default: "'pop'", description: 'Animation when typing', category: 'Animation' },
-  { name: 'successAnimation', type: "'none' | 'celebrate' | 'check' | 'confetti' | 'ripple'", default: "'celebrate'", description: 'Animation on successful completion', category: 'Animation' },
-  { name: 'errorAnimation', type: "'none' | 'shake' | 'wobble' | 'flash'", default: "'shake'", description: 'Animation on error', category: 'Animation' },
-  { name: 'morphText', type: 'boolean', default: 'true', description: 'Enable text morphing animation', category: 'Animation' },
-  { name: 'morphDuration', type: 'number', default: '150', description: 'Duration of morph animation (ms)', category: 'Animation' },
-  { name: 'showPlaceholder', type: 'boolean', default: 'true', description: 'Show placeholder character', category: 'Content' },
-  { name: 'placeholderChar', type: 'string', default: "'○'", description: 'Placeholder character', category: 'Content' },
-  { name: 'maskChar', type: 'string', default: "'●'", description: 'Character used when masked', category: 'Content' },
+  { name: 'variant', type: "'outlined' | 'filled' | 'underlined' | 'ghost' | 'morphing'", default: "'outlined'", description: 'Cascading default visual style for SOTPSlot children', category: 'Appearance' },
+  { name: 'size', type: "'small' | 'medium' | 'large' | 'xl'", default: "'medium'", description: 'Cascading default size for SOTPSlot children', category: 'Appearance' },
+  { name: 'color', type: 'string', default: 'var(--s-primary)', description: 'Cascading default color for focus/active states', category: 'Appearance' },
+  { name: 'rounded', type: "'none' | 'sm' | 'md' | 'lg' | 'full'", default: "'md'", description: 'Cascading default border radius for SOTPSlot children', category: 'Appearance' },
+  { name: 'gap', type: "'tight' | 'normal' | 'wide'", default: "'normal'", description: 'Spacing between boxes in the root container', category: 'Appearance' },
+  { name: 'animation', type: "'none' | 'bounce' | 'shake' | 'pulse' | 'flip' | 'morph' | 'glow' | 'wave'", default: "'bounce'", description: 'Cascading default general animation style', category: 'Animation' },
+  { name: 'entryAnimation', type: "'none' | 'fade' | 'slide-up' | 'slide-down' | 'scale' | 'rotate' | 'blur'", default: "'scale'", description: 'Cascading default entry animation', category: 'Animation' },
+  { name: 'inputAnimation', type: "'none' | 'pop' | 'squeeze' | 'jelly' | 'rubber'", default: "'pop'", description: 'Cascading default input animation', category: 'Animation' },
+  { name: 'successAnimation', type: "'none' | 'celebrate' | 'check' | 'confetti' | 'ripple'", default: "'celebrate'", description: 'Cascading default success animation', category: 'Animation' },
+  { name: 'errorAnimation', type: "'none' | 'shake' | 'wobble' | 'flash'", default: "'shake'", description: 'Cascading default error animation', category: 'Animation' },
+  { name: 'morphText', type: 'boolean', default: 'true', description: 'Cascading default for text morphing animation', category: 'Animation' },
+  { name: 'morphDuration', type: 'number', default: '150', description: 'Cascading default morph animation duration (ms)', category: 'Animation' },
+  { name: 'showPlaceholder', type: 'boolean', default: 'true', description: 'Cascading default for showing placeholder character', category: 'Content' },
+  { name: 'placeholderChar', type: 'string', default: "'○'", description: 'Cascading default placeholder character', category: 'Content' },
+  { name: 'maskChar', type: 'string', default: "'●'", description: 'Cascading default mask character', category: 'Content' },
   { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the input', category: 'State' },
   { name: 'readonly', type: 'boolean', default: 'false', description: 'Make input read-only', category: 'State' },
   { name: 'loading', type: 'boolean', default: 'false', description: 'Show loading state', category: 'State' },
@@ -205,14 +358,34 @@ const otpProps: ApiProp[] = [
   { name: 'masked', type: 'boolean', default: 'false', description: 'Hide entered characters', category: 'Behavior' },
   { name: 'clearOnError', type: 'boolean', default: 'false', description: 'Clear input on error', category: 'Behavior' },
   { name: 'allowPaste', type: 'boolean', default: 'true', description: 'Allow paste from clipboard', category: 'Behavior' },
-  { name: 'separator', type: 'string', default: "''", description: 'Separator character (e.g., "-")', category: 'Layout' },
-  { name: 'separatorPosition', type: 'number[]', default: '—', description: 'Positions for separators [3] = XXX-XXX', category: 'Layout' },
   { name: 'label', type: 'string', default: '—', description: 'Label text above input', category: 'Content' },
   { name: 'hint', type: 'string', default: '—', description: 'Hint text below input', category: 'Content' },
   { name: 'errorMessage', type: 'string', default: '—', description: 'Custom error message', category: 'Content' },
   { name: 'successMessage', type: 'string', default: '—', description: 'Custom success message', category: 'Content' },
   { name: 'countdown', type: 'number', default: '0', description: 'Countdown seconds for resend', category: 'Countdown' },
   { name: 'resendText', type: 'string', default: "'Resend code'", description: 'Text for resend button', category: 'Countdown' }
+]
+
+const slotProps: ApiProp[] = [
+  { name: 'index', type: 'number', default: '—', description: 'Zero-based digit index (required)', category: 'Core' },
+  { name: 'variant', type: "'outlined' | 'filled' | 'underlined' | 'ghost' | 'morphing'", default: 'inherited', description: 'Per-slot variant override (falls back to SOTP root)', category: 'Appearance' },
+  { name: 'size', type: "'small' | 'medium' | 'large' | 'xl'", default: 'inherited', description: 'Per-slot size override', category: 'Appearance' },
+  { name: 'color', type: 'string', default: 'inherited', description: 'Per-slot color override', category: 'Appearance' },
+  { name: 'rounded', type: "'none' | 'sm' | 'md' | 'lg' | 'full'", default: 'inherited', description: 'Per-slot border radius override', category: 'Appearance' },
+  { name: 'animation', type: "'none' | 'bounce' | 'shake' | 'pulse' | 'flip' | 'morph' | 'glow' | 'wave'", default: 'inherited', description: 'Per-slot general animation override', category: 'Animation' },
+  { name: 'entryAnimation', type: "'none' | 'fade' | 'slide-up' | 'slide-down' | 'scale' | 'rotate' | 'blur'", default: 'inherited', description: 'Per-slot entry animation override', category: 'Animation' },
+  { name: 'inputAnimation', type: "'none' | 'pop' | 'squeeze' | 'jelly' | 'rubber'", default: 'inherited', description: 'Per-slot input animation override', category: 'Animation' },
+  { name: 'successAnimation', type: "'none' | 'celebrate' | 'check' | 'confetti' | 'ripple'", default: 'inherited', description: 'Per-slot success animation override', category: 'Animation' },
+  { name: 'errorAnimation', type: "'none' | 'shake' | 'wobble' | 'flash'", default: 'inherited', description: 'Per-slot error animation override', category: 'Animation' },
+  { name: 'morphText', type: 'boolean', default: 'inherited', description: 'Per-slot morph text override', category: 'Animation' },
+  { name: 'morphDuration', type: 'number', default: 'inherited', description: 'Per-slot morph duration override', category: 'Animation' },
+  { name: 'showPlaceholder', type: 'boolean', default: 'inherited', description: 'Per-slot show placeholder override', category: 'Content' },
+  { name: 'placeholderChar', type: 'string', default: 'inherited', description: 'Per-slot placeholder char override', category: 'Content' },
+  { name: 'maskChar', type: 'string', default: 'inherited', description: 'Per-slot mask char override', category: 'Content' }
+]
+
+const groupProps: ApiProp[] = [
+  { name: 'gap', type: "'tight' | 'normal' | 'wide'", default: "'normal'", description: 'Spacing between SOTPSlot children within this group', category: 'Appearance' }
 ]
 
 const otpEvents: ApiEvent[] = [
@@ -228,12 +401,23 @@ const otpEvents: ApiEvent[] = [
   { name: '@success', description: 'Emitted on successful completion' }
 ]
 
-const otpSlots: ApiSlot[] = [
+const otpRootSlots: ApiSlot[] = [
+  { name: 'default', description: 'Compound component children (SOTPGroup, SOTPSlot, SOTPSeparator)' },
+  { name: 'resend', description: 'Custom resend button content' }
+]
+
+const slotSlots: ApiSlot[] = [
   { name: 'placeholder', description: 'Custom content for empty/unfilled boxes. Receives: { index, isFocused, size }' },
   { name: 'mask', description: 'Custom content for masked/hidden input. Receives: { index, value, size }' },
-  { name: 'digit', description: 'Custom content for displaying entered digits. Receives: { index, value, size }' },
-  { name: 'box', description: 'Complete custom box rendering. Receives: { index, value, isFocused, isFilled, isSuccess, isError, size, focus }' },
-  { name: 'resend', description: 'Custom resend button content' }
+  { name: 'digit', description: 'Custom content for displaying entered digits. Receives: { index, value, size }' }
+]
+
+const groupSlots: ApiSlot[] = [
+  { name: 'default', description: 'SOTPSlot children to group together' }
+]
+
+const separatorSlots: ApiSlot[] = [
+  { name: 'default', description: 'Separator content (defaults to "-")' }
 ]
 
 const otpMethods: ApiMethod[] = [
@@ -253,7 +437,7 @@ const otpMethods: ApiMethod[] = [
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">OTP Input</h1>
       <p class="text-lg text-(--s-text-secondary)">
-        Advanced one-time password input with rich animations, text morphing, and extensive customization.
+        Advanced one-time password input built with compound components. Compose SOTP, SOTPSlot, SOTPGroup, and SOTPSeparator for full layout and visual control.
       </p>
     </header>
 
@@ -261,6 +445,13 @@ const otpMethods: ApiMethod[] = [
     <article>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="mdi mdi-puzzle text-xl text-violet-500"></span>
+            <h3 class="font-semibold text-(--s-text-primary)">Compound Components</h3>
+          </div>
+          <p class="text-sm text-(--s-text-secondary)">Compose SOTP, SOTPSlot, SOTPGroup, and SOTPSeparator for flexible layouts.</p>
+        </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-animation text-xl text-violet-500"></span>
@@ -306,10 +497,53 @@ const otpMethods: ApiMethod[] = [
       </div>
     </article>
 
+    <!-- Compound Components -->
+    <section>
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Compound Components</h2>
+      <DemoSection
+        title="Composable Pattern"
+        description="Use SOTPGroup to group slots, SOTPSeparator for visual dividers, and per-slot visual overrides. Visual props set on SOTP cascade down to SOTPSlot children as defaults."
+        :code="compoundCode"
+        language="vue"
+      >
+        <div class="space-y-8">
+          <div>
+            <p class="text-sm text-(--s-text-secondary) mb-3">Grouped with separator (XXX-XXX)</p>
+            <SOTP v-model="compoundOtp" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot :index="0" />
+                <SOTPSlot :index="1" />
+                <SOTPSlot :index="2" />
+              </SOTPGroup>
+              <SOTPSeparator>-</SOTPSeparator>
+              <SOTPGroup>
+                <SOTPSlot :index="3" />
+                <SOTPSlot :index="4" />
+                <SOTPSlot :index="5" />
+              </SOTPGroup>
+            </SOTP>
+          </div>
+          <div>
+            <p class="text-sm text-(--s-text-secondary) mb-3">Per-slot variant overrides (first and last are filled)</p>
+            <SOTP v-model="compoundMixedOtp" variant="outlined" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot :index="0" variant="filled" />
+                <SOTPSlot :index="1" />
+                <SOTPSlot :index="2" />
+                <SOTPSlot :index="3" />
+                <SOTPSlot :index="4" />
+                <SOTPSlot :index="5" variant="filled" />
+              </SOTPGroup>
+            </SOTP>
+          </div>
+        </div>
+      </DemoSection>
+    </section>
+
     <!-- Basic Usage -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
-      <DemoSection 
+      <DemoSection
         title="Input Modes"
         description="Different character modes for various OTP requirements."
         :code="basicCode"
@@ -318,32 +552,44 @@ const otpMethods: ApiMethod[] = [
         <div class="space-y-8">
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Numeric (default)</p>
-            <SOTP 
+            <SOTP
               v-model="numericOtp"
               mode="numeric"
               label="Enter verification code"
               hint="Enter the 6-digit code sent to your phone"
               :auto-focus="false"
               @complete="handleComplete"
-            />
+            >
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Alphanumeric (A-Z, 0-9)</p>
-            <SOTP 
+            <SOTP
               v-model="alphanumericOtp"
               mode="alphanumeric"
               label="Enter license key"
               :auto-focus="false"
-            />
+            >
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Alphabetic only (A-Z)</p>
-            <SOTP 
+            <SOTP
               v-model="alphabeticOtp"
               mode="alphabetic"
               label="Enter code"
               :auto-focus="false"
-            />
+            >
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
         </div>
       </DemoSection>
@@ -352,32 +598,52 @@ const otpMethods: ApiMethod[] = [
     <!-- Variants -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
-      <DemoSection 
+      <DemoSection
         title="Visual Styles"
-        description="Choose from five visual styles to match your design."
+        description="Choose from five visual styles to match your design. Visual props cascade from SOTP to all SOTPSlot children."
         :code="variantsCode"
         language="vue"
       >
         <div class="space-y-8">
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Outlined (default)</p>
-            <SOTP v-model="outlinedOtp" variant="outlined" :auto-focus="false" />
+            <SOTP v-model="outlinedOtp" variant="outlined" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Filled</p>
-            <SOTP v-model="filledOtp" variant="filled" :auto-focus="false" />
+            <SOTP v-model="filledOtp" variant="filled" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Underlined</p>
-            <SOTP v-model="underlinedOtp" variant="underlined" :auto-focus="false" />
+            <SOTP v-model="underlinedOtp" variant="underlined" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Ghost</p>
-            <SOTP v-model="ghostOtp" variant="ghost" :auto-focus="false" />
+            <SOTP v-model="ghostOtp" variant="ghost" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Morphing (with glow effects)</p>
-            <SOTP v-model="morphingOtp" variant="morphing" :auto-focus="false" />
+            <SOTP v-model="morphingOtp" variant="morphing" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
         </div>
       </DemoSection>
@@ -386,7 +652,7 @@ const otpMethods: ApiMethod[] = [
     <!-- Sizes -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
-      <DemoSection 
+      <DemoSection
         title="Size Options"
         description="Four size presets for different contexts."
         :code="sizesCode"
@@ -395,19 +661,35 @@ const otpMethods: ApiMethod[] = [
         <div class="space-y-8">
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Small</p>
-            <SOTP v-model="smallOtp" size="small" :auto-focus="false" />
+            <SOTP v-model="smallOtp" size="small" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Medium (default)</p>
-            <SOTP v-model="mediumOtp" size="medium" :auto-focus="false" />
+            <SOTP v-model="mediumOtp" size="medium" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Large</p>
-            <SOTP v-model="largeOtp" size="large" :auto-focus="false" />
+            <SOTP v-model="largeOtp" size="large" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">XL</p>
-            <SOTP v-model="xlOtp" size="xl" :auto-focus="false" />
+            <SOTP v-model="xlOtp" size="xl" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
         </div>
       </DemoSection>
@@ -416,7 +698,7 @@ const otpMethods: ApiMethod[] = [
     <!-- Input Animations -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Input Animations</h2>
-      <DemoSection 
+      <DemoSection
         title="Character Entry Animations"
         description="Different animations when typing characters. Try typing to see the effects!"
         :code="animationsCode"
@@ -425,19 +707,35 @@ const otpMethods: ApiMethod[] = [
         <div class="space-y-8">
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Pop (default)</p>
-            <SOTP v-model="popOtp" input-animation="pop" :auto-focus="false" />
+            <SOTP v-model="popOtp" input-animation="pop" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Squeeze</p>
-            <SOTP v-model="squeezeOtp" input-animation="squeeze" :auto-focus="false" />
+            <SOTP v-model="squeezeOtp" input-animation="squeeze" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Jelly</p>
-            <SOTP v-model="jellyOtp" input-animation="jelly" :auto-focus="false" />
+            <SOTP v-model="jellyOtp" input-animation="jelly" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Rubber</p>
-            <SOTP v-model="rubberOtp" input-animation="rubber" :auto-focus="false" />
+            <SOTP v-model="rubberOtp" input-animation="rubber" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
         </div>
       </DemoSection>
@@ -446,7 +744,7 @@ const otpMethods: ApiMethod[] = [
     <!-- Success Animations -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Success Animations</h2>
-      <DemoSection 
+      <DemoSection
         title="Completion Celebrations"
         description="Beautiful animations when OTP is successfully completed. Type a complete code to see the effect!"
         :code="successCode"
@@ -455,19 +753,35 @@ const otpMethods: ApiMethod[] = [
         <div class="space-y-8">
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Celebrate (default) - boxes do a happy dance!</p>
-            <SOTP v-model="celebrateOtp" success-animation="celebrate" :auto-focus="false" />
+            <SOTP v-model="celebrateOtp" success-animation="celebrate" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Check - checkmark overlay</p>
-            <SOTP v-model="checkOtp" success-animation="check" :auto-focus="false" />
+            <SOTP v-model="checkOtp" success-animation="check" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Confetti - celebration particles!</p>
-            <SOTP v-model="confettiOtp" success-animation="confetti" :auto-focus="false" />
+            <SOTP v-model="confettiOtp" success-animation="confetti" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Ripple - expanding ring effect</p>
-            <SOTP v-model="rippleOtp" success-animation="ripple" :auto-focus="false" />
+            <SOTP v-model="rippleOtp" success-animation="ripple" :auto-focus="false">
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
         </div>
       </DemoSection>
@@ -476,22 +790,30 @@ const otpMethods: ApiMethod[] = [
     <!-- Error Animation -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Error State</h2>
-      <DemoSection 
+      <DemoSection
         title="Error Animation"
         description="Trigger error states programmatically with shake animations."
-        :code="`<SOTP ref='otpRef' error-animation='shake' />
+        :code="`<SOTP ref='otpRef' v-model='otp' error-animation='shake' :auto-focus='false'>
+  <SOTPGroup>
+    <SOTPSlot v-for='i in 6' :key='i' :index='i - 1' />
+  </SOTPGroup>
+</SOTP>
 
 // Trigger error
 otpRef.value.triggerError('Invalid code')`"
         language="vue"
       >
         <div class="space-y-4">
-          <SOTP 
+          <SOTP
             ref="errorOtpRef"
-            v-model="errorOtp" 
+            v-model="errorOtp"
             error-animation="shake"
             :auto-focus="false"
-          />
+          >
+            <SOTPGroup>
+              <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+            </SOTPGroup>
+          </SOTP>
           <div class="flex justify-center">
             <SButton @click="simulateError" variant="outlined" color="#ef4444">
               <span class="mdi mdi-alert-circle mr-2"></span>
@@ -505,47 +827,69 @@ otpRef.value.triggerError('Invalid code')`"
     <!-- Additional Features -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Additional Features</h2>
-      <DemoSection 
+      <DemoSection
         title="Extra Functionality"
-        description="Separators, masking, countdown timers, and custom lengths."
+        description="Separators via SOTPSeparator, masking, countdown timers, and custom lengths."
         :code="featuresCode"
         language="vue"
       >
         <div class="space-y-8">
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">With separator (XXX-XXX format)</p>
-            <SOTP 
-              v-model="separatorOtp" 
-              separator="-" 
-              :separator-position="[3]"
+            <SOTP
+              v-model="separatorOtp"
               :auto-focus="false"
-            />
+            >
+              <SOTPGroup>
+                <SOTPSlot :index="0" />
+                <SOTPSlot :index="1" />
+                <SOTPSlot :index="2" />
+              </SOTPGroup>
+              <SOTPSeparator>-</SOTPSeparator>
+              <SOTPGroup>
+                <SOTPSlot :index="3" />
+                <SOTPSlot :index="4" />
+                <SOTPSlot :index="5" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Masked (hidden digits)</p>
-            <SOTP 
-              v-model="maskedOtp" 
+            <SOTP
+              v-model="maskedOtp"
               masked
               hint="Your input is hidden for security"
               :auto-focus="false"
-            />
+            >
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">With countdown timer</p>
-            <SOTP 
+            <SOTP
               v-model="countdownOtp"
               :countdown="30"
               @resend="handleResend"
               :auto-focus="false"
-            />
+            >
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Custom length (4 digits)</p>
-            <SOTP 
+            <SOTP
               v-model="customLengthOtp"
-              :length="4"
+              :maxlength="4"
               :auto-focus="false"
-            />
+            >
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 4" :key="i" :index="i - 1" />
+              </SOTPGroup>
+            </SOTP>
           </div>
         </div>
       </DemoSection>
@@ -554,9 +898,9 @@ otpRef.value.triggerError('Invalid code')`"
     <!-- Custom Slots -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Slots</h2>
-      <DemoSection 
+      <DemoSection
         title="Customizable Templates"
-        description="Use slots to completely customize the appearance of placeholder, mask, and digit displays."
+        description="Use slots on SOTPSlot to completely customize the appearance of placeholder, mask, and digit displays."
         :code="customSlotsCode"
         language="vue"
       >
@@ -564,45 +908,42 @@ otpRef.value.triggerError('Invalid code')`"
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Custom placeholder (dashes instead of circles)</p>
             <SOTP v-model="customPlaceholderOtp" :auto-focus="false">
-              <template #placeholder="{ isFocused }">
-                <span 
-                  class="mdi text-2xl transition-all duration-200" 
-                  :class="isFocused ? 'mdi-circle-outline scale-110' : 'mdi-minus'"
-                />
-              </template>
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1">
+                  <template #placeholder="{ isFocused }">
+                    <span
+                      class="mdi text-2xl transition-all duration-200"
+                      :class="isFocused ? 'mdi-circle-outline scale-110' : 'mdi-minus'"
+                    />
+                  </template>
+                </SOTPSlot>
+              </SOTPGroup>
             </SOTP>
           </div>
-          
+
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Custom mask (asterisks instead of dots)</p>
             <SOTP v-model="customMaskOtp" masked :auto-focus="false">
-              <template #mask>
-                <span class="mdi mdi-asterisk text-lg text-(--s-primary)" />
-              </template>
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1">
+                  <template #mask>
+                    <span class="mdi mdi-asterisk text-lg text-(--s-primary)" />
+                  </template>
+                </SOTPSlot>
+              </SOTPGroup>
             </SOTP>
           </div>
-          
+
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Custom digit styling (monospace italic)</p>
             <SOTP v-model="customDigitOtp" :auto-focus="false">
-              <template #digit="{ value }">
-                <span class="font-mono italic text-cyan-500 tracking-wider">{{ value }}</span>
-              </template>
-            </SOTP>
-          </div>
-          
-          <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3">Icon-based design (locks → checkmarks)</p>
-            <SOTP v-model="customIconsOtp" :auto-focus="false" variant="filled">
-              <template #placeholder="{ isFocused }">
-                <span 
-                  class="mdi text-xl transition-all duration-200"
-                  :class="isFocused ? 'mdi-lock-open-outline text-amber-500 scale-110' : 'mdi-lock-outline text-(--s-text-tertiary)'"
-                />
-              </template>
-              <template #digit>
-                <span class="mdi mdi-check-circle text-xl text-emerald-500" />
-              </template>
+              <SOTPGroup>
+                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1">
+                  <template #digit="{ value }">
+                    <span class="font-mono italic text-cyan-500 tracking-wider">{{ value }}</span>
+                  </template>
+                </SOTPSlot>
+              </SOTPGroup>
             </SOTP>
           </div>
         </div>
@@ -612,10 +953,10 @@ otpRef.value.triggerError('Invalid code')`"
     <!-- Real-world Example -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-world Example</h2>
-      <DemoSection 
+      <DemoSection
         title="Phone Verification"
-        description="A complete phone verification flow with all features."
-        :code="`<SOTP 
+        description="A complete phone verification flow using compound components."
+        :code="`<SOTP
   v-model='otp'
   variant='morphing'
   size='large'
@@ -625,7 +966,11 @@ otpRef.value.triggerError('Invalid code')`"
   :countdown='60'
   @complete='verifyCode'
   @resend='resendCode'
-/>`"
+>
+  <SOTPGroup>
+    <SOTPSlot v-for='i in 6' :key='i' :index='i - 1' />
+  </SOTPGroup>
+</SOTP>`"
         language="vue"
       >
         <div class="max-w-md mx-auto bg-(--s-bg-primary) p-8 rounded-2xl border border-(--s-border) shadow-xl">
@@ -639,8 +984,8 @@ otpRef.value.triggerError('Invalid code')`"
               <span class="font-medium">+1 *** *** 1234</span>
             </p>
           </div>
-          
-          <SOTP 
+
+          <SOTP
             v-model="basicOtp"
             variant="morphing"
             size="large"
@@ -648,8 +993,12 @@ otpRef.value.triggerError('Invalid code')`"
             :countdown="60"
             @complete="handleComplete"
             @resend="handleResend"
-          />
-          
+          >
+            <SOTPGroup>
+              <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
+            </SOTPGroup>
+          </SOTP>
+
           <div class="mt-6">
             <SButton block :disabled="basicOtp.length < 6">
               Verify Code
@@ -662,12 +1011,26 @@ otpRef.value.triggerError('Invalid code')`"
     <!-- API Reference -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
-      
+
       <SApiSection title="SOTP">
         <SApiTable title="Props" :props="otpProps" type="props" />
         <SApiTable title="Events" :events="otpEvents" type="events" />
-        <SApiTable title="Slots" :slots="otpSlots" type="slots" />
+        <SApiTable title="Slots" :slots="otpRootSlots" type="slots" />
         <SApiTable title="Methods" :methods="otpMethods" type="methods" />
+      </SApiSection>
+
+      <SApiSection title="SOTPSlot">
+        <SApiTable title="Props" :props="slotProps" type="props" />
+        <SApiTable title="Slots" :slots="slotSlots" type="slots" />
+      </SApiSection>
+
+      <SApiSection title="SOTPGroup">
+        <SApiTable title="Props" :props="groupProps" type="props" />
+        <SApiTable title="Slots" :slots="groupSlots" type="slots" />
+      </SApiSection>
+
+      <SApiSection title="SOTPSeparator">
+        <SApiTable title="Slots" :slots="separatorSlots" type="slots" />
       </SApiSection>
     </section>
 
