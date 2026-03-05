@@ -71,7 +71,8 @@ export {
 } from './components/ui/drawer'
 
 // OTP Input
-export { SOTP } from './components/ui/otp'
+export { SOTP, SOTPSlot, SOTPGroup, SOTPSeparator, useSOTPContext, SOTP_INJECTION_KEY } from './components/ui/otp'
+export type { SOTPContext, MorphData } from './components/ui/otp'
 
 // Progress components
 export { SProgress, SProgressRange } from './components/ui/progress'

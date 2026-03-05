@@ -1,4 +1,7 @@
-import SOTP from './SOTP.vue'
-
-export { SOTP }
-export default SOTP
+export { default as SOTP } from './SOTP.vue'
+export { default as SOTPSlot } from './SOTPSlot.vue'
+export { default as SOTPGroup } from './SOTPGroup.vue'
+export { default as SOTPSeparator } from './SOTPSeparator.vue'
+export { SOTP_INJECTION_KEY, useSOTPContext } from './useOTPContext'
+export type { SOTPContext, MorphData } from './useOTPContext'
+export type * from './types'

@@ -1,15 +1,23 @@
 {
   "name": "otp",
   "displayName": "SOTP",
-  "description": "OTP/PIN input with configurable length, masked input, and auto-submit",
-  "version": "0.1.0",
+  "description": "Composable OTP input with headless root, visual slots, groups, and separators. Supports 5 animation systems, text morphing, masked input, countdown/resend.",
+  "version": "0.2.0",
   "files": [
     "components/ui/otp/index.ts",
-    "components/ui/otp/SOTP.vue"
+    "components/ui/otp/SOTP.vue",
+    "components/ui/otp/SOTPSlot.vue",
+    "components/ui/otp/SOTPGroup.vue",
+    "components/ui/otp/SOTPSeparator.vue",
+    "components/ui/otp/useOTPContext.ts",
+    "components/ui/otp/types.ts"
   ],
   "dependencies": [],
   "composables": [],
   "peerDependencies": {
     "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
   }
 }
