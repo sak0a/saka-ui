@@ -170,9 +170,9 @@ No props. Default slot for content.
 | Morph (3D flip text) | SOTP context (startMorphAnimation, rAF) | SOTPSlot inline style | Character change |
 | Error (shake, wobble, flash) | SOTP context (showError) | SOTPSlot CSS class | triggerError() or error prop |
 | Success per-slot (celebrate, ripple) | SOTP context (showSuccess) | SOTPSlot CSS class | Completion |
-| Success global (confetti, check) | SOTP root | SOTP root teleport/overlay | Completion |
+| Success global (check) | SOTP root | SOTP root overlay | Completion |
 
-Per-slot effects render in SOTPSlot. Global overlays (confetti particles, checkmark badge) render in SOTP root.
+Per-slot effects render in SOTPSlot. Global overlays (checkmark badge) render in SOTP root.
 
 All `@keyframes` CSS moves from the monolith into SOTPSlot's `<style scoped>`.
 

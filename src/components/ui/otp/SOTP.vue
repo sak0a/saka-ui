@@ -805,63 +805,10 @@ watch(() => props.error, (hasError) => {
       </slot>
     </div>
 
-    <!-- Confetti overlay for success -->
-    <Teleport to="body">
-      <Transition
-        enter-active-class="transition-opacity duration-300"
-        enter-from-class="opacity-0"
-        enter-to-class="opacity-100"
-        leave-active-class="transition-opacity duration-500"
-        leave-from-class="opacity-100"
-        leave-to-class="opacity-0"
-      >
-        <div
-          v-if="showSuccess && defaults.successAnimation === 'confetti'"
-          class="fixed inset-0 pointer-events-none z-[9999] overflow-hidden"
-        >
-          <div
-            v-for="i in 50"
-            :key="i"
-            class="confetti-piece absolute"
-            :style="{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 0.5}s`,
-              backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'][i % 5]
-            }"
-          />
-        </div>
-      </Transition>
-    </Teleport>
   </div>
 </template>
 
 <style scoped>
-/* Confetti */
-@keyframes confetti-fall {
-  0% {
-    transform: translateY(-100vh) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(720deg);
-    opacity: 0;
-  }
-}
-
-.confetti-piece {
-  width: 10px;
-  height: 10px;
-  animation: confetti-fall 2s ease-out forwards;
-}
-
-.confetti-piece:nth-child(odd) {
-  border-radius: 50%;
-}
-
-.confetti-piece:nth-child(even) {
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-}
-
 /* Success check animations */
 @keyframes check-bounce {
   0% { transform: scale(0) rotate(-45deg); }

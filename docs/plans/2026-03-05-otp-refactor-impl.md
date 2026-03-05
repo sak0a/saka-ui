@@ -35,7 +35,7 @@ export type SOTPMode = 'numeric' | 'alphanumeric' | 'alphabetic' | 'any'
 export type SOTPAnimation = 'none' | 'bounce' | 'shake' | 'pulse' | 'flip' | 'morph' | 'glow' | 'wave'
 export type SOTPEntryAnimation = 'none' | 'fade' | 'slide-up' | 'slide-down' | 'scale' | 'rotate' | 'blur'
 export type SOTPInputAnimation = 'none' | 'pop' | 'squeeze' | 'jelly' | 'rubber'
-export type SOTPSuccessAnimation = 'none' | 'celebrate' | 'check' | 'confetti' | 'ripple'
+export type SOTPSuccessAnimation = 'none' | 'celebrate' | 'check' | 'ripple'
 export type SOTPErrorAnimation = 'none' | 'shake' | 'wobble' | 'flash'
 
 export interface SOTPVisualDefaults {
@@ -244,7 +244,7 @@ This is the biggest task. Take the existing 1,218-line monolith and restructure 
 - **Add:** `provide()` call with full context
 - **Add:** Visual default props that cascade to children
 - **Keep:** Label, messages, resend sections in template (they stay in root)
-- **Keep:** Confetti/check overlays (global success effects)
+- **Keep:** Check overlay (global success effect)
 
 **Step 1: Rewrite SOTP.vue**
 
@@ -277,12 +277,11 @@ The `<template>` becomes:
 
     <!-- Messages section (error/success/hint) — keep as-is -->
     <!-- Resend section — keep as-is -->
-    <!-- Confetti teleport — keep as-is -->
   </div>
 </template>
 ```
 
-The `<style scoped>` keeps ONLY the confetti keyframes and any root-level animations. All per-slot keyframes move to SOTPSlot in Task 6.
+The `<style scoped>` keeps ONLY the success check animations and any root-level animations. All per-slot keyframes move to SOTPSlot in Task 6.
 
 **Step 2: Verify build**
 
@@ -398,11 +397,10 @@ const setInputRef = (el: any) => {
 
 <style scoped>
 /* ALL @keyframes from old SOTP: entry, input, error, success per-slot animations */
-/* Lines 972-1217 of old SOTP.vue — everything EXCEPT confetti */
 </style>
 ```
 
-The full implementation copies the visual rendering from old SOTP lines 657-819 (the digit box `<div>`) and all `@keyframes` from lines 972-1208 (everything except confetti which stays in SOTP root).
+The full implementation copies the visual rendering from old SOTP lines 657-819 (the digit box `<div>`) and all `@keyframes` from lines 972-1208.
 
 Every reference to `digits[index]`, `activeIndex`, `showSuccess`, `showError`, `animatingIndices`, `morphingIndices` changes to `ctx.digits.value[props.index]`, `ctx.activeIndex.value`, etc.
 

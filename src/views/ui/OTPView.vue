@@ -42,7 +42,6 @@ const customLengthOtp = ref('')
 
 const celebrateOtp = ref('')
 const checkOtp = ref('')
-const confettiOtp = ref('')
 const rippleOtp = ref('')
 
 const errorOtpRef = ref<InstanceType<typeof SOTP> | null>(null)
@@ -205,12 +204,6 @@ const successCode = `<!-- Different success animations -->
   </SOTPGroup>
 </SOTP>
 
-<SOTP v-model="otp" success-animation="confetti" :auto-focus="false">
-  <SOTPGroup>
-    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
-  </SOTPGroup>
-</SOTP>
-
 <SOTP v-model="otp" success-animation="ripple" :auto-focus="false">
   <SOTPGroup>
     <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
@@ -341,7 +334,7 @@ const otpProps: ApiProp[] = [
   { name: 'animation', type: "'none' | 'bounce' | 'shake' | 'pulse' | 'flip' | 'morph' | 'glow' | 'wave'", default: "'bounce'", description: 'Cascading default general animation style', category: 'Animation' },
   { name: 'entryAnimation', type: "'none' | 'fade' | 'slide-up' | 'slide-down' | 'scale' | 'rotate' | 'blur'", default: "'scale'", description: 'Cascading default entry animation', category: 'Animation' },
   { name: 'inputAnimation', type: "'none' | 'pop' | 'squeeze' | 'jelly' | 'rubber'", default: "'pop'", description: 'Cascading default input animation', category: 'Animation' },
-  { name: 'successAnimation', type: "'none' | 'celebrate' | 'check' | 'confetti' | 'ripple'", default: "'celebrate'", description: 'Cascading default success animation', category: 'Animation' },
+  { name: 'successAnimation', type: "'none' | 'celebrate' | 'check' | 'ripple'", default: "'celebrate'", description: 'Cascading default success animation', category: 'Animation' },
   { name: 'errorAnimation', type: "'none' | 'shake' | 'wobble' | 'flash'", default: "'shake'", description: 'Cascading default error animation', category: 'Animation' },
   { name: 'morphText', type: 'boolean', default: 'true', description: 'Cascading default for text morphing animation', category: 'Animation' },
   { name: 'morphDuration', type: 'number', default: '150', description: 'Cascading default morph animation duration (ms)', category: 'Animation' },
@@ -375,7 +368,7 @@ const slotProps: ApiProp[] = [
   { name: 'animation', type: "'none' | 'bounce' | 'shake' | 'pulse' | 'flip' | 'morph' | 'glow' | 'wave'", default: 'inherited', description: 'Per-slot general animation override', category: 'Animation' },
   { name: 'entryAnimation', type: "'none' | 'fade' | 'slide-up' | 'slide-down' | 'scale' | 'rotate' | 'blur'", default: 'inherited', description: 'Per-slot entry animation override', category: 'Animation' },
   { name: 'inputAnimation', type: "'none' | 'pop' | 'squeeze' | 'jelly' | 'rubber'", default: 'inherited', description: 'Per-slot input animation override', category: 'Animation' },
-  { name: 'successAnimation', type: "'none' | 'celebrate' | 'check' | 'confetti' | 'ripple'", default: 'inherited', description: 'Per-slot success animation override', category: 'Animation' },
+  { name: 'successAnimation', type: "'none' | 'celebrate' | 'check' | 'ripple'", default: 'inherited', description: 'Per-slot success animation override', category: 'Animation' },
   { name: 'errorAnimation', type: "'none' | 'shake' | 'wobble' | 'flash'", default: 'inherited', description: 'Per-slot error animation override', category: 'Animation' },
   { name: 'morphText', type: 'boolean', default: 'inherited', description: 'Per-slot morph text override', category: 'Animation' },
   { name: 'morphDuration', type: 'number', default: 'inherited', description: 'Per-slot morph duration override', category: 'Animation' },
@@ -768,14 +761,6 @@ const otpMethods: ApiMethod[] = [
             </SOTP>
           </div>
           <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3">Confetti - celebration particles!</p>
-            <SOTP v-model="confettiOtp" success-animation="confetti" :auto-focus="false">
-              <SOTPGroup>
-                <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
-              </SOTPGroup>
-            </SOTP>
-          </div>
-          <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Ripple - expanding ring effect</p>
             <SOTP v-model="rippleOtp" success-animation="ripple" :auto-focus="false">
               <SOTPGroup>
@@ -962,7 +947,7 @@ otpRef.value.triggerError('Invalid code')`"
   size='large'
   label='Verify your phone'
   hint='A 6-digit code was sent to +1 *** *** 1234'
-  success-animation='confetti'
+  success-animation='celebrate'
   :countdown='60'
   @complete='verifyCode'
   @resend='resendCode'
@@ -989,7 +974,7 @@ otpRef.value.triggerError('Invalid code')`"
             v-model="basicOtp"
             variant="morphing"
             size="large"
-            success-animation="confetti"
+            success-animation="celebrate"
             :countdown="60"
             @complete="handleComplete"
             @resend="handleResend"
