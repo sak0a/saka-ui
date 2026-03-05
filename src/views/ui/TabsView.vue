@@ -1,20 +1,27 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { STabs, STabPane, SApiSection, SApiTable } from '../../index'
+import {
+  STabs, STabPane, STabsList, STabsTrigger, STabsContent, STabsIndicator,
+  SApiSection, SApiTable
+} from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
-// States for various examples
+// Compound API states
+const compoundLineTab = ref('overview')
+const compoundChipTab = ref('react')
+const compoundSegmentTab = ref('daily')
+const compoundCardTab = ref('general')
+const compoundCustomTab = ref('inbox')
+const compoundVerticalTab = ref('dashboard')
+
+// Simple API states
 const lineTabValue = ref('tab1')
 const cardTabValue = ref('general')
 const segmentTabValue = ref('option1')
 const barTabValue = ref('home')
 const animatedTabValue = ref('first')
-const customTabValue = ref('styled1')
 const chipTabValue = ref('react')
-const customTemplateTab = ref('inbox')
-const verticalLeftTab = ref('dashboard')
-const verticalRightTab = ref('settings')
 const closableTabs = ref(['doc1', 'doc2', 'doc3'])
 const triggerTabValue = ref('hover1')
 
@@ -25,164 +32,135 @@ const handleTabClose = (name: string | number) => {
   }
 }
 
-// Code snippets for demos
-const lineTypeCode = `<STabs v-model="lineTabValue" type="line">
-  <STabPane name="tab1" tab="Overview">
-    <div class="p-6">Overview content...</div>
-  </STabPane>
-  <STabPane name="tab2" tab="Details">
-    <div class="p-6">Details content...</div>
-  </STabPane>
-  <STabPane name="tab3" tab="Settings">
-    <div class="p-6">Settings content...</div>
-  </STabPane>
+// Compound API code snippets
+const compoundLineCode = `<STabs v-model="active" type="line">
+  <STabsList>
+    <STabsTrigger value="overview">Overview</STabsTrigger>
+    <STabsTrigger value="details">Details</STabsTrigger>
+    <STabsTrigger value="settings">Settings</STabsTrigger>
+    <STabsIndicator />
+  </STabsList>
+
+  <STabsContent value="overview">Overview content...</STabsContent>
+  <STabsContent value="details">Details content...</STabsContent>
+  <STabsContent value="settings">Settings content...</STabsContent>
 </STabs>`
 
-const cardTypeCode = `<STabs v-model="cardTabValue" type="card">
-  <STabPane name="general" tab="General">
-    <div class="p-6">General settings...</div>
-  </STabPane>
-  <STabPane name="advanced" tab="Advanced">
-    <div class="p-6">Advanced settings...</div>
-  </STabPane>
-  <STabPane name="disabled" tab="Disabled" :disabled="true">
-    <div class="p-6">This tab is disabled.</div>
-  </STabPane>
+const compoundChipCode = `<STabs v-model="active" type="chip">
+  <STabsList>
+    <STabsTrigger value="react">React</STabsTrigger>
+    <STabsTrigger value="vue">Vue.js</STabsTrigger>
+    <STabsTrigger value="angular">Angular</STabsTrigger>
+    <!-- Morphing pill indicator -->
+    <STabsIndicator color="#3b82f6" />
+  </STabsList>
+
+  <STabsContent value="react">React framework...</STabsContent>
+  <STabsContent value="vue">Vue.js framework...</STabsContent>
+  <STabsContent value="angular">Angular framework...</STabsContent>
 </STabs>`
 
-const segmentTypeCode = `<STabs v-model="segmentTabValue" type="segment">
-  <STabPane name="option1" tab="Daily">
-    <div class="p-6">Daily view...</div>
-  </STabPane>
-  <STabPane name="option2" tab="Weekly">
-    <div class="p-6">Weekly view...</div>
-  </STabPane>
-  <STabPane name="option3" tab="Monthly">
-    <div class="p-6">Monthly view...</div>
-  </STabPane>
+const compoundSegmentCode = `<STabs v-model="active" type="segment">
+  <STabsList>
+    <STabsTrigger value="daily">Daily</STabsTrigger>
+    <STabsTrigger value="weekly">Weekly</STabsTrigger>
+    <STabsTrigger value="monthly">Monthly</STabsTrigger>
+    <!-- Morphing background indicator -->
+    <STabsIndicator />
+  </STabsList>
+
+  <STabsContent value="daily">Daily view...</STabsContent>
+  <STabsContent value="weekly">Weekly view...</STabsContent>
+  <STabsContent value="monthly">Monthly view...</STabsContent>
 </STabs>`
 
-const barTypeCode = `<STabs v-model="barTabValue" type="bar">
-  <STabPane name="home" tab="Home" icon="home">
-    <div class="p-6">Home page...</div>
-  </STabPane>
-  <STabPane name="search" tab="Search" icon="magnify">
-    <div class="p-6">Search...</div>
-  </STabPane>
-  <STabPane name="profile" tab="Profile" icon="account">
-    <div class="p-6">Profile...</div>
-  </STabPane>
+const compoundCardCode = `<STabs v-model="active" type="card">
+  <STabsList>
+    <STabsTrigger value="general">General</STabsTrigger>
+    <STabsTrigger value="advanced">Advanced</STabsTrigger>
+    <STabsTrigger value="disabled" :disabled="true">Disabled</STabsTrigger>
+    <STabsIndicator />
+  </STabsList>
+
+  <STabsContent value="general">General settings...</STabsContent>
+  <STabsContent value="advanced">Advanced options...</STabsContent>
 </STabs>`
 
-const chipTypeCode = `<STabs 
-  v-model="chipTabValue" 
-  type="chip" 
-  :animated="true"
-  chip-color="rgba(255, 255, 255, 0.06)"
-  chip-active-color="#3b82f6"
->
-  <STabPane name="react" tab="React" icon="react">
-    <div class="p-6">React framework...</div>
-  </STabPane>
-  <STabPane name="vue" tab="Vue.js" icon="vuejs">
-    <div class="p-6">Vue.js framework...</div>
-  </STabPane>
-  <STabPane name="angular" tab="Angular" icon="angular">
-    <div class="p-6">Angular framework...</div>
-  </STabPane>
+const compoundCustomCode = `<STabs v-model="active" type="line" :animated="true">
+  <STabsList>
+    <STabsTrigger value="inbox" v-slot="{ active }">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full"
+          :class="active ? 'bg-emerald-400 animate-pulse' : 'bg-muted-foreground'" />
+        <span>Inbox</span>
+        <span class="text-xs px-1.5 py-0.5 rounded-full"
+          :class="active ? 'bg-emerald-500/20 text-emerald-400' : 'bg-muted text-muted-foreground'">
+          3
+        </span>
+      </div>
+    </STabsTrigger>
+    <STabsTrigger value="sent">Sent</STabsTrigger>
+    <STabsIndicator color="#10b981" />
+  </STabsList>
+
+  <STabsContent value="inbox">You have 3 new messages!</STabsContent>
+  <STabsContent value="sent">Sent messages archive.</STabsContent>
 </STabs>`
 
-const animatedCode = `<STabs v-model="animatedTabValue" type="line" :animated="true" bar-color="#f59e0b">
-  <STabPane name="first" tab="First">
-    <div class="p-6">First panel with smooth slide animation.</div>
-  </STabPane>
-  <STabPane name="second" tab="Second">
-    <div class="p-6">Second panel with smooth transition!</div>
-  </STabPane>
+const compoundVerticalCode = `<STabs v-model="active" type="line" placement="left" :animated="true">
+  <STabsList>
+    <STabsTrigger value="dashboard">Dashboard</STabsTrigger>
+    <STabsTrigger value="users">Users</STabsTrigger>
+    <STabsTrigger value="reports">Reports</STabsTrigger>
+    <STabsIndicator color="#8b5cf6" />
+  </STabsList>
+
+  <STabsContent value="dashboard">Dashboard overview...</STabsContent>
+  <STabsContent value="users">Users management...</STabsContent>
+  <STabsContent value="reports">Reports & analytics...</STabsContent>
 </STabs>`
 
-const customThemingCode = `<STabs 
-  v-model="customTabValue" 
-  type="line" 
-  bar-color="#ec4899"
-  tab-class="font-semibold uppercase tracking-wider"
-  active-tab-class="text-pink-400"
-  panel-class="bg-(--s-bg-secondary)/50 rounded-lg mt-4"
->
-  <STabPane name="styled1" tab="Pink Theme">
-    <div class="p-6">Custom pink accent...</div>
-  </STabPane>
-  <STabPane name="styled2" tab="Indigo Theme">
-    <div class="p-6">Tailwind classes...</div>
-  </STabPane>
+// Simple API code snippets
+const lineTypeCode = `<STabs v-model="active" type="line">
+  <STabPane name="tab1" tab="Overview">Overview content...</STabPane>
+  <STabPane name="tab2" tab="Details">Details content...</STabPane>
+  <STabPane name="tab3" tab="Settings">Settings content...</STabPane>
 </STabs>`
 
-const customTemplateCode = `<STabs v-model="customTemplateTab" type="line" :animated="true">
-  <template #tab="{ pane, active }">
-    <div class="flex items-center gap-2">
-      <span 
-        v-if="pane.name === 'inbox'"
-        class="w-2 h-2 rounded-full"
-        :class="active ? 'bg-emerald-400 animate-pulse' : 'bg-(--s-text-tertiary)'"
-      />
-      <span :class="active ? 'font-bold text-emerald-400' : 'text-(--s-text-secondary)'">
-        {{ pane.tab }}
-      </span>
-      <span 
-        v-if="pane.name === 'inbox'"
-        class="text-xs px-1.5 py-0.5 rounded-full"
-        :class="active ? 'bg-emerald-500/20 text-emerald-400' : 'bg-(--s-bg-tertiary) text-(--s-text-secondary)'"
-      >3</span>
-    </div>
-  </template>
-  
-  <STabPane name="inbox" tab="Inbox">
-    <div class="p-6">📬 You have 3 new messages!</div>
-  </STabPane>
-  <STabPane name="sent" tab="Sent">
-    <div class="p-6">📤 Sent messages archive.</div>
-  </STabPane>
+const chipTypeCode = `<STabs v-model="active" type="chip" :animated="true"
+  chip-active-color="#3b82f6">
+  <STabPane name="react" tab="React">React framework...</STabPane>
+  <STabPane name="vue" tab="Vue.js">Vue.js framework...</STabPane>
+  <STabPane name="angular" tab="Angular">Angular framework...</STabPane>
+</STabs>`
+
+const segmentTypeCode = `<STabs v-model="active" type="segment">
+  <STabPane name="option1" tab="Daily">Daily view...</STabPane>
+  <STabPane name="option2" tab="Weekly">Weekly view...</STabPane>
+  <STabPane name="option3" tab="Monthly">Monthly view...</STabPane>
+</STabs>`
+
+const barTypeCode = `<STabs v-model="active" type="bar">
+  <STabPane name="home" tab="Home" icon="home">Home page...</STabPane>
+  <STabPane name="search" tab="Search" icon="magnify">Search...</STabPane>
+  <STabPane name="profile" tab="Profile" icon="account">Profile...</STabPane>
+</STabs>`
+
+const animatedCode = `<STabs v-model="active" type="line" :animated="true" bar-color="#f59e0b">
+  <STabPane name="first" tab="First">First panel with animation.</STabPane>
+  <STabPane name="second" tab="Second">Second panel with transition!</STabPane>
 </STabs>`
 
 const closableCode = `<STabs type="card" :closable="true" @close="handleTabClose">
-  <STabPane 
-    v-for="tab in closableTabs" 
-    :key="tab" 
-    :name="tab" 
-    :tab="\`Document \${tab.slice(-1)}\`"
-  >
-    <div class="p-6">Content for {{ tab }}.</div>
+  <STabPane v-for="tab in tabs" :key="tab" :name="tab"
+    :tab="\`Document \${tab.slice(-1)}\`">
+    Content for {{ tab }}.
   </STabPane>
 </STabs>`
 
-const triggerCode = `<STabs v-model="triggerTabValue" type="line" trigger="hover">
-  <STabPane name="hover1" tab="Hover Me">
-    <div class="p-6">Hovered tab 1</div>
-  </STabPane>
-  <STabPane name="hover2" tab="Don't Click">
-    <div class="p-6">Hovered tab 2</div>
-  </STabPane>
-  <STabPane name="hover3" tab="Just Hover">
-    <div class="p-6">Hovered tab 3</div>
-  </STabPane>
-</STabs>`
-
-const verticalLeftCode = `<STabs v-model="verticalLeftTab" type="line" placement="left" :animated="true" bar-color="#8b5cf6">
-  <STabPane name="dashboard" tab="Dashboard" icon="view-dashboard">
-    <div class="p-6">📊 Dashboard overview...</div>
-  </STabPane>
-  <STabPane name="users" tab="Users" icon="account-group">
-    <div class="p-6">👥 Users management...</div>
-  </STabPane>
-</STabs>`
-
-const verticalRightCode = `<STabs v-model="verticalRightTab" type="bar" placement="right" :animated="true" bar-color="#10b981">
-  <STabPane name="settings" tab="Settings" icon="cog">
-    <div class="p-6">⚙️ Settings panel...</div>
-  </STabPane>
-  <STabPane name="profile" tab="Profile" icon="account">
-    <div class="p-6">👤 Profile information...</div>
-  </STabPane>
+const triggerCode = `<STabs v-model="active" type="line" trigger="hover">
+  <STabPane name="hover1" tab="Hover Me">Hovered tab 1</STabPane>
+  <STabPane name="hover2" tab="Don't Click">Hovered tab 2</STabPane>
 </STabs>`
 </script>
 
@@ -191,7 +169,9 @@ const verticalRightCode = `<STabs v-model="verticalRightTab" type="bar" placemen
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Tabs</h1>
-      <p class="text-lg text-(--s-text-secondary)">A highly customizable tab component for organizing content.</p>
+      <p class="text-lg text-(--s-text-secondary)">
+        A highly customizable tab component with both simple and compound APIs.
+      </p>
     </header>
 
     <!-- Features -->
@@ -200,432 +180,537 @@ const verticalRightCode = `<STabs v-model="verticalRightTab" type="bar" placemen
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-tab text-2xl text-emerald-400"></span>
+            <span class="mdi mdi-puzzle-outline text-2xl text-emerald-400"></span>
+            <h3 class="font-semibold text-(--s-text-primary)">Compound API</h3>
+          </div>
+          <p class="text-sm text-(--s-text-secondary)">Composable subcomponents for full layout control and custom trigger content.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="mdi mdi-shape-outline text-2xl text-blue-400"></span>
+            <h3 class="font-semibold text-(--s-text-primary)">Morphing Indicator</h3>
+          </div>
+          <p class="text-sm text-(--s-text-secondary)">STabsIndicator morphs between tabs as underline, pill, or background.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="mdi mdi-tab text-2xl text-rose-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Five Tab Types</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Line, card, segment, bar, and chip styles for different use cases.</p>
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-animation-outline text-2xl text-blue-400"></span>
+            <span class="mdi mdi-animation-outline text-2xl text-violet-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Smooth Animations</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Optional panel transitions with cubic-bezier easing effects.</p>
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-view-carousel-outline text-2xl text-rose-400"></span>
+            <span class="mdi mdi-view-carousel-outline text-2xl text-amber-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Vertical Placement</h3>
           </div>
-          <p class="text-sm text-(--s-text-secondary)">Top, bottom, left, and right tab placements for vertical layouts.</p>
+          <p class="text-sm text-(--s-text-secondary)">Top, bottom, left, and right tab placements.</p>
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-close-circle text-2xl text-violet-400"></span>
-            <h3 class="font-semibold text-(--s-text-primary)">Closable Tabs</h3>
+            <span class="mdi mdi-layers-outline text-2xl text-cyan-400"></span>
+            <h3 class="font-semibold text-(--s-text-primary)">Dual API</h3>
           </div>
-          <p class="text-sm text-(--s-text-secondary)">Optional close buttons for dynamic tab management.</p>
-        </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-          <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-palette-swatch-outline text-2xl text-amber-400"></span>
-            <h3 class="font-semibold text-(--s-text-primary)">Custom Theming</h3>
-          </div>
-          <p class="text-sm text-(--s-text-secondary)">Tailwind classes for tabs, active states, and panels.</p>
-        </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-          <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-gesture-tap text-2xl text-cyan-400"></span>
-            <h3 class="font-semibold text-(--s-text-primary)">Trigger Modes</h3>
-          </div>
-          <p class="text-sm text-(--s-text-secondary)">Click or hover trigger modes for tab switching.</p>
+          <p class="text-sm text-(--s-text-secondary)">Simple STabPane for quick use, compound API for full control.</p>
         </div>
       </div>
     </article>
 
-    <!-- Line Type -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Line Type (Default)</h2>
-      <DemoSection 
-        title="Line Type"
-        description="Line type shows an underline indicator on the active tab."
-        :code="lineTypeCode"
-        language="vue"
-      >
-        <STabs v-model="lineTabValue" type="line">
-          <STabPane name="tab1" tab="Overview">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>This is the Overview tab content.</p>
-              <p class="mt-2 text-sm text-(--s-text-tertiary)">Line type shows an underline indicator on the active tab.</p>
-            </div>
-          </STabPane>
-          <STabPane name="tab2" tab="Details">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>This is the Details tab content with more information.</p>
-            </div>
-          </STabPane>
-          <STabPane name="tab3" tab="Settings">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Settings and configuration options go here.</p>
-            </div>
-          </STabPane>
-        </STabs>
-      </DemoSection>
-    </section>
+    <!-- ============================================ -->
+    <!-- COMPOUND API SECTION -->
+    <!-- ============================================ -->
+    <div>
+      <h2 class="text-3xl font-bold text-(--s-text-primary) mb-2">Compound API</h2>
+      <p class="text-(--s-text-secondary) mb-8">
+        Full control over layout, triggers, and the morphing indicator using composable subcomponents.
+      </p>
 
-    <!-- Card Type -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Card Type</h2>
-      <DemoSection 
-        title="Card Type"
-        description="Card type wraps each tab in a bordered card style."
-        :code="cardTypeCode"
-        language="vue"
-      >
-        <STabs v-model="cardTabValue" type="card">
-          <STabPane name="general" tab="General">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>General settings panel.</p>
-            </div>
-          </STabPane>
-          <STabPane name="advanced" tab="Advanced">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Advanced configuration options.</p>
-            </div>
-          </STabPane>
-          <STabPane name="disabled" tab="Disabled" :disabled="true">
-            <div class="p-6">This tab is disabled.</div>
-          </STabPane>
-        </STabs>
-      </DemoSection>
-    </section>
-
-    <!-- Segment Type -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Segment Type</h2>
-      <DemoSection 
-        title="Segment Type"
-        description="Segment type looks like iOS segmented controls."
-        :code="segmentTypeCode"
-        language="vue"
-      >
-        <STabs v-model="segmentTabValue" type="segment">
-          <STabPane name="option1" tab="Daily">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Daily view content.</p>
-            </div>
-          </STabPane>
-          <STabPane name="option2" tab="Weekly">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Weekly view content.</p>
-            </div>
-          </STabPane>
-          <STabPane name="option3" tab="Monthly">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Monthly view content.</p>
-            </div>
-          </STabPane>
-        </STabs>
-      </DemoSection>
-    </section>
-
-    <!-- Bar Type -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Bar Type</h2>
-      <DemoSection 
-        title="Bar Type"
-        description="Bar type shows a bottom bar indicator."
-        :code="barTypeCode"
-        language="vue"
-      >
-        <STabs v-model="barTabValue" type="bar">
-          <STabPane name="home" tab="Home" icon="home">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Home page content.</p>
-            </div>
-          </STabPane>
-          <STabPane name="search" tab="Search" icon="magnify">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Search functionality goes here.</p>
-            </div>
-          </STabPane>
-          <STabPane name="profile" tab="Profile" icon="account">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>User profile information.</p>
-            </div>
-          </STabPane>
-        </STabs>
-      </DemoSection>
-    </section>
-
-    <!-- Chip Type -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Chip Type</h2>
-      <DemoSection 
-        title="Chip Type"
-        description="Chip type displays tabs as colorful pills."
-        :code="chipTypeCode"
-        language="vue"
-      >
-        <STabs 
-          v-model="chipTabValue" 
-          type="chip" 
-          :animated="true"
-          chip-color="rgba(255, 255, 255, 0.06)"
-          chip-active-color="#3b82f6"
-        >
-          <STabPane name="react" tab="React" icon="react">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>React framework selected.</p>
-            </div>
-          </STabPane>
-          <STabPane name="vue" tab="Vue.js" icon="vuejs">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Vue.js framework selected.</p>
-            </div>
-          </STabPane>
-          <STabPane name="angular" tab="Angular" icon="angular">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Angular framework selected.</p>
-            </div>
-          </STabPane>
-          <STabPane name="svelte" tab="Svelte">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Svelte framework selected.</p>
-            </div>
-          </STabPane>
-        </STabs>
-      </DemoSection>
-    </section>
-
-    <!-- Animated Tabs -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Animated Tabs</h2>
-      <DemoSection 
-        title="Animated Tabs"
-        description="Content slides with cubic-bezier easing."
-        :code="animatedCode"
-        language="vue"
-      >
-        <STabs v-model="animatedTabValue" type="line" :animated="true" bar-color="#f59e0b">
-          <STabPane name="first" tab="First">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>First panel with smooth slide animation.</p>
-            </div>
-          </STabPane>
-          <STabPane name="second" tab="Second">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Second panel - notice the smooth transition!</p>
-            </div>
-          </STabPane>
-        </STabs>
-      </DemoSection>
-    </section>
-
-    <!-- Custom Theming -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Theming</h2>
-      <DemoSection 
-        title="Custom Theming"
-        description="Tailwind classes can be applied to almost every part."
-        :code="customThemingCode"
-        language="vue"
-      >
-        <STabs 
-          v-model="customTabValue" 
-          type="line" 
-          bar-color="#ec4899"
-          tab-class="font-semibold uppercase tracking-wider"
-          active-tab-class="text-pink-400"
-          panel-class="bg-(--s-bg-secondary)/50 rounded-lg mt-4"
-        >
-          <STabPane name="styled1" tab="Pink Theme">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Custom pink accent color and uppercase tabs.</p>
-            </div>
-          </STabPane>
-          <STabPane name="styled2" tab="Indigo Theme">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Tailwind classes can be applied to almost every part.</p>
-            </div>
-          </STabPane>
-        </STabs>
-      </DemoSection>
-    </section>
-
-    <!-- Custom Tab Template -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Tab Template</h2>
-      <DemoSection 
-        title="Custom Tab Template"
-        description="Use the tab slot to create custom tab button templates."
-        :code="customTemplateCode"
-        language="vue"
-      >
-        <STabs v-model="customTemplateTab" type="line" :animated="true">
-          <template #tab="{ pane, active }">
-            <div class="flex items-center gap-2">
-              <span 
-                v-if="pane.name === 'inbox'"
-                class="w-2 h-2 rounded-full"
-                :class="active ? 'bg-emerald-400 animate-pulse' : 'bg-(--s-text-tertiary)'"
-              />
-              <span :class="active ? 'font-bold text-emerald-400' : 'text-(--s-text-secondary)'">
-                {{ pane.tab }}
-              </span>
-              <span 
-                v-if="pane.name === 'inbox'"
-                class="text-xs px-1.5 py-0.5 rounded-full"
-                :class="active ? 'bg-emerald-500/20 text-emerald-400' : 'bg-(--s-bg-tertiary) text-(--s-text-secondary)'"
-              >3</span>
-            </div>
-          </template>
-          
-          <STabPane name="inbox" tab="Inbox">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>📬 You have 3 new messages!</p>
-            </div>
-          </STabPane>
-          <STabPane name="sent" tab="Sent">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>📤 Sent messages archive.</p>
-            </div>
-          </STabPane>
-        </STabs>
-      </DemoSection>
-    </section>
-
-    <!-- Closable Tabs -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Closable Tabs</h2>
-      <DemoSection 
-        title="Closable Tabs"
-        description="Click the X to close tabs."
-        :code="closableCode"
-        language="vue"
-      >
-        <STabs type="card" :closable="true" @close="handleTabClose">
-          <STabPane 
-            v-for="tab in closableTabs" 
-            :key="tab" 
-            :name="tab" 
-            :tab="`Document ${tab.slice(-1)}`"
-          >
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Content for {{ tab }}.</p>
-            </div>
-          </STabPane>
-        </STabs>
-        <p v-if="closableTabs.length === 0" class="p-4 text-center text-(--s-text-tertiary) rounded-xl mt-4 border border-dashed border-(--s-border)">All tabs closed!</p>
-      </DemoSection>
-    </section>
-
-    <!-- Trigger Event -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Trigger Event</h2>
-      <DemoSection 
-        title="Trigger Event"
-        description="Tabs can be triggered on hover."
-        :code="triggerCode"
-        language="vue"
-      >
-        <STabs v-model="triggerTabValue" type="line" trigger="hover">
-          <STabPane name="hover1" tab="Hover Me">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Hover over the tabs to switch!</p>
-            </div>
-          </STabPane>
-          <STabPane name="hover2" tab="Don't Click">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>No need to click, just hover.</p>
-            </div>
-          </STabPane>
-          <STabPane name="hover3" tab="Just Hover">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p>Smooth switching on mouse enter.</p>
-            </div>
-          </STabPane>
-        </STabs>
-      </DemoSection>
-    </section>
-
-    <!-- Vertical Tabs -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Vertical Tabs</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <DemoSection 
-          title="Left Placement"
-          description="Vertical tabs with left placement."
-          :code="verticalLeftCode"
+      <!-- Line with Indicator -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-bold text-(--s-text-primary) mb-6">Line with Morphing Indicator</h3>
+        <DemoSection
+          title="Line Type"
+          description="Underline indicator smoothly morphs between tabs."
+          :code="compoundLineCode"
           language="vue"
         >
-          <STabs v-model="verticalLeftTab" type="line" placement="left" :animated="true" bar-color="#8b5cf6">
-            <STabPane name="dashboard" tab="Dashboard" icon="view-dashboard">
+          <STabs v-model="compoundLineTab" type="line">
+            <STabsList>
+              <STabsTrigger value="overview">Overview</STabsTrigger>
+              <STabsTrigger value="details">Details</STabsTrigger>
+              <STabsTrigger value="settings">Settings</STabsTrigger>
+              <STabsIndicator />
+            </STabsList>
+
+            <STabsContent value="overview">
               <div class="p-6 text-(--s-text-secondary)">
-                <p class="text-lg font-semibold text-purple-400">📊 Dashboard</p>
+                <p>This is the Overview tab content.</p>
+                <p class="mt-2 text-sm text-(--s-text-tertiary)">The underline indicator slides smoothly between tabs.</p>
+              </div>
+            </STabsContent>
+            <STabsContent value="details">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>This is the Details tab content with more information.</p>
+              </div>
+            </STabsContent>
+            <STabsContent value="settings">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Settings and configuration options go here.</p>
+              </div>
+            </STabsContent>
+          </STabs>
+        </DemoSection>
+      </section>
+
+      <!-- Chip with Morphing Pill -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-bold text-(--s-text-primary) mb-6">Chip with Morphing Pill</h3>
+        <DemoSection
+          title="Chip Type"
+          description="Pill indicator morphs between chip tabs with a colored background."
+          :code="compoundChipCode"
+          language="vue"
+        >
+          <STabs v-model="compoundChipTab" type="chip">
+            <STabsList>
+              <STabsTrigger value="react">React</STabsTrigger>
+              <STabsTrigger value="vue">Vue.js</STabsTrigger>
+              <STabsTrigger value="angular">Angular</STabsTrigger>
+              <STabsTrigger value="svelte">Svelte</STabsTrigger>
+              <STabsIndicator color="#3b82f6" />
+            </STabsList>
+
+            <STabsContent value="react">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>React framework selected. The pill morphs to each tab.</p>
+              </div>
+            </STabsContent>
+            <STabsContent value="vue">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Vue.js framework selected. Smooth pill transition!</p>
+              </div>
+            </STabsContent>
+            <STabsContent value="angular">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Angular framework selected.</p>
+              </div>
+            </STabsContent>
+            <STabsContent value="svelte">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Svelte framework selected.</p>
+              </div>
+            </STabsContent>
+          </STabs>
+        </DemoSection>
+      </section>
+
+      <!-- Segment with Morphing Background -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-bold text-(--s-text-primary) mb-6">Segment with Morphing Background</h3>
+        <DemoSection
+          title="Segment Type"
+          description="iOS-style segmented control with a morphing background indicator."
+          :code="compoundSegmentCode"
+          language="vue"
+        >
+          <STabs v-model="compoundSegmentTab" type="segment">
+            <STabsList>
+              <STabsTrigger value="daily">Daily</STabsTrigger>
+              <STabsTrigger value="weekly">Weekly</STabsTrigger>
+              <STabsTrigger value="monthly">Monthly</STabsTrigger>
+              <STabsIndicator />
+            </STabsList>
+
+            <STabsContent value="daily">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Daily view content. The background morphs between options.</p>
+              </div>
+            </STabsContent>
+            <STabsContent value="weekly">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Weekly view content.</p>
+              </div>
+            </STabsContent>
+            <STabsContent value="monthly">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Monthly view content.</p>
+              </div>
+            </STabsContent>
+          </STabs>
+        </DemoSection>
+      </section>
+
+      <!-- Card with Morphing Background -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-bold text-(--s-text-primary) mb-6">Card with Morphing Background</h3>
+        <DemoSection
+          title="Card Type"
+          description="Card-style tabs with a morphing background indicator and disabled state."
+          :code="compoundCardCode"
+          language="vue"
+        >
+          <STabs v-model="compoundCardTab" type="card">
+            <STabsList>
+              <STabsTrigger value="general">General</STabsTrigger>
+              <STabsTrigger value="advanced">Advanced</STabsTrigger>
+              <STabsTrigger value="disabled" :disabled="true">Disabled</STabsTrigger>
+              <STabsIndicator />
+            </STabsList>
+
+            <STabsContent value="general">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>General settings panel.</p>
+              </div>
+            </STabsContent>
+            <STabsContent value="advanced">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Advanced configuration options.</p>
+              </div>
+            </STabsContent>
+          </STabs>
+        </DemoSection>
+      </section>
+
+      <!-- Custom Trigger Content -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Trigger Content</h3>
+        <DemoSection
+          title="Custom Triggers"
+          description="STabsTrigger's slot exposes { active, disabled } for fully custom trigger content."
+          :code="compoundCustomCode"
+          language="vue"
+        >
+          <STabs v-model="compoundCustomTab" type="line" :animated="true">
+            <STabsList>
+              <STabsTrigger value="inbox" v-slot="{ active }">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="w-2 h-2 rounded-full"
+                    :class="active ? 'bg-emerald-400 animate-pulse' : 'bg-(--s-text-tertiary)'"
+                  />
+                  <span>Inbox</span>
+                  <span
+                    class="text-xs px-1.5 py-0.5 rounded-full"
+                    :class="active ? 'bg-emerald-500/20 text-emerald-400' : 'bg-(--s-bg-tertiary) text-(--s-text-secondary)'"
+                  >3</span>
+                </div>
+              </STabsTrigger>
+              <STabsTrigger value="sent">Sent</STabsTrigger>
+              <STabsTrigger value="drafts">Drafts</STabsTrigger>
+              <STabsIndicator color="#10b981" />
+            </STabsList>
+
+            <STabsContent value="inbox">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>You have 3 new messages!</p>
+              </div>
+            </STabsContent>
+            <STabsContent value="sent">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Sent messages archive.</p>
+              </div>
+            </STabsContent>
+            <STabsContent value="drafts">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Draft messages.</p>
+              </div>
+            </STabsContent>
+          </STabs>
+        </DemoSection>
+      </section>
+
+      <!-- Vertical Tabs -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-bold text-(--s-text-primary) mb-6">Vertical Tabs</h3>
+        <DemoSection
+          title="Vertical Placement"
+          description="Compound API with left placement and vertical morphing indicator."
+          :code="compoundVerticalCode"
+          language="vue"
+        >
+          <STabs v-model="compoundVerticalTab" type="line" placement="left" :animated="true">
+            <STabsList>
+              <STabsTrigger value="dashboard">Dashboard</STabsTrigger>
+              <STabsTrigger value="users">Users</STabsTrigger>
+              <STabsTrigger value="reports">Reports</STabsTrigger>
+              <STabsIndicator color="#8b5cf6" />
+            </STabsList>
+
+            <STabsContent value="dashboard">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p class="text-lg font-semibold text-purple-400">Dashboard</p>
                 <p class="mt-2">Your main analytics overview.</p>
               </div>
-            </STabPane>
-            <STabPane name="users" tab="Users" icon="account-group">
+            </STabsContent>
+            <STabsContent value="users">
               <div class="p-6 text-(--s-text-secondary)">
-                <p class="text-lg font-semibold text-purple-400">👥 Users</p>
+                <p class="text-lg font-semibold text-purple-400">Users</p>
                 <p class="mt-2">Manage your team members.</p>
+              </div>
+            </STabsContent>
+            <STabsContent value="reports">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p class="text-lg font-semibold text-purple-400">Reports</p>
+                <p class="mt-2">View analytics and reports.</p>
+              </div>
+            </STabsContent>
+          </STabs>
+        </DemoSection>
+      </section>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SIMPLE API SECTION -->
+    <!-- ============================================ -->
+    <div>
+      <h2 class="text-3xl font-bold text-(--s-text-primary) mb-2">Simple API</h2>
+      <p class="text-(--s-text-secondary) mb-8">
+        Quick setup using STabPane for straightforward tab layouts.
+      </p>
+
+      <!-- Line Type -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-bold text-(--s-text-primary) mb-6">Line Type (Default)</h3>
+        <DemoSection
+          title="Line Type"
+          description="Line type shows an underline indicator on the active tab."
+          :code="lineTypeCode"
+          language="vue"
+        >
+          <STabs v-model="lineTabValue" type="line">
+            <STabPane name="tab1" tab="Overview">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>This is the Overview tab content.</p>
+              </div>
+            </STabPane>
+            <STabPane name="tab2" tab="Details">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>This is the Details tab content.</p>
+              </div>
+            </STabPane>
+            <STabPane name="tab3" tab="Settings">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Settings and configuration options.</p>
               </div>
             </STabPane>
           </STabs>
         </DemoSection>
+      </section>
 
-        <DemoSection 
-          title="Right Placement"
-          description="Vertical tabs with right placement."
-          :code="verticalRightCode"
+      <!-- Chip Type -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-bold text-(--s-text-primary) mb-6">Chip Type</h3>
+        <DemoSection
+          title="Chip Type"
+          description="Chip type displays tabs as colorful pills."
+          :code="chipTypeCode"
           language="vue"
         >
-          <STabs v-model="verticalRightTab" type="bar" placement="right" :animated="true" bar-color="#10b981">
-            <STabPane name="settings" tab="Settings" icon="cog">
-              <div class="p-6 text-(--s-text-secondary) text-right">
-                <p class="text-lg font-semibold text-emerald-400">⚙️ Settings</p>
-                <p class="mt-2">Application settings panel.</p>
+          <STabs
+            v-model="chipTabValue"
+            type="chip"
+            :animated="true"
+            chip-active-color="#3b82f6"
+          >
+            <STabPane name="react" tab="React">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>React framework selected.</p>
+              </div>
+            </STabPane>
+            <STabPane name="vue" tab="Vue.js">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Vue.js framework selected.</p>
+              </div>
+            </STabPane>
+            <STabPane name="angular" tab="Angular">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Angular framework selected.</p>
+              </div>
+            </STabPane>
+          </STabs>
+        </DemoSection>
+      </section>
+
+      <!-- Bar Type -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-bold text-(--s-text-primary) mb-6">Bar Type</h3>
+        <DemoSection
+          title="Bar Type"
+          description="Bar type shows a bottom bar indicator with icons."
+          :code="barTypeCode"
+          language="vue"
+        >
+          <STabs v-model="barTabValue" type="bar">
+            <STabPane name="home" tab="Home" icon="home">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Home page content.</p>
+              </div>
+            </STabPane>
+            <STabPane name="search" tab="Search" icon="magnify">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Search functionality goes here.</p>
               </div>
             </STabPane>
             <STabPane name="profile" tab="Profile" icon="account">
-              <div class="p-6 text-(--s-text-secondary) text-right">
-                <p class="text-lg font-semibold text-emerald-400">👤 Profile</p>
-                <p class="mt-2">Edit your profile information.</p>
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>User profile information.</p>
               </div>
             </STabPane>
           </STabs>
         </DemoSection>
+      </section>
+
+      <!-- Segment Type -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-bold text-(--s-text-primary) mb-6">Segment Type</h3>
+        <DemoSection
+          title="Segment Type"
+          description="Segment type looks like iOS segmented controls."
+          :code="segmentTypeCode"
+          language="vue"
+        >
+          <STabs v-model="segmentTabValue" type="segment">
+            <STabPane name="option1" tab="Daily">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Daily view content.</p>
+              </div>
+            </STabPane>
+            <STabPane name="option2" tab="Weekly">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Weekly view content.</p>
+              </div>
+            </STabPane>
+            <STabPane name="option3" tab="Monthly">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Monthly view content.</p>
+              </div>
+            </STabPane>
+          </STabs>
+        </DemoSection>
+      </section>
+
+      <!-- Animated Content -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-bold text-(--s-text-primary) mb-6">Animated Content</h3>
+        <DemoSection
+          title="Animated Tabs"
+          description="Content transitions with cubic-bezier easing."
+          :code="animatedCode"
+          language="vue"
+        >
+          <STabs v-model="animatedTabValue" type="line" :animated="true" bar-color="#f59e0b">
+            <STabPane name="first" tab="First">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>First panel with smooth slide animation.</p>
+              </div>
+            </STabPane>
+            <STabPane name="second" tab="Second">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Second panel - notice the smooth transition!</p>
+              </div>
+            </STabPane>
+          </STabs>
+        </DemoSection>
+      </section>
+
+      <!-- Closable Tabs -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-bold text-(--s-text-primary) mb-6">Closable Tabs</h3>
+        <DemoSection
+          title="Closable Tabs"
+          description="Click the X to close tabs."
+          :code="closableCode"
+          language="vue"
+        >
+          <STabs type="card" :closable="true" @close="handleTabClose">
+            <STabPane
+              v-for="tab in closableTabs"
+              :key="tab"
+              :name="tab"
+              :tab="`Document ${tab.slice(-1)}`"
+            >
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Content for {{ tab }}.</p>
+              </div>
+            </STabPane>
+          </STabs>
+          <p v-if="closableTabs.length === 0" class="p-4 text-center text-(--s-text-tertiary) rounded-xl mt-4 border border-dashed border-(--s-border)">All tabs closed!</p>
+        </DemoSection>
+      </section>
+
+      <!-- Hover Trigger -->
+      <section class="mb-10">
+        <h3 class="text-2xl font-bold text-(--s-text-primary) mb-6">Hover Trigger</h3>
+        <DemoSection
+          title="Trigger Event"
+          description="Tabs can be triggered on hover instead of click."
+          :code="triggerCode"
+          language="vue"
+        >
+          <STabs v-model="triggerTabValue" type="line" trigger="hover">
+            <STabPane name="hover1" tab="Hover Me">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Hover over the tabs to switch!</p>
+              </div>
+            </STabPane>
+            <STabPane name="hover2" tab="Don't Click">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>No need to click, just hover.</p>
+              </div>
+            </STabPane>
+            <STabPane name="hover3" tab="Just Hover">
+              <div class="p-6 text-(--s-text-secondary)">
+                <p>Smooth switching on mouse enter.</p>
+              </div>
+            </STabPane>
+          </STabs>
+        </DemoSection>
+      </section>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SUBCOMPONENTS -->
+    <!-- ============================================ -->
+    <section>
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Subcomponents</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="p-4 rounded-xl border border-(--s-border) bg-(--s-bg-secondary)">
+          <code class="text-sm font-mono text-emerald-400">STabs</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">Root context provider. Manages active tab, type, size, and provides context.</p>
+        </div>
+        <div class="p-4 rounded-xl border border-(--s-border) bg-(--s-bg-secondary)">
+          <code class="text-sm font-mono text-emerald-400">STabsList</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">Container for tab triggers. Provides layout and refs for indicator positioning.</p>
+        </div>
+        <div class="p-4 rounded-xl border border-(--s-border) bg-(--s-bg-secondary)">
+          <code class="text-sm font-mono text-emerald-400">STabsTrigger</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">Individual tab button. Exposes <code>{ active, disabled }</code> via slot for custom content.</p>
+        </div>
+        <div class="p-4 rounded-xl border border-(--s-border) bg-(--s-bg-secondary)">
+          <code class="text-sm font-mono text-emerald-400">STabsContent</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">Content panel that shows when its value matches the active tab. Supports transitions.</p>
+        </div>
+        <div class="p-4 rounded-xl border border-(--s-border) bg-(--s-bg-secondary)">
+          <code class="text-sm font-mono text-emerald-400">STabsIndicator</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">Animated indicator that morphs between tabs. Adapts to type: underline, pill, or background.</p>
+        </div>
+        <div class="p-4 rounded-xl border border-(--s-border) bg-(--s-bg-secondary)">
+          <code class="text-sm font-mono text-emerald-400">STabPane</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">Simple API only. Registers itself and renders content in the panel area.</p>
+        </div>
       </div>
     </section>
 
-    <!-- Real-World Examples -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Examples</h2>
-      <DemoSection 
-        title="Settings Panel"
-        description="A common tabs pattern for organizing application settings."
-        :code="verticalLeftCode"
-        language="vue"
-      >
-        <STabs v-model="verticalLeftTab" type="line" :animated="true">
-          <STabPane name="dashboard" tab="Account" icon="account">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p class="font-semibold mb-2">Account Settings</p>
-              <p class="text-sm">Manage your profile, password, and account preferences.</p>
-            </div>
-          </STabPane>
-          <STabPane name="users" tab="Notifications" icon="bell">
-            <div class="p-6 text-(--s-text-secondary)">
-              <p class="font-semibold mb-2">Notification Preferences</p>
-              <p class="text-sm">Configure email, push, and in-app notifications.</p>
-            </div>
-          </STabPane>
-        </STabs>
-      </DemoSection>
-    </section>
-
-    <!-- API Reference -->
+    <!-- ============================================ -->
+    <!-- API REFERENCE -->
+    <!-- ============================================ -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
       <SApiTable
@@ -636,48 +721,84 @@ const verticalRightCode = `<STabs v-model="verticalRightTab" type="bar" placemen
           { name: 'type', type: '\'line\' | \'card\' | \'segment\' | \'bar\' | \'chip\'', default: '\'line\'', description: 'Tab style variant', category: 'Appearance' },
           { name: 'size', type: '\'small\' | \'medium\' | \'large\'', default: '\'medium\'', description: 'Tab size', category: 'Appearance' },
           { name: 'placement', type: '\'top\' | \'left\' | \'right\' | \'bottom\'', default: '\'top\'', description: 'Tab position (vertical with left/right)', category: 'Appearance' },
-          { name: 'animated', type: 'boolean', default: 'false', description: 'Enable morph animation on content', category: 'Behavior' },
-          { name: 'closable', type: 'boolean', default: 'false', description: 'Show close buttons on tabs', category: 'Behavior' },
-          { name: 'justifyContent', type: '\'flex-start\' | \'center\' | \'flex-end\' | ...', default: '\'flex-start\'', description: 'Tab alignment', category: 'Behavior' },
-          { name: 'barColor', type: 'string', default: '\'#63e2b7\'', description: 'Active indicator color', category: 'Theming' },
-          { name: 'chipColor', type: 'string', default: '\'rgba(255,255,255,0.08)\'', description: 'Inactive chip background', category: 'Theming' },
-          { name: 'chipActiveColor', type: 'string', default: '\'#63e2b7\'', description: 'Active chip background', category: 'Theming' },
-          { name: 'tabClass', type: 'string', default: '\'\'', description: 'Classes for all tabs', category: 'Custom Classes' },
-          { name: 'activeTabClass', type: 'string', default: '\'\'', description: 'Classes for active tab', category: 'Custom Classes' },
-          { name: 'panelClass', type: 'string', default: '\'\'', description: 'Classes for content panel', category: 'Custom Classes' },
-          { name: 'tabsWrapperClass', type: 'string', default: '\'\'', description: 'Classes for tabs wrapper', category: 'Custom Classes' },
-          { name: 'trigger', type: '\'click\' | \'hover\'', default: '\'click\'', description: 'Trigger mode for switching tabs', category: 'Custom Classes' }
+          { name: 'animated', type: 'boolean', default: 'false', description: 'Enable morph animation on content panels', category: 'Behavior' },
+          { name: 'closable', type: 'boolean', default: 'false', description: 'Show close buttons on tabs (simple API)', category: 'Behavior' },
+          { name: 'trigger', type: '\'click\' | \'hover\'', default: '\'click\'', description: 'Trigger mode for switching tabs', category: 'Behavior' },
+          { name: 'justifyContent', type: 'string', default: '\'flex-start\'', description: 'Tab alignment (flex-start, center, etc.)', category: 'Layout' },
+          { name: 'barColor', type: 'string', default: 'var(--s-primary)', description: 'Active indicator color', category: 'Theming' },
+          { name: 'chipColor', type: 'string', default: 'var(--s-accent)', description: 'Inactive chip background (simple API)', category: 'Theming' },
+          { name: 'chipActiveColor', type: 'string', default: 'var(--s-primary)', description: 'Active chip background (simple API)', category: 'Theming' },
+          { name: 'tabClass', type: 'string', default: '\'\'', description: 'Classes for all tabs (simple API)', category: 'Custom Classes' },
+          { name: 'activeTabClass', type: 'string', default: '\'\'', description: 'Classes for active tab (simple API)', category: 'Custom Classes' },
+          { name: 'panelClass', type: 'string', default: '\'\'', description: 'Classes for content panel (simple API)', category: 'Custom Classes' }
         ] as ApiProp[])"
       />
 
       <SApiTable
-        title="STabPane Props"
+        title="STabsList Props"
+        type="props"
+        :props="([
+          { name: 'type', type: 'TabType', default: 'inherited', description: 'Override tab type from parent STabs' },
+          { name: 'class', type: 'string', default: '-', description: 'Additional CSS classes' }
+        ] as ApiProp[])"
+      />
+
+      <SApiTable
+        title="STabsTrigger Props"
+        type="props"
+        :props="([
+          { name: 'value', type: 'string | number', default: 'Required', description: 'Unique identifier matching STabsContent value' },
+          { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable this trigger' },
+          { name: 'class', type: 'string', default: '-', description: 'Additional CSS classes' }
+        ] as ApiProp[])"
+      />
+
+      <SApiTable
+        title="STabsTrigger Slots"
+        type="slots"
+        :slots="([
+          { name: 'default', props: '{ active: boolean, disabled: boolean }', description: 'Custom trigger content with reactive state' }
+        ] as ApiSlot[])"
+      />
+
+      <SApiTable
+        title="STabsContent Props"
+        type="props"
+        :props="([
+          { name: 'value', type: 'string | number', default: 'Required', description: 'Unique identifier matching STabsTrigger value' },
+          { name: 'class', type: 'string', default: '-', description: 'Additional CSS classes' }
+        ] as ApiProp[])"
+      />
+
+      <SApiTable
+        title="STabsIndicator Props"
+        type="props"
+        :props="([
+          { name: 'color', type: 'string', default: 'inherited', description: 'Override indicator color (defaults to barColor from STabs)' },
+          { name: 'class', type: 'string', default: '-', description: 'Additional CSS classes' }
+        ] as ApiProp[])"
+      />
+
+      <SApiTable
+        title="STabPane Props (Simple API)"
         type="props"
         :props="([
           { name: 'name', type: 'string | number', default: 'Required', description: 'Unique identifier' },
           { name: 'tab', type: 'string', default: 'Required', description: 'Tab button label' },
           { name: 'icon', type: 'string', default: '-', description: 'MDI icon name (without mdi- prefix)' },
           { name: 'disabled', type: 'boolean', default: '-', description: 'Disable this tab' },
-          { name: 'closable', type: 'boolean', default: '-', description: 'Override parent\'s closable' },
+          { name: 'closable', type: 'boolean', default: '-', description: 'Override parent closable setting' },
           { name: 'tabClass', type: 'string', default: '-', description: 'Additional classes for this tab button' }
         ] as ApiProp[])"
-      />
-
-      <SApiTable
-        title="Slots"
-        type="slots"
-        :slots="([
-          { name: '#tab', props: '{ pane, active, disabled, close }', description: 'Custom tab button template. Receives pane info, active state, and close function.' }
-        ] as ApiSlot[])"
       />
 
       <SApiTable
         title="Events"
         type="events"
         :events="([
-          { name: '@update:modelValue', payload: 'string | number', description: 'v-model update' },
-          { name: '@close', payload: 'string | number', description: 'Tab close clicked' },
-          { name: '@before-leave', payload: '(from, to)', description: 'Before switching (return false to cancel)' }
+          { name: '@update:modelValue', payload: 'string | number', description: 'v-model update when tab changes' },
+          { name: '@close', payload: 'string | number', description: 'Tab close button clicked (simple API)' },
+          { name: '@before-leave', payload: '(from, to)', description: 'Before switching tabs (return false to cancel)' }
         ] as ApiEvent[])"
       />
     </SApiSection>

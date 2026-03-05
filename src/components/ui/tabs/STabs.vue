@@ -1,9 +1,7 @@
 <script lang="ts">
 /**
  * STabs - Custom Tab Component
- * A highly customizable tab component styled with TailwindCSS
- * 
- * Exports for use by STabPane component
+ * Supports both simple (STabPane) and compound (STabsList + STabsTrigger + STabsContent) APIs
  */
 import { type InjectionKey, type Ref } from 'vue'
 
@@ -26,12 +24,16 @@ export interface STabsContext {
   activeTab: Ref<string | number>
   type: TabType
   size: TabSize
+  placement: TabPlacement
   animated: boolean
   closable: boolean
   barColor: string
+  justifyContent: TabJustify
+  trigger: 'click' | 'hover'
   registerPane: (pane: TabPaneInfo) => void
   unregisterPane: (name: string | number) => void
   setActiveTab: (name: string | number) => void
+  setListRef: (el: HTMLElement) => void
 }
 
 export const STabsContextKey: InjectionKey<STabsContext> = Symbol('STabsContext')
@@ -40,7 +42,8 @@ export const STabsContextKey: InjectionKey<STabsContext> = Symbol('STabsContext'
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
-import { provide, ref, computed, watch, nextTick, onMounted } from 'vue'
+import { provide, ref, computed, watch, nextTick, onMounted, useSlots } from 'vue'
+import { cn } from '~/lib/utils'
 
 // Props
 export interface Props {
@@ -88,7 +91,7 @@ const props = withDefaults(defineProps<Props>(), {
   activeTabClass: '',
   panelClass: '',
   barColor: 'var(--s-primary)',
-  chipColor: 'var(--s-bg-tertiary)',
+  chipColor: 'var(--s-accent)',
   chipActiveColor: 'var(--s-primary)',
   tabsWrapperClass: '',
   trigger: 'click'
@@ -101,11 +104,13 @@ const emit = defineEmits<{
   (e: 'before-leave', from: string | number, to: string | number): boolean | void
 }>()
 
+const slots = useSlots()
+
 // State
 const registeredPanes = ref<TabPaneInfo[]>([])
 const internalActiveTab = ref<string | number>('')
 
-// Refs for sliding indicator
+// Refs for sliding indicator (simple API)
 const tabsWrapperRef = ref<HTMLElement | null>(null)
 const tabRefs = ref<Map<string | number, HTMLElement>>(new Map())
 const indicatorStyle = ref<Record<string, string>>({
@@ -123,23 +128,27 @@ const activeTab = computed({
   }
 })
 
-// Update indicator position when active tab changes
+// Detect compound API: if registeredPanes stays empty, we're in compound mode
+// (STabsTrigger/STabsContent don't register panes)
+const isSimpleApi = computed(() => registeredPanes.value.length > 0)
+
+// Update indicator position when active tab changes (simple API only)
 const updateIndicator = async () => {
   await nextTick()
-  
+
   const wrapper = tabsWrapperRef.value
   const activeTabEl = tabRefs.value.get(activeTab.value)
-  
+
   if (!wrapper || !activeTabEl) {
     indicatorStyle.value = { ...indicatorStyle.value, opacity: '0' }
     return
   }
-  
+
   const wrapperRect = wrapper.getBoundingClientRect()
   const tabRect = activeTabEl.getBoundingClientRect()
-  
+
   const isVertical = props.placement === 'left' || props.placement === 'right'
-  
+
   if (isVertical) {
     indicatorStyle.value = {
       top: `${tabRect.top - wrapperRect.top}px`,
@@ -157,7 +166,7 @@ const updateIndicator = async () => {
   }
 }
 
-// Set tab ref
+// Set tab ref (simple API)
 const setTabRef = (name: string | number, el: HTMLElement | null) => {
   if (el) {
     tabRefs.value.set(name, el)
@@ -166,14 +175,21 @@ const setTabRef = (name: string | number, el: HTMLElement | null) => {
   }
 }
 
+// Allow STabsList to register its ref for compound API
+const setListRef = (el: HTMLElement) => {
+  // Not needed for simple API indicator, but kept for potential future use
+}
+
 // Watch for active tab changes and update indicator
 watch(activeTab, () => {
-  updateIndicator()
+  if (isSimpleApi.value) updateIndicator()
 })
 
 // Watch for panes changes
 watch(registeredPanes, () => {
-  nextTick(() => updateIndicator())
+  nextTick(() => {
+    if (isSimpleApi.value) updateIndicator()
+  })
 }, { deep: true })
 
 // Set first tab as default when panes register
@@ -188,8 +204,9 @@ watch(registeredPanes, (panes) => {
 
 // Initial indicator setup
 onMounted(() => {
-  // Delay to ensure DOM is ready
-  setTimeout(() => updateIndicator(), 50)
+  setTimeout(() => {
+    if (isSimpleApi.value) updateIndicator()
+  }, 50)
 })
 
 // Methods
@@ -207,12 +224,13 @@ const unregisterPane = (name: string | number) => {
 }
 
 const setActiveTab = (name: string | number) => {
+  // For simple API, check pane disabled state
   const pane = registeredPanes.value.find(p => p.name === name)
   if (pane?.disabled) return
-  
+
   const result = emit('before-leave', activeTab.value, name)
   if (result === false) return
-  
+
   activeTab.value = name
 }
 
@@ -237,21 +255,21 @@ const sizeClasses = computed(() => {
   return sizes[props.size]
 })
 
-// Type-specific classes for tabs wrapper
+// Type-specific classes for tabs wrapper (simple API)
 const wrapperClasses = computed(() => {
   const base = 'relative flex transition-colors duration-300'
-  const placement = props.placement === 'left' || props.placement === 'right' 
-    ? 'flex-col' 
+  const placement = props.placement === 'left' || props.placement === 'right'
+    ? 'flex-col'
     : 'flex-row'
-  
+
   const typeClasses = {
     line: 'gap-1',
     card: 'gap-2',
-    segment: 'gap-0.5 bg-(--s-bg-secondary) p-1 rounded-xl shadow-sm border border-(--s-border)',
+    segment: 'gap-0.5 bg-muted p-1 rounded-xl shadow-sm border border-border',
     bar: 'gap-1',
     chip: 'gap-2 flex-wrap'
   }
-  
+
   return `${base} ${placement} ${typeClasses[props.type]} ${props.tabsWrapperClass}`
 })
 
@@ -263,11 +281,11 @@ const containerClasses = computed(() => {
   return 'flex flex-col gap-3'
 })
 
-// Tab button classes
+// Tab button classes (simple API)
 const getTabClasses = (pane: TabPaneInfo) => {
   const isActive = activeTab.value === pane.name
   const isDisabled = pane.disabled
-  
+
   const base = `
     relative cursor-pointer
     flex items-center gap-2 whitespace-nowrap
@@ -276,36 +294,36 @@ const getTabClasses = (pane: TabPaneInfo) => {
     ${props.tabClass}
     ${pane.tabClass || ''}
   `
-  
-  const disabledClass = isDisabled 
-    ? 'opacity-40 cursor-not-allowed' 
+
+  const disabledClass = isDisabled
+    ? 'opacity-40 cursor-not-allowed'
     : ''
-  
+
   const typeStyles = {
-    line: isActive 
-      ? `text-(--s-text-primary) font-medium ${props.activeTabClass}` 
-      : 'text-(--s-text-secondary) hover:text-(--s-text-primary)',
-    card: isActive 
-      ? `bg-(--s-bg-secondary) text-(--s-text-primary) rounded-xl border border-(--s-border) shadow-md ${props.activeTabClass}` 
-      : 'text-(--s-text-secondary) border border-transparent hover:border-(--s-border) rounded-xl hover:bg-(--s-bg-tertiary)',
-    segment: isActive 
-      ? `bg-(--s-bg-primary) text-(--s-text-primary) rounded-lg shadow-sm font-medium ${props.activeTabClass}` 
-      : 'text-(--s-text-secondary) rounded-lg hover:text-(--s-text-primary)',
-    bar: isActive 
-      ? `text-(--s-text-primary) font-medium ${props.activeTabClass}` 
-      : 'text-(--s-text-secondary) hover:text-(--s-text-primary)',
-    chip: isActive 
-      ? `text-(--s-bg-primary) font-medium rounded-full shadow-md ${props.activeTabClass}` 
-      : 'text-(--s-text-secondary) rounded-full hover:text-(--s-text-primary)'
+    line: isActive
+      ? `text-foreground font-medium ${props.activeTabClass}`
+      : 'text-muted-foreground hover:text-foreground',
+    card: isActive
+      ? `bg-muted text-foreground rounded-xl border border-border shadow-md ${props.activeTabClass}`
+      : 'text-muted-foreground border border-transparent hover:border-border rounded-xl hover:bg-accent',
+    segment: isActive
+      ? `bg-background text-foreground rounded-lg shadow-sm font-medium ${props.activeTabClass}`
+      : 'text-muted-foreground rounded-lg hover:text-foreground',
+    bar: isActive
+      ? `text-foreground font-medium ${props.activeTabClass}`
+      : 'text-muted-foreground hover:text-foreground',
+    chip: isActive
+      ? `text-background font-medium rounded-full shadow-md ${props.activeTabClass}`
+      : 'text-muted-foreground rounded-full hover:text-foreground'
   }
-  
+
   return `${base} ${disabledClass} ${typeStyles[props.type]}`
 }
 
-// Get chip background style
+// Get chip background style (simple API)
 const getChipStyle = (pane: TabPaneInfo) => {
   if (props.type !== 'chip') return {}
-  
+
   const isActive = activeTab.value === pane.name
   return {
     backgroundColor: isActive ? props.chipActiveColor : props.chipColor,
@@ -313,10 +331,10 @@ const getChipStyle = (pane: TabPaneInfo) => {
   }
 }
 
-// Sliding indicator position and style
+// Sliding indicator position and style (simple API)
 const slidingIndicatorStyle = computed(() => {
   const isVertical = props.placement === 'left' || props.placement === 'right'
-  
+
   if (isVertical) {
     return {
       ...indicatorStyle.value,
@@ -327,7 +345,7 @@ const slidingIndicatorStyle = computed(() => {
       transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)'
     }
   }
-  
+
   return {
     ...indicatorStyle.value,
     backgroundColor: props.barColor,
@@ -338,91 +356,101 @@ const slidingIndicatorStyle = computed(() => {
   }
 })
 
-// Check if sliding indicator should be shown
+// Check if sliding indicator should be shown (simple API)
 const showSlidingIndicator = computed(() => {
   return props.type === 'line' || props.type === 'bar'
 })
 
-// Provide context to child panes
+// Provide context to all children
 provide(STabsContextKey, {
   activeTab: activeTab as Ref<string | number>,
   type: props.type,
   size: props.size,
+  placement: props.placement,
   animated: props.animated,
   closable: props.closable,
   barColor: props.barColor,
+  justifyContent: props.justifyContent,
+  trigger: props.trigger,
   registerPane,
   unregisterPane,
-  setActiveTab
+  setActiveTab,
+  setListRef
 })
 </script>
 
 <template>
-  <div v-bind="$attrs" :class="containerClasses">
-    <!-- Tabs -->
-    <div 
-      ref="tabsWrapperRef"
-      :class="wrapperClasses"
-      :style="{ justifyContent: justifyContent }"
-      role="tablist"
-    >
-      <!-- Sliding indicator (for line and bar types) -->
-      <span 
-        v-if="showSlidingIndicator"
-        class="s-tab-sliding-indicator"
-        :style="slidingIndicatorStyle"
-      />
-      
-      <button
-        v-for="pane in registeredPanes"
-        :key="pane.name"
-        :ref="(el) => setTabRef(pane.name, el as HTMLElement)"
-        :class="getTabClasses(pane)"
-        :style="getChipStyle(pane)"
-        :disabled="pane.disabled"
-        :aria-selected="activeTab === pane.name"
-        :aria-disabled="pane.disabled"
-        role="tab"
-        @click="setActiveTab(pane.name)"
-        @mouseenter="handleMouseEnter(pane.name)"
+  <div v-bind="$attrs" :class="cn(containerClasses, $attrs.class ?? '')">
+    <!-- Simple API: auto-render tabs from registered panes -->
+    <template v-if="isSimpleApi">
+      <div
+        ref="tabsWrapperRef"
+        :class="wrapperClasses"
+        :style="{ justifyContent: justifyContent }"
+        role="tablist"
       >
-        <!-- Custom tab template slot -->
-        <slot 
-          name="tab" 
-          :pane="pane"
-          :active="activeTab === pane.name"
+        <!-- Sliding indicator (for line and bar types) -->
+        <span
+          v-if="showSlidingIndicator"
+          class="s-tab-sliding-indicator"
+          :style="slidingIndicatorStyle"
+        />
+
+        <button
+          v-for="pane in registeredPanes"
+          :key="pane.name"
+          :ref="(el) => setTabRef(pane.name, el as HTMLElement)"
+          :class="getTabClasses(pane)"
+          :style="getChipStyle(pane)"
           :disabled="pane.disabled"
-          :close="() => emit('close', pane.name)"
+          :aria-selected="activeTab === pane.name"
+          :aria-disabled="pane.disabled"
+          role="tab"
+          @click="setActiveTab(pane.name)"
+          @mouseenter="handleMouseEnter(pane.name)"
         >
-          <!-- Default tab content -->
-          <!-- Icon -->
-          <span 
-            v-if="pane.icon" 
-            class="mdi transition-transform duration-300" 
-            :class="[`mdi-${pane.icon}`, { 'scale-110': activeTab === pane.name }]" 
-          />
-          
-          <!-- Label -->
-          <span>{{ pane.tab }}</span>
-          
-          <!-- Close button -->
-          <span 
-            v-if="(closable || pane.closable) && !pane.disabled"
-            class="ml-1 hover:bg-black/10 dark:hover:bg-white/10 rounded-full p-1 transition-all duration-200 hover:scale-110"
-            @click="handleClose(pane.name, $event)"
+          <!-- Custom tab template slot -->
+          <slot
+            name="tab"
+            :pane="pane"
+            :active="activeTab === pane.name"
+            :disabled="pane.disabled"
+            :close="() => emit('close', pane.name)"
           >
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </span>
-        </slot>
-      </button>
-    </div>
-    
-    <!-- Panels -->
-    <div :class="['flex-1 relative overflow-hidden', panelClass]" role="tabpanel">
+            <!-- Icon -->
+            <span
+              v-if="pane.icon"
+              class="mdi transition-transform duration-300"
+              :class="[`mdi-${pane.icon}`, { 'scale-110': activeTab === pane.name }]"
+            />
+
+            <!-- Label -->
+            <span>{{ pane.tab }}</span>
+
+            <!-- Close button -->
+            <span
+              v-if="(closable || pane.closable) && !pane.disabled"
+              class="ml-1 hover:bg-black/10 dark:hover:bg-white/10 rounded-full p-1 transition-all duration-200 hover:scale-110"
+              @click="handleClose(pane.name, $event)"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </span>
+          </slot>
+        </button>
+      </div>
+
+      <!-- Panels (simple API - STabPane children render here) -->
+      <div :class="['flex-1 relative overflow-hidden', panelClass]" role="tabpanel">
+        <slot />
+      </div>
+    </template>
+
+    <!-- Compound API: everything in default slot (STabsList, STabsContent, etc.) -->
+    <template v-else>
       <slot />
-    </div>
+    </template>
   </div>
 </template>
 

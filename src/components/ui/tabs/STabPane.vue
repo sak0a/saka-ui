@@ -6,6 +6,7 @@
 defineOptions({ inheritAttrs: false })
 
 import { inject, onMounted, onUnmounted, computed, watch } from 'vue'
+import { cn } from '~/lib/utils'
 import { STabsContextKey, type TabPaneInfo } from './STabs.vue'
 
 // Props
@@ -69,7 +70,7 @@ const shouldMorph = computed(() => context?.animated ?? false)
     :name="shouldMorph ? 's-tab-morph' : 's-tab-fade'" 
     mode="out-in"
   >
-    <div v-if="isActive" :key="name" v-bind="$attrs" class="s-tab-pane">
+    <div v-if="isActive" :key="name" v-bind="$attrs" :class="cn('s-tab-pane', $attrs.class ?? '')">
       <slot />
     </div>
   </Transition>

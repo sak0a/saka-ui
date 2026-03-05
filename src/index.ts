@@ -1,12 +1,15 @@
-export { STabs, STabPane } from './components/ui/tabs'
+// Utilities
+export { cn } from './lib/utils'
+
+export { STabs, STabPane, STabsList, STabsTrigger, STabsContent, STabsIndicator } from './components/ui/tabs'
 export { default as SIcon } from './components/ui/SIcon.vue'
 export { default as SChip } from './components/ui/SChip.vue'
 export { default as SSwitch } from './components/ui/SSwitch.vue'
-export { default as SButton } from './components/ui/SButton.vue'
+export { default as SButton, buttonVariants, type ButtonVariants } from './components/ui/SButton.vue'
 export { default as SGlassButton } from './components/ui/SGlassButton.vue'
 export { default as STooltip } from './components/ui/STooltip.vue'
 export { default as SAlert } from './components/ui/SAlert.vue'
-export { default as SBadge } from './components/ui/SBadge.vue'
+export { default as SBadge, type BadgeVariants } from './components/ui/SBadge.vue'
 export { default as SCheckbox } from './components/ui/SCheckbox.vue'
 export { SAvatar, SAvatarImage, SAvatarFallback, SAvatarGroup } from './components/ui/avatar'
 export { default as SSelect } from './components/ui/SSelect.vue'
@@ -14,9 +17,20 @@ export type { SelectOption, Props as SSelectProps } from './components/ui/SSelec
 export { SOption, SOptionGroup } from './components/ui/option'
 export { SCarousel, SCarouselSlide } from './components/ui/carousel'
 export { SRadio, SRadioGroup } from './components/ui/radio'
-export { SAccordion, SAccordionItem } from './components/ui/accordion'
+export { SAccordion, SAccordionItem, SAccordionTrigger, SAccordionContent } from './components/ui/accordion'
 export { default as SDatePicker } from './components/ui/SDatePicker.vue'
-export { default as SColorPicker } from './components/ui/SColorPicker.vue'
+export {
+  SColorPicker,
+  SColorPickerSpectrum,
+  SColorPickerHueSlider,
+  SColorPickerAlphaSlider,
+  SColorPickerPreview,
+  SColorPickerEyeDropper,
+  SColorPickerCopy,
+  SColorPickerInputs,
+  SColorPickerPresets,
+  SColorPickerRecent
+} from './components/ui/color-picker'
 export { default as SInput } from './components/ui/SInput.vue'
 export { SDropdown, SDropdownItem, SDropdownDivider, SDropdownGroup } from './components/ui/dropdown'
 export { default as SCard } from './components/ui/card/SCard.vue'
@@ -38,11 +52,11 @@ export {
   SMorphingCardClose
 } from './components/ui/card'
 export { SForm, SFormField } from './components/ui/form'
-export { 
-  SModal, 
-  SModalHeader, 
-  SModalContent, 
-  SModalFooter, 
+export {
+  SModal,
+  SModalHeader,
+  SModalContent,
+  SModalFooter,
   SModalTrigger,
   SModalTitle,
   SModalDescription,
