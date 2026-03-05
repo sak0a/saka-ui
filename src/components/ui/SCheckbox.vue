@@ -1,7 +1,27 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, type CSSProperties } from 'vue'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
+
+const checkboxVariants = cva(
+  'relative inline-flex items-center justify-center shrink-0 border-2 transition-all duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
+  {
+    variants: {
+      size: {
+        small: 'w-4 h-4',
+        medium: 'w-5 h-5',
+        large: 'w-6 h-6',
+      },
+    },
+    defaultVariants: {
+      size: 'medium',
+    },
+  }
+)
+
+export type CheckboxVariants = VariantProps<typeof checkboxVariants>
 
 export interface Props {
   modelValue?: boolean | string | number | any[]
@@ -26,7 +46,7 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: false,
   value: undefined,
   size: 'medium',
-  color: 'var(--s-primary)',
+  color: undefined,
   disabled: false,
   loading: false,
   indeterminate: false,
@@ -63,12 +83,12 @@ const isChecked = computed(() => {
 // Toggle checkbox
 const toggle = (event: Event) => {
   if (props.disabled || props.loading) return
-  
+
   // Trigger ripple
   triggerRipple()
-  
+
   let newValue: boolean | string | number | any[]
-  
+
   if (isArrayModel.value) {
     const arr = [...(props.modelValue as any[])]
     const index = arr.indexOf(props.value)
@@ -81,7 +101,7 @@ const toggle = (event: Event) => {
   } else {
     newValue = !isChecked.value
   }
-  
+
   emit('update:modelValue', newValue)
   emit('change', newValue, event)
 }
@@ -100,23 +120,20 @@ const handleKeydown = (e: KeyboardEvent) => {
   }
 }
 
-// Size configurations
+// Size configurations for icon and label
 const sizeConfig = computed(() => {
   const sizes = {
     small: {
-      box: 'w-4 h-4',
       icon: 'text-[10px]',
       label: 'text-xs',
       gap: 'gap-1.5'
     },
     medium: {
-      box: 'w-5 h-5',
       icon: 'text-xs',
       label: 'text-sm',
       gap: 'gap-2'
     },
     large: {
-      box: 'w-6 h-6',
       icon: 'text-sm',
       label: 'text-base',
       gap: 'gap-2.5'
@@ -125,15 +142,20 @@ const sizeConfig = computed(() => {
   return sizes[props.size]
 })
 
-// Computed styles for the checkbox box
-const boxStyle = computed(() => {
-  if (isChecked.value || props.indeterminate) {
-    return {
-      backgroundColor: props.color,
-      borderColor: props.color
-    }
+// Custom color override style (only when color prop is explicitly set)
+const colorStyle = computed<CSSProperties | undefined>(() => {
+  if (!props.color) return undefined
+  if (!(isChecked.value || props.indeterminate)) return undefined
+  return {
+    backgroundColor: props.color,
+    borderColor: props.color
   }
-  return {}
+})
+
+// Ripple color style
+const rippleStyle = computed<CSSProperties | undefined>(() => {
+  if (!props.color) return undefined
+  return { backgroundColor: props.color }
 })
 
 // Determine which icon to show
@@ -141,17 +163,33 @@ const displayIcon = computed(() => {
   if (props.indeterminate) return 'minus'
   return props.icon
 })
+
+const boxClasses = computed(() => {
+  return cn(
+    checkboxVariants({ size: props.size }),
+    rounded.value ? 'rounded-full' : 'rounded-md',
+    isChecked.value || props.indeterminate
+      ? props.color
+        ? 'border-transparent'
+        : 'border-transparent bg-primary'
+      : 'border-border bg-background hover:border-muted-foreground',
+    { 'cursor-not-allowed': props.disabled || props.loading },
+    props.checkboxClass
+  )
+})
+
+const rounded = computed(() => props.rounded)
 </script>
 
 <template>
-  <div class="s-checkbox-container" v-bind="$attrs">
-    <label 
-      class="s-checkbox-wrapper relative inline-flex items-center cursor-pointer select-none"
-      :class="[
+  <div v-bind="$attrs">
+    <label
+      :class="cn(
+        'relative inline-flex items-center cursor-pointer select-none',
         sizeConfig.gap,
         { 'opacity-50 cursor-not-allowed': disabled },
         { 'flex-row-reverse': labelPosition === 'left' }
-      ]"
+      )"
   >
     <!-- Hidden input for form compatibility -->
     <input
@@ -164,42 +202,36 @@ const displayIcon = computed(() => {
       class="sr-only"
       @change="toggle"
     />
-    
+
     <!-- Checkbox Box -->
     <span
       role="checkbox"
       :aria-checked="indeterminate ? 'mixed' : isChecked"
       :aria-disabled="disabled || loading"
       tabindex="0"
-      class="s-checkbox-box relative inline-flex items-center justify-center shrink-0 border-2 transition-all duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--s-primary)"
-      :class="[
-        sizeConfig.box,
-        rounded ? 'rounded-full' : 'rounded-md',
-        isChecked || indeterminate
-          ? 'border-transparent'
-          : 'border-(--s-border) bg-(--s-bg-primary) hover:border-(--s-text-tertiary)',
-        { 'cursor-not-allowed': disabled || loading },
-        checkboxClass
-      ]"
-      :style="boxStyle"
+      :class="boxClasses"
+      :style="colorStyle"
       @click.prevent="toggle"
       @keydown="handleKeydown"
     >
       <!-- Ripple Effect -->
-      <span 
-        v-if="isRippling" 
+      <span
+        v-if="isRippling"
         class="absolute inset-0 animate-ping opacity-30 z-0"
-        :class="rounded ? 'rounded-full' : 'rounded-md'"
-        :style="{ backgroundColor: color }"
+        :class="[rounded ? 'rounded-full' : 'rounded-md', !color && 'bg-primary']"
+        :style="rippleStyle"
       />
-      
+
       <!-- Loading Spinner -->
-      <span 
-        v-if="loading" 
-        class="mdi mdi-loading animate-spin"
-        :class="[sizeConfig.icon, isChecked || indeterminate ? 'text-white' : 'text-(--s-text-primary)']"
+      <span
+        v-if="loading"
+        :class="cn(
+          'mdi mdi-loading animate-spin',
+          sizeConfig.icon,
+          isChecked || indeterminate ? 'text-white' : 'text-foreground'
+        )"
       />
-      
+
       <!-- Check Icon / Indeterminate Icon -->
       <Transition
         enter-active-class="transition-all duration-200 ease-out"
@@ -209,10 +241,9 @@ const displayIcon = computed(() => {
         leave-from-class="scale-100 opacity-100"
         leave-to-class="scale-0 opacity-0"
       >
-        <span 
+        <span
           v-if="(isChecked || indeterminate) && !loading"
-          class="absolute inset-0 flex items-center justify-center text-white"
-          :class="sizeConfig.icon"
+          :class="cn('absolute inset-0 flex items-center justify-center text-white', sizeConfig.icon)"
         >
           <slot name="icon">
             <span :class="['mdi', `mdi-${displayIcon}`]" />
@@ -220,24 +251,24 @@ const displayIcon = computed(() => {
         </span>
       </Transition>
     </span>
-    
+
     <!-- Label -->
-    <span 
-      v-if="label || $slots.default" 
-      class="s-checkbox-label text-(--s-text-secondary) transition-colors"
-      :class="[
+    <span
+      v-if="label || $slots.default"
+      :class="cn(
+        'transition-colors text-muted-foreground',
         sizeConfig.label,
-        { 'text-(--s-text-primary)': isChecked },
+        { 'text-foreground': isChecked },
         labelClass
-      ]"
+      )"
     >
       <slot>{{ label }}</slot>
-      <span v-if="required" class="text-red-500 ml-0.5">*</span>
+      <span v-if="required" class="text-destructive ml-0.5">*</span>
     </span>
   </label>
-  
+
   <!-- Error message -->
-  <p v-if="error" class="mt-1 text-xs text-red-500 flex items-center gap-1">
+  <p v-if="error" class="mt-1 text-xs text-destructive flex items-center gap-1">
     <span class="mdi mdi-alert-circle" />
     {{ error }}
   </p>

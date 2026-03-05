@@ -1,7 +1,65 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
+
+const alertVariants = cva(
+  'relative overflow-hidden transition-all duration-300 max-w-[600px] min-w-[300px]',
+  {
+    variants: {
+      variant: {
+        success: 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-200',
+        warning: 'bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-200',
+        error: 'bg-red-50 dark:bg-red-950/50 text-red-800 dark:text-red-200',
+        info: 'bg-blue-50 dark:bg-blue-950/50 text-blue-800 dark:text-blue-200',
+        custom: 'bg-muted text-foreground',
+      },
+      size: {
+        small: 'p-3',
+        medium: 'p-4',
+        large: 'p-5',
+      },
+    },
+    defaultVariants: {
+      variant: 'info',
+      size: 'medium',
+    },
+  }
+)
+
+export type AlertVariants = VariantProps<typeof alertVariants>
+
+const variantIconColors: Record<string, string> = {
+  success: 'text-emerald-600 dark:text-emerald-400',
+  warning: 'text-amber-600 dark:text-amber-400',
+  error: 'text-red-600 dark:text-red-400',
+  info: 'text-blue-600 dark:text-blue-400',
+  custom: 'text-current',
+}
+
+const variantBorderColors: Record<string, string> = {
+  success: 'border-emerald-500',
+  warning: 'border-amber-500',
+  error: 'border-red-500',
+  info: 'border-blue-500',
+  custom: 'border-current',
+}
+
+const variantProgressColors: Record<string, string> = {
+  success: 'bg-emerald-500',
+  warning: 'bg-amber-500',
+  error: 'bg-red-500',
+  info: 'bg-blue-500',
+  custom: 'bg-current',
+}
+
+const sizeConfig: Record<string, { gap: string; iconSize: string; titleSize: string; textSize: string }> = {
+  small: { gap: 'gap-2', iconSize: 'text-lg', titleSize: 'text-sm font-semibold', textSize: 'text-xs' },
+  medium: { gap: 'gap-3', iconSize: 'text-xl', titleSize: 'text-base font-semibold', textSize: 'text-sm' },
+  large: { gap: 'gap-4', iconSize: 'text-2xl', titleSize: 'text-lg font-semibold', textSize: 'text-base' },
+}
 
 export interface Props {
   variant?: 'success' | 'warning' | 'error' | 'info' | 'custom'
@@ -40,7 +98,7 @@ const props = withDefaults(defineProps<Props>(), {
   rounded: true,
   dismissible: false,
   contentClass: undefined,
-  iconClass: undefined
+  iconClass: undefined,
 })
 
 const emit = defineEmits<{
@@ -62,7 +120,7 @@ const defaultIcons = computed(() => ({
   success: 'check-circle',
   warning: 'alert',
   error: 'alert-circle',
-  info: 'information'
+  info: 'information',
 }))
 
 const displayIcon = computed(() => {
@@ -71,101 +129,47 @@ const displayIcon = computed(() => {
   return defaultIcons.value[props.variant as keyof typeof defaultIcons.value] || 'information'
 })
 
-const variantColors = computed(() => {
-  const colors = {
-    success: {
-      bg: 'bg-emerald-50 dark:bg-emerald-950/50',
-      border: 'border-emerald-500',
-      text: 'text-emerald-800 dark:text-emerald-200',
-      icon: 'text-emerald-600 dark:text-emerald-400',
-      progress: 'bg-emerald-500'
-    },
-    warning: {
-      bg: 'bg-amber-50 dark:bg-amber-950/50',
-      border: 'border-amber-500',
-      text: 'text-amber-800 dark:text-amber-200',
-      icon: 'text-amber-600 dark:text-amber-400',
-      progress: 'bg-amber-500'
-    },
-    error: {
-      bg: 'bg-red-50 dark:bg-red-950/50',
-      border: 'border-red-500',
-      text: 'text-red-800 dark:text-red-200',
-      icon: 'text-red-600 dark:text-red-400',
-      progress: 'bg-red-500'
-    },
-    info: {
-      bg: 'bg-blue-50 dark:bg-blue-950/50',
-      border: 'border-blue-500',
-      text: 'text-blue-800 dark:text-blue-200',
-      icon: 'text-blue-600 dark:text-blue-400',
-      progress: 'bg-blue-500'
-    },
-    custom: {
-      bg: 'bg-(--s-bg-secondary)',
-      border: 'border-current',
-      text: 'text-(--s-text-primary)',
-      icon: 'text-current',
-      progress: 'bg-current'
-    }
-  }
-  return colors[props.variant]
-})
-
-const sizeClasses = computed(() => {
-  const sizes = {
-    small: {
-      padding: 'p-3',
-      gap: 'gap-2',
-      iconSize: 'text-lg',
-      titleSize: 'text-sm font-semibold',
-      textSize: 'text-xs'
-    },
-    medium: {
-      padding: 'p-4',
-      gap: 'gap-3',
-      iconSize: 'text-xl',
-      titleSize: 'text-base font-semibold',
-      textSize: 'text-sm'
-    },
-    large: {
-      padding: 'p-5',
-      gap: 'gap-4',
-      iconSize: 'text-2xl',
-      titleSize: 'text-lg font-semibold',
-      textSize: 'text-base'
-    }
-  }
-  return sizes[props.size]
-})
+const sizes = computed(() => sizeConfig[props.size])
 
 const borderClasses = computed(() => {
   if (props.border === 'none') return ''
-  if (props.border === 'left') return `border-l-4 ${variantColors.value.border}`
-  if (props.border === 'top') return `border-t-4 ${variantColors.value.border}`
-  if (props.border === 'all') return `border-2 ${variantColors.value.border}`
+  const borderColor = variantBorderColors[props.variant]
+  if (props.border === 'left') return `border-l-4 ${borderColor}`
+  if (props.border === 'top') return `border-t-4 ${borderColor}`
+  if (props.border === 'all') return `border-2 ${borderColor}`
   return ''
 })
 
 const positionClasses = computed(() => {
   if (props.position === 'static') return ''
-  
-  const positions = {
+  const positions: Record<string, string> = {
     top: 'fixed top-4 left-1/2 -translate-x-1/2 z-50',
     bottom: 'fixed bottom-4 left-1/2 -translate-x-1/2 z-50',
     'top-left': 'fixed top-4 left-4 z-50',
     'top-right': 'fixed top-4 right-4 z-50',
     'bottom-left': 'fixed bottom-4 left-4 z-50',
-    'bottom-right': 'fixed bottom-4 right-4 z-50'
+    'bottom-right': 'fixed bottom-4 right-4 z-50',
   }
-  return positions[props.position as keyof typeof positions] || ''
+  return positions[props.position] || ''
 })
 
 const customStyle = computed(() => {
-  if (props.variant !== 'custom' || !props.color) return {}
-  return {
-    '--alert-color': props.color
-  }
+  if (props.variant !== 'custom' || !props.color) return undefined
+  return { '--alert-color': props.color }
+})
+
+const alertClasses = computed(() => {
+  return cn(
+    alertVariants({ variant: props.variant, size: props.size }),
+    borderClasses.value,
+    positionClasses.value,
+    {
+      'rounded-lg': props.rounded,
+      'shadow-lg': props.elevation && props.position !== 'static',
+      'shadow-md': props.elevation && props.position === 'static',
+      'cursor-pointer': props.dismissible,
+    },
+  )
 })
 
 // Methods
@@ -183,45 +187,44 @@ function handleDismiss() {
 
 function pause() {
   if (!props.autoDismiss || isPaused.value) return
-  
+
   isPaused.value = true
   clearTimers()
-  
-  // Calculate remaining time
+
   const elapsed = Date.now() - startTime.value
   remainingTime.value = Math.max(0, remainingTime.value - elapsed)
 }
 
 function resume() {
   if (!props.autoDismiss || !isPaused.value) return
-  
+
   isPaused.value = false
   startDismissTimer()
 }
 
 function startDismissTimer() {
   if (!props.autoDismiss) return
-  
+
   startTime.value = Date.now()
-  
+
   dismissTimer.value = setTimeout(() => {
     handleDismiss()
   }, remainingTime.value)
-  
+
   if (props.showProgress) {
     startProgressAnimation()
   }
 }
 
 function startProgressAnimation() {
-  const interval = 50 // Update every 50ms
+  const interval = 50
   const totalSteps = remainingTime.value / interval
   let currentStep = 0
-  
+
   progressInterval.value = setInterval(() => {
     currentStep++
     progress.value = Math.max(0, 100 - (currentStep / totalSteps) * 100)
-    
+
     if (currentStep >= totalSteps) {
       clearInterval(progressInterval.value!)
       progressInterval.value = null
@@ -265,7 +268,6 @@ onBeforeUnmount(() => {
   document.removeEventListener('keydown', handleKeydown)
 })
 
-// Watch for autoDismiss changes
 watch(() => props.autoDismiss, (newVal) => {
   if (newVal) {
     remainingTime.value = props.duration
@@ -275,11 +277,10 @@ watch(() => props.autoDismiss, (newVal) => {
   }
 })
 
-// Expose methods
 defineExpose({
   close,
   pause,
-  resume
+  resume,
 })
 </script>
 
@@ -291,20 +292,7 @@ defineExpose({
     <div
       v-show="isVisible"
       v-bind="$attrs"
-      class="s-alert relative overflow-hidden transition-all duration-300"
-      :class="[
-        variantColors.bg,
-        variantColors.text,
-        sizeClasses.padding,
-        borderClasses,
-        positionClasses,
-        {
-          'rounded-lg': rounded,
-          'shadow-lg': elevation && position !== 'static',
-          'shadow-md': elevation && position === 'static',
-          'cursor-pointer': dismissible
-        }
-      ]"
+      :class="cn(alertClasses, ($attrs.class as string))"
       :style="customStyle"
       role="alert"
       aria-live="polite"
@@ -312,37 +300,31 @@ defineExpose({
       @mouseleave="resume"
       @click="handleAlertClick"
     >
-      <div class="flex items-start" :class="sizeClasses.gap">
+      <div class="flex items-start" :class="sizes.gap">
         <!-- Icon -->
-        <div v-if="displayIcon" class="shrink-0" :class="[variantColors.icon, iconClass]">
+        <div v-if="displayIcon" class="shrink-0" :class="[variantIconColors[variant], iconClass]">
           <slot name="icon">
-            <span class="mdi" :class="[`mdi-${displayIcon}`, sizeClasses.iconSize]" />
+            <span class="mdi" :class="[`mdi-${displayIcon}`, sizes.iconSize]" />
           </slot>
         </div>
 
         <!-- Content -->
         <div class="flex-1 min-w-0" :class="contentClass">
-          <!-- Title -->
-          <div v-if="title || $slots.title" :class="sizeClasses.titleSize">
+          <div v-if="title || $slots.title" :class="sizes.titleSize">
             <slot name="title">
               {{ title }}
             </slot>
           </div>
 
-          <!-- Description/Default Content -->
-          <div 
+          <div
             v-if="description || $slots.default"
-            :class="[
-              sizeClasses.textSize,
-              { 'mt-1': title || $slots.title }
-            ]"
+            :class="[sizes.textSize, { 'mt-1': title || $slots.title }]"
           >
             <slot>
               {{ description }}
             </slot>
           </div>
 
-          <!-- Actions -->
           <div v-if="$slots.actions" class="mt-3 flex items-center gap-2">
             <slot name="actions" />
           </div>
@@ -352,8 +334,10 @@ defineExpose({
         <button
           v-if="closable"
           type="button"
-          class="shrink-0 inline-flex items-center justify-center rounded-md px-1 transition-colors hover:bg-black/5 dark:hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-offset-2"
-          :class="variantColors.icon"
+          :class="cn(
+            'shrink-0 inline-flex items-center justify-center rounded-md px-1 transition-colors hover:bg-black/5 dark:hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-offset-2',
+            variantIconColors[variant]
+          )"
           aria-label="Close alert"
           @click.stop="close"
         >
@@ -365,7 +349,7 @@ defineExpose({
       <div
         v-if="autoDismiss && showProgress"
         class="absolute bottom-0 left-0 h-1 transition-all duration-100 ease-linear"
-        :class="variantColors.progress"
+        :class="variantProgressColors[variant]"
         :style="{ width: `${progress}%` }"
       />
     </div>
@@ -373,11 +357,6 @@ defineExpose({
 </template>
 
 <style scoped>
-.s-alert {
-  max-width: 600px;
-  min-width: 300px;
-}
-
 /* Alert transitions */
 .alert-enter-active,
 .alert-leave-active {
@@ -395,15 +374,15 @@ defineExpose({
 }
 
 /* Custom variant with color prop */
-.s-alert[style*="--alert-color"] .text-current {
+[style*="--alert-color"] .text-current {
   color: var(--alert-color);
 }
 
-.s-alert[style*="--alert-color"] .bg-current {
+[style*="--alert-color"] .bg-current {
   background-color: var(--alert-color);
 }
 
-.s-alert[style*="--alert-color"] .border-current {
+[style*="--alert-color"] .border-current {
   border-color: var(--alert-color);
 }
 </style>

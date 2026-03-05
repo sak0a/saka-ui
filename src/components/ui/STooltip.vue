@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick, type CSSProperties } from 'vue'
+import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -68,13 +69,13 @@ let hideTimeout: ReturnType<typeof setTimeout> | null = null
 // Computed
 const isManual = computed(() => props.trigger === 'manual')
 
-const tooltipStyle = computed(() => {
-  const styles: Record<string, string> = {
+const tooltipStyle = computed<CSSProperties>(() => {
+  const styles: CSSProperties = {
     position: 'fixed',
     top: `${tooltipPosition.value.top}px`,
     left: `${tooltipPosition.value.left}px`,
     maxWidth: props.maxWidth,
-    zIndex: props.zIndex.toString()
+    zIndex: props.zIndex
   }
 
   if (props.theme === 'custom') {
@@ -85,7 +86,7 @@ const tooltipStyle = computed(() => {
   return styles
 })
 
-const arrowStyle = computed(() => {
+const arrowStyle = computed<CSSProperties>(() => {
   const styles: Record<string, string> = {
     position: 'absolute',
     width: '0',
@@ -121,20 +122,24 @@ const arrowStyle = computed(() => {
     styles.left = `-${size}px`
   }
 
-  return styles
+  return styles as CSSProperties
 })
 
-const themeClass = computed(() => {
-  if (props.theme === 'dark') return 's-tooltip-dark'
-  if (props.theme === 'light') return 's-tooltip-light'
-  return 's-tooltip-custom'
+const tooltipClasses = computed(() => {
+  return cn(
+    'px-3 py-2 rounded-md text-sm leading-normal break-words pointer-events-auto shadow-lg',
+    props.theme === 'dark' && 'bg-popover text-popover-foreground',
+    props.theme === 'light' && 'bg-background text-foreground border border-border',
+    props.theme === 'custom' && '',
+    props.tooltipClass
+  )
 })
 
 // Methods
 function getArrowColor(): string {
   if (props.theme === 'custom' && props.color) return props.color
-  if (props.theme === 'light') return '#ffffff'
-  return 'rgb(30, 30, 30)'
+  if (props.theme === 'light') return 'var(--s-background)'
+  return 'var(--s-popover)'
 }
 
 function calculatePosition() {
@@ -282,7 +287,7 @@ function show() {
     emit('update:visible', true)
     emit('show')
     emit('toggle', true)
-    
+
     await nextTick()
     calculatePosition()
   }, props.showDelay)
@@ -365,7 +370,7 @@ function handleKeydown(event: KeyboardEvent) {
 
 function handleClickOutside(event: MouseEvent) {
   if (props.trigger !== 'click') return
-  
+
   const target = event.target as Node
   if (
     triggerRef.value &&
@@ -422,11 +427,11 @@ defineExpose({
 </script>
 
 <template>
-  <div class="s-tooltip-wrapper inline-block" v-bind="$attrs">
+  <div :class="cn('inline-block', ($attrs as any).class)" v-bind="{ ...$attrs, class: undefined }">
     <!-- Trigger slot -->
     <div
       ref="triggerRef"
-      class="s-tooltip-trigger"
+      class="inline-block"
       @mouseenter="handleTriggerMouseEnter"
       @mouseleave="handleTriggerMouseLeave"
       @click="handleTriggerClick"
@@ -442,23 +447,21 @@ defineExpose({
         <div
           v-show="isVisible"
           ref="tooltipRef"
-          class="s-tooltip"
-          :class="[themeClass, tooltipClass]"
+          :class="tooltipClasses"
           :style="tooltipStyle"
           role="tooltip"
           @mouseenter="handleTooltipMouseEnter"
           @mouseleave="handleTooltipMouseLeave"
         >
-          <div class="s-tooltip-content">
+          <div class="relative z-1">
             <slot name="content">
               {{ content }}
             </slot>
           </div>
-          
+
           <!-- Arrow -->
           <div
             v-if="arrow"
-            class="s-tooltip-arrow"
             :style="arrowStyle"
           />
         </div>
@@ -468,32 +471,6 @@ defineExpose({
 </template>
 
 <style scoped>
-.s-tooltip {
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 14px;
-  line-height: 1.5;
-  word-wrap: break-word;
-  pointer-events: auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.s-tooltip-dark {
-  background-color: rgb(30, 30, 30);
-  color: #ffffff;
-}
-
-.s-tooltip-light {
-  background-color: #ffffff;
-  color: rgb(30, 30, 30);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.s-tooltip-content {
-  position: relative;
-  z-index: 1;
-}
-
 /* Transitions */
 .tooltip-fade-enter-active,
 .tooltip-fade-leave-active {
@@ -510,10 +487,5 @@ defineExpose({
 .tooltip-fade-leave-from {
   opacity: 1;
   transform: scale(1);
-}
-
-/* Ensure trigger is focusable if needed */
-.s-tooltip-trigger {
-  display: inline-block;
 }
 </style>

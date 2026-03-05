@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -795,26 +796,26 @@ const variantStyles = computed(() => {
   
   if (props.variant === 'filled') {
     return {
-      '--dp-bg': 'var(--s-bg-tertiary)',
-      '--dp-bg-focus': 'var(--s-bg-tertiary)',
+      '--dp-bg': 'var(--s-accent)',
+      '--dp-bg-focus': 'var(--s-accent)',
       '--dp-border': 'transparent',
       '--dp-border-focus': color
     }
   }
-  
+
   if (props.variant === 'ghost') {
     return {
       '--dp-bg': 'transparent',
-      '--dp-bg-focus': 'var(--s-bg-tertiary)',
+      '--dp-bg-focus': 'var(--s-accent)',
       '--dp-border': 'transparent',
       '--dp-border-focus': color
     }
   }
-  
+
   // outlined (default)
   return {
-    '--dp-bg': 'var(--s-bg-primary)',
-    '--dp-bg-focus': 'var(--s-bg-primary)',
+    '--dp-bg': 'var(--s-background)',
+    '--dp-bg-focus': 'var(--s-background)',
     '--dp-border': 'var(--s-border)',
     '--dp-border-focus': color
   }
@@ -835,12 +836,12 @@ const teleportTarget = computed(() => {
 </script>
 
 <template>
-  <div v-bind="$attrs" :class="layoutClasses">
+  <div v-bind="$attrs" :class="cn(layoutClasses)">
     <!-- Label -->
     <label 
       v-if="label"
       :class="[
-        'font-medium text-(--s-text-primary) shrink-0',
+        'font-medium text-foreground shrink-0',
         sizeConfig.label,
         labelPlacement === 'left' ? 'mb-0' : ''
       ]"
@@ -873,20 +874,20 @@ const teleportTarget = computed(() => {
     >
       <!-- Calendar icon -->
       <span 
-        class="mdi mdi-calendar-blank-outline mr-2 text-(--s-text-secondary)"
+        class="mdi mdi-calendar-blank-outline mr-2 text-muted-foreground"
         :class="sizeConfig.icon"
       />
       
       <!-- Display value -->
       <span 
         v-if="hasValue"
-        class="flex-1 truncate text-(--s-text-primary)"
+        class="flex-1 truncate text-foreground"
       >
         {{ displayValue }}
       </span>
       <span 
         v-else
-        class="flex-1 text-(--s-text-tertiary)"
+        class="flex-1 text-muted-foreground"
       >
         {{ placeholder }}
       </span>
@@ -894,7 +895,7 @@ const teleportTarget = computed(() => {
       <!-- Loading spinner -->
       <span 
         v-if="loading"
-        class="mdi mdi-loading animate-spin text-(--s-text-secondary)"
+        class="mdi mdi-loading animate-spin text-muted-foreground"
         :class="sizeConfig.icon"
       />
       
@@ -902,7 +903,7 @@ const teleportTarget = computed(() => {
       <button
         v-else-if="clearable && hasValue && !disabled && !readonly"
         type="button"
-        class="p-1 -mr-1 rounded-full hover:bg-(--s-bg-tertiary) transition-colors text-(--s-text-secondary) hover:text-(--s-text-primary)"
+        class="p-1 -mr-1 rounded-full hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
         @click="clear"
       >
         <span class="mdi mdi-close text-sm" />
@@ -911,7 +912,7 @@ const teleportTarget = computed(() => {
       <!-- Dropdown arrow -->
       <span
         v-else
-        class="mdi transition-transform duration-200 text-(--s-text-secondary)"
+        class="mdi transition-transform duration-200 text-muted-foreground"
         :class="[sizeConfig.icon, isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down']"
       />
     </div>
@@ -929,7 +930,7 @@ const teleportTarget = computed(() => {
         <div
           v-if="isOpen"
           ref="calendarRef"
-          class="s-datepicker-calendar fixed z-50 bg-(--s-bg-primary) border border-(--s-border) rounded-xl shadow-2xl overflow-hidden"
+          class="s-datepicker-calendar fixed z-50 bg-background border border-border rounded-xl shadow-2xl overflow-hidden"
           :style="{
             top: dropdownPosition.top !== undefined ? `${dropdownPosition.top}px` : 'auto',
             bottom: dropdownPosition.bottom !== undefined ? `${dropdownPosition.bottom}px` : 'auto',
@@ -940,10 +941,10 @@ const teleportTarget = computed(() => {
           }"
         >
           <!-- Header -->
-          <div class="flex items-center justify-between px-4 py-3 border-b border-(--s-border) bg-(--s-bg-secondary)">
+          <div class="flex items-center justify-between px-4 py-3 border-b border-border bg-muted">
             <button
               type="button"
-              class="p-1.5 rounded-lg hover:bg-(--s-bg-tertiary) transition-colors text-(--s-text-secondary) hover:text-(--s-text-primary)"
+              class="p-1.5 rounded-lg hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
               @click="previousMonth"
             >
               <span class="mdi mdi-chevron-left text-lg" />
@@ -953,11 +954,11 @@ const teleportTarget = computed(() => {
               <!-- Month Picker Button -->
               <button
                 type="button"
-                class="px-2 py-1 rounded-lg hover:bg-(--s-bg-tertiary) transition-colors text-(--s-text-primary) font-semibold flex items-center gap-1"
+                class="px-2 py-1 rounded-lg hover:bg-accent transition-colors text-foreground font-semibold flex items-center gap-1"
                 @click="toggleMonthPicker"
               >
                 {{ monthNames[viewDate.getMonth()] }}
-                <span class="mdi mdi-chevron-down text-sm text-(--s-text-secondary)" />
+                <span class="mdi mdi-chevron-down text-sm text-muted-foreground" />
               </button>
               
               <!-- Month Picker Dropdown -->
@@ -971,7 +972,7 @@ const teleportTarget = computed(() => {
               >
                 <div
                   v-if="showMonthPicker"
-                  class="absolute top-full left-0 mt-1 z-10 bg-(--s-bg-primary) border border-(--s-border) rounded-lg shadow-xl p-2 grid grid-cols-3 gap-1 w-48"
+                  class="absolute top-full left-0 mt-1 z-10 bg-background border border-border rounded-lg shadow-xl p-2 grid grid-cols-3 gap-1 w-48"
                 >
                   <button
                     v-for="(month, index) in monthNamesShort"
@@ -981,7 +982,7 @@ const teleportTarget = computed(() => {
                     :class="[
                       viewDate.getMonth() === index 
                         ? 'text-white font-semibold' 
-                        : 'text-(--s-text-primary) hover:bg-(--s-bg-tertiary)'
+                        : 'text-foreground hover:bg-accent'
                     ]"
                     :style="viewDate.getMonth() === index ? { backgroundColor: color } : undefined"
                     @click="selectMonthFromPicker(index)"
@@ -994,11 +995,11 @@ const teleportTarget = computed(() => {
               <!-- Year Picker Button -->
               <button
                 type="button"
-                class="px-2 py-1 rounded-lg hover:bg-(--s-bg-tertiary) transition-colors text-(--s-text-primary) font-semibold flex items-center gap-1"
+                class="px-2 py-1 rounded-lg hover:bg-accent transition-colors text-foreground font-semibold flex items-center gap-1"
                 @click="toggleYearPicker"
               >
                 {{ viewDate.getFullYear() }}
-                <span class="mdi mdi-chevron-down text-sm text-(--s-text-secondary)" />
+                <span class="mdi mdi-chevron-down text-sm text-muted-foreground" />
               </button>
               
               <!-- Year Picker Dropdown -->
@@ -1013,7 +1014,7 @@ const teleportTarget = computed(() => {
                 <div
                   v-if="showYearPicker"
                   ref="yearPickerRef"
-                  class="absolute top-full right-0 mt-1 z-10 bg-(--s-bg-primary) border border-(--s-border) rounded-lg shadow-xl p-2 max-h-48 overflow-y-auto w-24 scrollbar-thin"
+                  class="absolute top-full right-0 mt-1 z-10 bg-background border border-border rounded-lg shadow-xl p-2 max-h-48 overflow-y-auto w-24 scrollbar-thin"
                 >
                   <button
                     v-for="year in years"
@@ -1023,7 +1024,7 @@ const teleportTarget = computed(() => {
                     :class="[
                       viewDate.getFullYear() === year 
                         ? 'text-white font-semibold' 
-                        : 'text-(--s-text-primary) hover:bg-(--s-bg-tertiary)'
+                        : 'text-foreground hover:bg-accent'
                     ]"
                     :style="viewDate.getFullYear() === year ? { backgroundColor: color } : undefined"
                     :data-current-year="viewDate.getFullYear() === year ? true : undefined"
@@ -1037,7 +1038,7 @@ const teleportTarget = computed(() => {
             
             <button
               type="button"
-              class="p-1.5 rounded-lg hover:bg-(--s-bg-tertiary) transition-colors text-(--s-text-secondary) hover:text-(--s-text-primary)"
+              class="p-1.5 rounded-lg hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
               @click="nextMonth"
             >
               <span class="mdi mdi-chevron-right text-lg" />
@@ -1045,11 +1046,11 @@ const teleportTarget = computed(() => {
           </div>
           
           <!-- Weekday headers -->
-          <div class="grid grid-cols-7 px-3 py-2 border-b border-(--s-border)">
+          <div class="grid grid-cols-7 px-3 py-2 border-b border-border">
             <div
               v-for="day in weekdaysOrdered"
               :key="day"
-              class="text-center text-xs font-medium text-(--s-text-tertiary) py-1"
+              class="text-center text-xs font-medium text-muted-foreground py-1"
             >
               {{ day }}
             </div>
@@ -1070,13 +1071,13 @@ const teleportTarget = computed(() => {
                 :class="[
                   sizeConfig.day,
                   {
-                    'text-(--s-text-tertiary)': !day.isCurrentMonth && !day.isSelected,
-                    'text-(--s-text-primary)': day.isCurrentMonth && !day.isSelected && !day.isDisabled,
+                    'text-muted-foreground': !day.isCurrentMonth && !day.isSelected,
+                    'text-foreground': day.isCurrentMonth && !day.isSelected && !day.isDisabled,
                     'font-bold ring-2 ring-inset': day.isToday && !day.isSelected,
                     'opacity-40 cursor-not-allowed': day.isDisabled,
-                    'cursor-pointer hover:bg-(--s-bg-tertiary)': !day.isDisabled && !day.isSelected,
+                    'cursor-pointer hover:bg-accent': !day.isDisabled && !day.isSelected,
                     'text-white font-semibold': day.isSelected,
-                    'bg-(--s-primary-alpha)': day.isInRange && !day.isSelected,
+                    'bg-primary/15': day.isInRange && !day.isSelected,
                     'rounded-l-lg': day.isRangeStart,
                     'rounded-r-lg': day.isRangeEnd
                   }
@@ -1110,14 +1111,14 @@ const teleportTarget = computed(() => {
           <!-- Time picker section -->
           <div 
             v-if="enableTime"
-            class="px-4 py-3 border-t border-(--s-border) bg-(--s-bg-secondary)"
+            class="px-4 py-3 border-t border-border bg-muted"
           >
             <div class="flex items-center justify-center gap-3">
               <!-- Hour input with arrows -->
               <div class="flex flex-col items-center" @wheel="handleHourWheel">
                 <button
                   type="button"
-                  class="p-0.5 rounded hover:bg-(--s-bg-tertiary) text-(--s-text-secondary)"
+                  class="p-0.5 rounded hover:bg-accent text-muted-foreground"
                   @click="adjustHour(1)"
                 >
                   <span class="mdi mdi-chevron-up text-lg" />
@@ -1126,7 +1127,7 @@ const teleportTarget = computed(() => {
                   type="text"
                   inputmode="numeric"
                   :value="displayHour()"
-                  class="w-12 h-10 text-center font-mono text-xl bg-(--s-bg-primary) text-(--s-text-primary) border border-(--s-border) rounded-lg focus:outline-none focus:ring-2 focus:ring-(--s-primary) focus:border-transparent"
+                  class="w-12 h-10 text-center font-mono text-xl bg-background text-foreground border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   maxlength="2"
                   @keydown="(e: KeyboardEvent) => { if (!/^[0-9]$/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) e.preventDefault() }"
                   @change="handleHourInput"
@@ -1134,20 +1135,20 @@ const teleportTarget = computed(() => {
                 />
                 <button
                   type="button"
-                  class="p-0.5 rounded hover:bg-(--s-bg-tertiary) text-(--s-text-secondary)"
+                  class="p-0.5 rounded hover:bg-accent text-muted-foreground"
                   @click="adjustHour(-1)"
                 >
                   <span class="mdi mdi-chevron-down text-lg" />
                 </button>
               </div>
               
-              <span class="text-2xl font-bold text-(--s-text-primary) pb-1">:</span>
+              <span class="text-2xl font-bold text-foreground pb-1">:</span>
               
               <!-- Minute input with arrows -->
               <div class="flex flex-col items-center" @wheel="handleMinuteWheel">
                 <button
                   type="button"
-                  class="p-0.5 rounded hover:bg-(--s-bg-tertiary) text-(--s-text-secondary)"
+                  class="p-0.5 rounded hover:bg-accent text-muted-foreground"
                   @click="adjustMinute(minuteStep)"
                 >
                   <span class="mdi mdi-chevron-up text-lg" />
@@ -1156,7 +1157,7 @@ const teleportTarget = computed(() => {
                   type="text"
                   inputmode="numeric"
                   :value="String(selectedMinute).padStart(2, '0')"
-                  class="w-12 h-10 text-center font-mono text-xl bg-(--s-bg-primary) text-(--s-text-primary) border border-(--s-border) rounded-lg focus:outline-none focus:ring-2 focus:ring-(--s-primary) focus:border-transparent"
+                  class="w-12 h-10 text-center font-mono text-xl bg-background text-foreground border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   maxlength="2"
                   @keydown="(e: KeyboardEvent) => { if (!/^[0-9]$/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) e.preventDefault() }"
                   @change="handleMinuteInput"
@@ -1164,7 +1165,7 @@ const teleportTarget = computed(() => {
                 />
                 <button
                   type="button"
-                  class="p-0.5 rounded hover:bg-(--s-bg-tertiary) text-(--s-text-secondary)"
+                  class="p-0.5 rounded hover:bg-accent text-muted-foreground"
                   @click="adjustMinute(-minuteStep)"
                 >
                   <span class="mdi mdi-chevron-down text-lg" />
@@ -1179,7 +1180,7 @@ const teleportTarget = computed(() => {
                   :class="[
                     isAM 
                       ? 'text-white' 
-                      : 'text-(--s-text-secondary) hover:bg-(--s-bg-tertiary)'
+                      : 'text-muted-foreground hover:bg-accent'
                   ]"
                   :style="isAM ? { backgroundColor: color } : undefined"
                   @click="isAM || toggleAMPM()"
@@ -1192,7 +1193,7 @@ const teleportTarget = computed(() => {
                   :class="[
                     !isAM 
                       ? 'text-white' 
-                      : 'text-(--s-text-secondary) hover:bg-(--s-bg-tertiary)'
+                      : 'text-muted-foreground hover:bg-accent'
                   ]"
                   :style="!isAM ? { backgroundColor: color } : undefined"
                   @click="isAM && toggleAMPM()"
@@ -1206,7 +1207,7 @@ const teleportTarget = computed(() => {
           <!-- Footer -->
           <div 
             v-if="showToday || enableTime"
-            class="flex items-center justify-between px-4 py-2 border-t border-(--s-border)"
+            class="flex items-center justify-between px-4 py-2 border-t border-border"
           >
             <button
               v-if="showToday"

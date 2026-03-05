@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, type Component } from 'vue'
+import { computed, type CSSProperties, type Component } from 'vue'
+import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
 
@@ -17,21 +18,22 @@ const props = withDefaults(defineProps<Props>(), {
   depth: undefined
 })
 
-const computedStyle = computed(() => {
-  const style: Record<string, string> = {}
-  
+const computedStyle = computed<CSSProperties>(() => {
+  const style: CSSProperties = {}
+
   // Handle size
   if (props.size !== undefined) {
-    style.fontSize = typeof props.size === 'number' ? `${props.size}px` : props.size
-    style.width = typeof props.size === 'number' ? `${props.size}px` : props.size
-    style.height = typeof props.size === 'number' ? `${props.size}px` : props.size
+    const sizeVal = typeof props.size === 'number' ? `${props.size}px` : props.size
+    style.fontSize = sizeVal
+    style.width = sizeVal
+    style.height = sizeVal
   }
-  
+
   // Handle color
   if (props.color) {
     style.color = props.color
   }
-  
+
   // Handle depth (opacity)
   if (props.depth) {
     const opacityMap: Record<number, string> = {
@@ -43,37 +45,34 @@ const computedStyle = computed(() => {
     }
     style.opacity = opacityMap[props.depth] || '1'
   }
-  
+
   return style
 })
 </script>
 
 <template>
-  <i class="s-icon" :style="computedStyle" role="img" v-bind="$attrs">
+  <i
+    :class="cn('inline-flex items-center justify-center align-middle leading-none', ($attrs as any).class)"
+    :style="computedStyle"
+    role="img"
+    v-bind="{ ...$attrs, class: undefined }"
+  >
     <component :is="component" v-if="component" />
     <slot v-else />
   </i>
 </template>
 
 <style scoped>
-.s-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  line-height: 1;
-}
-
 /* Ensure svg children scale correctly */
-.s-icon :deep(svg) {
+.inline-flex :deep(svg) {
   width: 1em;
   height: 1em;
   fill: currentColor;
 }
 
 /* Ensure font icons inherit size */
-.s-icon :deep(i), 
-.s-icon :deep(span) {
+.inline-flex :deep(i),
+.inline-flex :deep(span) {
   font-size: inherit;
 }
 </style>

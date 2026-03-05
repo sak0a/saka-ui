@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useAttrs, type CSSProperties } from 'vue'
+import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
+
+const attrs = useAttrs()
 
 export interface Props {
   modelValue?: boolean | string | number
@@ -27,7 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: false,
   type: 'inset',
   size: 'medium',
-  color: 'var(--s-primary)',
+  color: undefined,
   disabled: false,
   loading: false,
   checkedValue: true,
@@ -126,59 +129,91 @@ const sizeConfig = computed(() => {
   return sizes[props.size]
 })
 
-const trackStyle = computed(() => {
-  if (isChecked.value) {
+// Track style: when color is set and checked, use inline style; otherwise use token classes
+const trackStyle = computed<CSSProperties | undefined>(() => {
+  if (isChecked.value && props.color) {
     return { backgroundColor: props.color }
   }
-  return {}
+  return undefined
+})
+
+// Icon color style for checked icon when color is set
+const checkedIconStyle = computed<CSSProperties | undefined>(() => {
+  if (props.color) {
+    return { color: props.color }
+  }
+  return undefined
+})
+
+const wrapperClasses = computed(() => {
+  return cn(
+    'inline-flex items-center gap-2',
+    { 'opacity-50 cursor-not-allowed': props.disabled },
+    (attrs as Record<string, unknown>).class,
+  )
+})
+
+const trackClasses = computed(() => {
+  return cn(
+    's-switch-track relative inline-flex items-center shrink-0 rounded-full transition-all duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
+    hasTrackText.value ? 'min-w-16 px-1' : sizeConfig.value.track,
+    // Unchecked state uses accent background; checked uses primary (or inline style when color is set)
+    isChecked.value && !props.color ? 'bg-primary' : '',
+    !isChecked.value ? 'bg-accent' : '',
+    { 'cursor-pointer': !props.disabled && !props.loading, 'cursor-not-allowed': props.disabled || props.loading },
+    { 'h-6': hasTrackText.value && props.size === 'medium', 'h-5': hasTrackText.value && props.size === 'small', 'h-7': hasTrackText.value && props.size === 'large' },
+    props.trackClass,
+  )
+})
+
+const thumbClasses = computed(() => {
+  return cn(
+    's-switch-thumb inline-flex items-center justify-center rounded-full bg-white shadow-md transition-all duration-300 ease-in-out z-10',
+    hasTrackText.value ? 'w-5 h-5' : sizeConfig.value.thumb,
+    hasTrackText.value
+      ? (isChecked.value ? 'ml-auto' : 'mr-auto')
+      : (isChecked.value ? sizeConfig.value.thumbTranslate : 'translate-x-0.5'),
+    props.thumbClass,
+  )
 })
 </script>
 
 <template>
   <div
     v-bind="$attrs"
-    class="s-switch-wrapper inline-flex items-center gap-2"
-    :class="{ 'opacity-50 cursor-not-allowed': disabled }"
+    :class="wrapperClasses"
   >
     <!-- Label Before -->
     <span
       v-if="labelBefore"
-      class="s-switch-label text-(--s-text-secondary)"
+      class="select-none text-muted-foreground"
       :class="[sizeConfig.label, labelClass]"
     >
       {{ labelBefore }}
     </span>
-    
+
     <!-- Switch Track -->
     <button
       type="button"
       role="switch"
       :aria-checked="isChecked"
       :disabled="disabled || loading"
-      class="s-switch-track relative inline-flex items-center shrink-0 rounded-full transition-all duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--s-primary)"
-      :class="[
-        hasTrackText ? 'min-w-16 px-1' : sizeConfig.track,
-        !hasTrackText && (isChecked ? '' : 'bg-(--s-bg-tertiary)'),
-        hasTrackText && (isChecked ? '' : 'bg-(--s-bg-tertiary)'),
-        { 'cursor-pointer': !disabled && !loading, 'cursor-not-allowed': disabled || loading },
-        { 'h-6': hasTrackText && size === 'medium', 'h-5': hasTrackText && size === 'small', 'h-7': hasTrackText && size === 'large' },
-        trackClass
-      ]"
+      :class="trackClasses"
       :style="trackStyle"
       @click="toggle"
       @keydown="handleKeydown"
     >
       <!-- Track Text (unchecked - right side) -->
-      <span 
+      <span
         v-if="hasTrackText && !isChecked && uncheckedText"
         class="absolute right-2 text-white font-semibold select-none"
         :class="sizeConfig.trackText"
       >
         {{ uncheckedText }}
       </span>
-      
+
       <!-- Track Text (checked - left side) -->
-      <span 
+      <span
         v-if="hasTrackText && isChecked && checkedText"
         class="absolute left-2 text-white font-semibold select-none"
         :class="sizeConfig.trackText"
@@ -187,46 +222,38 @@ const trackStyle = computed(() => {
       </span>
 
       <!-- Thumb -->
-      <span
-        class="s-switch-thumb inline-flex items-center justify-center rounded-full bg-white shadow-md transition-all duration-300 ease-in-out z-10"
-        :class="[
-          hasTrackText ? 'w-5 h-5' : sizeConfig.thumb,
-          hasTrackText
-            ? (isChecked ? 'ml-auto' : 'mr-auto')
-            : (isChecked ? sizeConfig.thumbTranslate : 'translate-x-0.5'),
-          thumbClass
-        ]"
-      >
+      <span :class="thumbClasses">
         <!-- Loading Spinner -->
-        <span 
-          v-if="loading" 
-          class="mdi mdi-loading animate-spin text-(--s-text-tertiary)"
+        <span
+          v-if="loading"
+          class="mdi mdi-loading animate-spin text-muted-foreground"
           :class="sizeConfig.icon"
         ></span>
-        
+
         <!-- Custom Icons via Slots -->
         <template v-else>
           <slot v-if="isChecked" name="checked-icon">
-            <span 
-              v-if="checkedIcon" 
+            <span
+              v-if="checkedIcon"
               :class="['mdi', `mdi-${checkedIcon}`, sizeConfig.icon]"
-              :style="{ color: color }"
+              :style="checkedIconStyle"
+              :data-no-color="!color ? '' : undefined"
             ></span>
           </slot>
           <slot v-else name="unchecked-icon">
-            <span 
-              v-if="uncheckedIcon" 
-              :class="['mdi', `mdi-${uncheckedIcon}`, sizeConfig.icon, 'text-(--s-text-tertiary)']"
+            <span
+              v-if="uncheckedIcon"
+              :class="['mdi', `mdi-${uncheckedIcon}`, sizeConfig.icon, 'text-muted-foreground']"
             ></span>
           </slot>
         </template>
       </span>
     </button>
-    
+
     <!-- Label After -->
     <span
       v-if="labelAfter"
-      class="s-switch-label text-(--s-text-secondary)"
+      class="select-none text-muted-foreground"
       :class="[sizeConfig.label, labelClass]"
     >
       {{ labelAfter }}
@@ -243,12 +270,7 @@ const trackStyle = computed(() => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.s-switch-wrapper:hover:not(.cursor-not-allowed) .s-switch-thumb {
+.s-switch-track:hover:not(:disabled) .s-switch-thumb {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.12);
 }
-
-.s-switch-label {
-  user-select: none;
-}
 </style>
-

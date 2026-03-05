@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { ref, computed, watch, nextTick, onMounted } from 'vue'
+import { ref, computed, watch, nextTick, onMounted, type CSSProperties } from 'vue'
+import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 // Props interface
 export interface Props {
@@ -84,7 +87,7 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'text',
   variant: 'outlined',
   size: 'medium',
-  color: 'var(--s-primary)',
+  color: undefined,
   rounded: 'md',
   labelPlacement: 'top',
   labelAnimation: 'morph',
@@ -270,10 +273,10 @@ const roundedConfig = computed(() => {
 // Variant styles
 const variantClasses = computed(() => {
   const base = {
-    outlined: 'border bg-(--s-bg-primary) border-(--s-border) hover:border-(--s-border-hover)',
-    filled: 'border-transparent bg-(--s-bg-tertiary)',
-    underlined: 'border-b border-t-0 border-l-0 border-r-0 rounded-none! bg-transparent border-(--s-border)',
-    ghost: 'border-transparent bg-transparent hover:bg-(--s-bg-tertiary)'
+    outlined: 'border bg-background border-border hover:border-input',
+    filled: 'border-transparent bg-accent',
+    underlined: 'border-b border-t-0 border-l-0 border-r-0 rounded-none! bg-transparent border-border',
+    ghost: 'border-transparent bg-transparent hover:bg-accent'
   }
   return base[props.variant]
 })
@@ -281,10 +284,23 @@ const variantClasses = computed(() => {
 // Focus classes
 const focusClasses = computed(() => {
   if (!isFocused.value) return ''
+  if (props.color) return '' // handled by inline style
   if (props.variant === 'underlined') {
-    return 'border-(--s-primary)'
+    return 'border-primary'
   }
-  return 'ring-2 ring-(--s-primary)/20 border-(--s-primary)'
+  return 'ring-2 ring-ring/20 border-primary'
+})
+
+// Focus inline style when custom color is set
+const focusStyle = computed<CSSProperties | undefined>(() => {
+  if (!isFocused.value || !props.color) return undefined
+  if (props.variant === 'underlined') {
+    return { borderColor: props.color }
+  }
+  return {
+    borderColor: props.color,
+    boxShadow: `0 0 0 2px color-mix(in srgb, ${props.color} 20%, transparent)`
+  }
 })
 
 // Validation state border colors
@@ -300,19 +316,25 @@ const validationBorderClasses = computed(() => {
 
 // Character counter color
 const counterColorClass = computed(() => {
-  if (!props.maxLength) return 'text-(--s-text-tertiary)'
+  if (!props.maxLength) return 'text-muted-foreground'
   const ratio = currentLength.value / props.maxLength
   if (ratio >= 1) return 'text-red-500'
   if (ratio >= 0.9) return 'text-amber-500'
   if (ratio >= 0.75) return 'text-amber-400'
-  return 'text-(--s-text-tertiary)'
+  return 'text-muted-foreground'
 })
 
 // Icon color classes
 const iconColorClass = computed(() => {
   if (props.iconColor) return ''
-  if (isFocused.value) return 'text-(--s-primary)'
-  return 'text-(--s-text-tertiary)'
+  if (isFocused.value) return props.color ? '' : 'text-primary'
+  return 'text-muted-foreground'
+})
+
+// Icon color inline style when custom color is set
+const iconFocusStyle = computed<CSSProperties | undefined>(() => {
+  if (!isFocused.value || props.iconColor || !props.color) return undefined
+  return { color: props.color }
 })
 
 // Label layout classes for non-floating labels
@@ -339,9 +361,9 @@ const labelLayoutClasses = computed(() => {
 
 // Label text alignment
 const labelClasses = computed(() => {
-  const base = `font-medium text-(--s-text-secondary) ${sizeConfig.value.label}`
+  const base = `font-medium text-muted-foreground ${sizeConfig.value.label}`
   if (isFloatingLabel.value) return base
-  
+
   const [side, align] = props.labelPlacement.split('-')
   if (side === 'top' || side === 'bottom') {
     if (align === 'center') return `${base} text-center`
@@ -691,9 +713,9 @@ watch(() => props.error, (newError) => {
 </script>
 
 <template>
-  <div 
-    class="s-input-wrapper relative w-full" 
-    :class="[labelLayoutClasses, wrapperClass]"
+  <div
+    v-bind="$attrs"
+    :class="cn('s-input-wrapper relative w-full', labelLayoutClasses, wrapperClass, $attrs.class as string)"
   >
     <!-- Static Label (non-floating) -->
     <label 
@@ -718,11 +740,11 @@ watch(() => props.error, (newError) => {
             iconColorClass,
             size === 'small' ? 'pl-2.5' : size === 'large' ? 'pl-4' : 'pl-3'
           ]"
-          :style="iconColor ? { color: iconColor } : undefined"
+          :style="iconColor ? { color: iconColor } : iconFocusStyle"
         >
           <slot name="prefix">
             <span v-if="iconLeft" :class="['mdi', `mdi-${iconLeft}`]" />
-            <span v-if="prefix" class="text-(--s-text-secondary) text-sm">{{ prefix }}</span>
+            <span v-if="prefix" class="text-muted-foreground text-sm">{{ prefix }}</span>
           </slot>
         </span>
 
@@ -749,7 +771,7 @@ watch(() => props.error, (newError) => {
           :aria-describedby="(displayError || displaySuccess || displayWarning || hint) ? messageId : ariaDescribedBy"
           :aria-invalid="!!displayError"
           :aria-required="required"
-          class="s-input w-full outline-none transition-all duration-200 text-(--s-text-primary) placeholder:text-(--s-text-tertiary)"
+          class="s-input w-full outline-none transition-all duration-200 text-foreground placeholder:text-muted-foreground"
           :class="[
             inputPaddingClasses,
             roundedConfig,
@@ -763,6 +785,7 @@ watch(() => props.error, (newError) => {
               'py-2': isFloatingLabel
             }
           ]"
+          :style="focusStyle"
           @input="handleInput"
           @focus="handleFocus"
           @blur="handleBlur"
@@ -790,7 +813,7 @@ watch(() => props.error, (newError) => {
           :aria-describedby="(displayError || displaySuccess || displayWarning || hint) ? messageId : ariaDescribedBy"
           :aria-invalid="!!displayError"
           :aria-required="required"
-          class="s-input w-full outline-none transition-all duration-200 text-(--s-text-primary) placeholder:text-(--s-text-tertiary)"
+          class="s-input w-full outline-none transition-all duration-200 text-foreground placeholder:text-muted-foreground"
           :class="[
             sizeConfig.input,
             size === 'small' ? 'px-2.5 py-1.5' : size === 'large' ? 'px-4 py-2.5' : 'px-3 py-2',
@@ -808,7 +831,7 @@ watch(() => props.error, (newError) => {
               'resize': resize === 'both'
             }
           ]"
-          :style="{ minHeight: type === 'textarea' ? `${rows * 1.5 + 1}rem` : undefined }"
+          :style="{ ...focusStyle, minHeight: type === 'textarea' ? `${rows * 1.5 + 1}rem` : undefined }"
           @input="handleInput"
           @focus="handleFocus"
           @blur="handleBlur"
@@ -824,10 +847,11 @@ watch(() => props.error, (newError) => {
             labelClass,
             size === 'small' ? 'left-2.5' : size === 'large' ? 'left-4' : 'left-3',
             iconLeft || prefix ? (size === 'small' ? 'left-8' : size === 'large' ? 'left-12' : 'left-10') : '',
-            isLabelFloated 
-              ? [sizeConfig.floatLabelActive, 'text-(--s-primary) bg-(--s-bg-primary) px-1 -ml-1']
-              : ['top-1/2 -translate-y-1/2', sizeConfig.floatLabel, 'text-(--s-text-tertiary)']
+            isLabelFloated
+              ? [sizeConfig.floatLabelActive, color ? '' : 'text-primary', 'bg-background px-1 -ml-1']
+              : ['top-1/2 -translate-y-1/2', sizeConfig.floatLabel, 'text-muted-foreground']
           ]"
+          :style="isLabelFloated && color ? { color } : undefined"
         >
           {{ label }}
           <span v-if="required" class="text-red-500 ml-0.5">*</span>
@@ -845,14 +869,14 @@ watch(() => props.error, (newError) => {
           <!-- Loading spinner -->
           <span 
             v-if="loading" 
-            class="mdi mdi-loading animate-spin text-(--s-text-secondary)"
+            class="mdi mdi-loading animate-spin text-muted-foreground"
           />
           
           <!-- Clear button -->
           <button
             v-else-if="clearable && hasValue && !disabled && !readonly"
             type="button"
-            class="mdi mdi-close-circle text-(--s-text-tertiary) hover:text-(--s-text-secondary) transition-colors cursor-pointer"
+            class="mdi mdi-close-circle text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
             tabindex="-1"
             @click="clear"
           />
@@ -873,7 +897,7 @@ watch(() => props.error, (newError) => {
           <button
             v-if="type === 'password' && showPasswordToggle && !loading"
             type="button"
-            class="mdi transition-colors cursor-pointer text-(--s-text-tertiary) hover:text-(--s-text-secondary)"
+            class="mdi transition-colors cursor-pointer text-muted-foreground hover:text-foreground"
             :class="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
             tabindex="-1"
             @click="togglePassword"
@@ -881,20 +905,21 @@ watch(() => props.error, (newError) => {
           
           <!-- Custom suffix -->
           <slot name="suffix">
-            <span 
-              v-if="iconRight" 
+            <span
+              v-if="iconRight"
               :class="['mdi', `mdi-${iconRight}`, iconColorClass]"
-              :style="iconColor ? { color: iconColor } : undefined"
+              :style="iconColor ? { color: iconColor } : iconFocusStyle"
             />
-            <span v-if="suffix" class="text-(--s-text-secondary) text-sm">{{ suffix }}</span>
+            <span v-if="suffix" class="text-muted-foreground text-sm">{{ suffix }}</span>
           </slot>
         </span>
 
         <!-- Animated border line (underlined variant) -->
         <div 
           v-if="variant === 'underlined'"
-          class="s-input-border-animated absolute bottom-0 left-1/2 h-0.5 bg-(--s-primary) transition-all duration-200 ease-out"
-          :class="isFocused ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2'"
+          class="s-input-border-animated absolute bottom-0 left-1/2 h-0.5 transition-all duration-200 ease-out"
+          :class="[color ? '' : 'bg-primary', isFocused ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2']"
+          :style="color ? { backgroundColor: color } : undefined"
         />
 
         <!-- Suggestions Dropdown -->
@@ -909,7 +934,7 @@ watch(() => props.error, (newError) => {
           <ul
             v-if="shouldShowSuggestions"
             ref="suggestionsRef"
-            class="s-input-suggestions absolute left-0 right-0 top-full mt-1 z-50 rounded-lg border border-(--s-border) bg-(--s-bg-primary) shadow-lg overflow-hidden"
+            class="s-input-suggestions absolute left-0 right-0 top-full mt-1 z-50 rounded-lg border border-border bg-background shadow-lg overflow-hidden"
             role="listbox"
             :aria-label="`Suggestions for ${label || 'input'}`"
           >
@@ -920,16 +945,16 @@ watch(() => props.error, (newError) => {
               :aria-selected="index === selectedSuggestionIndex"
               class="px-3 py-2 text-sm cursor-pointer transition-colors"
               :class="[
-                index === selectedSuggestionIndex 
-                  ? 'bg-(--s-primary) text-white' 
-                  : 'text-(--s-text-primary) hover:bg-(--s-bg-tertiary)'
+                index === selectedSuggestionIndex
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-foreground hover:bg-accent'
               ]"
               @mousedown.prevent="selectSuggestion(suggestion)"
               @mouseenter="selectedSuggestionIndex = index"
             >
               <template v-if="type === 'email'">
-                <span class="text-(--s-text-secondary)">{{ String(modelValue || '').split('@')[0] }}</span>
-                <span :class="index === selectedSuggestionIndex ? 'text-white' : 'text-(--s-primary) font-medium'">{{ suggestion }}</span>
+                <span class="text-muted-foreground">{{ String(modelValue || '').split('@')[0] }}</span>
+                <span :class="index === selectedSuggestionIndex ? 'text-primary-foreground' : 'text-primary font-medium'">{{ suggestion }}</span>
               </template>
               <template v-else>
                 {{ suggestion }}
@@ -982,7 +1007,7 @@ watch(() => props.error, (newError) => {
           <p 
             v-else-if="hint"
             key="hint"
-            class="text-xs text-(--s-text-tertiary)"
+            class="text-xs text-muted-foreground"
           >
             {{ hint }}
           </p>

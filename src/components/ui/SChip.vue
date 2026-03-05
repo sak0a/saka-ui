@@ -1,7 +1,35 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useAttrs, type CSSProperties } from 'vue'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
+
+const attrs = useAttrs()
+
+const chipVariants = cva(
+  'inline-flex items-center rounded-full font-medium transition-all duration-300 select-none border border-transparent',
+  {
+    variants: {
+      variant: {
+        filled: 'bg-primary text-primary-foreground',
+        outlined: 'border-[1.5px] border-primary text-primary bg-transparent',
+        light: 'bg-primary/15 text-primary',
+      },
+      size: {
+        small: 'text-xs px-2 py-0.5 gap-1',
+        medium: 'text-sm px-3 py-1 gap-1.5',
+        large: 'text-base px-4 py-1.5 gap-2',
+      },
+    },
+    defaultVariants: {
+      variant: 'filled',
+      size: 'medium',
+    },
+  }
+)
+
+export type ChipVariants = VariantProps<typeof chipVariants>
 
 export interface Props {
   variant?: 'filled' | 'outlined' | 'light'
@@ -15,7 +43,7 @@ export interface Props {
 const props = withDefaults(defineProps<Props>(), {
   variant: 'filled',
   size: 'medium',
-  color: 'var(--s-primary)',
+  color: undefined,
   closable: false,
   disabled: false
 })
@@ -25,45 +53,40 @@ const emit = defineEmits<{
   click: []
 }>()
 
-const computedStyle = computed(() => {
-  const style: Record<string, string> = {}
-  
-  // Use the color prop directly if it's a hex/rgba, 
-  // or it will use the CSS variable provided by default
-  const colorValue = props.color
-  
+// Custom color override: when color prop is explicitly set, use inline styles
+const colorStyle = computed<CSSProperties | undefined>(() => {
+  if (!props.color) return undefined
+
+  const c = props.color
+
   if (props.variant === 'filled') {
-    style.backgroundColor = colorValue
-    style.color = '#fff' // Maintain white text for filled chips unless we want theme-aware text
+    return { backgroundColor: c, color: '#fff' }
   } else if (props.variant === 'outlined') {
-    style.border = `1.5px solid ${colorValue}`
-    style.color = colorValue
-    style.backgroundColor = 'transparent'
+    return { border: `1.5px solid ${c}`, color: c, backgroundColor: 'transparent' }
   } else if (props.variant === 'light') {
-    // If it's a variable, we use alpha from CSS variable if available
-    if (colorValue.includes('var(--s-primary)')) {
-      style.backgroundColor = 'var(--s-primary-alpha)'
-    } else {
-      style.backgroundColor = `${colorValue}20`
-    }
-    style.color = colorValue
+    const bg = c.startsWith('var(') ? `color-mix(in srgb, ${c} 15%, transparent)` : `${c}20`
+    return { backgroundColor: bg, color: c }
   }
-  
-  if (props.disabled) {
-    style.opacity = '0.5'
-    style.cursor = 'not-allowed'
-  }
-  
-  return style
+
+  return undefined
 })
 
-const sizeClasses = computed(() => {
-  const sizes = {
-    small: 'text-xs px-2 py-0.5 gap-1',
-    medium: 'text-sm px-3 py-1 gap-1.5',
-    large: 'text-base px-4 py-1.5 gap-2'
-  }
-  return sizes[props.size]
+const chipClasses = computed(() => {
+  return cn(
+    chipVariants({
+      variant: props.color ? undefined : props.variant,
+      size: props.size,
+    }),
+    // When color is set, skip variant styling (handled by inline style) but keep base classes
+    props.color && 'inline-flex items-center rounded-full font-medium transition-all duration-300 select-none border border-transparent',
+    // Hover/active interactions when color is set and filled
+    props.color && props.variant === 'filled' && 'hover:brightness-110',
+    {
+      'cursor-pointer hover:brightness-110 active:scale-95': !props.disabled,
+      'opacity-50 cursor-not-allowed': props.disabled,
+    },
+    (attrs as Record<string, unknown>).class,
+  )
 })
 
 const handleClose = (e: Event) => {
@@ -83,17 +106,16 @@ const handleClick = () => {
 <template>
   <div
     v-bind="$attrs"
-    class="s-chip inline-flex items-center rounded-full font-medium transition-all duration-300"
-    :class="[sizeClasses, { 'cursor-pointer hover:brightness-110 active:scale-95': !disabled }]"
-    :style="computedStyle"
+    :class="chipClasses"
+    :style="colorStyle"
     @click="handleClick"
   >
-    <span class="chip-content" :class="contentClass">
+    <span class="inline-flex items-center gap-1" :class="contentClass">
       <slot />
     </span>
     <button
       v-if="closable"
-      class="chip-close-btn ml-1 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+      class="inline-flex items-center justify-center rounded-full border-none bg-transparent p-0 leading-none cursor-pointer hover:bg-black/10 dark:hover:bg-white/10 transition-colors disabled:cursor-not-allowed"
       :class="{
         'w-3.5 h-3.5 text-xs': size === 'small',
         'w-4.5 h-4.5 text-sm': size === 'medium',
@@ -102,40 +124,7 @@ const handleClick = () => {
       @click="handleClose"
       :disabled="disabled"
     >
-      <span class="leading-none">×</span>
+      <span class="leading-none">&times;</span>
     </button>
   </div>
 </template>
-
-<style scoped>
-.s-chip {
-  user-select: none;
-  -webkit-user-select: none;
-  border: 1px solid transparent;
-}
-
-.chip-close-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  line-height: 1;
-}
-
-.chip-close-btn:disabled {
-  cursor: not-allowed;
-}
-
-.chip-content {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.s-chip:not(.disabled):active {
-  transform: scale(0.98);
-}
-</style>

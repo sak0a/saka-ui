@@ -1,7 +1,8 @@
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
-import { ref, computed, watch, provide, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, computed, watch, provide, onMounted, onBeforeUnmount, nextTick, type CSSProperties } from 'vue'
+import { cn } from '~/lib/utils'
 
 export interface SelectOption {
   value: any
@@ -60,7 +61,7 @@ const props = withDefaults(defineProps<Props>(), {
   loading: false,
   placeholder: 'Select...',
   size: 'medium',
-  color: 'var(--s-primary)',
+  color: undefined,
   variant: 'outlined',
   rounded: 'md',
   maxHeight: '280px',
@@ -608,18 +609,31 @@ const dropdownRoundedConfig = computed(() => {
 // Variant styles
 const variantClasses = computed(() => {
   const base = {
-    outlined: 'border bg-(--s-bg-primary) border-(--s-border) hover:border-(--s-border-hover)',
-    filled: 'border-transparent bg-(--s-bg-tertiary)',
-    underlined: 'border-b border-t-0 border-l-0 border-r-0 rounded-none bg-transparent border-(--s-border)'
+    outlined: 'border bg-background border-border hover:border-input',
+    filled: 'border-transparent bg-accent',
+    underlined: 'border-b border-t-0 border-l-0 border-r-0 rounded-none bg-transparent border-border'
   }
   return base[props.variant]
 })
 
 const focusClasses = computed(() => {
   if (!isFocused.value && !isOpen.value) return ''
-  return props.variant === 'underlined' 
-    ? `border-(--s-primary)` 
-    : `ring-2 ring-(--s-primary)/20 border-(--s-primary)`
+  if (props.color) return '' // handled by inline style
+  return props.variant === 'underlined'
+    ? 'border-primary'
+    : 'ring-2 ring-ring/20 border-primary'
+})
+
+// Focus inline style when custom color is set
+const focusStyle = computed<CSSProperties | undefined>(() => {
+  if ((!isFocused.value && !isOpen.value) || !props.color) return undefined
+  if (props.variant === 'underlined') {
+    return { borderColor: props.color }
+  }
+  return {
+    borderColor: props.color,
+    boxShadow: `0 0 0 2px color-mix(in srgb, ${props.color} 20%, transparent)`
+  }
 })
 
 const teleportTarget = computed(() => {
@@ -658,7 +672,7 @@ const labelLayoutClasses = computed(() => {
 })
 
 const labelClasses = computed(() => {
-  const base = 'font-medium text-(--s-text-secondary)'
+  const base = 'font-medium text-muted-foreground'
   const [side, align] = props.labelPlacement.split('-')
   
   let alignClass = ''
@@ -676,17 +690,20 @@ const labelClasses = computed(() => {
 const floatLabelBackground = computed(() => {
   switch (props.variant) {
     case 'filled':
-      return 'var(--s-bg-tertiary)'
+      return 'var(--s-accent)'
     case 'underlined':
       return 'transparent'
     default: // outlined
-      return 'var(--s-bg-primary)'
+      return 'var(--s-background)'
   }
 })
+
+// Resolved color for inline styles - falls back to CSS variable
+const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
 </script>
 
 <template>
-  <div v-bind="$attrs" class="s-select relative w-full" :class="labelLayoutClasses">
+  <div v-bind="$attrs" :class="cn('s-select relative w-full', labelLayoutClasses, $attrs.class as string)">
     <!-- Static Label (traditional placement) -->
     <label 
       v-if="label && !labelPlaceholder" 
@@ -722,6 +739,7 @@ const floatLabelBackground = computed(() => {
           's-select-trigger--elevated': (isFocused || isOpen) && !disabled
         }
       ]"
+      :style="focusStyle"
       @click="!filter && toggle()"
       @keydown="!filter && handleKeydown($event)"
       @focus="!filter && handleFocus($event)"
@@ -735,9 +753,9 @@ const floatLabelBackground = computed(() => {
           showFloatLabel 
             ? 's-float-label--active text-xs px-1.5 opacity-100' 
             : 'text-sm translate-y-0 opacity-40',
-          { 'text-(--s-text-tertiary)': !showFloatLabel }
+          { 'text-muted-foreground': !showFloatLabel }
         ]"
-        :style="showFloatLabel ? { color: color, backgroundColor: floatLabelBackground } : {}"
+        :style="showFloatLabel ? { color: resolvedColor, backgroundColor: floatLabelBackground } : {}"
       >
         {{ labelPlaceholder }}
         <span v-if="required" class="text-red-500 ml-0.5">*</span>
@@ -754,7 +772,7 @@ const floatLabelBackground = computed(() => {
           :value="isFilterActive ? filterQuery : (hasValue ? displayValue : '')"
           :placeholder="hasValue ? '' : (labelPlaceholder || placeholder)"
           :disabled="disabled || loading"
-          class="s-filter-input flex-1 min-w-0 bg-transparent outline-none text-(--s-text-primary) placeholder:text-(--s-text-tertiary)"
+          class="s-filter-input flex-1 min-w-0 bg-transparent outline-none text-foreground placeholder:text-muted-foreground"
           :class="{ 'cursor-not-allowed': disabled }"
           @input="handleFilterInput"
           @focus="handleFilterFocus"
@@ -788,9 +806,9 @@ const floatLabelBackground = computed(() => {
               <span
                 class="inline-flex items-center gap-1 rounded-md transition-colors"
                 :class="sizeConfig.tag"
-                :style="{ 
-                  backgroundColor: `color-mix(in srgb, ${color} 15%, transparent)`,
-                  color: color 
+                :style="{
+                  backgroundColor: `color-mix(in srgb, ${resolvedColor} 15%, transparent)`,
+                  color: resolvedColor
                 }"
               >
                 <span class="truncate max-w-24">{{ option.label ?? option.value }}</span>
@@ -804,7 +822,7 @@ const floatLabelBackground = computed(() => {
             <span 
               v-if="hiddenTagCount > 0" 
               :key="'more'"
-              class="text-(--s-text-tertiary)"
+              class="text-muted-foreground"
               :class="sizeConfig.tag"
             >
               +{{ hiddenTagCount }}
@@ -819,7 +837,7 @@ const floatLabelBackground = computed(() => {
             :value="filterQuery"
             :placeholder="visibleTags.length === 0 ? (labelPlaceholder || placeholder) : ''"
             :disabled="disabled || loading"
-            class="s-filter-input flex-1 min-w-[60px] bg-transparent outline-none text-(--s-text-primary) placeholder:text-(--s-text-tertiary) text-sm"
+            class="s-filter-input flex-1 min-w-[60px] bg-transparent outline-none text-foreground placeholder:text-muted-foreground text-sm"
             @input="handleFilterInput"
             @focus="handleFilterFocus"
             @blur="handleFilterBlur"
@@ -836,7 +854,7 @@ const floatLabelBackground = computed(() => {
             :value="filterQuery"
             :placeholder="labelPlaceholder || placeholder"
             :disabled="disabled || loading"
-            class="s-filter-input flex-1 min-w-0 bg-transparent outline-none text-(--s-text-primary) placeholder:text-(--s-text-tertiary)"
+            class="s-filter-input flex-1 min-w-0 bg-transparent outline-none text-foreground placeholder:text-muted-foreground"
             @input="handleFilterInput"
             @focus="handleFilterFocus"
             @blur="handleFilterBlur"
@@ -854,13 +872,13 @@ const floatLabelBackground = computed(() => {
               :alt="selectedOptions[0].label" 
               class="w-5 h-5 rounded-full object-cover shrink-0"
             />
-            <span v-else-if="selectedOptions[0]?.icon" :class="['mdi', `mdi-${selectedOptions[0].icon}`, 'text-(--s-text-secondary)']" />
-            <span class="truncate text-(--s-text-primary)">{{ displayValue }}</span>
+            <span v-else-if="selectedOptions[0]?.icon" :class="['mdi', `mdi-${selectedOptions[0].icon}`, 'text-muted-foreground']" />
+            <span class="truncate text-foreground">{{ displayValue }}</span>
           </slot>
         </template>
 
         <!-- Placeholder (only show if not using labelPlaceholder) -->
-        <span v-else-if="!labelPlaceholder" class="text-(--s-text-tertiary) truncate">
+        <span v-else-if="!labelPlaceholder" class="text-muted-foreground truncate">
           {{ placeholder }}
         </span>
         
@@ -874,7 +892,7 @@ const floatLabelBackground = computed(() => {
       <!-- Loading spinner -->
       <span 
         v-if="loading" 
-        class="mdi mdi-loading animate-spin text-(--s-text-secondary)"
+        class="mdi mdi-loading animate-spin text-muted-foreground"
         :class="sizeConfig.icon"
       />
 
@@ -882,7 +900,7 @@ const floatLabelBackground = computed(() => {
       <button
         v-else-if="clearable && hasValue && !disabled"
         type="button"
-        class="mdi mdi-close-circle text-(--s-text-tertiary) hover:text-(--s-text-secondary) transition-colors shrink-0"
+        class="mdi mdi-close-circle text-muted-foreground hover:text-muted-foreground transition-colors shrink-0"
         :class="sizeConfig.icon"
         @click="clear"
       />
@@ -891,7 +909,7 @@ const floatLabelBackground = computed(() => {
       <slot name="arrow" :is-open="isOpen">
         <span 
           v-if="!loading"
-          class="text-(--s-text-secondary) transition-transform duration-200 shrink-0"
+          class="text-muted-foreground transition-transform duration-200 shrink-0"
           :class="['mdi', `mdi-${arrowIcon}`, sizeConfig.icon, { 'rotate-180': isOpen }]"
         />
       </slot>
@@ -907,7 +925,7 @@ const floatLabelBackground = computed(() => {
     </p>
     <p 
       v-else-if="hint" 
-      class="mt-1.5 text-xs text-(--s-text-tertiary)"
+      class="mt-1.5 text-xs text-muted-foreground"
     >
       {{ hint }}
     </p>
@@ -927,7 +945,7 @@ const floatLabelBackground = computed(() => {
           ref="dropdownRef"
           role="listbox"
           :aria-multiselectable="multiple"
-          class="s-select-dropdown fixed z-[100] overflow-hidden border border-(--s-border) shadow-xl"
+          class="s-select-dropdown fixed z-[100] overflow-hidden border border-border shadow-xl"
           :class="dropdownRoundedConfig"
           :style="{
             top: dropdownPosition.top ? `${dropdownPosition.top}px` : 'auto',
@@ -938,20 +956,20 @@ const floatLabelBackground = computed(() => {
           }"
         >
           <!-- Glassmorphism background -->
-          <div class="absolute inset-0 bg-(--s-bg-primary)/95 backdrop-blur-xl" />
+          <div class="absolute inset-0 bg-background/95 backdrop-blur-xl" />
           
           <!-- Content -->
           <div class="relative">
             <!-- Search input -->
-            <div v-if="searchable" class="p-2 border-b border-(--s-border)">
+            <div v-if="searchable" class="p-2 border-b border-border">
               <div class="relative">
-                <span class="absolute left-3 top-1/2 -translate-y-1/2 mdi mdi-magnify text-(--s-text-tertiary)" />
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 mdi mdi-magnify text-muted-foreground" />
                 <input
                   ref="searchInputRef"
                   type="text"
                   :value="searchQuery"
                   placeholder="Search..."
-                  class="w-full pl-9 pr-3 py-2 text-sm bg-(--s-bg-secondary) border border-(--s-border) rounded-lg outline-none focus:border-(--s-primary) focus:ring-2 focus:ring-(--s-primary)/20 transition-all text-(--s-text-primary) placeholder:text-(--s-text-tertiary)"
+                  class="w-full pl-9 pr-3 py-2 text-sm bg-muted border border-border rounded-lg outline-none focus:border-primary focus:ring-2 focus:ring-ring/20 transition-all text-foreground placeholder:text-muted-foreground"
                   @input="handleSearchInput"
                   @keydown="handleKeydown"
                 />
@@ -975,7 +993,7 @@ const floatLabelBackground = computed(() => {
                       <!-- Group header -->
                       <div 
                         v-if="groupName" 
-                        class="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-(--s-text-tertiary) sticky top-0 bg-(--s-bg-primary)/95 backdrop-blur-sm mt-2 first:mt-0 border-t border-(--s-border) first:border-t-0 z-20"
+                        class="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground sticky top-0 bg-background/95 backdrop-blur-sm mt-2 first:mt-0 border-t border-border first:border-t-0 z-20"
                       >
                         {{ groupName }}
                       </div>
@@ -991,8 +1009,8 @@ const floatLabelBackground = computed(() => {
                           sizeConfig.option,
                           {
                             'opacity-50 cursor-not-allowed': option.disabled,
-                            'text-(--s-text-primary)': isSelected(option.value),
-                            'text-(--s-text-secondary) hover:text-(--s-text-primary) hover:bg-(--s-bg-tertiary)/50': !isSelected(option.value) && !option.disabled
+                            'text-foreground': isSelected(option.value),
+                            'text-muted-foreground hover:text-foreground hover:bg-accent/50': !isSelected(option.value) && !option.disabled
                           }
                         ]"
                         @click="!option.disabled && selectOption(option.value)"
@@ -1001,7 +1019,7 @@ const floatLabelBackground = computed(() => {
                         <div 
                           v-if="isSelected(option.value)"
                           class="absolute inset-0 transition-all duration-150 rounded-lg mx-1"
-                          :style="{ backgroundColor: `color-mix(in srgb, ${option.color ?? color} 15%, transparent)` }"
+                          :style="{ backgroundColor: `color-mix(in srgb, ${option.color ?? resolvedColor} 15%, transparent)` }"
                         />
 
                         <!-- Image -->
@@ -1016,14 +1034,14 @@ const floatLabelBackground = computed(() => {
                           v-else-if="option.icon" 
                           class="relative z-10 shrink-0 mr-2.5"
                           :class="['mdi', `mdi-${option.icon}`, sizeConfig.icon]"
-                          :style="isSelected(option.value) ? { color: option.color ?? color } : {}"
+                          :style="isSelected(option.value) ? { color: option.color ?? resolvedColor } : {}"
                         />
 
                         <!-- Content -->
                         <div class="relative z-10 flex-1 min-w-0">
                           <slot name="option" :option="option" :selected="isSelected(option.value)">
                             <span class="truncate block">{{ option.label ?? option.value }}</span>
-                            <p v-if="option.description" class="text-xs text-(--s-text-tertiary) truncate mt-0.5">
+                            <p v-if="option.description" class="text-xs text-muted-foreground truncate mt-0.5">
                               {{ option.description }}
                             </p>
                           </slot>
@@ -1034,7 +1052,7 @@ const floatLabelBackground = computed(() => {
                           v-if="isSelected(option.value)"
                           class="relative z-10 mdi mdi-check shrink-0 ml-2"
                           :class="sizeConfig.icon"
-                          :style="{ color: option.color ?? color }"
+                          :style="{ color: option.color ?? resolvedColor }"
                         />
                       </div>
                     </template>
@@ -1053,8 +1071,8 @@ const floatLabelBackground = computed(() => {
                         sizeConfig.option,
                         {
                           'opacity-50 cursor-not-allowed': option.disabled,
-                          'text-(--s-text-primary)': highlightedIndex === index || isSelected(option.value),
-                          'text-(--s-text-secondary) hover:text-(--s-text-primary)': highlightedIndex !== index && !isSelected(option.value) && !option.disabled
+                          'text-foreground': highlightedIndex === index || isSelected(option.value),
+                          'text-muted-foreground hover:text-foreground': highlightedIndex !== index && !isSelected(option.value) && !option.disabled
                         }
                       ]"
                       @click="!option.disabled && selectOption(option.value)"
@@ -1067,8 +1085,8 @@ const floatLabelBackground = computed(() => {
                         :class="isSelected(option.value) ? 'opacity-100' : 'opacity-60'"
                         :style="{ 
                           backgroundColor: isSelected(option.value) 
-                            ? `color-mix(in srgb, ${option.color ?? color} 15%, transparent)` 
-                            : 'var(--s-bg-tertiary)' 
+                            ? `color-mix(in srgb, ${option.color ?? resolvedColor} 15%, transparent)` 
+                            : 'var(--s-accent)' 
                         }"
                       />
 
@@ -1084,14 +1102,14 @@ const floatLabelBackground = computed(() => {
                         v-else-if="option.icon" 
                         class="relative z-10 shrink-0 mr-2.5"
                         :class="['mdi', `mdi-${option.icon}`, sizeConfig.icon]"
-                        :style="isSelected(option.value) ? { color: option.color ?? color } : {}"
+                        :style="isSelected(option.value) ? { color: option.color ?? resolvedColor } : {}"
                       />
 
                       <!-- Content -->
                       <div class="relative z-10 flex-1 min-w-0">
                         <slot name="option" :option="option" :selected="isSelected(option.value)" :highlighted="highlightedIndex === index">
                           <span class="truncate block">{{ option.label ?? option.value }}</span>
-                          <p v-if="option.description" class="text-xs text-(--s-text-tertiary) truncate mt-0.5">
+                          <p v-if="option.description" class="text-xs text-muted-foreground truncate mt-0.5">
                             {{ option.description }}
                           </p>
                         </slot>
@@ -1110,7 +1128,7 @@ const floatLabelBackground = computed(() => {
                           v-if="isSelected(option.value)"
                           class="relative z-10 mdi mdi-check shrink-0 ml-2"
                           :class="sizeConfig.icon"
-                          :style="{ color: option.color ?? color }"
+                          :style="{ color: option.color ?? resolvedColor }"
                         />
                       </Transition>
                     </div>
@@ -1119,20 +1137,20 @@ const floatLabelBackground = computed(() => {
                   <!-- Creatable option -->
                   <div 
                     v-if="showCreateOption"
-                    class="s-option relative flex items-center cursor-pointer transition-all duration-150 select-none border-t border-(--s-border) mt-1 pt-1"
+                    class="s-option relative flex items-center cursor-pointer transition-all duration-150 select-none border-t border-border mt-1 pt-1"
                     :class="sizeConfig.option"
                     @click="createOption"
                   >
-                    <span class="mdi mdi-plus-circle mr-2.5" :class="sizeConfig.icon" :style="{ color }" />
-                    <span class="text-(--s-text-secondary)">{{ createOptionLabel }}</span>
+                    <span class="mdi mdi-plus-circle mr-2.5" :class="sizeConfig.icon" :style="{ color: resolvedColor }" />
+                    <span class="text-muted-foreground">{{ createOptionLabel }}</span>
                   </div>
                 </template>
 
                 <!-- No results -->
                 <div v-else class="px-4 py-8 text-center">
                   <slot name="empty">
-                    <span class="mdi mdi-magnify-close text-3xl text-(--s-text-tertiary) mb-2 block" />
-                    <p class="text-sm text-(--s-text-secondary)">{{ noResultsText }}</p>
+                    <span class="mdi mdi-magnify-close text-3xl text-muted-foreground mb-2 block" />
+                    <p class="text-sm text-muted-foreground">{{ noResultsText }}</p>
                   </slot>
                 </div>
               </template>
@@ -1145,16 +1163,16 @@ const floatLabelBackground = computed(() => {
               <!-- No options -->
               <div v-else class="px-4 py-8 text-center">
                 <slot name="empty">
-                  <span class="mdi mdi-selection-off text-3xl text-(--s-text-tertiary) mb-2 block" />
-                  <p class="text-sm text-(--s-text-secondary)">{{ noOptionsText }}</p>
+                  <span class="mdi mdi-selection-off text-3xl text-muted-foreground mb-2 block" />
+                  <p class="text-sm text-muted-foreground">{{ noOptionsText }}</p>
                 </slot>
               </div>
 
               <!-- Loading state -->
               <div v-if="loading" class="px-4 py-8 text-center">
                 <slot name="loading">
-                  <span class="mdi mdi-loading animate-spin text-2xl mb-2 block" :style="{ color }" />
-                  <p class="text-sm text-(--s-text-secondary)">Loading...</p>
+                  <span class="mdi mdi-loading animate-spin text-2xl mb-2 block" :style="{ color: resolvedColor }" />
+                  <p class="text-sm text-muted-foreground">Loading...</p>
                 </slot>
               </div>
             </div>
@@ -1180,7 +1198,7 @@ const floatLabelBackground = computed(() => {
           v-if="isOpen"
           ref="dropdownRef"
           role="listbox"
-          class="s-select-dropdown absolute z-50 w-full mt-1 overflow-hidden border border-(--s-border) shadow-xl bg-(--s-bg-primary)"
+          class="s-select-dropdown absolute z-50 w-full mt-1 overflow-hidden border border-border shadow-xl bg-background"
           :class="roundedConfig"
           :style="{ maxHeight }"
         >
@@ -1267,6 +1285,6 @@ const floatLabelBackground = computed(() => {
 }
 
 .s-select-dropdown::-webkit-scrollbar-thumb:hover {
-  background: var(--s-border-hover);
+  background: var(--s-input);
 }
 </style>
