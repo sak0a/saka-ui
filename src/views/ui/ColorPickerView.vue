@@ -1,11 +1,29 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SColorPicker, SApiSection, SApiTable } from '../../index'
+import {
+  SColorPicker,
+  SColorPickerSpectrum,
+  SColorPickerHueSlider,
+  SColorPickerAlphaSlider,
+  SColorPickerPreview,
+  SColorPickerEyeDropper,
+  SColorPickerCopy,
+  SColorPickerInputs,
+  SColorPickerPresets,
+  SColorPickerRecent,
+  SApiSection,
+  SApiTable
+} from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
 // Demo state
 const basicColor = ref('#3b82f6')
+const compoundColor = ref('#10b981')
+const spectrumOnlyColor = ref('#ef4444')
+const slidersOnlyColor = ref('#8b5cf6')
+const customLayoutColor = ref('#f59e0b')
+const presetsOnlyColor = ref('#06b6d4')
 const dropdownColor = ref('#10b981')
 const alphaColor = ref('#ec489980')
 const formatHex = ref('#8b5cf6')
@@ -17,14 +35,6 @@ const sizeMedium = ref('#10b981')
 const sizeLarge = ref('#f59e0b')
 const disabledColor = ref('#6b7280')
 const readonlyColor = ref('#8b5cf6')
-
-// Minimal configurations
-const minimalColor = ref('#3b82f6')
-const spectrumOnlyColor = ref('#ef4444')
-const noPresetsColor = ref('#10b981')
-const compactColor = ref('#f59e0b')
-
-// Custom trigger
 const customTriggerColor = ref('#8b5cf6')
 const iconTriggerColor = ref('#ef4444')
 const textTriggerColor = ref('#10b981')
@@ -41,128 +51,83 @@ const customPresets = [
   '#5f27cd', '#00d2d3', '#1dd1a1', '#ff9f43', '#ee5a24'
 ]
 
+const brandPresets = [
+  '#1DA1F2', '#4267B2', '#E4405F', '#FF0000',
+  '#25D366', '#7289DA', '#FF4500', '#1DB954'
+]
+
 // Code snippets
-const basicCode = `<script setup>
-import { ref } from 'vue'
-const color = ref('#3b82f6')
-<\/script>
+const basicCode = `<SColorPicker v-model="color" />`
 
-<template>
-  <SColorPicker v-model="color" />
-</template>`
+const compoundBasicCode = `<SColorPicker v-model="color">
+  <SColorPickerSpectrum />
+  <SColorPickerHueSlider />
+  <SColorPickerAlphaSlider />
+  <div class="flex items-center gap-3">
+    <SColorPickerPreview />
+    <div class="flex gap-1">
+      <SColorPickerEyeDropper />
+      <SColorPickerCopy />
+    </div>
+  </div>
+  <SColorPickerInputs />
+  <SColorPickerPresets />
+  <SColorPickerRecent />
+</SColorPicker>`
 
-const dropdownCode = `<SColorPicker 
-  v-model="color" 
-  mode="dropdown"
-  label="Select Color"
-/>`
+const spectrumOnlyCode = `<!-- Just the spectrum -->
+<SColorPicker v-model="color">
+  <SColorPickerSpectrum />
+</SColorPicker>`
 
-const customTriggerCode = `<!-- Custom button trigger -->
-<SColorPicker v-model="color" mode="dropdown">
-  <template #trigger="{ color, displayValue, isOpen }">
-    <button class="my-custom-button">
-      <span :style="{ backgroundColor: color }"></span>
-      Pick a color
-    </button>
-  </template>
-</SColorPicker>
+const slidersOnlyCode = `<!-- Just hue + alpha sliders -->
+<SColorPicker v-model="color" :show-alpha="true">
+  <SColorPickerHueSlider />
+  <SColorPickerAlphaSlider />
+  <SColorPickerInputs />
+</SColorPicker>`
 
-<!-- Icon-only trigger -->
-<SColorPicker v-model="color" mode="dropdown">
-  <template #trigger="{ color }">
-    <div 
+const customLayoutCode = `<!-- Custom arrangement: presets on top, spectrum below -->
+<SColorPicker v-model="color">
+  <SColorPickerPresets :presets="brandPresets" label="Brand Colors" />
+  <SColorPickerSpectrum />
+  <SColorPickerHueSlider />
+  <div class="flex items-center gap-3">
+    <SColorPickerPreview />
+    <SColorPickerCopy />
+  </div>
+</SColorPicker>`
+
+const presetsOnlyCode = `<!-- Presets-only picker (no spectrum/sliders) -->
+<SColorPicker v-model="color">
+  <SColorPickerPresets :presets="customPresets" label="Pick a color" />
+  <div class="flex items-center gap-3">
+    <SColorPickerPreview />
+    <SColorPickerCopy />
+  </div>
+  <SColorPickerRecent />
+</SColorPicker>`
+
+const dropdownCode = `<SColorPicker v-model="color" mode="dropdown" label="Choose Color" />`
+
+const customTriggerCode = `<SColorPicker v-model="color" mode="dropdown">
+  <template #trigger="{ color, isOpen }">
+    <div
       class="w-10 h-10 rounded-full border-2 cursor-pointer"
       :style="{ backgroundColor: color }"
     />
   </template>
-</SColorPicker>
-
-<!-- Text link trigger -->
-<SColorPicker v-model="color" mode="dropdown">
-  <template #trigger="{ displayValue }">
-    <span class="underline cursor-pointer">
-      Color: {{ displayValue }}
-    </span>
-  </template>
 </SColorPicker>`
 
-const alphaCode = `<SColorPicker 
-  v-model="color" 
-  :show-alpha="true"
-/>`
+const alphaCode = `<SColorPicker v-model="color" :show-alpha="true" />`
 
-const formatsCode = `<!-- HEX output (default) -->
-<SColorPicker v-model="hexColor" format="hex" />
-
-<!-- RGB output -->
+const formatsCode = `<SColorPicker v-model="hexColor" format="hex" />
 <SColorPicker v-model="rgbColor" format="rgb" />
-
-<!-- HSL output -->
 <SColorPicker v-model="hslColor" format="hsl" />`
-
-const presetsCode = `<SColorPicker 
-  v-model="color"
-  :presets="[
-    '#ff6b6b', '#feca57', '#48dbfb', 
-    '#ff9ff3', '#54a0ff', '#5f27cd'
-  ]"
-/>`
 
 const sizesCode = `<SColorPicker v-model="color" size="small" />
 <SColorPicker v-model="color" size="medium" />
 <SColorPicker v-model="color" size="large" />`
-
-const statesCode = `<SColorPicker v-model="color" disabled />
-<SColorPicker v-model="color" readonly />`
-
-const minimalCode = `<!-- Spectrum only - no sliders, preview, inputs, or presets -->
-<SColorPicker 
-  v-model="color" 
-  :show-sliders="false"
-  :show-preview="false"
-  :show-inputs="false"
-  :show-presets="false"
-  :show-recent="false"
-/>
-
-<!-- No preview bar -->
-<SColorPicker 
-  v-model="color" 
-  :show-preview="false"
-/>
-
-<!-- No presets or recent -->
-<SColorPicker 
-  v-model="color" 
-  :show-presets="false"
-  :show-recent="false"
-/>
-
-<!-- Compact: spectrum + sliders only -->
-<SColorPicker 
-  v-model="color" 
-  :show-preview="false"
-  :show-inputs="false"
-  :show-presets="false"
-  :show-recent="false"
-  size="small"
-/>`
-
-const themeCode = `<script setup>
-const primary = ref('#3b82f6')
-const secondary = ref('#10b981')
-const accent = ref('#f59e0b')
-const background = ref('#1a1a2e')
-<\/script>
-
-<template>
-  <div class="theme-panel">
-    <SColorPicker v-model="primary" label="Primary" mode="dropdown" />
-    <SColorPicker v-model="secondary" label="Secondary" mode="dropdown" />
-    <SColorPicker v-model="accent" label="Accent" mode="dropdown" />
-    <SColorPicker v-model="background" label="Background" mode="dropdown" />
-  </div>
-</template>`
 
 // API Reference data
 const colorPickerProps: ApiProp[] = [
@@ -171,20 +136,28 @@ const colorPickerProps: ApiProp[] = [
   { name: 'format', type: "'hex' | 'rgb' | 'hsl'", default: "'hex'", description: 'Output color format for v-model', category: 'Core' },
   { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Component size (affects panel width & heights)', category: 'Core' },
   { name: 'label', type: 'string', default: 'undefined', description: 'Label text above picker', category: 'Core' },
-  { name: 'triggerStyle', type: "'button' | 'swatch'", default: "'button'", description: 'Built-in trigger style (ignored when using #trigger slot)', category: 'Dropdown Mode' },
-  { name: 'dropdownPlacement', type: "'bottom-start' | 'bottom-end' | 'top-start' | 'top-end'", default: "'bottom-start'", description: 'Position of the dropdown panel', category: 'Dropdown Mode' },
-  { name: 'showSpectrum', type: 'boolean', default: 'true', description: 'Show the 2D saturation/brightness picker', category: 'Show/Hide Features' },
-  { name: 'showSliders', type: 'boolean', default: 'true', description: 'Show hue and alpha sliders', category: 'Show/Hide Features' },
-  { name: 'showAlpha', type: 'boolean', default: 'false', description: 'Show alpha/opacity slider', category: 'Show/Hide Features' },
-  { name: 'showPreview', type: 'boolean', default: 'true', description: 'Show the color preview bar', category: 'Show/Hide Features' },
-  { name: 'showInputs', type: 'boolean', default: 'true', description: 'Show color value input fields', category: 'Show/Hide Features' },
-  { name: 'showPresets', type: 'boolean', default: 'true', description: 'Show preset color swatches', category: 'Show/Hide Features' },
-  { name: 'showRecent', type: 'boolean', default: 'true', description: 'Show recently used colors', category: 'Show/Hide Features' },
-  { name: 'showEyeDropper', type: 'boolean', default: 'true', description: 'Show eyedropper button (if browser supports it)', category: 'Show/Hide Features' },
-  { name: 'presets', type: 'string[]', default: 'Default palette', description: 'Custom preset colors array', category: 'Data' },
-  { name: 'maxRecent', type: 'number', default: '8', description: 'Maximum number of recent colors to store', category: 'Data' },
+  { name: 'triggerStyle', type: "'button' | 'swatch'", default: "'button'", description: 'Built-in trigger style (simple API only)', category: 'Simple API' },
+  { name: 'showSpectrum', type: 'boolean', default: 'true', description: 'Show the 2D saturation/brightness picker (simple API)', category: 'Simple API' },
+  { name: 'showSliders', type: 'boolean', default: 'true', description: 'Show hue and alpha sliders (simple API)', category: 'Simple API' },
+  { name: 'showAlpha', type: 'boolean', default: 'false', description: 'Show alpha/opacity slider', category: 'Core' },
+  { name: 'showPreview', type: 'boolean', default: 'true', description: 'Show the color preview bar (simple API)', category: 'Simple API' },
+  { name: 'showInputs', type: 'boolean', default: 'true', description: 'Show color value input fields (simple API)', category: 'Simple API' },
+  { name: 'showPresets', type: 'boolean', default: 'true', description: 'Show preset color swatches (simple API)', category: 'Simple API' },
+  { name: 'showRecent', type: 'boolean', default: 'true', description: 'Show recently used colors (simple API)', category: 'Simple API' },
+  { name: 'showEyeDropper', type: 'boolean', default: 'true', description: 'Show eyedropper button (simple API)', category: 'Simple API' },
+  { name: 'presets', type: 'string[]', default: 'Default palette', description: 'Custom preset colors (simple API)', category: 'Simple API' },
+  { name: 'maxRecent', type: 'number', default: '8', description: 'Maximum number of recent colors to store', category: 'Core' },
   { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable all interactions', category: 'States' },
-  { name: 'readonly', type: 'boolean', default: 'false', description: 'Read-only mode (can view but not change)', category: 'States' },
+  { name: 'readonly', type: 'boolean', default: 'false', description: 'Read-only mode', category: 'States' },
+]
+
+const presetsProps: ApiProp[] = [
+  { name: 'presets', type: 'string[]', default: 'Default palette', description: 'Array of color strings to display as swatches', category: 'Core' },
+  { name: 'label', type: 'string', default: "'Presets'", description: 'Label text above the swatches', category: 'Core' },
+]
+
+const recentProps: ApiProp[] = [
+  { name: 'label', type: 'string', default: "'Recent'", description: 'Label text above the recent colors', category: 'Core' },
 ]
 
 const colorPickerEvents: ApiEvent[] = [
@@ -194,7 +167,10 @@ const colorPickerEvents: ApiEvent[] = [
 ]
 
 const colorPickerSlots: ApiSlot[] = [
+  { name: 'default', props: 'color, rgb, hsl, displayValue, hsva', description: 'Compound API: place subcomponents here for full layout control' },
   { name: '#trigger', props: 'color, displayValue, isOpen, toggle, rgb, hsl, disabled', description: 'Custom trigger element for dropdown mode' },
+  { name: '#panel-before', props: '-', description: 'Content before the panel sections (simple API)' },
+  { name: '#panel-after', props: '-', description: 'Content after the panel sections (simple API)' },
 ]
 </script>
 
@@ -203,85 +179,127 @@ const colorPickerSlots: ApiSlot[] = [
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Color Picker</h1>
-      <p class="text-lg text-(--s-text-secondary)">A stunning, feature-rich color picker with multiple formats, presets, and advanced customization.</p>
+      <p class="text-lg text-(--s-text-secondary)">A composable, feature-rich color picker with compound subcomponents for full layout control.</p>
     </header>
 
-        <!-- Features -->
-        <article>
-          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4">Features</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-              <div class="flex items-center gap-3 mb-2">
-                <span class="mdi mdi-palette text-xl text-emerald-400"></span>
-                <span class="font-semibold text-(--s-text-primary)">Color Spectrum</span>
-              </div>
-              <p class="text-sm text-(--s-text-secondary)">2D picker for saturation and brightness with smooth gradients.</p>
-            </div>
-            <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-              <div class="flex items-center gap-3 mb-2">
-                <span class="mdi mdi-tune text-xl text-blue-400"></span>
-                <span class="font-semibold text-(--s-text-primary)">Hue & Alpha Sliders</span>
-              </div>
-              <p class="text-sm text-(--s-text-secondary)">Dedicated sliders for hue and optional transparency.</p>
-            </div>
-            <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-              <div class="flex items-center gap-3 mb-2">
-                <span class="mdi mdi-eyedropper text-xl text-violet-400"></span>
-                <span class="font-semibold text-(--s-text-primary)">Eyedropper Tool</span>
-              </div>
-              <p class="text-sm text-(--s-text-secondary)">Pick colors directly from anywhere on your screen.</p>
-            </div>
-            <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-              <div class="flex items-center gap-3 mb-2">
-                <span class="mdi mdi-content-copy text-xl text-amber-400"></span>
-                <span class="font-semibold text-(--s-text-primary)">Copy to Clipboard</span>
-              </div>
-              <p class="text-sm text-(--s-text-secondary)">One-click copy of the color value in any format.</p>
-            </div>
-            <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-              <div class="flex items-center gap-3 mb-2">
-                <span class="mdi mdi-swap-horizontal text-xl text-pink-400"></span>
-                <span class="font-semibold text-(--s-text-primary)">Format Switching</span>
-              </div>
-              <p class="text-sm text-(--s-text-secondary)">Toggle between HEX, RGB, and HSL formats.</p>
-            </div>
-            <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-              <div class="flex items-center gap-3 mb-2">
-                <span class="mdi mdi-history text-xl text-cyan-400"></span>
-                <span class="font-semibold text-(--s-text-primary)">Recent Colors</span>
-              </div>
-              <p class="text-sm text-(--s-text-secondary)">Remembers your recently used colors for quick access.</p>
-            </div>
-            <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-              <div class="flex items-center gap-3 mb-2">
-                <span class="mdi mdi-gesture-tap text-xl text-orange-400"></span>
-                <span class="font-semibold text-(--s-text-primary)">Touch Support</span>
-              </div>
-              <p class="text-sm text-(--s-text-secondary)">Full touch support for mobile devices and tablets.</p>
-            </div>
-            <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-              <div class="flex items-center gap-3 mb-2">
-                <span class="mdi mdi-puzzle text-xl text-rose-400"></span>
-                <span class="font-semibold text-(--s-text-primary)">Custom Triggers</span>
-              </div>
-              <p class="text-sm text-(--s-text-secondary)">Use any element as dropdown trigger with the #trigger slot.</p>
-            </div>
-            <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-              <div class="flex items-center gap-3 mb-2">
-                <span class="mdi mdi-responsive text-xl text-teal-400"></span>
-                <span class="font-semibold text-(--s-text-primary)">Responsive</span>
-              </div>
-              <p class="text-sm text-(--s-text-secondary)">Adapts beautifully to any screen size.</p>
-            </div>
-          </div>
-        </article>
-
-    <!-- Basic Usage -->
+    <!-- Compound API: Full -->
     <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
-      <DemoSection 
-        title="Inline Color Picker"
-        description="The default inline mode displays the full color picker panel."
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Compound API</h2>
+      <DemoSection
+        title="Full Compound Layout"
+        description="Use subcomponents for complete control over which parts appear and their arrangement. This is the recommended API for custom layouts."
+        :code="compoundBasicCode"
+        language="vue"
+      >
+        <div class="flex flex-col gap-4">
+          <SColorPicker v-model="compoundColor" :show-alpha="true">
+            <SColorPickerSpectrum />
+            <SColorPickerHueSlider />
+            <SColorPickerAlphaSlider />
+            <div class="flex items-center gap-3">
+              <SColorPickerPreview />
+              <div class="flex gap-1">
+                <SColorPickerEyeDropper />
+                <SColorPickerCopy />
+              </div>
+            </div>
+            <SColorPickerInputs />
+            <SColorPickerPresets />
+            <SColorPickerRecent />
+          </SColorPicker>
+          <code class="font-mono text-xs text-emerald-400">{{ compoundColor }}</code>
+        </div>
+      </DemoSection>
+    </section>
+
+    <!-- Compound API: Spectrum Only -->
+    <section>
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Compositions</h2>
+      <DemoSection
+        title="Spectrum Only"
+        description="Just the 2D saturation/brightness picker — no sliders, inputs, or presets."
+        :code="spectrumOnlyCode"
+        language="vue"
+      >
+        <div class="flex flex-col gap-4">
+          <SColorPicker v-model="spectrumOnlyColor">
+            <SColorPickerSpectrum />
+          </SColorPicker>
+          <code class="font-mono text-xs text-red-400">{{ spectrumOnlyColor }}</code>
+        </div>
+      </DemoSection>
+    </section>
+
+    <!-- Compound API: Sliders + Inputs -->
+    <section>
+      <DemoSection
+        title="Sliders + Inputs"
+        description="Hue and alpha sliders with input fields — no spectrum or presets."
+        :code="slidersOnlyCode"
+        language="vue"
+      >
+        <div class="flex flex-col gap-4">
+          <SColorPicker v-model="slidersOnlyColor" :show-alpha="true">
+            <SColorPickerHueSlider />
+            <SColorPickerAlphaSlider />
+            <SColorPickerInputs />
+          </SColorPicker>
+          <code class="font-mono text-xs text-violet-400">{{ slidersOnlyColor }}</code>
+        </div>
+      </DemoSection>
+    </section>
+
+    <!-- Compound API: Custom Layout -->
+    <section>
+      <DemoSection
+        title="Custom Arrangement"
+        description="Presets on top, spectrum below — subcomponents can be arranged in any order."
+        :code="customLayoutCode"
+        language="vue"
+      >
+        <div class="flex flex-col gap-4">
+          <SColorPicker v-model="customLayoutColor">
+            <SColorPickerPresets :presets="brandPresets" label="Brand Colors" />
+            <SColorPickerSpectrum />
+            <SColorPickerHueSlider />
+            <div class="flex items-center gap-3">
+              <SColorPickerPreview />
+              <SColorPickerCopy />
+            </div>
+          </SColorPicker>
+          <code class="font-mono text-xs text-amber-400">{{ customLayoutColor }}</code>
+        </div>
+      </DemoSection>
+    </section>
+
+    <!-- Compound API: Presets Only -->
+    <section>
+      <DemoSection
+        title="Presets-Only Picker"
+        description="A minimal swatch grid — no spectrum or sliders at all."
+        :code="presetsOnlyCode"
+        language="vue"
+      >
+        <div class="flex flex-col gap-4">
+          <SColorPicker v-model="presetsOnlyColor">
+            <SColorPickerPresets :presets="customPresets" label="Pick a color" />
+            <div class="flex items-center gap-3">
+              <SColorPickerPreview />
+              <SColorPickerCopy />
+            </div>
+            <SColorPickerRecent />
+          </SColorPicker>
+          <code class="font-mono text-xs text-cyan-400">{{ presetsOnlyColor }}</code>
+        </div>
+      </DemoSection>
+    </section>
+
+    <!-- Simple API -->
+    <section>
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Simple API</h2>
+      <DemoSection
+        title="Default Inline Picker"
+        description="Without the default slot, the simple prop-based API renders all sections based on show* props."
         :code="basicCode"
         language="vue"
       >
@@ -289,7 +307,7 @@ const colorPickerSlots: ApiSlot[] = [
           <SColorPicker v-model="basicColor" />
           <div class="flex items-center gap-3">
             <span class="text-sm text-(--s-text-secondary)">Selected:</span>
-            <div 
+            <div
               class="w-8 h-8 rounded-lg border border-(--s-border)"
               :style="{ backgroundColor: basicColor }"
             ></div>
@@ -302,7 +320,7 @@ const colorPickerSlots: ApiSlot[] = [
     <!-- Dropdown Mode -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Dropdown Mode</h2>
-      <DemoSection 
+      <DemoSection
         title="Trigger Button with Popup"
         description="Use dropdown mode to show the picker in a popup triggered by a button."
         :code="dropdownCode"
@@ -321,39 +339,36 @@ const colorPickerSlots: ApiSlot[] = [
     <!-- Custom Triggers -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Triggers</h2>
-      <DemoSection 
+      <DemoSection
         title="Any Element as Trigger"
-        description="Use the #trigger slot to make any element open the color picker. The slot provides color, displayValue, rgb, hsl, isOpen, toggle, and disabled props."
+        description="Use the #trigger slot to make any element open the color picker."
         :code="customTriggerCode"
         language="vue"
       >
         <div class="flex flex-wrap gap-8 items-center">
-          <!-- Custom button trigger -->
           <div class="flex flex-col gap-2">
             <span class="text-xs font-semibold text-(--s-text-secondary)">Custom Button</span>
             <SColorPicker v-model="customTriggerColor" mode="dropdown">
               <template #trigger="{ color, isOpen }">
-                <button 
+                <button
                   class="flex items-center gap-2 px-4 py-2 rounded-lg border border-(--s-border) bg-(--s-bg-secondary) hover:bg-(--s-bg-tertiary) transition-colors"
                   :class="{ 'ring-2 ring-(--s-primary)': isOpen }"
                 >
-                  <span 
+                  <span
                     class="w-5 h-5 rounded-md border border-(--s-border)"
                     :style="{ backgroundColor: color }"
                   ></span>
                   <span class="text-sm text-(--s-text-primary)">Pick a color</span>
-                  <span class="mdi mdi-chevron-down text-(--s-text-tertiary)" :class="{ 'rotate-180': isOpen }"></span>
                 </button>
               </template>
             </SColorPicker>
           </div>
 
-          <!-- Circle swatch trigger -->
           <div class="flex flex-col gap-2">
             <span class="text-xs font-semibold text-(--s-text-secondary)">Circle Swatch</span>
             <SColorPicker v-model="iconTriggerColor" mode="dropdown">
               <template #trigger="{ color, isOpen }">
-                <div 
+                <div
                   class="w-10 h-10 rounded-full border-2 border-white shadow-lg cursor-pointer transition-transform hover:scale-110"
                   :class="{ 'ring-2 ring-(--s-primary) ring-offset-2': isOpen }"
                   :style="{ backgroundColor: color }"
@@ -362,7 +377,6 @@ const colorPickerSlots: ApiSlot[] = [
             </SColorPicker>
           </div>
 
-          <!-- Text link trigger -->
           <div class="flex flex-col gap-2">
             <span class="text-xs font-semibold text-(--s-text-secondary)">Text Link</span>
             <SColorPicker v-model="textTriggerColor" mode="dropdown">
@@ -373,21 +387,6 @@ const colorPickerSlots: ApiSlot[] = [
               </template>
             </SColorPicker>
           </div>
-
-          <!-- Icon button trigger -->
-          <div class="flex flex-col gap-2">
-            <span class="text-xs font-semibold text-(--s-text-secondary)">Icon Button</span>
-            <SColorPicker v-model="customTriggerColor" mode="dropdown">
-              <template #trigger="{ color, isOpen }">
-                <button 
-                  class="w-9 h-9 flex items-center justify-center rounded-lg border border-(--s-border) bg-(--s-bg-secondary) hover:bg-(--s-bg-tertiary) transition-colors"
-                  :class="{ 'ring-2 ring-(--s-primary)': isOpen }"
-                >
-                  <span class="mdi mdi-palette text-lg" :style="{ color: color }"></span>
-                </button>
-              </template>
-            </SColorPicker>
-          </div>
         </div>
       </DemoSection>
     </section>
@@ -395,7 +394,7 @@ const colorPickerSlots: ApiSlot[] = [
     <!-- Alpha Channel -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Alpha Channel</h2>
-      <DemoSection 
+      <DemoSection
         title="Transparency Support"
         description="Enable the alpha slider for colors with transparency."
         :code="alphaCode"
@@ -405,13 +404,8 @@ const colorPickerSlots: ApiSlot[] = [
           <SColorPicker v-model="alphaColor" :show-alpha="true" />
           <div class="flex items-center gap-3">
             <span class="text-sm text-(--s-text-secondary)">With Alpha:</span>
-            <div 
-              class="w-8 h-8 rounded-lg border border-(--s-border) checkerboard"
-            >
-              <div 
-                class="w-full h-full rounded-lg"
-                :style="{ backgroundColor: alphaColor }"
-              ></div>
+            <div class="w-8 h-8 rounded-lg border border-(--s-border) checkerboard">
+              <div class="w-full h-full rounded-lg" :style="{ backgroundColor: alphaColor }"></div>
             </div>
             <code class="font-mono text-emerald-400">{{ alphaColor }}</code>
           </div>
@@ -422,7 +416,7 @@ const colorPickerSlots: ApiSlot[] = [
     <!-- Color Formats -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Color Formats</h2>
-      <DemoSection 
+      <DemoSection
         title="Output Formats"
         description="Choose between HEX, RGB, or HSL output formats."
         :code="formatsCode"
@@ -448,23 +442,10 @@ const colorPickerSlots: ApiSlot[] = [
       </DemoSection>
     </section>
 
-    <!-- Custom Presets -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Presets</h2>
-      <DemoSection 
-        title="Custom Color Swatches"
-        description="Provide your own preset colors for quick selection."
-        :code="presetsCode"
-        language="vue"
-      >
-        <SColorPicker v-model="presetColor" :presets="customPresets" />
-      </DemoSection>
-    </section>
-
     <!-- Sizes -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
-      <DemoSection 
+      <DemoSection
         title="Size Variants"
         description="Three size options: small, medium (default), and large."
         :code="sizesCode"
@@ -487,101 +468,16 @@ const colorPickerSlots: ApiSlot[] = [
       </DemoSection>
     </section>
 
-    <!-- States -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">States</h2>
-      <DemoSection 
-        title="Disabled & Readonly"
-        description="Disable interaction or make the picker read-only."
-        :code="statesCode"
-        language="vue"
-      >
-        <div class="flex flex-wrap gap-8 items-start">
-          <div class="flex flex-col gap-3">
-            <span class="text-sm font-semibold text-(--s-text-primary)">Disabled</span>
-            <SColorPicker v-model="disabledColor" disabled />
-          </div>
-          <div class="flex flex-col gap-3">
-            <span class="text-sm font-semibold text-(--s-text-primary)">Readonly</span>
-            <SColorPicker v-model="readonlyColor" readonly />
-          </div>
-        </div>
-      </DemoSection>
-    </section>
-
-    <!-- Minimal Configurations -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Minimal Configurations</h2>
-      <DemoSection 
-        title="Customizable Feature Visibility"
-        description="Hide specific parts of the color picker for a cleaner or more compact UI. Disable preview, inputs, presets, or even sliders based on your needs."
-        :code="minimalCode"
-        language="vue"
-      >
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div class="flex flex-col gap-3">
-            <span class="text-sm font-semibold text-(--s-text-primary)">Spectrum Only</span>
-            <span class="text-xs text-(--s-text-secondary)">No sliders, preview, inputs, or presets</span>
-            <SColorPicker 
-              v-model="spectrumOnlyColor" 
-              :show-sliders="false"
-              :show-preview="false"
-              :show-inputs="false"
-              :show-presets="false"
-              :show-recent="false"
-            />
-            <code class="font-mono text-xs text-red-400">{{ spectrumOnlyColor }}</code>
-          </div>
-          
-          <div class="flex flex-col gap-3">
-            <span class="text-sm font-semibold text-(--s-text-primary)">No Preview Bar</span>
-            <span class="text-xs text-(--s-text-secondary)">Hides the color preview and tool buttons</span>
-            <SColorPicker 
-              v-model="minimalColor" 
-              :show-preview="false"
-            />
-            <code class="font-mono text-xs text-blue-400">{{ minimalColor }}</code>
-          </div>
-          
-          <div class="flex flex-col gap-3">
-            <span class="text-sm font-semibold text-(--s-text-primary)">No Presets</span>
-            <span class="text-xs text-(--s-text-secondary)">Hides preset swatches and recent colors</span>
-            <SColorPicker 
-              v-model="noPresetsColor" 
-              :show-presets="false"
-              :show-recent="false"
-            />
-            <code class="font-mono text-xs text-emerald-400">{{ noPresetsColor }}</code>
-          </div>
-          
-          <div class="flex flex-col gap-3">
-            <span class="text-sm font-semibold text-(--s-text-primary)">Compact Mode</span>
-            <span class="text-xs text-(--s-text-secondary)">Small size with spectrum and sliders only</span>
-            <SColorPicker 
-              v-model="compactColor" 
-              :show-preview="false"
-              :show-inputs="false"
-              :show-presets="false"
-              :show-recent="false"
-              size="small"
-            />
-            <code class="font-mono text-xs text-amber-400">{{ compactColor }}</code>
-          </div>
-        </div>
-      </DemoSection>
-    </section>
-
     <!-- Real-World Example -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Example</h2>
-      <DemoSection 
+      <DemoSection
         title="Theme Customizer"
-        description="A theme customization panel using multiple color pickers."
-        :code="themeCode"
+        description="A theme customization panel using multiple color pickers in dropdown mode."
+        :code="`<SColorPicker v-model='primary' label='Primary' mode='dropdown' />`"
         language="vue"
       >
         <div class="flex flex-col md:flex-row gap-8">
-          <!-- Color Pickers -->
           <div class="flex-1 space-y-4">
             <h3 class="font-semibold text-(--s-text-primary) mb-4">Theme Colors</h3>
             <div class="grid grid-cols-2 gap-4">
@@ -591,33 +487,13 @@ const colorPickerSlots: ApiSlot[] = [
               <SColorPicker v-model="backgroundColor" mode="dropdown" label="Background" />
             </div>
           </div>
-          
-          <!-- Preview -->
           <div class="flex-1">
             <h3 class="font-semibold text-(--s-text-primary) mb-4">Preview</h3>
-            <div 
-              class="rounded-xl p-6 transition-colors duration-300"
-              :style="{ backgroundColor: backgroundColor }"
-            >
+            <div class="rounded-xl p-6 transition-colors duration-300" :style="{ backgroundColor: backgroundColor }">
               <div class="space-y-3">
-                <div 
-                  class="h-10 rounded-lg flex items-center justify-center text-white font-semibold text-sm"
-                  :style="{ backgroundColor: primaryColor }"
-                >
-                  Primary Button
-                </div>
-                <div 
-                  class="h-10 rounded-lg flex items-center justify-center text-white font-semibold text-sm"
-                  :style="{ backgroundColor: secondaryColor }"
-                >
-                  Secondary Button
-                </div>
-                <div 
-                  class="h-8 rounded-lg flex items-center justify-center text-black font-semibold text-sm"
-                  :style="{ backgroundColor: accentColor }"
-                >
-                  Accent Element
-                </div>
+                <div class="h-10 rounded-lg flex items-center justify-center text-white font-semibold text-sm" :style="{ backgroundColor: primaryColor }">Primary Button</div>
+                <div class="h-10 rounded-lg flex items-center justify-center text-white font-semibold text-sm" :style="{ backgroundColor: secondaryColor }">Secondary Button</div>
+                <div class="h-8 rounded-lg flex items-center justify-center text-black font-semibold text-sm" :style="{ backgroundColor: accentColor }">Accent Element</div>
               </div>
             </div>
           </div>
@@ -628,10 +504,55 @@ const colorPickerSlots: ApiSlot[] = [
     <!-- API Reference -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
-      <SApiTable title="Props" type="props" :props="colorPickerProps" />
-      <SApiTable title="Slots" type="slots" :slots="colorPickerSlots" />
-      <SApiTable title="Events" type="events" :events="colorPickerEvents" />
+      <SApiTable title="SColorPicker Props" type="props" :props="colorPickerProps" />
+      <SApiTable title="SColorPicker Slots" type="slots" :slots="colorPickerSlots" />
+      <SApiTable title="SColorPicker Events" type="events" :events="colorPickerEvents" />
+      <SApiTable title="SColorPickerPresets Props" type="props" :props="presetsProps" />
+      <SApiTable title="SColorPickerRecent Props" type="props" :props="recentProps" />
     </SApiSection>
+
+    <!-- Subcomponents Reference -->
+    <section>
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Subcomponents</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerSpectrum</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">2D saturation/brightness picker area.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerHueSlider</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">Horizontal hue selection slider (0-360).</p>
+        </div>
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerAlphaSlider</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">Horizontal alpha/opacity slider (0-1).</p>
+        </div>
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerPreview</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">Color preview swatch with checkerboard for transparency.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerEyeDropper</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">Browser EyeDropper API button (auto-hides if unsupported).</p>
+        </div>
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerCopy</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">Copy-to-clipboard button with check animation.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerInputs</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">HEX/RGB/HSL input fields with format toggle button.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerPresets</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">Grid of preset color swatches. Props: <code>presets</code>, <code>label</code>.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerRecent</code>
+          <p class="text-sm text-(--s-text-secondary) mt-1">Recently used colors (persisted to localStorage). Props: <code>label</code>.</p>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
