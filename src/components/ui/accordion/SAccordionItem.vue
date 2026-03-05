@@ -1,8 +1,9 @@
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
-import { inject, ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
-import { SAccordionContextKey, type SAccordionContext } from './SAccordion.vue'
+import { inject, ref, computed, onMounted, onBeforeUnmount, watch, nextTick, provide, useSlots } from 'vue'
+import { cn } from '~/lib/utils'
+import { SAccordionContextKey, SAccordionItemContextKey, type SAccordionContext } from './SAccordion.vue'
 
 export interface Props {
   /** Unique identifier for this item */
@@ -40,6 +41,8 @@ const emit = defineEmits<{
   'toggle': [expanded: boolean]
 }>()
 
+const slots = useSlots()
+
 // Inject context
 const context = inject<SAccordionContext>(SAccordionContextKey)
 
@@ -54,6 +57,7 @@ const hasBeenExpanded = ref(false)
 
 // Computed
 const isExpanded = computed(() => context?.isExpanded(props.name) ?? false)
+const disabledRef = computed(() => props.disabled)
 const shouldRender = computed(() => {
   if (!props.lazy) return true
   return hasBeenExpanded.value
@@ -102,7 +106,7 @@ const handleKeydown = (e: KeyboardEvent) => {
 // Size configurations
 const sizeConfig = computed(() => {
   const isDense = context?.dense ?? false
-  
+
   const sizes = {
     small: {
       header: isDense ? 'py-1 px-2' : 'py-1 px-2',
@@ -135,15 +139,15 @@ const sizeConfig = computed(() => {
 // Type-based classes
 const itemClasses = computed(() => {
   const type = context?.type ?? 'default'
-  
+
   const typeClasses = {
     default: '',
     bordered: '',
-    separated: 'rounded-xl border border-(--s-border) overflow-hidden',
-    card: 'rounded-xl bg-(--s-bg-primary) border border-(--s-border) shadow-sm overflow-hidden',
+    separated: 'rounded-xl border border-border overflow-hidden',
+    card: 'rounded-xl bg-background border border-border shadow-sm overflow-hidden',
     minimal: ''
   }
-  
+
   return typeClasses[type]
 })
 
@@ -152,25 +156,25 @@ const headerClasses = computed(() => {
   const base = `
     w-full flex items-center gap-3 cursor-pointer select-none
     transition-all duration-300 ease-out
-    focus:outline-none focus-visible:ring-2 focus-visible:ring-(--s-primary) focus-visible:ring-offset-2
+    focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
   `
-  
+
   const typeStyles = {
-    default: 'hover:bg-(--s-bg-tertiary)',
-    bordered: 'hover:bg-(--s-bg-tertiary)',
-    separated: 'bg-(--s-bg-primary) hover:bg-(--s-bg-tertiary)',
-    card: 'hover:bg-(--s-bg-tertiary)',
-    minimal: 'hover:text-(--s-primary)'
+    default: 'hover:bg-accent',
+    bordered: 'hover:bg-accent',
+    separated: 'bg-background hover:bg-accent',
+    card: 'hover:bg-accent',
+    minimal: 'hover:text-primary'
   }
-  
-  const disabledStyles = props.disabled 
-    ? 'opacity-50 cursor-not-allowed' 
+
+  const disabledStyles = props.disabled
+    ? 'opacity-50 cursor-not-allowed'
     : ''
-  
+
   const expandedStyles = isExpanded.value && !props.disabled
-    ? 'bg-(--s-bg-tertiary)/50'
+    ? 'bg-accent/50'
     : ''
-  
+
   return `${base} ${sizeConfig.value.header} ${typeStyles[type]} ${disabledStyles} ${expandedStyles} ${props.headerClass}`
 })
 
@@ -178,7 +182,7 @@ const contentWrapperStyle = computed(() => {
   if (!context?.animated) {
     return isExpanded.value ? {} : { display: 'none' }
   }
-  
+
   return {
     maxHeight: isExpanded.value ? `${contentHeight.value}px` : '0px',
     opacity: isExpanded.value ? '1' : '0',
@@ -207,103 +211,133 @@ const showDivider = computed(() => {
 const headerFlexClass = computed(() => {
   return context?.iconPlacement === 'left' ? 'flex-row-reverse' : ''
 })
+
+// Detect compound usage: if default slot contains SAccordionTrigger/SAccordionContent
+// we use compound mode (no built-in header/content rendering)
+const isCompound = computed(() => {
+  // If title prop is not set and no header slot override, check for compound usage
+  // The heuristic: if there's no title and no #header slot, assume compound
+  if (props.title) return false
+  return true
+})
+
+// Provide item context for SAccordionTrigger and SAccordionContent
+provide(SAccordionItemContextKey, {
+  isExpanded,
+  disabled: disabledRef,
+  toggle,
+  contentRef,
+  contentHeight,
+  updateContentHeight,
+  shouldRender,
+  contentWrapperStyle,
+  sizeConfig,
+  accordionContext: context
+})
 </script>
 
 <template>
   <div
     v-bind="$attrs"
-    class="s-accordion-item"
-    :class="itemClasses"
+    :class="cn('s-accordion-item', itemClasses, $attrs.class ?? '')"
   >
-    <!-- Header -->
-    <button
-      type="button"
-      role="button"
-      :aria-expanded="isExpanded"
-      :aria-disabled="disabled"
-      :disabled="disabled"
-      :class="headerClasses"
-      :style="{ justifyContent: context?.iconPlacement === 'left' ? 'flex-start' : 'space-between' }"
-      @click="toggle"
-      @keydown="handleKeydown"
-    >
-      <div 
-        class="flex items-center gap-3 flex-1 min-w-0"
-        :class="headerFlexClass"
+    <!-- Compound API: just render the slot, subcomponents handle their own rendering -->
+    <template v-if="isCompound && !title">
+      <slot :expanded="isExpanded" :toggle="toggle" :disabled="disabled" />
+    </template>
+
+    <!-- Simple API: built-in header + content -->
+    <template v-else>
+      <!-- Header -->
+      <button
+        type="button"
+        role="button"
+        :aria-expanded="isExpanded"
+        :aria-disabled="disabled"
+        :disabled="disabled"
+        :class="headerClasses"
+        :style="{ justifyContent: context?.iconPlacement === 'left' ? 'flex-start' : 'space-between' }"
+        @click="toggle"
+        @keydown="handleKeydown"
       >
-        <!-- Custom Header Slot -->
-        <slot 
-          name="header" 
-          :expanded="isExpanded" 
-          :toggle="toggle" 
-          :disabled="disabled"
+        <div
+          class="flex items-center gap-3 flex-1 min-w-0"
+          :class="headerFlexClass"
         >
-          <!-- Icon -->
-          <span 
-            v-if="icon" 
-            :class="['mdi', `mdi-${icon}`, sizeConfig.icon, 'shrink-0 text-(--s-text-secondary)']"
-            :style="isExpanded ? { color: context?.color } : {}"
+          <!-- Custom Header Slot -->
+          <slot
+            name="header"
+            :expanded="isExpanded"
+            :toggle="toggle"
+            :disabled="disabled"
+          >
+            <!-- Icon -->
+            <span
+              v-if="icon"
+              :class="['mdi', `mdi-${icon}`, sizeConfig.icon, 'shrink-0 text-muted-foreground']"
+              :style="isExpanded ? { color: context?.color } : {}"
+            />
+
+            <!-- Title & Subtitle -->
+            <div class="flex flex-col items-start min-w-0 flex-1">
+              <slot name="title">
+                <span
+                  :class="[sizeConfig.title, 'font-medium text-foreground truncate w-full text-left']"
+                >
+                  {{ title }}
+                </span>
+              </slot>
+              <slot name="subtitle">
+                <span
+                  v-if="subtitle"
+                  :class="[sizeConfig.subtitle, 'text-muted-foreground truncate w-full text-left']"
+                >
+                  {{ subtitle }}
+                </span>
+              </slot>
+            </div>
+          </slot>
+
+          <!-- Extra Slot -->
+          <slot name="extra" />
+        </div>
+
+        <!-- Expand Icon -->
+        <slot name="icon" :expanded="isExpanded">
+          <span
+            :class="['mdi shrink-0', `mdi-${expandIcon || 'chevron-down'}`, sizeConfig.expandIcon, 'text-muted-foreground']"
+            :style="expandIconStyle"
           />
-          
-          <!-- Title & Subtitle -->
-          <div class="flex flex-col items-start min-w-0 flex-1">
-            <slot name="title">
-              <span 
-                :class="[sizeConfig.title, 'font-medium text-(--s-text-primary) truncate w-full text-left']"
-              >
-                {{ title }}
-              </span>
-            </slot>
-            <slot name="subtitle">
-              <span 
-                v-if="subtitle"
-                :class="[sizeConfig.subtitle, 'text-(--s-text-secondary) truncate w-full text-left']"
-              >
-                {{ subtitle }}
-              </span>
-            </slot>
-          </div>
         </slot>
-        
-        <!-- Extra Slot -->
-        <slot name="extra" />
-      </div>
-        
-      <!-- Expand Icon -->
-      <slot name="icon" :expanded="isExpanded">
-        <span 
-          :class="['mdi shrink-0', `mdi-${expandIcon || 'chevron-down'}`, sizeConfig.expandIcon, 'text-(--s-text-secondary)']"
-          :style="expandIconStyle"
-        />
-      </slot>
-    </button>
-    
-    <!-- Divider -->
-    <div 
-      v-if="showDivider && !isExpanded"
-      class="border-b border-(--s-border)"
-    />
-    
-    <!-- Content -->
-    <div 
-      ref="contentRef"
-      :style="contentWrapperStyle"
-      role="region"
-      :aria-hidden="!isExpanded"
-    >
-      <div 
-        v-if="shouldRender"
-        :class="[sizeConfig.content, 'text-(--s-text-secondary)', contentClass]"
+      </button>
+
+      <!-- Divider -->
+      <div
+        v-if="showDivider && !isExpanded"
+        class="border-b border-border"
+      />
+
+      <!-- Content -->
+      <div
+        ref="contentRef"
+        :style="contentWrapperStyle"
+        role="region"
+        :aria-hidden="!isExpanded"
       >
-        <slot />
+        <div
+          v-if="shouldRender"
+          :class="[sizeConfig.content, 'text-muted-foreground', contentClass]"
+        >
+          <slot />
+        </div>
       </div>
-    </div>
-    
-    <!-- Bottom Divider for expanded state -->
-    <div 
-      v-if="showDivider && isExpanded"
-      class="border-b border-(--s-border)"
-    />
+
+      <!-- Bottom Divider for expanded state -->
+      <div
+        v-if="showDivider && isExpanded"
+        class="border-b border-border"
+      />
+    </template>
   </div>
 </template>
 

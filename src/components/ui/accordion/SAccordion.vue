@@ -34,12 +34,28 @@ export interface SAccordionContext {
 }
 
 export const SAccordionContextKey: InjectionKey<SAccordionContext> = Symbol('SAccordionContext')
+
+export interface SAccordionItemContext {
+  isExpanded: Ref<boolean>
+  disabled: Ref<boolean>
+  toggle: () => void
+  contentRef: Ref<HTMLElement | null>
+  contentHeight: Ref<number>
+  updateContentHeight: () => void
+  shouldRender: Ref<boolean>
+  contentWrapperStyle: Ref<Record<string, string>>
+  sizeConfig: Ref<{ header: string; title: string; subtitle: string; icon: string; content: string; expandIcon: string }>
+  accordionContext: SAccordionContext | undefined
+}
+
+export const SAccordionItemContextKey: InjectionKey<SAccordionItemContext> = Symbol('SAccordionItemContext')
 </script>
 
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
 import { provide, ref, computed, watch } from 'vue'
+import { cn } from '~/lib/utils'
 
 export interface Props {
   /** Active item(s) - array for multiple mode, single value for single mode */
@@ -187,7 +203,7 @@ const accordionClasses = computed(() => {
   
   const typeClasses = {
     default: '',
-    bordered: 'border border-(--s-border) rounded-xl overflow-hidden',
+    bordered: 'border border-border rounded-xl overflow-hidden',
     separated: 'space-y-3',
     card: 'space-y-3',
     minimal: ''
@@ -219,7 +235,7 @@ provide(SAccordionContextKey, {
 <template>
   <div
     v-bind="$attrs"
-    :class="accordionClasses"
+    :class="cn(accordionClasses, $attrs.class ?? '')"
     role="region"
     aria-label="Accordion"
   >

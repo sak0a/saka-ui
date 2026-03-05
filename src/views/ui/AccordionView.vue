@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SAccordion, SAccordionItem, SApiSection, SApiTable, SApiKeyboard } from '../../index'
+import { SAccordion, SAccordionItem, SAccordionTrigger, SAccordionContent, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
@@ -39,65 +39,116 @@ const faqValue = ref('')
 // Colors
 const colorValue = ref('item-1')
 
-// Custom expand icons
-const customExpandValue = ref('item-1')
+// Custom arrow
+const customArrowValue = ref('item-1')
 
 // Dense mode
 const denseValue = ref('item-1')
 
+// Simple API
+const simpleValue = ref('item-1')
+
 // Code snippets
 const basicCode = `<script setup>
 import { ref } from 'vue'
+import { SAccordion, SAccordionItem, SAccordionTrigger, SAccordionContent } from 'saka-ui'
+
 const expanded = ref('item-1')
 <\/script>
 
 <template>
-  <SAccordion v-model="expanded">
-    <SAccordionItem name="item-1" title="First Section">
-      Content for the first section.
+  <SAccordion v-model="expanded" type="bordered">
+    <SAccordionItem name="item-1">
+      <SAccordionTrigger>What is Vue.js?</SAccordionTrigger>
+      <SAccordionContent>
+        A progressive JavaScript framework for building user interfaces.
+      </SAccordionContent>
     </SAccordionItem>
-    <SAccordionItem name="item-2" title="Second Section">
-      Content for the second section.
+    <SAccordionItem name="item-2">
+      <SAccordionTrigger>Why choose Vue?</SAccordionTrigger>
+      <SAccordionContent>
+        Gentle learning curve, excellent docs, flexible architecture.
+      </SAccordionContent>
     </SAccordionItem>
   </SAccordion>
 </template>`
 
 const multipleCode = `<SAccordion v-model="expanded" multiple>
-  <SAccordionItem name="item-1" title="First Section">...</SAccordionItem>
-  <SAccordionItem name="item-2" title="Second Section">...</SAccordionItem>
+  <SAccordionItem name="item-1">
+    <SAccordionTrigger>Features</SAccordionTrigger>
+    <SAccordionContent>...</SAccordionContent>
+  </SAccordionItem>
+  <SAccordionItem name="item-2">
+    <SAccordionTrigger>Performance</SAccordionTrigger>
+    <SAccordionContent>...</SAccordionContent>
+  </SAccordionItem>
 </SAccordion>`
 
 const variantsCode = `<!-- Default -->
-<SAccordion type="default">...items...</SAccordion>
+<SAccordion type="default">...</SAccordion>
 
 <!-- Bordered -->
-<SAccordion type="bordered">...items...</SAccordion>
+<SAccordion type="bordered">...</SAccordion>
 
 <!-- Separated -->
-<SAccordion type="separated">...items...</SAccordion>
+<SAccordion type="separated">...</SAccordion>
 
 <!-- Card -->
-<SAccordion type="card">...items...</SAccordion>
+<SAccordion type="card">...</SAccordion>
 
 <!-- Minimal -->
-<SAccordion type="minimal">...items...</SAccordion>`
+<SAccordion type="minimal">...</SAccordion>`
 
 const sizesCode = `<SAccordion size="small">...</SAccordion>
 <SAccordion size="medium">...</SAccordion>
 <SAccordion size="large">...</SAccordion>`
 
-const iconCode = `<SAccordion icon-placement="left">
-  <SAccordionItem name="settings" icon="cog" title="Settings" />
-  <SAccordionItem name="users" icon="account-group" title="Users" />
-</SAccordion>`
+const customIconCode = `<SAccordionItem name="settings">
+  <SAccordionTrigger>
+    <template #icon>
+      <!-- Any component: Lucide, Heroicons, SVG, emoji -->
+      <svg class="w-5 h-5 text-blue-500">...</svg>
+    </template>
+    Settings
+  </SAccordionTrigger>
+  <SAccordionContent>...</SAccordionContent>
+</SAccordionItem>`
+
+const customArrowCode = `<SAccordionItem name="item-1">
+  <SAccordionTrigger>
+    Section Title
+    <template #arrow="{ expanded }">
+      <!-- Replace the default chevron with anything -->
+      <LucideChevronRight :class="expanded ? 'rotate-90' : ''" />
+    </template>
+  </SAccordionTrigger>
+  <SAccordionContent>...</SAccordionContent>
+</SAccordionItem>
+
+<!-- Or hide the arrow entirely -->
+<SAccordionTrigger :hide-arrow="true">No Arrow</SAccordionTrigger>`
 
 const nestedCode = `<SAccordion v-model="parent">
-  <SAccordionItem name="parent-1" title="Parent">
-    <SAccordion v-model="child" type="card">
-      <SAccordionItem name="child-1" title="Nested Item 1">
-        Nested content
-      </SAccordionItem>
-    </SAccordion>
+  <SAccordionItem name="parent-1">
+    <SAccordionTrigger>
+      <template #icon><span class="mdi mdi-folder text-amber-500" /></template>
+      Project Files
+    </SAccordionTrigger>
+    <SAccordionContent>
+      <SAccordion v-model="child" type="card">
+        <SAccordionItem name="child-1">
+          <SAccordionTrigger>Nested Item</SAccordionTrigger>
+          <SAccordionContent>Nested content</SAccordionContent>
+        </SAccordionItem>
+      </SAccordion>
+    </SAccordionContent>
+  </SAccordionItem>
+</SAccordion>`
+
+const simpleApiCode = `<!-- Simple API: title prop instead of subcomponents -->
+<SAccordion v-model="expanded">
+  <SAccordionItem name="item-1" title="Section Title" icon="cog" subtitle="Optional subtitle">
+    Content goes here
   </SAccordionItem>
 </SAccordion>`
 
@@ -116,21 +167,31 @@ const accordionProps: ApiProp[] = [
 
 const accordionItemProps: ApiProp[] = [
   { name: 'name', type: 'string | number', default: 'required', description: 'Unique identifier', category: 'Core' },
-  { name: 'title', type: 'string', default: 'undefined', description: 'Header title text', category: 'Content' },
-  { name: 'subtitle', type: 'string', default: 'undefined', description: 'Secondary text', category: 'Content' },
-  { name: 'icon', type: 'string', default: 'undefined', description: 'MDI icon name', category: 'Content' },
-  { name: 'expandIcon', type: 'string', default: "'chevron-down'", description: 'Custom expand icon (MDI name)', category: 'Content' },
+  { name: 'title', type: 'string', default: 'undefined', description: 'Header title text (simple API)', category: 'Content' },
+  { name: 'subtitle', type: 'string', default: 'undefined', description: 'Secondary text (simple API)', category: 'Content' },
+  { name: 'icon', type: 'string', default: 'undefined', description: 'MDI icon name (simple API)', category: 'Content' },
+  { name: 'expandIcon', type: 'string', default: "'chevron-down'", description: 'Custom expand icon MDI name (simple API)', category: 'Content' },
   { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable this item', category: 'States' },
   { name: 'lazy', type: 'boolean', default: 'false', description: 'Lazy render content', category: 'States' }
 ]
 
 const accordionItemSlots: ApiSlot[] = [
-  { name: 'default', description: 'Accordion panel content' },
-  { name: '#header', props: '{ expanded, toggle, disabled }', description: 'Custom header content replacing the default header' },
-  { name: '#title', description: 'Custom title content' },
-  { name: '#subtitle', description: 'Custom subtitle content' },
-  { name: '#icon', props: '{ expanded }', description: 'Custom expand/collapse icon' },
-  { name: '#extra', description: 'Extra content in header area' }
+  { name: 'default', description: 'SAccordionTrigger + SAccordionContent (compound) or plain content (simple API with title prop)' }
+]
+
+const triggerProps: ApiProp[] = [
+  { name: 'hideArrow', type: 'boolean', default: 'false', description: 'Hide the default arrow indicator', category: 'Appearance' },
+  { name: 'triggerClass', type: 'string', default: "''", description: 'Additional CSS classes for the trigger button', category: 'Appearance' }
+]
+
+const triggerSlots: ApiSlot[] = [
+  { name: 'default', props: '{ expanded, disabled }', description: 'Trigger label text' },
+  { name: '#icon', props: '{ expanded, disabled }', description: 'Leading icon slot — any component (Lucide, SVG, MDI, emoji)' },
+  { name: '#arrow', props: '{ expanded, disabled }', description: 'Expand indicator — replaces the default chevron SVG' }
+]
+
+const contentProps: ApiProp[] = [
+  { name: 'contentClass', type: 'string', default: "''", description: 'Additional CSS classes for the content area', category: 'Appearance' }
 ]
 
 const accordionEvents: ApiEvent[] = [
@@ -152,91 +213,215 @@ const keyboardShortcuts: KeyboardShortcut[] = [
   <div class="space-y-12 pb-20">
     <!-- Header -->
     <header>
-      <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Accordion</h1>
-      <p class="text-lg text-(--s-text-secondary)">A stunning, customizable accordion component for expandable content sections.</p>
+      <h1 class="text-4xl font-extrabold text-foreground mb-2">Accordion</h1>
+      <p class="text-lg text-muted-foreground">A compound accordion component with full control over trigger, icons, and content.</p>
     </header>
 
     <!-- Features -->
     <article>
-      <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4">Features</h3>
+      <h3 class="text-xl font-semibold text-foreground mb-4">Features</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-muted border border-border">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-view-sequential text-xl text-emerald-400"></span>
-            <span class="font-semibold text-(--s-text-primary)">Multiple Variants</span>
+            <span class="mdi mdi-puzzle text-xl text-emerald-400"></span>
+            <span class="font-semibold text-foreground">Compound API</span>
           </div>
-          <p class="text-sm text-(--s-text-secondary)">Five visual styles: default, bordered, separated, card, and minimal.</p>
+          <p class="text-sm text-muted-foreground">SAccordionTrigger + SAccordionContent for full composability.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-muted border border-border">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-checkbox-multiple-marked text-xl text-blue-400"></span>
-            <span class="font-semibold text-(--s-text-primary)">Single & Multiple</span>
+            <span class="mdi mdi-image-filter-vintage text-xl text-blue-400"></span>
+            <span class="font-semibold text-foreground">Any Icon Library</span>
           </div>
-          <p class="text-sm text-(--s-text-secondary)">Toggle between single or multiple items open at once.</p>
+          <p class="text-sm text-muted-foreground">Use Lucide, Heroicons, SVGs, or emoji via #icon and #arrow slots.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-muted border border-border">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-animation text-xl text-violet-400"></span>
-            <span class="font-semibold text-(--s-text-primary)">Smooth Animations</span>
+            <span class="mdi mdi-view-sequential text-xl text-violet-400"></span>
+            <span class="font-semibold text-foreground">Five Variants</span>
           </div>
-          <p class="text-sm text-(--s-text-secondary)">Hardware-accelerated expand/collapse animations.</p>
+          <p class="text-sm text-muted-foreground">Default, bordered, separated, card, and minimal styles.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-muted border border-border">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-folder-multiple text-xl text-amber-400"></span>
-            <span class="font-semibold text-(--s-text-primary)">Nested Support</span>
+            <span class="mdi mdi-animation text-xl text-amber-400"></span>
+            <span class="font-semibold text-foreground">Smooth Animations</span>
           </div>
-          <p class="text-sm text-(--s-text-secondary)">Full support for accordion inside accordion structures.</p>
+          <p class="text-sm text-muted-foreground">Hardware-accelerated expand/collapse with configurable timing.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-muted border border-border">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-keyboard text-xl text-pink-400"></span>
-            <span class="font-semibold text-(--s-text-primary)">Keyboard Navigation</span>
+            <span class="font-semibold text-foreground">Keyboard Navigation</span>
           </div>
-          <p class="text-sm text-(--s-text-secondary)">Full keyboard support with Tab, Enter, and Space.</p>
+          <p class="text-sm text-muted-foreground">Full keyboard support with Tab, Enter, and Space.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-muted border border-border">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-palette text-xl text-cyan-400"></span>
-            <span class="font-semibold text-(--s-text-primary)">Custom Colors</span>
+            <span class="mdi mdi-checkbox-multiple-marked text-xl text-cyan-400"></span>
+            <span class="font-semibold text-foreground">Single & Multiple</span>
           </div>
-          <p class="text-sm text-(--s-text-secondary)">Customize accent colors for headers and icons.</p>
+          <p class="text-sm text-muted-foreground">Toggle between single or multiple items open at once.</p>
         </div>
       </div>
     </article>
 
     <!-- Basic Usage -->
     <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
-      <DemoSection 
-        title="Simple Accordion"
-        description="Click headers to expand and collapse sections. Only one item can be open at a time by default."
+      <h2 class="text-2xl font-bold text-foreground mb-6">Basic Usage</h2>
+      <DemoSection
+        title="Compound API"
+        description="Use SAccordionTrigger for the header and SAccordionContent for the body. Click to expand/collapse."
         :code="basicCode"
         language="vue"
       >
         <div class="max-w-2xl">
           <SAccordion v-model="basicValue" type="bordered">
-            <SAccordionItem name="item-1" title="What is Vue.js?">
-              Vue.js is a progressive JavaScript framework for building user interfaces. It was created by Evan You and is designed to be incrementally adoptable.
+            <SAccordionItem name="item-1">
+              <SAccordionTrigger>What is Vue.js?</SAccordionTrigger>
+              <SAccordionContent>
+                Vue.js is a progressive JavaScript framework for building user interfaces. It was created by Evan You and is designed to be incrementally adoptable.
+              </SAccordionContent>
             </SAccordionItem>
-            <SAccordionItem name="item-2" title="Why choose Vue?">
-              Vue offers a gentle learning curve, excellent documentation, and a flexible architecture that scales from small widgets to enterprise applications.
+            <SAccordionItem name="item-2">
+              <SAccordionTrigger>Why choose Vue?</SAccordionTrigger>
+              <SAccordionContent>
+                Vue offers a gentle learning curve, excellent documentation, and a flexible architecture that scales from small widgets to enterprise applications.
+              </SAccordionContent>
             </SAccordionItem>
-            <SAccordionItem name="item-3" title="How do I get started?">
-              You can start by including Vue via CDN, using the Vue CLI, or scaffolding with Vite. Check the official documentation at vuejs.org.
+            <SAccordionItem name="item-3">
+              <SAccordionTrigger>How do I get started?</SAccordionTrigger>
+              <SAccordionContent>
+                Scaffold with Vite, install saka-ui, and start building. Check the official documentation at vuejs.org.
+              </SAccordionContent>
             </SAccordionItem>
           </SAccordion>
-          <p class="text-sm text-(--s-text-secondary) mt-4">
+          <p class="text-sm text-muted-foreground mt-4">
             Currently expanded: <code class="font-mono text-emerald-400">{{ basicValue || 'none' }}</code>
           </p>
         </div>
       </DemoSection>
     </section>
 
+    <!-- Custom Icons -->
+    <section>
+      <h2 class="text-2xl font-bold text-foreground mb-6">Custom Icons</h2>
+      <DemoSection
+        title="#icon Slot"
+        description="Place any component in the #icon slot — Lucide, Heroicons, inline SVGs, or even emoji. No dependency on MDI."
+        :code="customIconCode"
+        language="vue"
+      >
+        <div class="max-w-xl">
+          <SAccordion v-model="iconValue" type="separated">
+            <SAccordionItem name="settings">
+              <SAccordionTrigger>
+                <template #icon>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground shrink-0"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                </template>
+                Settings
+              </SAccordionTrigger>
+              <SAccordionContent>
+                Customize your application settings, notifications, and more.
+              </SAccordionContent>
+            </SAccordionItem>
+            <SAccordionItem name="users">
+              <SAccordionTrigger>
+                <template #icon>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground shrink-0"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </template>
+                Team Members
+              </SAccordionTrigger>
+              <SAccordionContent>
+                Add, remove, or modify team member permissions and roles.
+              </SAccordionContent>
+            </SAccordionItem>
+            <SAccordionItem name="security">
+              <SAccordionTrigger>
+                <template #icon>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                </template>
+                Security
+              </SAccordionTrigger>
+              <SAccordionContent>
+                Enable two-factor authentication, manage sessions, and security keys.
+              </SAccordionContent>
+            </SAccordionItem>
+            <SAccordionItem name="billing">
+              <SAccordionTrigger>
+                <template #icon>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground shrink-0"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                </template>
+                Billing
+              </SAccordionTrigger>
+              <SAccordionContent>
+                View invoices, update payment methods, and manage subscriptions.
+              </SAccordionContent>
+            </SAccordionItem>
+          </SAccordion>
+        </div>
+      </DemoSection>
+    </section>
+
+    <!-- Custom Arrow -->
+    <section>
+      <h2 class="text-2xl font-bold text-foreground mb-6">Custom Arrow</h2>
+      <DemoSection
+        title="#arrow Slot & hideArrow"
+        description="Replace the default chevron with any component via #arrow, or hide it entirely with the hideArrow prop."
+        :code="customArrowCode"
+        language="vue"
+      >
+        <div class="max-w-2xl">
+          <SAccordion v-model="customArrowValue" type="card">
+            <SAccordionItem name="item-1">
+              <SAccordionTrigger>
+                <template #icon>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500 shrink-0"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                </template>
+                Custom right-chevron arrow
+                <template #arrow="{ expanded }">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-muted-foreground transition-transform duration-300" :class="expanded ? 'rotate-90' : ''"><path d="m9 18 6-6-6-6"/></svg>
+                </template>
+              </SAccordionTrigger>
+              <SAccordionContent>
+                The #arrow slot receives <code class="text-xs bg-accent px-1 py-0.5 rounded">{ expanded, disabled }</code> so you can animate it however you like.
+              </SAccordionContent>
+            </SAccordionItem>
+            <SAccordionItem name="item-2">
+              <SAccordionTrigger>
+                <template #icon>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-violet-500 shrink-0"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+                </template>
+                Plus/minus arrow
+                <template #arrow="{ expanded }">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-muted-foreground transition-transform duration-300" :class="expanded ? 'rotate-45' : ''"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+                </template>
+              </SAccordionTrigger>
+              <SAccordionContent>
+                A plus icon that rotates 45° to become an X when expanded.
+              </SAccordionContent>
+            </SAccordionItem>
+            <SAccordionItem name="item-3">
+              <SAccordionTrigger :hide-arrow="true">
+                <template #icon>
+                  <span class="text-lg">🚀</span>
+                </template>
+                No arrow at all (hideArrow)
+              </SAccordionTrigger>
+              <SAccordionContent>
+                Set <code class="text-xs bg-accent px-1 py-0.5 rounded">hide-arrow</code> on SAccordionTrigger to remove the indicator entirely.
+              </SAccordionContent>
+            </SAccordionItem>
+          </SAccordion>
+        </div>
+      </DemoSection>
+    </section>
+
     <!-- Multiple Expansion -->
     <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Multiple Expansion</h2>
-      <DemoSection 
+      <h2 class="text-2xl font-bold text-foreground mb-6">Multiple Expansion</h2>
+      <DemoSection
         title="Allow Multiple Open Items"
         description="Enable multiple mode to allow several sections open simultaneously."
         :code="multipleCode"
@@ -244,17 +429,35 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       >
         <div class="max-w-2xl">
           <SAccordion v-model="multipleValue" type="bordered" multiple>
-            <SAccordionItem name="item-1" title="Features" icon="star">
-              Multiple items can be expanded at the same time. Click multiple headers to open them all.
+            <SAccordionItem name="item-1">
+              <SAccordionTrigger>
+                <template #icon><span class="mdi mdi-star text-lg text-amber-400 shrink-0"></span></template>
+                Features
+              </SAccordionTrigger>
+              <SAccordionContent>
+                Multiple items can be expanded at the same time. Click multiple headers to open them all.
+              </SAccordionContent>
             </SAccordionItem>
-            <SAccordionItem name="item-2" title="Performance" icon="speedometer">
-              Lazy loading available for heavy content. Animations are optimized with hardware acceleration.
+            <SAccordionItem name="item-2">
+              <SAccordionTrigger>
+                <template #icon><span class="mdi mdi-speedometer text-lg text-blue-400 shrink-0"></span></template>
+                Performance
+              </SAccordionTrigger>
+              <SAccordionContent>
+                Lazy loading available for heavy content. Animations are optimized with hardware acceleration.
+              </SAccordionContent>
             </SAccordionItem>
-            <SAccordionItem name="item-3" title="Customization" icon="palette">
-              Full control over styles, icons, colors, and content via props and slots.
+            <SAccordionItem name="item-3">
+              <SAccordionTrigger>
+                <template #icon><span class="mdi mdi-palette text-lg text-violet-400 shrink-0"></span></template>
+                Customization
+              </SAccordionTrigger>
+              <SAccordionContent>
+                Full control over styles, icons, colors, and content via props and slots.
+              </SAccordionContent>
             </SAccordionItem>
           </SAccordion>
-          <p class="text-sm text-(--s-text-secondary) mt-4">
+          <p class="text-sm text-muted-foreground mt-4">
             Expanded items: <code class="font-mono text-emerald-400">{{ multipleValue.length > 0 ? multipleValue.join(', ') : 'none' }}</code>
           </p>
         </div>
@@ -263,84 +466,89 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
     <!-- Variants -->
     <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
-      <DemoSection 
+      <h2 class="text-2xl font-bold text-foreground mb-6">Variants</h2>
+      <DemoSection
         title="Visual Style Variants"
         description="Five distinct visual styles for different design contexts."
         :code="variantsCode"
         language="vue"
       >
         <div class="space-y-8">
-          <!-- Default -->
           <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3 font-medium">Default</p>
+            <p class="text-sm text-muted-foreground mb-3 font-medium">Default</p>
             <div class="max-w-xl">
               <SAccordion v-model="variantDefault" type="default">
-                <SAccordionItem name="item-1" title="Default Style">
-                  Clean, minimal appearance with subtle hover effects.
+                <SAccordionItem name="item-1">
+                  <SAccordionTrigger>Default Style</SAccordionTrigger>
+                  <SAccordionContent>Clean, minimal appearance with subtle hover effects.</SAccordionContent>
                 </SAccordionItem>
-                <SAccordionItem name="item-2" title="Another Section">
-                  Works great for simple use cases.
+                <SAccordionItem name="item-2">
+                  <SAccordionTrigger>Another Section</SAccordionTrigger>
+                  <SAccordionContent>Works great for simple use cases.</SAccordionContent>
                 </SAccordionItem>
               </SAccordion>
             </div>
           </div>
 
-          <!-- Bordered -->
           <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3 font-medium">Bordered</p>
+            <p class="text-sm text-muted-foreground mb-3 font-medium">Bordered</p>
             <div class="max-w-xl">
               <SAccordion v-model="variantBordered" type="bordered">
-                <SAccordionItem name="item-1" title="Bordered Style">
-                  Items contained within a bordered container.
+                <SAccordionItem name="item-1">
+                  <SAccordionTrigger>Bordered Style</SAccordionTrigger>
+                  <SAccordionContent>Items contained within a bordered container.</SAccordionContent>
                 </SAccordionItem>
-                <SAccordionItem name="item-2" title="Another Section">
-                  Great for grouping related content.
+                <SAccordionItem name="item-2">
+                  <SAccordionTrigger>Another Section</SAccordionTrigger>
+                  <SAccordionContent>Great for grouping related content.</SAccordionContent>
                 </SAccordionItem>
               </SAccordion>
             </div>
           </div>
 
-          <!-- Separated -->
           <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3 font-medium">Separated</p>
+            <p class="text-sm text-muted-foreground mb-3 font-medium">Separated</p>
             <div class="max-w-xl">
               <SAccordion v-model="variantSeparated" type="separated">
-                <SAccordionItem name="item-1" title="Separated Style">
-                  Each item is visually separate with its own border.
+                <SAccordionItem name="item-1">
+                  <SAccordionTrigger>Separated Style</SAccordionTrigger>
+                  <SAccordionContent>Each item is visually separate with its own border.</SAccordionContent>
                 </SAccordionItem>
-                <SAccordionItem name="item-2" title="Another Section">
-                  Adds visual distinction between sections.
+                <SAccordionItem name="item-2">
+                  <SAccordionTrigger>Another Section</SAccordionTrigger>
+                  <SAccordionContent>Adds visual distinction between sections.</SAccordionContent>
                 </SAccordionItem>
               </SAccordion>
             </div>
           </div>
 
-          <!-- Card -->
           <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3 font-medium">Card</p>
+            <p class="text-sm text-muted-foreground mb-3 font-medium">Card</p>
             <div class="max-w-xl">
               <SAccordion v-model="variantCard" type="card">
-                <SAccordionItem name="item-1" title="Card Style">
-                  Elevated cards with shadows for premium feel.
+                <SAccordionItem name="item-1">
+                  <SAccordionTrigger>Card Style</SAccordionTrigger>
+                  <SAccordionContent>Elevated cards with shadows for premium feel.</SAccordionContent>
                 </SAccordionItem>
-                <SAccordionItem name="item-2" title="Another Section">
-                  Perfect for important content sections.
+                <SAccordionItem name="item-2">
+                  <SAccordionTrigger>Another Section</SAccordionTrigger>
+                  <SAccordionContent>Perfect for important content sections.</SAccordionContent>
                 </SAccordionItem>
               </SAccordion>
             </div>
           </div>
 
-          <!-- Minimal -->
           <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3 font-medium">Minimal</p>
+            <p class="text-sm text-muted-foreground mb-3 font-medium">Minimal</p>
             <div class="max-w-xl">
               <SAccordion v-model="variantMinimal" type="minimal">
-                <SAccordionItem name="item-1" title="Minimal Style">
-                  Ultra-clean with no containers or dividers.
+                <SAccordionItem name="item-1">
+                  <SAccordionTrigger>Minimal Style</SAccordionTrigger>
+                  <SAccordionContent>Ultra-clean with no containers or dividers.</SAccordionContent>
                 </SAccordionItem>
-                <SAccordionItem name="item-2" title="Another Section">
-                  Headers highlight on hover.
+                <SAccordionItem name="item-2">
+                  <SAccordionTrigger>Another Section</SAccordionTrigger>
+                  <SAccordionContent>Headers highlight on hover.</SAccordionContent>
                 </SAccordionItem>
               </SAccordion>
             </div>
@@ -351,8 +559,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
     <!-- Sizes -->
     <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
-      <DemoSection 
+      <h2 class="text-2xl font-bold text-foreground mb-6">Sizes</h2>
+      <DemoSection
         title="Size Variants"
         description="Three size options for different contexts."
         :code="sizesCode"
@@ -360,31 +568,34 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       >
         <div class="space-y-6">
           <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3">Small</p>
+            <p class="text-sm text-muted-foreground mb-3">Small</p>
             <div class="max-w-md">
               <SAccordion v-model="sizeValue" type="bordered" size="small">
-                <SAccordionItem name="item-1" title="Small Size">
-                  Compact accordion for tight spaces.
+                <SAccordionItem name="item-1">
+                  <SAccordionTrigger>Small Size</SAccordionTrigger>
+                  <SAccordionContent>Compact accordion for tight spaces.</SAccordionContent>
                 </SAccordionItem>
               </SAccordion>
             </div>
           </div>
           <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3">Medium (default)</p>
+            <p class="text-sm text-muted-foreground mb-3">Medium (default)</p>
             <div class="max-w-md">
               <SAccordion v-model="sizeValue" type="bordered" size="medium">
-                <SAccordionItem name="item-1" title="Medium Size">
-                  Standard size for most use cases.
+                <SAccordionItem name="item-1">
+                  <SAccordionTrigger>Medium Size</SAccordionTrigger>
+                  <SAccordionContent>Standard size for most use cases.</SAccordionContent>
                 </SAccordionItem>
               </SAccordion>
             </div>
           </div>
           <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3">Large</p>
+            <p class="text-sm text-muted-foreground mb-3">Large</p>
             <div class="max-w-md">
               <SAccordion v-model="sizeValue" type="bordered" size="large">
-                <SAccordionItem name="item-1" title="Large Size">
-                  Larger padding for emphasis.
+                <SAccordionItem name="item-1">
+                  <SAccordionTrigger>Large Size</SAccordionTrigger>
+                  <SAccordionContent>Larger padding for emphasis.</SAccordionContent>
                 </SAccordionItem>
               </SAccordion>
             </div>
@@ -395,8 +606,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
     <!-- Dense Mode -->
     <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Dense Mode</h2>
-      <DemoSection 
+      <h2 class="text-2xl font-bold text-foreground mb-6">Dense Mode</h2>
+      <DemoSection
         title="Compact Layout"
         description="Use dense mode for a more compact accordion with reduced padding."
         :code="`<SAccordion dense>...</SAccordion>`"
@@ -404,24 +615,28 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       >
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3">Normal</p>
+            <p class="text-sm text-muted-foreground mb-3">Normal</p>
             <SAccordion v-model="denseValue" type="card">
-              <SAccordionItem name="item-1" title="Standard Padding">
-                This accordion uses normal padding.
+              <SAccordionItem name="item-1">
+                <SAccordionTrigger>Standard Padding</SAccordionTrigger>
+                <SAccordionContent>This accordion uses normal padding.</SAccordionContent>
               </SAccordionItem>
-              <SAccordionItem name="item-2" title="More Space">
-                Standard space for better readability.
+              <SAccordionItem name="item-2">
+                <SAccordionTrigger>More Space</SAccordionTrigger>
+                <SAccordionContent>Standard space for better readability.</SAccordionContent>
               </SAccordionItem>
             </SAccordion>
           </div>
           <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3">Dense</p>
+            <p class="text-sm text-muted-foreground mb-3">Dense</p>
             <SAccordion v-model="denseValue" type="card" dense>
-              <SAccordionItem name="item-1" title="Compact Padding">
-                This accordion uses dense mode with reduced padding.
+              <SAccordionItem name="item-1">
+                <SAccordionTrigger>Compact Padding</SAccordionTrigger>
+                <SAccordionContent>This accordion uses dense mode with reduced padding.</SAccordionContent>
               </SAccordionItem>
-              <SAccordionItem name="item-2" title="Less Space">
-                Great for sidebars, menus, or information-dense UIs.
+              <SAccordionItem name="item-2">
+                <SAccordionTrigger>Less Space</SAccordionTrigger>
+                <SAccordionContent>Great for sidebars, menus, or information-dense UIs.</SAccordionContent>
               </SAccordionItem>
             </SAccordion>
           </div>
@@ -431,123 +646,78 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
     <!-- Icon Placement -->
     <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Icon Placement</h2>
-      <DemoSection 
-        title="Expand Icon Position"
+      <h2 class="text-2xl font-bold text-foreground mb-6">Icon Placement</h2>
+      <DemoSection
+        title="Expand Arrow Position"
         description="Place the expand chevron on the left or right side."
-        :code="iconCode"
+        :code="`<SAccordion icon-placement=&quot;left&quot;>...</SAccordion>`"
         language="vue"
       >
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3">Right (default)</p>
+            <p class="text-sm text-muted-foreground mb-3">Right (default)</p>
             <SAccordion v-model="iconLeftValue" type="card" icon-placement="right">
-              <SAccordionItem name="item-1" icon="cog" title="Settings">
-                Settings content here.
+              <SAccordionItem name="item-1">
+                <SAccordionTrigger>
+                  <template #icon><span class="mdi mdi-cog text-lg text-muted-foreground shrink-0"></span></template>
+                  Settings
+                </SAccordionTrigger>
+                <SAccordionContent>Settings content here.</SAccordionContent>
               </SAccordionItem>
-              <SAccordionItem name="item-2" icon="account" title="Profile">
-                Profile content here.
+              <SAccordionItem name="item-2">
+                <SAccordionTrigger>
+                  <template #icon><span class="mdi mdi-account text-lg text-muted-foreground shrink-0"></span></template>
+                  Profile
+                </SAccordionTrigger>
+                <SAccordionContent>Profile content here.</SAccordionContent>
               </SAccordionItem>
             </SAccordion>
           </div>
           <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3">Left</p>
+            <p class="text-sm text-muted-foreground mb-3">Left</p>
             <SAccordion v-model="iconLeftValue" type="card" icon-placement="left">
-              <SAccordionItem name="item-1" icon="cog" title="Settings">
-                Settings content here.
+              <SAccordionItem name="item-1">
+                <SAccordionTrigger>
+                  <template #icon><span class="mdi mdi-cog text-lg text-muted-foreground shrink-0"></span></template>
+                  Settings
+                </SAccordionTrigger>
+                <SAccordionContent>Settings content here.</SAccordionContent>
               </SAccordionItem>
-              <SAccordionItem name="item-2" icon="account" title="Profile">
-                Profile content here.
-              </SAccordionItem>
-            </SAccordion>
-          </div>
-        </div>
-      </DemoSection>
-    </section>
-
-    <!-- Custom Expand Icons -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Expand Icons</h2>
-      <DemoSection 
-        title="Replace the Default Chevron"
-        description="Use the expandIcon prop to replace the default arrow with any MDI icon."
-        :code="`<SAccordionItem expandIcon='plus' title='With Plus Icon' />`"
-        language="vue"
-      >
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3">Plus/Minus Icons</p>
-            <SAccordion v-model="customExpandValue" type="card">
-              <SAccordionItem name="item-1" expand-icon="plus" title="Click to Expand">
-                This item uses a plus icon instead of the default chevron.
-              </SAccordionItem>
-              <SAccordionItem name="item-2" expand-icon="plus" title="Another Section">
-                The icon rotates 180° when expanded, showing as a minus-like cross.
+              <SAccordionItem name="item-2">
+                <SAccordionTrigger>
+                  <template #icon><span class="mdi mdi-account text-lg text-muted-foreground shrink-0"></span></template>
+                  Profile
+                </SAccordionTrigger>
+                <SAccordionContent>Profile content here.</SAccordionContent>
               </SAccordionItem>
             </SAccordion>
           </div>
-          <div>
-            <p class="text-sm text-(--s-text-secondary) mb-3">Arrow Icons</p>
-            <SAccordion v-model="customExpandValue" type="card">
-              <SAccordionItem name="item-1" expand-icon="arrow-down-circle" title="Circle Arrow">
-                Using arrow-down-circle icon.
-              </SAccordionItem>
-              <SAccordionItem name="item-2" expand-icon="menu-down" title="Menu Arrow">
-                Using menu-down icon.
-              </SAccordionItem>
-            </SAccordion>
-          </div>
-        </div>
-      </DemoSection>
-    </section>
-
-    <!-- Custom Icons -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Icons</h2>
-      <DemoSection 
-        title="Header Icons"
-        description="Add MDI icons to accordion headers for visual context."
-        :code="iconCode"
-        language="vue"
-      >
-        <div class="max-w-xl">
-          <SAccordion v-model="iconValue" type="separated" color="#8b5cf6">
-            <SAccordionItem name="settings" icon="cog" title="Settings" subtitle="Configure your preferences">
-              Customize your application settings, notifications, and more.
-            </SAccordionItem>
-            <SAccordionItem name="users" icon="account-group" title="Team Members" subtitle="Manage your team">
-              Add, remove, or modify team member permissions and roles.
-            </SAccordionItem>
-            <SAccordionItem name="security" icon="shield-lock" title="Security" subtitle="Keep your account safe">
-              Enable two-factor authentication, manage sessions, and security keys.
-            </SAccordionItem>
-            <SAccordionItem name="billing" icon="credit-card" title="Billing" subtitle="Payment and invoices">
-              View invoices, update payment methods, and manage subscriptions.
-            </SAccordionItem>
-          </SAccordion>
         </div>
       </DemoSection>
     </section>
 
     <!-- Disabled Items -->
     <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Disabled Items</h2>
-      <DemoSection 
+      <h2 class="text-2xl font-bold text-foreground mb-6">Disabled Items</h2>
+      <DemoSection
         title="Disabled State"
         description="Individual items can be disabled to prevent interaction."
-        :code="`<SAccordionItem name='item' disabled title='Disabled' />`"
+        :code="`<SAccordionItem name='item' disabled>...</SAccordionItem>`"
         language="vue"
       >
         <div class="max-w-xl">
           <SAccordion v-model="disabledValue" type="bordered">
-            <SAccordionItem name="item-1" title="Available Section">
-              This section is fully interactive.
+            <SAccordionItem name="item-1">
+              <SAccordionTrigger>Available Section</SAccordionTrigger>
+              <SAccordionContent>This section is fully interactive.</SAccordionContent>
             </SAccordionItem>
-            <SAccordionItem name="item-2" title="Disabled Section" disabled>
-              You cannot expand this section.
+            <SAccordionItem name="item-2" disabled>
+              <SAccordionTrigger>Disabled Section</SAccordionTrigger>
+              <SAccordionContent>You cannot expand this section.</SAccordionContent>
             </SAccordionItem>
-            <SAccordionItem name="item-3" title="Another Available Section">
-              This one works too!
+            <SAccordionItem name="item-3">
+              <SAccordionTrigger>Another Available Section</SAccordionTrigger>
+              <SAccordionContent>This one works too!</SAccordionContent>
             </SAccordionItem>
           </SAccordion>
         </div>
@@ -556,8 +726,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
     <!-- Nested -->
     <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Nested Accordions</h2>
-      <DemoSection 
+      <h2 class="text-2xl font-bold text-foreground mb-6">Nested Accordions</h2>
+      <DemoSection
         title="Accordions Inside Accordions"
         description="Full support for nested accordion structures."
         :code="nestedCode"
@@ -565,26 +735,50 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       >
         <div class="max-w-xl">
           <SAccordion v-model="nestedValue" type="bordered">
-            <SAccordionItem name="parent-1" icon="folder" title="Project Files">
-              <SAccordion v-model="nestedChildValue" type="card" class="mt-2">
-                <SAccordionItem name="child-1" icon="file-document" title="README.md">
-                  Documentation for the project.
-                </SAccordionItem>
-                <SAccordionItem name="child-2" icon="file-code" title="package.json">
-                  Project dependencies and scripts.
-                </SAccordionItem>
-                <SAccordionItem name="child-3" icon="folder-open" title="src/">
-                  Source code directory.
-                </SAccordionItem>
-              </SAccordion>
+            <SAccordionItem name="parent-1">
+              <SAccordionTrigger>
+                <template #icon><span class="mdi mdi-folder text-lg text-amber-400 shrink-0"></span></template>
+                Project Files
+              </SAccordionTrigger>
+              <SAccordionContent>
+                <SAccordion v-model="nestedChildValue" type="card" class="mt-2">
+                  <SAccordionItem name="child-1">
+                    <SAccordionTrigger>
+                      <template #icon><span class="mdi mdi-file-document text-lg text-muted-foreground shrink-0"></span></template>
+                      README.md
+                    </SAccordionTrigger>
+                    <SAccordionContent>Documentation for the project.</SAccordionContent>
+                  </SAccordionItem>
+                  <SAccordionItem name="child-2">
+                    <SAccordionTrigger>
+                      <template #icon><span class="mdi mdi-file-code text-lg text-muted-foreground shrink-0"></span></template>
+                      package.json
+                    </SAccordionTrigger>
+                    <SAccordionContent>Project dependencies and scripts.</SAccordionContent>
+                  </SAccordionItem>
+                  <SAccordionItem name="child-3">
+                    <SAccordionTrigger>
+                      <template #icon><span class="mdi mdi-folder-open text-lg text-muted-foreground shrink-0"></span></template>
+                      src/
+                    </SAccordionTrigger>
+                    <SAccordionContent>Source code directory.</SAccordionContent>
+                  </SAccordionItem>
+                </SAccordion>
+              </SAccordionContent>
             </SAccordionItem>
-            <SAccordionItem name="parent-2" icon="cog" title="Configuration">
-              <p class="mb-3">Configure project settings:</p>
-              <ul class="list-disc list-inside space-y-1 text-sm">
-                <li>Build configuration</li>
-                <li>Environment variables</li>
-                <li>Plugin settings</li>
-              </ul>
+            <SAccordionItem name="parent-2">
+              <SAccordionTrigger>
+                <template #icon><span class="mdi mdi-cog text-lg text-muted-foreground shrink-0"></span></template>
+                Configuration
+              </SAccordionTrigger>
+              <SAccordionContent>
+                <p class="mb-3">Configure project settings:</p>
+                <ul class="list-disc list-inside space-y-1 text-sm">
+                  <li>Build configuration</li>
+                  <li>Environment variables</li>
+                  <li>Plugin settings</li>
+                </ul>
+              </SAccordionContent>
             </SAccordionItem>
           </SAccordion>
         </div>
@@ -593,8 +787,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
     <!-- Custom Colors -->
     <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Colors</h2>
-      <DemoSection 
+      <h2 class="text-2xl font-bold text-foreground mb-6">Custom Colors</h2>
+      <DemoSection
         title="Accent Color Customization"
         description="Change the accent color for headers and icons."
         :code="`<SAccordion color='#ec4899'>...</SAccordion>`"
@@ -602,18 +796,30 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       >
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <SAccordion v-model="colorValue" type="card" color="#3b82f6">
-            <SAccordionItem name="item-1" icon="water" title="Blue Theme">
-              Content with blue accent.
+            <SAccordionItem name="item-1">
+              <SAccordionTrigger>
+                <template #icon><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500 shrink-0"><path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20z"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></template>
+                Blue Theme
+              </SAccordionTrigger>
+              <SAccordionContent>Content with blue accent.</SAccordionContent>
             </SAccordionItem>
           </SAccordion>
           <SAccordion v-model="colorValue" type="card" color="#ec4899">
-            <SAccordionItem name="item-1" icon="heart" title="Pink Theme">
-              Content with pink accent.
+            <SAccordionItem name="item-1">
+              <SAccordionTrigger>
+                <template #icon><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-500 shrink-0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></template>
+                Pink Theme
+              </SAccordionTrigger>
+              <SAccordionContent>Content with pink accent.</SAccordionContent>
             </SAccordionItem>
           </SAccordion>
           <SAccordion v-model="colorValue" type="card" color="#f59e0b">
-            <SAccordionItem name="item-1" icon="star" title="Amber Theme">
-              Content with amber accent.
+            <SAccordionItem name="item-1">
+              <SAccordionTrigger>
+                <template #icon><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500 shrink-0"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></template>
+                Amber Theme
+              </SAccordionTrigger>
+              <SAccordionContent>Content with amber accent.</SAccordionContent>
             </SAccordionItem>
           </SAccordion>
         </div>
@@ -622,49 +828,73 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
     <!-- FAQ Example -->
     <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Example</h2>
-      <DemoSection 
+      <h2 class="text-2xl font-bold text-foreground mb-6">Real-World Example</h2>
+      <DemoSection
         title="FAQ Section"
-        description="A practical FAQ implementation with the accordion component."
+        description="A practical FAQ implementation with the compound accordion API."
         :code="`<SAccordion type='separated' collapsible>...</SAccordion>`"
         language="vue"
       >
         <div class="max-w-2xl">
           <div class="mb-6">
-            <h3 class="text-xl font-semibold text-(--s-text-primary) mb-2">Frequently Asked Questions</h3>
-            <p class="text-(--s-text-secondary)">Find answers to common questions below.</p>
+            <h3 class="text-xl font-semibold text-foreground mb-2">Frequently Asked Questions</h3>
+            <p class="text-muted-foreground">Find answers to common questions below.</p>
           </div>
           <SAccordion v-model="faqValue" type="separated" collapsible>
-            <SAccordionItem name="faq-1" title="How do I reset my password?">
-              <p>To reset your password, click the "Forgot Password" link on the login page. Enter your email address, and we'll send you a password reset link. The link expires in 24 hours for security.</p>
+            <SAccordionItem name="faq-1">
+              <SAccordionTrigger>How do I reset my password?</SAccordionTrigger>
+              <SAccordionContent>
+                <p>To reset your password, click the "Forgot Password" link on the login page. Enter your email address, and we'll send you a password reset link. The link expires in 24 hours for security.</p>
+              </SAccordionContent>
             </SAccordionItem>
-            <SAccordionItem name="faq-2" title="What payment methods do you accept?">
-              <p class="mb-2">We accept the following payment methods:</p>
-              <ul class="list-disc list-inside space-y-1 text-sm">
-                <li>Visa, Mastercard, American Express</li>
-                <li>PayPal</li>
-                <li>Apple Pay and Google Pay</li>
-                <li>Bank transfers (for enterprise plans)</li>
-              </ul>
+            <SAccordionItem name="faq-2">
+              <SAccordionTrigger>What payment methods do you accept?</SAccordionTrigger>
+              <SAccordionContent>
+                <p class="mb-2">We accept the following payment methods:</p>
+                <ul class="list-disc list-inside space-y-1 text-sm">
+                  <li>Visa, Mastercard, American Express</li>
+                  <li>PayPal</li>
+                  <li>Apple Pay and Google Pay</li>
+                  <li>Bank transfers (for enterprise plans)</li>
+                </ul>
+              </SAccordionContent>
             </SAccordionItem>
-            <SAccordionItem name="faq-3" title="Can I cancel my subscription anytime?">
-              <p>Yes! You can cancel your subscription at any time from your account settings. Your access will continue until the end of your current billing period. We don't offer refunds for partial months.</p>
+            <SAccordionItem name="faq-3">
+              <SAccordionTrigger>Can I cancel my subscription anytime?</SAccordionTrigger>
+              <SAccordionContent>
+                <p>Yes! You can cancel your subscription at any time from your account settings. Your access will continue until the end of your current billing period.</p>
+              </SAccordionContent>
             </SAccordionItem>
-            <SAccordionItem name="faq-4" title="Do you offer a free trial?">
-              <p>Absolutely! We offer a 14-day free trial for all new users. No credit card required to start. You'll have access to all premium features during the trial period.</p>
+            <SAccordionItem name="faq-4">
+              <SAccordionTrigger>Do you offer a free trial?</SAccordionTrigger>
+              <SAccordionContent>
+                <p>Absolutely! We offer a 14-day free trial for all new users. No credit card required to start.</p>
+              </SAccordionContent>
             </SAccordionItem>
-            <SAccordionItem name="faq-5" title="How do I contact support?">
-              <p>You can reach our support team through:</p>
-              <div class="mt-2 space-y-2">
-                <div class="flex items-center gap-2 text-sm">
-                  <span class="mdi mdi-email text-(--s-primary)"></span>
-                  support@example.com
-                </div>
-                <div class="flex items-center gap-2 text-sm">
-                  <span class="mdi mdi-chat text-(--s-primary)"></span>
-                  Live chat (bottom-right corner)
-                </div>
-              </div>
+          </SAccordion>
+        </div>
+      </DemoSection>
+    </section>
+
+    <!-- Simple API (legacy) -->
+    <section>
+      <h2 class="text-2xl font-bold text-foreground mb-6">Simple API</h2>
+      <DemoSection
+        title="Title Prop Shorthand"
+        description="For quick use, pass title, subtitle, and icon props directly to SAccordionItem instead of using subcomponents."
+        :code="simpleApiCode"
+        language="vue"
+      >
+        <div class="max-w-xl">
+          <SAccordion v-model="simpleValue" type="separated" color="#8b5cf6">
+            <SAccordionItem name="item-1" icon="cog" title="Settings" subtitle="Configure your preferences">
+              Customize your application settings, notifications, and more.
+            </SAccordionItem>
+            <SAccordionItem name="item-2" icon="account-group" title="Team Members" subtitle="Manage your team">
+              Add, remove, or modify team member permissions and roles.
+            </SAccordionItem>
+            <SAccordionItem name="item-3" icon="shield-lock" title="Security" subtitle="Keep your account safe">
+              Enable two-factor authentication, manage sessions, and security keys.
             </SAccordionItem>
           </SAccordion>
         </div>
@@ -672,25 +902,14 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- API Reference -->
-    <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
+    <h2 class="text-2xl font-bold text-foreground mb-6">API Reference</h2>
     <SApiSection>
       <SApiTable title="SAccordion Props" type="props" :props="accordionProps" />
       <SApiTable title="SAccordionItem Props" type="props" :props="accordionItemProps" />
-      <SApiTable title="SAccordionItem Slots" type="slots" :slots="accordionItemSlots">
-        <div class="mt-4 p-4 rounded-xl bg-(--s-bg-tertiary) border border-(--s-border)">
-          <h4 class="text-sm font-semibold text-(--s-text-primary) mb-3">Header Slot Example</h4>
-          <pre class="text-xs text-(--s-text-secondary) overflow-x-auto"><code>&lt;SAccordionItem name="custom"&gt;
-  &lt;template #header="{ expanded, toggle, disabled }"&gt;
-    &lt;div @click="toggle" class="custom-header"&gt;
-      &lt;span&gt;My Custom Header&lt;/span&gt;
-      &lt;span v-if="expanded"&gt;▲&lt;/span&gt;
-      &lt;span v-else&gt;▼&lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/template&gt;
-  Content goes here...
-&lt;/SAccordionItem&gt;</code></pre>
-        </div>
-      </SApiTable>
+      <SApiTable title="SAccordionItem Slots" type="slots" :slots="accordionItemSlots" />
+      <SApiTable title="SAccordionTrigger Props" type="props" :props="triggerProps" />
+      <SApiTable title="SAccordionTrigger Slots" type="slots" :slots="triggerSlots" />
+      <SApiTable title="SAccordionContent Props" type="props" :props="contentProps" />
       <SApiTable title="SAccordion Events" type="events" :events="accordionEvents" />
       <SApiKeyboard :shortcuts="keyboardShortcuts" variant="table" />
     </SApiSection>
