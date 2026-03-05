@@ -6,6 +6,9 @@
   "main": "./dist/saka-ui.umd.cjs",
   "module": "./dist/saka-ui.js",
   "types": "./dist/index.d.ts",
+  "bin": {
+    "saka-ui": "./dist/cli/index.js"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -15,11 +18,14 @@
     "./style.css": "./dist/style.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "registry"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vue-tsc && vite build && tsx scripts/build-registry.ts",
+    "build:cli": "tsup",
+    "build:all": "vue-tsc && vite build && tsx scripts/build-registry.ts && tsup",
     "preview": "vite preview"
   },
   "dependencies": {

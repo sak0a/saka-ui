@@ -8,7 +8,7 @@ import { addCommand } from './commands/add.js'
 import { listCommand } from './commands/list.js'
 import { diffCommand } from './commands/diff.js'
 
-const pkgPath = resolve(import.meta.dirname, '..', 'package.json')
+const pkgPath = resolve(import.meta.dirname, '..', '..', 'package.json')
 const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'))
 
 const program = new Command()
