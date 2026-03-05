@@ -17,6 +17,11 @@ export default defineConfig({
       strictOutput: false,
     }),
   ],
+  resolve: {
+    alias: {
+      '~': resolve(__dirname, 'src'),
+    },
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),

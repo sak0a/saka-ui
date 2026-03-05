@@ -1,29 +1,108 @@
 @import "tailwindcss";
 @variant dark (&:where(.dark, .dark *));
 
-:root {
-  /* Theme Variables - Light Mode (Default) */
-  --s-bg-primary: #ffffff;
-  --s-bg-secondary: #f9fafb;
-  --s-bg-tertiary: #f3f4f6;
-  --s-text-primary: #111827;
-  --s-text-secondary: #4b5563;
-  --s-text-tertiary: #9ca3af;
-  --s-border: #e5e7eb;
-  --s-border-hover: #d1d5db;
-  --s-border-subtle: rgba(0, 0, 0, 0.06);
-  --s-primary: #059669;
-  --s-primary-hover: #10b981;
-  --s-primary-alpha: rgba(5, 150, 105, 0.15);
-  --s-primary-rgb: 5, 150, 105;
+/* ============================================================
+   SAKA UI — Design Token System
+   ============================================================
+   All tokens use the --s- prefix for namespacing.
+   Override any token in your app's CSS to customize the theme.
+   ============================================================ */
 
-  font-family: "Geist", system-ui, Avenir, Helvetica, Arial, sans-serif;
+:root {
+  /* --- Backgrounds --- */
+  --s-background: #ffffff;
+  --s-foreground: #09090b; /* zinc-950 */
+
+  --s-card: #ffffff;
+  --s-card-foreground: #09090b;
+
+  --s-popover: #ffffff;
+  --s-popover-foreground: #09090b;
+
+  --s-muted: #f4f4f5; /* zinc-100 */
+  --s-muted-foreground: #71717a; /* zinc-500 */
+
+  /* --- Brand / Actions --- */
+  --s-primary: #18181b; /* zinc-900 */
+  --s-primary-foreground: #fafafa; /* zinc-50 */
+
+  --s-secondary: #f4f4f5; /* zinc-100 */
+  --s-secondary-foreground: #18181b; /* zinc-900 */
+
+  --s-accent: #f4f4f5; /* zinc-100 */
+  --s-accent-foreground: #18181b; /* zinc-900 */
+
+  /* --- Semantic --- */
+  --s-destructive: #ef4444; /* red-500 */
+  --s-destructive-foreground: #fafafa;
+
+  --s-success: #22c55e; /* green-500 */
+  --s-success-foreground: #fafafa;
+
+  --s-warning: #f59e0b; /* amber-500 */
+  --s-warning-foreground: #fafafa;
+
+  --s-info: #3b82f6; /* blue-500 */
+  --s-info-foreground: #fafafa;
+
+  /* --- Chrome --- */
+  --s-border: #e4e4e7; /* zinc-200 */
+  --s-input: #e4e4e7; /* zinc-200 */
+  --s-ring: #18181b; /* zinc-900 */
+
+  /* --- Border Radius --- */
+  --s-radius: 0.625rem; /* 10px — base radius */
+  --s-radius-sm: 0.375rem; /* 6px */
+  --s-radius-md: 0.625rem; /* 10px */
+  --s-radius-lg: 0.875rem; /* 14px */
+  --s-radius-xl: 1.25rem; /* 20px */
+  --s-radius-full: 9999px;
+
+  /* --- Shadows --- */
+  --s-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --s-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --s-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --s-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --s-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* --- Typography --- */
+  --s-font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --s-font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* --- Animation --- */
+  --s-duration-fast: 150ms;
+  --s-duration-normal: 200ms;
+  --s-duration-slow: 300ms;
+  --s-duration-slower: 500ms;
+  --s-ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --s-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --s-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --s-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* --- Opacity --- */
+  --s-opacity-disabled: 0.5;
+
+  /* --- Legacy Aliases (backward-compat, remove after full migration) --- */
+  --s-bg-primary: var(--s-background);
+  --s-bg-secondary: var(--s-muted);
+  --s-bg-tertiary: var(--s-accent);
+  --s-text-primary: var(--s-foreground);
+  --s-text-secondary: var(--s-muted-foreground);
+  --s-text-tertiary: var(--s-muted-foreground);
+  --s-border-hover: var(--s-input);
+  --s-border-subtle: var(--s-border);
+  --s-primary-hover: var(--s-primary);
+  --s-primary-alpha: color-mix(in srgb, var(--s-primary) 15%, transparent);
+  --s-primary-rgb: 24, 24, 27;
+
+  /* --- Base Styles --- */
+  font-family: var(--s-font-sans);
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: var(--s-text-primary);
-  background-color: var(--s-bg-primary);
+  color: var(--s-foreground);
+  background-color: var(--s-background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -33,29 +112,128 @@
 }
 
 :root.dark {
-  /* Theme Variables - Dark Mode */
-  --s-bg-primary: #0a0a0a;
-  /* neutral-950 */
-  --s-bg-secondary: #171717;
-  /* neutral-900 */
-  --s-bg-tertiary: #262626;
-  /* neutral-800 */
-  --s-text-primary: #f5f5f5;
-  /* neutral-50 */
-  --s-text-secondary: #a3a3a3;
-  /* neutral-400 */
-  --s-text-tertiary: #737373;
-  /* neutral-500 */
-  --s-border: #262626;
-  /* neutral-800 */
-  --s-border-hover: #404040;
-  /* neutral-700 */
-  --s-border-subtle: rgba(255, 255, 255, 0.06);
-  --s-primary: #63e2b7;
-  --s-primary-hover: #7fe7c4;
-  --s-primary-alpha: rgba(99, 226, 183, 0.2);
-  --s-primary-rgb: 99, 226, 183;
+  /* --- Backgrounds --- */
+  --s-background: #09090b; /* zinc-950 */
+  --s-foreground: #fafafa; /* zinc-50 */
+
+  --s-card: #09090b;
+  --s-card-foreground: #fafafa;
+
+  --s-popover: #09090b;
+  --s-popover-foreground: #fafafa;
+
+  --s-muted: #27272a; /* zinc-800 */
+  --s-muted-foreground: #a1a1aa; /* zinc-400 */
+
+  /* --- Brand / Actions --- */
+  --s-primary: #fafafa; /* zinc-50 */
+  --s-primary-foreground: #18181b; /* zinc-900 */
+
+  --s-secondary: #27272a; /* zinc-800 */
+  --s-secondary-foreground: #fafafa;
+
+  --s-accent: #27272a; /* zinc-800 */
+  --s-accent-foreground: #fafafa;
+
+  /* --- Semantic --- */
+  --s-destructive: #dc2626; /* red-600 */
+  --s-destructive-foreground: #fafafa;
+
+  --s-success: #16a34a; /* green-600 */
+  --s-success-foreground: #fafafa;
+
+  --s-warning: #d97706; /* amber-600 */
+  --s-warning-foreground: #fafafa;
+
+  --s-info: #2563eb; /* blue-600 */
+  --s-info-foreground: #fafafa;
+
+  /* --- Chrome --- */
+  --s-border: #27272a; /* zinc-800 */
+  --s-input: #27272a;
+  --s-ring: #d4d4d8; /* zinc-300 */
+
+  /* --- Shadows (softer in dark mode) --- */
+  --s-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.2);
+  --s-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+  --s-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --s-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+  --s-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+
+  /* --- Legacy Aliases (backward-compat, remove after full migration) --- */
+  --s-bg-primary: var(--s-background);
+  --s-bg-secondary: var(--s-muted);
+  --s-bg-tertiary: var(--s-accent);
+  --s-text-primary: var(--s-foreground);
+  --s-text-secondary: var(--s-muted-foreground);
+  --s-text-tertiary: var(--s-muted-foreground);
+  --s-border-hover: var(--s-input);
+  --s-border-subtle: var(--s-border);
+  --s-primary-hover: var(--s-primary);
+  --s-primary-alpha: color-mix(in srgb, var(--s-primary) 15%, transparent);
+  --s-primary-rgb: 250, 250, 250;
 }
+
+/* ============================================================
+   Tailwind v4 Theme Mapping
+   ============================================================
+   Maps --s-* tokens to Tailwind utilities.
+   Usage: bg-primary, text-muted-foreground, border-border, etc.
+   ============================================================ */
+
+@theme {
+  /* Colors */
+  --color-background: var(--s-background);
+  --color-foreground: var(--s-foreground);
+
+  --color-card: var(--s-card);
+  --color-card-foreground: var(--s-card-foreground);
+
+  --color-popover: var(--s-popover);
+  --color-popover-foreground: var(--s-popover-foreground);
+
+  --color-primary: var(--s-primary);
+  --color-primary-foreground: var(--s-primary-foreground);
+
+  --color-secondary: var(--s-secondary);
+  --color-secondary-foreground: var(--s-secondary-foreground);
+
+  --color-muted: var(--s-muted);
+  --color-muted-foreground: var(--s-muted-foreground);
+
+  --color-accent: var(--s-accent);
+  --color-accent-foreground: var(--s-accent-foreground);
+
+  --color-destructive: var(--s-destructive);
+  --color-destructive-foreground: var(--s-destructive-foreground);
+
+  --color-success: var(--s-success);
+  --color-success-foreground: var(--s-success-foreground);
+
+  --color-warning: var(--s-warning);
+  --color-warning-foreground: var(--s-warning-foreground);
+
+  --color-info: var(--s-info);
+  --color-info-foreground: var(--s-info-foreground);
+
+  --color-border: var(--s-border);
+  --color-input: var(--s-input);
+  --color-ring: var(--s-ring);
+
+  /* Border Radius */
+  --radius-sm: var(--s-radius-sm);
+  --radius-md: var(--s-radius-md);
+  --radius-lg: var(--s-radius-lg);
+  --radius-xl: var(--s-radius-xl);
+
+  /* Fonts */
+  --font-sans: var(--s-font-sans);
+  --font-mono: var(--s-font-mono);
+}
+
+/* ============================================================
+   Base Styles
+   ============================================================ */
 
 body {
   margin: 0;

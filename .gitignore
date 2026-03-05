@@ -23,6 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.playwright-mcp/*
+.playwright-mcp
 .worktrees
 registry/source/
