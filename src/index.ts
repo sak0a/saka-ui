@@ -99,6 +99,20 @@ export type { SProgressProps, SProgressRangeProps, RangeValue } from './componen
 export { SPagination } from './components/ui/pagination'
 export type { SPaginationProps, PaginationVariant, PaginationSize, PaginationShape, AnimationType as PaginationAnimationType } from './components/ui/pagination'
 
+// Stepper components
+export {
+  SStepper,
+  SStepperItem,
+  SStepperTrigger,
+  SStepperIndicator,
+  SStepperTitle,
+  SStepperDescription,
+  SStepperSeparator,
+  SStepperContent
+} from './components/ui/stepper'
+export type { StepperOrientation, StepperSize, StepperVariant, SStepperContext } from './components/ui/stepper'
+export { SStepperContextKey, SStepperItemContextKey } from './components/ui/stepper'
+
 // Drawer type exports
 export type {
   DrawerSide,

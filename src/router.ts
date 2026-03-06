@@ -162,6 +162,11 @@ const router = createRouter({
                     component: () => import('./views/ui/SkeletonView.vue')
                 },
                 {
+                    path: 'stepper',
+                    name: 'ui-stepper',
+                    component: () => import('./views/ui/StepperView.vue')
+                },
+                {
                     path: 'table',
                     name: 'ui-table',
                     component: () => import('./views/ui/TableView.vue')
