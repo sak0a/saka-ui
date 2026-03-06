@@ -14,39 +14,43 @@ A modern, high-performance Vue 3 component library built with Tailwind CSS v4 an
 ## 📦 Components
 
 ### Form Controls
+
 | Component | Description |
-|-----------|-------------|
-| `SButton` | Versatile button with variants, sizes, icons, and loading states |
-| `SCheckbox` | Checkbox with indeterminate state and custom styling |
-| `SRadio` / `SRadioGroup` | Radio buttons with group management |
-| `SSwitch` | Toggle switch with icons, labels, and track text |
-| `SSelect` / `SOption` / `SOptionGroup` | Feature-rich dropdown with search, multiple selection, and grouping |
-| `SDatePicker` | Date picker with range selection and calendar view |
-| `SColorPicker` | Color picker with presets and custom color input |
+| --- | --- |
+| SButton | Versatile button with variants, sizes, icons, and loading states |
+| SCheckbox | Checkbox with indeterminate state and custom styling |
+| SRadio / SRadioGroup | Radio buttons with group management |
+| SSwitch | Toggle switch with icons, labels, and track text |
+| SSelect / SOption / SOptionGroup | Feature-rich dropdown with search, multiple selection, and grouping |
+| SDatePicker | Date picker with range selection and calendar view |
+| SColorPicker | Color picker with presets and custom color input |
 
 ### Data Display
+
 | Component | Description |
-|-----------|-------------|
-| `SBadge` | Status badges with dot indicators and colors |
-| `SChip` | Tags/chips with icons and close functionality |
-| `SAvatar` / `SAvatarGroup` | User avatars with fallback and grouping |
-| `SCarousel` / `SCarouselSlide` | Image/content carousel with autoplay |
-| `SAccordion` / `SAccordionItem` | Collapsible content panels |
-| `STabs` / `STabPane` | Tab navigation with 5 style variants |
-| `SIcon` | MDI icon wrapper component |
+| --- | --- |
+| SBadge | Status badges with dot indicators and colors |
+| SChip | Tags/chips with icons and close functionality |
+| SAvatar / SAvatarGroup | User avatars with fallback and grouping |
+| SCarousel / SCarouselSlide | Image/content carousel with autoplay |
+| SAccordion / SAccordionItem | Collapsible content panels |
+| STabs / STabPane | Tab navigation with 5 style variants |
+| SIcon | MDI icon wrapper component |
 
 ### Feedback
+
 | Component | Description |
-|-----------|-------------|
-| `SAlert` | Alert messages with variants and dismissible option |
-| `STooltip` | Rich tooltips with 12 placements and interactive mode |
+| --- | --- |
+| SAlert | Alert messages with variants and dismissible option |
+| STooltip | Rich tooltips with 12 placements and interactive mode |
 
 ### Documentation
+
 | Component | Description |
-|-----------|-------------|
-| `SApiSection` | API reference section wrapper |
-| `SApiTable` | Props/events/slots/methods documentation table |
-| `SApiKeyboard` | Keyboard shortcuts display |
+| --- | --- |
+| SApiSection | API reference section wrapper |
+| SApiTable | Props/events/slots/methods documentation table |
+| SApiKeyboard | Keyboard shortcuts display |
 
 ## 🚀 Quick Start
 
@@ -57,21 +61,21 @@ bun install
 # Start dev server
 bun run dev
 
-# Build everything (library + registry + CLI)
+# Build the default production artifacts (type-check + library + registry)
 bun run build
 ```
 
 ## 🧑‍💻 Development
 
-This project uses **[Bun](https://bun.sh/)** as its package manager and script runner.
+This project uses [**Bun**](https://bun.sh/) as its package manager and script runner.
 
 ### Local Verification
 
-Before pushing, run the same checks that CI will execute:
+Before pushing, run the same install/build/smoke steps that CI executes:
 
 ```bash
-# 1. Install dependencies
-bun install
+# 1. Install dependencies with a frozen lockfile
+bun install --frozen-lockfile
 
 # 2. Build the component library
 bun run build:lib
@@ -83,20 +87,20 @@ bun run build:cli
 bun run test:smoke
 ```
 
-All four steps must pass for CI to be green.
+All four steps must pass locally for CI to be green.
 
 ### Available Scripts
 
 | Command | Description |
-|---------|-------------|
-| `bun run dev` | Start the Vite dev server |
-| `bun run build` | Full production build (type-check → library → registry) |
-| `bun run build:lib` | Build the component library only |
-| `bun run build:cli` | Build the CLI tool (via tsup) |
-| `bun run build:registry` | Build the component registry |
-| `bun run build:all` | Build library + registry + CLI |
-| `bun run test:smoke` | Run CLI smoke tests (requires `build:cli` first) |
-| `bun run preview` | Preview the production build locally |
+| --- | --- |
+| bun run dev | Start the Vite dev server |
+| bun run build | Full production build (type-check → library → registry) |
+| bun run build:lib | Build the component library only |
+| bun run build:cli | Build the CLI tool (via tsup) |
+| bun run build:registry | Build the component registry |
+| bun run build:all | Build library + registry + CLI |
+| bun run test:smoke | Run CLI smoke tests (requires build:cli first) |
+| bun run preview | Preview the production build locally |
 
 ### Continuous Integration
 
