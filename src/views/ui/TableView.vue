@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { SDataTable, SButton, SChip, SApiSection, SApiTable, SApiKeyboard } from '../../index'
+import { SDataTable, SPagination, SButton, SChip, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut, TableColumn } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
@@ -188,15 +188,33 @@ const customCellsCode = `<SDataTable :data="data" :columns="columns">
   </template>
 </SDataTable>`
 
-const paginationCode = `<SDataTable 
-  :data="largeDataset" 
+const paginationCode = `<!-- Default: uses SPagination internally -->
+<SDataTable
+  :data="largeDataset"
   :columns="columns"
   pagination
   :page-size="10"
   :page-size-options="[10, 25, 50, 100]"
   @page-change="(page) => console.log('Page:', page)"
   @page-size-change="(size) => console.log('Size:', size)"
-/>`
+/>
+
+<!-- Custom: override the pagination slot with your own SPagination -->
+<SDataTable :data="data" :columns="columns" pagination>
+  <template #pagination="{ page, total, pageSize, goToPage, setPageSize }">
+    <SPagination
+      :model-value="page"
+      :total="total"
+      :page-size="pageSize"
+      show-total
+      show-page-size
+      show-first-last
+      show-quick-jump
+      @update:model-value="goToPage"
+      @update:page-size="setPageSize"
+    />
+  </template>
+</SDataTable>`
 
 const loadingCode = `<SDataTable 
   :data="data" 
@@ -687,22 +705,59 @@ const formatSalary = (value: number) => {
     <!-- Pagination -->
     <DemoSection
       title="Pagination"
-      description="Built-in pagination for large datasets."
+      description="Uses the SPagination component internally. You can also override via the pagination slot."
       :code="paginationCode"
     >
-      <SDataTable
-        :data="extendedUsers"
-        :columns="basicColumns"
-        pagination
-        :page-size="5"
-        :page-size-options="[5, 10, 25]"
-      >
-        <template #cell-status="{ value }">
-          <SChip :color="getStatusColor(value as string)" size="sm">
-            {{ value }}
-          </SChip>
-        </template>
-      </SDataTable>
+      <div class="space-y-8">
+        <div>
+          <h4 class="text-sm font-medium text-(--s-text-secondary) mb-3">Default (SPagination built-in)</h4>
+          <SDataTable
+            :data="extendedUsers"
+            :columns="basicColumns"
+            pagination
+            :page-size="5"
+            :page-size-options="[5, 10, 25]"
+          >
+            <template #cell-status="{ value }">
+              <SChip :color="getStatusColor(value as string)" size="sm">
+                {{ value }}
+              </SChip>
+            </template>
+          </SDataTable>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-medium text-(--s-text-secondary) mb-3">Custom Pagination Slot</h4>
+          <SDataTable
+            :data="extendedUsers"
+            :columns="basicColumns"
+            pagination
+            :page-size="5"
+            :page-size-options="[5, 10, 25]"
+          >
+            <template #cell-status="{ value }">
+              <SChip :color="getStatusColor(value as string)" size="sm">
+                {{ value }}
+              </SChip>
+            </template>
+            <template #pagination="{ page, total, pageSize, goToPage, setPageSize }">
+              <SPagination
+                :model-value="page"
+                :total="total"
+                :page-size="pageSize"
+                :page-size-options="[5, 10, 25]"
+                show-total
+                show-page-size
+                show-first-last
+                show-quick-jump
+                class="px-4 py-3 border-t border-border justify-between"
+                @update:model-value="goToPage"
+                @update:page-size="setPageSize"
+              />
+            </template>
+          </SDataTable>
+        </div>
+      </div>
     </DemoSection>
 
     <!-- Loading State -->
