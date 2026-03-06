@@ -157,6 +157,11 @@ const router = createRouter({
                     component: () => import('./views/ui/PaginationView.vue')
                 },
                 {
+                    path: 'skeleton',
+                    name: 'ui-skeleton',
+                    component: () => import('./views/ui/SkeletonView.vue')
+                },
+                {
                     path: 'table',
                     name: 'ui-table',
                     component: () => import('./views/ui/TableView.vue')

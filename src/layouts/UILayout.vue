@@ -50,6 +50,7 @@ const uiNavigation = [
   { name: 'Morphing Modal', href: '/ui/morphing-modal', icon: 'transition' },
   { name: 'Radio', href: '/ui/radio', icon: 'radiobox-marked' },
   { name: 'Select', href: '/ui/select', icon: 'form-dropdown' },
+  { name: 'Skeleton', href: '/ui/skeleton', icon: 'blur-linear' },
   { name: 'Switch', href: '/ui/switch', icon: 'toggle-switch' },
   { name: 'Table', href: '/ui/table', icon: 'table' },
   { name: 'Tabs', href: '/ui/tabs', icon: 'view-dashboard' },

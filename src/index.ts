@@ -33,6 +33,7 @@ export {
 } from './components/ui/color-picker'
 export { default as SInput } from './components/ui/SInput.vue'
 export { default as SKbd, kbdVariants, type KbdVariants } from './components/ui/SKbd.vue'
+export { default as SSkeleton, type SkeletonVariants } from './components/ui/SSkeleton.vue'
 export { default as SKbdShortcut } from './components/ui/SKbdShortcut.vue'
 export { SDropdown, SDropdownItem, SDropdownDivider, SDropdownGroup } from './components/ui/dropdown'
 export { default as SCard } from './components/ui/card/SCard.vue'
