@@ -54,13 +54,19 @@ const colorStyle = computed<CSSProperties | undefined>(() => {
   const c = props.color
 
   if (props.variant === 'default') {
-    const bg = c.startsWith('var(') ? `color-mix(in srgb, ${c} 15%, transparent)` : `${c}20`
-    return { backgroundColor: bg, color: c, borderColor: c, boxShadow: `0 -1px 0 0 rgba(255,255,255,0.06) inset, 0 2px 0 0 ${c}40` }
+    return {
+      backgroundColor: `color-mix(in srgb, ${c} 15%, transparent)`,
+      color: c,
+      borderColor: c,
+      boxShadow: `0 -1px 0 0 rgba(255,255,255,0.06) inset, 0 2px 0 0 color-mix(in srgb, ${c} 25%, transparent)`,
+    }
   } else if (props.variant === 'outlined') {
     return { borderColor: c, color: c }
   } else if (props.variant === 'flat') {
-    const bg = c.startsWith('var(') ? `color-mix(in srgb, ${c} 15%, transparent)` : `${c}20`
-    return { backgroundColor: bg, color: c }
+    return {
+      backgroundColor: `color-mix(in srgb, ${c} 15%, transparent)`,
+      color: c,
+    }
   } else if (props.variant === 'ghost') {
     return { color: c }
   }
@@ -71,14 +77,9 @@ const colorStyle = computed<CSSProperties | undefined>(() => {
 const kbdClasses = computed(() => {
   return cn(
     kbdVariants({
-      variant: props.color ? undefined : props.variant,
+      variant: props.variant,
       size: props.size,
     }),
-    props.color && 'inline-flex items-center justify-center font-mono font-medium select-none whitespace-nowrap leading-none',
-    props.color && props.size === 'xs' && 'text-[10px] px-1 py-0.5 min-w-4 h-4 rounded',
-    props.color && props.size === 'sm' && 'text-xs px-1.5 py-0.5 min-w-5 h-5 rounded-md',
-    props.color && props.size === 'md' && 'text-xs px-1.5 py-1 min-w-6 h-6 rounded-md',
-    props.color && props.size === 'lg' && 'text-sm px-2 py-1 min-w-7 h-7 rounded-md',
     (attrs as Record<string, unknown>).class,
   )
 })

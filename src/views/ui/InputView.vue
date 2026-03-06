@@ -184,12 +184,11 @@ const featuresCode = `<!-- Clearable -->
 />`
 
 const kbdSearchCode = `<!-- Search input with keyboard shortcut hint -->
-<div class="relative">
-  <SInput placeholder="Search..." iconLeft="magnify" />
-  <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+<SInput placeholder="Search..." iconLeft="magnify">
+  <template #suffix>
     <SKbdShortcut :keys="['⌘', 'K']" size="xs" variant="flat" />
-  </div>
-</div>`
+  </template>
+</SInput>`
 
 // API Reference
 const inputProps: ApiProp[] = [
@@ -761,11 +760,12 @@ const inputMethods: ApiMethod[] = [
         :code="kbdSearchCode"
         language="vue"
       >
-        <div class="max-w-md relative">
-          <SInput placeholder="Search..." iconLeft="magnify" />
-          <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-            <SKbdShortcut :keys="['⌘', 'K']" size="xs" variant="flat" />
-          </div>
+        <div class="max-w-md">
+          <SInput placeholder="Search..." iconLeft="magnify">
+            <template #suffix>
+              <SKbdShortcut :keys="['⌘', 'K']" size="xs" variant="flat" />
+            </template>
+          </SInput>
         </div>
       </DemoSection>
     </section>

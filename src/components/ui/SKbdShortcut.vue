@@ -12,12 +12,14 @@ interface Props {
   separator?: string
   size?: 'xs' | 'sm' | 'md' | 'lg'
   variant?: 'default' | 'outlined' | 'flat' | 'ghost'
+  color?: string
 }
 
 withDefaults(defineProps<Props>(), {
   separator: '+',
   size: 'md',
   variant: 'default',
+  color: undefined,
 })
 </script>
 
@@ -28,7 +30,7 @@ withDefaults(defineProps<Props>(), {
   >
     <template v-for="(key, i) in keys" :key="i">
       <span v-if="i > 0" class="text-xs text-muted-foreground">{{ separator }}</span>
-      <SKbd :size="size" :variant="variant">{{ key }}</SKbd>
+      <SKbd :size="size" :variant="variant" :color="color">{{ key }}</SKbd>
     </template>
   </span>
 </template>

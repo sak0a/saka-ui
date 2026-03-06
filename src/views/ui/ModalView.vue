@@ -985,15 +985,14 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       <DemoSection
         title="Escape Key Hint"
         description="Display keyboard hints to help users discover modal shortcuts."
-        code="<p class=&quot;text-sm text-muted-foreground&quot;>
-  Press <SKbd size=&quot;sm&quot;>Esc</SKbd> to close, or
-  <SKbdShortcut :keys=&quot;['⌘', 'Enter']&quot; size=&quot;sm&quot; /> to confirm.
+        code="<p class=&quot;text-sm text-(--s-text-secondary)&quot;>
+  Press <SKbd size=&quot;sm&quot;>Esc</SKbd> to close the modal.
 </p>"
         language="vue"
       >
         <div class="max-w-md p-4 rounded-xl border border-(--s-border) bg-(--s-bg-secondary)/30">
           <p class="text-sm text-(--s-text-secondary) leading-relaxed">
-            Press <SKbd size="sm">Esc</SKbd> to close the modal, or <SKbdShortcut :keys="['⌘', 'Enter']" size="sm" /> to confirm your changes.
+            Press <SKbd size="sm">Esc</SKbd> to close the modal.
           </p>
         </div>
       </DemoSection>

@@ -56,14 +56,14 @@ const withComponentsCode = `<!-- Button with shortcut hint -->
 </STooltip>`
 
 const realWorldCode = `<!-- Command palette trigger -->
-<div class="flex items-center gap-3 px-4 py-2.5 rounded-xl border cursor-pointer hover:bg-muted/50">
-  <span class="mdi mdi-magnify text-muted-foreground"></span>
-  <span class="text-sm text-muted-foreground flex-1">Search commands...</span>
+<div class="flex items-center gap-3 px-4 py-2.5 rounded-xl border cursor-pointer hover:bg-(--s-bg-secondary)">
+  <span class="mdi mdi-magnify text-(--s-text-secondary)"></span>
+  <span class="text-sm text-(--s-text-secondary) flex-1">Search commands...</span>
   <SKbdShortcut :keys="['⌘', 'K']" size="sm" />
 </div>
 
 <!-- Menu item with shortcut -->
-<div class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-muted/50">
+<div class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-(--s-bg-secondary)">
   <span class="text-sm">Copy</span>
   <SKbdShortcut :keys="['⌘', 'C']" size="xs" variant="flat" />
 </div>`
@@ -84,6 +84,7 @@ const shortcutProps: ApiProp[] = [
   { name: 'separator', type: 'string', default: "'+'", description: 'Separator string between keys', category: 'Content' },
   { name: 'variant', type: "'default' | 'outlined' | 'flat' | 'ghost'", default: "'default'", description: 'Passed to each SKbd instance', category: 'Appearance' },
   { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg'", default: "'md'", description: 'Passed to each SKbd instance', category: 'Appearance' },
+  { name: 'color', type: 'string', default: 'undefined', description: 'Custom color override, passed to each SKbd instance', category: 'Appearance' },
 ]
 </script>
 
@@ -435,25 +436,25 @@ const shortcutProps: ApiProp[] = [
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Menu items with shortcuts:</p>
             <div class="max-w-xs rounded-xl border border-(--s-border) bg-(--s-bg-secondary)/50 overflow-hidden divide-y divide-(--s-border)/50">
-              <div class="flex items-center justify-between px-3 py-2.5 hover:bg-muted/50 cursor-pointer">
+              <div class="flex items-center justify-between px-3 py-2.5 hover:bg-(--s-bg-secondary) cursor-pointer">
                 <span class="flex items-center gap-2 text-sm text-(--s-text-primary)">
                   <span class="mdi mdi-content-cut text-(--s-text-secondary)"></span> Cut
                 </span>
                 <SKbdShortcut :keys="['⌘', 'X']" size="xs" variant="flat" />
               </div>
-              <div class="flex items-center justify-between px-3 py-2.5 hover:bg-muted/50 cursor-pointer">
+              <div class="flex items-center justify-between px-3 py-2.5 hover:bg-(--s-bg-secondary) cursor-pointer">
                 <span class="flex items-center gap-2 text-sm text-(--s-text-primary)">
                   <span class="mdi mdi-content-copy text-(--s-text-secondary)"></span> Copy
                 </span>
                 <SKbdShortcut :keys="['⌘', 'C']" size="xs" variant="flat" />
               </div>
-              <div class="flex items-center justify-between px-3 py-2.5 hover:bg-muted/50 cursor-pointer">
+              <div class="flex items-center justify-between px-3 py-2.5 hover:bg-(--s-bg-secondary) cursor-pointer">
                 <span class="flex items-center gap-2 text-sm text-(--s-text-primary)">
                   <span class="mdi mdi-content-paste text-(--s-text-secondary)"></span> Paste
                 </span>
                 <SKbdShortcut :keys="['⌘', 'V']" size="xs" variant="flat" />
               </div>
-              <div class="flex items-center justify-between px-3 py-2.5 hover:bg-muted/50 cursor-pointer">
+              <div class="flex items-center justify-between px-3 py-2.5 hover:bg-(--s-bg-secondary) cursor-pointer">
                 <span class="flex items-center gap-2 text-sm text-(--s-text-primary)">
                   <span class="mdi mdi-select-all text-(--s-text-secondary)"></span> Select All
                 </span>
@@ -488,11 +489,12 @@ const shortcutProps: ApiProp[] = [
           <!-- Search input with shortcut -->
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Search input with shortcut hint:</p>
-            <div class="max-w-md relative">
-              <SInput placeholder="Search..." iconLeft="magnify" />
-              <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                <SKbdShortcut :keys="['⌘', 'K']" size="xs" variant="flat" />
-              </div>
+            <div class="max-w-md">
+              <SInput placeholder="Search..." iconLeft="magnify">
+                <template #suffix>
+                  <SKbdShortcut :keys="['⌘', 'K']" size="xs" variant="flat" />
+                </template>
+              </SInput>
             </div>
           </div>
 

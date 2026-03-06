@@ -763,7 +763,7 @@ const advancedCode = `<!-- User profile preview -->
       <DemoSection
         title="Tooltip Shortcut Hints"
         description="Show keyboard shortcuts inside tooltip content using SKbdShortcut."
-        code="<STooltip position=&quot;top&quot;>
+        code="<STooltip placement=&quot;top&quot;>
   <SButton variant=&quot;ghost&quot; iconOnly>
     <span class=&quot;mdi mdi-content-copy&quot;></span>
   </SButton>
@@ -776,7 +776,7 @@ const advancedCode = `<!-- User profile preview -->
         language="vue"
       >
         <div class="flex flex-wrap gap-3 items-center">
-          <STooltip position="top">
+          <STooltip placement="top">
             <SButton variant="ghost" iconOnly>
               <span class="mdi mdi-content-copy"></span>
             </SButton>
@@ -786,7 +786,7 @@ const advancedCode = `<!-- User profile preview -->
               </span>
             </template>
           </STooltip>
-          <STooltip position="top">
+          <STooltip placement="top">
             <SButton variant="ghost" iconOnly>
               <span class="mdi mdi-content-paste"></span>
             </SButton>
@@ -796,7 +796,7 @@ const advancedCode = `<!-- User profile preview -->
               </span>
             </template>
           </STooltip>
-          <STooltip position="top">
+          <STooltip placement="top">
             <SButton variant="ghost" iconOnly>
               <span class="mdi mdi-undo"></span>
             </SButton>
@@ -806,7 +806,7 @@ const advancedCode = `<!-- User profile preview -->
               </span>
             </template>
           </STooltip>
-          <STooltip position="top">
+          <STooltip placement="top">
             <SButton variant="ghost" iconOnly>
               <span class="mdi mdi-magnify"></span>
             </SButton>
