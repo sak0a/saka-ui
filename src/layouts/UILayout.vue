@@ -41,6 +41,7 @@ const uiNavigation = [
   { name: 'Glass Card', href: '/ui/glass-card', icon: 'blur' },
   { name: 'Icons', href: '/ui/icons', icon: 'emoticon' },
   { name: 'Input', href: '/ui/input', icon: 'form-textbox' },
+  { name: 'Kbd', href: '/ui/kbd', icon: 'keyboard' },
   { name: 'Modal', href: '/ui/modal', icon: 'forum-outline' },
   { name: 'OTP', href: '/ui/otp', icon: 'form-textbox-password' },
   { name: 'Pagination', href: '/ui/pagination', icon: 'page-next' },

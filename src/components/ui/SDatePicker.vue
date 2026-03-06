@@ -88,6 +88,9 @@ const emit = defineEmits<{
   yearChange: [year: number]
 }>()
 
+// Active text class: use primary-foreground for default primary, white for custom colors
+const activeTextClass = computed(() => props.color === 'var(--s-primary)' ? 'text-primary-foreground' : 'text-white')
+
 // Refs
 const triggerRef = ref<HTMLElement | null>(null)
 const calendarRef = ref<HTMLElement | null>(null)
@@ -981,7 +984,7 @@ const teleportTarget = computed(() => {
                     class="px-2 py-1.5 text-sm rounded-md transition-colors"
                     :class="[
                       viewDate.getMonth() === index 
-                        ? 'text-white font-semibold' 
+                        ? `${activeTextClass} font-semibold`
                         : 'text-foreground hover:bg-accent'
                     ]"
                     :style="viewDate.getMonth() === index ? { backgroundColor: color } : undefined"
@@ -1023,7 +1026,7 @@ const teleportTarget = computed(() => {
                     class="w-full px-2 py-1.5 text-sm rounded-md transition-colors text-left"
                     :class="[
                       viewDate.getFullYear() === year 
-                        ? 'text-white font-semibold' 
+                        ? `${activeTextClass} font-semibold`
                         : 'text-foreground hover:bg-accent'
                     ]"
                     :style="viewDate.getFullYear() === year ? { backgroundColor: color } : undefined"
@@ -1076,7 +1079,7 @@ const teleportTarget = computed(() => {
                     'font-bold ring-2 ring-inset': day.isToday && !day.isSelected,
                     'opacity-40 cursor-not-allowed': day.isDisabled,
                     'cursor-pointer hover:bg-accent': !day.isDisabled && !day.isSelected,
-                    'text-white font-semibold': day.isSelected,
+                    [activeTextClass + ' font-semibold']: day.isSelected,
                     'bg-primary/15': day.isInRange && !day.isSelected,
                     'rounded-l-lg': day.isRangeStart,
                     'rounded-r-lg': day.isRangeEnd
@@ -1178,8 +1181,8 @@ const teleportTarget = computed(() => {
                   type="button"
                   class="px-3 py-1.5 text-sm font-medium rounded-lg transition-colors"
                   :class="[
-                    isAM 
-                      ? 'text-white' 
+                    isAM
+                      ? activeTextClass
                       : 'text-muted-foreground hover:bg-accent'
                   ]"
                   :style="isAM ? { backgroundColor: color } : undefined"
@@ -1191,8 +1194,8 @@ const teleportTarget = computed(() => {
                   type="button"
                   class="px-3 py-1.5 text-sm font-medium rounded-lg transition-colors"
                   :class="[
-                    !isAM 
-                      ? 'text-white' 
+                    !isAM
+                      ? activeTextClass
                       : 'text-muted-foreground hover:bg-accent'
                   ]"
                   :style="!isAM ? { backgroundColor: color } : undefined"
@@ -1223,7 +1226,7 @@ const teleportTarget = computed(() => {
             <button
               v-if="enableTime"
               type="button"
-              class="px-4 py-1.5 text-sm font-medium rounded-lg transition-colors text-white"
+              :class="['px-4 py-1.5 text-sm font-medium rounded-lg transition-colors', activeTextClass]"
               :style="{ backgroundColor: color }"
               @click="close"
             >

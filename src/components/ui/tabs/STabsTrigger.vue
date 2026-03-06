@@ -80,16 +80,16 @@ const triggerClasses = computed(() => {
       ? 'text-foreground font-medium'
       : 'text-muted-foreground hover:text-foreground',
     card: active
-      ? 'text-foreground font-medium rounded-xl'
+      ? 'text-primary-foreground font-medium rounded-xl'
       : 'text-muted-foreground rounded-xl hover:text-foreground',
     segment: active
-      ? 'text-foreground font-medium rounded-lg'
+      ? 'text-primary-foreground font-medium rounded-lg'
       : 'text-muted-foreground rounded-lg hover:text-foreground',
     bar: active
       ? 'text-foreground font-medium'
       : 'text-muted-foreground hover:text-foreground',
     chip: active
-      ? 'text-white font-medium rounded-full'
+      ? 'text-primary-foreground font-medium rounded-full'
       : 'text-muted-foreground rounded-full hover:text-foreground'
   }
 

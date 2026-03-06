@@ -117,6 +117,11 @@ const router = createRouter({
                     component: () => import('./views/ui/InputView.vue')
                 },
                 {
+                    path: 'kbd',
+                    name: 'ui-kbd',
+                    component: () => import('./views/ui/KbdView.vue')
+                },
+                {
                     path: 'modal',
                     name: 'ui-modal',
                     component: () => import('./views/ui/ModalView.vue')

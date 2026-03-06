@@ -168,7 +168,8 @@ const trackClasses = computed(() => {
 
 const thumbClasses = computed(() => {
   return cn(
-    's-switch-thumb inline-flex items-center justify-center rounded-full bg-white shadow-md transition-all duration-300 ease-in-out z-10',
+    's-switch-thumb inline-flex items-center justify-center rounded-full shadow-md transition-all duration-300 ease-in-out z-10',
+    isChecked.value && !props.color ? 'bg-primary-foreground' : 'bg-white',
     hasTrackText.value ? 'w-5 h-5' : sizeConfig.value.thumb,
     hasTrackText.value
       ? (isChecked.value ? 'ml-auto' : 'mr-auto')
@@ -206,8 +207,7 @@ const thumbClasses = computed(() => {
       <!-- Track Text (unchecked - right side) -->
       <span
         v-if="hasTrackText && !isChecked && uncheckedText"
-        class="absolute right-2 text-white font-semibold select-none"
-        :class="sizeConfig.trackText"
+        :class="['absolute right-2 font-semibold select-none', color ? 'text-white' : 'text-primary-foreground', sizeConfig.trackText]"
       >
         {{ uncheckedText }}
       </span>
@@ -215,8 +215,7 @@ const thumbClasses = computed(() => {
       <!-- Track Text (checked - left side) -->
       <span
         v-if="hasTrackText && isChecked && checkedText"
-        class="absolute left-2 text-white font-semibold select-none"
-        :class="sizeConfig.trackText"
+        :class="['absolute left-2 font-semibold select-none', color ? 'text-white' : 'text-primary-foreground', sizeConfig.trackText]"
       >
         {{ checkedText }}
       </span>

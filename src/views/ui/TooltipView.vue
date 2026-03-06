@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { STooltip, SButton, SApiSection, SApiTable, SApiKeyboard } from '../../index'
+import { STooltip, SButton, SKbd, SKbdShortcut, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, ApiMethod, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
@@ -752,6 +752,69 @@ const advancedCode = `<!-- User profile preview -->
               <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
               <span class="text-sm text-(--s-text-secondary)">Online</span>
             </div>
+          </STooltip>
+        </div>
+      </DemoSection>
+    </section>
+
+    <!-- With Keyboard Shortcuts -->
+    <section>
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">With Keyboard Shortcuts</h2>
+      <DemoSection
+        title="Tooltip Shortcut Hints"
+        description="Show keyboard shortcuts inside tooltip content using SKbdShortcut."
+        code="<STooltip placement=&quot;top&quot;>
+  <SButton variant=&quot;ghost&quot; iconOnly>
+    <span class=&quot;mdi mdi-content-copy&quot;></span>
+  </SButton>
+  <template #content>
+    <span class=&quot;flex items-center gap-2&quot;>
+      Copy <SKbdShortcut :keys=&quot;['⌘', 'C']&quot; size=&quot;xs&quot; variant=&quot;flat&quot; />
+    </span>
+  </template>
+</STooltip>"
+        language="vue"
+      >
+        <div class="flex flex-wrap gap-3 items-center">
+          <STooltip placement="top">
+            <SButton variant="ghost" iconOnly>
+              <span class="mdi mdi-content-copy"></span>
+            </SButton>
+            <template #content>
+              <span class="flex items-center gap-2">
+                Copy <SKbdShortcut :keys="['⌘', 'C']" size="xs" variant="flat" />
+              </span>
+            </template>
+          </STooltip>
+          <STooltip placement="top">
+            <SButton variant="ghost" iconOnly>
+              <span class="mdi mdi-content-paste"></span>
+            </SButton>
+            <template #content>
+              <span class="flex items-center gap-2">
+                Paste <SKbdShortcut :keys="['⌘', 'V']" size="xs" variant="flat" />
+              </span>
+            </template>
+          </STooltip>
+          <STooltip placement="top">
+            <SButton variant="ghost" iconOnly>
+              <span class="mdi mdi-undo"></span>
+            </SButton>
+            <template #content>
+              <span class="flex items-center gap-2">
+                Undo <SKbdShortcut :keys="['⌘', 'Z']" size="xs" variant="flat" />
+              </span>
+            </template>
+          </STooltip>
+          <STooltip placement="top">
+            <SButton variant="ghost" iconOnly>
+              <span class="mdi mdi-magnify"></span>
+            </SButton>
+            <template #content>
+              <span class="flex items-center gap-2">
+                Search <SKbdShortcut :keys="['⌘', 'K']" size="xs" variant="flat" />
+              </span>
+            </template>
           </STooltip>
         </div>
       </DemoSection>

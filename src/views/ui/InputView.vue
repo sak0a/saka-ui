@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { 
-  SInput, SButton, SApiSection, SApiTable
+import {
+  SInput, SButton, SKbd, SKbdShortcut, SApiSection, SApiTable
 } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, ApiMethod } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
@@ -182,6 +182,13 @@ const featuresCode = `<!-- Clearable -->
   :rows="4"
   label="Message"
 />`
+
+const kbdSearchCode = `<!-- Search input with keyboard shortcut hint -->
+<SInput placeholder="Search..." iconLeft="magnify">
+  <template #suffix>
+    <SKbdShortcut :keys="['⌘', 'K']" size="xs" variant="flat" />
+  </template>
+</SInput>`
 
 // API Reference
 const inputProps: ApiProp[] = [
@@ -742,6 +749,25 @@ const inputMethods: ApiMethod[] = [
           </div>
         </DemoSection>
       </div>
+    </section>
+
+    <!-- With Keyboard Shortcut -->
+    <section>
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">With Keyboard Shortcut</h2>
+      <DemoSection
+        title="Search with Shortcut Hint"
+        description="Overlay an SKbdShortcut on top of an input to indicate a keyboard shortcut."
+        :code="kbdSearchCode"
+        language="vue"
+      >
+        <div class="max-w-md">
+          <SInput placeholder="Search..." iconLeft="magnify">
+            <template #suffix>
+              <SKbdShortcut :keys="['⌘', 'K']" size="xs" variant="flat" />
+            </template>
+          </SInput>
+        </div>
+      </DemoSection>
     </section>
 
     <!-- API Reference -->
