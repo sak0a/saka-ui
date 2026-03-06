@@ -730,7 +730,7 @@ const triggerCode = `<STabs v-model="active" type="line" trigger="hover">
               { name: 'animated', type: 'boolean', default: 'false', description: 'Enable panel transition animations', category: 'Behavior' },
               { name: 'closable', type: 'boolean', default: 'false', description: 'Show close buttons on tabs (simple API)', category: 'Behavior' },
               { name: 'trigger', type: '\'click\' | \'hover\'', default: '\'click\'', description: 'Trigger mode for switching tabs', category: 'Behavior' },
-              { name: 'justifyContent', type: 'string', default: '\'flex-start\'', description: 'Tab alignment (flex-start, center, etc.)', category: 'Layout' },
+              { name: 'justifyContent', type: 'TabJustify', default: '\'flex-start\'', description: 'Tab alignment (flex-start, center, etc.)', category: 'Layout' },
               { name: 'barColor', type: 'string', default: 'var(--s-primary)', description: 'Active indicator color', category: 'Theming' },
               { name: 'chipColor', type: 'string', default: 'var(--s-accent)', description: 'Inactive chip background (simple API)', category: 'Theming' },
               { name: 'chipActiveColor', type: 'string', default: 'var(--s-primary)', description: 'Active chip background (simple API)', category: 'Theming' },
@@ -746,7 +746,7 @@ const triggerCode = `<STabs v-model="active" type="line" trigger="hover">
             :events="([
               { name: 'update:modelValue', payload: 'string | number', description: 'v-model update when tab changes' },
               { name: 'close', payload: 'string | number', description: 'Tab close button clicked (simple API)' },
-              { name: 'before-leave', payload: '(from, to)', description: 'Before switching tabs (return false to cancel)' }
+              { name: 'before-leave', payload: '(from, to)', description: 'Emitted before switching tabs' }
             ] as ApiEvent[])"
             class="mt-6"
           />
