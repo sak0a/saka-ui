@@ -1,4 +1,4 @@
 {
   "version": "0.1.0",
-  "components": ["accordion", "alert", "avatar", "badge", "button", "card", "carousel", "checkbox", "chip", "color-picker", "date-picker", "drawer", "dropdown", "form", "glass-button", "icon", "input", "kbd", "modal", "option", "otp", "pagination", "progress", "radio", "select", "skeleton", "switch", "table", "tabs", "toast", "tooltip"]
+  "components": ["accordion", "alert", "avatar", "badge", "button", "breadcrumb", "card", "carousel", "checkbox", "chip", "color-picker", "date-picker", "drawer", "dropdown", "form", "glass-button", "icon", "input", "kbd", "modal", "option", "otp", "pagination", "progress", "radio", "select", "skeleton", "switch", "table", "tabs", "toast", "tooltip"]
 }

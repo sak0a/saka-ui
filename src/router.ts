@@ -62,6 +62,11 @@ const router = createRouter({
                     component: () => import('./views/ui/BadgeView.vue')
                 },
                 {
+                    path: 'breadcrumb',
+                    name: 'ui-breadcrumb',
+                    component: () => import('./views/ui/BreadcrumbView.vue')
+                },
+                {
                     path: 'checkbox',
                     name: 'ui-checkbox',
                     component: () => import('./views/ui/CheckboxView.vue')

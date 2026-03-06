@@ -36,6 +36,15 @@ export { default as SKbd, kbdVariants, type KbdVariants } from './components/ui/
 export { default as SSkeleton, type SkeletonVariants } from './components/ui/SSkeleton.vue'
 export { default as SKbdShortcut } from './components/ui/SKbdShortcut.vue'
 export { SDropdown, SDropdownItem, SDropdownDivider, SDropdownGroup } from './components/ui/dropdown'
+export {
+  SBreadcrumb,
+  SBreadcrumbList,
+  SBreadcrumbItem,
+  SBreadcrumbLink,
+  SBreadcrumbPage,
+  SBreadcrumbSeparator,
+  SBreadcrumbEllipsis
+} from './components/ui/breadcrumb'
 export { default as SCard } from './components/ui/card/SCard.vue'
 export { default as SCardHeader } from './components/ui/card/SCardHeader.vue'
 export { default as SCardContent } from './components/ui/card/SCardContent.vue'

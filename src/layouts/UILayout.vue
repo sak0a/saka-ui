@@ -27,6 +27,7 @@ const uiNavigation = [
   { name: 'Alerts', href: '/ui/alerts', icon: 'alert-circle-outline' },
   { name: 'Avatar', href: '/ui/avatar', icon: 'account-circle' },
   { name: 'Badges', href: '/ui/badges', icon: 'tag-multiple' },
+  { name: 'Breadcrumb', href: '/ui/breadcrumb', icon: 'chevron-double-right' },
   { name: 'Buttons', href: '/ui/buttons', icon: 'button-cursor' },
   { name: 'Card', href: '/ui/card', icon: 'card-outline' },
   { name: 'Carousel', href: '/ui/carousel', icon: 'view-carousel' },
