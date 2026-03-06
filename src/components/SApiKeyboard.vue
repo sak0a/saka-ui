@@ -75,6 +75,7 @@ const normalizeKeys = (keys: string | string[]): string[] => {
     <!-- Table variant -->
     <div v-else class="overflow-x-auto rounded-xl border border-border/70 bg-background/80 shadow-sm">
       <table class="w-full min-w-full text-left text-sm">
+        <caption v-if="title" class="sr-only">{{ title }}</caption>
         <thead class="bg-muted/55 text-xs uppercase tracking-[0.16em] text-muted-foreground">
           <tr>
             <th class="px-4 py-3 font-semibold">Key</th>

@@ -1173,7 +1173,7 @@ const optionGroupSlots: ApiSlot[] = [
               { name: 'selected', props: '{ option }', description: 'Custom selected value display' },
               { name: 'option', props: '{ option, selected, highlighted }', description: 'Custom option rendering' },
               { name: 'tag', props: '{ option, remove }', description: 'Custom tag rendering for multiple' },
-              { name: 'arrow', props: '{ isOpen }', description: 'Override the built-in dropdown arrow' },
+              { name: 'arrow', props: "{ 'is-open': boolean }", description: 'Override the built-in dropdown arrow' },
               { name: 'empty', props: '-', description: 'Custom empty state' },
               { name: 'loading', props: '-', description: 'Custom loading state' },
               { name: 'header', props: '-', description: 'Content above options' },
@@ -1201,11 +1201,8 @@ const optionGroupSlots: ApiSlot[] = [
         </div>
 
         <div>
-          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
-            <span class="mdi mdi-keyboard-outline text-(--s-primary)" />
-            Keyboard Navigation
-          </h3>
           <SApiKeyboard
+            title="Keyboard Navigation"
             :shortcuts="([
               { keys: ['Enter', 'Space'], action: 'Open dropdown or select highlighted option' },
               { keys: 'Escape', action: 'Close dropdown' },

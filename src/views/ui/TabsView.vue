@@ -723,11 +723,11 @@ const triggerCode = `<STabs v-model="active" type="line" trigger="hover">
             title="Props"
             type="props"
             :props="([
-              { name: 'v-model', type: 'string | number', default: '-', description: 'Active tab value', category: 'Core' },
+              { name: 'modelValue', type: 'string | number', default: 'undefined', description: 'Active tab value (use with v-model)', category: 'Core' },
               { name: 'type', type: '\'line\' | \'card\' | \'segment\' | \'bar\' | \'chip\'', default: '\'line\'', description: 'Tab style variant', category: 'Appearance' },
               { name: 'size', type: '\'small\' | \'medium\' | \'large\'', default: '\'medium\'', description: 'Tab size', category: 'Appearance' },
               { name: 'placement', type: '\'top\' | \'left\' | \'right\' | \'bottom\'', default: '\'top\'', description: 'Tab position (vertical with left/right)', category: 'Appearance' },
-              { name: 'animated', type: 'boolean', default: 'false', description: 'Enable morph animation on content panels', category: 'Behavior' },
+              { name: 'animated', type: 'boolean', default: 'false', description: 'Enable panel transition animations', category: 'Behavior' },
               { name: 'closable', type: 'boolean', default: 'false', description: 'Show close buttons on tabs (simple API)', category: 'Behavior' },
               { name: 'trigger', type: '\'click\' | \'hover\'', default: '\'click\'', description: 'Trigger mode for switching tabs', category: 'Behavior' },
               { name: 'justifyContent', type: 'string', default: '\'flex-start\'', description: 'Tab alignment (flex-start, center, etc.)', category: 'Layout' },

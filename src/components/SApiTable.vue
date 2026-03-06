@@ -130,6 +130,7 @@ const tableData = computed(() => {
 
     <div class="overflow-x-auto rounded-xl border border-border/70 bg-background/80 shadow-sm">
       <table class="w-full min-w-full text-left text-sm">
+        <caption class="sr-only">{{ title }}</caption>
         <thead class="bg-muted/55 text-xs uppercase tracking-[0.16em] text-muted-foreground">
           <tr>
             <th v-for="col in columns" :key="col.key" class="px-4 py-3 font-semibold">

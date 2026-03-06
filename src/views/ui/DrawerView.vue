@@ -1138,11 +1138,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         </div>
 
         <div>
-          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
-            <span class="mdi mdi-keyboard-outline text-(--s-primary)" />
-            Keyboard Navigation
-          </h3>
-          <SApiKeyboard :shortcuts="keyboardShortcuts" />
+          <SApiKeyboard title="Keyboard Navigation" :shortcuts="keyboardShortcuts" />
         </div>
       </div>
     </SApiSection>

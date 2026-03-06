@@ -909,7 +909,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
             title="Props"
             type="props"
             :props="([
-              { name: 'label', type: 'string', default: 'Required', description: 'Group header label' },
+              { name: 'label', type: 'string', default: '-', description: 'Required. Group header label' },
               { name: 'icon', type: 'string', default: 'undefined', description: 'Optional icon shown next to the group label' }
             ] as ApiProp[])"
           />
@@ -924,11 +924,8 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
         </div>
 
         <div>
-          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
-            <span class="mdi mdi-keyboard-outline text-(--s-primary)" />
-            Keyboard Navigation
-          </h3>
           <SApiKeyboard
+            title="Keyboard Navigation"
             :shortcuts="([
               { keys: ['Enter', 'Space'], action: 'Open dropdown or select highlighted item' },
               { keys: 'Escape', action: 'Close dropdown' },

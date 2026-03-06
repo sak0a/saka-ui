@@ -287,11 +287,15 @@ const tableProps: ApiProp[] = [
   { name: 'pagination', type: 'boolean', default: 'false', description: 'Enable pagination' },
   { name: 'pageSize', type: 'number', default: '10', description: 'Initial page size' },
   { name: 'pageSizeOptions', type: 'number[]', default: '[10, 25, 50, 100]', description: 'Available page size options' },
+  { name: 'multiSelect', type: 'boolean', default: 'false', description: 'Enable multi-select (requires selectionMode="multiple")' },
   { name: 'initialSort', type: 'SortState', default: 'undefined', description: 'Initial sort state' },
+  { name: 'tableClass', type: 'string', default: "''", description: 'Custom classes for the table element' },
+  { name: 'fixedLayout', type: 'boolean', default: 'false', description: 'Enable fixed table layout' },
   { name: 'maxHeight', type: 'string', default: 'undefined', description: 'Max height for scrollable body' },
   { name: 'emptyMessage', type: 'string', default: "'No data available'", description: 'Message shown when data is empty' },
   { name: 'emptyIcon', type: 'string', default: "'mdi-table-off'", description: 'Icon shown in empty state' },
-  { name: 'caption', type: 'string', default: 'undefined', description: 'Accessible caption for the table' }
+  { name: 'caption', type: 'string', default: 'undefined', description: 'Accessible caption for the table' },
+  { name: 'captionSide', type: "'top' | 'bottom'", default: "'top'", description: 'Caption placement' }
 ]
 
 const columnProps: ApiProp[] = [
