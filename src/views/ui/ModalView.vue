@@ -17,7 +17,9 @@ import {
   SApiSection,
   SApiTable,
   SApiKeyboard,
-  SBadge
+  SBadge,
+  SKbd,
+  SKbdShortcut
 } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 
@@ -975,6 +977,26 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       <p class="text-(--s-text-secondary) mb-4">
         See the Confirmation Dialog, Form Modal, and Nested Modals examples above for comprehensive real-world use cases.
       </p>
+    </section>
+
+    <!-- Keyboard Shortcut Hints -->
+    <section>
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Keyboard Shortcut Hints</h2>
+      <DemoSection
+        title="Escape Key Hint"
+        description="Display keyboard hints to help users discover modal shortcuts."
+        code="<p class=&quot;text-sm text-muted-foreground&quot;>
+  Press <SKbd size=&quot;sm&quot;>Esc</SKbd> to close, or
+  <SKbdShortcut :keys=&quot;['⌘', 'Enter']&quot; size=&quot;sm&quot; /> to confirm.
+</p>"
+        language="vue"
+      >
+        <div class="max-w-md p-4 rounded-xl border border-(--s-border) bg-(--s-bg-secondary)/30">
+          <p class="text-sm text-(--s-text-secondary) leading-relaxed">
+            Press <SKbd size="sm">Esc</SKbd> to close the modal, or <SKbdShortcut :keys="['⌘', 'Enter']" size="sm" /> to confirm your changes.
+          </p>
+        </div>
+      </DemoSection>
     </section>
 
     <!-- API Reference -->

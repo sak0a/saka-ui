@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SDropdown, SDropdownItem, SDropdownDivider, SDropdownGroup, SApiSection, SApiTable, SApiKeyboard } from '../../index'
+import { SDropdown, SDropdownItem, SDropdownDivider, SDropdownGroup, SKbd, SKbdShortcut, SButton, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import type { DropdownMenuItem } from '../../components/ui/dropdown/SDropdown.vue'
 import DemoSection from '../../components/DemoSection.vue'
@@ -760,6 +760,62 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
             </SDropdown>
           </div>
         </div>
+      </DemoSection>
+    </section>
+
+    <!-- With Keyboard Shortcuts -->
+    <section>
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">With Keyboard Shortcuts</h2>
+      <DemoSection
+        title="Menu Items with Shortcuts"
+        description="Use SKbdShortcut inside dropdown items to display keyboard shortcut hints."
+        code="<SDropdown>
+  <template #trigger>
+    <SButton variant=&quot;outlined&quot;>Edit Menu</SButton>
+  </template>
+  <template #default>
+    <SDropdownItem item-key=&quot;cut&quot; icon=&quot;content-cut&quot;>
+      <div class=&quot;flex items-center justify-between w-full&quot;>
+        <span>Cut</span>
+        <SKbdShortcut :keys=&quot;['⌘', 'X']&quot; size=&quot;xs&quot; variant=&quot;flat&quot; />
+      </div>
+    </SDropdownItem>
+  </template>
+</SDropdown>"
+        language="vue"
+      >
+        <SDropdown>
+          <template #trigger>
+            <SButton variant="outlined">Edit Menu</SButton>
+          </template>
+          <template #default>
+            <SDropdownItem item-key="cut" icon="content-cut">
+              <div class="flex items-center justify-between w-full">
+                <span>Cut</span>
+                <SKbdShortcut :keys="['⌘', 'X']" size="xs" variant="flat" />
+              </div>
+            </SDropdownItem>
+            <SDropdownItem item-key="copy" icon="content-copy">
+              <div class="flex items-center justify-between w-full">
+                <span>Copy</span>
+                <SKbdShortcut :keys="['⌘', 'C']" size="xs" variant="flat" />
+              </div>
+            </SDropdownItem>
+            <SDropdownItem item-key="paste" icon="content-paste">
+              <div class="flex items-center justify-between w-full">
+                <span>Paste</span>
+                <SKbdShortcut :keys="['⌘', 'V']" size="xs" variant="flat" />
+              </div>
+            </SDropdownItem>
+            <SDropdownDivider />
+            <SDropdownItem item-key="select-all" icon="select-all">
+              <div class="flex items-center justify-between w-full">
+                <span>Select All</span>
+                <SKbdShortcut :keys="['⌘', 'A']" size="xs" variant="flat" />
+              </div>
+            </SDropdownItem>
+          </template>
+        </SDropdown>
       </DemoSection>
     </section>
 

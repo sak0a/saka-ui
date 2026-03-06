@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SButton, SApiSection, SApiTable, SApiKeyboard } from '../../index'
+import { SButton, SKbd, SKbdShortcut, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
@@ -135,6 +135,16 @@ const buttonGroupCode = `<div class="flex">
   <SButton rounded="none" variant="outlined">Center</SButton>
   <SButton rounded="none" class="rounded-r-lg">Right</SButton>
 </div>`
+
+const kbdShortcutCode = `<SButton variant="outlined">
+  Search
+  <SKbdShortcut :keys="['⌘', 'K']" size="xs" variant="flat" class="ml-2 opacity-70" />
+</SButton>
+
+<SButton variant="light">
+  Save
+  <SKbdShortcut :keys="['⌘', 'S']" size="xs" variant="flat" class="ml-2 opacity-70" />
+</SButton>`
 
 // API Reference data
 const buttonProps: ApiProp[] = [
@@ -688,13 +698,39 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       </DemoSection>
     </section>
 
+    <!-- With Keyboard Shortcuts -->
+    <section>
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">With Keyboard Shortcuts</h2>
+      <DemoSection
+        title="Shortcut Hints"
+        description="Use SKbd or SKbdShortcut inside buttons to display keyboard shortcut hints."
+        :code="kbdShortcutCode"
+        language="vue"
+      >
+        <div class="flex flex-wrap gap-3 items-center">
+          <SButton variant="outlined">
+            Search
+            <SKbdShortcut :keys="['⌘', 'K']" size="xs" variant="flat" class="ml-2 opacity-70" />
+          </SButton>
+          <SButton variant="light">
+            Save
+            <SKbdShortcut :keys="['⌘', 'S']" size="xs" variant="flat" class="ml-2 opacity-70" />
+          </SButton>
+          <SButton variant="ghost">
+            Undo
+            <SKbdShortcut :keys="['⌘', 'Z']" size="xs" variant="ghost" class="ml-1 opacity-60" />
+          </SButton>
+        </div>
+      </DemoSection>
+    </section>
+
     <!-- API Reference -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
       <SApiTable
         title="Props"
-        type="props" 
-        :props="buttonProps" 
+        type="props"
+        :props="buttonProps"
       />
 
       <SApiTable 
