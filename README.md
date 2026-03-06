@@ -51,15 +51,63 @@ A modern, high-performance Vue 3 component library built with Tailwind CSS v4 an
 ## 🚀 Quick Start
 
 ```bash
-# Install dependencies
+# Install dependencies (requires Bun — https://bun.sh)
 bun install
 
 # Start dev server
 bun run dev
 
-# Build for production
+# Build everything (library + registry + CLI)
 bun run build
 ```
+
+## 🧑‍💻 Development
+
+This project uses **[Bun](https://bun.sh/)** as its package manager and script runner.
+
+### Local Verification
+
+Before pushing, run the same checks that CI will execute:
+
+```bash
+# 1. Install dependencies
+bun install
+
+# 2. Build the component library
+bun run build:lib
+
+# 3. Build the CLI tool
+bun run build:cli
+
+# 4. Run the CLI smoke test
+bun run test:smoke
+```
+
+All four steps must pass for CI to be green.
+
+### Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `bun run dev` | Start the Vite dev server |
+| `bun run build` | Full production build (type-check → library → registry) |
+| `bun run build:lib` | Build the component library only |
+| `bun run build:cli` | Build the CLI tool (via tsup) |
+| `bun run build:registry` | Build the component registry |
+| `bun run build:all` | Build library + registry + CLI |
+| `bun run test:smoke` | Run CLI smoke tests (requires `build:cli` first) |
+| `bun run preview` | Preview the production build locally |
+
+### Continuous Integration
+
+A GitHub Actions workflow (`.github/workflows/ci.yml`) runs on every push and pull request to `main`. It performs:
+
+1. **Install** — `bun install --frozen-lockfile`
+2. **Build library** — `bun run build:lib`
+3. **Build CLI** — `bun run build:cli`
+4. **CLI smoke test** — `bun run test:smoke`
+
+CI uses the latest Bun version on Ubuntu. The frozen lockfile flag ensures reproducible installs.
 
 ## 🛠️ Tech Stack
 
@@ -79,6 +127,7 @@ bun run build
 - [x] Reusable API reference components
 - [x] Vite Library Mode configured
 - [x] TypeScript declaration generation
+- [x] GitHub Actions CI (build + smoke test)
 - [ ] Unit tests
 - [ ] Storybook integration
 - [ ] npm package publishing
