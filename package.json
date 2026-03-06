@@ -26,6 +26,7 @@
     "build": "vue-tsc && vite build && tsx scripts/build-registry.ts",
     "build:lib": "vite build",
     "build:lib:bundle": "vite build --mode ci-bundle",
+    "build:pages": "vite build --mode pages",
     "build:registry": "tsx scripts/build-registry.ts",
     "build:cli": "tsup",
     "build:all": "vite build && tsx scripts/build-registry.ts && tsup",
