@@ -1,0 +1,7 @@
+export { default as SBreadcrumb } from './SBreadcrumb.vue'
+export { default as SBreadcrumbList } from './SBreadcrumbList.vue'
+export { default as SBreadcrumbItem } from './SBreadcrumbItem.vue'
+export { default as SBreadcrumbLink } from './SBreadcrumbLink.vue'
+export { default as SBreadcrumbPage } from './SBreadcrumbPage.vue'
+export { default as SBreadcrumbSeparator } from './SBreadcrumbSeparator.vue'
+export { default as SBreadcrumbEllipsis } from './SBreadcrumbEllipsis.vue'

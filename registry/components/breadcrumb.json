@@ -1,0 +1,24 @@
+{
+  "name": "breadcrumb",
+  "displayName": "SBreadcrumb",
+  "description": "Composable breadcrumb navigation with list, item, link, page, separator, and ellipsis subcomponents.",
+  "version": "0.1.0",
+  "files": [
+    "components/ui/breadcrumb/index.ts",
+    "components/ui/breadcrumb/SBreadcrumb.vue",
+    "components/ui/breadcrumb/SBreadcrumbList.vue",
+    "components/ui/breadcrumb/SBreadcrumbItem.vue",
+    "components/ui/breadcrumb/SBreadcrumbLink.vue",
+    "components/ui/breadcrumb/SBreadcrumbPage.vue",
+    "components/ui/breadcrumb/SBreadcrumbSeparator.vue",
+    "components/ui/breadcrumb/SBreadcrumbEllipsis.vue"
+  ],
+  "dependencies": [],
+  "composables": [],
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.0.0"
+  }
+}
