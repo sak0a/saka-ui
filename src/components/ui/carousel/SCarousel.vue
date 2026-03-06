@@ -730,7 +730,7 @@ defineExpose({
           :key="i - 1"
           class="s-carousel__num w-7 h-7 rounded-full text-xs font-medium flex items-center justify-center transition-all duration-300"
           :class="activeIndex === i - 1 
-            ? 'bg-primary text-white scale-110' 
+            ? 'bg-primary text-primary-foreground scale-110'
             : 'bg-accent/80 text-muted-foreground hover:bg-background'"
           role="tab"
           :aria-selected="activeIndex === i - 1"

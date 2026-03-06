@@ -544,7 +544,7 @@ const maxHandleZIndex = computed(() => {
               class="w-1.5 h-1.5 rounded-full transition-colors"
               :class="[
                 (range ? tick.value >= internalMin && tick.value <= internalMax : tick.value <= internalMin)
-                  ? 'bg-white'
+                  ? 'bg-primary-foreground'
                   : 'bg-muted-foreground'
               ]"
             />

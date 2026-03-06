@@ -383,35 +383,38 @@ const shapeClasses = computed(() => {
   return shapes[props.shape]
 })
 
+// Active text color: use primary-foreground for default primary, white for custom colors
+const activeTextColor = computed(() => props.color === 'var(--s-primary)' ? 'text-primary-foreground' : 'text-white')
+
 // Button styles based on variant
 const getButtonClasses = (isActive: boolean, isDisabled: boolean) => {
   const base = `
-    relative flex items-center justify-center 
+    relative flex items-center justify-center
     font-medium transition-all duration-200 ease-out
     select-none cursor-pointer
     focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
     ${sizeClasses.value} ${shapeClasses.value}
   `
-  
+
   if (isDisabled) {
     return `${base} opacity-40 cursor-not-allowed pointer-events-none`
   }
-  
+
   if (props.variant === 'default') {
     return isActive
-      ? `${base} text-white shadow-md hover:shadow-lg`
+      ? `${base} ${activeTextColor.value} shadow-md hover:shadow-lg`
       : `${base} bg-muted text-foreground hover:bg-accent border border-border`
   }
-  
+
   if (props.variant === 'outlined') {
     return isActive
-      ? `${base} border-2 text-white shadow-md`
+      ? `${base} border-2 ${activeTextColor.value} shadow-md`
       : `${base} border-2 border-border text-muted-foreground hover:border-muted-foreground hover:text-foreground`
   }
-  
+
   if (props.variant === 'ghost') {
     return isActive
-      ? `${base} text-white`
+      ? `${base} ${activeTextColor.value}`
       : `${base} text-muted-foreground hover:bg-muted hover:text-foreground`
   }
   

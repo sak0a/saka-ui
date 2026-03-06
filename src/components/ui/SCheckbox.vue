@@ -228,7 +228,7 @@ const rounded = computed(() => props.rounded)
         :class="cn(
           'mdi mdi-loading animate-spin',
           sizeConfig.icon,
-          isChecked || indeterminate ? 'text-white' : 'text-foreground'
+          isChecked || indeterminate ? (color ? 'text-white' : 'text-primary-foreground') : 'text-foreground'
         )"
       />
 
@@ -243,7 +243,7 @@ const rounded = computed(() => props.rounded)
       >
         <span
           v-if="(isChecked || indeterminate) && !loading"
-          :class="cn('absolute inset-0 flex items-center justify-center text-white', sizeConfig.icon)"
+          :class="cn('absolute inset-0 flex items-center justify-center', color ? 'text-white' : 'text-primary-foreground', sizeConfig.icon)"
         >
           <slot name="icon">
             <span :class="['mdi', `mdi-${displayIcon}`]" />

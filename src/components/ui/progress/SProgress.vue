@@ -313,7 +313,7 @@ watch(() => props.modelValue, (newVal) => {
           <!-- Value inside -->
           <span 
             v-if="showValue && valuePosition === 'inside' && size !== 'xs' && size !== 'small'"
-            class="absolute inset-0 flex items-center justify-center text-white font-semibold drop-shadow-sm tabular-nums"
+            :class="['absolute inset-0 flex items-center justify-center font-semibold drop-shadow-sm tabular-nums', color === 'var(--s-primary)' ? 'text-primary-foreground' : 'text-white']"
             :style="{ fontSize: sizeConfig.fontSize }"
           >
             {{ displayValue }}

@@ -278,7 +278,7 @@ const buttonStyle = computed<CSSProperties>(() => {
       <span
         v-if="loading"
         class="mdi mdi-loading animate-spin z-10"
-        :class="[sizeConfig.icon, isChecked && currentVariant === 'filled' ? 'text-white' : 'text-foreground']"
+        :class="[sizeConfig.icon, isChecked && currentVariant === 'filled' ? (hasCustomColor ? 'text-white' : 'text-primary-foreground') : 'text-foreground']"
       />
 
       <!-- Inner Dot / Icon -->
@@ -293,7 +293,7 @@ const buttonStyle = computed<CSSProperties>(() => {
         <span
           v-if="isChecked && !loading"
           class="z-10"
-          :class="currentVariant === 'filled' ? 'text-white' : ''"
+          :class="currentVariant === 'filled' ? (hasCustomColor ? 'text-white' : 'text-primary-foreground') : ''"
         >
           <slot name="icon">
             <span
@@ -306,7 +306,7 @@ const buttonStyle = computed<CSSProperties>(() => {
               :class="cn(
                 's-radio-inner block rounded-full transition-all duration-300',
                 sizeConfig.inner,
-                currentVariant === 'filled' ? 'bg-white' : '',
+                currentVariant === 'filled' ? (hasCustomColor ? 'bg-white' : 'bg-primary-foreground') : '',
                 currentVariant !== 'filled' && !hasCustomColor ? 'bg-primary' : ''
               )"
               :style="currentVariant !== 'filled' && hasCustomColor ? dotStyle : {}"
