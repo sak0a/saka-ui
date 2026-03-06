@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { SCarousel, SCarouselSlide, SApiSection, SApiTable } from '../../index'
-import type { ApiProp, ApiEvent, ApiMethod } from '../../index'
+import type { ApiProp, ApiEvent, ApiMethod, ApiSlot } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
 // State for demos
@@ -164,6 +164,20 @@ const carouselMethods: ApiMethod[] = [
   { name: 'goTo(index)', description: 'Jump to specific slide' },
   { name: 'start() / stop()', description: 'Start/stop autoplay' },
   { name: 'pause() / resume()', description: 'Pause/resume autoplay' }
+]
+
+const carouselSlots: ApiSlot[] = [
+  { name: 'default', props: '-', description: 'Slide content made up of SCarouselSlide children' },
+  { name: 'thumbnail', props: '{ index, isActive }', description: 'Custom thumbnail renderer when thumbnail navigation is enabled' }
+]
+
+const carouselSlideProps: ApiProp[] = [
+  { name: 'lazy', type: 'boolean', default: 'false', description: 'Delay rendering slide content until the slide becomes visible' }
+]
+
+const carouselSlideSlots: ApiSlot[] = [
+  { name: 'default', props: '{ isActive, isVisible, index }', description: 'Main slide content' },
+  { name: 'overlay', props: '{ isActive, isVisible, index }', description: 'Overlay content positioned over the slide' }
 ]
 </script>
 
@@ -681,9 +695,27 @@ const carouselMethods: ApiMethod[] = [
     <!-- API Reference -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
-      <SApiTable title="SCarousel Props" type="props" :props="carouselProps" />
-      <SApiTable title="Events" type="events" :events="carouselEvents" />
-      <SApiTable title="Exposed Methods" type="methods" :methods="carouselMethods" />
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-view-carousel text-(--s-primary)" />
+            SCarousel
+          </h3>
+          <SApiTable title="Props" type="props" :props="carouselProps" />
+          <SApiTable title="Events" type="events" :events="carouselEvents" class="mt-6" />
+          <SApiTable title="Slots" type="slots" :slots="carouselSlots" class="mt-6" />
+          <SApiTable title="Exposed Methods" type="methods" :methods="carouselMethods" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-image-outline text-(--s-primary)" />
+            SCarouselSlide
+          </h3>
+          <SApiTable title="Props" type="props" :props="carouselSlideProps" />
+          <SApiTable title="Slots" type="slots" :slots="carouselSlideSlots" class="mt-6" />
+        </div>
+      </div>
     </SApiSection>
   </div>
 </template>

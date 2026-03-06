@@ -746,10 +746,28 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     <!-- API Reference -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
-      <SApiTable title="Props" type="props" :props="glassCardProps" />
-      <SApiTable title="Events" type="events" :events="glassCardEvents" />
-      <SApiTable title="Slots" type="slots" :slots="glassCardSlots" />
-      <SApiKeyboard :shortcuts="keyboardShortcuts" />
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-card-outline text-(--s-primary)" />
+            SGlassCard
+          </h3>
+          <p class="text-sm text-(--s-text-secondary) mb-4">
+            Use the shared card building blocks with <code>SGlassCard</code>: <code>SCardHeader</code>, <code>SCardContent</code>, <code>SCardFooter</code>, <code>SCardMedia</code>, and <code>SCardActions</code>.
+          </p>
+          <SApiTable title="Props" type="props" :props="glassCardProps" />
+          <SApiTable title="Events" type="events" :events="glassCardEvents" class="mt-6" />
+          <SApiTable title="Slots" type="slots" :slots="glassCardSlots" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-keyboard-outline text-(--s-primary)" />
+            Keyboard Navigation
+          </h3>
+          <SApiKeyboard :shortcuts="keyboardShortcuts" />
+        </div>
+      </div>
     </SApiSection>
   </div>
 </template>

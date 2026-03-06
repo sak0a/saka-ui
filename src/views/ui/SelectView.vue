@@ -333,6 +333,32 @@ const features = ref(['auth', 'api'])
     />
   </div>
 </template>`
+
+const optionProps: ApiProp[] = [
+  { name: 'value', type: 'any', default: 'required', description: 'Option value submitted back to SSelect', category: 'Core' },
+  { name: 'label', type: 'string', default: 'undefined', description: 'Display label (falls back to the value)', category: 'Content' },
+  { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable selection for this option', category: 'State' },
+  { name: 'icon', type: 'string', default: 'undefined', description: 'Optional leading MDI icon', category: 'Content' },
+  { name: 'description', type: 'string', default: 'undefined', description: 'Secondary supporting text', category: 'Content' },
+  { name: 'color', type: 'string', default: 'undefined', description: 'Custom accent color when selected', category: 'Appearance' },
+]
+
+const optionSlots: ApiSlot[] = [
+  { name: 'default', props: '-', description: 'Custom option label content' },
+  { name: 'suffix', props: '-', description: 'Trailing content rendered inline with the option label' }
+]
+
+const optionGroupProps: ApiProp[] = [
+  { name: 'label', type: 'string', default: 'required', description: 'Group heading text', category: 'Core' },
+  { name: 'disabled', type: 'boolean', default: 'false', description: 'Visually disables the group header; nested options still rely on their own disabled prop', category: 'State' },
+  { name: 'collapsible', type: 'boolean', default: 'false', description: 'Allow the group to collapse or expand', category: 'Behavior' },
+  { name: 'defaultCollapsed', type: 'boolean', default: 'false', description: 'Initial collapsed state when collapsible is enabled', category: 'Behavior' },
+]
+
+const optionGroupSlots: ApiSlot[] = [
+  { name: 'label', props: '-', description: 'Custom group header content' },
+  { name: 'default', props: '-', description: 'Nested SOption content for the group' }
+]
 </script>
 
 <template>
@@ -1076,75 +1102,120 @@ const features = ref(['auth', 'api'])
     <!-- API Reference -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
-      <SApiTable
-        title="Props"
-        type="props"
-        :props="([
-          { name: 'modelValue', type: 'any | any[]', default: 'null', description: 'v-model binding value', category: 'Core' },
-          { name: 'options', type: 'SelectOption[]', default: '[]', description: 'Array of options (alternative to slots)', category: 'Core' },
-          { name: 'multiple', type: 'boolean', default: 'false', description: 'Enable multiple selection', category: 'Selection Mode' },
-          { name: 'searchable', type: 'boolean', default: 'false', description: 'Enable search input in dropdown', category: 'Selection Mode' },
-          { name: 'filter', type: 'boolean', default: 'false', description: 'Enable inline filtering (type directly in trigger)', category: 'Selection Mode' },
-          { name: 'clearable', type: 'boolean', default: 'false', description: 'Show clear button when has value', category: 'Selection Mode' },
-          { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the select', category: 'Selection Mode' },
-          { name: 'loading', type: 'boolean', default: 'false', description: 'Show loading state', category: 'Selection Mode' },
-          { name: 'placeholder', type: 'string', default: '\'Select...\'', description: 'Placeholder text', category: 'Selection Mode' },
-          { name: 'labelPlaceholder', type: 'string', default: 'undefined', description: 'Float label that animates from inside to top', category: 'Appearance' },
-          { name: 'size', type: '\'small\' | \'medium\' | \'large\'', default: '\'medium\'', description: 'Component size', category: 'Appearance' },
-          { name: 'color', type: 'string', default: 'var(--s-primary)', description: 'Accent color', category: 'Appearance' },
-          { name: 'variant', type: '\'outlined\' | \'filled\' | \'underlined\'', default: '\'outlined\'', description: 'Visual variant style', category: 'Appearance' },
-          { name: 'rounded', type: '\'none\' | \'sm\' | \'md\' | \'lg\' | \'full\'', default: '\'md\'', description: 'Border radius', category: 'Appearance' },
-          { name: 'maxHeight', type: 'string', default: '\'280px\'', description: 'Max dropdown height', category: 'Appearance' },
-          { name: 'tagLimit', type: 'number', default: '3', description: 'Max visible tags for multiple', category: 'Multiple Selection' },
-          { name: 'label', type: 'string', default: 'undefined', description: 'Form label (static positioning)', category: 'Form Integration' },
-          { name: 'error', type: 'string', default: 'undefined', description: 'Error message', category: 'Form Integration' },
-          { name: 'hint', type: 'string', default: 'undefined', description: 'Hint text below select', category: 'Form Integration' },
-          { name: 'required', type: 'boolean', default: 'false', description: 'Show required indicator', category: 'Form Integration' },
-          { name: 'placement', type: '\'bottom\' | \'top\' | \'auto\'', default: '\'auto\'', description: 'Dropdown placement', category: 'Dropdown Behavior' }
-        ] as ApiProp[])"
-      />
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-form-dropdown text-(--s-primary)" />
+            SSelect
+          </h3>
+          <SApiTable
+            title="Props"
+            type="props"
+            :props="([
+              { name: 'modelValue', type: 'any | any[]', default: 'null', description: 'v-model binding value', category: 'Core' },
+              { name: 'options', type: 'SelectOption[]', default: '[]', description: 'Array of options (alternative to slots)', category: 'Core' },
+              { name: 'multiple', type: 'boolean', default: 'false', description: 'Enable multiple selection', category: 'Selection Mode' },
+              { name: 'searchable', type: 'boolean', default: 'false', description: 'Enable search input in dropdown', category: 'Selection Mode' },
+              { name: 'filter', type: 'boolean', default: 'false', description: 'Enable inline filtering (type directly in trigger)', category: 'Selection Mode' },
+              { name: 'clearable', type: 'boolean', default: 'false', description: 'Show clear button when has value', category: 'Selection Mode' },
+              { name: 'closeOnSelect', type: 'boolean', default: 'auto', description: 'Override whether the menu closes after an option is selected', category: 'Selection Mode' },
+              { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the select', category: 'Selection Mode' },
+              { name: 'loading', type: 'boolean', default: 'false', description: 'Show loading state', category: 'Selection Mode' },
+              { name: 'placeholder', type: 'string', default: '\'Select...\'', description: 'Placeholder text', category: 'Selection Mode' },
+              { name: 'labelPlaceholder', type: 'string', default: 'undefined', description: 'Float label that animates from inside to top', category: 'Appearance' },
+              { name: 'labelPlacement', type: '\'top\' | \'top-left\' | \'top-center\' | \'top-right\' | \'bottom\' | \'bottom-left\' | \'bottom-center\' | \'bottom-right\' | \'left\' | \'left-top\' | \'left-center\' | \'left-bottom\' | \'right\' | \'right-top\' | \'right-center\' | \'right-bottom\'', default: '\'top\'', description: 'Placement for the static label', category: 'Appearance' },
+              { name: 'size', type: '\'small\' | \'medium\' | \'large\'', default: '\'medium\'', description: 'Component size', category: 'Appearance' },
+              { name: 'color', type: 'string', default: 'var(--s-primary)', description: 'Accent color', category: 'Appearance' },
+              { name: 'variant', type: '\'outlined\' | \'filled\' | \'underlined\'', default: '\'outlined\'', description: 'Visual variant style', category: 'Appearance' },
+              { name: 'rounded', type: '\'none\' | \'sm\' | \'md\' | \'lg\' | \'full\'', default: '\'md\'', description: 'Border radius', category: 'Appearance' },
+              { name: 'maxHeight', type: 'string', default: '\'280px\'', description: 'Max dropdown height', category: 'Appearance' },
+              { name: 'arrowIcon', type: 'string', default: '\'chevron-down\'', description: 'Icon used by the built-in dropdown arrow', category: 'Appearance' },
+              { name: 'menuWidth', type: 'string | number', default: 'undefined', description: 'Override the dropdown menu width', category: 'Dropdown Behavior' },
+              { name: 'menuAlign', type: '\'start\' | \'end\' | \'center\'', default: '\'start\'', description: 'Horizontal alignment of the dropdown menu', category: 'Dropdown Behavior' },
+              { name: 'placement', type: '\'bottom\' | \'top\' | \'auto\'', default: '\'auto\'', description: 'Dropdown placement', category: 'Dropdown Behavior' },
+              { name: 'teleport', type: 'boolean | string', default: 'true', description: 'Teleport target for the dropdown overlay', category: 'Dropdown Behavior' },
+              { name: 'tagLimit', type: 'number', default: '3', description: 'Max visible tags for multiple', category: 'Multiple Selection' },
+              { name: 'creatable', type: 'boolean', default: 'false', description: 'Allow creating a new option from the current query', category: 'Multiple Selection' },
+              { name: 'createText', type: 'string', default: '\'Create "{query}"\'', description: 'Template used for the creatable option label', category: 'Multiple Selection' },
+              { name: 'noOptionsText', type: 'string', default: '\'No options available\'', description: 'Message shown when there are no options', category: 'Content' },
+              { name: 'noResultsText', type: 'string', default: '\'No results found\'', description: 'Message shown when search/filter finds nothing', category: 'Content' },
+              { name: 'label', type: 'string', default: 'undefined', description: 'Form label (static positioning)', category: 'Form Integration' },
+              { name: 'error', type: 'string', default: 'undefined', description: 'Error message', category: 'Form Integration' },
+              { name: 'hint', type: 'string', default: 'undefined', description: 'Hint text below select', category: 'Form Integration' },
+              { name: 'required', type: 'boolean', default: 'false', description: 'Show required indicator', category: 'Form Integration' }
+            ] as ApiProp[])"
+          />
 
-      <SApiTable
-        title="Events"
-        type="events"
-        :events="([
-          { name: 'update:modelValue', payload: 'any | any[]', description: 'Emitted when value changes (for v-model)' },
-          { name: 'change', payload: '(value, event?)', description: 'Emitted when value changes' },
-          { name: 'open', payload: '-', description: 'Dropdown opened' },
-          { name: 'close', payload: '-', description: 'Dropdown closed' },
-          { name: 'search', payload: 'string', description: 'Search query changed' },
-          { name: 'focus', payload: 'FocusEvent', description: 'Select focused' },
-          { name: 'blur', payload: 'FocusEvent', description: 'Select blurred' }
-        ] as ApiEvent[])"
-      />
+          <SApiTable
+            title="Events"
+            type="events"
+            class="mt-6"
+            :events="([
+              { name: 'update:modelValue', payload: 'any | any[]', description: 'Emitted when value changes (for v-model)' },
+              { name: 'change', payload: '(value, event?)', description: 'Emitted when value changes' },
+              { name: 'open', payload: '-', description: 'Dropdown opened' },
+              { name: 'close', payload: '-', description: 'Dropdown closed' },
+              { name: 'search', payload: 'string', description: 'Search query changed' },
+              { name: 'focus', payload: 'FocusEvent', description: 'Select focused' },
+              { name: 'blur', payload: 'FocusEvent', description: 'Select blurred' },
+              { name: 'create', payload: 'string', description: 'Emitted when a creatable option is confirmed' }
+            ] as ApiEvent[])"
+          />
 
-      <SApiTable
-        title="Slots"
-        type="slots"
-        :slots="([
-          { name: 'default', props: '-', description: 'SOption/SOptionGroup children' },
-          { name: 'prefix', props: '-', description: 'Content before the value' },
-          { name: 'suffix', props: '-', description: 'Content after the value' },
-          { name: 'selected', props: '{ option }', description: 'Custom selected value display' },
-          { name: 'option', props: '{ option, selected, highlighted }', description: 'Custom option rendering' },
-          { name: 'tag', props: '{ option, remove }', description: 'Custom tag rendering for multiple' },
-          { name: 'empty', props: '-', description: 'Custom empty state' },
-          { name: 'loading', props: '-', description: 'Custom loading state' },
-          { name: 'header', props: '-', description: 'Content above options' },
-          { name: 'footer', props: '-', description: 'Content below options' }
-        ] as ApiSlot[])"
-      />
+          <SApiTable
+            title="Slots"
+            type="slots"
+            class="mt-6"
+            :slots="([
+              { name: 'default', props: '-', description: 'SOption/SOptionGroup children' },
+              { name: 'prefix', props: '-', description: 'Content before the value' },
+              { name: 'suffix', props: '-', description: 'Content after the value' },
+              { name: 'selected', props: '{ option }', description: 'Custom selected value display' },
+              { name: 'option', props: '{ option, selected, highlighted }', description: 'Custom option rendering' },
+              { name: 'tag', props: '{ option, remove }', description: 'Custom tag rendering for multiple' },
+              { name: 'arrow', props: '{ isOpen }', description: 'Override the built-in dropdown arrow' },
+              { name: 'empty', props: '-', description: 'Custom empty state' },
+              { name: 'loading', props: '-', description: 'Custom loading state' },
+              { name: 'header', props: '-', description: 'Content above options' },
+              { name: 'footer', props: '-', description: 'Content below options' }
+            ] as ApiSlot[])"
+          />
+        </div>
 
-      <SApiKeyboard
-        title="Keyboard Navigation"
-        :shortcuts="([
-          { keys: ['Enter', 'Space'], action: 'Open dropdown or select highlighted option' },
-          { keys: 'Escape', action: 'Close dropdown' },
-          { keys: ['↓', '↑'], action: 'Navigate through options' },
-          { keys: ['Home', 'End'], action: 'Jump to first/last option' },
-          { keys: 'Tab', action: 'Close dropdown and move focus' }
-        ] as KeyboardShortcut[])"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-format-list-bulleted-square text-(--s-primary)" />
+            SOption
+          </h3>
+          <SApiTable title="Props" type="props" :props="optionProps" />
+          <SApiTable title="Slots" type="slots" :slots="optionSlots" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-folder-outline text-(--s-primary)" />
+            SOptionGroup
+          </h3>
+          <SApiTable title="Props" type="props" :props="optionGroupProps" />
+          <SApiTable title="Slots" type="slots" :slots="optionGroupSlots" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-keyboard-outline text-(--s-primary)" />
+            Keyboard Navigation
+          </h3>
+          <SApiKeyboard
+            :shortcuts="([
+              { keys: ['Enter', 'Space'], action: 'Open dropdown or select highlighted option' },
+              { keys: 'Escape', action: 'Close dropdown' },
+              { keys: ['↓', '↑'], action: 'Navigate through options' },
+              { keys: ['Home', 'End'], action: 'Jump to first/last option' },
+              { keys: 'Tab', action: 'Close dropdown and move focus' }
+            ] as KeyboardShortcut[])"
+          />
+        </div>
+      </div>
     </SApiSection>
   </div>
 </template>

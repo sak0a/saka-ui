@@ -515,7 +515,7 @@ const radioKeyboard: KeyboardShortcut[] = [
             <span class="mdi mdi-keyboard-outline text-(--s-primary)" />
             Keyboard Navigation
           </h3>
-          <SApiKeyboard title="Keyboard Navigation" :shortcuts="radioKeyboard" />
+          <SApiKeyboard :shortcuts="radioKeyboard" />
         </div>
       </div>
     </SApiSection>

@@ -713,94 +713,166 @@ const triggerCode = `<STabs v-model="active" type="line" trigger="hover">
     <!-- ============================================ -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
-      <SApiTable
-        title="STabs Props"
-        type="props"
-        :props="([
-          { name: 'v-model', type: 'string | number', default: '-', description: 'Active tab value', category: 'Core' },
-          { name: 'type', type: '\'line\' | \'card\' | \'segment\' | \'bar\' | \'chip\'', default: '\'line\'', description: 'Tab style variant', category: 'Appearance' },
-          { name: 'size', type: '\'small\' | \'medium\' | \'large\'', default: '\'medium\'', description: 'Tab size', category: 'Appearance' },
-          { name: 'placement', type: '\'top\' | \'left\' | \'right\' | \'bottom\'', default: '\'top\'', description: 'Tab position (vertical with left/right)', category: 'Appearance' },
-          { name: 'animated', type: 'boolean', default: 'false', description: 'Enable morph animation on content panels', category: 'Behavior' },
-          { name: 'closable', type: 'boolean', default: 'false', description: 'Show close buttons on tabs (simple API)', category: 'Behavior' },
-          { name: 'trigger', type: '\'click\' | \'hover\'', default: '\'click\'', description: 'Trigger mode for switching tabs', category: 'Behavior' },
-          { name: 'justifyContent', type: 'string', default: '\'flex-start\'', description: 'Tab alignment (flex-start, center, etc.)', category: 'Layout' },
-          { name: 'barColor', type: 'string', default: 'var(--s-primary)', description: 'Active indicator color', category: 'Theming' },
-          { name: 'chipColor', type: 'string', default: 'var(--s-accent)', description: 'Inactive chip background (simple API)', category: 'Theming' },
-          { name: 'chipActiveColor', type: 'string', default: 'var(--s-primary)', description: 'Active chip background (simple API)', category: 'Theming' },
-          { name: 'tabClass', type: 'string', default: '\'\'', description: 'Classes for all tabs (simple API)', category: 'Custom Classes' },
-          { name: 'activeTabClass', type: 'string', default: '\'\'', description: 'Classes for active tab (simple API)', category: 'Custom Classes' },
-          { name: 'panelClass', type: 'string', default: '\'\'', description: 'Classes for content panel (simple API)', category: 'Custom Classes' }
-        ] as ApiProp[])"
-      />
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-tab text-(--s-primary)" />
+            STabs
+          </h3>
+          <SApiTable
+            title="Props"
+            type="props"
+            :props="([
+              { name: 'v-model', type: 'string | number', default: '-', description: 'Active tab value', category: 'Core' },
+              { name: 'type', type: '\'line\' | \'card\' | \'segment\' | \'bar\' | \'chip\'', default: '\'line\'', description: 'Tab style variant', category: 'Appearance' },
+              { name: 'size', type: '\'small\' | \'medium\' | \'large\'', default: '\'medium\'', description: 'Tab size', category: 'Appearance' },
+              { name: 'placement', type: '\'top\' | \'left\' | \'right\' | \'bottom\'', default: '\'top\'', description: 'Tab position (vertical with left/right)', category: 'Appearance' },
+              { name: 'animated', type: 'boolean', default: 'false', description: 'Enable morph animation on content panels', category: 'Behavior' },
+              { name: 'closable', type: 'boolean', default: 'false', description: 'Show close buttons on tabs (simple API)', category: 'Behavior' },
+              { name: 'trigger', type: '\'click\' | \'hover\'', default: '\'click\'', description: 'Trigger mode for switching tabs', category: 'Behavior' },
+              { name: 'justifyContent', type: 'string', default: '\'flex-start\'', description: 'Tab alignment (flex-start, center, etc.)', category: 'Layout' },
+              { name: 'barColor', type: 'string', default: 'var(--s-primary)', description: 'Active indicator color', category: 'Theming' },
+              { name: 'chipColor', type: 'string', default: 'var(--s-accent)', description: 'Inactive chip background (simple API)', category: 'Theming' },
+              { name: 'chipActiveColor', type: 'string', default: 'var(--s-primary)', description: 'Active chip background (simple API)', category: 'Theming' },
+              { name: 'tabsWrapperClass', type: 'string', default: '\'\'', description: 'Classes for the tabs wrapper element', category: 'Custom Classes' },
+              { name: 'tabClass', type: 'string', default: '\'\'', description: 'Classes for all tabs (simple API)', category: 'Custom Classes' },
+              { name: 'activeTabClass', type: 'string', default: '\'\'', description: 'Classes for active tab (simple API)', category: 'Custom Classes' },
+              { name: 'panelClass', type: 'string', default: '\'\'', description: 'Classes for content panel (simple API)', category: 'Custom Classes' }
+            ] as ApiProp[])"
+          />
+          <SApiTable
+            title="Events"
+            type="events"
+            :events="([
+              { name: 'update:modelValue', payload: 'string | number', description: 'v-model update when tab changes' },
+              { name: 'close', payload: 'string | number', description: 'Tab close button clicked (simple API)' },
+              { name: 'before-leave', payload: '(from, to)', description: 'Before switching tabs (return false to cancel)' }
+            ] as ApiEvent[])"
+            class="mt-6"
+          />
+          <SApiTable
+            title="Slots"
+            type="slots"
+            :slots="([
+              { name: 'default', props: '-', description: 'Compose STabsList, STabsTrigger, STabsContent, or simple STabPane children' },
+              { name: 'tab', props: '{ pane, active, disabled, close }', description: 'Customize the simple-API tab trigger template for each registered pane' }
+            ] as ApiSlot[])"
+            class="mt-6"
+          />
+        </div>
 
-      <SApiTable
-        title="STabsList Props"
-        type="props"
-        :props="([
-          { name: 'type', type: 'TabType', default: 'inherited', description: 'Override tab type from parent STabs' },
-          { name: 'class', type: 'string', default: '-', description: 'Additional CSS classes' }
-        ] as ApiProp[])"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-view-carousel-outline text-(--s-primary)" />
+            STabPane
+          </h3>
+          <SApiTable
+            title="Props"
+            type="props"
+            :props="([
+              { name: 'name', type: 'string | number', default: 'Required', description: 'Unique identifier' },
+              { name: 'tab', type: 'string', default: 'Required', description: 'Tab button label' },
+              { name: 'icon', type: 'string', default: '-', description: 'MDI icon name (without mdi- prefix)' },
+              { name: 'disabled', type: 'boolean', default: '-', description: 'Disable this tab' },
+              { name: 'closable', type: 'boolean', default: '-', description: 'Override parent closable setting' },
+              { name: 'tabClass', type: 'string', default: '-', description: 'Additional classes for this tab button' }
+            ] as ApiProp[])"
+          />
+          <SApiTable
+            title="Slots"
+            type="slots"
+            :slots="([
+              { name: 'default', props: '-', description: 'Panel content for the tab' }
+            ] as ApiSlot[])"
+            class="mt-6"
+          />
+        </div>
 
-      <SApiTable
-        title="STabsTrigger Props"
-        type="props"
-        :props="([
-          { name: 'value', type: 'string | number', default: 'Required', description: 'Unique identifier matching STabsContent value' },
-          { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable this trigger' },
-          { name: 'class', type: 'string', default: '-', description: 'Additional CSS classes' }
-        ] as ApiProp[])"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-format-list-bulleted text-(--s-primary)" />
+            STabsList
+          </h3>
+          <SApiTable
+            title="Props"
+            type="props"
+            :props="([
+              { name: 'type', type: 'TabType', default: 'inherited', description: 'Override tab type from parent STabs' },
+              { name: 'class', type: 'string', default: '-', description: 'Additional CSS classes' }
+            ] as ApiProp[])"
+          />
+          <SApiTable
+            title="Slots"
+            type="slots"
+            :slots="([
+              { name: 'default', props: '-', description: 'Tab triggers and optional indicator component' }
+            ] as ApiSlot[])"
+            class="mt-6"
+          />
+        </div>
 
-      <SApiTable
-        title="STabsTrigger Slots"
-        type="slots"
-        :slots="([
-          { name: 'default', props: '{ active: boolean, disabled: boolean }', description: 'Custom trigger content with reactive state' }
-        ] as ApiSlot[])"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-radiobox-marked text-(--s-primary)" />
+            STabsTrigger
+          </h3>
+          <SApiTable
+            title="Props"
+            type="props"
+            :props="([
+              { name: 'value', type: 'string | number', default: 'Required', description: 'Unique identifier matching STabsContent value' },
+              { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable this trigger' },
+              { name: 'class', type: 'string', default: '-', description: 'Additional CSS classes' }
+            ] as ApiProp[])"
+          />
+          <SApiTable
+            title="Slots"
+            type="slots"
+            :slots="([
+              { name: 'default', props: '{ active: boolean, disabled: boolean }', description: 'Custom trigger content with reactive state' }
+            ] as ApiSlot[])"
+            class="mt-6"
+          />
+        </div>
 
-      <SApiTable
-        title="STabsContent Props"
-        type="props"
-        :props="([
-          { name: 'value', type: 'string | number', default: 'Required', description: 'Unique identifier matching STabsTrigger value' },
-          { name: 'class', type: 'string', default: '-', description: 'Additional CSS classes' }
-        ] as ApiProp[])"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-text-box-outline text-(--s-primary)" />
+            STabsContent
+          </h3>
+          <SApiTable
+            title="Props"
+            type="props"
+            :props="([
+              { name: 'value', type: 'string | number', default: 'Required', description: 'Unique identifier matching STabsTrigger value' },
+              { name: 'class', type: 'string', default: '-', description: 'Additional CSS classes' }
+            ] as ApiProp[])"
+          />
+          <SApiTable
+            title="Slots"
+            type="slots"
+            :slots="([
+              { name: 'default', props: '-', description: 'Content rendered for the active tab' }
+            ] as ApiSlot[])"
+            class="mt-6"
+          />
+        </div>
 
-      <SApiTable
-        title="STabsIndicator Props"
-        type="props"
-        :props="([
-          { name: 'color', type: 'string', default: 'inherited', description: 'Override indicator color (defaults to barColor from STabs)' },
-          { name: 'class', type: 'string', default: '-', description: 'Additional CSS classes' }
-        ] as ApiProp[])"
-      />
-
-      <SApiTable
-        title="STabPane Props (Simple API)"
-        type="props"
-        :props="([
-          { name: 'name', type: 'string | number', default: 'Required', description: 'Unique identifier' },
-          { name: 'tab', type: 'string', default: 'Required', description: 'Tab button label' },
-          { name: 'icon', type: 'string', default: '-', description: 'MDI icon name (without mdi- prefix)' },
-          { name: 'disabled', type: 'boolean', default: '-', description: 'Disable this tab' },
-          { name: 'closable', type: 'boolean', default: '-', description: 'Override parent closable setting' },
-          { name: 'tabClass', type: 'string', default: '-', description: 'Additional classes for this tab button' }
-        ] as ApiProp[])"
-      />
-
-      <SApiTable
-        title="Events"
-        type="events"
-        :events="([
-          { name: '@update:modelValue', payload: 'string | number', description: 'v-model update when tab changes' },
-          { name: '@close', payload: 'string | number', description: 'Tab close button clicked (simple API)' },
-          { name: '@before-leave', payload: '(from, to)', description: 'Before switching tabs (return false to cancel)' }
-        ] as ApiEvent[])"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-minus text-(--s-primary)" />
+            STabsIndicator
+          </h3>
+          <SApiTable
+            title="Props"
+            type="props"
+            :props="([
+              { name: 'color', type: 'string', default: 'inherited', description: 'Override indicator color (defaults to barColor from STabs)' },
+              { name: 'class', type: 'string', default: '-', description: 'Additional CSS classes' }
+            ] as ApiProp[])"
+          />
+        </div>
+      </div>
     </SApiSection>
   </div>
 </template>

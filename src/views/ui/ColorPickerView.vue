@@ -168,9 +168,17 @@ const colorPickerEvents: ApiEvent[] = [
 
 const colorPickerSlots: ApiSlot[] = [
   { name: 'default', props: 'color, rgb, hsl, displayValue, hsva', description: 'Compound API: place subcomponents here for full layout control' },
-  { name: '#trigger', props: 'color, displayValue, isOpen, toggle, rgb, hsl, disabled', description: 'Custom trigger element for dropdown mode' },
-  { name: '#panel-before', props: '-', description: 'Content before the panel sections (simple API)' },
-  { name: '#panel-after', props: '-', description: 'Content after the panel sections (simple API)' },
+  { name: 'trigger', props: 'color, displayValue, isOpen, toggle, rgb, hsl, disabled', description: 'Custom trigger element for dropdown mode' },
+  { name: 'panel-before', props: '-', description: 'Content before the panel sections (simple API)' },
+  { name: 'panel-after', props: '-', description: 'Content after the panel sections (simple API)' },
+]
+
+const eyeDropperSlots: ApiSlot[] = [
+  { name: 'default', props: '-', description: 'Replace the default eyedropper icon content' }
+]
+
+const copySlots: ApiSlot[] = [
+  { name: 'default', props: '{ copied }', description: 'Replace the copy button content and react to copied state' }
 ]
 </script>
 
@@ -504,55 +512,67 @@ const colorPickerSlots: ApiSlot[] = [
     <!-- API Reference -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
-      <SApiTable title="SColorPicker Props" type="props" :props="colorPickerProps" />
-      <SApiTable title="SColorPicker Slots" type="slots" :slots="colorPickerSlots" />
-      <SApiTable title="SColorPicker Events" type="events" :events="colorPickerEvents" />
-      <SApiTable title="SColorPickerPresets Props" type="props" :props="presetsProps" />
-      <SApiTable title="SColorPickerRecent Props" type="props" :props="recentProps" />
-    </SApiSection>
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-eyedropper-variant text-(--s-primary)" />
+            SColorPicker
+          </h3>
+          <SApiTable title="Props" type="props" :props="colorPickerProps" />
+          <SApiTable title="Slots" type="slots" :slots="colorPickerSlots" class="mt-6" />
+          <SApiTable title="Events" type="events" :events="colorPickerEvents" class="mt-6" />
+        </div>
 
-    <!-- Subcomponents Reference -->
-    <section>
-      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Subcomponents</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerSpectrum</code>
-          <p class="text-sm text-(--s-text-secondary) mt-1">2D saturation/brightness picker area.</p>
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-2">SColorPickerSpectrum</h3>
+          <p class="text-sm text-(--s-text-secondary)">2D saturation/brightness surface used in compound layouts.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerHueSlider</code>
-          <p class="text-sm text-(--s-text-secondary) mt-1">Horizontal hue selection slider (0-360).</p>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-2">SColorPickerHueSlider</h3>
+          <p class="text-sm text-(--s-text-secondary)">Horizontal hue slider for shifting the current color across the 0–360 range.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerAlphaSlider</code>
-          <p class="text-sm text-(--s-text-secondary) mt-1">Horizontal alpha/opacity slider (0-1).</p>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-2">SColorPickerAlphaSlider</h3>
+          <p class="text-sm text-(--s-text-secondary)">Optional alpha/opacity slider used when transparent colors are enabled.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerPreview</code>
-          <p class="text-sm text-(--s-text-secondary) mt-1">Color preview swatch with checkerboard for transparency.</p>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-2">SColorPickerPreview</h3>
+          <p class="text-sm text-(--s-text-secondary)">Preview swatch showing the current color, including checkerboard transparency feedback.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerEyeDropper</code>
-          <p class="text-sm text-(--s-text-secondary) mt-1">Browser EyeDropper API button (auto-hides if unsupported).</p>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4">SColorPickerEyeDropper</h3>
+          <p class="text-sm text-(--s-text-secondary) mb-4">Browser EyeDropper API trigger that automatically hides itself when the platform does not support eyedropper access.</p>
+          <SApiTable title="Slots" type="slots" :slots="eyeDropperSlots" />
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerCopy</code>
-          <p class="text-sm text-(--s-text-secondary) mt-1">Copy-to-clipboard button with check animation.</p>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4">SColorPickerCopy</h3>
+          <p class="text-sm text-(--s-text-secondary) mb-4">Copy-to-clipboard action button with a temporary copied state for custom feedback.</p>
+          <SApiTable title="Slots" type="slots" :slots="copySlots" />
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerInputs</code>
-          <p class="text-sm text-(--s-text-secondary) mt-1">HEX/RGB/HSL input fields with format toggle button.</p>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-2">SColorPickerInputs</h3>
+          <p class="text-sm text-(--s-text-secondary)">HEX/RGB/HSL inputs with a built-in format toggle for direct value entry.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerPresets</code>
-          <p class="text-sm text-(--s-text-secondary) mt-1">Grid of preset color swatches. Props: <code>presets</code>, <code>label</code>.</p>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4">SColorPickerPresets</h3>
+          <p class="text-sm text-(--s-text-secondary) mb-4">Preset swatch grid for offering a curated color palette alongside the picker.</p>
+          <SApiTable title="Props" type="props" :props="presetsProps" />
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
-          <code class="text-sm font-semibold text-(--s-text-primary)">SColorPickerRecent</code>
-          <p class="text-sm text-(--s-text-secondary) mt-1">Recently used colors (persisted to localStorage). Props: <code>label</code>.</p>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4">SColorPickerRecent</h3>
+          <p class="text-sm text-(--s-text-secondary) mb-4">Recently used color list backed by the picker’s local history storage.</p>
+          <SApiTable title="Props" type="props" :props="recentProps" />
         </div>
       </div>
-    </section>
+    </SApiSection>
   </div>
 </template>
 

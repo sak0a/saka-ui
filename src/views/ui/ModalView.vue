@@ -254,19 +254,45 @@ const modalSlots: ApiSlot[] = [
   { name: 'footer', description: 'Footer content' }
 ]
 
+const triggerProps: ApiProp[] = [
+  { name: 'as', type: 'string', default: "'button'", description: 'HTML element or component used for the trigger' },
+  { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable trigger interaction' },
+  { name: 'triggerClass', type: 'string', default: "''", description: 'Additional CSS class for the trigger wrapper' }
+]
+
+const triggerEvents: ApiEvent[] = [
+  { name: 'click', payload: 'MouseEvent', description: 'Emitted when the trigger opens the modal' }
+]
+
+const triggerSlots: ApiSlot[] = [
+  { name: 'default', description: 'Trigger content that opens the modal' }
+]
+
 const headerProps: ApiProp[] = [
   { name: 'title', type: 'string', default: 'undefined', description: 'Header title' },
   { name: 'description', type: 'string', default: 'undefined', description: 'Description text' },
   { name: 'closable', type: 'boolean', default: 'true', description: 'Show close button' },
   { name: 'divider', type: 'boolean', default: 'true', description: 'Show bottom divider' },
-  { name: 'padding', type: "'none' | 'sm' | 'md' | 'lg'", default: "'md'", description: 'Padding size' }
+  { name: 'padding', type: "'none' | 'sm' | 'md' | 'lg'", default: "'md'", description: 'Padding size' },
+  { name: 'headerClass', type: 'string', default: "''", description: 'Additional CSS class for the header container' }
+]
+
+const headerSlots: ApiSlot[] = [
+  { name: 'title', description: 'Custom title content rendered before the description' },
+  { name: 'description', description: 'Custom description content under the title' },
+  { name: 'extra', description: 'Additional content shown before the close button' }
 ]
 
 const contentProps: ApiProp[] = [
   { name: 'padding', type: "'none' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Padding size' },
   { name: 'centered', type: 'boolean', default: 'false', description: 'Center content' },
   { name: 'scrollable', type: 'boolean', default: 'true', description: 'Enable scrolling' },
-  { name: 'maxHeight', type: 'string', default: 'undefined', description: 'Max height for scroll' }
+  { name: 'maxHeight', type: 'string', default: 'undefined', description: 'Max height for scroll' },
+  { name: 'contentClass', type: 'string', default: "''", description: 'Additional CSS class for the content container' }
+]
+
+const contentSlots: ApiSlot[] = [
+  { name: 'default', description: 'Main modal body content' }
 ]
 
 const footerProps: ApiProp[] = [
@@ -274,7 +300,12 @@ const footerProps: ApiProp[] = [
   { name: 'divider', type: 'boolean', default: 'true', description: 'Show top divider' },
   { name: 'padding', type: "'none' | 'sm' | 'md' | 'lg'", default: "'md'", description: 'Padding size' },
   { name: 'gap', type: "'none' | 'sm' | 'md' | 'lg'", default: "'md'", description: 'Gap between items' },
-  { name: 'stackOnMobile', type: 'boolean', default: 'false', description: 'Stack buttons on mobile' }
+  { name: 'stackOnMobile', type: 'boolean', default: 'false', description: 'Stack buttons on mobile' },
+  { name: 'footerClass', type: 'string', default: "''", description: 'Additional CSS class for the footer container' }
+]
+
+const footerSlots: ApiSlot[] = [
+  { name: 'default', description: 'Footer actions or summary content' }
 ]
 
 const titleProps: ApiProp[] = [
@@ -282,14 +313,26 @@ const titleProps: ApiProp[] = [
   { name: 'titleClass', type: 'string', default: "''", description: 'Additional CSS class' }
 ]
 
+const titleSlots: ApiSlot[] = [
+  { name: 'default', description: 'Modal title content' }
+]
+
 const descriptionProps: ApiProp[] = [
   { name: 'as', type: "'p' | 'span' | 'div'", default: "'p'", description: 'HTML tag to use' },
   { name: 'descriptionClass', type: 'string', default: "''", description: 'Additional CSS class' }
 ]
 
+const descriptionSlots: ApiSlot[] = [
+  { name: 'default', description: 'Modal description content' }
+]
+
 const closeProps: ApiProp[] = [
   { name: 'closeClass', type: 'string', default: "''", description: 'Additional CSS class' },
   { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the close button' }
+]
+
+const closeSlots: ApiSlot[] = [
+  { name: 'default', description: 'Custom close icon or label content' }
 ]
 
 const keyboardShortcuts: KeyboardShortcut[] = [
@@ -937,61 +980,89 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     <!-- API Reference -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
-      <SApiTable
-        title="SModal Props"
-        type="props"
-        :props="modalProps"
-      />
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-window-maximize text-(--s-primary)" />
+            SModal
+          </h3>
+          <SApiTable title="Props" type="props" :props="modalProps" />
+          <SApiTable title="Events" type="events" :events="modalEvents" class="mt-6" />
+          <SApiTable title="Slots" type="slots" :slots="modalSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="Events"
-        type="events"
-        :events="modalEvents"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-page-layout-header text-(--s-primary)" />
+            SModalHeader
+          </h3>
+          <SApiTable title="Props" type="props" :props="headerProps" />
+          <SApiTable title="Slots" type="slots" :slots="headerSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="Slots"
-        type="slots"
-        :slots="modalSlots"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-text-box-outline text-(--s-primary)" />
+            SModalContent
+          </h3>
+          <SApiTable title="Props" type="props" :props="contentProps" />
+          <SApiTable title="Slots" type="slots" :slots="contentSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SModalHeader Props"
-        type="props"
-        :props="headerProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-dock-bottom text-(--s-primary)" />
+            SModalFooter
+          </h3>
+          <SApiTable title="Props" type="props" :props="footerProps" />
+          <SApiTable title="Slots" type="slots" :slots="footerSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SModalContent Props"
-        type="props"
-        :props="contentProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-cursor-default-click-outline text-(--s-primary)" />
+            SModalTrigger
+          </h3>
+          <SApiTable title="Props" type="props" :props="triggerProps" />
+          <SApiTable title="Events" type="events" :events="triggerEvents" class="mt-6" />
+          <SApiTable title="Slots" type="slots" :slots="triggerSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SModalFooter Props"
-        type="props"
-        :props="footerProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-format-title text-(--s-primary)" />
+            SModalTitle
+          </h3>
+          <SApiTable title="Props" type="props" :props="titleProps" />
+          <SApiTable title="Slots" type="slots" :slots="titleSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SModalTitle Props"
-        type="props"
-        :props="titleProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-text text-(--s-primary)" />
+            SModalDescription
+          </h3>
+          <SApiTable title="Props" type="props" :props="descriptionProps" />
+          <SApiTable title="Slots" type="slots" :slots="descriptionSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SModalDescription Props"
-        type="props"
-        :props="descriptionProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-close-circle-outline text-(--s-primary)" />
+            SModalClose
+          </h3>
+          <SApiTable title="Props" type="props" :props="closeProps" />
+          <SApiTable title="Slots" type="slots" :slots="closeSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SModalClose Props"
-        type="props"
-        :props="closeProps"
-      />
-
-      <SApiKeyboard :shortcuts="keyboardShortcuts" />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-keyboard-outline text-(--s-primary)" />
+            Keyboard Navigation
+          </h3>
+          <SApiKeyboard :shortcuts="keyboardShortcuts" />
+        </div>
+      </div>
     </SApiSection>
   </div>
 </template>

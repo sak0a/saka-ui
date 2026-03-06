@@ -336,10 +336,168 @@ const tableSlots: ApiSlot[] = [
   { name: 'footer', description: 'Table footer content', props: '{ table }' }
 ]
 
+const headerProps: ApiProp[] = [
+  { name: 'headerClass', type: 'string', default: "''", description: 'Additional CSS class for the generated <thead> element' }
+]
+
+const headerSlots: ApiSlot[] = [
+  { name: 'default', description: 'Override the full header row markup', props: '-' },
+  { name: 'header-{columnKey}', description: 'Customize a generated header cell for a specific column. For headless column definitions with explicit sort state, use the `header` slot on `STableColumn`.', props: '{ column }' }
+]
+
+const bodyProps: ApiProp[] = [
+  { name: 'animate', type: 'boolean', default: 'inherits animateRows', description: 'Override row transition animations for this tbody' },
+  { name: 'bodyClass', type: 'string', default: "''", description: 'Additional CSS class for the <tbody> element' }
+]
+
+const bodySlots: ApiSlot[] = [
+  { name: 'default', description: 'Row content rendered inside the table body' }
+]
+
+const rowProps: ApiProp[] = [
+  { name: 'rowKey', type: 'string | number', default: 'undefined', description: 'Unique key used for selection and expansion state' },
+  { name: 'hoverable', type: 'boolean', default: 'inherits table hoverable', description: 'Override hover styling for this row' },
+  { name: 'rowClass', type: 'string', default: "''", description: 'Additional CSS class for the <tr> element' },
+  { name: 'index', type: 'number', default: '0', description: 'Zero-based row index used for striped styles' }
+]
+
+const rowEvents: ApiEvent[] = [
+  { name: 'click', payload: 'MouseEvent', description: 'Emitted when the row is clicked' },
+  { name: 'dblclick', payload: 'MouseEvent', description: 'Emitted when the row is double-clicked' }
+]
+
+const rowSlots: ApiSlot[] = [
+  { name: 'default', description: 'Cells rendered inside the row' }
+]
+
+const cellProps: ApiProp[] = [
+  { name: 'align', type: "'left' | 'center' | 'right'", default: "'left'", description: 'Horizontal alignment for the cell content' },
+  { name: 'cellClass', type: 'string', default: "''", description: 'Additional CSS class for the rendered cell' },
+  { name: 'columnKey', type: 'string', default: 'undefined', description: 'Column key used to inherit table column settings' },
+  { name: 'header', type: 'boolean', default: 'false', description: 'Render a <th> instead of a <td>' },
+  { name: 'colspan', type: 'number', default: 'undefined', description: 'HTML colspan value' },
+  { name: 'rowspan', type: 'number', default: 'undefined', description: 'HTML rowspan value' },
+  { name: 'width', type: 'string', default: 'undefined', description: 'Explicit width for the cell' },
+  { name: 'minWidth', type: 'string', default: 'undefined', description: 'Minimum width for the cell' },
+  { name: 'maxWidth', type: 'string', default: 'undefined', description: 'Maximum width for the cell' },
+  { name: 'sticky', type: "'left' | 'right'", default: 'undefined', description: 'Stick the cell to one table edge' },
+  { name: 'truncate', type: 'boolean', default: 'false', description: 'Apply single-line truncation styles' }
+]
+
+const cellSlots: ApiSlot[] = [
+  { name: 'default', description: 'Cell content' }
+]
+
+const tableColumnProps: ApiProp[] = [
+  { name: 'columnKey', type: 'string', default: '-', required: true, description: 'Unique column key used by the table context' },
+  { name: 'label', type: 'string', default: 'undefined', description: 'Display label for the generated header cell' },
+  { name: 'accessor', type: 'string', default: 'undefined', description: 'Property name used to read the cell value from each row' },
+  { name: 'width', type: 'string', default: 'undefined', description: 'Preferred width for the column' },
+  { name: 'minWidth', type: 'string', default: 'undefined', description: 'Minimum width for the column' },
+  { name: 'maxWidth', type: 'string', default: 'undefined', description: 'Maximum width for the column' },
+  { name: 'align', type: "'left' | 'center' | 'right'", default: "'left'", description: 'Alignment applied to header and data cells' },
+  { name: 'sortable', type: 'boolean', default: 'false', description: 'Enable sorting from the generated header cell' },
+  { name: 'visible', type: 'boolean', default: 'true', description: 'Whether the column is included in visibleColumns' },
+  { name: 'sticky', type: "'left' | 'right'", default: 'undefined', description: 'Sticky positioning for the column' },
+  { name: 'headerClass', type: 'string', default: "''", description: 'Additional CSS class for generated header cells' },
+  { name: 'cellClass', type: 'string', default: "''", description: 'Additional CSS class for generated data cells' },
+  { name: 'priority', type: 'number', default: '0', description: 'Responsive priority for future column-hiding logic' }
+]
+
+const columnSlots: ApiSlot[] = [
+  { name: 'header', description: 'Custom header cell content for this column definition', props: '{ column, sortState }' },
+  { name: 'default', description: 'Custom cell renderer for this column', props: '{ row, value, index }' }
+]
+
+const skeletonProps: ApiProp[] = [
+  { name: 'rows', type: 'number', default: '5', description: 'Number of skeleton rows to render' },
+  { name: 'columns', type: 'number', default: 'context visible column count', description: 'Explicit number of skeleton columns' },
+  { name: 'showSelection', type: 'boolean', default: 'false', description: 'Reserve a selection checkbox column' },
+  { name: 'showActions', type: 'boolean', default: 'false', description: 'Reserve a row actions column' },
+  { name: 'skeletonClass', type: 'string', default: "''", description: 'Additional CSS class for each skeleton row' },
+  { name: 'animation', type: "'shimmer' | 'pulse' | 'none'", default: "'shimmer'", description: 'Loading animation style' },
+  { name: 'progressive', type: 'boolean', default: 'false', description: 'Reveal skeleton rows progressively' },
+  { name: 'progressiveDelay', type: 'number', default: '100', description: 'Delay between progressive rows in milliseconds' }
+]
+
+const emptyProps: ApiProp[] = [
+  { name: 'icon', type: 'string', default: "'mdi-table-off'", description: 'MDI icon class for the empty state' },
+  { name: 'title', type: 'string', default: "'No data available'", description: 'Primary empty-state title' },
+  { name: 'description', type: 'string', default: "''", description: 'Secondary explanatory text' },
+  { name: 'variant', type: "'default' | 'minimal' | 'illustrated'", default: "'default'", description: 'Visual treatment for the empty state' },
+  { name: 'iconSize', type: "'sm' | 'md' | 'lg' | 'xl'", default: "'lg'", description: 'Icon size preset' },
+  { name: 'colspan', type: 'number', default: '1', description: 'Number of columns the empty row should span' }
+]
+
+const emptySlots: ApiSlot[] = [
+  { name: 'icon', description: 'Custom empty-state icon' },
+  { name: 'title', description: 'Custom empty-state title' },
+  { name: 'description', description: 'Custom empty-state description' },
+  { name: 'action', description: 'Action button or CTA rendered below the message' }
+]
+
+const useDataTableOptions: ApiProp[] = [
+  { name: 'data', type: 'T[] | Ref<T[]>', default: '[]', description: 'Initial table rows' },
+  { name: 'columns', type: 'TableColumn<T>[] | Ref<TableColumn<T>[]>', default: '[]', description: 'Reactive column definitions' },
+  { name: 'rowKey', type: 'keyof T | ((row, index) => string | number)', default: 'undefined', description: 'Unique key accessor for each row' },
+  { name: 'initialSort', type: 'SortState', default: 'undefined', description: 'Initial sorting state' },
+  { name: 'pagination', type: 'boolean | Partial<PaginationState>', default: 'false', description: 'Enable pagination or configure its initial state' },
+  { name: 'selection', type: 'boolean', default: 'false', description: 'Enable row selection helpers' },
+  { name: 'multiSelect', type: 'boolean', default: 'false', description: 'Allow selecting multiple rows at once' },
+  { name: 'expandable', type: 'boolean', default: 'false', description: 'Enable row expansion helpers' },
+  { name: 'loader', type: '(params) => Promise<DataLoaderResult<T>>', default: 'undefined', description: 'Async loader for remote data sources' },
+  { name: 'debounce', type: 'number', default: '0', description: 'Debounce delay for async loader refreshes' }
+]
+
+const useDataTableReturn: ApiProp[] = [
+  { name: 'data', type: 'Ref<T[]>', default: '-', description: 'Reactive raw table rows before sorting and pagination' },
+  { name: 'processedData', type: 'ComputedRef<T[]>', default: '-', description: 'Sorted and filtered rows before pagination' },
+  { name: 'paginatedData', type: 'ComputedRef<T[]>', default: '-', description: 'Rows for the active page' },
+  { name: 'columns', type: 'Ref<TableColumn<T>[]>', default: '-', description: 'Reactive column definitions registered with the table' },
+  { name: 'visibleColumns', type: 'ComputedRef<TableColumn<T>[]>', default: '-', description: 'Columns that are currently visible' },
+  { name: 'sortState', type: 'Ref<SortState>', default: '-', description: 'Reactive sort state' },
+  { name: 'toggleSort', type: '(columnKey: string) => void', default: '-', description: 'Cycle the sort direction for a column' },
+  { name: 'setSort', type: '(columnKey: string, direction: SortDirection) => void', default: '-', description: 'Explicitly set the sort column and direction' },
+  { name: 'clearSort', type: '() => void', default: '-', description: 'Reset sorting back to the unsorted state' },
+  { name: 'selectedKeys', type: 'Ref<Set<string | number>>', default: '-', description: 'Currently selected row keys' },
+  { name: 'selectedRows', type: 'ComputedRef<T[]>', default: '-', description: 'Selected row objects' },
+  { name: 'toggleRowSelection', type: '(key: string | number) => void', default: '-', description: 'Toggle selection for a single row key' },
+  { name: 'selectRow', type: '(key: string | number) => void', default: '-', description: 'Select a single row key' },
+  { name: 'deselectRow', type: '(key: string | number) => void', default: '-', description: 'Clear selection for a single row key' },
+  { name: 'selectAll', type: '() => void', default: '-', description: 'Select every currently processed row' },
+  { name: 'deselectAll', type: '() => void', default: '-', description: 'Clear all selected row keys' },
+  { name: 'toggleAllSelection', type: '() => void', default: '-', description: 'Toggle between select-all and deselect-all' },
+  { name: 'isRowSelected', type: '(key: string | number) => boolean', default: '-', description: 'Check whether a row key is selected' },
+  { name: 'isAllSelected', type: 'ComputedRef<boolean>', default: '-', description: 'Whether all processed rows are selected' },
+  { name: 'isSomeSelected', type: 'ComputedRef<boolean>', default: '-', description: 'Whether some, but not all, processed rows are selected' },
+  { name: 'expandedKeys', type: 'Ref<Set<string | number>>', default: '-', description: 'Currently expanded row keys' },
+  { name: 'toggleRowExpansion', type: '(key: string | number) => void', default: '-', description: 'Toggle expansion for a single row key' },
+  { name: 'expandRow', type: '(key: string | number) => void', default: '-', description: 'Expand a single row key' },
+  { name: 'collapseRow', type: '(key: string | number) => void', default: '-', description: 'Collapse a single row key' },
+  { name: 'expandAll', type: '() => void', default: '-', description: 'Expand every currently processed row' },
+  { name: 'collapseAll', type: '() => void', default: '-', description: 'Collapse all expanded row keys' },
+  { name: 'isRowExpanded', type: '(key: string | number) => boolean', default: '-', description: 'Check whether a row key is expanded' },
+  { name: 'pagination', type: 'Ref<PaginationState>', default: '-', description: 'Current pagination state' },
+  { name: 'totalPages', type: 'ComputedRef<number>', default: '-', description: 'Derived page count' },
+  { name: 'goToPage', type: '(page: number) => void', default: '-', description: 'Jump to a specific page number' },
+  { name: 'nextPage', type: '() => void', default: '-', description: 'Advance to the next page when available' },
+  { name: 'prevPage', type: '() => void', default: '-', description: 'Go back to the previous page when available' },
+  { name: 'setPageSize', type: '(size: number) => void', default: '-', description: 'Update the active page size' },
+  { name: 'showColumn', type: '(key: string) => void', default: '-', description: 'Mark a column as visible' },
+  { name: 'hideColumn', type: '(key: string) => void', default: '-', description: 'Hide a column from visibleColumns' },
+  { name: 'toggleColumn', type: '(key: string) => void', default: '-', description: 'Toggle visibility for a column key' },
+  { name: 'setColumnVisibility', type: '(key: string, visible: boolean) => void', default: '-', description: 'Set an explicit visibility state for a column' },
+  { name: 'loading', type: 'Ref<boolean>', default: '-', description: 'Async loading state' },
+  { name: 'error', type: 'Ref<Error | null>', default: '-', description: 'Last async loader error' },
+  { name: 'getRowKey', type: '(row: T, index: number) => string | number', default: '-', description: 'Resolve the stable key used for row operations' },
+  { name: 'refresh', type: '() => Promise<void>', default: '-', description: 'Re-run the async loader when configured' },
+  { name: 'setData', type: '(newData: T[]) => void', default: '-', description: 'Replace the raw data source' }
+]
+
 const keyboardShortcuts: KeyboardShortcut[] = [
-  { keys: ['Tab'], description: 'Navigate between sortable columns' },
-  { keys: ['Enter', 'Space'], description: 'Toggle sort on focused column header' },
-  { keys: ['↑', '↓'], description: 'Navigate rows (when row focus enabled)' }
+  { keys: ['Tab'], action: 'Navigate between sortable column headers' },
+  { keys: ['Enter', 'Space'], action: 'Toggle sort on the focused column header' },
+  { keys: ['↑', '↓'], action: 'Move between rows when custom row focus management is enabled' }
 ]
 
 // Helper for status colors - returns actual color values
@@ -659,39 +817,101 @@ const formatSalary = (value: number) => {
     <!-- API Documentation -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
-      <!-- SDataTable Props -->
-      <SApiTable
-        title="SDataTable Props"
-        type="props"
-        :props="tableProps"
-      />
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-table text-(--s-primary)" />
+            SDataTable
+          </h3>
+          <SApiTable title="Props" type="props" :props="tableProps" />
+          <SApiTable title="Events" type="events" :events="tableEvents" class="mt-6" />
+          <SApiTable title="Slots" type="slots" :slots="tableSlots" class="mt-6" />
+        </div>
 
-      <!-- Column Definition -->
-      <SApiTable
-        title="TableColumn Definition"
-        type="props"
-        :props="columnProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-table-row text-(--s-primary)" />
+            STableHeader
+          </h3>
+          <SApiTable title="Props" type="props" :props="headerProps" />
+          <SApiTable title="Slots" type="slots" :slots="headerSlots" class="mt-6" />
+        </div>
 
-      <!-- Events -->
-      <SApiTable
-        title="Events"
-        type="events"
-        :events="tableEvents"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-table-row-group text-(--s-primary)" />
+            STableBody
+          </h3>
+          <SApiTable title="Props" type="props" :props="bodyProps" />
+          <SApiTable title="Slots" type="slots" :slots="bodySlots" class="mt-6" />
+        </div>
 
-      <!-- Slots -->
-      <SApiTable
-        title="Slots"
-        type="slots"
-        :slots="tableSlots"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-table-row-plus-after text-(--s-primary)" />
+            STableRow
+          </h3>
+          <SApiTable title="Props" type="props" :props="rowProps" />
+          <SApiTable title="Events" type="events" :events="rowEvents" class="mt-6" />
+          <SApiTable title="Slots" type="slots" :slots="rowSlots" class="mt-6" />
+        </div>
 
-      <!-- Keyboard -->
-      <SApiKeyboard
-        :shortcuts="keyboardShortcuts"
-        variant="table"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-table-column text-(--s-primary)" />
+            STableCell
+          </h3>
+          <SApiTable title="Props" type="props" :props="cellProps" />
+          <SApiTable title="Slots" type="slots" :slots="cellSlots" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-view-column-outline text-(--s-primary)" />
+            STableColumn
+          </h3>
+          <SApiTable title="Props" type="props" :props="tableColumnProps" />
+          <SApiTable title="Slots" type="slots" :slots="columnSlots" class="mt-6" />
+          <SApiTable title="TableColumn&lt;T&gt; Interface" type="props" :props="columnProps" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-loading text-(--s-primary)" />
+            STableSkeleton
+          </h3>
+          <SApiTable title="Props" type="props" :props="skeletonProps" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-table-off text-(--s-primary)" />
+            STableEmpty
+          </h3>
+          <SApiTable title="Props" type="props" :props="emptyProps" />
+          <SApiTable title="Slots" type="slots" :slots="emptySlots" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-function-variant text-(--s-primary)" />
+            useDataTable
+          </h3>
+          <SApiTable title="Options" type="props" :props="useDataTableOptions" />
+          <SApiTable title="Return Value" type="props" :props="useDataTableReturn" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-keyboard-outline text-(--s-primary)" />
+            Keyboard Navigation
+          </h3>
+          <SApiKeyboard
+            :shortcuts="keyboardShortcuts"
+            variant="table"
+          />
+        </div>
+      </div>
     </SApiSection>
 
     <!-- Accessibility Notes -->
