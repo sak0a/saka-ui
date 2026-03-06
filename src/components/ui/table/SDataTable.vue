@@ -7,15 +7,16 @@
  */
 import { provide, computed, toRef, watch, ref } from 'vue'
 import { cn } from '~/lib/utils'
-import { 
-  SDataTableContextKey, 
-  type TableColumn, 
-  type TableVariant, 
+import {
+  SDataTableContextKey,
+  type TableColumn,
+  type TableVariant,
   type TableSize,
   type SelectionMode,
   type SortState
 } from './index'
 import { useDataTable } from './useDataTable'
+import { SPagination } from '../pagination'
 
 defineOptions({ inheritAttrs: false })
 
@@ -530,78 +531,32 @@ defineExpose({
     </div>
     
     <!-- Pagination slot -->
-    <slot 
-      name="pagination" 
+    <slot
+      name="pagination"
       :table="table"
       :page="table.pagination.value.page"
       :page-size="table.pagination.value.pageSize"
-      :total="table.pagination.value.total"
+      :total="table.pagination.value.total || table.processedData.value.length"
       :total-pages="table.totalPages.value"
       :go-to-page="table.goToPage"
       :next-page="table.nextPage"
       :prev-page="table.prevPage"
       :set-page-size="(size: number) => { table.setPageSize(size); emit('page-size-change', size) }"
     >
-      <div 
+      <SPagination
         v-if="pagination && !loading && table.paginatedData.value.length > 0"
-        class="s-table-pagination flex items-center justify-between px-4 py-3 border-t border-border"
-      >
-        <div class="flex items-center gap-2 text-sm text-muted-foreground">
-          <span>Rows per page:</span>
-          <select 
-            :value="table.pagination.value.pageSize"
-            class="s-table-page-select bg-muted border border-border rounded px-2 py-1 text-sm"
-            @change="(e) => { table.setPageSize(Number((e.target as HTMLSelectElement).value)); emit('page-size-change', Number((e.target as HTMLSelectElement).value)) }"
-          >
-            <option v-for="size in pageSizeOptions" :key="size" :value="size">{{ size }}</option>
-          </select>
-        </div>
-        
-        <div class="flex items-center gap-1 text-sm text-muted-foreground">
-          <span>
-            {{ ((table.pagination.value.page - 1) * table.pagination.value.pageSize) + 1 }}
-            -
-            {{ Math.min(table.pagination.value.page * table.pagination.value.pageSize, table.pagination.value.total || table.processedData.value.length) }}
-            of
-            {{ table.pagination.value.total || table.processedData.value.length }}
-          </span>
-        </div>
-        
-        <div class="flex items-center gap-1">
-          <button
-            class="s-table-page-btn p-1.5 rounded hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-            :disabled="table.pagination.value.page === 1"
-            @click="table.goToPage(1)"
-            aria-label="First page"
-          >
-            <span class="mdi mdi-chevron-double-left" />
-          </button>
-          <button
-            class="s-table-page-btn p-1.5 rounded hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-            :disabled="table.pagination.value.page === 1"
-            @click="table.prevPage()"
-            aria-label="Previous page"
-          >
-            <span class="mdi mdi-chevron-left" />
-          </button>
-          <button
-            class="s-table-page-btn p-1.5 rounded hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-            :disabled="table.pagination.value.page >= table.totalPages.value"
-            @click="table.nextPage()"
-            aria-label="Next page"
-          >
-            <span class="mdi mdi-chevron-right" />
-          </button>
-          <button
-            class="s-table-page-btn p-1.5 rounded hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-            :disabled="table.pagination.value.page >= table.totalPages.value"
-            @click="table.goToPage(table.totalPages.value)"
-            aria-label="Last page"
-          >
-            <span class="mdi mdi-chevron-double-right" />
-          </button>
-        </div>
-      </div>
+        :model-value="table.pagination.value.page"
+        :total="table.pagination.value.total || table.processedData.value.length"
+        :page-size="table.pagination.value.pageSize"
+        :page-size-options="pageSizeOptions"
+        show-total
+        show-page-size
+        show-first-last
+        size="sm"
+        class="px-4 py-3 border-t border-border justify-between"
+        @update:model-value="(page: number) => { table.goToPage(page); emit('page-change', page) }"
+        @update:page-size="(size: number) => { table.setPageSize(size); emit('page-size-change', size) }"
+      />
     </slot>
     
     <!-- Loading overlay -->
@@ -857,14 +812,6 @@ const prefersReducedMotion = typeof window !== 'undefined'
   border-radius: 3px;
 }
 
-/* ===== Page Select ===== */
-.s-table-page-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%236b7280' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.5rem center;
-  padding-right: 1.5rem;
-}
 
 /* ===== Screen Reader Only ===== */
 .sr-only {
