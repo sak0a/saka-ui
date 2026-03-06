@@ -6,11 +6,11 @@ import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     vue(),
     tailwindcss(),
-    dts({
+    mode !== 'ci-bundle' && dts({
       insertTypesEntry: true,
       cleanVueFileName: true,
       rollupTypes: false,
@@ -37,4 +37,4 @@ export default defineConfig({
       },
     },
   },
-})
+}))
