@@ -4,7 +4,17 @@
   "description": "Color picker with palette, spectrum, input modes, and opacity support",
   "version": "0.1.0",
   "files": [
-    "components/ui/SColorPicker.vue"
+    "components/ui/color-picker/index.ts",
+    "components/ui/color-picker/SColorPicker.vue",
+    "components/ui/color-picker/SColorPickerAlphaSlider.vue",
+    "components/ui/color-picker/SColorPickerCopy.vue",
+    "components/ui/color-picker/SColorPickerEyeDropper.vue",
+    "components/ui/color-picker/SColorPickerHueSlider.vue",
+    "components/ui/color-picker/SColorPickerInputs.vue",
+    "components/ui/color-picker/SColorPickerPresets.vue",
+    "components/ui/color-picker/SColorPickerPreview.vue",
+    "components/ui/color-picker/SColorPickerRecent.vue",
+    "components/ui/color-picker/SColorPickerSpectrum.vue"
   ],
   "dependencies": [],
   "composables": [],

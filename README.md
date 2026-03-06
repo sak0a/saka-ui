@@ -77,17 +77,20 @@ Before pushing, run the same install/build/smoke steps that CI executes:
 # 1. Install dependencies with a frozen lockfile
 bun install --frozen-lockfile
 
-# 2. Build the component library
-bun run build:lib
+# 2. Build the component library bundle
+bun run build:lib:bundle
 
-# 3. Build the CLI tool
+# 3. Build registry source artifacts
+bun run build:registry
+
+# 4. Build the CLI tool
 bun run build:cli
 
-# 4. Run the CLI smoke test
+# 5. Run the CLI smoke test
 bun run test:smoke
 ```
 
-All four steps must pass locally for CI to be green.
+All five steps must pass locally for CI to be green.
 
 ### Available Scripts
 
@@ -95,7 +98,8 @@ All four steps must pass locally for CI to be green.
 | --- | --- |
 | bun run dev | Start the Vite dev server |
 | bun run build | Full production build (type-check → library → registry) |
-| bun run build:lib | Build the component library only |
+| bun run build:lib | Build the component library with declaration generation |
+| bun run build:lib:bundle | Build the component library bundle only (clean CI check) |
 | bun run build:cli | Build the CLI tool (via tsup) |
 | bun run build:registry | Build the component registry |
 | bun run build:all | Build library + registry + CLI |
@@ -107,11 +111,12 @@ All four steps must pass locally for CI to be green.
 A GitHub Actions workflow (`.github/workflows/ci.yml`) runs on every push and pull request to `main`. It performs:
 
 1. **Install** — `bun install --frozen-lockfile`
-2. **Build library** — `bun run build:lib`
-3. **Build CLI** — `bun run build:cli`
-4. **CLI smoke test** — `bun run test:smoke`
+2. **Build library bundle** — `bun run build:lib:bundle`
+3. **Build registry sources** — `bun run build:registry`
+4. **Build CLI** — `bun run build:cli`
+5. **CLI smoke test** — `bun run test:smoke`
 
-CI uses the latest Bun version on Ubuntu. The frozen lockfile flag ensures reproducible installs.
+CI uses the latest Bun version on Ubuntu. The frozen lockfile flag ensures reproducible installs. The workflow intentionally gates on checks that fail loudly today: the bundle-only library build, registry source generation, CLI build, and CLI smoke path.
 
 ## 🛠️ Tech Stack
 
@@ -131,7 +136,7 @@ CI uses the latest Bun version on Ubuntu. The frozen lockfile flag ensures repro
 - [x] Reusable API reference components
 - [x] Vite Library Mode configured
 - [x] TypeScript declaration generation
-- [x] GitHub Actions CI (build + smoke test)
+- [x] GitHub Actions CI (bundle + registry + CLI smoke)
 - [ ] Unit tests
 - [ ] Storybook integration
 - [ ] npm package publishing

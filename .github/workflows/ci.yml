@@ -20,8 +20,11 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Build library
-        run: bun run build:lib
+      - name: Build library bundle
+        run: bun run build:lib:bundle
+
+      - name: Build registry sources
+        run: bun run build:registry
 
       - name: Build CLI
         run: bun run build:cli
