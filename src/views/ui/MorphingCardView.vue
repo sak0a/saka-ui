@@ -14,7 +14,7 @@ import {
   SApiTable,
   SApiKeyboard
 } from '../../index'
-import type { ApiProp, ApiEvent, KeyboardShortcut } from '../../index'
+import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 
 // Demo images
 const demoImages = [
@@ -115,15 +115,28 @@ const cardEvents: ApiEvent[] = [
   { name: 'closed', payload: 'void', description: 'Emitted after close animation completes' }
 ]
 
+const cardSlots: ApiSlot[] = [
+  { name: 'trigger', description: 'Preview content shown before the card expands' },
+  { name: 'content', description: 'Expanded card content rendered in the overlay' }
+]
+
 const triggerProps: ApiProp[] = [
   { name: 'triggerClass', type: 'string', default: "''", description: 'Additional CSS class' },
   { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the trigger' },
   { name: 'cursor', type: "'pointer' | 'zoom-in' | 'default'", default: "'pointer'", description: 'Cursor style on hover' }
 ]
 
+const triggerSlots: ApiSlot[] = [
+  { name: 'default', description: 'Trigger card preview content' }
+]
+
 const contentProps: ApiProp[] = [
   { name: 'padding', type: "'none' | 'sm' | 'md' | 'lg'", default: "'md'", description: 'Padding size' },
   { name: 'contentClass', type: 'string', default: "''", description: 'Additional CSS class' }
+]
+
+const contentSlots: ApiSlot[] = [
+  { name: 'default', description: 'Expanded content rendered once the card is open' }
 ]
 
 const imageProps: ApiProp[] = [
@@ -134,10 +147,32 @@ const imageProps: ApiProp[] = [
   { name: 'loading', type: "'lazy' | 'eager'", default: "'lazy'", description: 'Image loading strategy' }
 ]
 
+const titleProps: ApiProp[] = [
+  { name: 'as', type: "'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div'", default: "'h2'", description: 'HTML tag to render for the title' },
+  { name: 'titleClass', type: 'string', default: "''", description: 'Additional CSS class for the title element' }
+]
+
+const titleSlots: ApiSlot[] = [
+  { name: 'default', description: 'Title content for the trigger or expanded card' }
+]
+
+const descriptionProps: ApiProp[] = [
+  { name: 'descriptionClass', type: 'string', default: "''", description: 'Additional CSS class for the description element' },
+  { name: 'alwaysShow', type: 'boolean', default: 'false', description: 'Show the description even when the card is collapsed' }
+]
+
+const descriptionSlots: ApiSlot[] = [
+  { name: 'default', description: 'Description content shown in the expanded card (or always when configured)' }
+]
+
 const closeProps: ApiProp[] = [
   { name: 'closeClass', type: 'string', default: "''", description: 'Additional CSS class' },
   { name: 'position', type: "'top-right' | 'top-left' | 'inline'", default: "'top-right'", description: 'Button position' },
   { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Button size' }
+]
+
+const closeSlots: ApiSlot[] = [
+  { name: 'default', description: 'Custom close icon or label content' }
 ]
 
 const keyboardShortcuts: KeyboardShortcut[] = [
@@ -318,43 +353,78 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     <!-- API Reference -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
-      <SApiTable
-        title="SMorphingCard Props"
-        type="props"
-        :props="cardProps"
-      />
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-card-bulleted-outline text-(--s-primary)" />
+            SMorphingCard
+          </h3>
+          <SApiTable title="Props" type="props" :props="cardProps" />
+          <SApiTable title="Events" type="events" :events="cardEvents" class="mt-6" />
+          <SApiTable title="Slots" type="slots" :slots="cardSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="Events"
-        type="events"
-        :events="cardEvents"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-cursor-default-click-outline text-(--s-primary)" />
+            SMorphingCardTrigger
+          </h3>
+          <SApiTable title="Props" type="props" :props="triggerProps" />
+          <SApiTable title="Slots" type="slots" :slots="triggerSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SMorphingCardTrigger Props"
-        type="props"
-        :props="triggerProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-text-box-outline text-(--s-primary)" />
+            SMorphingCardContent
+          </h3>
+          <SApiTable title="Props" type="props" :props="contentProps" />
+          <SApiTable title="Slots" type="slots" :slots="contentSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SMorphingCardContent Props"
-        type="props"
-        :props="contentProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-image-outline text-(--s-primary)" />
+            SMorphingCardImage
+          </h3>
+          <SApiTable title="Props" type="props" :props="imageProps" />
+        </div>
 
-      <SApiTable
-        title="SMorphingCardImage Props"
-        type="props"
-        :props="imageProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-format-title text-(--s-primary)" />
+            SMorphingCardTitle
+          </h3>
+          <SApiTable title="Props" type="props" :props="titleProps" />
+          <SApiTable title="Slots" type="slots" :slots="titleSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SMorphingCardClose Props"
-        type="props"
-        :props="closeProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-text text-(--s-primary)" />
+            SMorphingCardDescription
+          </h3>
+          <SApiTable title="Props" type="props" :props="descriptionProps" />
+          <SApiTable title="Slots" type="slots" :slots="descriptionSlots" class="mt-6" />
+        </div>
 
-      <SApiKeyboard :shortcuts="keyboardShortcuts" />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-close-circle-outline text-(--s-primary)" />
+            SMorphingCardClose
+          </h3>
+          <SApiTable title="Props" type="props" :props="closeProps" />
+          <SApiTable title="Slots" type="slots" :slots="closeSlots" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-keyboard-outline text-(--s-primary)" />
+            Keyboard Navigation
+          </h3>
+          <SApiKeyboard :shortcuts="keyboardShortcuts" />
+        </div>
+      </div>
     </SApiSection>
   </div>
 </template>

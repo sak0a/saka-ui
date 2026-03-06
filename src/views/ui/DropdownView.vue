@@ -766,105 +766,176 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
     <!-- API Reference -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
-      <SApiTable
-        title="SDropdown Props"
-        type="props"
-        :props="([
-          { name: 'items', type: 'DropdownMenuItem[]', default: 'undefined', description: 'Array of menu items (alternative to slots)', category: 'Core' },
-          { name: 'trigger', type: '\'click\' | \'hover\' | \'context\' | \'manual\'', default: '\'click\'', description: 'How to trigger the dropdown', category: 'Core' },
-          { name: 'placement', type: 'DropdownPlacement', default: '\'bottom-start\'', description: 'Menu placement (12 options)', category: 'Positioning' },
-          { name: 'size', type: '\'small\' | \'medium\' | \'large\'', default: '\'medium\'', description: 'Component size', category: 'Appearance' },
-          { name: 'variant', type: '\'default\' | \'filled\' | \'glass\'', default: '\'default\'', description: 'Visual variant style', category: 'Appearance' },
-          { name: 'color', type: 'string', default: 'var(--s-primary)', description: 'Accent color for checked items', category: 'Appearance' },
-          { name: 'animation', type: '\'fade\' | \'slide\' | \'scale\' | \'reveal\'', default: '\'scale\'', description: 'Animation type', category: 'Appearance' },
-          { name: 'closeOnSelect', type: 'boolean', default: 'true', description: 'Close menu when item is selected', category: 'Behavior' },
-          { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the dropdown', category: 'Behavior' },
-          { name: 'arrow', type: 'boolean', default: 'false', description: 'Show arrow pointing to trigger', category: 'Appearance' },
-          { name: 'maxHeight', type: 'string', default: '\'320px\'', description: 'Maximum menu height', category: 'Appearance' },
-          { name: 'width', type: 'number | string', default: 'undefined', description: 'Fixed menu width', category: 'Appearance' },
-          { name: 'minWidth', type: 'string', default: '\'180px\'', description: 'Minimum menu width', category: 'Appearance' },
-          { name: 'teleport', type: 'boolean | string', default: 'true', description: 'Teleport target for menu', category: 'Rendering' },
-          { name: 'zIndex', type: 'number', default: '1000', description: 'Z-index for dropdown', category: 'Rendering' },
-          { name: 'showDelay', type: 'number', default: '100', description: 'Delay before showing (hover)', category: 'Timing' },
-          { name: 'hideDelay', type: 'number', default: '150', description: 'Delay before hiding (hover)', category: 'Timing' },
-          { name: 'visible', type: 'boolean', default: 'undefined', description: 'Manual visibility control', category: 'Control' },
-          { name: 'searchable', type: 'boolean', default: 'false', description: 'Enable search filtering', category: 'Features' },
-          { name: 'searchPlaceholder', type: 'string', default: '\'Search...\'', description: 'Search input placeholder', category: 'Features' },
-          { name: 'offset', type: 'number', default: '6', description: 'Offset from trigger (px)', category: 'Positioning' },
-          { name: 'label', type: 'string', default: 'undefined', description: 'Default trigger button text', category: 'Trigger' },
-          { name: 'icon', type: 'string', default: 'undefined', description: 'Default trigger button icon', category: 'Trigger' },
-          { name: 'hideArrow', type: 'boolean', default: 'false', description: 'Hide chevron on trigger button', category: 'Trigger' }
-        ] as ApiProp[])"
-      />
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-menu-down text-(--s-primary)" />
+            SDropdown
+          </h3>
+          <SApiTable
+            title="Props"
+            type="props"
+            :props="([
+              { name: 'items', type: 'DropdownMenuItem[]', default: 'undefined', description: 'Array of menu items (alternative to slots)', category: 'Core' },
+              { name: 'trigger', type: '\'click\' | \'hover\' | \'context\' | \'manual\'', default: '\'click\'', description: 'How to trigger the dropdown', category: 'Core' },
+              { name: 'placement', type: 'DropdownPlacement', default: '\'bottom-start\'', description: 'Menu placement (12 options)', category: 'Positioning' },
+              { name: 'size', type: '\'small\' | \'medium\' | \'large\'', default: '\'medium\'', description: 'Component size', category: 'Appearance' },
+              { name: 'variant', type: '\'default\' | \'filled\' | \'glass\'', default: '\'default\'', description: 'Visual variant style', category: 'Appearance' },
+              { name: 'color', type: 'string', default: 'var(--s-primary)', description: 'Accent color for checked items', category: 'Appearance' },
+              { name: 'animation', type: '\'fade\' | \'slide\' | \'scale\' | \'reveal\'', default: '\'scale\'', description: 'Animation type', category: 'Appearance' },
+              { name: 'closeOnSelect', type: 'boolean', default: 'true', description: 'Close menu when item is selected', category: 'Behavior' },
+              { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the dropdown', category: 'Behavior' },
+              { name: 'arrow', type: 'boolean', default: 'false', description: 'Show arrow pointing to trigger', category: 'Appearance' },
+              { name: 'maxHeight', type: 'string', default: '\'320px\'', description: 'Maximum menu height', category: 'Appearance' },
+              { name: 'width', type: 'number | string', default: 'undefined', description: 'Fixed menu width', category: 'Appearance' },
+              { name: 'minWidth', type: 'string', default: '\'180px\'', description: 'Minimum menu width', category: 'Appearance' },
+              { name: 'teleport', type: 'boolean | string', default: 'true', description: 'Teleport target for menu', category: 'Rendering' },
+              { name: 'zIndex', type: 'number', default: '1000', description: 'Z-index for dropdown', category: 'Rendering' },
+              { name: 'showDelay', type: 'number', default: '100', description: 'Delay before showing (hover)', category: 'Timing' },
+              { name: 'hideDelay', type: 'number', default: '150', description: 'Delay before hiding (hover)', category: 'Timing' },
+              { name: 'visible', type: 'boolean', default: 'undefined', description: 'Manual visibility control', category: 'Control' },
+              { name: 'searchable', type: 'boolean', default: 'false', description: 'Enable search filtering', category: 'Features' },
+              { name: 'searchPlaceholder', type: 'string', default: '\'Search...\'', description: 'Search input placeholder', category: 'Features' },
+              { name: 'offset', type: 'number', default: '6', description: 'Offset from trigger (px)', category: 'Positioning' },
+              { name: 'label', type: 'string', default: 'undefined', description: 'Default trigger button text', category: 'Trigger' },
+              { name: 'icon', type: 'string', default: 'undefined', description: 'Default trigger button icon', category: 'Trigger' },
+              { name: 'hideArrow', type: 'boolean', default: 'false', description: 'Hide chevron on trigger button', category: 'Trigger' }
+            ] as ApiProp[])"
+          />
+          <SApiTable
+            title="DropdownMenuItem Interface"
+            type="props"
+            :props="([
+              { name: 'key', type: 'string', default: '-', description: 'Unique identifier for the item' },
+              { name: 'label', type: 'string', default: '-', description: 'Display text' },
+              { name: 'icon', type: 'string', default: 'undefined', description: 'Leading icon (MDI name)' },
+              { name: 'trailingIcon', type: 'string', default: 'undefined', description: 'Trailing icon' },
+              { name: 'description', type: 'string', default: 'undefined', description: 'Description text below label' },
+              { name: 'shortcut', type: 'string', default: 'undefined', description: 'Keyboard shortcut display' },
+              { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the item' },
+              { name: 'danger', type: 'boolean', default: 'false', description: 'Destructive action styling' },
+              { name: 'checked', type: 'boolean', default: 'undefined', description: 'Checkable state' },
+              { name: 'divider', type: 'boolean', default: 'false', description: 'Render as divider line' },
+              { name: 'header', type: 'string', default: 'undefined', description: 'Render as section header' },
+              { name: 'onClick', type: '() => void', default: 'undefined', description: 'Click handler' }
+            ] as ApiProp[])"
+            class="mt-6"
+          />
+          <SApiTable
+            title="Events"
+            type="events"
+            :events="([
+              { name: 'update:visible', payload: 'boolean', description: 'Visibility changed (for v-model:visible)' },
+              { name: 'open', payload: '-', description: 'Dropdown opened' },
+              { name: 'close', payload: '-', description: 'Dropdown closed' },
+              { name: 'select', payload: '(key: string, item?: DropdownMenuItem)', description: 'Item selected' }
+            ] as ApiEvent[])"
+            class="mt-6"
+          />
+          <SApiTable
+            title="Slots"
+            type="slots"
+            :slots="([
+              { name: 'trigger', props: '-', description: 'Custom trigger element' },
+              { name: 'default', props: '-', description: 'Menu content (SDropdownItem children)' },
+              { name: 'header', props: '-', description: 'Content above menu items' },
+              { name: 'footer', props: '-', description: 'Content below menu items' }
+            ] as ApiSlot[])"
+            class="mt-6"
+          />
+        </div>
 
-      <SApiTable
-        title="DropdownMenuItem Interface"
-        type="props"
-        :props="([
-          { name: 'key', type: 'string', default: '-', description: 'Unique identifier for the item' },
-          { name: 'label', type: 'string', default: '-', description: 'Display text' },
-          { name: 'icon', type: 'string', default: 'undefined', description: 'Leading icon (MDI name)' },
-          { name: 'trailingIcon', type: 'string', default: 'undefined', description: 'Trailing icon' },
-          { name: 'description', type: 'string', default: 'undefined', description: 'Description text below label' },
-          { name: 'shortcut', type: 'string', default: 'undefined', description: 'Keyboard shortcut display' },
-          { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the item' },
-          { name: 'danger', type: 'boolean', default: 'false', description: 'Destructive action styling' },
-          { name: 'checked', type: 'boolean', default: 'undefined', description: 'Checkable state' },
-          { name: 'divider', type: 'boolean', default: 'false', description: 'Render as divider line' },
-          { name: 'header', type: 'string', default: 'undefined', description: 'Render as section header' },
-          { name: 'onClick', type: '() => void', default: 'undefined', description: 'Click handler' }
-        ] as ApiProp[])"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-menu-right text-(--s-primary)" />
+            SDropdownItem
+          </h3>
+          <SApiTable
+            title="Props"
+            type="props"
+            :props="([
+              { name: 'itemKey', type: 'string', default: '-', description: 'Unique key (required)' },
+              { name: 'label', type: 'string', default: 'undefined', description: 'Item text' },
+              { name: 'icon', type: 'string', default: 'undefined', description: 'Leading icon' },
+              { name: 'trailingIcon', type: 'string', default: 'undefined', description: 'Trailing icon' },
+              { name: 'description', type: 'string', default: 'undefined', description: 'Description text' },
+              { name: 'shortcut', type: 'string', default: 'undefined', description: 'Keyboard shortcut' },
+              { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the item' },
+              { name: 'danger', type: 'boolean', default: 'false', description: 'Danger styling' },
+              { name: 'checked', type: 'boolean', default: 'undefined', description: 'Checkable state' },
+              { name: 'color', type: 'string', default: 'undefined', description: 'Custom accent color' }
+            ] as ApiProp[])"
+          />
+          <SApiTable
+            title="Events"
+            type="events"
+            :events="([
+              { name: 'click', payload: 'MouseEvent', description: 'Emitted when the item is activated' },
+              { name: 'update:checked', payload: 'boolean', description: 'Emitted when a checkable item toggles' }
+            ] as ApiEvent[])"
+            class="mt-6"
+          />
+          <SApiTable
+            title="Slots"
+            type="slots"
+            :slots="([
+              { name: 'default', props: '-', description: 'Custom primary item content' },
+              { name: 'trailing', props: '-', description: 'Trailing content after shortcuts and icons' }
+            ] as ApiSlot[])"
+            class="mt-6"
+          />
+        </div>
 
-      <SApiTable
-        title="Events"
-        type="events"
-        :events="([
-          { name: 'update:visible', payload: 'boolean', description: 'Visibility changed (for v-model:visible)' },
-          { name: 'open', payload: '-', description: 'Dropdown opened' },
-          { name: 'close', payload: '-', description: 'Dropdown closed' },
-          { name: 'select', payload: '(key: string, item?: DropdownMenuItem)', description: 'Item selected' }
-        ] as ApiEvent[])"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-minus text-(--s-primary)" />
+            SDropdownDivider
+          </h3>
+          <SApiTable
+            title="Props"
+            type="props"
+            :props="([
+              { name: 'margin', type: 'string', default: '\'4px\'', description: 'Vertical spacing above and below the divider' }
+            ] as ApiProp[])"
+          />
+        </div>
 
-      <SApiTable
-        title="Slots"
-        type="slots"
-        :slots="([
-          { name: 'trigger', props: '-', description: 'Custom trigger element' },
-          { name: 'default', props: '-', description: 'Menu content (SDropdownItem children)' },
-          { name: 'header', props: '-', description: 'Content above menu items' },
-          { name: 'footer', props: '-', description: 'Content below menu items' }
-        ] as ApiSlot[])"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-folder-multiple-outline text-(--s-primary)" />
+            SDropdownGroup
+          </h3>
+          <SApiTable
+            title="Props"
+            type="props"
+            :props="([
+              { name: 'label', type: 'string', default: '-', description: 'Required. Group header label' },
+              { name: 'icon', type: 'string', default: 'undefined', description: 'Optional icon shown next to the group label' }
+            ] as ApiProp[])"
+          />
+          <SApiTable
+            title="Slots"
+            type="slots"
+            :slots="([
+              { name: 'default', props: '-', description: 'Grouped dropdown items rendered below the label' }
+            ] as ApiSlot[])"
+            class="mt-6"
+          />
+        </div>
 
-      <SApiTable
-        title="SDropdownItem Props"
-        type="props"
-        :props="([
-          { name: 'itemKey', type: 'string', default: '-', description: 'Unique key (required)' },
-          { name: 'label', type: 'string', default: 'undefined', description: 'Item text' },
-          { name: 'icon', type: 'string', default: 'undefined', description: 'Leading icon' },
-          { name: 'trailingIcon', type: 'string', default: 'undefined', description: 'Trailing icon' },
-          { name: 'description', type: 'string', default: 'undefined', description: 'Description text' },
-          { name: 'shortcut', type: 'string', default: 'undefined', description: 'Keyboard shortcut' },
-          { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the item' },
-          { name: 'danger', type: 'boolean', default: 'false', description: 'Danger styling' },
-          { name: 'checked', type: 'boolean', default: 'undefined', description: 'Checkable state' },
-          { name: 'color', type: 'string', default: 'undefined', description: 'Custom accent color' }
-        ] as ApiProp[])"
-      />
-
-      <SApiKeyboard
-        title="Keyboard Navigation"
-        :shortcuts="([
-          { keys: ['Enter', 'Space'], action: 'Open dropdown or select highlighted item' },
-          { keys: 'Escape', action: 'Close dropdown' },
-          { keys: ['↓', '↑'], action: 'Navigate through menu items' },
-          { keys: ['Home', 'End'], action: 'Jump to first/last item' },
-          { keys: 'Tab', action: 'Close dropdown and move focus' }
-        ] as KeyboardShortcut[])"
-      />
+        <div>
+          <SApiKeyboard
+            title="Keyboard Navigation"
+            :shortcuts="([
+              { keys: ['Enter', 'Space'], action: 'Open dropdown or select highlighted item' },
+              { keys: 'Escape', action: 'Close dropdown' },
+              { keys: ['↓', '↑'], action: 'Navigate through menu items' },
+              { keys: ['Home', 'End'], action: 'Jump to first/last item' },
+              { keys: 'Tab', action: 'Close dropdown and move focus' }
+            ] as KeyboardShortcut[])"
+          />
+        </div>
+      </div>
     </SApiSection>
   </div>
 </template>

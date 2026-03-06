@@ -904,14 +904,50 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     <!-- API Reference -->
     <h2 class="text-2xl font-bold text-foreground mb-6">API Reference</h2>
     <SApiSection>
-      <SApiTable title="SAccordion Props" type="props" :props="accordionProps" />
-      <SApiTable title="SAccordionItem Props" type="props" :props="accordionItemProps" />
-      <SApiTable title="SAccordionItem Slots" type="slots" :slots="accordionItemSlots" />
-      <SApiTable title="SAccordionTrigger Props" type="props" :props="triggerProps" />
-      <SApiTable title="SAccordionTrigger Slots" type="slots" :slots="triggerSlots" />
-      <SApiTable title="SAccordionContent Props" type="props" :props="contentProps" />
-      <SApiTable title="SAccordion Events" type="events" :events="accordionEvents" />
-      <SApiKeyboard :shortcuts="keyboardShortcuts" variant="table" />
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+            <span class="mdi mdi-view-sequential text-primary" />
+            SAccordion
+          </h3>
+          <SApiTable title="Props" type="props" :props="accordionProps" />
+          <SApiTable title="Events" type="events" :events="accordionEvents" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+            <span class="mdi mdi-format-list-bulleted text-primary" />
+            SAccordionItem
+          </h3>
+          <SApiTable title="Props" type="props" :props="accordionItemProps" />
+          <SApiTable title="Slots" type="slots" :slots="accordionItemSlots" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+            <span class="mdi mdi-chevron-down text-primary" />
+            SAccordionTrigger
+          </h3>
+          <SApiTable title="Props" type="props" :props="triggerProps" />
+          <SApiTable title="Slots" type="slots" :slots="triggerSlots" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+            <span class="mdi mdi-text-box-outline text-primary" />
+            SAccordionContent
+          </h3>
+          <SApiTable title="Props" type="props" :props="contentProps" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+            <span class="mdi mdi-keyboard-outline text-primary" />
+            Keyboard Navigation
+          </h3>
+          <SApiKeyboard :shortcuts="keyboardShortcuts" variant="table" />
+        </div>
+      </div>
     </SApiSection>
   </div>
 </template>

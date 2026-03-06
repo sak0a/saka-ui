@@ -108,6 +108,14 @@ const morphingModalSlots: ApiSlot[] = [
   { name: 'content', description: 'The expanded modal content. Visible when the modal is open.' }
 ]
 
+const triggerEvents: ApiEvent[] = [
+  { name: 'click', payload: 'MouseEvent', description: 'Emitted when the trigger opens the modal' }
+]
+
+const triggerSlots: ApiSlot[] = [
+  { name: 'default', description: 'Trigger card or element used as the morph origin' }
+]
+
 const triggerProps: ApiProp[] = [
   { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the trigger interaction' },
   { name: 'triggerClass', type: 'string', default: "''", description: 'Additional CSS class for the trigger wrapper' }
@@ -117,13 +125,25 @@ const titleProps: ApiProp[] = [
   { name: 'titleClass', type: 'string', default: "''", description: 'Additional CSS class for the title element' }
 ]
 
+const titleSlots: ApiSlot[] = [
+  { name: 'default', description: 'Title content for trigger and expanded states' }
+]
+
 const subtitleProps: ApiProp[] = [
   { name: 'subtitleClass', type: 'string', default: "''", description: 'Additional CSS class for the subtitle element' }
+]
+
+const subtitleSlots: ApiSlot[] = [
+  { name: 'default', description: 'Subtitle content rendered below the title' }
 ]
 
 const descriptionProps: ApiProp[] = [
   { name: 'descriptionClass', type: 'string', default: "''", description: 'Additional CSS class for the description element' },
   { name: 'disableLayoutAnimation', type: 'boolean', default: 'false', description: 'Disable the fade-in animation for the description' }
+]
+
+const descriptionSlots: ApiSlot[] = [
+  { name: 'default', description: 'Expanded description content' }
 ]
 
 const imageProps: ApiProp[] = [
@@ -135,6 +155,10 @@ const imageProps: ApiProp[] = [
 
 const closeProps: ApiProp[] = [
   { name: 'closeClass', type: 'string', default: "''", description: 'Additional CSS class for the close button' }
+]
+
+const closeSlots: ApiSlot[] = [
+  { name: 'default', description: 'Custom close icon or label content' }
 ]
 
 const keyboardShortcuts: KeyboardShortcut[] = [
@@ -540,61 +564,79 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     <!-- API Reference -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
-      <SApiTable
-        title="SMorphingModal Props"
-        type="props"
-        :props="morphingModalProps"
-      />
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-transition text-(--s-primary)" />
+            SMorphingModal
+          </h3>
+          <SApiTable title="Props" type="props" :props="morphingModalProps" />
+          <SApiTable title="Events" type="events" :events="morphingModalEvents" class="mt-6" />
+          <SApiTable title="Slots" type="slots" :slots="morphingModalSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SMorphingModal Events"
-        type="events"
-        :events="morphingModalEvents"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-cursor-default-click-outline text-(--s-primary)" />
+            SMorphingModalTrigger
+          </h3>
+          <SApiTable title="Props" type="props" :props="triggerProps" />
+          <SApiTable title="Events" type="events" :events="triggerEvents" class="mt-6" />
+          <SApiTable title="Slots" type="slots" :slots="triggerSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SMorphingModal Slots"
-        type="slots"
-        :slots="morphingModalSlots"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-close-circle-outline text-(--s-primary)" />
+            SMorphingModalClose
+          </h3>
+          <SApiTable title="Props" type="props" :props="closeProps" />
+          <SApiTable title="Slots" type="slots" :slots="closeSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SMorphingModalTrigger Props"
-        type="props"
-        :props="triggerProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-format-title text-(--s-primary)" />
+            SMorphingModalTitle
+          </h3>
+          <SApiTable title="Props" type="props" :props="titleProps" />
+          <SApiTable title="Slots" type="slots" :slots="titleSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SMorphingModalTitle Props"
-        type="props"
-        :props="titleProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-format-subscript text-(--s-primary)" />
+            SMorphingModalSubtitle
+          </h3>
+          <SApiTable title="Props" type="props" :props="subtitleProps" />
+          <SApiTable title="Slots" type="slots" :slots="subtitleSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SMorphingModalSubtitle Props"
-        type="props"
-        :props="subtitleProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-text text-(--s-primary)" />
+            SMorphingModalDescription
+          </h3>
+          <SApiTable title="Props" type="props" :props="descriptionProps" />
+          <SApiTable title="Slots" type="slots" :slots="descriptionSlots" class="mt-6" />
+        </div>
 
-      <SApiTable
-        title="SMorphingModalDescription Props"
-        type="props"
-        :props="descriptionProps"
-      />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-image-outline text-(--s-primary)" />
+            SMorphingModalImage
+          </h3>
+          <SApiTable title="Props" type="props" :props="imageProps" />
+        </div>
 
-      <SApiTable
-        title="SMorphingModalImage Props"
-        type="props"
-        :props="imageProps"
-      />
-
-      <SApiTable
-        title="SMorphingModalClose Props"
-        type="props"
-        :props="closeProps"
-      />
-
-      <SApiKeyboard :shortcuts="keyboardShortcuts" />
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-keyboard-outline text-(--s-primary)" />
+            Keyboard Navigation
+          </h3>
+          <SApiKeyboard :shortcuts="keyboardShortcuts" />
+        </div>
+      </div>
     </SApiSection>
   </div>
 </template>

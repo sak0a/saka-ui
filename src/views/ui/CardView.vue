@@ -219,6 +219,34 @@ const mediaProps: ApiProp[] = [
   { name: 'skeleton', type: 'boolean', default: 'false', description: 'Show skeleton', category: 'State' }
 ]
 
+const contentProps: ApiProp[] = [
+  { name: 'padding', type: 'string', default: '—', description: 'Custom padding override', category: 'Layout' },
+  { name: 'align', type: "'left' | 'center' | 'right' | 'justify'", default: "'left'", description: 'Text alignment', category: 'Layout' },
+  { name: 'maxHeight', type: 'string', default: '—', description: 'Maximum height for scrollable content', category: 'Layout' },
+  { name: 'skeleton', type: 'boolean', default: 'false', description: 'Render a loading skeleton instead of slot content', category: 'State' },
+  { name: 'skeletonLines', type: 'number', default: '3', description: 'Number of placeholder lines when skeleton is enabled', category: 'State' }
+]
+
+const footerProps: ApiProp[] = [
+  { name: 'divider', type: 'boolean', default: 'false', description: 'Show a divider above the footer', category: 'Appearance' },
+  { name: 'justify', type: "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'", default: "'end'", description: 'Horizontal distribution of footer content', category: 'Layout' },
+  { name: 'align', type: "'start' | 'center' | 'end' | 'stretch'", default: "'center'", description: 'Cross-axis alignment', category: 'Layout' },
+  { name: 'gap', type: "'none' | 'sm' | 'md' | 'lg'", default: "'md'", description: 'Gap between footer items', category: 'Layout' },
+  { name: 'padding', type: 'string', default: '—', description: 'Custom padding override', category: 'Layout' },
+  { name: 'stackOnMobile', type: 'boolean', default: 'false', description: 'Stack footer content vertically on small screens', category: 'Responsive' }
+]
+
+const actionsProps: ApiProp[] = [
+  { name: 'justify', type: "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'", default: "'start'", description: 'Horizontal distribution of actions', category: 'Layout' },
+  { name: 'align', type: "'start' | 'center' | 'end' | 'stretch'", default: "'center'", description: 'Cross-axis alignment', category: 'Layout' },
+  { name: 'gap', type: "'none' | 'xs' | 'sm' | 'md' | 'lg'", default: "'sm'", description: 'Gap between actions', category: 'Layout' },
+  { name: 'direction', type: "'row' | 'column'", default: "'row'", description: 'Layout direction for actions', category: 'Layout' },
+  { name: 'padding', type: 'string', default: '—', description: 'Custom padding override', category: 'Layout' },
+  { name: 'fullWidth', type: 'boolean', default: 'false', description: 'Stretch action children to fill available width', category: 'Layout' },
+  { name: 'stackOnMobile', type: 'boolean', default: 'false', description: 'Stack actions vertically on small screens', category: 'Responsive' },
+  { name: 'reverse', type: 'boolean', default: 'false', description: 'Reverse the visual order of actions', category: 'Layout' }
+]
+
 const cardEvents: ApiEvent[] = [
   { name: '@click', description: 'Emitted when card is clicked (if clickable)' }
 ]
@@ -240,6 +268,18 @@ const mediaSlots: ApiSlot[] = [
   { name: 'overlay', description: 'Bottom overlay content' },
   { name: 'badge', description: 'Badge in top-right corner' },
   { name: 'actions', description: 'Actions at bottom of media' }
+]
+
+const contentSlots: ApiSlot[] = [
+  { name: 'default', description: 'Main card body content' }
+]
+
+const footerSlots: ApiSlot[] = [
+  { name: 'default', description: 'Footer actions or summary content' }
+]
+
+const actionsSlots: ApiSlot[] = [
+  { name: 'default', description: 'Action buttons or links' }
 ]
 </script>
 
@@ -1038,11 +1078,38 @@ const mediaSlots: ApiSlot[] = [
 
         <div>
           <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-text-box-outline text-(--s-primary)" />
+            SCardContent
+          </h3>
+          <SApiTable title="Props" type="props" :props="contentProps" />
+          <SApiTable title="Slots" type="slots" :slots="contentSlots" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-dock-bottom text-(--s-primary)" />
+            SCardFooter
+          </h3>
+          <SApiTable title="Props" type="props" :props="footerProps" />
+          <SApiTable title="Slots" type="slots" :slots="footerSlots" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
             <span class="mdi mdi-image text-(--s-primary)" />
             SCardMedia
           </h3>
           <SApiTable title="Props" type="props" :props="mediaProps" />
           <SApiTable title="Slots" type="slots" :slots="mediaSlots" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-button-cursor text-(--s-primary)" />
+            SCardActions
+          </h3>
+          <SApiTable title="Props" type="props" :props="actionsProps" />
+          <SApiTable title="Slots" type="slots" :slots="actionsSlots" class="mt-6" />
         </div>
       </div>
     </SApiSection>

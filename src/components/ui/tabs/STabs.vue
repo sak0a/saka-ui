@@ -101,7 +101,7 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string | number): void
   (e: 'close', name: string | number): void
-  (e: 'before-leave', from: string | number, to: string | number): boolean | void
+  (e: 'before-leave', from: string | number, to: string | number): void
 }>()
 
 const slots = useSlots()
@@ -228,9 +228,7 @@ const setActiveTab = (name: string | number) => {
   const pane = registeredPanes.value.find(p => p.name === name)
   if (pane?.disabled) return
 
-  const result = emit('before-leave', activeTab.value, name)
-  if (result === false) return
-
+  emit('before-leave', activeTab.value, name)
   activeTab.value = name
 }
 

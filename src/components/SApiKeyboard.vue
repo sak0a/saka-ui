@@ -34,12 +34,15 @@ const normalizeKeys = (keys: string | string[]): string[] => {
 </script>
 
 <template>
-  <article v-bind="$attrs">
-    <h3 class="text-xl font-semibold text-foreground mt-4 mb-2">{{ title }}</h3>
+  <article v-bind="$attrs" class="space-y-3">
+    <div class="flex items-center gap-3">
+      <h4 class="text-sm font-semibold tracking-tight text-foreground">{{ title }}</h4>
+      <div class="h-px flex-1 bg-border/70" aria-hidden="true" />
+    </div>
     
     <!-- Grid variant -->
     <div v-if="variant === 'grid'" 
-         class="bg-muted/50 p-6 rounded-xl border border-border">
+         class="rounded-xl border border-border/70 bg-background/80 p-6 shadow-sm">
       <div 
         class="grid gap-4"
         :class="{
@@ -54,12 +57,12 @@ const normalizeKeys = (keys: string | string[]): string[] => {
         <div 
           v-for="(shortcut, index) in shortcuts" 
           :key="index"
-          class="flex items-center gap-3"
+          class="flex items-center gap-3 rounded-lg border border-border/60 bg-muted/35 px-4 py-3"
         >
           <span class="flex items-center gap-1">
             <template v-for="(key, keyIndex) in normalizeKeys(shortcut.keys)" :key="keyIndex">
               <span v-if="keyIndex > 0" class="text-muted-foreground text-xs">/</span>
-              <kbd class="px-2 py-1 bg-accent rounded text-xs font-mono text-foreground">
+              <kbd class="rounded border border-border/70 bg-background px-2 py-1 text-xs font-mono text-foreground shadow-sm">
                 {{ key }}
               </kbd>
             </template>
@@ -70,31 +73,32 @@ const normalizeKeys = (keys: string | string[]): string[] => {
     </div>
 
     <!-- Table variant -->
-    <div v-else class="overflow-x-auto rounded-xl border border-border">
-      <table class="w-full text-sm text-left">
-        <thead class="text-muted-foreground bg-muted text-xs uppercase tracking-wider">
+    <div v-else class="overflow-x-auto rounded-xl border border-border/70 bg-background/80 shadow-sm">
+      <table class="w-full min-w-full text-left text-sm">
+        <caption v-if="title" class="sr-only">{{ title }}</caption>
+        <thead class="bg-muted/55 text-xs uppercase tracking-[0.16em] text-muted-foreground">
           <tr>
-            <th class="py-3 px-4">Key</th>
-            <th class="py-3 px-4">Action</th>
+            <th class="px-4 py-3 font-semibold">Key</th>
+            <th class="px-4 py-3 font-semibold">Action</th>
           </tr>
         </thead>
-        <tbody class="text-muted-foreground bg-muted/40">
+        <tbody class="bg-background/40 text-muted-foreground">
           <tr 
             v-for="(shortcut, index) in shortcuts" 
             :key="index"
-            class="border-t border-border"
+            class="border-t border-border/70 align-top"
           >
-            <td class="py-3 px-4">
+            <td class="px-4 py-3 align-top">
               <span class="flex items-center gap-1">
                 <template v-for="(key, keyIndex) in normalizeKeys(shortcut.keys)" :key="keyIndex">
                   <span v-if="keyIndex > 0" class="text-muted-foreground text-xs mx-1">/</span>
-                  <kbd class="px-2 py-1 bg-accent rounded text-xs font-mono text-foreground">
+                  <kbd class="rounded border border-border/70 bg-background px-2 py-1 text-xs font-mono text-foreground shadow-sm">
                     {{ key }}
                   </kbd>
                 </template>
               </span>
             </td>
-            <td class="py-3 px-4">{{ shortcut.action }}</td>
+            <td class="px-4 py-3 align-top text-foreground/90">{{ shortcut.action }}</td>
           </tr>
         </tbody>
       </table>

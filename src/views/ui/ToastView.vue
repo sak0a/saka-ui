@@ -5,7 +5,7 @@ import {
   SSelect, SOption, SInput,
   useToast, SToastContainer
 } from '../../index'
-import type { ApiProp, ApiMethod, ToastPosition, ToastType } from '../../index'
+import type { ApiProp, ApiMethod, ApiEvent, ToastPosition, ToastType } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
 const toast = useToast()
@@ -164,6 +164,8 @@ const toastOptionsProps: ApiProp[] = [
   { name: 'closable', type: 'boolean', default: 'true', description: 'Show close button' },
   { name: 'icon', type: 'string | boolean', description: 'Icon name or false to hide' },
   { name: 'color', type: 'string', description: 'Custom color for custom type' },
+  { name: 'component', type: 'Component', description: 'Custom Vue component rendered in the toast body' },
+  { name: 'componentProps', type: 'Record<string, unknown>', description: 'Props passed through to the custom component' },
   { name: 'onClick', type: '() => void', description: 'Callback when toast is clicked' },
   { name: 'onClose', type: '() => void', description: 'Callback when toast is closed' }
 ]
@@ -174,6 +176,27 @@ const containerProps: ApiProp[] = [
   { name: 'gap', type: 'number', default: '8', description: 'Gap between toasts (px)' },
   { name: 'teleport', type: 'boolean | string', default: 'true', description: 'Teleport target' },
   { name: 'zIndex', type: 'number', default: '9999', description: 'Z-index for container' }
+]
+
+const toastProps: ApiProp[] = [
+  { name: 'id', type: 'string', default: 'required', description: 'Unique toast instance identifier' },
+  { name: 'type', type: 'ToastType', default: 'required', description: 'Visual toast type used for styling and defaults' },
+  { name: 'title', type: 'string', default: 'undefined', description: 'Toast title' },
+  { name: 'description', type: 'string', default: 'undefined', description: 'Toast message/description' },
+  { name: 'duration', type: 'number', default: '5000', description: 'Duration in ms for progress display' },
+  { name: 'showProgress', type: 'boolean', default: 'true', description: 'Show progress bar' },
+  { name: 'closable', type: 'boolean', default: 'true', description: 'Show close button' },
+  { name: 'icon', type: 'string | boolean', default: 'undefined', description: 'Icon name or false to hide it' },
+  { name: 'color', type: 'string', default: 'undefined', description: 'Custom accent color for custom toasts' },
+  { name: 'progress', type: 'number', default: '100', description: 'Current progress percentage' },
+  { name: 'paused', type: 'boolean', default: 'false', description: 'Pause the progress timer visually and behaviorally' },
+  { name: 'component', type: 'object', default: 'undefined', description: 'Custom Vue component rendered inside the toast' },
+  { name: 'componentProps', type: 'Record<string, unknown>', default: 'undefined', description: 'Props forwarded to the custom component' },
+]
+
+const toastEvents: ApiEvent[] = [
+  { name: 'close', payload: '-', description: 'Emitted when the toast close action runs' },
+  { name: 'click', payload: '-', description: 'Emitted when the toast body is clicked' }
 ]
 </script>
 
@@ -318,22 +341,43 @@ const containerProps: ApiProp[] = [
     <!-- API Reference -->
     <section>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
-      
-      <SApiSection title="useToast Methods">
-        <SApiTable title="Methods" :methods="toastMethods" type="methods" />
+
+      <SApiSection>
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+              <span class="mdi mdi-bell-outline text-(--s-primary)" />
+              useToast
+            </h3>
+            <SApiTable title="Methods" :methods="toastMethods" type="methods" />
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+              <span class="mdi mdi-tune-variant text-(--s-primary)" />
+              ToastOptions
+            </h3>
+            <SApiTable title="Properties" :props="toastOptionsProps" type="props" />
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+              <span class="mdi mdi-message-badge-outline text-(--s-primary)" />
+              SToast
+            </h3>
+            <SApiTable title="Props" :props="toastProps" type="props" />
+            <SApiTable title="Events" :events="toastEvents" type="events" class="mt-6" />
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+              <span class="mdi mdi-view-stream-outline text-(--s-primary)" />
+              SToastContainer
+            </h3>
+            <SApiTable title="Props" :props="containerProps" type="props" />
+          </div>
+        </div>
       </SApiSection>
-
-      <div class="mt-8">
-        <SApiSection title="ToastOptions">
-          <SApiTable title="Properties" :props="toastOptionsProps" type="props" />
-        </SApiSection>
-      </div>
-
-      <div class="mt-8">
-        <SApiSection title="SToastContainer Props">
-          <SApiTable title="Properties" :props="containerProps" type="props" />
-        </SApiSection>
-      </div>
     </section>
   </div>
 

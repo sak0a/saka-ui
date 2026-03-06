@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { SRadio, SRadioGroup, SApiSection, SApiTable, SApiKeyboard } from '../../index'
-import type { ApiProp, KeyboardShortcut } from '../../index'
+import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
 // Basic usage
@@ -130,14 +130,43 @@ const radioProps: ApiProp[] = [
   { name: 'label', type: 'string', default: 'undefined', description: 'Label text', category: 'Label & Icon' },
   { name: 'labelPosition', type: "'left' | 'right'", default: "'right'", description: 'Label placement', category: 'Label & Icon' },
   { name: 'icon', type: 'string', default: 'undefined', description: 'MDI icon name for center', category: 'Label & Icon' },
+  { name: 'required', type: 'boolean', default: 'false', description: 'Show a required marker after the label', category: 'Label & Icon' },
+  { name: 'name', type: 'string', default: 'undefined', description: 'Native radio input name attribute', category: 'Form Integration' },
+  { name: 'error', type: 'string', default: 'undefined', description: 'Inline validation message', category: 'Form Integration' },
+  { name: 'radioClass', type: 'string', default: 'undefined', description: 'Additional class for the radio control element', category: 'Appearance' },
+  { name: 'labelClass', type: 'string', default: 'undefined', description: 'Additional class for the label text', category: 'Appearance' },
 ]
 
 const radioGroupProps: ApiProp[] = [
   { name: 'modelValue', type: 'any', default: 'undefined', description: 'v-model binding value', category: 'Core' },
   { name: 'options', type: '{ value, label, disabled?, icon? }[]', default: '[]', description: 'Array of radio options', category: 'Core' },
   { name: 'orientation', type: "'horizontal' | 'vertical' | 'grid'", default: "'vertical'", description: 'Layout direction', category: 'Layout' },
+  { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Inherited size for child radios', category: 'Appearance' },
+  { name: 'color', type: 'string', default: 'undefined', description: 'Inherited selected color for child radios', category: 'Appearance' },
+  { name: 'variant', type: "'default' | 'filled' | 'outlined' | 'button'", default: "'default'", description: 'Inherited visual variant for child radios', category: 'Appearance' },
+  { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the entire group', category: 'State' },
   { name: 'gridCols', type: 'number', default: '3', description: 'Columns for grid layout', category: 'Layout' },
   { name: 'gap', type: "'tight' | 'normal' | 'loose'", default: "'normal'", description: 'Spacing between items', category: 'Layout' },
+  { name: 'name', type: 'string', default: 'undefined', description: 'Shared native name passed to generated radios', category: 'Form Integration' },
+]
+
+const radioEvents: ApiEvent[] = [
+  { name: 'update:modelValue', payload: 'any', description: 'Emitted when the radio becomes selected' },
+  { name: 'change', payload: '(value, event)', description: 'Emitted after user interaction changes the selected value' }
+]
+
+const radioGroupEvents: ApiEvent[] = [
+  { name: 'update:modelValue', payload: 'any', description: 'Emitted when the group selection changes' },
+  { name: 'change', payload: 'any', description: 'Emitted after the group selection changes' }
+]
+
+const radioSlots: ApiSlot[] = [
+  { name: 'default', props: '-', description: 'Custom label content' },
+  { name: 'icon', props: '-', description: 'Override the selected icon or inner dot content' }
+]
+
+const radioGroupSlots: ApiSlot[] = [
+  { name: 'default', props: '-', description: 'Custom SRadio children when not using the options prop' }
 ]
 
 const radioKeyboard: KeyboardShortcut[] = [
@@ -460,9 +489,31 @@ const radioKeyboard: KeyboardShortcut[] = [
     <!-- API Reference -->
     <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
     <SApiSection>
-      <SApiTable title="SRadio Props" type="props" :props="radioProps" />
-      <SApiTable title="SRadioGroup Props" type="props" :props="radioGroupProps" />
-      <SApiKeyboard title="Keyboard Navigation" :shortcuts="radioKeyboard" />
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-radiobox-marked text-(--s-primary)" />
+            SRadio
+          </h3>
+          <SApiTable title="Props" type="props" :props="radioProps" />
+          <SApiTable title="Events" type="events" :events="radioEvents" class="mt-6" />
+          <SApiTable title="Slots" type="slots" :slots="radioSlots" class="mt-6" />
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
+            <span class="mdi mdi-format-list-bulleted text-(--s-primary)" />
+            SRadioGroup
+          </h3>
+          <SApiTable title="Props" type="props" :props="radioGroupProps" />
+          <SApiTable title="Events" type="events" :events="radioGroupEvents" class="mt-6" />
+          <SApiTable title="Slots" type="slots" :slots="radioGroupSlots" class="mt-6" />
+        </div>
+
+        <div>
+          <SApiKeyboard title="Keyboard Navigation" :shortcuts="radioKeyboard" />
+        </div>
+      </div>
     </SApiSection>
   </div>
 </template>
