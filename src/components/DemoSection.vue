@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, useSlots } from 'vue'
 import { cn } from '~/lib/utils'
+import SButton from '~/components/ui/SButton.vue'
+import SIcon from '~/components/ui/SIcon.vue'
 
 defineOptions({ inheritAttrs: false })
 import hljs from 'highlight.js/lib/core'
@@ -73,33 +75,25 @@ const copyCode = async () => {
       
       <!-- Action buttons -->
       <div class="flex items-center gap-2 ml-4">
-        <button 
-          class="p-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg transition-colors"
-          title="Open in sandbox"
-        >
-          <span class="mdi mdi-cube-outline text-lg"></span>
-        </button>
-        <button 
-          class="p-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg transition-colors"
-          title="Edit"
-        >
-          <span class="mdi mdi-pencil text-lg"></span>
-        </button>
-        <button 
-          @click="copyCode"
-          class="p-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg transition-colors"
-          title="Copy code"
-        >
-          <span class="mdi mdi-content-copy text-lg"></span>
-        </button>
-        <button 
-          @click="toggleCode"
-          :class="isCodeVisible ? 'bg-accent text-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-accent'"
-          class="p-2 rounded-lg transition-colors"
+        <SButton variant="ghost" size="small" iconOnly title="Open in sandbox" class="text-muted-foreground">
+          <SIcon size="18"><span class="mdi mdi-cube-outline"></span></SIcon>
+        </SButton>
+        <SButton variant="ghost" size="small" iconOnly title="Edit" class="text-muted-foreground">
+          <SIcon size="18"><span class="mdi mdi-pencil"></span></SIcon>
+        </SButton>
+        <SButton variant="ghost" size="small" iconOnly title="Copy code" class="text-muted-foreground" @click="copyCode">
+          <SIcon size="18"><span class="mdi mdi-content-copy"></span></SIcon>
+        </SButton>
+        <SButton
+          variant="ghost"
+          size="small"
+          iconOnly
           title="Show code"
+          :class="isCodeVisible ? 'bg-accent text-foreground' : 'text-muted-foreground'"
+          @click="toggleCode"
         >
-          <span class="mdi mdi-code-tags text-lg"></span>
-        </button>
+          <SIcon size="18"><span class="mdi mdi-code-tags"></span></SIcon>
+        </SButton>
       </div>
     </div>
  

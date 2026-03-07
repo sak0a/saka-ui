@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SCarousel, SCarouselSlide, SApiSection, SApiTable } from '../../index'
+import { SCarousel, SCarouselSlide, SApiSection, SApiTable, SButton } from '../../index'
 import type { ApiProp, ApiEvent, ApiMethod, ApiSlot } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
@@ -283,17 +283,15 @@ const carouselSlideSlots: ApiSlot[] = [
         <div class="space-y-4">
           <!-- Effect selector -->
           <div class="flex flex-wrap gap-2">
-            <button
+            <SButton
               v-for="effect in effects"
               :key="effect"
-              class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all"
-              :class="currentEffect === effect 
-                ? 'bg-(--s-primary) text-white' 
-                : 'bg-(--s-bg-tertiary) text-(--s-text-secondary) hover:bg-(--s-bg-primary)'"
+              :variant="currentEffect === effect ? 'light' : 'ghost'"
+              size="small"
               @click="currentEffect = effect; effectIndex = 0"
             >
               {{ effect.charAt(0).toUpperCase() + effect.slice(1) }}
-            </button>
+            </SButton>
           </div>
           
           <p class="text-sm text-(--s-text-tertiary)">{{ effectDescriptions[currentEffect] }}</p>
@@ -332,17 +330,15 @@ const carouselSlideSlots: ApiSlot[] = [
       >
         <div class="space-y-4">
           <div class="flex gap-2">
-            <button
+            <SButton
               v-for="style in dotsStyles"
               :key="style"
-              class="px-4 py-2 rounded-lg text-sm font-medium transition-all"
-              :class="currentDotsStyle === style 
-                ? 'bg-(--s-primary) text-white' 
-                : 'bg-(--s-bg-tertiary) text-(--s-text-secondary) hover:bg-(--s-bg-primary)'"
+              :variant="currentDotsStyle === style ? 'light' : 'ghost'"
+              size="small"
               @click="currentDotsStyle = style"
             >
               {{ style.charAt(0).toUpperCase() + style.slice(1) }}
-            </button>
+            </SButton>
           </div>
           
           <SCarousel 
@@ -375,17 +371,15 @@ const carouselSlideSlots: ApiSlot[] = [
       >
         <div class="space-y-4">
           <div class="flex flex-wrap gap-2">
-            <button
+            <SButton
               v-for="placement in arrowPlacements"
               :key="placement"
-              class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all"
-              :class="currentArrowPlacement === placement 
-                ? 'bg-(--s-primary) text-white' 
-                : 'bg-(--s-bg-tertiary) text-(--s-text-secondary) hover:bg-(--s-bg-primary)'"
+              :variant="currentArrowPlacement === placement ? 'light' : 'ghost'"
+              size="small"
               @click="currentArrowPlacement = placement"
             >
               {{ placement }}
-            </button>
+            </SButton>
           </div>
           
           <SCarousel 
@@ -421,17 +415,15 @@ const carouselSlideSlots: ApiSlot[] = [
       >
         <div class="space-y-4">
           <div class="flex flex-wrap gap-2">
-            <button
+            <SButton
               v-for="easing in easings"
               :key="easing"
-              class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all"
-              :class="currentEasing === easing 
-                ? 'bg-(--s-primary) text-white' 
-                : 'bg-(--s-bg-tertiary) text-(--s-text-secondary) hover:bg-(--s-bg-primary)'"
+              :variant="currentEasing === easing ? 'light' : 'ghost'"
+              size="small"
               @click="currentEasing = easing"
             >
               {{ easing }}
-            </button>
+            </SButton>
           </div>
           
           <SCarousel 
@@ -468,15 +460,13 @@ const carouselSlideSlots: ApiSlot[] = [
       >
         <div class="space-y-4">
           <div class="flex items-center gap-4">
-            <button
-              class="px-4 py-2 rounded-lg text-sm font-medium transition-all"
-              :class="autoplayEnabled 
-                ? 'bg-emerald-500 text-white' 
-                : 'bg-(--s-bg-tertiary) text-(--s-text-secondary)'"
+            <SButton
+              :variant="autoplayEnabled ? 'light' : 'ghost'"
+              size="small"
               @click="autoplayEnabled = !autoplayEnabled"
             >
               {{ autoplayEnabled ? '⏸ Pause' : '▶ Play' }}
-            </button>
+            </SButton>
             <span class="text-sm text-(--s-text-secondary)">Hover over carousel to pause</span>
           </div>
           
@@ -613,26 +603,30 @@ const carouselSlideSlots: ApiSlot[] = [
       >
         <div class="space-y-4">
           <div class="flex flex-wrap gap-2">
-            <button
-              class="px-4 py-2 rounded-lg bg-(--s-bg-tertiary) text-(--s-text-primary) hover:bg-(--s-primary) hover:text-white transition-all text-sm font-medium"
+            <SButton
+              variant="ghost"
+              size="small"
               @click="carouselRef?.prev()"
             >
               ← Prev
-            </button>
-            <button
-              class="px-4 py-2 rounded-lg bg-(--s-bg-tertiary) text-(--s-text-primary) hover:bg-(--s-primary) hover:text-white transition-all text-sm font-medium"
+            </SButton>
+            <SButton
+              variant="ghost"
+              size="small"
               @click="carouselRef?.next()"
             >
               Next →
-            </button>
-            <button
+            </SButton>
+            <SButton
               v-for="i in 5"
               :key="i"
-              class="w-10 h-10 rounded-lg bg-(--s-bg-tertiary) text-(--s-text-primary) hover:bg-(--s-primary) hover:text-white transition-all text-sm font-medium"
+              variant="ghost"
+              size="small"
+              :class="customIndex === i - 1 ? 'ring-2 ring-primary' : ''"
               @click="carouselRef?.goTo(i - 1)"
             >
               {{ i }}
-            </button>
+            </SButton>
           </div>
           
           <SCarousel 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SSelect, SApiSection, SApiTable, SApiKeyboard } from '../../index'
+import { SSelect, SButton, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
@@ -1086,13 +1086,14 @@ const optionGroupSlots: ApiSlot[] = [
               placeholder="Select features to include"
             />
             <div class="pt-4 border-t border-(--s-border)">
-              <button 
-                class="w-full py-2.5 px-4 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white font-medium transition-colors"
+              <SButton
+                block
+                color="#10b981"
+                class="py-2.5 font-medium"
                 :disabled="!projectFramework"
-                :class="{ 'opacity-50 cursor-not-allowed': !projectFramework }"
               >
                 Create Project
-              </button>
+              </SButton>
             </div>
           </div>
         </div>

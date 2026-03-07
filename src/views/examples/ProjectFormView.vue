@@ -393,13 +393,14 @@ const resetForm = () => {
             <label class="block text-sm font-medium text-(--s-text-secondary) mb-2">Generated Command</label>
             <div class="relative">
               <pre class="bg-(--s-bg-tertiary) text-(--s-text-primary) p-4 rounded-lg text-sm font-mono overflow-x-auto whitespace-pre-wrap">{{ generatedCommand }}</pre>
-              <button 
+              <SButton
                 @click="copyCommand"
-                class="absolute top-2 right-2 p-2 rounded-lg bg-(--s-bg-secondary) hover:bg-(--s-bg-primary) text-(--s-text-secondary) hover:text-(--s-text-primary) transition-colors"
+                variant="ghost"
+                iconOnly
+                iconLeft="content-copy"
+                class="absolute top-2 right-2"
                 title="Copy command"
-              >
-                <span class="mdi mdi-content-copy" />
-              </button>
+              />
             </div>
           </div>
         </SCardContent>

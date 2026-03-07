@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SRadio, SRadioGroup, SApiSection, SApiTable, SApiKeyboard } from '../../index'
+import { SRadio, SRadioGroup, SButton, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
@@ -479,9 +479,9 @@ const radioKeyboard: KeyboardShortcut[] = [
               </div>
             </label>
           </div>
-          <button class="mt-6 w-full py-3 rounded-xl bg-blue-500 text-white font-semibold hover:bg-blue-600 transition-colors">
+          <SButton variant="filled" block rounded="xl" color="#3b82f6" class="mt-6 py-3 font-semibold">
             Continue with {{ paymentMethod === 'card' ? 'Card' : paymentMethod === 'paypal' ? 'PayPal' : 'Bank Transfer' }}
-          </button>
+          </SButton>
         </div>
       </DemoSection>
     </section>

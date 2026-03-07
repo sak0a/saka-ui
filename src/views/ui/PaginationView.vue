@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { SPagination, SButton, SSelect, SApiSection, SApiTable, SApiKeyboard } from '../../index'
+import { SPagination, SButton, SSelect, SSwitch, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut, PaginationVariant, PaginationSize, PaginationShape, SelectOption } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
@@ -312,30 +312,12 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         
         <!-- Toggle options -->
         <div class="flex flex-wrap gap-4 mb-6">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input v-model="showFirstLast" type="checkbox" class="w-4 h-4 accent-emerald-500" />
-            <span class="text-sm text-(--s-text-primary)">First/Last</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input v-model="showTotal" type="checkbox" class="w-4 h-4 accent-emerald-500" />
-            <span class="text-sm text-(--s-text-primary)">Show Total</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input v-model="showQuickJump" type="checkbox" class="w-4 h-4 accent-emerald-500" />
-            <span class="text-sm text-(--s-text-primary)">Quick Jump</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input v-model="showProgress" type="checkbox" class="w-4 h-4 accent-emerald-500" />
-            <span class="text-sm text-(--s-text-primary)">Progress</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input v-model="isSimple" type="checkbox" class="w-4 h-4 accent-emerald-500" />
-            <span class="text-sm text-(--s-text-primary)">Simple Mode</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input v-model="hasBackground" type="checkbox" class="w-4 h-4 accent-emerald-500" />
-            <span class="text-sm text-(--s-text-primary)">Background</span>
-          </label>
+          <SSwitch v-model="showFirstLast" label-after="First/Last" size="small" />
+          <SSwitch v-model="showTotal" label-after="Show Total" size="small" />
+          <SSwitch v-model="showQuickJump" label-after="Quick Jump" size="small" />
+          <SSwitch v-model="showProgress" label-after="Progress" size="small" />
+          <SSwitch v-model="isSimple" label-after="Simple Mode" size="small" />
+          <SSwitch v-model="hasBackground" label-after="Background" size="small" />
         </div>
         
         <!-- Pagination Preview -->

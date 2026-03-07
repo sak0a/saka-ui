@@ -287,9 +287,9 @@ const submit = form.handleSubmit(
       <!-- Toggle -->
       <p class="text-center mt-4 text-sm text-(--s-text-secondary)">
         {{ isLoginMode ? "No account?" : "Have an account?" }}
-        <button @click="toggleMode" class="text-violet-500 hover:text-violet-400 font-medium ml-1" :disabled="form.isSubmitting.value">
+        <SButton variant="link" @click="toggleMode" class="text-violet-500 hover:text-violet-400 font-medium ml-1" :disabled="form.isSubmitting.value">
           {{ isLoginMode ? 'Sign up' : 'Sign in' }}
-        </button>
+        </SButton>
       </p>
     </div>
   </div>
