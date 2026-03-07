@@ -16,6 +16,7 @@ export default defineConfig(({ mode }) => {
       vue(),
       tailwindcss(),
       shouldGenerateTypes && dts({
+        tsconfigPath: './tsconfig.json',
         insertTypesEntry: true,
         cleanVueFileName: true,
         rollupTypes: false,

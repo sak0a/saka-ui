@@ -1,13 +1,14 @@
 {
   "name": "saka-ui",
-  "private": true,
+  "private": false,
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/saka-ui.umd.cjs",
   "module": "./dist/saka-ui.js",
   "types": "./dist/index.d.ts",
+  "author": "sakoa",
   "bin": {
-    "saka-ui": "./dist/cli/index.js"
+    "saka-ui": "dist/cli/index.js"
   },
   "exports": {
     ".": {
@@ -31,7 +32,8 @@
     "build:cli": "tsup",
     "build:all": "vite build && tsx scripts/build-registry.ts && tsup",
     "preview": "vite preview",
-    "test:smoke": "node dist/cli/index.js --version && node dist/cli/index.js list --help"
+    "test:smoke": "node dist/cli/index.js --version && node dist/cli/index.js list --help",
+    "prepublishOnly": "npm run build:all"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
@@ -58,6 +60,6 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-dts": "^4.5.4",
-    "vue-tsc": "^1.8.27"
+    "vue-tsc": "1.8.27"
   }
 }
