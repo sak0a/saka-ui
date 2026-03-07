@@ -118,6 +118,14 @@ A GitHub Actions workflow (`.github/workflows/ci.yml`) runs on every push and pu
 
 CI uses the latest Bun version on Ubuntu. The frozen lockfile flag ensures reproducible installs. The workflow intentionally gates on checks that fail loudly today: the bundle-only library build, registry source generation, CLI build, and CLI smoke path.
 
+### GitHub Pages Deployment
+
+A dedicated GitHub Actions workflow (`.github/workflows/pages.yml`) deploys the demo/docs site to GitHub Pages. It runs automatically on pushes to `main` and can also be started manually from the Actions tab.
+
+The workflow installs dependencies with Bun, runs the Pages-specific build command (`npm run build:pages`), uploads the generated `dist-pages/` artifact, and deploys it to the repository's GitHub Pages environment.
+
+To enable publishing, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**. After the workflow succeeds, the site will be available at `https://<owner>.github.io/saka-ui/`.
+
 ## 🛠️ Tech Stack
 
 - **Framework**: [Vue 3](https://vuejs.org/) with Composition API
