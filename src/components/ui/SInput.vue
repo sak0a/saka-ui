@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, nextTick, onMounted, type CSSProperties } from 'vue'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 
 defineOptions({ inheritAttrs: false })
 
@@ -23,8 +24,8 @@ export interface Props {
   labelAnimation?: 'morph' | 'slide' | 'fade' | 'none'
   
   // Icons
-  iconLeft?: string
-  iconRight?: string
+  iconLeft?: IconProp
+  iconRight?: IconProp
   iconColor?: string
   
   // States
@@ -743,7 +744,8 @@ watch(() => props.error, (newError) => {
           :style="iconColor ? { color: iconColor } : iconFocusStyle"
         >
           <slot name="prefix">
-            <span v-if="iconLeft" :class="['mdi', `mdi-${iconLeft}`]" />
+            <component v-if="iconLeft && isIconComponent(iconLeft)" :is="iconLeft" />
+            <span v-else-if="iconLeft" :class="['mdi', `mdi-${iconLeft}`]" />
             <span v-if="prefix" class="text-muted-foreground text-sm">{{ prefix }}</span>
           </slot>
         </span>
@@ -905,8 +907,14 @@ watch(() => props.error, (newError) => {
           
           <!-- Custom suffix -->
           <slot name="suffix">
+            <component
+              v-if="iconRight && isIconComponent(iconRight)"
+              :is="iconRight"
+              :class="[iconColorClass]"
+              :style="iconColor ? { color: iconColor } : iconFocusStyle"
+            />
             <span
-              v-if="iconRight"
+              v-else-if="iconRight"
               :class="['mdi', `mdi-${iconRight}`, iconColorClass]"
               :style="iconColor ? { color: iconColor } : iconFocusStyle"
             />
