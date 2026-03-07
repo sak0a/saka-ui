@@ -637,7 +637,7 @@ watch(() => props.pageSize, (newVal) => {
                     v-for="p in hiddenPagesStart"
                     :key="p"
                     type="button"
-                    class="flex items-center justify-center text-sm min-w-8 h-8 px-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                    class="flex items-center justify-center text-sm min-w-8 h-8 px-2 rounded-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
                     @click="selectFromDropdown(p)"
                   >
                     {{ p }}
@@ -684,7 +684,7 @@ watch(() => props.pageSize, (newVal) => {
                     v-for="p in hiddenPagesEnd"
                     :key="p"
                     type="button"
-                    class="flex items-center justify-center text-sm min-w-8 h-8 px-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                    class="flex items-center justify-center text-sm min-w-8 h-8 px-2 rounded-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
                     @click="selectFromDropdown(p)"
                   >
                     {{ p }}

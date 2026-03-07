@@ -678,7 +678,7 @@ defineExpose({
                   v-else
                   role="menuitem"
                   :tabindex="item.disabled ? -1 : 0"
-                  class="s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none rounded-md"
+                  class="s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none rounded-lg"
                   :class="[
                     sizeConfig.item,
                     {

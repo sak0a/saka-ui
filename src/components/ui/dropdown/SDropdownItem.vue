@@ -108,7 +108,7 @@ const handleClick = (event: MouseEvent) => {
   <div
     role="menuitem"
     :tabindex="disabled ? -1 : 0"
-    :class="cn('s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none rounded-md group', sizeConfig.item, {
+    :class="cn('s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none rounded-lg group', sizeConfig.item, {
         'opacity-50 cursor-not-allowed': disabled,
         'text-red-500 hover:bg-red-500/10': danger && !disabled,
         'text-foreground hover:bg-accent': !danger && !disabled,

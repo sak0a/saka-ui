@@ -981,7 +981,7 @@ const teleportTarget = computed(() => {
                     v-for="(month, index) in monthNamesShort"
                     :key="index"
                     type="button"
-                    class="px-2 py-1.5 text-sm rounded-md transition-colors"
+                    class="px-2 py-1.5 text-sm rounded-sm transition-colors"
                     :class="[
                       viewDate.getMonth() === index 
                         ? `${activeTextClass} font-semibold`
@@ -1023,7 +1023,7 @@ const teleportTarget = computed(() => {
                     v-for="year in years"
                     :key="year"
                     type="button"
-                    class="w-full px-2 py-1.5 text-sm rounded-md transition-colors text-left"
+                    class="w-full px-2 py-1.5 text-sm rounded-sm transition-colors text-left"
                     :class="[
                       viewDate.getFullYear() === year 
                         ? `${activeTextClass} font-semibold`

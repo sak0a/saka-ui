@@ -99,73 +99,76 @@ const getThemeIcon = () => {
 </script>
 
 <template>
-  <div class="h-screen bg-background text-foreground flex overflow-hidden transition-colors duration-300">
-    <!-- Sidebar -->
-    <aside class="w-64 border-r border-border bg-background hidden md:flex flex-col h-full transition-colors duration-300">
-      <!-- Header -->
-      <div class="p-6 shrink-0 flex items-center justify-between">
-        <router-link to="/ui" class="text-xl font-bold bg-linear-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity">
-          Saka-UI
-        </router-link>
-        <button 
-          @click="toggleTheme" 
-          class="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
-          :title="'Theme: ' + theme"
-        >
-          <span :class="['mdi', getThemeIcon(), 'text-xl']"></span>
-        </button>
-      </div>
+  <div class="h-screen bg-background text-foreground flex flex-col overflow-hidden transition-colors duration-300">
+    <!-- Top Navigation Bar -->
+    <header class="h-14 shrink-0 border-b border-border bg-background flex items-center px-6 transition-colors duration-300">
+      <!-- Logo -->
+      <router-link to="/ui" class="text-xl font-bold bg-linear-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity mr-8">
+        Saka-UI
+      </router-link>
 
-      <!-- Topic Navigation -->
-      <div class="px-4 pb-3">
-        <div class="flex gap-1">
-          <router-link
-            v-for="topic in topics"
-            :key="topic.name"
-            :to="topic.href"
-            class="flex-1 flex flex-col items-center gap-1 px-2 py-2 rounded-lg transition-colors text-xs"
-            :class="route.path.startsWith(topic.match) 
-              ? 'bg-primary/15 text-primary font-medium' 
-              : 'text-muted-foreground hover:bg-muted hover:text-foreground'"
-          >
-            <span :class="['mdi mdi-' + topic.icon, 'text-lg']"></span>
-            {{ topic.name }}
-          </router-link>
-        </div>
-      </div>
-
-      <!-- Divider -->
-      <div class="mx-4 border-t border-border"></div>
-
-      <!-- Content Navigation -->
-      <nav class="flex-1 overflow-y-auto mt-3 px-4 space-y-1 pb-8">
+      <!-- Section Links -->
+      <nav class="flex items-center gap-1">
         <router-link
-          v-for="item in navigation"
-          :key="item.name"
-          :to="item.href"
-          class="flex items-center gap-3 px-2 py-0.5 rounded-lg transition-colors"
-          active-class="bg-primary/15 text-primary font-medium"
-          inactive-class="text-muted-foreground hover:bg-muted hover:text-foreground"
+          v-for="topic in topics"
+          :key="topic.name"
+          :to="topic.href"
+          class="flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors text-sm"
+          :class="route.path.startsWith(topic.match)
+            ? 'bg-primary/15 text-primary font-medium'
+            : 'text-muted-foreground hover:bg-muted hover:text-foreground'"
         >
-          <span :class="['mdi mdi-' + item.icon, 'text-lg']"></span>
-          {{ item.name }}
+          <span :class="['mdi mdi-' + topic.icon, 'text-base']"></span>
+          {{ topic.name }}
         </router-link>
       </nav>
-    </aside>
 
-    <!-- Main Content -->
-    <main class="flex-1 overflow-y-auto overscroll-contain bg-muted transition-colors duration-300">
-      <div class="p-8 w-full">
-        <div class="max-w-7xl mx-auto flex gap-8">
-          <!-- Page content -->
-          <div class="flex-1 min-w-0">
-            <router-view />
+      <!-- Spacer -->
+      <div class="flex-1"></div>
+
+      <!-- Theme Toggle -->
+      <button
+        @click="toggleTheme"
+        class="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+        :title="'Theme: ' + theme"
+      >
+        <span :class="['mdi', getThemeIcon(), 'text-xl']"></span>
+      </button>
+    </header>
+
+    <!-- Sidebar + Main Content -->
+    <div class="flex-1 flex overflow-hidden">
+      <!-- Sidebar -->
+      <aside class="w-64 border-r border-border bg-background hidden md:flex flex-col transition-colors duration-300">
+        <nav class="flex-1 overflow-y-auto pt-4 px-4 space-y-1 pb-8">
+          <router-link
+            v-for="item in navigation"
+            :key="item.name"
+            :to="item.href"
+            class="flex items-center gap-3 px-2 py-0.5 rounded-lg transition-colors"
+            active-class="bg-primary/15 text-primary font-medium"
+            inactive-class="text-muted-foreground hover:bg-muted hover:text-foreground"
+          >
+            <span :class="['mdi mdi-' + item.icon, 'text-lg']"></span>
+            {{ item.name }}
+          </router-link>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 overflow-y-auto overscroll-contain bg-muted transition-colors duration-300">
+        <div class="p-8 w-full">
+          <div class="max-w-7xl mx-auto flex gap-8">
+            <!-- Page content -->
+            <div class="flex-1 min-w-0">
+              <router-view />
+            </div>
+
+            <!-- Table of Contents sidebar -->
+            <STableOfContents />
           </div>
-          
-          <!-- Table of Contents sidebar -->
-          <STableOfContents />
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
 </template>
