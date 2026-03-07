@@ -203,7 +203,17 @@ const router = createRouter({
             children: [
                 {
                     path: '',
-                    redirect: '/docs/styling-guide'
+                    redirect: '/docs/getting-started'
+                },
+                {
+                    path: 'getting-started',
+                    name: 'docs-getting-started',
+                    component: () => import('./views/docs/GettingStartedView.vue')
+                },
+                {
+                    path: 'cli',
+                    name: 'docs-cli',
+                    component: () => import('./views/docs/CLIView.vue')
                 },
                 {
                     path: 'styling-guide',
@@ -214,6 +224,11 @@ const router = createRouter({
                     path: 'customization',
                     name: 'docs-customization',
                     component: () => import('./views/docs/CustomizationView.vue')
+                },
+                {
+                    path: 'icons-guide',
+                    name: 'docs-icons-guide',
+                    component: () => import('./views/docs/IconsGuideView.vue')
                 },
                 {
                     path: 'form-validation',

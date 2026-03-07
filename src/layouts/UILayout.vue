@@ -62,8 +62,11 @@ const uiNavigation = [
 
 // Docs navigation (for /docs)
 const docsNavigation = [
+  { name: 'Getting Started', href: '/docs/getting-started', icon: 'rocket-launch' },
+  { name: 'CLI', href: '/docs/cli', icon: 'console' },
   { name: 'Styling Guide', href: '/docs/styling-guide', icon: 'palette-swatch-variant' },
   { name: 'Customization', href: '/docs/customization', icon: 'tune-variant' },
+  { name: 'Icons Guide', href: '/docs/icons-guide', icon: 'emoticon-outline' },
   { name: 'Form Validation', href: '/docs/form-validation', icon: 'check-decagram' },
   { name: 'useTheme', href: '/docs/use-theme', icon: 'palette-swatch' },
   { name: 'useClipboard', href: '/docs/use-clipboard', icon: 'content-copy' },
