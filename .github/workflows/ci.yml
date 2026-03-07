@@ -19,8 +19,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          bun install
-          npm install @rollup/rollup-linux-x64-gnu
+          bun install --frozen-lockfile
 
       - name: Build library bundle
         run: bun run build:lib:bundle
