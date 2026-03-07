@@ -39,6 +39,12 @@ export async function initCommand() {
       initial: DEFAULT_CONFIG.composableDir,
     },
     {
+      type: 'text',
+      name: 'libDir',
+      message: 'Lib/utils directory:',
+      initial: DEFAULT_CONFIG.libDir,
+    },
+    {
       type: 'confirm',
       name: 'typescript',
       message: 'Use TypeScript?',
@@ -60,6 +66,7 @@ export async function initCommand() {
   const config: SakaUIConfig = {
     componentDir: response.componentDir,
     composableDir: response.composableDir,
+    libDir: response.libDir,
     typescript: response.typescript,
     overwrite: response.overwriteFiles,
   }
@@ -70,6 +77,7 @@ export async function initCommand() {
   log.success('Created saka-ui.json')
   log.dim(`  Component dir: ${config.componentDir}`)
   log.dim(`  Composable dir: ${config.composableDir}`)
+  log.dim(`  Lib dir: ${config.libDir}`)
   log.dim(`  TypeScript: ${config.typescript}`)
   log.blank()
   log.info('Next: run "saka-ui add button" to add your first component.')
