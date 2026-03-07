@@ -45,12 +45,20 @@ export interface SDropdownContext {
 }
 
 export const SDropdownContextKey: InjectionKey<SDropdownContext> = Symbol('SDropdownContext')
+
+export interface SDropdownParentContext {
+  registerChildRef: (ref: Ref<HTMLElement | null>) => void
+  unregisterChildRef: (ref: Ref<HTMLElement | null>) => void
+  cancelHide: () => void
+}
+
+export const SDropdownParentKey: InjectionKey<SDropdownParentContext> = Symbol('SDropdownParent')
 </script>
 
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
-import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, computed, provide, inject, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { cn } from '~/lib/utils'
 
 export interface Props {
@@ -156,6 +164,23 @@ const menuPosition = ref<{
 
 let showTimeout: ReturnType<typeof setTimeout> | null = null
 let hideTimeout: ReturnType<typeof setTimeout> | null = null
+
+// Nested dropdown support: track child teleported menu refs
+const childDropdownRefs = new Set<Ref<HTMLElement | null>>()
+const parentDropdown = inject(SDropdownParentKey, null)
+
+provide(SDropdownParentKey, {
+  registerChildRef: (childRef: Ref<HTMLElement | null>) => { childDropdownRefs.add(childRef) },
+  unregisterChildRef: (childRef: Ref<HTMLElement | null>) => { childDropdownRefs.delete(childRef) },
+  cancelHide: () => {
+    if (hideTimeout) {
+      clearTimeout(hideTimeout)
+      hideTimeout = null
+    }
+    // Propagate up the chain for deeply nested dropdowns
+    parentDropdown?.cancelHide()
+  }
+})
 
 // Computed
 const isManual = computed(() => props.trigger === 'manual')
@@ -339,12 +364,15 @@ const calculatePosition = () => {
 
 const open = async () => {
   if (props.disabled || isOpen.value) return
-  
+
   if (hideTimeout) {
     clearTimeout(hideTimeout)
     hideTimeout = null
   }
-  
+
+  // Cancel parent hide timeout when a nested dropdown opens
+  parentDropdown?.cancelHide()
+
   isOpen.value = true
   emit('update:visible', true)
   emit('open')
@@ -413,6 +441,8 @@ const handleMenuMouseEnter = () => {
       hideTimeout = null
     }
   }
+  // Also cancel parent hide when entering a nested menu
+  parentDropdown?.cancelHide()
 }
 
 const handleMenuMouseLeave = () => {
@@ -427,7 +457,9 @@ const handleClickOutside = (event: MouseEvent) => {
     triggerRef.value &&
     dropdownRef.value &&
     !triggerRef.value.contains(target) &&
-    !dropdownRef.value.contains(target)
+    !dropdownRef.value.contains(target) &&
+    // Don't close if click is inside a child dropdown's teleported menu
+    ![...childDropdownRefs].some(childRef => childRef.value?.contains(target))
   ) {
     close()
   }
@@ -528,6 +560,11 @@ watch(isOpen, (val) => {
   }
 })
 
+// Register this dropdown's menu ref with parent (for nested teleported menus)
+if (parentDropdown) {
+  parentDropdown.registerChildRef(dropdownRef)
+}
+
 // Lifecycle
 onMounted(() => {
   document.addEventListener('mousedown', handleClickOutside)
@@ -536,6 +573,9 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (showTimeout) clearTimeout(showTimeout)
   if (hideTimeout) clearTimeout(hideTimeout)
+  if (parentDropdown) {
+    parentDropdown.unregisterChildRef(dropdownRef)
+  }
   document.removeEventListener('mousedown', handleClickOutside)
   window.removeEventListener('scroll', calculatePosition, true)
   window.removeEventListener('resize', calculatePosition)
