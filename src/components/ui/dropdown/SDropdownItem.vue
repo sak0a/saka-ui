@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
-import { inject, computed, onMounted, onBeforeUnmount } from 'vue'
+import { inject, ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { cn } from '~/lib/utils'
 import { SDropdownContextKey, type SDropdownContext } from './SDropdown.vue'
 
@@ -49,13 +49,13 @@ const emit = defineEmits<{
 const context = inject<SDropdownContext>(SDropdownContextKey)
 
 // Register with parent
-let itemIndex = -1
+const itemIndex = ref(-1)
 
 onMounted(() => {
   if (context) {
-    itemIndex = context.registerItem({ 
-      key: props.itemKey, 
-      disabled: props.disabled 
+    itemIndex.value = context.registerItem({
+      key: props.itemKey,
+      disabled: props.disabled
     })
   }
 })
@@ -85,8 +85,8 @@ const sizeConfig = computed(() => ({
 const accentColor = computed(() => props.color ?? context?.color ?? 'var(--s-primary)')
 
 const isHighlighted = computed(() => {
-  if (!context) return false
-  return context.highlightedIndex.value === itemIndex
+  if (!context || itemIndex.value < 0) return false
+  return context.highlightedIndex.value === itemIndex.value
 })
 
 const handleClick = (event: MouseEvent) => {
