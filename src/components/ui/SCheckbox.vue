@@ -2,6 +2,7 @@
 import { computed, ref, type CSSProperties } from 'vue'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 
 defineOptions({ inheritAttrs: false })
 
@@ -34,7 +35,7 @@ export interface Props {
   label?: string
   labelPosition?: 'left' | 'right'
   rounded?: boolean
-  icon?: string
+  icon?: IconProp
   required?: boolean
   name?: string
   error?: string
@@ -246,7 +247,8 @@ const rounded = computed(() => props.rounded)
           :class="cn('absolute inset-0 flex items-center justify-center', color ? 'text-white' : 'text-primary-foreground', sizeConfig.icon)"
         >
           <slot name="icon">
-            <span :class="['mdi', `mdi-${displayIcon}`]" />
+            <component v-if="isIconComponent(displayIcon)" :is="displayIcon" />
+            <span v-else :class="['mdi', `mdi-${displayIcon}`]" />
           </slot>
         </span>
       </Transition>

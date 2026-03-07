@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, useAttrs, type CSSProperties } from 'vue'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 
 defineOptions({ inheritAttrs: false })
 
@@ -17,8 +18,8 @@ export interface Props {
   uncheckedValue?: boolean | string | number
   labelBefore?: string
   labelAfter?: string
-  checkedIcon?: string
-  uncheckedIcon?: string
+  checkedIcon?: IconProp
+  uncheckedIcon?: IconProp
   checkedText?: string
   uncheckedText?: string
   trackClass?: string
@@ -232,16 +233,18 @@ const thumbClasses = computed(() => {
         <!-- Custom Icons via Slots -->
         <template v-else>
           <slot v-if="isChecked" name="checked-icon">
+            <component v-if="checkedIcon && isIconComponent(checkedIcon)" :is="checkedIcon" :class="[sizeConfig.icon]" :style="checkedIconStyle" />
             <span
-              v-if="checkedIcon"
+              v-else-if="checkedIcon"
               :class="['mdi', `mdi-${checkedIcon}`, sizeConfig.icon]"
               :style="checkedIconStyle"
               :data-no-color="!color ? '' : undefined"
             ></span>
           </slot>
           <slot v-else name="unchecked-icon">
+            <component v-if="uncheckedIcon && isIconComponent(uncheckedIcon)" :is="uncheckedIcon" :class="[sizeConfig.icon, 'text-muted-foreground']" />
             <span
-              v-if="uncheckedIcon"
+              v-else-if="uncheckedIcon"
               :class="['mdi', `mdi-${uncheckedIcon}`, sizeConfig.icon, 'text-muted-foreground']"
             ></span>
           </slot>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, inject, type CSSProperties } from 'vue'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 
 defineOptions({ inheritAttrs: false })
 
@@ -14,7 +15,7 @@ export interface Props {
   label?: string
   labelPosition?: 'left' | 'right'
   variant?: 'default' | 'filled' | 'outlined' | 'button'
-  icon?: string
+  icon?: IconProp
   required?: boolean
   name?: string
   error?: string
@@ -195,8 +196,9 @@ const buttonStyle = computed<CSSProperties>(() => {
     ></span>
 
     <!-- Icon -->
+    <component v-if="icon && !loading && isIconComponent(icon)" :is="icon" class="mr-2" />
     <span
-      v-if="icon && !loading"
+      v-else-if="icon && !loading"
       :class="['mdi', `mdi-${icon}`, 'mr-2']"
     ></span>
 
@@ -296,8 +298,14 @@ const buttonStyle = computed<CSSProperties>(() => {
           :class="currentVariant === 'filled' ? (hasCustomColor ? 'text-white' : 'text-primary-foreground') : ''"
         >
           <slot name="icon">
+            <component
+              v-if="icon && isIconComponent(icon)"
+              :is="icon"
+              :class="cn(sizeConfig.icon, currentVariant !== 'filled' && !hasCustomColor ? 'text-primary' : '')"
+              :style="currentVariant !== 'filled' && hasCustomColor ? { color: currentColor } : {}"
+            />
             <span
-              v-if="icon"
+              v-else-if="icon"
               :class="cn('mdi', `mdi-${icon}`, sizeConfig.icon, currentVariant !== 'filled' && !hasCustomColor ? 'text-primary' : '')"
               :style="currentVariant !== 'filled' && hasCustomColor ? { color: currentColor } : {}"
             />

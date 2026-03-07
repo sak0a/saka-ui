@@ -3,13 +3,14 @@ defineOptions({ inheritAttrs: false })
 
 import { inject, computed } from 'vue'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 import { SDropdownContextKey, type SDropdownContext } from './SDropdown.vue'
 
 export interface Props {
   /** Group header label */
   label: string
   /** Icon for the header */
-  icon?: string
+  icon?: IconProp
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -33,7 +34,8 @@ const sizeConfig = computed(() => ({
       class="font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-2 sticky top-0 bg-background/95 backdrop-blur-sm"
       :class="sizeConfig"
     >
-      <span v-if="icon" :class="['mdi', `mdi-${icon}`, 'text-xs']" />
+      <component v-if="icon && isIconComponent(icon)" :is="icon" class="text-xs" />
+      <span v-else-if="icon" :class="['mdi', `mdi-${icon}`, 'text-xs']" />
       <span>{{ label }}</span>
     </div>
     

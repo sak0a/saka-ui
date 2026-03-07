@@ -3,6 +3,7 @@ defineOptions({ inheritAttrs: false })
 
 import { inject, ref, computed, onMounted, onBeforeUnmount, watch, nextTick, provide, useSlots } from 'vue'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 import { SAccordionContextKey, SAccordionItemContextKey, type SAccordionContext } from './SAccordion.vue'
 
 export interface Props {
@@ -12,10 +13,10 @@ export interface Props {
   title?: string
   /** Optional subtitle text */
   subtitle?: string
-  /** MDI icon name for header */
-  icon?: string
-  /** Custom expand icon (MDI icon name, replaces default chevron) */
-  expandIcon?: string
+  /** MDI icon name or Vue component for header */
+  icon?: IconProp
+  /** Custom expand icon (MDI icon name or Vue component, replaces default chevron) */
+  expandIcon?: IconProp
   /** Disable this item */
   disabled?: boolean
   /** Lazy render content */
@@ -272,8 +273,14 @@ provide(SAccordionItemContextKey, {
             :disabled="disabled"
           >
             <!-- Icon -->
+            <component
+              v-if="icon && isIconComponent(icon)"
+              :is="icon"
+              :class="[sizeConfig.icon, 'shrink-0 text-muted-foreground']"
+              :style="isExpanded ? { color: context?.color } : {}"
+            />
             <span
-              v-if="icon"
+              v-else-if="icon"
               :class="['mdi', `mdi-${icon}`, sizeConfig.icon, 'shrink-0 text-muted-foreground']"
               :style="isExpanded ? { color: context?.color } : {}"
             />
@@ -304,7 +311,14 @@ provide(SAccordionItemContextKey, {
 
         <!-- Expand Icon -->
         <slot name="icon" :expanded="isExpanded">
+          <component
+            v-if="expandIcon && isIconComponent(expandIcon)"
+            :is="expandIcon"
+            :class="[sizeConfig.expandIcon, 'text-muted-foreground shrink-0']"
+            :style="expandIconStyle"
+          />
           <span
+            v-else
             :class="['mdi shrink-0', `mdi-${expandIcon || 'chevron-down'}`, sizeConfig.expandIcon, 'text-muted-foreground']"
             :style="expandIconStyle"
           />

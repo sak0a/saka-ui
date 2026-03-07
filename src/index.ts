@@ -1,5 +1,6 @@
 // Utilities
 export { cn } from './lib/utils'
+export { type IconProp, isIconComponent } from './lib/icon'
 
 export { STabs, STabPane, STabsList, STabsTrigger, STabsContent, STabsIndicator } from './components/ui/tabs'
 export { default as SIcon } from './components/ui/SIcon.vue'

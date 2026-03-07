@@ -4,6 +4,7 @@
  * Supports both simple (STabPane) and compound (STabsList + STabsTrigger + STabsContent) APIs
  */
 import { type InjectionKey, type Ref } from 'vue'
+import type { IconProp } from '~/lib/icon'
 
 // Types - exported for external use
 export type TabType = 'line' | 'card' | 'segment' | 'bar' | 'chip'
@@ -14,7 +15,7 @@ export type TabJustify = 'flex-start' | 'center' | 'flex-end' | 'space-between' 
 export interface TabPaneInfo {
   name: string | number
   tab: string
-  icon?: string
+  icon?: IconProp
   disabled?: boolean
   closable?: boolean
   tabClass?: string
@@ -44,6 +45,7 @@ defineOptions({ inheritAttrs: false })
 
 import { provide, ref, computed, watch, nextTick, onMounted, useSlots } from 'vue'
 import { cn } from '~/lib/utils'
+import { isIconComponent } from '~/lib/icon'
 
 // Props
 export interface Props {
@@ -416,8 +418,9 @@ provide(STabsContextKey, {
             :close="() => emit('close', pane.name)"
           >
             <!-- Icon -->
+            <component v-if="pane.icon && isIconComponent(pane.icon)" :is="pane.icon" :class="[{ 'scale-110': activeTab === pane.name }]" />
             <span
-              v-if="pane.icon"
+              v-else-if="pane.icon"
               class="mdi transition-transform duration-300"
               :class="[`mdi-${pane.icon}`, { 'scale-110': activeTab === pane.name }]"
             />

@@ -2,6 +2,7 @@
 import { computed, ref, useSlots, onMounted, onUnmounted } from 'vue'
 import { useTheme } from '../../composables/useTheme'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 
 defineOptions({ inheritAttrs: false })
 
@@ -13,8 +14,8 @@ export interface Props {
   preserveSize?: boolean
   block?: boolean
   rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
-  iconLeft?: string
-  iconRight?: string
+  iconLeft?: IconProp
+  iconRight?: IconProp
   iconOnly?: boolean
   tag?: string
   href?: string
@@ -356,10 +357,10 @@ const componentBindings = computed(() => {
       <!-- Left icon -->
       <template v-if="!loading || preserveSize">
         <slot name="icon-left">
-          <span
-            v-if="iconLeft"
-            :class="['mdi', `mdi-${iconLeft}`, iconSizes]"
-          />
+          <template v-if="iconLeft">
+            <component v-if="isIconComponent(iconLeft)" :is="iconLeft" :class="[iconSizes]" />
+            <span v-else :class="['mdi', `mdi-${iconLeft}`, iconSizes]" />
+          </template>
         </slot>
       </template>
 
@@ -376,10 +377,10 @@ const componentBindings = computed(() => {
       <!-- Right icon -->
       <template v-if="!loading || preserveSize">
         <slot name="icon-right">
-          <span
-            v-if="iconRight"
-            :class="['mdi', `mdi-${iconRight}`, iconSizes]"
-          />
+          <template v-if="iconRight">
+            <component v-if="isIconComponent(iconRight)" :is="iconRight" :class="[iconSizes]" />
+            <span v-else :class="['mdi', `mdi-${iconRight}`, iconSizes]" />
+          </template>
         </slot>
       </template>
     </span>

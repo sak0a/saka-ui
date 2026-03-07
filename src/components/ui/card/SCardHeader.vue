@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 import { cardContextKey, type CardContext } from './index'
 
 defineOptions({ inheritAttrs: false })
@@ -14,8 +15,8 @@ export interface Props {
   avatar?: string
   /** Avatar fallback text (initials) */
   avatarFallback?: string
-  /** Icon name (MDI) */
-  icon?: string
+  /** Icon name (MDI) or Vue component */
+  icon?: IconProp
   /** Icon color */
   iconColor?: string
   /** Show divider below header */
@@ -109,11 +110,13 @@ const computedStyle = computed(() => {
         </div>
         
         <!-- Icon -->
-        <div 
-          v-else-if="icon" 
+        <div
+          v-else-if="icon"
           class="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center"
         >
-          <span 
+          <component v-if="isIconComponent(icon)" :is="icon" :style="{ color: iconColor }" />
+          <span
+            v-else
             class="mdi text-xl"
             :class="`mdi-${icon}`"
             :style="{ color: iconColor }"

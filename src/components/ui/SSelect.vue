@@ -3,12 +3,13 @@ defineOptions({ inheritAttrs: false })
 
 import { ref, computed, watch, provide, onMounted, onBeforeUnmount, nextTick, type CSSProperties } from 'vue'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 
 export interface SelectOption {
   value: any
   label?: string
   disabled?: boolean
-  icon?: string
+  icon?: IconProp
   image?: string
   description?: string
   color?: string
@@ -40,7 +41,7 @@ export interface Props {
   teleport?: boolean | string
   placement?: 'bottom' | 'top' | 'auto'
   // New props
-  arrowIcon?: string
+  arrowIcon?: IconProp
   menuWidth?: string | number
   menuAlign?: 'start' | 'end' | 'center'
   creatable?: boolean
@@ -872,6 +873,7 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
               :alt="selectedOptions[0].label" 
               class="w-5 h-5 rounded-full object-cover shrink-0"
             />
+            <component v-else-if="selectedOptions[0]?.icon && isIconComponent(selectedOptions[0].icon)" :is="selectedOptions[0].icon" class="text-muted-foreground" />
             <span v-else-if="selectedOptions[0]?.icon" :class="['mdi', `mdi-${selectedOptions[0].icon}`, 'text-muted-foreground']" />
             <span class="truncate text-foreground">{{ displayValue }}</span>
           </slot>
@@ -907,8 +909,14 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
 
       <!-- Dropdown arrow -->
       <slot name="arrow" :is-open="isOpen">
-        <span 
-          v-if="!loading"
+        <component
+          v-if="!loading && isIconComponent(arrowIcon)"
+          :is="arrowIcon"
+          class="text-muted-foreground transition-transform duration-200 shrink-0"
+          :class="[sizeConfig.icon, { 'rotate-180': isOpen }]"
+        />
+        <span
+          v-else-if="!loading"
           class="text-muted-foreground transition-transform duration-200 shrink-0"
           :class="['mdi', `mdi-${arrowIcon}`, sizeConfig.icon, { 'rotate-180': isOpen }]"
         />
@@ -1030,8 +1038,15 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
                           class="relative z-10 w-6 h-6 rounded-full object-cover shrink-0 mr-2.5"
                         />
                         <!-- Icon -->
-                        <span 
-                          v-else-if="option.icon" 
+                        <component
+                          v-else-if="option.icon && isIconComponent(option.icon)"
+                          :is="option.icon"
+                          class="relative z-10 shrink-0 mr-2.5"
+                          :class="[sizeConfig.icon]"
+                          :style="isSelected(option.value) ? { color: option.color ?? resolvedColor } : {}"
+                        />
+                        <span
+                          v-else-if="option.icon"
                           class="relative z-10 shrink-0 mr-2.5"
                           :class="['mdi', `mdi-${option.icon}`, sizeConfig.icon]"
                           :style="isSelected(option.value) ? { color: option.color ?? resolvedColor } : {}"
@@ -1098,8 +1113,15 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
                         class="relative z-10 w-6 h-6 rounded-full object-cover shrink-0 mr-2.5"
                       />
                       <!-- Icon -->
-                      <span 
-                        v-else-if="option.icon" 
+                      <component
+                        v-else-if="option.icon && isIconComponent(option.icon)"
+                        :is="option.icon"
+                        class="relative z-10 shrink-0 mr-2.5"
+                        :class="[sizeConfig.icon]"
+                        :style="isSelected(option.value) ? { color: option.color ?? resolvedColor } : {}"
+                      />
+                      <span
+                        v-else-if="option.icon"
                         class="relative z-10 shrink-0 mr-2.5"
                         :class="['mdi', `mdi-${option.icon}`, sizeConfig.icon]"
                         :style="isSelected(option.value) ? { color: option.color ?? resolvedColor } : {}"

@@ -4,6 +4,7 @@
  * A highly customizable dropdown component for menus, actions, and navigation
  */
 import { type InjectionKey, type Ref } from 'vue'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 
 // Types
 export type DropdownTrigger = 'click' | 'hover' | 'context' | 'manual'
@@ -19,8 +20,8 @@ export type DropdownAnimation = 'fade' | 'slide' | 'scale' | 'reveal'
 export interface DropdownMenuItem {
   key: string
   label: string
-  icon?: string
-  trailingIcon?: string
+  icon?: IconProp
+  trailingIcon?: IconProp
   description?: string
   shortcut?: string
   disabled?: boolean
@@ -98,7 +99,7 @@ export interface Props {
   /** Trigger button text */
   label?: string
   /** Trigger button icon */
-  icon?: string
+  icon?: IconProp
   /** Hide the dropdown arrow on trigger */
   hideArrow?: boolean
 }
@@ -589,7 +590,8 @@ defineExpose({
           ]"
           :disabled="disabled"
         >
-          <span v-if="icon" :class="['mdi', `mdi-${icon}`, sizeConfig.icon]" />
+          <component v-if="icon && isIconComponent(icon)" :is="icon" :class="[sizeConfig.icon]" />
+          <span v-else-if="icon" :class="['mdi', `mdi-${icon}`, sizeConfig.icon]" />
           <span v-if="label">{{ label }}</span>
           <span 
             v-if="!hideArrow" 
@@ -704,7 +706,8 @@ defineExpose({
                   />
                   
                   <!-- Leading icon -->
-                  <span 
+                  <component v-else-if="item.icon && isIconComponent(item.icon)" :is="item.icon" :class="[sizeConfig.icon, 'mr-2.5', item.danger ? '' : 'text-muted-foreground']" />
+                  <span
                     v-else-if="item.icon"
                     :class="['mdi', `mdi-${item.icon}`, sizeConfig.icon, 'mr-2.5', item.danger ? '' : 'text-muted-foreground']"
                   />
@@ -732,8 +735,9 @@ defineExpose({
                     </kbd>
                     
                     <!-- Trailing icon -->
-                    <span 
-                      v-if="item.trailingIcon"
+                    <component v-if="item.trailingIcon && isIconComponent(item.trailingIcon)" :is="item.trailingIcon" :class="[sizeConfig.icon, 'text-muted-foreground']" />
+                    <span
+                      v-else-if="item.trailingIcon"
                       :class="['mdi', `mdi-${item.trailingIcon}`, sizeConfig.icon, 'text-muted-foreground']"
                     />
                     

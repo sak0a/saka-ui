@@ -3,6 +3,7 @@ defineOptions({ inheritAttrs: false })
 
 import { inject, ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 import { SDropdownContextKey, type SDropdownContext } from './SDropdown.vue'
 
 export interface Props {
@@ -10,10 +11,10 @@ export interface Props {
   itemKey: string
   /** Item label text */
   label?: string
-  /** Leading icon (MDI icon name) */
-  icon?: string
-  /** Trailing icon */
-  trailingIcon?: string
+  /** Leading icon (MDI icon name or Vue component) */
+  icon?: IconProp
+  /** Trailing icon (MDI icon name or Vue component) */
+  trailingIcon?: IconProp
   /** Description text below label */
   description?: string
   /** Keyboard shortcut display */
@@ -130,7 +131,8 @@ const handleClick = (event: MouseEvent) => {
     />
     
     <!-- Leading icon -->
-    <span 
+    <component v-else-if="icon && isIconComponent(icon)" :is="icon" :class="[sizeConfig.icon, 'mr-2.5', danger ? '' : 'text-muted-foreground group-hover:text-foreground']" />
+    <span
       v-else-if="icon"
       :class="['mdi', `mdi-${icon}`, sizeConfig.icon, 'mr-2.5', danger ? '' : 'text-muted-foreground group-hover:text-foreground']"
     />
@@ -160,8 +162,9 @@ const handleClick = (event: MouseEvent) => {
       </kbd>
       
       <!-- Trailing icon -->
-      <span 
-        v-if="trailingIcon"
+      <component v-if="trailingIcon && isIconComponent(trailingIcon)" :is="trailingIcon" :class="[sizeConfig.icon, 'text-muted-foreground']" />
+      <span
+        v-else-if="trailingIcon"
         :class="['mdi', `mdi-${trailingIcon}`, sizeConfig.icon, 'text-muted-foreground']"
       />
       

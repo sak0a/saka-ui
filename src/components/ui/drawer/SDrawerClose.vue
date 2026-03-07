@@ -9,6 +9,7 @@ defineOptions({ inheritAttrs: false })
 
 import { inject } from 'vue'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
 
 export interface Props {
@@ -19,7 +20,7 @@ export interface Props {
   /** Visual variant */
   variant?: 'default' | 'ghost' | 'subtle'
   /** Icon to display */
-  icon?: string
+  icon?: IconProp
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -59,6 +60,7 @@ const variantClasses = {
     aria-label="Close drawer"
     @click="handleClose"
   >
-    <span :class="`mdi mdi-${icon} text-xl`" />
+    <component v-if="isIconComponent(icon)" :is="icon" class="text-xl" />
+    <span v-else :class="`mdi mdi-${icon} text-xl`" />
   </button>
 </template>

@@ -3,12 +3,13 @@ defineOptions({ inheritAttrs: false })
 
 import { inject, computed, type CSSProperties } from 'vue'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 
 export interface Props {
   value: any
   label?: string
   disabled?: boolean
-  icon?: string
+  icon?: IconProp
   description?: string
   color?: string
 }
@@ -132,8 +133,14 @@ const bgClass = computed(() => {
     />
 
     <!-- Icon -->
+    <component
+      v-if="icon && isIconComponent(icon)"
+      :is="icon"
+      :class="cn('relative z-10 shrink-0', sizeConfig.icon, isSelected && !hasCustomColor ? 'text-primary' : '')"
+      :style="isSelected && hasCustomColor ? { color: resolvedColor } : {}"
+    />
     <span
-      v-if="icon"
+      v-else-if="icon"
       :class="cn('relative z-10 shrink-0 mdi', `mdi-${icon}`, sizeConfig.icon, isSelected && !hasCustomColor ? 'text-primary' : '')"
       :style="isSelected && hasCustomColor ? { color: resolvedColor } : {}"
     />

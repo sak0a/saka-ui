@@ -2,6 +2,7 @@
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 
 defineOptions({ inheritAttrs: false })
 
@@ -66,7 +67,7 @@ export interface Props {
   size?: 'small' | 'medium' | 'large'
   title?: string
   description?: string
-  icon?: string | boolean
+  icon?: IconProp | boolean
   closable?: boolean
   autoDismiss?: boolean
   duration?: number
@@ -125,8 +126,10 @@ const defaultIcons = computed(() => ({
 
 const displayIcon = computed(() => {
   if (props.icon === false) return null
-  if (typeof props.icon === 'string') return props.icon
-  return defaultIcons.value[props.variant as keyof typeof defaultIcons.value] || 'information'
+  if (props.icon === true || props.icon === undefined) {
+    return defaultIcons.value[props.variant as keyof typeof defaultIcons.value] || 'information'
+  }
+  return props.icon // could be string or Component
 })
 
 const sizes = computed(() => sizeConfig[props.size])
@@ -302,9 +305,10 @@ defineExpose({
     >
       <div class="flex items-start" :class="sizes.gap">
         <!-- Icon -->
-        <div v-if="displayIcon" class="shrink-0" :class="[variantIconColors[variant], iconClass]">
+        <div v-if="displayIcon != null" class="shrink-0" :class="[variantIconColors[variant], iconClass]">
           <slot name="icon">
-            <span class="mdi" :class="[`mdi-${displayIcon}`, sizes.iconSize]" />
+            <component v-if="isIconComponent(displayIcon)" :is="displayIcon" :class="[sizes.iconSize]" />
+            <span v-else class="mdi" :class="[`mdi-${displayIcon}`, sizes.iconSize]" />
           </slot>
         </div>
 

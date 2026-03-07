@@ -1,5 +1,6 @@
 <script lang="ts">
 import { cva, type VariantProps } from 'class-variance-authority'
+import type { IconProp } from '~/lib/icon'
 
 export const buttonVariants = cva(
   'relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out overflow-hidden select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-[1.5px] border-transparent',
@@ -46,8 +47,8 @@ export interface Props {
   preserveSize?: boolean
   block?: boolean
   rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
-  iconLeft?: string
-  iconRight?: string
+  iconLeft?: IconProp
+  iconRight?: IconProp
   iconOnly?: boolean
   tag?: string
   href?: string
@@ -64,6 +65,7 @@ export interface Props {
 <script setup lang="ts">
 import { computed, ref, useSlots, type CSSProperties } from 'vue'
 import { cn } from '~/lib/utils'
+import { isIconComponent } from '~/lib/icon'
 
 const iconOnlySizes: Record<string, string> = {
   xs: 'w-6 h-6 text-xs',
@@ -257,10 +259,10 @@ const componentBindings = computed(() => {
     >
       <template v-if="!loading || preserveSize">
         <slot name="icon-left">
-          <span
-            v-if="iconLeft"
-            :class="['mdi', `mdi-${iconLeft}`, iconSizes, iconClass]"
-          />
+          <template v-if="iconLeft">
+            <component v-if="isIconComponent(iconLeft)" :is="iconLeft" :class="[iconSizes, iconClass]" />
+            <span v-else :class="['mdi', `mdi-${iconLeft}`, iconSizes, iconClass]" />
+          </template>
         </slot>
       </template>
 
@@ -274,10 +276,10 @@ const componentBindings = computed(() => {
 
       <template v-if="!loading || preserveSize">
         <slot name="icon-right">
-          <span
-            v-if="iconRight"
-            :class="['mdi', `mdi-${iconRight}`, iconSizes, iconClass]"
-          />
+          <template v-if="iconRight">
+            <component v-if="isIconComponent(iconRight)" :is="iconRight" :class="[iconSizes, iconClass]" />
+            <span v-else :class="['mdi', `mdi-${iconRight}`, iconSizes, iconClass]" />
+          </template>
         </slot>
       </template>
     </span>
