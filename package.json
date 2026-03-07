@@ -1,6 +1,5 @@
 {
-  "name": "saka-ui",
-  "private": false,
+  "name": "@sakoa/ui",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/saka-ui.umd.cjs",
