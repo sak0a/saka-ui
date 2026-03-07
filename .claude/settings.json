@@ -40,7 +40,9 @@
       "Skill(commit-commands:commit-push-pr:*)",
       "Bash(git add src/components/ui/SKbd.vue src/components/ui/SKbdShortcut.vue src/views/ui/KbdView.vue src/views/ui/TooltipView.vue src/views/ui/ModalView.vue src/views/ui/InputView.vue registry/index.json registry/components/kbd.json registry/source/components/ui/SKbd.vue registry/source/components/ui/SKbdShortcut.vue)",
       "Bash(git add src/components/ui/SKbd.vue src/components/ui/SKbdShortcut.vue src/views/ui/KbdView.vue src/views/ui/TooltipView.vue src/views/ui/ModalView.vue src/views/ui/InputView.vue registry/index.json registry/components/kbd.json)",
-      "Bash(git push)"
+      "Bash(git push)",
+      "Bash(npx vue-tsc --noEmit)",
+      "Bash(gh pr:*)"
     ]
   }
 }
