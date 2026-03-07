@@ -27,6 +27,8 @@ export interface Props {
   checked?: boolean
   /** Custom color for this item */
   color?: string
+  /** Custom icon color */
+  iconColor?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -38,7 +40,8 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   danger: false,
   checked: undefined,
-  color: undefined
+  color: undefined,
+  iconColor: undefined
 })
 
 const emit = defineEmits<{
@@ -71,15 +74,21 @@ onBeforeUnmount(() => {
 const sizeConfig = computed(() => ({
   small: {
     item: 'px-2 py-1 text-xs',
-    icon: 'text-sm'
+    icon: 'text-sm',
+    iconSize: 'w-3.5 h-3.5',
+    iconPx: 14
   },
   medium: {
     item: 'px-2.5 py-1.5 text-sm',
-    icon: 'text-base'
+    icon: 'text-base',
+    iconSize: 'w-4 h-4',
+    iconPx: 16
   },
   large: {
     item: 'px-3 py-2 text-base',
-    icon: 'text-lg'
+    icon: 'text-lg',
+    iconSize: 'w-5 h-5',
+    iconPx: 20
   }
 }[context?.size ?? 'medium']))
 
@@ -131,7 +140,7 @@ const handleClick = (event: MouseEvent) => {
     />
     
     <!-- Leading icon -->
-    <component v-else-if="icon && isIconComponent(icon)" :is="icon" :class="[sizeConfig.icon, 'mr-2.5', danger ? '' : 'text-muted-foreground group-hover:text-foreground']" />
+    <component v-else-if="icon && isIconComponent(icon)" :is="icon" :size="sizeConfig.iconPx" :class="['mr-2.5 shrink-0', !iconColor && !danger ? 'text-muted-foreground group-hover:text-foreground' : '']" :style="iconColor ? { color: iconColor } : {}" />
     <span
       v-else-if="icon"
       :class="['mdi', `mdi-${icon}`, sizeConfig.icon, 'mr-2.5', danger ? '' : 'text-muted-foreground group-hover:text-foreground']"
@@ -162,7 +171,7 @@ const handleClick = (event: MouseEvent) => {
       </kbd>
       
       <!-- Trailing icon -->
-      <component v-if="trailingIcon && isIconComponent(trailingIcon)" :is="trailingIcon" :class="[sizeConfig.icon, 'text-muted-foreground']" />
+      <component v-if="trailingIcon && isIconComponent(trailingIcon)" :is="trailingIcon" :size="sizeConfig.iconPx" class="text-muted-foreground" />
       <span
         v-else-if="trailingIcon"
         :class="['mdi', `mdi-${trailingIcon}`, sizeConfig.icon, 'text-muted-foreground']"

@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { SButton, SKbd, SKbdShortcut, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
+import { Palette, Sparkles, LoaderCircle } from 'lucide-vue-next'
 
 // State for interactive demos
 const isLoading = ref(false)
@@ -206,7 +207,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-palette-outline text-xl text-emerald-500"></span>
+            <Palette class="w-5 h-5 text-emerald-500" />
             <h3 class="font-semibold text-(--s-text-primary)">Five Variants</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Filled, outlined, light, ghost, and link variants with custom color support.</p>
@@ -220,7 +221,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-shimmer text-xl text-purple-500"></span>
+            <Sparkles class="w-5 h-5 text-purple-500" />
             <h3 class="font-semibold text-(--s-text-primary)">Ripple Effect</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Built-in ripple animation on click for tactile feedback.</p>
@@ -234,7 +235,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-loading text-xl text-red-500"></span>
+            <LoaderCircle class="w-5 h-5 text-red-500" />
             <h3 class="font-semibold text-(--s-text-primary)">Loading State</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Built-in loading spinner with automatic interaction prevention.</p>

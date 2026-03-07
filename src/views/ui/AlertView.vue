@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { SAlert, SButton, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, ApiMethod, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
+import { Timer, MousePointerClick, Keyboard } from 'lucide-vue-next'
 
 // State for demo
 const showToast = ref(false)
@@ -291,7 +292,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-timer-outline text-xl text-blue-500"></span>
+            <Timer class="w-5 h-5 text-blue-500" />
             <h3 class="font-semibold text-(--s-text-primary)">Auto-dismiss</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Automatically dismiss alerts with configurable duration and visual progress indicator.</p>
@@ -305,7 +306,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-cursor-default-click-outline text-xl text-amber-500"></span>
+            <MousePointerClick class="w-5 h-5 text-amber-500" />
             <h3 class="font-semibold text-(--s-text-primary)">Action Buttons</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Add interactive buttons using the actions slot for confirm/cancel dialogs.</p>
@@ -319,7 +320,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-keyboard text-xl text-cyan-500"></span>
+            <Keyboard class="w-5 h-5 text-cyan-500" />
             <h3 class="font-semibold text-(--s-text-primary)">Keyboard Support</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Press Escape to close alerts with full keyboard accessibility support.</p>

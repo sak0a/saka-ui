@@ -4,23 +4,24 @@ import { SDropdown, SDropdownItem, SDropdownDivider, SDropdownGroup, SKbd, SKbdS
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import type { DropdownMenuItem } from '../../components/ui/dropdown/SDropdown.vue'
 import DemoSection from '../../components/DemoSection.vue'
+import { Pencil, Copy, Archive, Trash2, Mail, Link, Code, QrCode, Search, Palette, Keyboard as KeyboardIcon } from 'lucide-vue-next'
 
 // Basic items
 const basicItems: DropdownMenuItem[] = [
-  { key: 'edit', label: 'Edit', icon: 'pencil' },
-  { key: 'duplicate', label: 'Duplicate', icon: 'content-copy' },
-  { key: 'archive', label: 'Archive', icon: 'archive' },
+  { key: 'edit', label: 'Edit', icon: Pencil },
+  { key: 'duplicate', label: 'Duplicate', icon: Copy },
+  { key: 'archive', label: 'Archive', icon: Archive },
   { key: 'divider1', divider: true },
-  { key: 'delete', label: 'Delete', icon: 'delete', danger: true }
+  { key: 'delete', label: 'Delete', icon: Trash2, danger: true }
 ]
 
 // Items with descriptions
 const richItems: DropdownMenuItem[] = [
-  { key: 'email', label: 'Send via Email', icon: 'email', description: 'Send to recipient email address', shortcut: '⌘E' },
-  { key: 'link', label: 'Copy Link', icon: 'link-variant', description: 'Copy shareable link to clipboard', shortcut: '⌘L' },
-  { key: 'embed', label: 'Embed', icon: 'code-tags', description: 'Get embed code for websites' },
+  { key: 'email', label: 'Send via Email', icon: Mail, description: 'Send to recipient email address', shortcut: '⌘E' },
+  { key: 'link', label: 'Copy Link', icon: Link, description: 'Copy shareable link to clipboard', shortcut: '⌘L' },
+  { key: 'embed', label: 'Embed', icon: Code, description: 'Get embed code for websites' },
   { key: 'divider1', divider: true },
-  { key: 'qr', label: 'Generate QR Code', icon: 'qrcode', description: 'Create scannable QR code' }
+  { key: 'qr', label: 'Generate QR Code', icon: QrCode, description: 'Create scannable QR code' }
 ]
 
 // Grouped items
@@ -253,14 +254,14 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-keyboard text-2xl text-rose-400"></span>
+            <KeyboardIcon class="w-6 h-6 text-rose-400" />
             <h3 class="font-semibold text-(--s-text-primary)">Keyboard Navigation</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Full keyboard support with arrows, Enter, Escape, and shortcuts display.</p>
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-magnify text-2xl text-violet-400"></span>
+            <Search class="w-6 h-6 text-violet-400" />
             <h3 class="font-semibold text-(--s-text-primary)">Searchable Menu</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Built-in search filtering for long lists of options.</p>
@@ -274,7 +275,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-palette text-2xl text-cyan-400"></span>
+            <Palette class="w-6 h-6 text-cyan-400" />
             <h3 class="font-semibold text-(--s-text-primary)">Customizable</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Sizes, variants, colors, and complete slot support for custom content.</p>

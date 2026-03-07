@@ -5,6 +5,7 @@ import {
 } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, ApiMethod } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
+import { Sparkles, ShieldCheck, Wrench } from 'lucide-vue-next'
 
 // Demo state
 const basicValue = ref('')
@@ -275,14 +276,14 @@ const inputMethods: ApiMethod[] = [
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-animation text-xl text-blue-500"></span>
+            <Sparkles class="w-5 h-5 text-blue-500" />
             <h3 class="font-semibold text-(--s-text-primary)">Morphing Labels</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Smooth floating label animations with scale and translate transitions.</p>
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-shield-check text-xl text-emerald-500"></span>
+            <ShieldCheck class="w-5 h-5 text-emerald-500" />
             <h3 class="font-semibold text-(--s-text-primary)">Advanced Validation</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Built-in validators plus custom async validation support.</p>
@@ -303,7 +304,7 @@ const inputMethods: ApiMethod[] = [
         </div>
         <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-tools text-xl text-cyan-500"></span>
+            <Wrench class="w-5 h-5 text-cyan-500" />
             <h3 class="font-semibold text-(--s-text-primary)">Rich Features</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Password toggle, clearable, character counter, and more.</p>
