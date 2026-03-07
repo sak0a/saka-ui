@@ -6,7 +6,7 @@ import { log } from './logger.js'
 
 const PROVENANCE_PREFIX = '// @saka-ui/registry'
 
-const LIB_FILES = ['lib/utils.ts']
+const LIB_FILES = ['lib/utils.ts', 'lib/icon.ts']
 
 export interface CopyResult {
   file: string
