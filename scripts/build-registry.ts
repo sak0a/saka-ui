@@ -52,7 +52,7 @@ const manifests: ComponentManifest[] = componentNames.map((name) => {
 })
 
 // 4. Copy shared lib files (always included)
-const LIB_FILES = ['lib/utils.ts']
+const LIB_FILES = ['lib/utils.ts', 'lib/icon.ts']
 
 for (const libFile of LIB_FILES) {
   const srcPath = resolve(SRC, libFile)
