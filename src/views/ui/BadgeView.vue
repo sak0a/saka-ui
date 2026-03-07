@@ -458,12 +458,9 @@ const badgeSlots: ApiSlot[] = [
               @click="incrementNotifications"
             />
           </SBadge>
-          <button 
-            @click="clearNotifications"
-            class="px-4 py-2 text-sm bg-(--s-bg-tertiary) text-(--s-text-secondary) rounded-lg hover:bg-(--s-bg-secondary) hover:text-(--s-text-primary) transition-colors"
-          >
+          <SButton variant="ghost" size="small" @click="clearNotifications">
             Clear
-          </button>
+          </SButton>
           <span class="text-sm text-(--s-text-secondary)">
             Count: {{ notificationCount }}
           </span>

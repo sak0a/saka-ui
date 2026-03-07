@@ -622,12 +622,12 @@ const advancedCode = `<!-- User profile preview -->
               <div class="space-y-2">
                 <div class="font-semibold">Interactive Tooltip</div>
                 <div class="text-sm">Try hovering over this tooltip content!</div>
-                <button 
-                  class="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-sm mt-2 transition-colors w-full"
+                <SButton
+                  class="w-full mt-2"
                   @click="() => console.log('Clicked inside tooltip!')"
                 >
                   Click me
-                </button>
+                </SButton>
               </div>
             </template>
             <SButton iconLeft="cursor-default-click">Interactive</SButton>
@@ -704,10 +704,10 @@ const advancedCode = `<!-- User profile preview -->
                 </div>
               </div>
             </template>
-            <button class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-(--s-bg-secondary) transition-colors">
+            <SButton variant="ghost" class="flex items-center gap-2">
               <span class="mdi mdi-account-circle text-2xl text-(--s-text-secondary)"></span>
               <span class="text-sm text-(--s-text-secondary)">Profile</span>
-            </button>
+            </SButton>
           </STooltip>
 
           <!-- Help icon -->
@@ -716,9 +716,9 @@ const advancedCode = `<!-- User profile preview -->
             placement="top"
             max-width="220px"
           >
-            <button class="text-(--s-text-secondary) hover:text-(--s-text-primary) transition-colors">
+            <SButton variant="ghost" iconOnly>
               <span class="mdi mdi-help-circle text-xl"></span>
-            </button>
+            </SButton>
           </STooltip>
 
           <!-- Delete action -->

@@ -983,15 +983,9 @@ const actionsSlots: ApiSlot[] = [
                 </div>
               </div>
               <div class="flex items-center justify-center gap-6 mt-4">
-                <button class="text-white/70 hover:text-white transition-colors">
-                  <span class="mdi mdi-skip-previous text-2xl" />
-                </button>
-                <button class="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
-                  <span class="mdi mdi-play text-2xl text-white" />
-                </button>
-                <button class="text-white/70 hover:text-white transition-colors">
-                  <span class="mdi mdi-skip-next text-2xl" />
-                </button>
+                <SButton variant="ghost" iconOnly iconLeft="skip-previous" class="text-white/70 hover:text-white" />
+                <SButton variant="ghost" iconOnly iconLeft="play" class="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white" />
+                <SButton variant="ghost" iconOnly iconLeft="skip-next" class="text-white/70 hover:text-white" />
               </div>
             </SCard>
 

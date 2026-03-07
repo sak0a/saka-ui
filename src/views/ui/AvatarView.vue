@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SAvatar, SAvatarImage, SAvatarFallback, SAvatarGroup, SApiSection, SApiTable } from '../../index'
+import { SAvatar, SAvatarImage, SAvatarFallback, SAvatarGroup, SButton, SApiSection, SApiTable } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
@@ -563,12 +563,9 @@ const avatarSlots: ApiSlot[] = [
             <SAvatarImage :src="users[0].src" />
             <SAvatarFallback>JD</SAvatarFallback>
           </SAvatar>
-          <button 
-            @click="toggleStatus"
-            class="px-4 py-2 text-sm bg-(--s-bg-tertiary) text-(--s-text-secondary) rounded-lg hover:bg-(--s-bg-secondary) hover:text-(--s-text-primary) transition-colors"
-          >
+          <SButton @click="toggleStatus">
             Toggle Status: {{ currentStatus }}
-          </button>
+          </SButton>
         </div>
       </DemoSection>
     </section>

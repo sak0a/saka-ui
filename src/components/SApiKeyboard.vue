@@ -18,6 +18,7 @@ interface Props {
 }
 
 import { cn } from '~/lib/utils'
+import SKbd from '~/components/ui/SKbd.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -62,9 +63,7 @@ const normalizeKeys = (keys: string | string[]): string[] => {
           <span class="flex items-center gap-1">
             <template v-for="(key, keyIndex) in normalizeKeys(shortcut.keys)" :key="keyIndex">
               <span v-if="keyIndex > 0" class="text-muted-foreground text-xs">/</span>
-              <kbd class="rounded border border-border/70 bg-background px-2 py-1 text-xs font-mono text-foreground shadow-sm">
-                {{ key }}
-              </kbd>
+              <SKbd>{{ key }}</SKbd>
             </template>
           </span>
           <span class="text-sm text-muted-foreground">{{ shortcut.action }}</span>
@@ -92,9 +91,7 @@ const normalizeKeys = (keys: string | string[]): string[] => {
               <span class="flex items-center gap-1">
                 <template v-for="(key, keyIndex) in normalizeKeys(shortcut.keys)" :key="keyIndex">
                   <span v-if="keyIndex > 0" class="text-muted-foreground text-xs mx-1">/</span>
-                  <kbd class="rounded border border-border/70 bg-background px-2 py-1 text-xs font-mono text-foreground shadow-sm">
-                    {{ key }}
-                  </kbd>
+                  <SKbd>{{ key }}</SKbd>
                 </template>
               </span>
             </td>

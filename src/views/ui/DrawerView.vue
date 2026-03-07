@@ -602,54 +602,54 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         >
           <SDrawerContent padding="none">
             <div class="grid grid-cols-4 gap-4 p-6">
-              <button class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-(--s-bg-secondary) transition-colors">
+              <SButton variant="ghost" class="flex flex-col items-center gap-2 p-3 rounded-xl h-auto">
                 <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white">
                   <span class="mdi mdi-twitter text-xl" />
                 </div>
                 <span class="text-xs text-(--s-text-secondary)">Twitter</span>
-              </button>
-              <button class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-(--s-bg-secondary) transition-colors">
+              </SButton>
+              <SButton variant="ghost" class="flex flex-col items-center gap-2 p-3 rounded-xl h-auto">
                 <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white">
                   <span class="mdi mdi-facebook text-xl" />
                 </div>
                 <span class="text-xs text-(--s-text-secondary)">Facebook</span>
-              </button>
-              <button class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-(--s-bg-secondary) transition-colors">
+              </SButton>
+              <SButton variant="ghost" class="flex flex-col items-center gap-2 p-3 rounded-xl h-auto">
                 <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white">
                   <span class="mdi mdi-whatsapp text-xl" />
                 </div>
                 <span class="text-xs text-(--s-text-secondary)">WhatsApp</span>
-              </button>
-              <button class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-(--s-bg-secondary) transition-colors">
+              </SButton>
+              <SButton variant="ghost" class="flex flex-col items-center gap-2 p-3 rounded-xl h-auto">
                 <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white">
                   <span class="mdi mdi-instagram text-xl" />
                 </div>
                 <span class="text-xs text-(--s-text-secondary)">Instagram</span>
-              </button>
-              <button class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-(--s-bg-secondary) transition-colors">
+              </SButton>
+              <SButton variant="ghost" class="flex flex-col items-center gap-2 p-3 rounded-xl h-auto">
                 <div class="w-12 h-12 rounded-full bg-sky-500 flex items-center justify-center text-white">
                   <span class="mdi mdi-telegram text-xl" />
                 </div>
                 <span class="text-xs text-(--s-text-secondary)">Telegram</span>
-              </button>
-              <button class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-(--s-bg-secondary) transition-colors">
+              </SButton>
+              <SButton variant="ghost" class="flex flex-col items-center gap-2 p-3 rounded-xl h-auto">
                 <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center text-white">
                   <span class="mdi mdi-email text-xl" />
                 </div>
                 <span class="text-xs text-(--s-text-secondary)">Email</span>
-              </button>
-              <button class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-(--s-bg-secondary) transition-colors">
+              </SButton>
+              <SButton variant="ghost" class="flex flex-col items-center gap-2 p-3 rounded-xl h-auto">
                 <div class="w-12 h-12 rounded-full bg-(--s-bg-tertiary) flex items-center justify-center text-(--s-text-primary)">
                   <span class="mdi mdi-link-variant text-xl" />
                 </div>
                 <span class="text-xs text-(--s-text-secondary)">Copy Link</span>
-              </button>
-              <button class="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-(--s-bg-secondary) transition-colors">
+              </SButton>
+              <SButton variant="ghost" class="flex flex-col items-center gap-2 p-3 rounded-xl h-auto">
                 <div class="w-12 h-12 rounded-full bg-(--s-bg-tertiary) flex items-center justify-center text-(--s-text-primary)">
                   <span class="mdi mdi-dots-horizontal text-xl" />
                 </div>
                 <span class="text-xs text-(--s-text-secondary)">More</span>
-              </button>
+              </SButton>
             </div>
           </SDrawerContent>
         </SDrawer>
@@ -692,16 +692,17 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           
           <SDrawerContent padding="sm">
             <nav class="space-y-1">
-              <button
+              <SButton
                 v-for="item in menuItems"
                 :key="item.label"
-                class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-(--s-text-secondary) hover:text-(--s-text-primary) hover:bg-(--s-bg-secondary) transition-colors"
+                variant="ghost"
+                class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-(--s-text-secondary) hover:text-(--s-text-primary) hover:bg-(--s-bg-secondary) h-auto justify-start"
                 @click="menuDrawer = false"
               >
                 <span :class="`mdi mdi-${item.icon} text-xl`" />
                 <span class="flex-1 text-left">{{ item.label }}</span>
                 <SBadge v-if="item.badge" size="sm" color="red">{{ item.badge }}</SBadge>
-              </button>
+              </SButton>
             </nav>
           </SDrawerContent>
           
@@ -754,9 +755,9 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                   <p class="text-sm text-(--s-text-tertiary) mt-1">Qty: {{ item.qty }}</p>
                   <p class="font-semibold text-(--s-primary) mt-2">${{ (item.price * item.qty).toFixed(2) }}</p>
                 </div>
-                <button class="shrink-0 w-8 h-8 rounded-lg text-(--s-text-tertiary) hover:text-red-500 hover:bg-red-500/10 transition-colors">
+                <SButton variant="ghost" size="small" :iconOnly="true" class="shrink-0 text-(--s-text-tertiary) hover:text-red-500 hover:bg-red-500/10">
                   <span class="mdi mdi-delete-outline text-lg" />
-                </button>
+                </SButton>
               </div>
             </div>
           </SDrawerContent>

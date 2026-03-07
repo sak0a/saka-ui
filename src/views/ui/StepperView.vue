@@ -970,22 +970,23 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
             <SStepperContent :step="2">
               <div class="grid grid-cols-3 gap-4 max-w-lg">
-                <button
+                <SButton
                   v-for="plan in ['Free', 'Pro', 'Enterprise']"
                   :key="plan"
                   :class="[
-                    'rounded-xl border-2 p-5 text-center transition-all duration-200',
+                    'rounded-xl border-2 p-5 text-center transition-all duration-200 h-auto flex-col',
                     formData.plan === plan
                       ? 'border-primary bg-primary/5 shadow-sm'
                       : 'border-border hover:border-primary/40'
                   ]"
+                  variant="ghost"
                   @click="formData.plan = plan"
                 >
                   <span class="font-semibold text-foreground">{{ plan }}</span>
                   <p class="text-xs text-muted-foreground mt-1">
                     {{ plan === 'Free' ? '$0/mo' : plan === 'Pro' ? '$19/mo' : '$99/mo' }}
                   </p>
-                </button>
+                </SButton>
               </div>
             </SStepperContent>
 

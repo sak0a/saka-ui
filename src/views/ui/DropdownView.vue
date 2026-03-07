@@ -318,10 +318,10 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
           <!-- Custom trigger -->
           <SDropdown @select="handleSelect">
             <template #trigger>
-              <button class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-lg font-medium hover:opacity-90 transition-opacity">
+              <SButton class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-lg font-medium hover:opacity-90 transition-opacity">
                 <span class="mdi mdi-rocket-launch"></span>
                 Quick Actions
-              </button>
+              </SButton>
             </template>
             
             <SDropdownItem item-key="new" icon="plus" label="Create New" description="Start a new project" />
@@ -336,9 +336,9 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
           <!-- Icon-only trigger -->
           <SDropdown :items="basicItems" hide-arrow @select="handleSelect">
             <template #trigger>
-              <button class="p-2 rounded-lg bg-(--s-bg-tertiary) text-(--s-text-secondary) hover:text-(--s-text-primary) hover:bg-(--s-bg-secondary) transition-colors border border-(--s-border)">
+              <SButton variant="ghost" iconOnly class="border border-(--s-border)">
                 <span class="mdi mdi-dots-vertical text-xl"></span>
-              </button>
+              </SButton>
             </template>
           </SDropdown>
         </div>
@@ -720,9 +720,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
               hide-arrow
             >
               <template #trigger>
-                <button class="px-3 py-1.5 text-sm text-(--s-text-secondary) hover:text-(--s-text-primary) hover:bg-(--s-bg-secondary) rounded-md transition-colors">
-                  File
-                </button>
+                <SButton variant="ghost" size="small">File</SButton>
               </template>
             </SDropdown>
             <SDropdown 
@@ -741,9 +739,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
               hide-arrow
             >
               <template #trigger>
-                <button class="px-3 py-1.5 text-sm text-(--s-text-secondary) hover:text-(--s-text-primary) hover:bg-(--s-bg-secondary) rounded-md transition-colors">
-                  Edit
-                </button>
+                <SButton variant="ghost" size="small">Edit</SButton>
               </template>
             </SDropdown>
             <SDropdown 
@@ -753,9 +749,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
               hide-arrow
             >
               <template #trigger>
-                <button class="px-3 py-1.5 text-sm text-(--s-text-secondary) hover:text-(--s-text-primary) hover:bg-(--s-bg-secondary) rounded-md transition-colors">
-                  View
-                </button>
+                <SButton variant="ghost" size="small">View</SButton>
               </template>
             </SDropdown>
           </div>
