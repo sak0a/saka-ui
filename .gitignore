@@ -23,7 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-.claude
-.playwright-mcp
-.worktrees
+.claude/*
+.playwright-mcp/*
+.worktrees/*
 registry/source/
