@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import DemoSection from '../../components/DemoSection.vue'
 import {
   SDrawer,
@@ -21,10 +21,26 @@ import {
   SBadge,
   SAvatar,
   SAvatarImage,
-  SAvatarFallback
+  SAvatarFallback,
+  SIcon
 } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import type { DrawerSide, DrawerSize, DrawerVariant } from '../../components/ui/drawer'
+import { useCustomizer } from '../../composables/useCustomizer'
+import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+
+const { ri, iconPack } = useCustomizer()
+
+const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const cp = (mdiName: string, attr = 'icon') => {
+  if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
+  const name = getLucideImportName(mdiName)
+  return name ? `:icon="${name}"` : `${attr}="${mdiName}"`
+}
+const li = (...mdiNames: string[]) => {
+  if (iconPack.value === 'mdi') return ''
+  return '\n' + lucideImportStatement(mdiNames)
+}
 
 // Demo states
 const basicDrawer = ref(false)
@@ -85,15 +101,15 @@ const notifications = ref([
 ])
 
 // Menu items
-const menuItems = [
-  { icon: 'home', label: 'Home', badge: null },
-  { icon: 'account', label: 'Profile', badge: null },
-  { icon: 'bell', label: 'Notifications', badge: '3' },
-  { icon: 'cart', label: 'Cart', badge: '2' },
-  { icon: 'heart', label: 'Wishlist', badge: null },
-  { icon: 'cog', label: 'Settings', badge: null },
-  { icon: 'help-circle', label: 'Help', badge: null }
-]
+const menuItems = computed(() => [
+  { icon: ri('home'), label: 'Home', badge: null },
+  { icon: ri('account'), label: 'Profile', badge: null },
+  { icon: ri('bell'), label: 'Notifications', badge: '3' },
+  { icon: ri('cart'), label: 'Cart', badge: '2' },
+  { icon: ri('heart'), label: 'Wishlist', badge: null },
+  { icon: ri('cog'), label: 'Settings', badge: null },
+  { icon: ri('help-circle'), label: 'Help', badge: null }
+])
 
 // Code snippets
 const basicCode = `<SButton @click="showDrawer = true">Open Drawer</SButton>
@@ -193,7 +209,21 @@ const cartCode = `<SDrawer
   </SDrawerFooter>
 </SDrawer>`
 
-const menuCode = `<SDrawer
+const menuCode = computed(() => `<script setup>${li('home', 'account', 'bell', 'cart', 'heart', 'cog', 'help-circle')}
+
+const menuItems = [
+  { icon: ${cv('home')}, label: 'Home', badge: null },
+  { icon: ${cv('account')}, label: 'Profile', badge: null },
+  { icon: ${cv('bell')}, label: 'Notifications', badge: '3' },
+  { icon: ${cv('cart')}, label: 'Cart', badge: '2' },
+  { icon: ${cv('heart')}, label: 'Wishlist', badge: null },
+  { icon: ${cv('cog')}, label: 'Settings', badge: null },
+  { icon: ${cv('help-circle')}, label: 'Help', badge: null }
+]
+<\/script>
+
+<template>
+<SDrawer
   v-model="menuDrawer"
   side="left"
   size="sm"
@@ -208,7 +238,7 @@ const menuCode = `<SDrawer
         variant="ghost"
         class="w-full"
       >
-        <span :class="\`mdi mdi-\${item.icon}\`" />
+        <SIcon :icon="item.icon" :size="20" />
         <span>{{ item.label }}</span>
         <SBadge v-if="item.badge" size="sm" color="red">
           {{ item.badge }}
@@ -216,9 +246,10 @@ const menuCode = `<SDrawer
       </SButton>
     </nav>
   </SDrawerContent>
-</SDrawer>`
+</SDrawer>
+</template>`)
 
-const formDrawerCode = `<SDrawer
+const formDrawerCode = computed(() => `<SDrawer
   v-model="formDrawer"
   side="right"
   size="md"
@@ -227,10 +258,10 @@ const formDrawerCode = `<SDrawer
 >
   <SDrawerContent>
     <form class="space-y-5">
-      <SInput v-model="formData.name" label="Full Name" placeholder="John Doe" prefix-icon="account" />
-      <SInput v-model="formData.email" label="Email Address" type="email" placeholder="john@example.com" prefix-icon="email" />
-      <SInput label="Phone Number" placeholder="+1 (555) 000-0000" prefix-icon="phone" />
-      <SInput label="Company" placeholder="Acme Inc." prefix-icon="domain" />
+      <SInput v-model="formData.name" label="Full Name" placeholder="John Doe" ${cp('account', 'prefix-icon')} />
+      <SInput v-model="formData.email" label="Email Address" type="email" placeholder="john@example.com" ${cp('email', 'prefix-icon')} />
+      <SInput label="Phone Number" placeholder="+1 (555) 000-0000" ${cp('phone', 'prefix-icon')} />
+      <SInput label="Company" placeholder="Acme Inc." ${cp('domain', 'prefix-icon')} />
       <div class="flex items-center justify-between py-2">
         <span class="text-sm text-(--s-text-secondary)">Send welcome email</span>
         <SSwitch v-model="formData.notify" />
@@ -241,7 +272,7 @@ const formDrawerCode = `<SDrawer
     <SButton variant="secondary">Cancel</SButton>
     <SButton>Save Contact</SButton>
   </SDrawerFooter>
-</SDrawer>`
+</SDrawer>`)
 
 const settingsCode = `<SDrawer
   v-model="settingsDrawer"
@@ -798,7 +829,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <SButton @click="menuDrawer = true">
-          <span class="mdi mdi-menu mr-2" />
+          <SIcon :icon="ri('menu')" :size="20" class="mr-2" />
           Open Menu
         </SButton>
 
@@ -831,7 +862,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                 class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-(--s-text-secondary) hover:text-(--s-text-primary) hover:bg-(--s-bg-secondary) h-auto justify-start"
                 @click="menuDrawer = false"
               >
-                <span :class="`mdi mdi-${item.icon} text-xl`" />
+                <SIcon :icon="item.icon" :size="20" />
                 <span class="flex-1 text-left">{{ item.label }}</span>
                 <SBadge v-if="item.badge" size="sm" color="red">{{ item.badge }}</SBadge>
               </SButton>
@@ -840,7 +871,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           
           <SDrawerFooter divider>
             <SButton variant="ghost" color="red" class="w-full justify-start" @click="menuDrawer = false">
-              <span class="mdi mdi-logout mr-2" />
+              <SIcon :icon="ri('logout')" :size="20" class="mr-2" />
               Sign Out
             </SButton>
           </SDrawerFooter>
@@ -858,7 +889,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <SButton @click="cartDrawer = true">
-          <span class="mdi mdi-cart mr-2" />
+          <SIcon :icon="ri('cart')" :size="20" class="mr-2" />
           View Cart
           <SBadge size="sm" class="ml-2">{{ cartItems.length }}</SBadge>
         </SButton>
@@ -888,7 +919,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                   <p class="font-semibold text-(--s-primary) mt-2">${{ (item.price * item.qty).toFixed(2) }}</p>
                 </div>
                 <SButton variant="ghost" size="small" :iconOnly="true" class="shrink-0 text-(--s-text-tertiary) hover:text-red-500 hover:bg-red-500/10">
-                  <span class="mdi mdi-delete-outline text-lg" />
+                  <SIcon :icon="ri('delete')" :size="18" />
                 </SButton>
               </div>
             </div>
@@ -900,7 +931,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               <span class="text-xl font-bold text-(--s-text-primary)">${{ cartTotal().toFixed(2) }}</span>
             </div>
             <SButton size="large" class="w-full">
-              <span class="mdi mdi-lock mr-2" />
+              <SIcon :icon="ri('lock')" :size="20" class="mr-2" />
               Checkout
             </SButton>
             <SButton variant="secondary" class="w-full" @click="cartDrawer = false">
@@ -921,7 +952,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <SButton @click="formDrawer = true">
-          <span class="mdi mdi-account-plus mr-2" />
+          <SIcon :icon="ri('account')" :size="20" class="mr-2" />
           Add Contact
         </SButton>
 
@@ -938,24 +969,24 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                 v-model="formData.name"
                 label="Full Name"
                 placeholder="John Doe"
-                prefix-icon="account"
+                :prefix-icon="ri('account')"
               />
               <SInput
                 v-model="formData.email"
                 label="Email Address"
                 type="email"
                 placeholder="john@example.com"
-                prefix-icon="email"
+                :prefix-icon="ri('email')"
               />
               <SInput
                 label="Phone Number"
                 placeholder="+1 (555) 000-0000"
-                prefix-icon="phone"
+                :prefix-icon="ri('phone')"
               />
               <SInput
                 label="Company"
                 placeholder="Acme Inc."
-                prefix-icon="domain"
+                :prefix-icon="ri('domain')"
               />
               <div class="flex items-center justify-between py-2">
                 <span class="text-sm text-(--s-text-secondary)">Send welcome email</span>
@@ -966,7 +997,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           <SDrawerFooter>
             <SButton variant="secondary" @click="formDrawer = false">Cancel</SButton>
             <SButton @click="formDrawer = false">
-              <span class="mdi mdi-check mr-2" />
+              <SIcon :icon="ri('check')" :size="20" class="mr-2" />
               Save Contact
             </SButton>
           </SDrawerFooter>
@@ -984,7 +1015,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <SButton @click="settingsDrawer = true">
-          <span class="mdi mdi-cog mr-2" />
+          <SIcon :icon="ri('cog')" :size="20" class="mr-2" />
           Settings
         </SButton>
 
@@ -1044,7 +1075,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <SButton @click="notificationDrawer = true">
-          <span class="mdi mdi-bell mr-2" />
+          <SIcon :icon="ri('bell')" :size="20" class="mr-2" />
           Notifications
           <SBadge size="sm" color="red" class="ml-2">3</SBadge>
         </SButton>
