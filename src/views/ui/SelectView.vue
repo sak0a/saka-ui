@@ -1,8 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { SSelect, SButton, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
+import { useCustomizer } from '../../composables/useCustomizer'
+import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+
+const { ri, iconPack } = useCustomizer()
+
+const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const cp = (mdiName: string, attr = 'icon') => {
+  if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
+  const name = getLucideImportName(mdiName)
+  return name ? `:icon="${name}"` : `${attr}="${mdiName}"`
+}
+const li = (...mdiNames: string[]) => {
+  if (iconPack.value === 'mdi') return ''
+  return '\n' + lucideImportStatement(mdiNames)
+}
 
 // Basic demo
 const basicValue = ref(null)
@@ -35,40 +50,40 @@ const colorOptions = [
 
 // Multiple selection demo
 const multipleValue = ref(['vue', 'react'])
-const multipleOptions = [
-  { value: 'vue', label: 'Vue.js', icon: 'vuejs' },
-  { value: 'react', label: 'React', icon: 'react' },
-  { value: 'angular', label: 'Angular', icon: 'angular' },
-  { value: 'svelte', label: 'Svelte', icon: 'flash' },
-  { value: 'solid', label: 'Solid.js', icon: 'atom' },
-  { value: 'qwik', label: 'Qwik', icon: 'lightning-bolt' }
-]
+const multipleOptions = computed(() => [
+  { value: 'vue', label: 'Vue.js', icon: ri('vuejs') },
+  { value: 'react', label: 'React', icon: ri('react') },
+  { value: 'angular', label: 'Angular', icon: ri('angular') },
+  { value: 'svelte', label: 'Svelte', icon: ri('flash') },
+  { value: 'solid', label: 'Solid.js', icon: ri('atom') },
+  { value: 'qwik', label: 'Qwik', icon: ri('lightning-bolt') }
+])
 
 // Searchable demo
 const searchValue = ref(null)
-const countryOptions = [
-  { value: 'us', label: 'United States', icon: 'flag' },
-  { value: 'uk', label: 'United Kingdom', icon: 'flag' },
-  { value: 'de', label: 'Germany', icon: 'flag' },
-  { value: 'fr', label: 'France', icon: 'flag' },
-  { value: 'es', label: 'Spain', icon: 'flag' },
-  { value: 'it', label: 'Italy', icon: 'flag' },
-  { value: 'jp', label: 'Japan', icon: 'flag' },
-  { value: 'cn', label: 'China', icon: 'flag' },
-  { value: 'kr', label: 'South Korea', icon: 'flag' },
-  { value: 'br', label: 'Brazil', icon: 'flag' },
-  { value: 'au', label: 'Australia', icon: 'flag' },
-  { value: 'ca', label: 'Canada', icon: 'flag' }
-]
+const countryOptions = computed(() => [
+  { value: 'us', label: 'United States', icon: ri('flag') },
+  { value: 'uk', label: 'United Kingdom', icon: ri('flag') },
+  { value: 'de', label: 'Germany', icon: ri('flag') },
+  { value: 'fr', label: 'France', icon: ri('flag') },
+  { value: 'es', label: 'Spain', icon: ri('flag') },
+  { value: 'it', label: 'Italy', icon: ri('flag') },
+  { value: 'jp', label: 'Japan', icon: ri('flag') },
+  { value: 'cn', label: 'China', icon: ri('flag') },
+  { value: 'kr', label: 'South Korea', icon: ri('flag') },
+  { value: 'br', label: 'Brazil', icon: ri('flag') },
+  { value: 'au', label: 'Australia', icon: ri('flag') },
+  { value: 'ca', label: 'Canada', icon: ri('flag') }
+])
 
 // With icons and descriptions
 const iconValue = ref(null)
-const iconOptions = [
-  { value: 'email', label: 'Email', icon: 'email', description: 'Send notifications via email' },
-  { value: 'sms', label: 'SMS', icon: 'message-text', description: 'Text message alerts' },
-  { value: 'push', label: 'Push', icon: 'bell', description: 'Browser push notifications' },
-  { value: 'slack', label: 'Slack', icon: 'slack', description: 'Slack channel messages' }
-]
+const iconOptions = computed(() => [
+  { value: 'email', label: 'Email', icon: ri('email'), description: 'Send notifications via email' },
+  { value: 'sms', label: 'SMS', icon: ri('message-text'), description: 'Text message alerts' },
+  { value: 'push', label: 'Push', icon: ri('bell'), description: 'Browser push notifications' },
+  { value: 'slack', label: 'Slack', icon: ri('slack'), description: 'Slack channel messages' }
+])
 
 // States demo
 const disabledValue = ref('option1')
@@ -99,26 +114,26 @@ const projectFramework = ref(null)
 const projectLanguage = ref('typescript')
 const projectFeatures = ref(['auth', 'api'])
 
-const frameworkOptions = [
-  { value: 'nextjs', label: 'Next.js', icon: 'react', description: 'The React Framework' },
-  { value: 'nuxt', label: 'Nuxt', icon: 'vuejs', description: 'The Intuitive Vue Framework' },
-  { value: 'sveltekit', label: 'SvelteKit', icon: 'flash', description: 'Web development, streamlined' },
-  { value: 'remix', label: 'Remix', icon: 'disc', description: 'Full Stack Web Framework' }
-]
+const frameworkOptions = computed(() => [
+  { value: 'nextjs', label: 'Next.js', icon: ri('react'), description: 'The React Framework' },
+  { value: 'nuxt', label: 'Nuxt', icon: ri('vuejs'), description: 'The Intuitive Vue Framework' },
+  { value: 'sveltekit', label: 'SvelteKit', icon: ri('flash'), description: 'Web development, streamlined' },
+  { value: 'remix', label: 'Remix', icon: ri('disc'), description: 'Full Stack Web Framework' }
+])
 
 const languageOptions = [
   { value: 'typescript', label: 'TypeScript' },
   { value: 'javascript', label: 'JavaScript' }
 ]
 
-const featureOptions = [
-  { value: 'auth', label: 'Authentication', icon: 'shield-account' },
-  { value: 'api', label: 'API Routes', icon: 'api' },
-  { value: 'db', label: 'Database', icon: 'database' },
-  { value: 'storage', label: 'File Storage', icon: 'folder-multiple' },
-  { value: 'realtime', label: 'Realtime', icon: 'lightning-bolt' },
-  { value: 'ai', label: 'AI Features', icon: 'robot' }
-]
+const featureOptions = computed(() => [
+  { value: 'auth', label: 'Authentication', icon: ri('shield-account') },
+  { value: 'api', label: 'API Routes', icon: ri('api') },
+  { value: 'db', label: 'Database', icon: ri('database') },
+  { value: 'storage', label: 'File Storage', icon: ri('folder-multiple') },
+  { value: 'realtime', label: 'Realtime', icon: ri('lightning-bolt') },
+  { value: 'ai', label: 'AI Features', icon: ri('robot') }
+])
 
 // Grouped options demo
 const groupedValue = ref(null)
@@ -205,12 +220,14 @@ const colorsCode = `<SSelect v-model="value" :options="options" color="#3b82f6" 
 <SSelect v-model="value" :options="options" color="#ec4899" />
 <SSelect v-model="value" :options="options" color="#f59e0b" />`
 
-const multipleCode = `<script setup>
+const multipleCode = computed(() => `<script setup>
+import { ref } from 'vue'${li('vuejs', 'react', 'angular')}
+
 const selected = ref(['vue', 'react'])
 const options = [
-  { value: 'vue', label: 'Vue.js', icon: 'vuejs' },
-  { value: 'react', label: 'React', icon: 'react' },
-  { value: 'angular', label: 'Angular', icon: 'angular' }
+  { value: 'vue', label: 'Vue.js', ${cp('vuejs')} },
+  { value: 'react', label: 'React', ${cp('react')} },
+  { value: 'angular', label: 'Angular', ${cp('angular')} }
 ]
 <\/script>
 
@@ -223,7 +240,7 @@ const options = [
     :tag-limit="3"
     placeholder="Select frameworks..."
   />
-</template>`
+</template>`)
 
 const searchableCode = `<SSelect
   v-model="selected"
@@ -291,12 +308,17 @@ const labelPlacementCode = `<div class="grid gap-6">
   <SSelect label="Right Bottom" label-placement="right-bottom" :options="options" />
 </div>`
 
-const iconsCode = `const options = [
-  { value: 'email', label: 'Email', icon: 'email', description: 'Via email' },
-  { value: 'sms', label: 'SMS', icon: 'message-text', description: 'Text alerts' }
-]
+const iconsCode = computed(() => `<script setup>${li('email', 'message-text')}
 
-<SSelect v-model="selected" :options="options" />`
+const options = [
+  { value: 'email', label: 'Email', ${cp('email')}, description: 'Via email' },
+  { value: 'sms', label: 'SMS', ${cp('message-text')}, description: 'Text alerts' }
+]
+<\/script>
+
+<template>
+  <SSelect v-model="selected" :options="options" />
+</template>`)
 
 const statesCode = `<SSelect v-model="value" :options="options" disabled />
 <SSelect v-model="value" :options="options" :loading="isLoading" placeholder="Click to load..." />
