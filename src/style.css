@@ -11,26 +11,26 @@
 :root {
   /* --- Backgrounds --- */
   --s-background: #ffffff;
-  --s-foreground: #09090b; /* zinc-950 */
+  --s-foreground: #0a0a0a; /* neutral-950 */
 
   --s-card: #ffffff;
-  --s-card-foreground: #09090b;
+  --s-card-foreground: #0a0a0a;
 
   --s-popover: #ffffff;
-  --s-popover-foreground: #09090b;
+  --s-popover-foreground: #0a0a0a;
 
-  --s-muted: #f4f4f5; /* zinc-100 */
-  --s-muted-foreground: #71717a; /* zinc-500 */
+  --s-muted: #f5f5f5; /* neutral-100 */
+  --s-muted-foreground: #737373; /* neutral-500 */
 
   /* --- Brand / Actions --- */
-  --s-primary: #18181b; /* zinc-900 */
-  --s-primary-foreground: #fafafa; /* zinc-50 */
+  --s-primary: #171717; /* neutral-900 */
+  --s-primary-foreground: #fafafa; /* neutral-50 */
 
-  --s-secondary: #f4f4f5; /* zinc-100 */
-  --s-secondary-foreground: #18181b; /* zinc-900 */
+  --s-secondary: #f5f5f5; /* neutral-100 */
+  --s-secondary-foreground: #171717; /* neutral-900 */
 
-  --s-accent: #f4f4f5; /* zinc-100 */
-  --s-accent-foreground: #18181b; /* zinc-900 */
+  --s-accent: #f5f5f5; /* neutral-100 */
+  --s-accent-foreground: #171717; /* neutral-900 */
 
   /* --- Semantic --- */
   --s-destructive: #ef4444; /* red-500 */
@@ -46,9 +46,9 @@
   --s-info-foreground: #fafafa;
 
   /* --- Chrome --- */
-  --s-border: #e4e4e7; /* zinc-200 */
-  --s-input: #e4e4e7; /* zinc-200 */
-  --s-ring: #18181b; /* zinc-900 */
+  --s-border: #e5e5e5; /* neutral-200 */
+  --s-input: #e5e5e5; /* neutral-200 */
+  --s-ring: #171717; /* neutral-900 */
 
   /* --- Border Radius --- */
   --s-radius: 0.625rem; /* 10px — base radius */
@@ -93,7 +93,7 @@
   --s-border-subtle: var(--s-border);
   --s-primary-hover: var(--s-primary);
   --s-primary-alpha: color-mix(in srgb, var(--s-primary) 15%, transparent);
-  --s-primary-rgb: 24, 24, 27;
+  --s-primary-rgb: 23, 23, 23;
 
   /* --- Base Styles --- */
   font-family: var(--s-font-sans);
@@ -113,27 +113,27 @@
 
 :root.dark {
   /* --- Backgrounds --- */
-  --s-background: #09090b; /* zinc-950 */
-  --s-foreground: #fafafa; /* zinc-50 */
+  --s-background: #0a0a0a; /* neutral-950 — pure neutral, no blue */
+  --s-foreground: #ececec; /* softer white for less eye strain */
 
-  --s-card: #09090b;
-  --s-card-foreground: #fafafa;
+  --s-card: #141414; /* elevated surface — sidebar, cards */
+  --s-card-foreground: #ececec;
 
-  --s-popover: #09090b;
-  --s-popover-foreground: #fafafa;
+  --s-popover: #1a1a1a; /* floats above cards */
+  --s-popover-foreground: #ececec;
 
-  --s-muted: #27272a; /* zinc-800 */
-  --s-muted-foreground: #a1a1aa; /* zinc-400 */
+  --s-muted: #171717; /* warm neutral muted surface */
+  --s-muted-foreground: #888888; /* neutral subdued text */
 
   /* --- Brand / Actions --- */
-  --s-primary: #fafafa; /* zinc-50 */
-  --s-primary-foreground: #18181b; /* zinc-900 */
+  --s-primary: #e5e5e5; /* slightly warmer than pure white */
+  --s-primary-foreground: #171717; /* neutral-900 */
 
-  --s-secondary: #27272a; /* zinc-800 */
-  --s-secondary-foreground: #fafafa;
+  --s-secondary: #171717; /* matches muted */
+  --s-secondary-foreground: #ececec;
 
-  --s-accent: #27272a; /* zinc-800 */
-  --s-accent-foreground: #fafafa;
+  --s-accent: #262626; /* distinct from muted, for hover/active states */
+  --s-accent-foreground: #ececec;
 
   /* --- Semantic --- */
   --s-destructive: #dc2626; /* red-600 */
@@ -149,9 +149,9 @@
   --s-info-foreground: #fafafa;
 
   /* --- Chrome --- */
-  --s-border: #27272a; /* zinc-800 */
-  --s-input: #27272a;
-  --s-ring: #d4d4d8; /* zinc-300 */
+  --s-border: rgba(255, 255, 255, 0.08); /* soft semi-transparent border */
+  --s-input: rgba(255, 255, 255, 0.12); /* slightly more visible for inputs */
+  --s-ring: #d4d4d4; /* neutral-300 */
 
   /* --- Shadows (softer in dark mode) --- */
   --s-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.2);
@@ -171,7 +171,7 @@
   --s-border-subtle: var(--s-border);
   --s-primary-hover: var(--s-primary);
   --s-primary-alpha: color-mix(in srgb, var(--s-primary) 15%, transparent);
-  --s-primary-rgb: 250, 250, 250;
+  --s-primary-rgb: 229, 229, 229;
 }
 
 /* ============================================================

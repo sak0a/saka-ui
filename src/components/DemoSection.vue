@@ -65,7 +65,7 @@ const copyCode = async () => {
 </script>
 
 <template>
-  <div v-bind="$attrs" :class="cn('bg-muted rounded-2xl border border-border transition-all duration-300')">
+  <div v-bind="$attrs" :class="cn('bg-muted rounded-2xl border border-border shadow-sm transition-all duration-300')">
     <!-- Header with title and actions -->
     <div class="flex items-start justify-between p-5 pb-0">
       <div class="flex-1">

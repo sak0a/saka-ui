@@ -104,7 +104,7 @@ const getThemeIcon = () => {
 <template>
   <div class="h-screen bg-background text-foreground flex flex-col overflow-hidden transition-colors duration-300">
     <!-- Top Navigation Bar -->
-    <header class="h-14 shrink-0 border-b border-border bg-background flex items-center px-6 transition-colors duration-300">
+    <header class="h-14 shrink-0 border-b border-border bg-card shadow-sm flex items-center px-6 transition-colors duration-300">
       <!-- Logo -->
       <router-link to="/ui" class="text-xl font-bold bg-linear-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity mr-8">
         Saka-UI
@@ -142,7 +142,7 @@ const getThemeIcon = () => {
     <!-- Sidebar + Main Content -->
     <div class="flex-1 flex overflow-hidden">
       <!-- Sidebar -->
-      <aside class="w-64 border-r border-border bg-background hidden md:flex flex-col transition-colors duration-300">
+      <aside class="w-64 border-r border-border bg-card hidden md:flex flex-col transition-colors duration-300">
         <nav class="flex-1 overflow-y-auto pt-4 px-4 space-y-1 pb-8">
           <router-link
             v-for="item in navigation"
