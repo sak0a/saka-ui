@@ -144,13 +144,19 @@ const items = [
 
 const slotCode = `<SDropdown>
   <template #trigger>
-    <button class="custom-trigger">Custom Trigger</button>
+    <SButton class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-lg font-medium hover:opacity-90 transition-opacity">
+      <span class="mdi mdi-rocket-launch"></span>
+      Quick Actions
+    </SButton>
   </template>
-  
-  <SDropdownItem item-key="edit" icon="pencil" label="Edit" />
-  <SDropdownItem item-key="copy" icon="content-copy" label="Copy" />
+
+  <SDropdownItem item-key="new" icon="plus" label="Create New" description="Start a new project" />
+  <SDropdownItem item-key="import" icon="import" label="Import" description="Import existing project" />
   <SDropdownDivider />
-  <SDropdownItem item-key="delete" icon="delete" label="Delete" danger />
+  <SDropdownGroup label="Recent">
+    <SDropdownItem item-key="project-1" icon="folder" label="My Project" />
+    <SDropdownItem item-key="project-2" icon="folder" label="Design System" />
+  </SDropdownGroup>
 </SDropdown>`
 
 const hoverCode = `<SDropdown
@@ -169,7 +175,8 @@ const hoverCode = `<SDropdown
 />
 <SDropdown :items="items" trigger="context">
   <template #trigger>
-    <div class="px-6 py-4 border-2 border-dashed rounded-xl">
+    <div class="px-6 py-4 border-2 border-dashed border-(--s-border) rounded-xl text-(--s-text-secondary) text-sm hover:border-(--s-border-hover) transition-colors cursor-context-menu">
+      <span class="mdi mdi-mouse-right-click mr-2"></span>
       Right-click me
     </div>
   </template>
@@ -795,11 +802,21 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
       <DemoSection 
         title="Application Menu Bar"
         description="A typical desktop application menu bar with file, edit, and view menus."
-        :code="`<div class='flex gap-1'>
-  <SDropdown :items='fileItems' label='File' variant='filled' />
-  <SDropdown :items='editItems' label='Edit' variant='filled' />
-  <SDropdown :items='viewItems' label='View' variant='filled' />
-</div>`"
+        :code="`<SDropdown :items='fileActions' variant='filled' :width='240' hide-arrow>
+  <template #trigger>
+    <SButton variant='ghost' size='small'>File</SButton>
+  </template>
+</SDropdown>
+<SDropdown :items='editItems' variant='filled' :width='200' hide-arrow>
+  <template #trigger>
+    <SButton variant='ghost' size='small'>Edit</SButton>
+  </template>
+</SDropdown>
+<SDropdown :items='viewItems' variant='filled' :width='220' hide-arrow>
+  <template #trigger>
+    <SButton variant='ghost' size='small'>View</SButton>
+  </template>
+</SDropdown>`"
         language="vue"
       >
         <div class="p-4 bg-(--s-bg-secondary) rounded-xl border border-(--s-border)">
