@@ -52,136 +52,175 @@ const usernameValidator = async (value: string | number): Promise<string | boole
 }
 
 // Code snippets
-const basicCode = `<SInput 
-  v-model="username" 
-  label="Username" 
+const basicCode = `<SInput
+  v-model="username"
+  label="Username"
   placeholder="Enter your username"
 />
 
-<SInput 
-  v-model="email" 
-  type="email" 
-  label="Email" 
+<SInput
+  v-model="email"
+  type="email"
+  label="Email"
   placeholder="name@example.com"
 />
 
-<SInput 
-  v-model="password" 
-  type="password" 
+<SInput
+  v-model="password"
+  type="password"
   label="Password"
+  placeholder="••••••••"
   show-password-toggle
 />`
 
 const variantsCode = `<!-- Outlined (default) -->
-<SInput variant="outlined" label="Outlined" />
+<SInput variant="outlined" label="Outlined" placeholder="Default style" />
 
 <!-- Filled -->
-<SInput variant="filled" label="Filled" />
+<SInput variant="filled" label="Filled" placeholder="Filled background" />
 
 <!-- Underlined -->
-<SInput variant="underlined" label="Underlined" />
+<SInput variant="underlined" label="Underlined" placeholder="Minimal style" />
 
 <!-- Ghost -->
-<SInput variant="ghost" label="Ghost" />`
+<SInput variant="ghost" label="Ghost" placeholder="Transparent" />`
 
-const sizesCode = `<SInput size="small" label="Small" />
-<SInput size="medium" label="Medium" />
-<SInput size="large" label="Large" />`
+const sizesCode = `<SInput size="small" label="Small" placeholder="Small input" />
+<SInput size="medium" label="Medium" placeholder="Medium input" />
+<SInput size="large" label="Large" placeholder="Large input" />`
 
 const floatingCode = `<!-- Floating label -->
-<SInput 
-  v-model="value" 
+<SInput
+  v-model="value"
   label="Floating Label"
   label-placement="floating"
   placeholder="Type something..."
 />
 
 <!-- Inside label -->
-<SInput 
-  v-model="value" 
+<SInput
+  v-model="value"
   label="Inside Label"
   label-placement="inside"
+  placeholder="Focus to see animation..."
 />`
 
-const iconsCode = `<!-- Left icon -->
-<SInput icon-left="magnify" placeholder="Search..." />
+const iconsCode = `<!-- Left icon with clearable -->
+<SInput v-model="search" icon-left="magnify" placeholder="Search..." clearable />
 
 <!-- Right icon -->
-<SInput icon-right="email" label="Email" />
-
-<!-- Both icons -->
-<SInput icon-left="lock" icon-right="eye" label="Password" />
+<SInput v-model="url" icon-right="link-variant" label="Website" placeholder="https://..." />
 
 <!-- Prefix/suffix text -->
-<SInput prefix="$" suffix=".00" label="Price" />
-<SInput suffix="kg" label="Weight" />`
+<SInput v-model="price" prefix="$" suffix=".00" label="Price" placeholder="0" type="number" />
+<SInput v-model="weight" suffix="kg" label="Weight" placeholder="Enter weight" type="number" />
+
+<!-- Both icons with success -->
+<SInput icon-left="account" icon-right="check-circle" label="Username" placeholder="Available username" success />
+
+<!-- Icon with hint -->
+<SInput icon-left="email" label="Email" placeholder="user@example.com" hint="We'll never share your email" />`
 
 const validationCode = `<!-- Required field -->
-<SInput 
+<SInput
   v-model="email"
   type="email"
-  label="Email"
+  label="Email (required)"
+  placeholder="Enter your email"
   required
+  hint="Validates email format on blur"
 />
 
 <!-- Min/max length -->
-<SInput 
+<SInput
   v-model="password"
   type="password"
-  label="Password"
+  label="Password (8-20 chars)"
+  placeholder="Enter password"
   :min-length="8"
   :max-length="20"
   counter
+  show-password-toggle
+/>
+
+<!-- Pattern validation -->
+<SInput
+  v-model="letters"
+  label="Pattern (letters only)"
+  placeholder="Only letters allowed"
+  pattern="^[a-zA-Z]+$"
+  hint="Uses regex pattern validation"
 />
 
 <!-- Custom async validator -->
-<SInput 
+<SInput
   v-model="username"
-  label="Username"
+  label="Username (async check)"
+  placeholder="Try 'admin'"
   :validator="checkUsername"
   validate-on="blur"
+  hint="Simulates API validation (try 'admin')"
 />`
 
 const statesCode = `<!-- Error state -->
-<SInput error="Invalid email address" label="Email" />
+<SInput error="Invalid email address" label="Email" value="invalid-email" />
 
 <!-- Success state -->
-<SInput success="Username available!" label="Username" />
+<SInput success="Username is available!" label="Username" value="john_doe" />
 
 <!-- Warning state -->
-<SInput warning="Weak password" label="Password" />
+<SInput warning="Password is weak" label="Password" type="password" value="123" />
 
 <!-- Disabled -->
-<SInput disabled value="Disabled input" label="Disabled" />
+<SInput disabled model-value="Disabled input" label="Disabled" />
+
+<!-- Read-only -->
+<SInput readonly model-value="Read-only input" label="Read-only" />
 
 <!-- Loading -->
-<SInput loading label="Loading" />`
+<SInput loading label="Loading" placeholder="Checking..." />`
 
 const featuresCode = `<!-- Clearable -->
-<SInput v-model="text" clearable label="Clearable" />
+<SInput v-model="text" clearable label="Clearable" hint="Click X to clear" />
 
 <!-- Character counter -->
-<SInput 
-  v-model="bio" 
-  :max-length="100" 
-  counter 
-  label="Bio"
+<SInput
+  v-model="bio"
+  :max-length="50"
+  counter
+  label="With Counter"
+  placeholder="Type to see counter..."
 />
 
 <!-- Password toggle -->
-<SInput 
+<SInput
   v-model="password"
   type="password"
   show-password-toggle
-  label="Password"
+  label="Password Toggle"
+  placeholder="Click eye to toggle"
+/>
+
+<!-- Number input -->
+<SInput
+  v-model="number"
+  type="number"
+  :min="0"
+  :max="100"
+  :step="5"
+  label="Number Input"
+  placeholder="0-100, step 5"
 />
 
 <!-- Textarea -->
-<SInput 
+<SInput
   v-model="message"
   type="textarea"
   :rows="4"
-  label="Message"
+  :max-length="200"
+  counter
+  label="Textarea"
+  placeholder="Enter a longer message..."
 />`
 
 const kbdSearchCode = `<!-- Search input with keyboard shortcut hint -->
@@ -611,12 +650,14 @@ const inputMethods: ApiMethod[] = [
       <DemoSection 
         title="Email Suggestions"
         description="Auto-suggest popular email domains as you type. Press Tab to accept the first suggestion or use arrow keys to navigate."
-        :code="`<SInput 
-  v-model='email' 
-  type='email' 
+        :code="`<SInput
+  v-model='email'
+  type='email'
   label='Email Address'
-  :suggestions='[&quot;@gmail.com&quot;, &quot;@outlook.com&quot;, &quot;@yahoo.com&quot;]'
+  :suggestions='emailSuggestions'
   placeholder='Type @ to see suggestions'
+  icon-left='email'
+  hint='Type your email and see suggestions after @'
 />`"
         language="vue"
       >
@@ -641,13 +682,13 @@ const inputMethods: ApiMethod[] = [
         title="Character Restrictions"
         description="Restrict input to only specific characters. Invalid characters are blocked as you type."
         :code="`<!-- Digits only -->
-<SInput v-model='value' allow-only='digits' label='Digits Only' />
+<SInput v-model='value' allow-only='digits' label='Digits Only' placeholder='Only 0-9 allowed' hint='Try typing letters' />
 
 <!-- Letters only -->
-<SInput v-model='value' allow-only='letters' label='Letters Only' />
+<SInput v-model='value' allow-only='letters' label='Letters Only' placeholder='Only a-z allowed' hint='Try typing numbers' />
 
 <!-- Float with 2 decimal places -->
-<SInput v-model='value' allow-only='digits' :decimal-places='2' label='Price' />`"
+<SInput v-model='value' allow-only='digits' :decimal-places='2' label='Price (2 decimals)' placeholder='0.00' prefix='$' hint='Max 2 decimal places' />`"
         language="vue"
       >
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -684,8 +725,9 @@ const inputMethods: ApiMethod[] = [
       <DemoSection 
         title="Login Form"
         description="A complete login form example."
-        :code="`<SInput v-model='email' type='email' label='Email' icon-left='email' required />
-<SInput v-model='password' type='password' label='Password' icon-left='lock' show-password-toggle required />`"
+        :code="`<SInput v-model='email' type='email' label='Email' placeholder='you@example.com' icon-left='email' required />
+<SInput v-model='password' type='password' label='Password' placeholder='••••••••' icon-left='lock' show-password-toggle required />
+<SButton block>Sign In</SButton>`"
         language="vue"
       >
         <div class="max-w-md mx-auto space-y-4">
@@ -714,7 +756,7 @@ const inputMethods: ApiMethod[] = [
         <DemoSection 
           title="Search Bar"
           description="A search input with icon and clear button."
-          :code="`<SInput v-model='query' icon-left='magnify' placeholder='Search...' clearable variant='filled' rounded='full' />`"
+          :code="`<SInput v-model='query' icon-left='magnify' placeholder='Search anything...' clearable variant='filled' rounded='full' size='large' />`"
           language="vue"
         >
           <div class="max-w-lg mx-auto">
@@ -735,7 +777,7 @@ const inputMethods: ApiMethod[] = [
         <DemoSection 
           title="Credit Card Input"
           description="Formatted credit card input with prefix icon."
-          :code="`<SInput v-model='cardNumber' icon-left='credit-card' placeholder='4242 4242 4242 4242' label='Card Number' />`"
+          :code="`<SInput v-model='cardNumber' icon-left='credit-card' placeholder='4242 4242 4242 4242' label='Card Number' :max-length='19' counter />`"
           language="vue"
         >
           <div class="max-w-md mx-auto">

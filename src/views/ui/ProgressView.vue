@@ -66,140 +66,212 @@ onUnmounted(() => {
 })
 
 // Code snippets
-const basicCode = `<script setup>
-import { ref } from 'vue'
-const progress = ref(65)
-<\/script>
+const basicCode = `<SProgress v-model="basicProgress" />`
 
-<template>
-  <SProgress v-model="progress" />
-</template>`
-
-const sizesCode = `<SProgress v-model="progress" size="xs" />
-<SProgress v-model="progress" size="small" />
-<SProgress v-model="progress" size="medium" />
-<SProgress v-model="progress" size="large" />
-<SProgress v-model="progress" size="xl" />`
+const sizesCode = `<SProgress v-model="sizeProgress" size="xs" />
+<SProgress v-model="sizeProgress" size="small" />
+<SProgress v-model="sizeProgress" size="medium" />
+<SProgress v-model="sizeProgress" size="large" />
+<SProgress v-model="sizeProgress" size="xl" show-value value-position="inside" />`
 
 const variantsCode = `<!-- Default -->
-<SProgress v-model="progress" />
+<SProgress v-model="basicProgress" />
 
 <!-- Gradient -->
-<SProgress 
-  v-model="progress" 
+<SProgress
+  v-model="gradientProgress"
   variant="gradient"
   :gradient-colors="['#06b6d4', '#3b82f6', '#8b5cf6']"
 />
 
-<!-- Striped -->
-<SProgress v-model="progress" variant="striped" animated />
+<!-- Striped (animated) -->
+<SProgress
+  v-model="stripedProgress"
+  variant="striped"
+  animated
+  animation-type="flow"
+  color="#f59e0b"
+/>
 
 <!-- Buffer -->
-<SProgress 
-  v-model="progress" 
+<SProgress
+  v-model="bufferProgress"
   variant="buffer"
-  :buffer-value="70"
+  :buffer-value="bufferValue"
+  color="#3b82f6"
 />
 
 <!-- Segments -->
-<SProgress v-model="progress" variant="segments" :segments="5" />
+<SProgress
+  v-model="segmentProgress"
+  variant="segments"
+  :segments="5"
+  color="#10b981"
+/>
 
 <!-- Liquid -->
-<SProgress v-model="progress" variant="liquid" />`
+<SProgress
+  v-model="liquidProgress"
+  variant="liquid"
+  size="large"
+  color="#8b5cf6"
+/>`
 
 const animationsCode = `<!-- Pulse -->
-<SProgress v-model="progress" animated animation-type="pulse" />
+<SProgress v-model="pulseProgress" animated animation-type="pulse" color="#ec4899" />
 
 <!-- Wave -->
-<SProgress v-model="progress" animated animation-type="wave" />
+<SProgress v-model="waveProgress" animated animation-type="wave" color="#3b82f6" />
 
 <!-- Shimmer -->
-<SProgress v-model="progress" animated animation-type="shimmer" />
+<SProgress v-model="shimmerProgress" animated animation-type="shimmer" color="#10b981" />
 
-<!-- Flow (for striped) -->
-<SProgress v-model="progress" variant="striped" animated animation-type="flow" />
+<!-- Flow (striped) -->
+<SProgress
+  v-model="flowProgress"
+  variant="striped"
+  animated
+  animation-type="flow"
+  color="#f59e0b"
+/>
 
 <!-- Indeterminate -->
-<SProgress :indeterminate="true" />`
+<SProgress :indeterminate="indeterminateActive" color="#8b5cf6" />`
 
-const displayCode = `<!-- With label -->
-<SProgress v-model="progress" label="Loading files..." />
+const displayCode = `<!-- With label and value -->
+<SProgress
+  v-model="animatedProgress"
+  label="Downloading files..."
+  show-value
+  color="#3b82f6"
+/>
 
-<!-- Show value -->
-<SProgress v-model="progress" show-value />
-
-<!-- Value inside (large size) -->
-<SProgress v-model="progress" size="xl" show-value value-position="inside" />
+<!-- Value inside (xl size) -->
+<SProgress
+  v-model="basicProgress"
+  size="xl"
+  show-value
+  value-position="inside"
+  color="#10b981"
+/>
 
 <!-- Value tooltip -->
-<SProgress v-model="progress" show-value value-position="tooltip" />
+<SProgress
+  v-model="basicProgress"
+  show-value
+  value-position="tooltip"
+  color="#ec4899"
+/>
 
 <!-- Custom format -->
-<SProgress 
-  v-model="progress" 
+<SProgress
+  v-model="basicProgress"
+  label="Upload Progress"
   show-value
   :value-format="(v) => \`\${v} MB / 100 MB\`"
+  color="#8b5cf6"
 />`
 
-const verticalCode = `<SProgress 
-  v-model="progress" 
+const verticalCode = `<SProgress
+  v-model="verticalProgress"
   orientation="vertical"
   height="150px"
-  show-value
+  color="#3b82f6"
+/>
+
+<SProgress
+  v-model="gradientProgress"
+  orientation="vertical"
+  height="150px"
+  variant="gradient"
+  :gradient-colors="['#f59e0b', '#ef4444', '#ec4899']"
+/>
+
+<SProgress
+  v-model="segmentProgress"
+  orientation="vertical"
+  height="150px"
+  variant="segments"
+  :segments="5"
+  color="#10b981"
+/>
+
+<SProgress
+  :indeterminate="true"
+  orientation="vertical"
+  height="150px"
+  color="#8b5cf6"
 />`
 
-const rangeCode = `<script setup>
-import { ref } from 'vue'
-const value = ref({ min: 20, max: 80 })
-<\/script>
+const rangeCode = `<!-- Single Slider -->
+<SProgressRange
+  v-model="singleSlider"
+  show-value
+  show-labels
+  color="#3b82f6"
+/>
 
-<template>
-  <SProgressRange 
-    v-model="value" 
-    range 
-    show-value
-  />
-</template>`
+<!-- Range Slider (Dual Handles) -->
+<SProgressRange
+  v-model="rangeValue"
+  range
+  show-value
+  show-labels
+  color="#10b981"
+/>`
 
-const priceFilterCode = `<script setup>
-import { ref } from 'vue'
-const priceRange = ref({ min: 100, max: 500 })
-<\/script>
+const priceFilterCode = `<SProgressRange
+  v-model="priceRange"
+  range
+  :min="0"
+  :max="1000"
+  :step="10"
+  :pushable="50"
+  show-value
+  show-ticks
+  :tick-count="5"
+  :value-format="(v) => \`$\${v}\`"
+  label="Price Range"
+  color="#8b5cf6"
+/>`
 
-<template>
-  <SProgressRange 
-    v-model="priceRange"
-    range
-    :min="0"
-    :max="1000"
-    :step="10"
-    :pushable="50"
-    show-value
-    show-labels
-    :value-format="(v) => \`$\${v}\`"
-    label="Price Range"
-  />
-</template>`
+const maxRangeCode = `<SProgressRange
+  v-model="limitedRange"
+  range
+  :min="0"
+  :max="1500"
+  :max-range="500"
+  :step="10"
+  show-value
+  show-labels
+  :value-format="(v) => \`€\${v}\`"
+  color="#10b981"
+/>`
 
-const maxRangeCode = `<script setup>
-import { ref } from 'vue'
-// Maximum 500€ span allowed
-const limitedRange = ref({ min: 200, max: 600 })
-<\/script>
+const liveCode = `<SProgress
+  v-model="animatedProgress"
+  variant="gradient"
+  :gradient-colors="['#06b6d4', '#3b82f6', '#8b5cf6']"
+  size="large"
+  show-value
+  value-position="inside"
+  animated
+  animation-type="shimmer"
+  label="Processing..."
+/>`
 
-<template>
-  <SProgressRange 
-    v-model="limitedRange"
-    range
-    :min="0"
-    :max="1500"
-    :max-range="500"
-    :step="10"
-    show-value
-    :value-format="(v) => \`€\${v}\`"
-    label="Limited Range (max €500 span)"
-  />
-</template>`
+const marksCode = `<SProgressRange
+  v-model="singleSlider"
+  :marks="[
+    { value: 0, label: 'Cold' },
+    { value: 25, label: 'Cool' },
+    { value: 50, label: 'Warm' },
+    { value: 75, label: 'Hot' },
+    { value: 100, label: 'Extreme' }
+  ]"
+  show-ticks
+  color="#ef4444"
+/>`
 
 // Demo values for max range
 const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
@@ -655,15 +727,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
       <DemoSection
         title="Custom Tick Marks"
         description="Display custom marks at specific values."
-        :code="`<SProgressRange 
-  v-model=&quot;value&quot;
-  :marks=&quot;[
-    { value: 0, label: 'Cold' },
-    { value: 50, label: 'Warm' },
-    { value: 100, label: 'Hot' }
-  ]&quot;
-  show-ticks
-/>`"
+        :code="marksCode"
         language="vue"
       >
         <div class="max-w-lg">
@@ -689,8 +753,8 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
       <DemoSection
         title="Animated Progress Simulation"
         description="See the progress bar in action with live updates."
-        :code="`// Simulated progress animation`"
-        language="js"
+        :code="liveCode"
+        language="vue"
       >
         <div class="space-y-6 max-w-lg">
           <SProgress 

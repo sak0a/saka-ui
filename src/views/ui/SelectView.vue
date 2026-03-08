@@ -215,52 +215,67 @@ const options = [
 <\/script>
 
 <template>
-  <SSelect 
-    v-model="selected" 
-    :options="options" 
-    multiple 
+  <SSelect
+    v-model="selected"
+    :options="options"
+    multiple
+    searchable
     :tag-limit="3"
-    placeholder="Select frameworks"
+    placeholder="Select frameworks..."
   />
 </template>`
 
-const searchableCode = `<SSelect 
-  v-model="selected" 
-  :options="countryOptions" 
-  searchable 
+const searchableCode = `<SSelect
+  v-model="selected"
+  :options="countryOptions"
+  searchable
+  clearable
   placeholder="Search countries..."
 />`
 
 const floatLabelCode = `<!-- Float label animates from inside to above -->
-<SSelect 
-  v-model="selected" 
+<SSelect
+  v-model="selected"
   :options="options"
   label-placeholder="Select Framework"
+  clearable
 />
 
 <!-- With value - label stays above -->
-<SSelect 
-  v-model="selected" 
+<SSelect
+  v-model="selected"
   :options="options"
   label-placeholder="Framework"
   clearable
+/>
+
+<!-- With color -->
+<SSelect
+  v-model="selected"
+  :options="options"
+  label-placeholder="Choose Option"
+  color="#8b5cf6"
+  clearable
+  required
 />`
 
 const inlineFilterCode = `<!-- Type directly in the select trigger to filter -->
-<SSelect 
-  v-model="selected" 
+<SSelect
+  v-model="selected"
   :options="options"
   filter
-  label-placeholder="Search & Select"
+  label-placeholder="Search Countries"
+  clearable
 />
 
 <!-- Inline filter with multiple selection -->
-<SSelect 
-  v-model="selected" 
+<SSelect
+  v-model="selected"
   :options="options"
   filter
   multiple
-  label-placeholder="Select Tags"
+  :tag-limit="2"
+  label-placeholder="Select Frameworks"
 />`
 
 const labelPlacementCode = `<div class="grid gap-6">
@@ -284,22 +299,31 @@ const iconsCode = `const options = [
 <SSelect v-model="selected" :options="options" />`
 
 const statesCode = `<SSelect v-model="value" :options="options" disabled />
-<SSelect v-model="value" :options="options" loading />
+<SSelect v-model="value" :options="options" :loading="isLoading" placeholder="Click to load..." />
 <SSelect v-model="value" :options="options" clearable />`
 
-const labelsCode = `<SSelect 
-  v-model="selected" 
-  :options="options" 
+const labelsCode = `<SSelect
+  v-model="selected"
+  :options="options"
   label="Framework"
   required
-  hint="Choose your preferred framework"
+  placeholder="Select..."
 />
 
-<SSelect 
-  v-model="selected" 
-  :options="options" 
-  label="Framework"
+<SSelect
+  v-model="selected"
+  :options="options"
+  label="With Hint"
+  hint="Choose your preferred framework"
+  placeholder="Select..."
+/>
+
+<SSelect
+  v-model="selected"
+  :options="options"
+  label="With Error"
   error="This field is required"
+  placeholder="Select..."
 />`
 
 const realWorldCode = `<script setup>
@@ -323,13 +347,14 @@ const features = ref(['auth', 'api'])
       :options="languageOptions"
       label="Language"
     />
-    <SSelect 
+    <SSelect
       v-model="features"
       :options="featureOptions"
       label="Features"
       multiple
       searchable
-      placeholder="Select features"
+      :tag-limit="4"
+      placeholder="Select features to include"
     />
   </div>
 </template>`
@@ -718,7 +743,7 @@ const optionGroupSlots: ApiSlot[] = [
   // ...
 ]
 
-<SSelect v-model='selected' :options='timezoneOptions' searchable />`"
+<SSelect v-model='selected' :options='timezoneOptions' searchable placeholder='Select a timezone...' label='Timezone' />`"
         language="vue"
       >
         <div class="max-w-md">
@@ -773,7 +798,7 @@ const optionGroupSlots: ApiSlot[] = [
   { value: 'user2', label: 'Mike Chen', image: 'https://...', description: 'Engineer' }
 ]
 
-<SSelect v-model='selected' :options='userOptions' />`"
+<SSelect v-model='selected' :options='userOptions' label='Assign to' placeholder='Select a team member...' />`"
         language="vue"
       >
         <div class="max-w-sm">
@@ -793,12 +818,14 @@ const optionGroupSlots: ApiSlot[] = [
       <DemoSection 
         title="Create New Options"
         description="Enable 'creatable' to allow users to create new options by typing. Works great for tags."
-        :code="`<SSelect 
-  v-model='tags' 
-  :options='tagOptions' 
-  multiple 
-  searchable 
+        :code="`<SSelect
+  v-model='tags'
+  :options='tagOptions'
+  multiple
+  searchable
   creatable
+  label='Tags'
+  placeholder='Type to add tags...'
   @create='handleCreate'
 />`"
         language="vue"
@@ -827,7 +854,7 @@ const optionGroupSlots: ApiSlot[] = [
       <DemoSection 
         title="Menu Width Control"
         description="Use 'menuWidth' prop to set a custom dropdown width."
-        :code="`<SSelect :options='options' menu-width='400px' />`"
+        :code="`<SSelect v-model='value' :options='options' searchable menu-width='400px' placeholder='Select a country...' />`"
         language="vue"
       >
         <div class="max-w-sm">

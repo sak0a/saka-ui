@@ -31,110 +31,170 @@ const variantsCode = `<SButton variant="filled">Filled</SButton>
 <SButton variant="ghost">Ghost</SButton>
 <SButton variant="link">Link</SButton>`
 
+const variantColorsCode = `<SButton color="#8b5cf6" variant="filled">Filled</SButton>
+<SButton color="#8b5cf6" variant="outlined">Outlined</SButton>
+<SButton color="#8b5cf6" variant="light">Light</SButton>
+<SButton color="#8b5cf6" variant="ghost">Ghost</SButton>
+
+<SButton color="#ef4444" variant="filled">Filled</SButton>
+<SButton color="#ef4444" variant="outlined">Outlined</SButton>
+<SButton color="#ef4444" variant="light">Light</SButton>
+<SButton color="#ef4444" variant="ghost">Ghost</SButton>
+
+<SButton color="#06b6d4" variant="filled">Filled</SButton>
+<SButton color="#06b6d4" variant="outlined">Outlined</SButton>
+<SButton color="#06b6d4" variant="light">Light</SButton>
+<SButton color="#06b6d4" variant="ghost">Ghost</SButton>`
+
 const sizesCode = `<SButton size="xs">Extra Small</SButton>
 <SButton size="small">Small</SButton>
 <SButton size="medium">Medium</SButton>
 <SButton size="large">Large</SButton>
 <SButton size="xl">Extra Large</SButton>`
 
-const roundedCode = `<SButton rounded="none">None</SButton>
-<SButton rounded="sm">Small</SButton>
-<SButton rounded="md">Medium</SButton>
-<SButton rounded="lg">Large</SButton>
-<SButton rounded="full">Pill</SButton>`
+const roundedCode = `<SButton rounded="none" color="#3b82f6">None</SButton>
+<SButton rounded="sm" color="#3b82f6">Small</SButton>
+<SButton rounded="md" color="#3b82f6">Medium</SButton>
+<SButton rounded="lg" color="#3b82f6">Large</SButton>
+<SButton rounded="full" color="#3b82f6">Pill</SButton>`
 
 const iconsCode = `<SButton iconLeft="home">Home</SButton>
-<SButton iconRight="arrow-right">Continue</SButton>
-<SButton iconLeft="plus" iconRight="chevron-down">
-  New Item
+<SButton iconRight="arrow-right" color="#3b82f6">Continue</SButton>
+<SButton iconLeft="plus" iconRight="chevron-down" variant="outlined">New Item</SButton>
+<SButton iconOnly rounded="full" color="#ec4899">
+  <span class="mdi mdi-heart"></span>
 </SButton>
-<SButton iconOnly iconLeft="heart" rounded="full" />
-<SButton iconOnly iconLeft="cog" variant="ghost" />`
+<SButton iconOnly variant="ghost">
+  <span class="mdi mdi-cog"></span>
+</SButton>
+<SButton iconOnly variant="light" color="#8b5cf6">
+  <span class="mdi mdi-bell"></span>
+</SButton>`
 
-const loadingCode = `<SButton :loading="isLoading" @click="simulateLoading">
-  Click to Load
+const loadingCode = `<SButton :loading="isLoading">
+  {{ isLoading ? 'Loading...' : 'Click to Load' }}
 </SButton>
 <SButton loading variant="outlined">Loading...</SButton>
-<SButton loading variant="light" color="#8b5cf6">
-  Processing
-</SButton>
+<SButton loading variant="light" color="#8b5cf6">Processing</SButton>
+<SButton loading size="small" color="#ec4899">Wait</SButton>
 
 <!-- With preserveSize to maintain button width -->
-<SButton loading preserveSize>Submit Order</SButton>`
+<SButton :loading="isLoading" preserveSize>
+  Submit Order
+</SButton>
+<SButton loading preserveSize variant="outlined" iconLeft="cloud-upload">
+  Upload File
+</SButton>
+<SButton loading preserveSize variant="light" color="#8b5cf6" iconRight="arrow-right">
+  Continue
+</SButton>`
 
 const disabledCode = `<SButton disabled>Disabled Filled</SButton>
 <SButton disabled variant="outlined">Disabled Outlined</SButton>
 <SButton disabled variant="light">Disabled Light</SButton>
-<SButton disabled variant="ghost">Disabled Ghost</SButton>`
+<SButton disabled variant="ghost">Disabled Ghost</SButton>
+<SButton disabled variant="link">Disabled Link</SButton>`
 
-const blockCode = `<SButton block>Full Width Button</SButton>
-<SButton block variant="outlined" color="#3b82f6">
-  Full Width Outlined
-</SButton>`
+const rippleCode = `<SButton size="large" color="#3b82f6">Click me for ripple!</SButton>
+<SButton size="large" :ripple="false" variant="outlined">No Ripple</SButton>`
 
-const linksCode = `<SButton href="https://google.com" target="_blank">
+const blockCode = `<SButton block size="large" iconLeft="rocket-launch">Full Width Button</SButton>
+<SButton block variant="outlined" color="#3b82f6">Full Width Outlined</SButton>
+<SButton block variant="light" color="#8b5cf6">Full Width Light</SButton>`
+
+const linksCode = `<SButton href="https://google.com" target="_blank" iconRight="open-in-new">
   External Link
 </SButton>
-<SButton to="/ui/chips" variant="light">
-  Router Link (Chips)
+<SButton to="/ui/chips" variant="light" iconLeft="arrow-left">
+  Go to Chips
+</SButton>
+<SButton to="/ui/switch" variant="outlined" iconRight="arrow-right">
+  Go to Switch
 </SButton>`
 
-const combinedCode = `<SButton 
-  variant="filled" 
-  size="large" 
-  color="#8b5cf6" 
+const combinedCode = `<SButton
+  variant="filled"
+  size="large"
+  color="#8b5cf6"
   iconLeft="rocket-launch"
   rounded="lg"
 >
   Launch Project
 </SButton>
 
-<SButton 
-  variant="outlined" 
-  size="small" 
+<SButton
+  variant="outlined"
+  size="small"
   color="#10b981"
   iconRight="check"
   rounded="full"
 >
   Completed
+</SButton>
+
+<SButton
+  variant="light"
+  color="#ef4444"
+  iconLeft="trash-can"
+>
+  Delete
+</SButton>
+
+<SButton
+  variant="ghost"
+  iconLeft="share-variant"
+>
+  Share
 </SButton>`
 
 const animateCode = `<!-- Slide animation (default) -->
-<SButton>
+<SButton size="large">
   Home
   <template #animate>
-    <span class="mdi mdi-home"></span> Go Home
+    <span class="mdi mdi-home mr-1"></span> Go Home
   </template>
 </SButton>
 
 <!-- Vertical animation -->
-<SButton animation-type="vertical" color="#10b981">
+<SButton size="large" animation-type="vertical" color="#10b981">
   Message
   <template #animate>
-    <span class="mdi mdi-email-send"></span> Send
+    <span class="mdi mdi-email-send mr-1"></span> Send
   </template>
 </SButton>
 
 <!-- Scale animation -->
-<SButton animation-type="scale" color="#8b5cf6">
+<SButton size="large" animation-type="scale" color="#8b5cf6">
   Like
   <template #animate>
-    <span class="mdi mdi-heart"></span>
+    <span class="mdi mdi-heart text-lg"></span>
   </template>
 </SButton>
 
 <!-- Rotate animation -->
-<SButton animation-type="rotate" color="#f59e0b">
+<SButton size="large" animation-type="rotate" color="#f59e0b">
   Settings
   <template #animate>
-    <span class="mdi mdi-cog"></span>
+    <span class="mdi mdi-cog text-lg"></span>
   </template>
 </SButton>`
 
-const buttonGroupCode = `<div class="flex">
-  <SButton rounded="none" class="rounded-l-lg">Left</SButton>
-  <SButton rounded="none" variant="outlined">Center</SButton>
-  <SButton rounded="none" class="rounded-r-lg">Right</SButton>
+const buttonGroupCode = `<div class="inline-flex">
+  <SButton rounded="none" class="rounded-l-lg border-r-0">Left</SButton>
+  <SButton rounded="none" variant="outlined" class="border-x-0">Center</SButton>
+  <SButton rounded="none" class="rounded-r-lg border-l-0">Right</SButton>
+</div>
+
+<div class="inline-flex">
+  <SButton rounded="none" variant="outlined" color="#8b5cf6" class="rounded-l-lg">
+    <span class="mdi mdi-format-bold"></span>
+  </SButton>
+  <SButton rounded="none" variant="outlined" color="#8b5cf6">
+    <span class="mdi mdi-format-italic"></span>
+  </SButton>
+  <SButton rounded="none" variant="outlined" color="#8b5cf6" class="rounded-r-lg">
+    <span class="mdi mdi-format-underline"></span>
+  </SButton>
 </div>`
 
 const kbdShortcutCode = `<SButton variant="outlined">
@@ -145,6 +205,11 @@ const kbdShortcutCode = `<SButton variant="outlined">
 <SButton variant="light">
   Save
   <SKbdShortcut :keys="['⌘', 'S']" size="xs" variant="flat" class="ml-2 opacity-70" />
+</SButton>
+
+<SButton variant="ghost">
+  Undo
+  <SKbdShortcut :keys="['⌘', 'Z']" size="xs" variant="ghost" class="ml-1 opacity-60" />
 </SButton>`
 
 // API Reference data
@@ -308,9 +373,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       <DemoSection 
         title="Colored Variants"
         description="All variants adapt to the color prop."
-        code="<SButton color='#8b5cf6' variant='filled'>Filled</SButton>
-<SButton color='#8b5cf6' variant='outlined'>Outlined</SButton>
-<SButton color='#8b5cf6' variant='light'>Light</SButton>"
+        :code="variantColorsCode"
         language="vue"
       >
         <div class="space-y-4">
@@ -606,8 +669,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       <DemoSection 
         title="Click Animation"
         description="Buttons include a ripple effect on click. Disable it with :ripple='false'."
-        code="<SButton>With Ripple</SButton>
-<SButton :ripple='false'>No Ripple</SButton>"
+        :code="rippleCode"
         language="vue"
       >
         <div class="flex flex-wrap gap-3 items-center">

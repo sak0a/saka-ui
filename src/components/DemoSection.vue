@@ -41,7 +41,7 @@ const hasSlotContent = computed(() => !!slots.default)
 const isCodeVisible = ref(props.codeOnly)
 
 const highlightedCode = computed(() => {
-  // Map language if needed, e.g. vue -> xml is handled by alias or manually
+  if (!props.code) return ''
   const lang = props.language
   if (lang && hljs.getLanguage(lang)) {
     return hljs.highlight(props.code, { language: lang }).value

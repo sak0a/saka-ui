@@ -159,7 +159,7 @@ const getThemeIcon = () => {
       </aside>
 
       <!-- Main Content -->
-      <main class="flex-1 overflow-y-auto overscroll-contain bg-muted transition-colors duration-300">
+      <main class="flex-1 overflow-y-auto overscroll-contain bg-background transition-colors duration-300">
         <div class="p-8 w-full">
           <div class="max-w-7xl mx-auto flex gap-8">
             <!-- Page content -->

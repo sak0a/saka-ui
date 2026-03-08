@@ -38,15 +38,16 @@ const products = [
 
 // Code snippets
 const basicCode = `<SCard>
-  <SCardHeader 
-    title="Card Title" 
-    subtitle="Card subtitle"
-    icon="credit-card"
+  <SCardHeader
+    title="Project Overview"
+    subtitle="Updated 2 hours ago"
+    icon="folder-outline"
   />
   <SCardContent>
-    This is the card content. Cards are surfaces that display content and actions on a single topic.
+    This is the card content area. Cards are surfaces that display content
+    and actions on a single topic, making it easy to scan for relevant information.
   </SCardContent>
-  <SCardFooter divider>
+  <SCardFooter divider justify="end">
     <SButton variant="ghost" size="small">Cancel</SButton>
     <SButton size="small">Save</SButton>
   </SCardFooter>
@@ -79,47 +80,90 @@ const variantsCode = `<!-- Elevated (default) -->
 
 const interactiveCode = `<!-- Hoverable -->
 <SCard hoverable>
-  <SCardContent>Hover me for a lift effect!</SCardContent>
+  <SCardHeader title="Hoverable" icon="arrow-up" icon-color="#3b82f6" />
+  <SCardContent>
+    Hover me for a lift effect with enhanced shadow!
+  </SCardContent>
 </SCard>
 
 <!-- Pressable -->
-<SCard pressable clickable @click="handleClick">
-  <SCardContent>Click me! I have a press effect.</SCardContent>
+<SCard pressable clickable>
+  <SCardHeader title="Pressable" icon="gesture-tap" icon-color="#ef4444" />
+  <SCardContent>
+    Click me! I have a satisfying press effect.
+  </SCardContent>
 </SCard>
 
 <!-- With spotlight glow -->
-<SCard spotlight spotlightColor="#8b5cf6">
-  <SCardContent>Move your mouse over me!</SCardContent>
+<SCard spotlight spotlight-color="#8b5cf6" variant="outlined">
+  <SCardHeader title="Spotlight" icon="spotlight-beam" icon-color="#8b5cf6" />
+  <SCardContent>
+    Move your mouse around for a glow effect!
+  </SCardContent>
 </SCard>
 
 <!-- 3D Tilt effect -->
 <SCard tilt hoverable>
-  <SCardContent>3D tilt effect on hover</SCardContent>
-</SCard>`
-
-const mediaCode = `<SCard>
-  <SCardMedia 
-    src="https://example.com/image.jpg"
-    ratio="16/9"
-    zoom
-  />
-  <SCardHeader title="Beautiful Landscape" />
+  <SCardHeader title="3D Tilt" icon="rotate-3d-variant" icon-color="#10b981" />
   <SCardContent>
-    Stunning mountain views at sunrise.
+    Perspective-based 3D rotation on hover.
   </SCardContent>
 </SCard>`
 
-const horizontalCode = `<SCard horizontal>
-  <SCardMedia 
-    src="https://example.com/image.jpg"
+const mediaCode = `<SCard hoverable>
+  <SCardMedia
+    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4"
+    ratio="16/9"
+    zoom
+  >
+    <template #badge>
+      <SBadge color="#ef4444">Featured</SBadge>
+    </template>
+  </SCardMedia>
+  <SCardHeader title="Mountain Sunrise" subtitle="Swiss Alps" />
+  <SCardContent>
+    Breathtaking views of the Alps at dawn with golden light.
+  </SCardContent>
+  <SCardActions justify="between">
+    <SButton variant="ghost" size="small" icon-left="heart-outline">Like</SButton>
+    <SButton variant="ghost" size="small" icon-left="share-variant-outline">Share</SButton>
+  </SCardActions>
+</SCard>`
+
+const horizontalCode = `<!-- Media on the left -->
+<SCard horizontal hoverable>
+  <SCardMedia
+    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
     position="left"
   />
-  <div class="flex-1">
-    <SCardHeader title="Horizontal Layout" />
+  <div class="flex-1 p-4">
+    <SCardHeader title="Wireless Headphones" subtitle="Premium Audio" />
     <SCardContent>
-      Media on the side with content next to it.
+      Experience crystal-clear sound with active noise cancellation.
     </SCardContent>
+    <SCardFooter justify="between">
+      <span class="text-lg font-bold">$299</span>
+      <SButton size="small" icon-left="cart-outline">Add to Cart</SButton>
+    </SCardFooter>
   </div>
+</SCard>
+
+<!-- Media on the right -->
+<SCard horizontal media-right hoverable>
+  <div class="flex-1 p-4">
+    <SCardHeader title="Smart Watch Series 5" subtitle="Fitness & Health" />
+    <SCardContent>
+      Track your health metrics with advanced sensors and GPS.
+    </SCardContent>
+    <SCardFooter justify="between">
+      <span class="text-lg font-bold">$449</span>
+      <SButton size="small" icon-left="cart-outline">Add to Cart</SButton>
+    </SCardFooter>
+  </div>
+  <SCardMedia
+    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+    position="right"
+  />
 </SCard>`
 
 const animationsCode = `<!-- Floating icons -->
@@ -138,15 +182,23 @@ const animationsCode = `<!-- Floating icons -->
   <div class="animate-progress-85" />
 </SCard>`
 
-const loadingCode = `<SCard :loading="isLoading">
-  <SCardHeader title="Loading State" />
+const loadingCode = `<!-- Loading overlay -->
+<SCard :loading="isLoading">
+  <SCardHeader title="Loading Overlay" subtitle="Click button below" icon="loading" />
   <SCardContent>
-    This card shows a loading overlay.
+    This card shows a shimmer loading overlay when loading is true.
   </SCardContent>
 </SCard>
 
+<!-- Skeleton media + content -->
 <SCard>
-  <SCardContent :skeleton="true" :skeletonLines="4" />
+  <SCardMedia skeleton ratio="16/9" />
+  <SCardContent :skeleton="true" :skeleton-lines="3" />
+</SCard>
+
+<!-- Skeleton with avatar -->
+<SCard>
+  <SCardContent :skeleton="true" :skeleton-lines="4" />
 </SCard>`
 
 const overlayCode = `<SCard>

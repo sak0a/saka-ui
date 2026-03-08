@@ -139,7 +139,7 @@ const items = [
 <\/script>
 
 <template>
-  <SDropdown :items="items" label="Actions" />
+  <SDropdown :items="items" label="Actions" icon="menu" />
 </template>`
 
 const slotCode = `<SDropdown>
@@ -153,27 +153,49 @@ const slotCode = `<SDropdown>
   <SDropdownItem item-key="delete" icon="delete" label="Delete" danger />
 </SDropdown>`
 
-const hoverCode = `<SDropdown 
-  :items="items" 
-  trigger="hover" 
-  label="Hover Me"
+const hoverCode = `<SDropdown
+  :items="items"
+  trigger="click"
+  label="Click"
+  icon="cursor-default-click"
+/>
+<SDropdown
+  :items="items"
+  trigger="hover"
+  label="Hover"
+  icon="cursor-default"
   :show-delay="100"
   :hide-delay="200"
-/>`
+/>
+<SDropdown :items="items" trigger="context">
+  <template #trigger>
+    <div class="px-6 py-4 border-2 border-dashed rounded-xl">
+      Right-click me
+    </div>
+  </template>
+</SDropdown>`
 
-const placementCode = `<SDropdown :items="items" placement="top-start" />
-<SDropdown :items="items" placement="right" />
-<SDropdown :items="items" placement="bottom-end" />`
+const placementCode = `<SDropdown :items="items" placement="top-start" label="Top Start" />
+<SDropdown :items="items" placement="top" label="Top" />
+<SDropdown :items="items" placement="top-end" label="Top End" />
+<SDropdown :items="items" placement="left-start" label="Left" />
+<SDropdown :items="items" placement="right-start" label="Right" />
+<SDropdown :items="items" placement="bottom-start" label="Bottom Start" />
+<SDropdown :items="items" placement="bottom" label="Bottom" />
+<SDropdown :items="items" placement="bottom-end" label="Bottom End" />`
 
-const animationCode = `<SDropdown :items="items" animation="fade" />
-<SDropdown :items="items" animation="slide" />
-<SDropdown :items="items" animation="scale" />
-<SDropdown :items="items" animation="reveal" />`
+const animationCode = `<SDropdown :items="items" animation="fade" label="Fade" icon="blur" />
+<SDropdown :items="items" animation="slide" label="Slide" icon="arrow-expand-down" />
+<SDropdown :items="items" animation="scale" label="Scale" icon="resize" />
+<SDropdown :items="items" animation="reveal" label="Reveal" icon="blur-radial" />`
 
-const searchableCode = `<SDropdown 
-  :items="countryItems" 
-  searchable 
+const searchableCode = `<SDropdown
+  :items="countryItems"
+  searchable
   search-placeholder="Search countries..."
+  label="Select Country"
+  icon="earth"
+  :width="260"
   max-height="280px"
 />`
 
@@ -190,7 +212,14 @@ const onSelect = (key) => {
 <\/script>
 
 <template>
-  <SDropdown :items="items" @select="onSelect" :close-on-select="false" />
+  <SDropdown
+    :items="items"
+    label="Format"
+    icon="format-text"
+    :width="220"
+    :close-on-select="false"
+    @select="onSelect"
+  />
 </template>`
 
 const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-select="false">
@@ -391,7 +420,9 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
       <DemoSection 
         title="Size Variants"
         description="Three size options: small, medium (default), and large."
-        :code="`<SDropdown :items='items' size='small' />`"
+        :code="`<SDropdown :items='items' size='small' label='Small' />
+<SDropdown :items='items' size='medium' label='Medium' />
+<SDropdown :items='items' size='large' label='Large' />`"
         language="vue"
       >
         <div class="flex flex-wrap items-center gap-4">
@@ -408,7 +439,9 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
       <DemoSection 
         title="Visual Variants"
         description="Different visual styles for the dropdown menu."
-        :code="`<SDropdown :items='items' variant='glass' />`"
+        :code="`<SDropdown :items='items' variant='default' label='Default' />
+<SDropdown :items='items' variant='filled' label='Filled' />
+<SDropdown :items='items' variant='glass' label='Glass' />`"
         language="vue"
       >
         <div class="flex flex-wrap items-center gap-4">
@@ -489,7 +522,9 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
         :code="`items = [
   { key: 'email', label: 'Send via Email', icon: 'email', description: 'Send to email', shortcut: '⌘E' },
   { key: 'link', label: 'Copy Link', icon: 'link-variant', shortcut: '⌘L' }
-]`"
+]
+
+<SDropdown :items='items' label='Share' icon='share-variant' :width='320' />`"
         language="javascript"
       >
         <div class="flex flex-wrap items-center gap-4">
@@ -530,7 +565,9 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
   { key: 'list', label: 'List View', icon: 'view-list' },
   { key: 'header-sort', header: 'Sort By' },
   { key: 'name', label: 'Name', icon: 'sort-alphabetical-ascending' }
-]`"
+]
+
+<SDropdown :items='items' label='Display Options' icon='tune' :width='220' />`"
         language="javascript"
       >
         <SDropdown 
@@ -688,7 +725,9 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
       <DemoSection 
         title="Accent Colors"
         description="Customize the accent color for checked items and highlights."
-        :code="`<SDropdown :items='items' color='#ec4899' />`"
+        :code="`<SDropdown :items='items' color='#3b82f6' label='Blue' :close-on-select='false' />
+<SDropdown :items='items' color='#ec4899' label='Pink' :close-on-select='false' />
+<SDropdown :items='items' color='#f59e0b' label='Amber' :close-on-select='false' />`"
         language="vue"
       >
         <div class="flex flex-wrap items-center gap-4">
