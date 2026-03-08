@@ -16,9 +16,9 @@ const simulateLoading = () => {
 
 // Code snippets
 const basicUsageCode = `<SGlassButton tint="light">Glass Button</SGlassButton>
-<SGlassButton tint="light" color="#3b82f6">Blue Accent</SGlassButton>
-<SGlassButton tint="light" color="#ec4899">Pink Accent</SGlassButton>
-<SGlassButton tint="light" color="#f59e0b">Orange Accent</SGlassButton>`
+<SGlassButton tint="light" color="#93c5fd">Blue Accent</SGlassButton>
+<SGlassButton tint="light" color="#f9a8d4">Pink Accent</SGlassButton>
+<SGlassButton tint="light" color="#fcd34d">Orange Accent</SGlassButton>`
 
 const tintModesCode = `<!-- Light tint (for dark backgrounds) -->
 <SGlassButton tint="light">Light Tint</SGlassButton>
@@ -31,11 +31,17 @@ const tintModesCode = `<!-- Light tint (for dark backgrounds) -->
 
 const darkBgCode = `<SGlassButton tint="light">On Black</SGlassButton>
 <SGlassButton tint="light" size="large">Large Glass</SGlassButton>
-<SGlassButton tint="light" iconLeft="star">Starred</SGlassButton>`
+<SGlassButton tint="light" iconLeft="star">Starred</SGlassButton>
+<SGlassButton tint="light" iconOnly rounded="full">
+  <span class="mdi mdi-heart"></span>
+</SGlassButton>`
 
 const lightBgCode = `<SGlassButton tint="dark">On White</SGlassButton>
 <SGlassButton tint="dark" size="large">Large Glass</SGlassButton>
-<SGlassButton tint="dark" iconLeft="star">Starred</SGlassButton>`
+<SGlassButton tint="dark" iconLeft="star">Starred</SGlassButton>
+<SGlassButton tint="dark" iconOnly rounded="full">
+  <span class="mdi mdi-heart"></span>
+</SGlassButton>`
 
 const imageBgCode = `<!-- Scrollable image background with sticky glass buttons -->
 <div class="rounded-2xl overflow-hidden">
@@ -66,25 +72,34 @@ const roundedCode = `<SGlassButton rounded="none" tint="light">None</SGlassButto
 
 const iconsCode = `<SGlassButton tint="light" iconLeft="home">Home</SGlassButton>
 <SGlassButton tint="light" iconRight="arrow-right">Continue</SGlassButton>
-<SGlassButton tint="light" iconLeft="plus" iconRight="chevron-down">
-  New Item
-</SGlassButton>
+<SGlassButton tint="light" iconLeft="plus" iconRight="chevron-down">New Item</SGlassButton>
 <SGlassButton tint="light" iconOnly rounded="full">
   <span class="mdi mdi-heart"></span>
-</SGlassButton>`
-
-const loadingCode = `<SGlassButton :loading="isLoading" tint="light" @click="simulateLoading">
-  Click to Load
 </SGlassButton>
-<SGlassButton loading tint="light">Loading...</SGlassButton>
-<SGlassButton loading preserveSize tint="light">Submit Order</SGlassButton>`
-
-const disabledCode = `<SGlassButton disabled tint="light">Disabled Light</SGlassButton>
-<SGlassButton disabled tint="dark">Disabled Dark</SGlassButton>`
-
-const blockCode = `<SGlassButton block tint="light" size="large" iconLeft="rocket-launch">
-  Full Width Glass Button
+<SGlassButton tint="light" iconOnly>
+  <span class="mdi mdi-cog"></span>
+</SGlassButton>
+<SGlassButton tint="light" iconOnly>
+  <span class="mdi mdi-bell"></span>
 </SGlassButton>`
+
+const loadingCode = `<SGlassButton tint="light" :loading="isLoading">
+  {{ isLoading ? 'Loading...' : 'Click to Load' }}
+</SGlassButton>
+<SGlassButton tint="light" loading>Loading...</SGlassButton>
+<SGlassButton tint="light" loading size="small">Wait</SGlassButton>
+<SGlassButton tint="light" :loading="isLoading" preserveSize>Submit Order</SGlassButton>
+<SGlassButton tint="light" loading preserveSize iconLeft="cloud-upload">Upload File</SGlassButton>`
+
+const disabledCode = `<SGlassButton tint="light" disabled>Disabled Light</SGlassButton>
+<SGlassButton tint="light" disabled iconLeft="lock">Locked</SGlassButton>
+<SGlassButton tint="dark" disabled>Disabled Dark</SGlassButton>
+<SGlassButton tint="dark" disabled iconLeft="lock">Locked</SGlassButton>`
+
+const blockCode = `<SGlassButton block size="large" tint="light" iconLeft="rocket-launch">
+  Full Width Glass Button
+</SGlassButton>
+<SGlassButton block tint="light" iconRight="arrow-right">Continue</SGlassButton>`
 
 const customizationCode = `<!-- Subtle blur -->
 <SGlassButton :blur="6" tint="light">Subtle</SGlassButton>
@@ -117,11 +132,11 @@ const animateCode = `<!-- Slide animation -->
   </template>
 </SGlassButton>`
 
-const colorTintCode = `<SGlassButton tint="light" color="#3b82f6">Blue</SGlassButton>
-<SGlassButton tint="light" color="#ec4899">Pink</SGlassButton>
-<SGlassButton tint="light" color="#10b981">Green</SGlassButton>
-<SGlassButton tint="light" color="#f59e0b">Amber</SGlassButton>
-<SGlassButton tint="light" color="#8b5cf6">Purple</SGlassButton>`
+const colorTintCode = `<SGlassButton tint="light" color="#93c5fd">Blue</SGlassButton>
+<SGlassButton tint="light" color="#f9a8d4">Pink</SGlassButton>
+<SGlassButton tint="light" color="#6ee7b7">Green</SGlassButton>
+<SGlassButton tint="light" color="#fcd34d">Amber</SGlassButton>
+<SGlassButton tint="light" color="#c4b5fd">Purple</SGlassButton>`
 
 const linksCode = `<SGlassButton href="https://google.com" tint="light" iconRight="open-in-new">
   External Link

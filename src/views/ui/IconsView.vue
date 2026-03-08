@@ -33,6 +33,19 @@ const mdiFontCode = `<SIcon :size="48" color="#3b82f6" :depth="1">
   <span class="mdi mdi-cog" />
 </SIcon>`
 
+const navBarCode = `<SIcon :size="28" color="var(--s-primary)" :depth="1">
+  <span class="mdi mdi-home" />
+</SIcon>
+<SIcon :size="28" color="var(--s-text-secondary)" :depth="2">
+  <span class="mdi mdi-magnify" />
+</SIcon>
+<SIcon :size="28" color="var(--s-text-secondary)" :depth="2">
+  <span class="mdi mdi-heart-outline" />
+</SIcon>
+<SIcon :size="28" color="var(--s-text-secondary)" :depth="2">
+  <span class="mdi mdi-account-outline" />
+</SIcon>`
+
 // API Reference data
 const iconProps: ApiProp[] = [
   { name: 'component', type: 'Component', default: 'undefined', description: 'The icon component to display' },
@@ -164,7 +177,7 @@ const iconProps: ApiProp[] = [
       <DemoSection 
         title="Icon Navigation Bar"
         description="Common icon usage in navigation elements."
-        :code="mdiFontCode"
+        :code="navBarCode"
         language="vue"
       >
         <div class="flex items-center justify-around bg-(--s-bg-secondary) p-4 rounded-xl max-w-md mx-auto">

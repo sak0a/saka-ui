@@ -55,7 +55,7 @@ const isChecked = ref(false)
 <\/script>
 
 <template>
-  <SCheckbox v-model="isChecked" label="Accept terms" />
+  <SCheckbox v-model="isChecked" label="Accept terms and conditions" />
 </template>`
 
 const sizesCode = `<SCheckbox v-model="small" size="small" label="Small" />
@@ -67,61 +67,80 @@ const colorsCode = `<SCheckbox v-model="check1" color="#3b82f6" label="Blue" />
 <SCheckbox v-model="check3" color="#f59e0b" label="Amber" />
 <SCheckbox v-model="check4" color="#8b5cf6" label="Violet" />`
 
-const labelsCode = `<SCheckbox v-model="value" label="Label on right" />
-<SCheckbox 
-  v-model="value" 
-  label="Label on left" 
-  label-position="left" 
+const labelsCode = `<SCheckbox v-model="value" label="Label on the right (default)" />
+<SCheckbox
+  v-model="value"
+  label="Label on the left"
+  label-position="left"
 />`
 
-const indeterminateCode = `<SCheckbox 
-  :model-value="allDone" 
-  :indeterminate="someDone" 
-  label="Select All"
-  @change="toggleAll"
+const indeterminateCode = `<SCheckbox
+  :model-value="allTasksDone"
+  :indeterminate="someTasksDone"
+  label="Select All Tasks"
+  size="large"
+  color="#3b82f6"
+  @change="toggleAllTasks"
+/>
+<SCheckbox
+  v-for="task in tasks"
+  :key="task.id"
+  v-model="task.done"
+  :label="task.label"
+  color="#10b981"
+/>
+
+<SCheckbox
+  v-model="indeterminateDemo"
+  indeterminate
+  label="Always indeterminate"
+  color="#8b5cf6"
 />`
 
 const groupCode = `<script setup>
 const selected = ref(['apple'])
-const fruits = ['apple', 'banana', 'orange']
+const fruits = ['apple', 'banana', 'orange', 'mango', 'grape']
 <\/script>
 
 <template>
-  <SCheckbox 
-    v-for="fruit in fruits" 
+  <SCheckbox
+    v-for="fruit in fruits"
     :key="fruit"
     v-model="selected"
     :value="fruit"
-    :label="fruit"
+    :label="fruit.charAt(0).toUpperCase() + fruit.slice(1)"
+    color="#10b981"
   />
-  <p>Selected: {{ selected }}</p>
 </template>`
 
-const roundedCode = `<SCheckbox v-model="value" rounded label="Rounded" />
-<SCheckbox v-model="value2" rounded color="#ec4899" />`
+const roundedCode = `<SCheckbox v-model="value" rounded label="Rounded checkbox" />
+<SCheckbox v-model="value2" rounded color="#ec4899" label="Pink rounded" />`
 
 const iconsCode = `<SCheckbox v-model="v1" icon="check-bold" label="Bold check" />
 <SCheckbox v-model="v2" icon="heart" color="#ec4899" label="Heart" />
 <SCheckbox v-model="v3" icon="star" color="#f59e0b" label="Star" />`
 
-const statesCode = `<SCheckbox :model-value="false" disabled label="Disabled" />
-<SCheckbox :model-value="true" disabled label="Disabled On" />
-<SCheckbox v-model="value" loading label="Loading" />
-<SCheckbox v-model="value" required label="Required" />`
+const statesCode = `<SCheckbox :model-value="false" disabled label="Disabled Off" />
+<SCheckbox v-model="disabledOn" disabled label="Disabled On" />
+<SCheckbox v-model="loadingCheck" loading label="Loading" />
+<SCheckbox v-model="requiredCheck" required label="Required" />`
 
 const taskListCode = `<script setup>
 const tasks = ref([
-  { id: 1, label: 'Task 1', done: true },
-  { id: 2, label: 'Task 2', done: false },
+  { id: 1, label: 'Complete project proposal', done: true },
+  { id: 2, label: 'Review design mockups', done: false },
+  { id: 3, label: 'Setup development environment', done: true },
+  { id: 4, label: 'Write documentation', done: false },
 ])
 <\/script>
 
 <template>
   <div v-for="task in tasks" :key="task.id">
-    <SCheckbox 
-      v-model="task.done" 
+    <SCheckbox
+      v-model="task.done"
       :label="task.label"
       color="#10b981"
+      :class="{ 'line-through opacity-60': task.done }"
     />
   </div>
 </template>`

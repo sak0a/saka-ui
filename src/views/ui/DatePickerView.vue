@@ -85,17 +85,17 @@ const dates = ref([])
   />
 </template>`
 
-const variantsCode = `<SDatePicker v-model="date" variant="outlined" label="Outlined" />
-<SDatePicker v-model="date" variant="filled" label="Filled" />
-<SDatePicker v-model="date" variant="ghost" label="Ghost" />`
+const variantsCode = `<SDatePicker v-model="variantDate" variant="outlined" label="Outlined" />
+<SDatePicker v-model="variantDate" variant="filled" label="Filled" />
+<SDatePicker v-model="variantDate" variant="ghost" label="Ghost" />`
 
-const sizesCode = `<SDatePicker v-model="date" size="small" label="Small" />
-<SDatePicker v-model="date" size="medium" label="Medium" />
-<SDatePicker v-model="date" size="large" label="Large" />`
+const sizesCode = `<SDatePicker v-model="sizeDate" size="small" label="Small" />
+<SDatePicker v-model="sizeDate" size="medium" label="Medium" />
+<SDatePicker v-model="sizeDate" size="large" label="Large" />`
 
-const colorsCode = `<SDatePicker v-model="date" color="#f43f5e" label="Rose" />
-<SDatePicker v-model="date" color="#8b5cf6" label="Violet" />
-<SDatePicker v-model="date" color="#10b981" label="Emerald" />`
+const colorsCode = `<SDatePicker v-model="colorDate" color="#f43f5e" label="Rose" />
+<SDatePicker v-model="colorDate" color="#8b5cf6" label="Violet" />
+<SDatePicker v-model="colorDate" color="#10b981" label="Emerald" />`
 
 const constraintsCode = `<script setup>
 const minDate = new Date()
@@ -129,23 +129,33 @@ const holidays = [
   />
 </template>`
 
-const timeCode = `<SDatePicker 
-  v-model="dateTime" 
+const timeCode = `<SDatePicker
+  v-model="dateTime"
   :enable-time="true"
   time-format="24h"
-  label="Date & Time"
+  label="24h Format"
+/>
+<SDatePicker
+  v-model="dateTime12h"
+  :enable-time="true"
+  time-format="12h"
+  label="12h Format (AM/PM)"
 />`
 
-const weekCode = `<SDatePicker 
-  v-model="date" 
-  :first-day-of-week="1"
-  :show-week-numbers="true"
-  label="Week Starts Monday"
-/>`
+const weekCode = `<SDatePicker v-model="weekDate" :first-day-of-week="0" label="Week starts Sunday" />
+<SDatePicker v-model="weekDate" :first-day-of-week="1" label="Week starts Monday" />`
 
-const statesCode = `<SDatePicker v-model="date" disabled label="Disabled" />
-<SDatePicker v-model="date" loading label="Loading" />
-<SDatePicker v-model="date" readonly label="Read Only" />`
+const statesCode = `<SDatePicker v-model="disabledDate" disabled label="Disabled" />
+<SDatePicker v-model="loadingDate" loading label="Loading" />
+<SDatePicker v-model="disabledDate" readonly label="Read Only" />`
+
+const bookingCode = `<SDatePicker
+  v-model="rangeDate"
+  mode="range"
+  label="Check-in / Check-out"
+  placeholder="Select dates..."
+  color="#10b981"
+/>`
 
 // API Reference data
 const datePickerProps: ApiProp[] = [
@@ -478,13 +488,13 @@ const datePickerKeyboard: KeyboardShortcut[] = [
       <DemoSection 
         title="Booking Form"
         description="A typical travel or hotel booking date selection."
-        :code="rangeCode"
+        :code="bookingCode"
         language="vue"
       >
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-lg">
-          <SDatePicker 
-            v-model="rangeDate" 
-            mode="range" 
+          <SDatePicker
+            v-model="rangeDate"
+            mode="range"
             label="Check-in / Check-out"
             placeholder="Select dates..."
             color="#10b981"

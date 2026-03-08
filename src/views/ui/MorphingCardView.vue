@@ -44,54 +44,67 @@ const demoImages = [
 // Code snippets
 const basicCode = `<SMorphingCard>
   <template #trigger>
-    <SMorphingCardTrigger>
+    <SMorphingCardTrigger cursor="zoom-in">
       <SMorphingCardImage
-        src="https://example.com/image.jpg"
-        aspect-ratio="16/9"
+        :src="demoImages[0].src"
+        aspect-ratio="4/3"
       />
       <div class="p-4">
-        <SMorphingCardTitle>Card Title</SMorphingCardTitle>
-        <p class="text-sm text-gray-500 mt-1">Click to expand</p>
+        <SMorphingCardTitle as="h3" title-class="text-base">
+          {{ demoImages[0].title }}
+        </SMorphingCardTitle>
+        <p class="text-sm text-(--s-text-tertiary) mt-1">{{ demoImages[0].subtitle }}</p>
       </div>
     </SMorphingCardTrigger>
   </template>
-  
+
   <template #content>
     <SMorphingCardClose />
     <SMorphingCardImage
-      src="https://example.com/image.jpg"
+      :src="demoImages[0].src"
       aspect-ratio="16/9"
     />
     <SMorphingCardContent>
-      <SMorphingCardTitle>Card Title</SMorphingCardTitle>
-      <SMorphingCardDescription class="mt-2">
-        Detailed description that appears when expanded...
+      <SMorphingCardTitle>{{ demoImages[0].title }}</SMorphingCardTitle>
+      <SMorphingCardDescription class="mt-3">
+        {{ demoImages[0].description }}
       </SMorphingCardDescription>
     </SMorphingCardContent>
   </template>
 </SMorphingCard>`
 
-const galleryCode = `<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-  <SMorphingCard v-for="image in images" :key="image.id">
-    <template #trigger>
-      <SMorphingCardTrigger cursor="zoom-in">
-        <SMorphingCardImage :src="image.src" />
-        <div class="p-4">
-          <SMorphingCardTitle as="h3">{{ image.title }}</SMorphingCardTitle>
-        </div>
-      </SMorphingCardTrigger>
-    </template>
-    
-    <template #content>
-      <SMorphingCardClose />
-      <SMorphingCardImage :src="image.src" />
-      <SMorphingCardContent>
-        <SMorphingCardTitle>{{ image.title }}</SMorphingCardTitle>
-        <SMorphingCardDescription>{{ image.description }}</SMorphingCardDescription>
-      </SMorphingCardContent>
-    </template>
-  </SMorphingCard>
-</div>`
+const galleryCode = `<SMorphingCard v-for="image in demoImages" :key="image.id">
+  <template #trigger>
+    <SMorphingCardTrigger cursor="zoom-in">
+      <SMorphingCardImage
+        :src="image.src"
+        :alt="image.title"
+        aspect-ratio="4/3"
+      />
+      <div class="p-4">
+        <SMorphingCardTitle as="h3" title-class="text-base">
+          {{ image.title }}
+        </SMorphingCardTitle>
+        <p class="text-sm text-(--s-text-tertiary) mt-1">{{ image.subtitle }}</p>
+      </div>
+    </SMorphingCardTrigger>
+  </template>
+
+  <template #content>
+    <SMorphingCardClose />
+    <SMorphingCardImage
+      :src="image.src"
+      :alt="image.title"
+      aspect-ratio="16/9"
+    />
+    <SMorphingCardContent>
+      <SMorphingCardTitle>{{ image.title }}</SMorphingCardTitle>
+      <SMorphingCardDescription class="mt-3">
+        {{ image.description }}
+      </SMorphingCardDescription>
+    </SMorphingCardContent>
+  </template>
+</SMorphingCard>`
 
 // API Documentation
 const cardProps: ApiProp[] = [

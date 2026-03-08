@@ -10,8 +10,12 @@ const basicUsageCode = `<SKbd>Esc</SKbd>
 <SKbd>Tab</SKbd>
 <SKbd>&#8593;</SKbd>
 <SKbd>&#8595;</SKbd>
+<SKbd>&#8592;</SKbd>
+<SKbd>&#8594;</SKbd>
 <SKbd>K</SKbd>
-<SKbd>&#8984;</SKbd>`
+<SKbd>&#8984;</SKbd>
+<SKbd>Space</SKbd>
+<SKbd>Del</SKbd>`
 
 const sizesCode = `<SKbd size="xs">Esc</SKbd>
 <SKbd size="sm">Esc</SKbd>
@@ -28,11 +32,12 @@ const shortcutCode = `<SKbdShortcut :keys="['⌘', 'K']" />
 <SKbdShortcut :keys="['Alt', 'Tab']" />
 <SKbdShortcut :keys="['⌘', 'C']" separator="" />`
 
-const colorsCode = `<SKbd color="#3b82f6">⌘</SKbd>
+const colorsCode = `<SKbd color="#3b82f6">&#8984;</SKbd>
 <SKbd color="#8b5cf6">K</SKbd>
 <SKbd color="#ec4899">Shift</SKbd>
 <SKbd color="#10b981">Enter</SKbd>
-<SKbdShortcut :keys="['⌘', 'K']" color="#f59e0b" />`
+<SKbd color="#f59e0b">Del</SKbd>
+<SKbd color="#ef4444">Esc</SKbd>`
 
 const inlineCode = `<p>
   Press <SKbd size="sm">Esc</SKbd> to close the dialog,

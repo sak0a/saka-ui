@@ -27,6 +27,7 @@ const basicUsageCode = `<SGlassCard tint="light">
     <p>A translucent card with backdrop blur, specular highlight, and barrel-distortion refraction.</p>
   </SCardContent>
   <SCardFooter>
+    <SButton size="small" variant="ghost">Cancel</SButton>
     <SButton size="small">Learn More</SButton>
   </SCardFooter>
 </SGlassCard>`

@@ -68,6 +68,7 @@ const selected = ref('option1')
 <template>
   <SRadio v-model="selected" value="option1" label="Option 1" />
   <SRadio v-model="selected" value="option2" label="Option 2" />
+  <SRadio v-model="selected" value="option3" label="Option 3" />
 </template>`
 
 const sizesCode = `<SRadio v-model="value" value="small" size="small" label="Small" />
@@ -76,31 +77,63 @@ const sizesCode = `<SRadio v-model="value" value="small" size="small" label="Sma
 
 const colorsCode = `<SRadio v-model="v" value="blue" color="#3b82f6" label="Blue" />
 <SRadio v-model="v" value="pink" color="#ec4899" label="Pink" />
-<SRadio v-model="v" value="amber" color="#f59e0b" label="Amber" />`
+<SRadio v-model="v" value="amber" color="#f59e0b" label="Amber" />
+<SRadio v-model="v" value="violet" color="#8b5cf6" label="Violet" />
+<SRadio v-model="v" value="emerald" color="#10b981" label="Emerald" />`
 
 const variantsCode = `<!-- Default: ring highlight -->
-<SRadio v-model="v" value="a" variant="default" label="Default" />
+<SRadio v-model="v" value="a" variant="default" label="Option A" />
+<SRadio v-model="v" value="b" variant="default" label="Option B" />
 
 <!-- Filled: solid background -->
-<SRadio v-model="v" value="b" variant="filled" label="Filled" />
+<SRadio v-model="v" value="a" variant="filled" color="#ec4899" label="Option A" />
+<SRadio v-model="v" value="b" variant="filled" color="#ec4899" label="Option B" />
 
 <!-- Outlined: emphasized border -->
-<SRadio v-model="v" value="c" variant="outlined" label="Outlined" />
+<SRadio v-model="v" value="a" variant="outlined" color="#f59e0b" label="Option A" />
+<SRadio v-model="v" value="b" variant="outlined" color="#f59e0b" label="Option B" />
+<SRadio v-model="v" value="c" variant="outlined" color="#f59e0b" label="Option C" />
 
 <!-- Button: toggle button style -->
-<SRadio v-model="v" value="d" variant="button" label="Button" />`
+<SRadio v-model="v" value="option1" variant="button" color="#8b5cf6" label="Monthly" />
+<SRadio v-model="v" value="option2" variant="button" color="#8b5cf6" label="Yearly" />
+<SRadio v-model="v" value="option3" variant="button" color="#8b5cf6" label="Lifetime" />`
 
 const groupCode = `<script setup>
 const selected = ref('vue')
 const options = [
-  { value: 'vue', label: 'Vue.js' },
-  { value: 'react', label: 'React' },
-  { value: 'angular', label: 'Angular' }
+  { value: 'vue', label: 'Vue.js', icon: 'vuejs' },
+  { value: 'react', label: 'React', icon: 'react' },
+  { value: 'angular', label: 'Angular', icon: 'angular' },
+  { value: 'svelte', label: 'Svelte', icon: 'language-javascript' }
 ]
 <\/script>
 
 <template>
-  <SRadioGroup v-model="selected" :options="options" orientation="horizontal" />
+  <!-- Horizontal -->
+  <SRadioGroup
+    v-model="selected"
+    :options="options"
+    orientation="horizontal"
+    color="#3b82f6"
+  />
+
+  <!-- Vertical -->
+  <SRadioGroup
+    v-model="selected"
+    :options="options"
+    orientation="vertical"
+    color="#10b981"
+  />
+
+  <!-- Grid (3 columns) -->
+  <SRadioGroup
+    v-model="selected"
+    :options="languageOptions"
+    orientation="grid"
+    :grid-cols="3"
+    color="#f59e0b"
+  />
 </template>`
 
 const buttonGroupCode = `<SRadioGroup 
@@ -111,12 +144,37 @@ const buttonGroupCode = `<SRadioGroup
   color="#8b5cf6"
 />`
 
-const iconsCode = `<SRadio v-model="v" value="card" icon="credit-card" label="Card" />
-<SRadio v-model="v" value="bank" icon="bank" label="Bank" />
-<SRadio v-model="v" value="paypal" icon="paypal" label="PayPal" />`
+const iconsCode = `<SRadio v-model="v" value="card" icon="credit-card" color="#3b82f6" label="Credit Card" />
+<SRadio v-model="v" value="bank" icon="bank" color="#10b981" label="Bank Transfer" />
+<SRadio v-model="v" value="paypal" icon="wallet" color="#f59e0b" label="E-Wallet" />`
 
-const statesCode = `<SRadio :model-value="false" disabled label="Disabled" />
-<SRadio v-model="value" loading label="Loading" />`
+const statesCode = `<SRadio v-model="value" value="enabled" label="Enabled" />
+<SRadio v-model="value" value="disabled" disabled label="Disabled" />
+<SRadio v-model="value" value="loading" loading label="Loading" />`
+
+const paymentMethodCode = `<script setup>
+const paymentMethod = ref('card')
+const methods = [
+  { value: 'card', label: 'Credit / Debit Card', icon: 'credit-card', desc: 'Visa, Mastercard, Amex' },
+  { value: 'paypal', label: 'PayPal', icon: 'alpha-p-box', desc: 'Fast & secure checkout' },
+  { value: 'bank', label: 'Bank Transfer', icon: 'bank', desc: '1-3 business days' }
+]
+<\/script>
+
+<template>
+  <label v-for="method in methods" :key="method.value">
+    <SRadio
+      v-model="paymentMethod"
+      :value="method.value"
+      color="#3b82f6"
+    />
+    <span>{{ method.label }}</span>
+    <p>{{ method.desc }}</p>
+  </label>
+  <SButton variant="filled" block rounded="xl" color="#3b82f6">
+    Continue with {{ paymentMethod }}
+  </SButton>
+</template>`
 
 // API Reference data
 const radioProps: ApiProp[] = [
@@ -443,7 +501,7 @@ const radioKeyboard: KeyboardShortcut[] = [
       <DemoSection 
         title="Payment Method Selection"
         description="A practical payment method selector implementation."
-        :code="`<SRadio v-model='method' value='card' label='Card' />`"
+        :code="paymentMethodCode"
         language="vue"
       >
         <div class="p-6 rounded-xl bg-(--s-bg-primary) border border-(--s-border) max-w-md">

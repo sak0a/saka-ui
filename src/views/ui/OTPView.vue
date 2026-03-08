@@ -70,31 +70,38 @@ const handleResend = () => {
 }
 
 // Code snippets
-const basicCode = `<SOTP
-  v-model="otp"
-  @complete="handleComplete"
+const basicCode = `<!-- Numeric (default) -->
+<SOTP
+  v-model="numericOtp"
+  mode="numeric"
+  label="Enter verification code"
+  hint="Enter the 6-digit code sent to your phone"
+  :auto-focus="false"
 >
   <SOTPGroup>
     <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
   </SOTPGroup>
 </SOTP>
 
-// Numeric mode (default)
-<SOTP v-model="otp" mode="numeric" :auto-focus="false">
+<!-- Alphanumeric (A-Z, 0-9) -->
+<SOTP
+  v-model="alphanumericOtp"
+  mode="alphanumeric"
+  label="Enter license key"
+  :auto-focus="false"
+>
   <SOTPGroup>
     <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
   </SOTPGroup>
 </SOTP>
 
-// Alphanumeric (A-Z, 0-9)
-<SOTP v-model="otp" mode="alphanumeric" :auto-focus="false">
-  <SOTPGroup>
-    <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
-  </SOTPGroup>
-</SOTP>
-
-// Alphabetic only (A-Z)
-<SOTP v-model="otp" mode="alphabetic" :auto-focus="false">
+<!-- Alphabetic only (A-Z) -->
+<SOTP
+  v-model="alphabeticOtp"
+  mode="alphabetic"
+  label="Enter code"
+  :auto-focus="false"
+>
   <SOTPGroup>
     <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
   </SOTPGroup>
@@ -211,7 +218,7 @@ const successCode = `<!-- Different success animations -->
 </SOTP>`
 
 const featuresCode = `<!-- With separator (XXX-XXX format) -->
-<SOTP v-model="otp" :auto-focus="false">
+<SOTP v-model="separatorOtp" :auto-focus="false">
   <SOTPGroup>
     <SOTPSlot :index="0" />
     <SOTPSlot :index="1" />
@@ -226,7 +233,12 @@ const featuresCode = `<!-- With separator (XXX-XXX format) -->
 </SOTP>
 
 <!-- Masked (hidden digits) -->
-<SOTP v-model="otp" masked :auto-focus="false">
+<SOTP
+  v-model="maskedOtp"
+  masked
+  hint="Your input is hidden for security"
+  :auto-focus="false"
+>
   <SOTPGroup>
     <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
   </SOTPGroup>
@@ -234,9 +246,8 @@ const featuresCode = `<!-- With separator (XXX-XXX format) -->
 
 <!-- With countdown timer -->
 <SOTP
-  v-model="otp"
-  :countdown="60"
-  @resend="handleResend"
+  v-model="countdownOtp"
+  :countdown="30"
   :auto-focus="false"
 >
   <SOTPGroup>
@@ -245,7 +256,7 @@ const featuresCode = `<!-- With separator (XXX-XXX format) -->
 </SOTP>
 
 <!-- Custom length (4 digits) -->
-<SOTP v-model="otp" :maxlength="4" :auto-focus="false">
+<SOTP v-model="customLengthOtp" :maxlength="4" :auto-focus="false">
   <SOTPGroup>
     <SOTPSlot v-for="i in 4" :key="i" :index="i - 1" />
   </SOTPGroup>
@@ -285,37 +296,37 @@ const compoundCode = `<!-- Simple: all slots share visual config from root -->
   </SOTPGroup>
 </SOTP>`
 
-const customSlotsCode = `<!-- Custom placeholder (empty state) — slot is on SOTPSlot -->
-<SOTP v-model="otp" :auto-focus="false">
+const customSlotsCode = `<!-- Custom placeholder (dashes instead of circles) -->
+<SOTP v-model="customPlaceholderOtp" :auto-focus="false">
   <SOTPGroup>
     <SOTPSlot v-for="i in 6" :key="i" :index="i - 1">
       <template #placeholder="{ isFocused }">
         <span
-          class="mdi"
-          :class="isFocused ? 'mdi-circle-outline' : 'mdi-minus'"
+          class="mdi text-2xl transition-all duration-200"
+          :class="isFocused ? 'mdi-circle-outline scale-110' : 'mdi-minus'"
         />
       </template>
     </SOTPSlot>
   </SOTPGroup>
 </SOTP>
 
-<!-- Custom mask (hidden input) — slot is on SOTPSlot -->
-<SOTP v-model="otp" masked :auto-focus="false">
+<!-- Custom mask (asterisks instead of dots) -->
+<SOTP v-model="customMaskOtp" masked :auto-focus="false">
   <SOTPGroup>
     <SOTPSlot v-for="i in 6" :key="i" :index="i - 1">
       <template #mask>
-        <span class="mdi mdi-asterisk" />
+        <span class="mdi mdi-asterisk text-lg text-(--s-primary)" />
       </template>
     </SOTPSlot>
   </SOTPGroup>
 </SOTP>
 
-<!-- Custom digit rendering — slot is on SOTPSlot -->
-<SOTP v-model="otp" :auto-focus="false">
+<!-- Custom digit styling (monospace italic) -->
+<SOTP v-model="customDigitOtp" :auto-focus="false">
   <SOTPGroup>
     <SOTPSlot v-for="i in 6" :key="i" :index="i - 1">
       <template #digit="{ value }">
-        <span class="font-mono italic">{{ value }}</span>
+        <span class="font-mono italic text-cyan-500 tracking-wider">{{ value }}</span>
       </template>
     </SOTPSlot>
   </SOTPGroup>

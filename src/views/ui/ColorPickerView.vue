@@ -57,9 +57,9 @@ const brandPresets = [
 ]
 
 // Code snippets
-const basicCode = `<SColorPicker v-model="color" />`
+const basicCode = `<SColorPicker v-model="basicColor" />`
 
-const compoundBasicCode = `<SColorPicker v-model="color">
+const compoundBasicCode = `<SColorPicker v-model="compoundColor" :show-alpha="true">
   <SColorPickerSpectrum />
   <SColorPickerHueSlider />
   <SColorPickerAlphaSlider />
@@ -75,20 +75,17 @@ const compoundBasicCode = `<SColorPicker v-model="color">
   <SColorPickerRecent />
 </SColorPicker>`
 
-const spectrumOnlyCode = `<!-- Just the spectrum -->
-<SColorPicker v-model="color">
+const spectrumOnlyCode = `<SColorPicker v-model="spectrumOnlyColor">
   <SColorPickerSpectrum />
 </SColorPicker>`
 
-const slidersOnlyCode = `<!-- Just hue + alpha sliders -->
-<SColorPicker v-model="color" :show-alpha="true">
+const slidersOnlyCode = `<SColorPicker v-model="slidersOnlyColor" :show-alpha="true">
   <SColorPickerHueSlider />
   <SColorPickerAlphaSlider />
   <SColorPickerInputs />
 </SColorPicker>`
 
-const customLayoutCode = `<!-- Custom arrangement: presets on top, spectrum below -->
-<SColorPicker v-model="color">
+const customLayoutCode = `<SColorPicker v-model="customLayoutColor">
   <SColorPickerPresets :presets="brandPresets" label="Brand Colors" />
   <SColorPickerSpectrum />
   <SColorPickerHueSlider />
@@ -98,8 +95,7 @@ const customLayoutCode = `<!-- Custom arrangement: presets on top, spectrum belo
   </div>
 </SColorPicker>`
 
-const presetsOnlyCode = `<!-- Presets-only picker (no spectrum/sliders) -->
-<SColorPicker v-model="color">
+const presetsOnlyCode = `<SColorPicker v-model="presetsOnlyColor">
   <SColorPickerPresets :presets="customPresets" label="Pick a color" />
   <div class="flex items-center gap-3">
     <SColorPickerPreview />
@@ -108,26 +104,55 @@ const presetsOnlyCode = `<!-- Presets-only picker (no spectrum/sliders) -->
   <SColorPickerRecent />
 </SColorPicker>`
 
-const dropdownCode = `<SColorPicker v-model="color" mode="dropdown" label="Choose Color" />`
+const dropdownCode = `<SColorPicker v-model="dropdownColor" mode="dropdown" label="Choose Color" />`
 
-const customTriggerCode = `<SColorPicker v-model="color" mode="dropdown">
+const customTriggerCode = `<!-- Custom Button -->
+<SColorPicker v-model="customTriggerColor" mode="dropdown">
+  <template #trigger="{ color, isOpen }">
+    <button
+      class="flex items-center gap-2 px-4 py-2 rounded-lg border"
+      :class="{ 'ring-2 ring-(--s-primary)': isOpen }"
+    >
+      <span class="w-5 h-5 rounded-md border" :style="{ backgroundColor: color }"></span>
+      <span class="text-sm">Pick a color</span>
+    </button>
+  </template>
+</SColorPicker>
+
+<!-- Circle Swatch -->
+<SColorPicker v-model="iconTriggerColor" mode="dropdown">
   <template #trigger="{ color, isOpen }">
     <div
-      class="w-10 h-10 rounded-full border-2 cursor-pointer"
+      class="w-10 h-10 rounded-full border-2 border-white shadow-lg cursor-pointer"
+      :class="{ 'ring-2 ring-(--s-primary) ring-offset-2': isOpen }"
       :style="{ backgroundColor: color }"
-    />
+    ></div>
+  </template>
+</SColorPicker>
+
+<!-- Text Link -->
+<SColorPicker v-model="textTriggerColor" mode="dropdown">
+  <template #trigger="{ displayValue, color }">
+    <span class="text-sm underline cursor-pointer">
+      Theme color: <code class="font-mono" :style="{ color: color }">{{ displayValue }}</code>
+    </span>
   </template>
 </SColorPicker>`
 
-const alphaCode = `<SColorPicker v-model="color" :show-alpha="true" />`
+const alphaCode = `<SColorPicker v-model="alphaColor" :show-alpha="true" />`
 
-const formatsCode = `<SColorPicker v-model="hexColor" format="hex" />
-<SColorPicker v-model="rgbColor" format="rgb" />
-<SColorPicker v-model="hslColor" format="hsl" />`
+const formatsCode = `<SColorPicker v-model="formatHex" format="hex" />
+<SColorPicker v-model="formatRgb" format="rgb" />
+<SColorPicker v-model="formatHsl" format="hsl" />`
 
-const sizesCode = `<SColorPicker v-model="color" size="small" />
-<SColorPicker v-model="color" size="medium" />
-<SColorPicker v-model="color" size="large" />`
+const sizesCode = `<SColorPicker v-model="sizeSmall" size="small" />
+<SColorPicker v-model="sizeMedium" size="medium" />
+<SColorPicker v-model="sizeLarge" size="large" />`
+
+const themeCustomizerCode = `<SColorPicker v-model="primaryColor" mode="dropdown" label="Primary" />
+<SColorPicker v-model="secondaryColor" mode="dropdown" label="Secondary" />
+<SColorPicker v-model="accentColor" mode="dropdown" label="Accent" />
+<SColorPicker v-model="backgroundColor" mode="dropdown" label="Background" />`
 
 // API Reference data
 const colorPickerProps: ApiProp[] = [
@@ -482,7 +507,7 @@ const copySlots: ApiSlot[] = [
       <DemoSection
         title="Theme Customizer"
         description="A theme customization panel using multiple color pickers in dropdown mode."
-        :code="`<SColorPicker v-model='primary' label='Primary' mode='dropdown' />`"
+        :code="themeCustomizerCode"
         language="vue"
       >
         <div class="flex flex-col md:flex-row gap-8">

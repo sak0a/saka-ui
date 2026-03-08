@@ -59,65 +59,196 @@ const easings: Array<typeof currentEasing.value> = ['ease', 'ease-in', 'ease-out
 const arrowPlacements: Array<typeof currentArrowPlacement.value> = ['sides', 'bottom-right', 'bottom-left', 'top-right', 'top-left', 'bottom-center', 'top-center']
 
 // Code snippets
-const basicCode = `<SCarousel v-model="activeSlide" height="300px">
-  <SCarouselSlide>
-    <div class="slide-content">Slide 1</div>
+const basicCode = `<SCarousel v-model="basicIndex" height="280px" border-radius="12px">
+  <SCarouselSlide v-for="(slide, i) in demoSlides" :key="i">
+    <div
+      class="w-full h-full flex flex-col items-center justify-center text-white"
+      :style="{ background: slide.bg }"
+    >
+      <span class="text-5xl mb-3">{{ slide.emoji }}</span>
+      <h3 class="text-3xl font-bold mb-2">{{ slide.title }}</h3>
+      <p class="text-white/80">{{ slide.desc }}</p>
+    </div>
   </SCarouselSlide>
 </SCarousel>`
 
-const effectsCode = `<!-- 12 stunning transition effects -->
-<SCarousel effect="slide">...</SCarousel>
-<SCarousel effect="fade">...</SCarousel>
-<SCarousel effect="cube">...</SCarousel>
-<SCarousel effect="flip">...</SCarousel>
-<SCarousel effect="coverflow">...</SCarousel>
-<SCarousel effect="cards">...</SCarousel>
-<SCarousel effect="zoom">...</SCarousel>
-<SCarousel effect="creative">...</SCarousel>
-<SCarousel effect="parallax">...</SCarousel>
-<SCarousel effect="stack">...</SCarousel>
-<SCarousel effect="swirl">...</SCarousel>
-<SCarousel effect="kenburns">...</SCarousel>`
+const effectsCode = `<SCarousel
+  v-model="effectIndex"
+  :effect="currentEffect"
+  height="280px"
+  border-radius="12px"
+  :speed="currentEffect === 'kenburns' ? 1000 : 600"
+  easing="spring"
+>
+  <SCarouselSlide v-for="(slide, i) in demoSlides" :key="i">
+    <div
+      class="w-full h-full flex flex-col items-center justify-center text-white rounded-xl"
+      :style="{ background: slide.bg }"
+    >
+      <span class="text-6xl mb-4">{{ slide.emoji }}</span>
+      <h3 class="text-2xl font-bold">{{ currentEffect.toUpperCase() }}</h3>
+      <p class="text-white/70 mt-2">Slide {{ i + 1 }} of {{ demoSlides.length }}</p>
+    </div>
+  </SCarouselSlide>
+</SCarousel>`
 
-const autoplayCode = `<SCarousel 
-  :autoplay="true"
-  :autoplay-delay="3000"
+const autoplayCode = `<SCarousel
+  v-model="autoplayIndex"
+  :autoplay="autoplayEnabled"
+  :autoplay-delay="2500"
   :pause-on-hover="true"
   :show-progress="true"
   :show-counter="true"
-/>`
+  :loop="true"
+  height="250px"
+  border-radius="12px"
+>
+  <SCarouselSlide v-for="(slide, i) in demoSlides" :key="i">
+    <div
+      class="w-full h-full flex flex-col items-center justify-center text-white"
+      :style="{ background: slide.bg }"
+    >
+      <span class="text-5xl mb-3">&#x1F3AC;</span>
+      <h3 class="text-2xl font-bold">{{ slide.title }}</h3>
+    </div>
+  </SCarouselSlide>
+</SCarousel>`
 
-const dotsStyleCode = `<!-- Different pagination styles -->
-<SCarousel dots-style="dots" />
-<SCarousel dots-style="bars" />
-<SCarousel dots-style="numbers" />
-<SCarousel dots-style="fraction" />`
+const dotsStyleCode = `<SCarousel
+  v-model="dotsStyleIndex"
+  height="220px"
+  border-radius="12px"
+  :dots-style="currentDotsStyle"
+>
+  <SCarouselSlide v-for="(slide, i) in demoSlides.slice(0, 4)" :key="i">
+    <div
+      class="w-full h-full flex items-center justify-center text-white"
+      :style="{ background: slide.bg }"
+    >
+      <span class="text-4xl">{{ slide.emoji }}</span>
+    </div>
+  </SCarouselSlide>
+</SCarousel>`
 
-const easingCode = `<!-- Custom easing functions -->
-<SCarousel easing="ease" />
-<SCarousel easing="spring" />
-<SCarousel easing="bounce" />`
+const easingCode = `<SCarousel
+  v-model="easingIndex"
+  height="200px"
+  border-radius="12px"
+  :easing="currentEasing"
+  :speed="700"
+>
+  <SCarouselSlide v-for="(slide, i) in demoSlides.slice(0, 3)" :key="i">
+    <div
+      class="w-full h-full flex items-center justify-center text-white"
+      :style="{ background: slide.bg }"
+    >
+      <div class="text-center">
+        <span class="text-4xl">{{ slide.emoji }}</span>
+        <p class="mt-2 font-semibold">{{ currentEasing }}</p>
+      </div>
+    </div>
+  </SCarouselSlide>
+</SCarousel>`
 
-const mousewheelCode = `<SCarousel 
+const mousewheelCode = `<SCarousel
+  v-model="mousewheelIndex"
   :mousewheel="true"
   :grab-cursor="true"
-  :free-mode="true"
-/>`
+  height="220px"
+  border-radius="12px"
+>
+  <SCarouselSlide v-for="(slide, i) in demoSlides" :key="i">
+    <div
+      class="w-full h-full flex items-center justify-center text-white"
+      :style="{ background: slide.bg }"
+    >
+      <div class="text-center">
+        <span class="text-5xl">&#x1F5B1;&#xFE0F;</span>
+        <p class="mt-3 font-semibold">Scroll to navigate!</p>
+      </div>
+    </div>
+  </SCarouselSlide>
+</SCarousel>`
 
-const arrowPlacementCode = `<!-- 7 arrow placement options -->
-<SCarousel arrow-placement="sides" />      <!-- default -->
-<SCarousel arrow-placement="bottom-right" />
-<SCarousel arrow-placement="bottom-left" />
-<SCarousel arrow-placement="top-right" />
-<SCarousel arrow-placement="top-left" />
-<SCarousel arrow-placement="bottom-center" />
-<SCarousel arrow-placement="top-center" />`
+const arrowPlacementCode = `<SCarousel
+  v-model="arrowPlacementIndex"
+  height="260px"
+  border-radius="12px"
+  :arrow-placement="currentArrowPlacement"
+  :show-dots="false"
+>
+  <SCarouselSlide v-for="(slide, i) in demoSlides.slice(0, 4)" :key="i">
+    <div
+      class="w-full h-full flex flex-col items-center justify-center text-white"
+      :style="{ background: slide.bg }"
+    >
+      <span class="text-5xl mb-3">&#x1F3AF;</span>
+      <h3 class="text-xl font-bold">{{ currentArrowPlacement }}</h3>
+      <p class="text-white/70 mt-2 text-sm">Arrow placement demo</p>
+    </div>
+  </SCarouselSlide>
+</SCarousel>`
 
-const thumbnailsCode = `<SCarousel :show-thumbnails="true">
-  <template #thumbnail="{ index }">
-    <img :src="slides[index].image" />
-  </template>
-  <SCarouselSlide>...</SCarouselSlide>
+const thumbnailsCode = `<SCarousel
+  v-model="thumbnailIndex"
+  height="280px"
+  border-radius="12px"
+  :autoplay="true"
+  :autoplay-delay="4000"
+  :pause-on-hover="true"
+  :loop="true"
+>
+  <SCarouselSlide v-for="(slide, i) in demoSlides" :key="i">
+    <div
+      class="w-full h-full flex flex-col items-center justify-center text-white"
+      :style="{ background: slide.bg }"
+    >
+      <span class="text-5xl mb-3">{{ slide.emoji }}</span>
+      <h3 class="text-xl font-bold">{{ slide.title }}</h3>
+      <p class="text-white/70 text-sm">Product {{ i + 1 }}</p>
+    </div>
+  </SCarouselSlide>
+</SCarousel>`
+
+const verticalCode = `<SCarousel
+  v-model="verticalIndex"
+  direction="vertical"
+  height="300px"
+  border-radius="12px"
+  :mousewheel="true"
+>
+  <SCarouselSlide v-for="(slide, i) in demoSlides.slice(0, 4)" :key="i">
+    <div
+      class="w-full h-full flex items-center justify-center text-white"
+      :style="{ background: slide.bg }"
+    >
+      <div class="text-center">
+        <span class="text-5xl">\\u2B06\\uFE0F\\u2B07\\uFE0F</span>
+        <h3 class="text-xl font-bold mt-4">Vertical Slide {{ i + 1 }}</h3>
+      </div>
+    </div>
+  </SCarouselSlide>
+</SCarousel>`
+
+const loopCode = `<SCarousel
+  v-model="loopIndex"
+  :loop="true"
+  height="220px"
+  border-radius="12px"
+  easing="bounce"
+>
+  <SCarouselSlide v-for="(slide, i) in demoSlides.slice(0, 3)" :key="i">
+    <div
+      class="w-full h-full flex items-center justify-center text-white"
+      :style="{ background: slide.bg }"
+    >
+      <div class="text-center">
+        <span class="text-5xl">\\uD83D\\uDD04</span>
+        <h3 class="text-xl font-bold mt-4">{{ slide.title }}</h3>
+        <p class="text-white/70 text-sm">Loop enabled - navigate infinitely!</p>
+      </div>
+    </div>
+  </SCarouselSlide>
 </SCarousel>`
 
 const methodsCode = `<script setup>
@@ -535,7 +666,7 @@ const carouselSlideSlots: ApiSlot[] = [
       <DemoSection 
         title="Vertical Carousel"
         description="Slides arranged vertically with up/down navigation."
-        :code="`<SCarousel direction='vertical' />`"
+        :code="verticalCode"
         language="vue"
       >
         <SCarousel 
@@ -566,7 +697,7 @@ const carouselSlideSlots: ApiSlot[] = [
       <DemoSection 
         title="Infinite Navigation"
         description="Loop mode for seamless infinite scroll, or rewind for jump-back behavior."
-        :code="`<SCarousel :loop='true' />\n<SCarousel :rewind='true' />`"
+        :code="loopCode"
         language="vue"
       >
         <SCarousel 

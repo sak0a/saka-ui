@@ -58,10 +58,10 @@ const titlesCode = `<!-- Alert with title only -->
 <SAlert variant="warning" description="You have unsaved changes." />`
 
 const autoDismissCode = `<!-- Auto-dismiss with progress bar (default) -->
-<SAlert 
-  variant="success" 
-  title="Auto Dismiss" 
-  description="This alert will dismiss in 5 seconds."
+<SAlert
+  variant="success"
+  title="Auto Dismiss"
+  description="This alert will dismiss in 5 seconds. Hover to pause."
   :auto-dismiss="true"
   :duration="5000"
 />
@@ -92,16 +92,16 @@ const iconsCode = `<!-- Without icon -->
 <SAlert variant="info" title="Custom Icon" icon="rocket" />
 
 <!-- Default icons (auto based on variant) -->
-<SAlert variant="success" title="Success Icon" />
-<SAlert variant="warning" title="Warning Icon" />
-<SAlert variant="error" title="Error Icon" />
-<SAlert variant="info" title="Info Icon" />`
+<SAlert variant="success" title="Success Icon" description="Default check-circle icon" />
+<SAlert variant="warning" title="Warning Icon" description="Default alert icon" />
+<SAlert variant="error" title="Error Icon" description="Default alert-circle icon" />
+<SAlert variant="info" title="Info Icon" description="Default information icon" />`
 
 const bordersCode = `<!-- No border -->
 <SAlert variant="success" title="No Border" border="none" />
 
 <!-- Left border (default) -->
-<SAlert variant="info" title="Left Border" border="left" />
+<SAlert variant="info" title="Left Border" border="left" description="Default border style" />
 
 <!-- Top border -->
 <SAlert variant="warning" title="Top Border" border="top" />
@@ -203,29 +203,44 @@ const richContentCode = `<SAlert variant="info">
 </SAlert>`
 
 const customizationCode = `<!-- Custom color -->
-<SAlert 
-  variant="custom" 
-  color="#8b5cf6" 
-  title="Custom Purple" 
+<SAlert
+  variant="custom"
+  color="#8b5cf6"
+  title="Custom Purple"
   description="A custom purple themed alert."
 />
 
 <!-- Without elevation -->
-<SAlert variant="info" title="No Shadow" :elevation="false" />
+<SAlert variant="info" title="No Shadow" :elevation="false" description="Alert without elevation shadow" />
 
 <!-- Without rounded corners -->
-<SAlert variant="warning" title="Sharp Corners" :rounded="false" />
+<SAlert variant="warning" title="Sharp Corners" :rounded="false" description="Alert with sharp corners" />
 
 <!-- Dismissible on click -->
-<SAlert 
-  variant="success" 
-  title="Click to Dismiss" 
+<SAlert
+  variant="success"
+  title="Click to Dismiss"
   description="Click anywhere on this alert to dismiss it."
   :dismissible="true"
 />
 
 <!-- Not closable -->
-<SAlert variant="error" title="Cannot Close" :closable="false" />`
+<SAlert variant="error" title="Cannot Close" description="This alert has no close button" :closable="false" />`
+
+const realWorldCode = `<SAlert variant="success" closable>
+  <template #title>Payment Successful</template>
+  Your order #12345 has been confirmed. A confirmation email has been sent.
+</SAlert>
+
+<SAlert variant="error" closable>
+  <template #title>Authentication Failed</template>
+  Invalid credentials. Please check your email and password.
+</SAlert>
+
+<SAlert variant="warning">
+  <template #title>Session Expiring</template>
+  Your session will expire in 5 minutes. Save your work to avoid losing changes.
+</SAlert>`
 
 // API Reference data
 const alertProps: ApiProp[] = [
@@ -616,19 +631,19 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       <DemoSection 
         title="Notification System"
         description="Common alert patterns used in real applications for form validation, success messages, and error handling."
-        :code="customizationCode"
+        :code="realWorldCode"
         language="vue"
       >
         <div class="space-y-4">
-          <SAlert type="success" closable>
+          <SAlert variant="success" closable>
             <template #title>Payment Successful</template>
             Your order #12345 has been confirmed. A confirmation email has been sent.
           </SAlert>
-          <SAlert type="danger" closable>
+          <SAlert variant="error" closable>
             <template #title>Authentication Failed</template>
             Invalid credentials. Please check your email and password.
           </SAlert>
-          <SAlert type="warning">
+          <SAlert variant="warning">
             <template #title>Session Expiring</template>
             Your session will expire in 5 minutes. Save your work to avoid losing changes.
           </SAlert>

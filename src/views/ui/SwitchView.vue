@@ -45,10 +45,14 @@ const sizesCode = `<SSwitch v-model="small" size="small" />
 <SSwitch v-model="large" size="large" />`
 
 const typesCode = `<!-- Inset (default) -->
-<SSwitch v-model="value" type="inset" />
+<SSwitch v-model="value" type="inset" size="small" />
+<SSwitch v-model="value" type="inset" size="medium" />
+<SSwitch v-model="value" type="inset" size="large" />
 
 <!-- Outset - thumb larger than track -->
-<SSwitch v-model="value" type="outset" />`
+<SSwitch v-model="value" type="outset" size="small" />
+<SSwitch v-model="value" type="outset" size="medium" />
+<SSwitch v-model="value" type="outset" size="large" />`
 
 const colorsCode = `<SSwitch v-model="switch1" color="#3b82f6" />
 <SSwitch v-model="switch2" color="#ec4899" />
@@ -62,47 +66,54 @@ const labelsCode = `<SSwitch v-model="value" label-after="Enable notifications" 
 />`
 
 const iconsCode = `<!-- Using icon names -->
-<SSwitch 
-  v-model="value" 
-  checked-icon="check" 
-  unchecked-icon="close" 
+<SSwitch
+  v-model="value"
+  checked-icon="check"
+  unchecked-icon="close"
+  size="large"
 />
 
 <!-- Using custom content via slots -->
 <SSwitch v-model="value" size="large">
   <template #checked-icon>🤔</template>
   <template #unchecked-icon>➡️</template>
+</SSwitch>
+
+<!-- Emoji icons with custom color -->
+<SSwitch v-model="value" size="large" color="#f59e0b">
+  <template #checked-icon>☀️</template>
+  <template #unchecked-icon>🌙</template>
 </SSwitch>`
 
 const trackTextCode = `<!-- Text inside track -->
-<SSwitch 
-  v-model="value" 
+<SSwitch
+  v-model="value"
   checked-text="ON"
   unchecked-text="OFF"
   color="#3b82f6"
 />
 
-<SSwitch 
-  v-model="value" 
-  unchecked-text="Unchecked"
+<SSwitch
+  v-model="value"
   checked-text="Checked"
+  unchecked-text="Unchecked"
   color="#10b981"
 />`
 
-const statesCode = `<SSwitch :model-value="false" disabled />
-<SSwitch :model-value="true" disabled />
-<SSwitch v-model="value" loading />`
+const statesCode = `<SSwitch v-model="disabledOff" disabled />
+<SSwitch v-model="disabledOn" disabled />
+<SSwitch v-model="loadingSwitch" loading />`
 
 const customValuesCode = `<script setup>
 const status = ref('inactive')
 <\/script>
 
 <template>
-  <SSwitch 
-    v-model="status" 
+  <SSwitch
+    v-model="status"
     checked-value="active"
     unchecked-value="inactive"
-    :label-after="status"
+    color="#8b5cf6"
   />
 </template>`
 
