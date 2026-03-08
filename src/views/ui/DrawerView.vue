@@ -101,14 +101,14 @@ const basicCode = `<SButton @click="showDrawer = true">Open Drawer</SButton>
 <SDrawer
   v-model="showDrawer"
   title="Welcome to SDrawer"
-  description="Swipe down or tap outside to close"
+  description="This is a modern drawer component with swipe gestures and smooth animations."
 >
   <SDrawerContent>
     <p>Your content here...</p>
   </SDrawerContent>
   <SDrawerFooter>
-    <SButton variant="secondary" @click="showDrawer = false">Cancel</SButton>
-    <SButton @click="showDrawer = false">Confirm</SButton>
+    <SButton variant="secondary">Cancel</SButton>
+    <SButton>Got it!</SButton>
   </SDrawerFooter>
 </SDrawer>`
 
@@ -147,15 +147,24 @@ const variantsCode = `<!-- Default -->
 <SDrawer v-model="showDrawer" variant="minimal">...</SDrawer>`
 
 const mobileCode = `<SDrawer
-  v-model="showDrawer"
+  v-model="mobileDrawer"
   side="bottom"
-  :swipeable="true"
-  :show-handle="true"
+  size="md"
   modal
-  title="Mobile Drawer"
+  title="Share this content"
+  description="Choose how you'd like to share"
 >
-  <SDrawerContent>
-    <p>Swipe down to close, or tap the backdrop.</p>
+  <SDrawerContent padding="none">
+    <div class="grid grid-cols-4 gap-4 p-6">
+      <!-- Share option buttons -->
+      <SButton variant="ghost" class="flex flex-col items-center gap-2 p-3 rounded-xl h-auto">
+        <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white">
+          <span class="mdi mdi-twitter text-xl" />
+        </div>
+        <span class="text-xs text-(--s-text-secondary)">Twitter</span>
+      </SButton>
+      <!-- ... more share options -->
+    </div>
   </SDrawerContent>
 </SDrawer>`
 
@@ -164,27 +173,140 @@ const cartCode = `<SDrawer
   side="right"
   size="md"
   title="Shopping Cart"
+  :description="\`\${cartItems.length} items in your cart\`"
+>
+  <SDrawerContent padding="none">
+    <div class="divide-y divide-(--s-border)">
+      <div v-for="item in cartItems" :key="item.id" class="flex gap-4 p-6">
+        <img :src="item.image" :alt="item.name" class="w-20 h-20 rounded-xl object-cover" />
+        <div class="flex-1 min-w-0">
+          <h4 class="font-medium truncate">{{ item.name }}</h4>
+          <p class="text-sm text-(--s-text-tertiary) mt-1">Qty: {{ item.qty }}</p>
+          <p class="font-semibold text-(--s-primary) mt-2">\${{ (item.price * item.qty).toFixed(2) }}</p>
+        </div>
+      </div>
+    </div>
+  </SDrawerContent>
+  <SDrawerFooter align="stretch">
+    <SButton size="large" class="w-full">Checkout</SButton>
+    <SButton variant="secondary" class="w-full">Continue Shopping</SButton>
+  </SDrawerFooter>
+</SDrawer>`
+
+const menuCode = `<SDrawer
+  v-model="menuDrawer"
+  side="left"
+  size="sm"
+  :show-handle="false"
+  hide-header
+>
+  <SDrawerContent padding="sm">
+    <nav class="space-y-1">
+      <SButton
+        v-for="item in menuItems"
+        :key="item.label"
+        variant="ghost"
+        class="w-full"
+      >
+        <span :class="\`mdi mdi-\${item.icon}\`" />
+        <span>{{ item.label }}</span>
+        <SBadge v-if="item.badge" size="sm" color="red">
+          {{ item.badge }}
+        </SBadge>
+      </SButton>
+    </nav>
+  </SDrawerContent>
+</SDrawer>`
+
+const formDrawerCode = `<SDrawer
+  v-model="formDrawer"
+  side="right"
+  size="md"
+  title="Add New Contact"
+  description="Fill in the contact details"
 >
   <SDrawerContent>
-    <div v-for="item in cartItems" :key="item.id" class="flex gap-4 py-4">
-      <img :src="item.image" class="w-16 h-16 rounded-lg object-cover" />
-      <div class="flex-1">
-        <h4>{{ item.name }}</h4>
-        <p>{{ item.price }}</p>
+    <form class="space-y-5">
+      <SInput v-model="formData.name" label="Full Name" placeholder="John Doe" prefix-icon="account" />
+      <SInput v-model="formData.email" label="Email Address" type="email" placeholder="john@example.com" prefix-icon="email" />
+      <SInput label="Phone Number" placeholder="+1 (555) 000-0000" prefix-icon="phone" />
+      <SInput label="Company" placeholder="Acme Inc." prefix-icon="domain" />
+      <div class="flex items-center justify-between py-2">
+        <span class="text-sm text-(--s-text-secondary)">Send welcome email</span>
+        <SSwitch v-model="formData.notify" />
+      </div>
+    </form>
+  </SDrawerContent>
+  <SDrawerFooter>
+    <SButton variant="secondary">Cancel</SButton>
+    <SButton>Save Contact</SButton>
+  </SDrawerFooter>
+</SDrawer>`
+
+const settingsCode = `<SDrawer
+  v-model="settingsDrawer"
+  side="right"
+  size="sm"
+  title="Settings"
+  description="Customize your experience"
+>
+  <SDrawerContent padding="none">
+    <div class="divide-y divide-(--s-border)">
+      <div class="flex items-center justify-between p-6">
+        <div>
+          <h4 class="font-medium text-(--s-text-primary)">Dark Mode</h4>
+          <p class="text-sm text-(--s-text-tertiary)">Toggle dark theme</p>
+        </div>
+        <SSwitch v-model="settings.darkMode" />
+      </div>
+      <div class="flex items-center justify-between p-6">
+        <div>
+          <h4 class="font-medium text-(--s-text-primary)">Notifications</h4>
+          <p class="text-sm text-(--s-text-tertiary)">Enable push notifications</p>
+        </div>
+        <SSwitch v-model="settings.notifications" />
       </div>
     </div>
   </SDrawerContent>
   <SDrawerFooter>
-    <SButton block>Checkout</SButton>
+    <SButton variant="secondary">Close</SButton>
+  </SDrawerFooter>
+</SDrawer>`
+
+const notificationsCode = `<SDrawer
+  v-model="notificationDrawer"
+  side="right"
+  size="md"
+  hide-header
+>
+  <SDrawerHeader title="Notifications" closable>
+    <template #extra>
+      <SButton variant="ghost" size="small">Mark all read</SButton>
+    </template>
+  </SDrawerHeader>
+  <SDrawerContent padding="none">
+    <div class="divide-y divide-(--s-border)">
+      <div v-for="notification in notifications" :key="notification.id" class="flex gap-4 p-6">
+        <div class="shrink-0 w-10 h-10 rounded-full flex items-center justify-center">
+          <span class="mdi text-xl" />
+        </div>
+        <div class="flex-1 min-w-0">
+          <h4 class="font-medium">{{ notification.title }}</h4>
+          <p class="text-sm">{{ notification.message }}</p>
+        </div>
+      </div>
+    </div>
+  </SDrawerContent>
+  <SDrawerFooter align="center">
+    <SButton variant="ghost">View All Notifications</SButton>
   </SDrawerFooter>
 </SDrawer>`
 
 const composableCode = `<SDrawer v-model="showDrawer" hide-header>
-  <!-- Custom header with composable components -->
   <div class="flex items-center justify-between p-6 border-b border-(--s-border)">
     <div class="flex items-center gap-4">
-      <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600">
-        <span class="mdi mdi-palette text-2xl text-white" />
+      <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
+        <span class="mdi mdi-puzzle text-2xl" />
       </div>
       <div>
         <SDrawerTitle>Custom Header</SDrawerTitle>
@@ -195,10 +317,15 @@ const composableCode = `<SDrawer v-model="showDrawer" hide-header>
     </div>
     <SDrawerClose />
   </div>
-  
+
   <SDrawerContent>
     <p>Use individual components for maximum flexibility.</p>
   </SDrawerContent>
+
+  <SDrawerFooter>
+    <SButton variant="secondary">Cancel</SButton>
+    <SButton>Got it!</SButton>
+  </SDrawerFooter>
 </SDrawer>`
 
 // API Documentation
@@ -662,7 +789,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       <DemoSection
         title="Side Menu Drawer"
         description="A common pattern for mobile navigation menus."
-        :code="cartCode"
+        :code="menuCode"
         language="vue"
       >
         <SButton @click="menuDrawer = true">
@@ -785,7 +912,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       <DemoSection
         title="Drawer with Form"
         description="Side panel for forms and data entry."
-        :code="cartCode"
+        :code="formDrawerCode"
         language="vue"
       >
         <SButton @click="formDrawer = true">
@@ -848,7 +975,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       <DemoSection
         title="Settings Drawer"
         description="Quick settings panel pattern."
-        :code="cartCode"
+        :code="settingsCode"
         language="vue"
       >
         <SButton @click="settingsDrawer = true">
@@ -908,7 +1035,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       <DemoSection
         title="Notifications Drawer"
         description="Display notifications in a side panel."
-        :code="cartCode"
+        :code="notificationsCode"
         language="vue"
       >
         <SButton @click="notificationDrawer = true">

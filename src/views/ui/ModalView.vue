@@ -58,14 +58,14 @@ const basicCode = `<SButton @click="showModal = true">Open Modal</SButton>
 <SModal
   v-model="showModal"
   title="Welcome to SModal"
-  description="A basic modal with title and description"
+  description="This is a basic modal with a title and description. It supports keyboard navigation, focus trapping, and smooth animations."
 >
   <SModalContent>
     <p>Your content here...</p>
   </SModalContent>
   <SModalFooter>
-    <SButton variant="secondary" @click="showModal = false">Cancel</SButton>
-    <SButton @click="showModal = false">Got it!</SButton>
+    <SButton variant="secondary">Cancel</SButton>
+    <SButton>Got it!</SButton>
   </SModalFooter>
 </SModal>`
 
@@ -105,56 +105,66 @@ const customHeaderCode = `<SModal v-model="showModal" hide-header>
   <SModalHeader closable>
     <template #title>
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600">
-          <span class="mdi mdi-star" />
+        <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-white">
+          <span class="mdi mdi-star text-xl" />
         </div>
         <div>
-          <h2>Premium Feature</h2>
-          <p>Upgrade to unlock</p>
+          <h2 class="text-lg font-semibold text-(--s-text-primary)">Premium Feature</h2>
+          <p class="text-sm text-(--s-text-tertiary)">Upgrade to unlock</p>
         </div>
       </div>
     </template>
     <template #extra>
-      <SBadge color="amber">PRO</SBadge>
+      <SBadge color="amber" variant="subtle">PRO</SBadge>
     </template>
   </SModalHeader>
   <SModalContent>...</SModalContent>
-  <SModalFooter>...</SModalFooter>
+  <SModalFooter>
+    <SButton variant="secondary">Maybe Later</SButton>
+    <SButton color="amber">Upgrade Now</SButton>
+  </SModalFooter>
 </SModal>`
 
 const composableCode = `<SModal v-model="showModal" hide-header>
-  <!-- Custom header with composable components -->
   <div class="flex items-center justify-between p-6 border-b border-(--s-border)">
-    <div>
-      <SModalTitle>Composable Header</SModalTitle>
-      <SModalDescription class="mt-1">
-        Built with individual components
-      </SModalDescription>
+    <div class="flex items-center gap-4">
+      <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 text-white">
+        <span class="mdi mdi-puzzle text-2xl" />
+      </div>
+      <div>
+        <SModalTitle>Composable Header</SModalTitle>
+        <SModalDescription class="mt-1">
+          Built with individual components
+        </SModalDescription>
+      </div>
     </div>
     <SModalClose />
   </div>
-  
+
   <SModalContent>
-    <p>Use SModalTitle, SModalDescription, and SModalClose 
+    <p>Use SModalTitle, SModalDescription, and SModalClose
     for maximum flexibility in your layouts.</p>
   </SModalContent>
-  
+
   <SModalFooter>
-    <SButton @click="showModal = false">Got it</SButton>
+    <SButton variant="secondary">Cancel</SButton>
+    <SButton>Got it!</SButton>
   </SModalFooter>
 </SModal>`
 
 const confirmCode = `<SModal v-model="confirmModal" size="sm" animation="zoom">
   <SModalContent centered padding="lg">
-    <div class="w-16 h-16 rounded-full bg-red-500/10 text-red-500">
+    <div class="flex items-center justify-center w-16 h-16 mx-auto rounded-full bg-red-500/10 text-red-500 mb-4">
       <span class="mdi mdi-alert-circle-outline text-4xl" />
     </div>
-    <h3>Delete this item?</h3>
-    <p>This action cannot be undone.</p>
+    <h3 class="text-lg font-semibold text-(--s-text-primary) mb-2">Delete this item?</h3>
+    <p class="text-(--s-text-secondary) text-sm max-w-xs">
+      This action cannot be undone. This will permanently delete the item and all associated data.
+    </p>
   </SModalContent>
-  <SModalFooter align="stretch" stack-on-mobile>
-    <SButton variant="secondary" @click="confirmModal = false">Cancel</SButton>
-    <SButton color="red" @click="confirmModal = false">Delete</SButton>
+  <SModalFooter align="stretch" gap="md" stack-on-mobile>
+    <SButton variant="secondary">Cancel</SButton>
+    <SButton color="red">Delete</SButton>
   </SModalFooter>
 </SModal>`
 
@@ -162,22 +172,29 @@ const formCode = `<SModal
   v-model="formModal"
   size="sm"
   title="Create Account"
-  description="Fill in your details"
+  description="Fill in your details to get started"
 >
   <SModalContent>
     <form class="space-y-4">
-      <SInput v-model="name" label="Full Name" prefix-icon="account" />
-      <SInput v-model="email" label="Email" type="email" prefix-icon="email" />
-      <SSwitch v-model="subscribe" label="Subscribe to newsletter" />
+      <SInput v-model="formData.name" label="Full Name" placeholder="John Doe" prefix-icon="account" />
+      <SInput v-model="formData.email" label="Email Address" type="email" placeholder="john@example.com" prefix-icon="email" />
+      <div class="flex items-center justify-between py-2">
+        <span class="text-sm text-(--s-text-secondary)">Subscribe to newsletter</span>
+        <SSwitch v-model="formData.subscribe" />
+      </div>
     </form>
   </SModalContent>
   <SModalFooter>
-    <SButton variant="secondary" @click="formModal = false">Cancel</SButton>
-    <SButton @click="formModal = false">Create Account</SButton>
+    <SButton variant="secondary">Cancel</SButton>
+    <SButton>Create Account</SButton>
   </SModalFooter>
 </SModal>`
 
-const scrollCode = `<SModal v-model="scrollModal" title="Terms of Service">
+const scrollCode = `<SModal
+  v-model="scrollModal"
+  title="Terms of Service"
+  description="Please read carefully before accepting"
+>
   <SModalContent max-height="300px">
     <div class="space-y-4">
       <p v-for="i in 10" :key="i">Long content...</p>
@@ -189,28 +206,51 @@ const scrollCode = `<SModal v-model="scrollModal" title="Terms of Service">
   </SModalFooter>
 </SModal>`
 
-const nestedCode = `<SModal v-model="firstModal" :stack-order="0">
+const nestedCode = `<SModal
+  v-model="nestedModal1"
+  title="First Modal"
+  description="This is the first modal layer"
+  :stack-order="0"
+>
   <SModalContent>
-    <SButton @click="secondModal = true">Open Second Modal</SButton>
+    <p>Click the button below to open another modal on top of this one.</p>
+    <SButton>Open Second Modal</SButton>
   </SModalContent>
+  <SModalFooter>
+    <SButton variant="secondary">Close</SButton>
+  </SModalFooter>
 </SModal>
 
-<SModal v-model="secondModal" :stack-order="1">
+<SModal
+  v-model="nestedModal2"
+  title="Second Modal"
+  description="This modal is on top of the first one"
+  size="sm"
+  :stack-order="1"
+  animation="slide-up"
+>
   <SModalContent>
-    This modal appears above the first one.
+    <p>Notice how this modal appears above the first one with a higher z-index.</p>
   </SModalContent>
+  <SModalFooter>
+    <SButton>Close</SButton>
+  </SModalFooter>
 </SModal>`
 
 const fullscreenCode = `<SModal v-model="fullscreenModal" fullscreen animation="zoom">
-  <SModalHeader title="Fullscreen Mode" />
+  <SModalHeader title="Fullscreen Mode" description="The modal takes up the entire viewport" />
   <SModalContent centered>
-    <div class="text-center">
-      <span class="mdi mdi-monitor text-8xl" />
-      <h2>Immersive Experience</h2>
+    <div class="text-center max-w-lg mx-auto">
+      <span class="mdi mdi-monitor text-8xl text-(--s-primary) mb-6 block" />
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Immersive Experience</h2>
+      <p class="text-(--s-text-secondary)">
+        Fullscreen modals are perfect for image galleries, video players,
+        or any content that benefits from maximum screen real estate.
+      </p>
     </div>
   </SModalContent>
   <SModalFooter align="center">
-    <SButton @click="fullscreenModal = false">Exit Fullscreen</SButton>
+    <SButton size="large">Exit Fullscreen</SButton>
   </SModalFooter>
 </SModal>`
 

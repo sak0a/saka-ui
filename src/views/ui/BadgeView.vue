@@ -16,12 +16,10 @@ const clearNotifications = () => {
 }
 
 // Code snippets for demos
-const basicUsageCode = `<SBadge :content="5" standalone>
-</SBadge>
-<SBadge content="New" standalone color="#3b82f6">
-</SBadge>
-<SBadge content="99" standalone color="#ec4899">
-</SBadge>`
+const basicUsageCode = `<SBadge :content="5" standalone />
+<SBadge content="New" standalone color="#3b82f6" />
+<SBadge content="99" standalone color="#ec4899" />
+<SBadge content="Hot" standalone color="#f59e0b" />`
 
 const overlayCode = `<SBadge :content="5">
   <SButton iconOnly iconLeft="bell" />
@@ -29,22 +27,38 @@ const overlayCode = `<SBadge :content="5">
 
 <SBadge :content="12" color="#ec4899">
   <SButton iconOnly iconLeft="email" />
+</SBadge>
+
+<SBadge :content="3" color="#3b82f6">
+  <SButton iconOnly iconLeft="message" />
+</SBadge>
+
+<SBadge content="NEW" color="#f59e0b" size="small">
+  <SButton iconOnly iconLeft="gift" />
 </SBadge>`
 
-const variantsCode = `<SBadge content="5" variant="filled" standalone />
-<SBadge content="5" variant="outlined" standalone />
-<SBadge content="5" variant="light" standalone />`
+const variantsCode = `<SBadge :content="5" variant="filled" standalone />
+<SBadge :content="5" variant="outlined" standalone />
+<SBadge :content="5" variant="light" standalone />`
 
-const sizesCode = `<SBadge content="5" size="small" standalone />
-<SBadge content="5" size="medium" standalone />
-<SBadge content="5" size="large" standalone />`
+const sizesCode = `<SBadge :content="5" size="small" standalone />
+<SBadge :content="5" size="medium" standalone />
+<SBadge :content="5" size="large" standalone />`
 
 const dotCode = `<SBadge dot>
   <SButton iconOnly iconLeft="bell" />
 </SBadge>
 
 <SBadge dot color="#f59e0b">
-  <span class="mdi mdi-account text-3xl"></span>
+  <span class="mdi mdi-account text-3xl text-(--s-text-secondary)"></span>
+</SBadge>
+
+<SBadge dot color="#ef4444">
+  <div class="w-10 h-10 bg-linear-to-br from-blue-500 to-purple-600 rounded-full"></div>
+</SBadge>
+
+<SBadge dot color="#10b981" size="large">
+  <SButton iconOnly iconLeft="wifi" />
 </SBadge>`
 
 const maxCode = `<SBadge :content="100" :max="99">
@@ -53,27 +67,39 @@ const maxCode = `<SBadge :content="100" :max="99">
 
 <SBadge :content="1000" :max="999" color="#ec4899">
   <SButton iconOnly iconLeft="message" />
+</SBadge>
+
+<SBadge :content="50" :max="10" color="#3b82f6">
+  <SButton iconOnly iconLeft="inbox" />
 </SBadge>`
 
-const positionsCode = `<SBadge :content="1" position="top-right">
-  <div class="w-10 h-10 bg-gray-700 rounded-lg"></div>
+const positionsCode = `<SBadge :content="1" position="top-right" color="#ef4444">
+  <div class="w-12 h-12 bg-(--s-bg-tertiary) rounded-lg"></div>
 </SBadge>
-<SBadge :content="2" position="top-left">
-  <div class="w-10 h-10 bg-gray-700 rounded-lg"></div>
+<SBadge :content="2" position="top-left" color="#f59e0b">
+  <div class="w-12 h-12 bg-(--s-bg-tertiary) rounded-lg"></div>
 </SBadge>
-<SBadge :content="3" position="bottom-right">
-  <div class="w-10 h-10 bg-gray-700 rounded-lg"></div>
+<SBadge :content="3" position="bottom-right" color="#10b981">
+  <div class="w-12 h-12 bg-(--s-bg-tertiary) rounded-lg"></div>
 </SBadge>
-<SBadge :content="4" position="bottom-left">
-  <div class="w-10 h-10 bg-gray-700 rounded-lg"></div>
+<SBadge :content="4" position="bottom-left" color="#3b82f6">
+  <div class="w-12 h-12 bg-(--s-bg-tertiary) rounded-lg"></div>
 </SBadge>`
 
-const borderedCode = `<SBadge :content="5" bordered>
-  <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full"></div>
+const borderedCode = `<SBadge :content="5" bordered color="#ef4444">
+  <div class="w-12 h-12 bg-linear-to-br from-pink-500 to-purple-600 rounded-full"></div>
 </SBadge>
 
 <SBadge dot bordered color="#10b981">
-  <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full"></div>
+  <div class="w-12 h-12 bg-linear-to-br from-blue-500 to-cyan-500 rounded-full"></div>
+</SBadge>
+
+<SBadge content="NEW" bordered color="#f59e0b" size="small">
+  <div class="w-12 h-12 bg-linear-to-br from-orange-500 to-red-500 rounded-full"></div>
+</SBadge>
+
+<SBadge :content="99" bordered variant="outlined">
+  <div class="w-12 h-12 bg-linear-to-br from-emerald-500 to-teal-500 rounded-full"></div>
 </SBadge>`
 
 const pulseCode = `<SBadge dot pulse color="#ef4444">
@@ -82,20 +108,44 @@ const pulseCode = `<SBadge dot pulse color="#ef4444">
 
 <SBadge :content="3" pulse color="#f59e0b">
   <SButton iconOnly iconLeft="email" />
-</SBadge>`
-
-const colorsCode = `<SBadge content="1" standalone color="#ef4444" />
-<SBadge content="2" standalone color="#f59e0b" />
-<SBadge content="3" standalone color="#10b981" />
-<SBadge content="4" standalone color="#3b82f6" />
-<SBadge content="5" standalone color="#8b5cf6" />
-<SBadge content="6" standalone color="#ec4899" />`
-
-const interactiveCode = `<SBadge :content="notificationCount">
-  <SButton iconOnly iconLeft="bell" @click="incrementNotifications" />
 </SBadge>
 
-<button @click="clearNotifications">Clear</button>`
+<SBadge dot pulse color="#10b981" size="large">
+  <span class="mdi mdi-circle text-3xl text-(--s-text-secondary)"></span>
+</SBadge>`
+
+const colorsCode = `<SBadge :content="1" standalone color="#ef4444" />
+<SBadge :content="2" standalone color="#f59e0b" />
+<SBadge :content="3" standalone color="#10b981" />
+<SBadge :content="4" standalone color="#3b82f6" />
+<SBadge :content="5" standalone color="#8b5cf6" />
+<SBadge :content="6" standalone color="#ec4899" />`
+
+const interactiveCode = `<SBadge :content="notificationCount" :showZero="true">
+  <SButton iconOnly iconLeft="bell" />
+</SBadge>
+
+<SButton variant="ghost" size="small">Clear</SButton>`
+
+const showZeroCode = `<SBadge :content="0" :showZero="false">
+  <SButton iconOnly iconLeft="bell" />
+</SBadge>
+
+<SBadge :content="0" :showZero="true">
+  <SButton iconOnly iconLeft="bell" />
+</SBadge>`
+
+const navigationCode = `<SBadge :content="3" color="#ef4444">
+  <SButton variant="ghost" iconOnly iconLeft="bell" />
+</SBadge>
+
+<SBadge :content="12" color="#3b82f6">
+  <SButton variant="ghost" iconOnly iconLeft="email" />
+</SBadge>
+
+<SBadge dot color="#10b981" pulse>
+  <SButton variant="ghost" iconOnly iconLeft="account" />
+</SBadge>`
 
 // API Reference data
 const badgeProps: ApiProp[] = [
@@ -474,8 +524,7 @@ const badgeSlots: ApiSlot[] = [
       <DemoSection 
         title="Zero Value Display"
         description="Control whether to show the badge when content is 0."
-        code="<SBadge :content='0' :showZero='false' /> <!-- Hidden -->
-<SBadge :content='0' :showZero='true' />  <!-- Visible -->"
+        :code="showZeroCode"
         language="vue"
       >
         <div class="flex flex-wrap gap-8 items-center">
@@ -501,7 +550,7 @@ const badgeSlots: ApiSlot[] = [
       <DemoSection 
         title="Navigation Badges"
         description="Common badge patterns for navigation items showing unread counts and status indicators."
-        :code="interactiveCode"
+        :code="navigationCode"
         language="vue"
       >
         <div class="flex flex-wrap gap-6 items-center p-4 bg-(--s-bg-secondary) rounded-xl">
