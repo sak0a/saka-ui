@@ -386,6 +386,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SModal -->
+    <!-- @props modelValue, size, variant, animation, position, title, description, closable, closeOnBackdrop, closeOnEscape, lockScroll, trapFocus, backdrop, backdropBlur, persistent, fullscreen, hideHeader, teleport, zIndex, initialFocus, autoFocus, stackOrder -->
+    <!-- @events update:modelValue, open, close, opened, closed, before-open, before-close -->
+    <!-- @slots default, header, footer -->
+    <!-- @sections features, basic-usage, sizes, animations, variants, positions, custom-header, composable-components, confirmation-dialog, form-modal, scrollable-content, nested-modals, fullscreen-modal, real-world-examples, keyboard-shortcut-hints -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Modal</h1>
@@ -393,7 +398,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -442,7 +447,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection
         title="Basic Modal"
@@ -490,7 +495,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection
         title="Modal Sizes"
@@ -536,7 +541,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Animations -->
-    <section>
+    <section id="animations">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Animations</h2>
       <DemoSection
         title="Animation Styles"
@@ -583,7 +588,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
       <DemoSection
         title="Visual Variants"
@@ -637,7 +642,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Positions -->
-    <section>
+    <section id="positions">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Positions</h2>
       <DemoSection
         title="Screen Positions"
@@ -673,7 +678,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Custom Header -->
-    <section>
+    <section id="custom-header">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Header</h2>
       <DemoSection
         title="Custom Modal Header"
@@ -728,7 +733,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Composable Components -->
-    <section>
+    <section id="composable-components">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Composable Components</h2>
       <DemoSection
         title="Title, Description & Close"
@@ -792,7 +797,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Confirmation Modal -->
-    <section>
+    <section id="confirmation-dialog">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Confirmation Dialog</h2>
       <DemoSection
         title="Delete Confirmation"
@@ -831,7 +836,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Form Modal -->
-    <section>
+    <section id="form-modal">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Form Modal</h2>
       <DemoSection
         title="Modal with Form"
@@ -880,7 +885,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Scrollable Content -->
-    <section>
+    <section id="scrollable-content">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Scrollable Content</h2>
       <DemoSection
         title="Long Content Modal"
@@ -918,7 +923,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Nested Modals -->
-    <section>
+    <section id="nested-modals">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Nested Modals</h2>
       <DemoSection
         title="Stacked Modals"
@@ -972,7 +977,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Fullscreen -->
-    <section>
+    <section id="fullscreen-modal">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Fullscreen Modal</h2>
       <DemoSection
         title="Fullscreen Mode"
@@ -1012,7 +1017,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Real-World Examples -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Examples</h2>
       <p class="text-(--s-text-secondary) mb-4">
         See the Confirmation Dialog, Form Modal, and Nested Modals examples above for comprehensive real-world use cases.
@@ -1020,7 +1025,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Keyboard Shortcut Hints -->
-    <section>
+    <section id="keyboard-shortcut-hints">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Keyboard Shortcut Hints</h2>
       <DemoSection
         title="Escape Key Hint"

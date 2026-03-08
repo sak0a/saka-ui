@@ -139,6 +139,11 @@ const realWorldCode = `<div class="settings-panel">
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SSwitch -->
+    <!-- @props modelValue, type, size, color, disabled, loading, checkedValue, uncheckedValue, labelBefore, labelAfter, checkedIcon, uncheckedIcon, checkedText, uncheckedText -->
+    <!-- @events update:modelValue, change -->
+    <!-- @slots checked-icon, unchecked-icon -->
+    <!-- @sections features, basic-usage, sizes, types, colors, labels, icons, track-text, states, custom-values, real-world-example, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Switch</h1>
@@ -146,7 +151,7 @@ const realWorldCode = `<div class="settings-panel">
     </header>
 
     <!-- Features -->
-    <article class="space-y-4">
+    <article id="features" class="space-y-4">
       <h2 class="text-2xl font-bold text-(--s-text-primary)">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -195,7 +200,7 @@ const realWorldCode = `<div class="settings-panel">
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection 
         title="Simple Toggle"
@@ -213,7 +218,7 @@ const realWorldCode = `<div class="settings-panel">
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection 
         title="Switch Sizes"
@@ -239,7 +244,7 @@ const realWorldCode = `<div class="settings-panel">
     </section>
 
     <!-- Types -->
-    <section>
+    <section id="types">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Types</h2>
       <DemoSection 
         title="Inset &amp; Outset"
@@ -287,7 +292,7 @@ const realWorldCode = `<div class="settings-panel">
     </section>
 
     <!-- Colors -->
-    <section>
+    <section id="colors">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Colors</h2>
       <DemoSection 
         title="Custom Colors"
@@ -313,7 +318,7 @@ const realWorldCode = `<div class="settings-panel">
     </section>
 
     <!-- Labels -->
-    <section>
+    <section id="labels">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Labels</h2>
       <DemoSection 
         title="With Labels"
@@ -329,7 +334,7 @@ const realWorldCode = `<div class="settings-panel">
     </section>
 
     <!-- Icons -->
-    <section>
+    <section id="icons">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Icons</h2>
       <DemoSection 
         title="With Icons"
@@ -373,7 +378,7 @@ const realWorldCode = `<div class="settings-panel">
     </section>
 
     <!-- Track Text -->
-    <section>
+    <section id="track-text">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Track Text</h2>
       <DemoSection 
         title="Text Inside Track"
@@ -405,7 +410,7 @@ const realWorldCode = `<div class="settings-panel">
     </section>
 
     <!-- Disabled & Loading -->
-    <section>
+    <section id="states">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">States</h2>
       <DemoSection 
         title="Disabled & Loading"
@@ -431,7 +436,7 @@ const realWorldCode = `<div class="settings-panel">
     </section>
 
     <!-- Custom Values -->
-    <section>
+    <section id="custom-values">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Values</h2>
       <DemoSection 
         title="Non-Boolean Values"
@@ -454,7 +459,7 @@ const realWorldCode = `<div class="settings-panel">
     </section>
 
     <!-- Real-world Example -->
-    <section>
+    <section id="real-world-example">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Example</h2>
       <DemoSection 
         title="Settings Panel"

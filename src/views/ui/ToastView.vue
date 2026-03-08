@@ -202,6 +202,10 @@ const toastEvents: ApiEvent[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component useToast -->
+    <!-- @props title, description, duration, position, showProgress, closable, icon, color, component, componentProps, onClick, onClose, id, type, progress, paused, maxToasts, gap, teleport, zIndex -->
+    <!-- @events close, click -->
+    <!-- @sections quick-demo, basic-usage, toast-options, promise-based-toasts, loading-toasts, positions, custom-toast, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">useToast</h1>
@@ -211,7 +215,7 @@ const toastEvents: ApiEvent[] = [
     </header>
 
     <!-- Quick Demo -->
-    <section>
+    <section id="quick-demo">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Quick Demo</h2>
       <SCard variant="outlined">
         <SCardContent class="flex flex-wrap gap-3">
@@ -227,7 +231,7 @@ const toastEvents: ApiEvent[] = [
     </section>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection
         title="Simple Toasts"
@@ -239,7 +243,7 @@ const toastEvents: ApiEvent[] = [
     </section>
 
     <!-- Toast Options -->
-    <section>
+    <section id="toast-options">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Toast Options</h2>
       <DemoSection
         title="With Options"
@@ -251,7 +255,7 @@ const toastEvents: ApiEvent[] = [
     </section>
 
     <!-- Promise Toasts -->
-    <section>
+    <section id="promise-based-toasts">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Promise-based Toasts</h2>
       <DemoSection
         title="Async Operations"
@@ -266,7 +270,7 @@ const toastEvents: ApiEvent[] = [
     </section>
 
     <!-- Loading Toasts -->
-    <section>
+    <section id="loading-toasts">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Loading Toasts</h2>
       <DemoSection
         title="Manual Control"
@@ -281,7 +285,7 @@ const toastEvents: ApiEvent[] = [
     </section>
 
     <!-- Positions -->
-    <section>
+    <section id="positions">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Positions</h2>
       <DemoSection
         title="Toast Positions"
@@ -313,7 +317,7 @@ const toastEvents: ApiEvent[] = [
     </section>
 
     <!-- Custom Toast -->
-    <section>
+    <section id="custom-toast">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Toast</h2>
       <SCard variant="outlined">
         <SCardHeader>
@@ -339,7 +343,7 @@ const toastEvents: ApiEvent[] = [
     </section>
 
     <!-- API Reference -->
-    <section>
+    <section id="api-reference">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
 
       <SApiSection>

@@ -294,6 +294,11 @@ const inputMethods: ApiMethod[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SInput -->
+    <!-- @props modelValue, type, variant, size, rounded, label, placeholder, labelPlacement, iconLeft, iconRight, prefix, suffix, disabled, readonly, loading, error, success, warning, hint, required, minLength, maxLength, pattern, validator, validateOn, clearable, showPasswordToggle, counter, rows, resize, autofocus, suggestions, showSuggestionsOnFocus, allowOnly, decimalPlaces -->
+    <!-- @events @update:modelValue, @input, @change, @focus, @blur, @clear, @enter, @validate -->
+    <!-- @slots prefix, suffix -->
+    <!-- @sections features, basic-usage, variants, sizes, floating-labels, icons-and-affixes, validation-states, validation, advanced-features, email-autocomplete, input-filtering, real-world-examples, with-keyboard-shortcut, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Input</h1>
@@ -303,7 +308,7 @@ const inputMethods: ApiMethod[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-violet-500/5 border border-(--s-border)">
@@ -352,7 +357,7 @@ const inputMethods: ApiMethod[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection 
         title="Text Inputs"
@@ -384,7 +389,7 @@ const inputMethods: ApiMethod[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
       <DemoSection 
         title="Input Variants"
@@ -402,7 +407,7 @@ const inputMethods: ApiMethod[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection 
         title="Input Sizes"
@@ -419,7 +424,7 @@ const inputMethods: ApiMethod[] = [
     </section>
 
     <!-- Floating Labels -->
-    <section>
+    <section id="floating-labels">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Floating Labels</h2>
       <DemoSection 
         title="Morphing Label Animation"
@@ -445,7 +450,7 @@ const inputMethods: ApiMethod[] = [
     </section>
 
     <!-- Icons -->
-    <section>
+    <section id="icons-and-affixes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Icons & Affixes</h2>
       <DemoSection 
         title="Icons and Text Affixes"
@@ -499,7 +504,7 @@ const inputMethods: ApiMethod[] = [
     </section>
 
     <!-- Validation States -->
-    <section>
+    <section id="validation-states">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Validation States</h2>
       <DemoSection 
         title="Visual Feedback"
@@ -544,7 +549,7 @@ const inputMethods: ApiMethod[] = [
     </section>
 
     <!-- Built-in Validation -->
-    <section>
+    <section id="validation">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Validation</h2>
       <DemoSection 
         title="Built-in & Custom Validation"
@@ -591,7 +596,7 @@ const inputMethods: ApiMethod[] = [
     </section>
 
     <!-- Advanced Features -->
-    <section>
+    <section id="advanced-features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Advanced Features</h2>
       <DemoSection 
         title="Additional Functionality"
@@ -645,7 +650,7 @@ const inputMethods: ApiMethod[] = [
     </section>
 
     <!-- Email Suggestions -->
-    <section>
+    <section id="email-autocomplete">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Email Autocomplete</h2>
       <DemoSection 
         title="Email Suggestions"
@@ -676,7 +681,7 @@ const inputMethods: ApiMethod[] = [
     </section>
 
     <!-- Input Filtering -->
-    <section>
+    <section id="input-filtering">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Input Filtering</h2>
       <DemoSection 
         title="Character Restrictions"
@@ -720,7 +725,7 @@ const inputMethods: ApiMethod[] = [
     </section>
 
     <!-- Real-world Examples -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-world Examples</h2>
       <DemoSection 
         title="Login Form"
@@ -795,7 +800,7 @@ const inputMethods: ApiMethod[] = [
     </section>
 
     <!-- With Keyboard Shortcut -->
-    <section>
+    <section id="with-keyboard-shortcut">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">With Keyboard Shortcut</h2>
       <DemoSection
         title="Search with Shortcut Hint"
@@ -814,7 +819,7 @@ const inputMethods: ApiMethod[] = [
     </section>
 
     <!-- API Reference -->
-    <section>
+    <section id="api-reference">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
       
       <SApiSection title="SInput">

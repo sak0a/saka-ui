@@ -388,6 +388,11 @@ const optionGroupSlots: ApiSlot[] = [
 
 <template>
   <div class="space-y-8 pb-20">
+    <!-- @component SSelect -->
+    <!-- @props modelValue, options, multiple, searchable, filter, clearable, closeOnSelect, disabled, loading, placeholder, labelPlaceholder, labelPlacement, size, color, variant, rounded, maxHeight, arrowIcon, menuWidth, menuAlign, placement, teleport, tagLimit, creatable, createText, noOptionsText, noResultsText, label, error, hint, required -->
+    <!-- @events update:modelValue, change, open, close, search, focus, blur, create -->
+    <!-- @slots default, prefix, suffix, selected, option, tag, arrow, empty, loading, header, footer -->
+    <!-- @sections features, basic-usage, sizes, variants, colors, multiple-selection, searchable, float-label, inline-filter, icons-and-descriptions, grouped-options, dense-mode, with-images, creatable, custom-menu-width, states, label-placement, labels-and-validation, border-radius, real-world-example, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Select</h1>
@@ -395,7 +400,7 @@ const optionGroupSlots: ApiSlot[] = [
     </header>
 
     <!-- Features -->
-    <article class="space-y-4">
+    <article id="features" class="space-y-4">
       <h2 class="text-2xl font-bold text-(--s-text-primary)">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -444,7 +449,7 @@ const optionGroupSlots: ApiSlot[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Basic Usage</h2>
       <DemoSection 
         title="Simple Select"
@@ -466,7 +471,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Sizes</h2>
       <DemoSection 
         title="Select Sizes"
@@ -507,7 +512,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Variants</h2>
       <DemoSection 
         title="Visual Variants"
@@ -545,7 +550,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Colors -->
-    <section>
+    <section id="colors">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Colors</h2>
       <DemoSection 
         title="Custom Colors"
@@ -577,7 +582,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Multiple Selection -->
-    <section>
+    <section id="multiple-selection">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Multiple Selection</h2>
       <DemoSection 
         title="Multi-Select with Tags"
@@ -602,7 +607,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Searchable -->
-    <section>
+    <section id="searchable">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Searchable</h2>
       <DemoSection 
         title="Search & Filter"
@@ -623,7 +628,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Float Label (Label Placeholder) - Vuesax-inspired -->
-    <section>
+    <section id="float-label">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Float Label</h2>
       <DemoSection 
         title="Animated Label Placeholder"
@@ -669,7 +674,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Inline Filter - Vuesax-inspired -->
-    <section>
+    <section id="inline-filter">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Inline Filter</h2>
       <DemoSection 
         title="Type-to-Search in Trigger"
@@ -713,7 +718,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- With Icons & Descriptions -->
-    <section>
+    <section id="icons-and-descriptions">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Icons & Descriptions</h2>
       <DemoSection 
         title="Rich Options"
@@ -732,7 +737,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Grouped Options -->
-    <section>
+    <section id="grouped-options">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Grouped Options</h2>
       <DemoSection 
         title="Options with Group Headers"
@@ -759,7 +764,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Dense Mode -->
-    <section>
+    <section id="dense-mode">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Dense Mode</h2>
       <DemoSection 
         title="Compact Layout"
@@ -788,7 +793,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- With Images -->
-    <section>
+    <section id="with-images">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">With Images</h2>
       <DemoSection 
         title="Avatar & Image Support"
@@ -813,7 +818,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Creatable -->
-    <section>
+    <section id="creatable">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Creatable</h2>
       <DemoSection 
         title="Create New Options"
@@ -849,7 +854,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Menu Width -->
-    <section>
+    <section id="custom-menu-width">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Custom Menu Width</h2>
       <DemoSection 
         title="Menu Width Control"
@@ -870,7 +875,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- States -->
-    <section>
+    <section id="states">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">States</h2>
       <DemoSection 
         title="Disabled, Loading & Clearable"
@@ -910,7 +915,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Label Placement -->
-    <section>
+    <section id="label-placement">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Label Placement</h2>
       <DemoSection 
         title="Custom Label Positioning"
@@ -1015,7 +1020,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Labels & Validation -->
-    <section>
+    <section id="labels-and-validation">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Labels & Validation</h2>
       <DemoSection 
         title="Form Integration"
@@ -1050,7 +1055,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Rounded -->
-    <section>
+    <section id="border-radius">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Border Radius</h2>
       <DemoSection 
         title="Rounded Variants"
@@ -1076,7 +1081,7 @@ const optionGroupSlots: ApiSlot[] = [
     </section>
 
     <!-- Real-world Example -->
-    <section>
+    <section id="real-world-example">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Real-World Example</h2>
       <DemoSection 
         title="Project Configuration"

@@ -181,6 +181,11 @@ const checkboxKeyboard: KeyboardShortcut[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SCheckbox -->
+    <!-- @props modelValue, value, size, color, rounded, icon, label, labelPosition, disabled, loading, indeterminate, required, name -->
+    <!-- @events update:modelValue, change -->
+    <!-- @slots default, icon -->
+    <!-- @sections features, basic-usage, sizes, colors, labels, indeterminate-state, checkbox-groups, rounded, custom-icons, states, real-world-example, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Checkbox</h1>
@@ -188,7 +193,7 @@ const checkboxKeyboard: KeyboardShortcut[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -237,7 +242,7 @@ const checkboxKeyboard: KeyboardShortcut[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection 
         title="Simple Checkbox"
@@ -255,7 +260,7 @@ const checkboxKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection 
         title="Checkbox Sizes"
@@ -278,7 +283,7 @@ const checkboxKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Colors -->
-    <section>
+    <section id="colors">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Colors</h2>
       <DemoSection 
         title="Custom Colors"
@@ -296,7 +301,7 @@ const checkboxKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Labels -->
-    <section>
+    <section id="labels">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Labels</h2>
       <DemoSection 
         title="Label Positioning"
@@ -312,7 +317,7 @@ const checkboxKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Indeterminate -->
-    <section>
+    <section id="indeterminate-state">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Indeterminate State</h2>
       <DemoSection 
         title="Partial Selection"
@@ -353,7 +358,7 @@ const checkboxKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Checkbox Groups -->
-    <section>
+    <section id="checkbox-groups">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Checkbox Groups</h2>
       <DemoSection 
         title="Array-based Selection"
@@ -380,7 +385,7 @@ const checkboxKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Rounded -->
-    <section>
+    <section id="rounded">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Rounded</h2>
       <DemoSection 
         title="Pill Shape"
@@ -396,7 +401,7 @@ const checkboxKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Custom Icons -->
-    <section>
+    <section id="custom-icons">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Icons</h2>
       <DemoSection 
         title="Different Check Icons"
@@ -413,7 +418,7 @@ const checkboxKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- States -->
-    <section>
+    <section id="states">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">States</h2>
       <DemoSection 
         title="Disabled, Loading & Required"
@@ -431,7 +436,7 @@ const checkboxKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Real-world Example -->
-    <section>
+    <section id="real-world-example">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Example</h2>
       <DemoSection 
         title="Task List"

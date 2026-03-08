@@ -315,6 +315,11 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
 
 <template>
   <div class="space-y-8 pb-20">
+    <!-- @component SDropdown -->
+    <!-- @props items, trigger, placement, size, variant, color, animation, closeOnSelect, disabled, arrow, maxHeight, width, minWidth, teleport, zIndex, showDelay, hideDelay, visible, searchable, searchPlaceholder, offset, label, icon, hideArrow -->
+    <!-- @events update:visible, open, close, select -->
+    <!-- @slots trigger, default, header, footer -->
+    <!-- @sections features, basic-usage, using-slots, trigger-modes, sizes, variants, placement, animations, rich-menu-items, grouped-items, nested-dropdowns, checkable-items, searchable, custom-colors, real-world-examples, with-keyboard-shortcuts, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Dropdown</h1>
@@ -322,7 +327,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </header>
 
     <!-- Features -->
-    <article class="space-y-4">
+    <article id="features" class="space-y-4">
       <h2 class="text-2xl font-bold text-(--s-text-primary)">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -371,7 +376,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Basic Usage</h2>
       <DemoSection 
         title="Simple Dropdown"
@@ -394,7 +399,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- With Slots -->
-    <section>
+    <section id="using-slots">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Using Slots</h2>
       <DemoSection 
         title="Custom Content with Slots"
@@ -434,7 +439,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- Trigger Modes -->
-    <section>
+    <section id="trigger-modes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Trigger Modes</h2>
       <DemoSection 
         title="Click, Hover & Context Menu"
@@ -473,7 +478,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Sizes</h2>
       <DemoSection 
         title="Size Variants"
@@ -492,7 +497,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Variants</h2>
       <DemoSection 
         title="Visual Variants"
@@ -511,7 +516,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- Placement -->
-    <section>
+    <section id="placement">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Placement</h2>
       <DemoSection 
         title="Menu Positioning"
@@ -554,7 +559,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- Animations -->
-    <section>
+    <section id="animations">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Animations</h2>
       <DemoSection 
         title="Animation Types"
@@ -572,7 +577,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- Rich Items -->
-    <section>
+    <section id="rich-menu-items">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Rich Menu Items</h2>
       <DemoSection 
         title="Icons, Descriptions & Shortcuts"
@@ -613,7 +618,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- Grouped Items -->
-    <section>
+    <section id="grouped-items">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Grouped Items</h2>
       <DemoSection 
         title="Section Headers"
@@ -638,7 +643,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- Nested Dropdowns -->
-    <section>
+    <section id="nested-dropdowns">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Nested Dropdowns</h2>
       <DemoSection 
         title="Submenus with Nested Dropdowns"
@@ -737,7 +742,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- Checkable Items -->
-    <section>
+    <section id="checkable-items">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Checkable Items</h2>
       <DemoSection 
         title="Toggle States"
@@ -757,7 +762,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- Searchable -->
-    <section>
+    <section id="searchable">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Searchable</h2>
       <DemoSection 
         title="Search & Filter"
@@ -778,7 +783,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- Colors -->
-    <section>
+    <section id="custom-colors">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Custom Colors</h2>
       <DemoSection 
         title="Accent Colors"
@@ -797,7 +802,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- File Menu Example -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Real-World Examples</h2>
       <DemoSection 
         title="Application Menu Bar"
@@ -866,7 +871,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     </section>
 
     <!-- With Keyboard Shortcuts -->
-    <section>
+    <section id="with-keyboard-shortcuts">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">With Keyboard Shortcuts</h2>
       <DemoSection
         title="Menu Items with Shortcuts"

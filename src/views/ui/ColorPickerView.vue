@@ -209,6 +209,11 @@ const copySlots: ApiSlot[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SColorPicker -->
+    <!-- @props modelValue, mode, format, size, label, triggerStyle, showSpectrum, showSliders, showAlpha, showPreview, showInputs, showPresets, showRecent, showEyeDropper, presets, maxRecent, disabled, readonly -->
+    <!-- @events update:modelValue, change, input -->
+    <!-- @slots default, trigger, panel-before, panel-after -->
+    <!-- @sections compound-api, custom-compositions, simple-api, dropdown-mode, custom-triggers, alpha-channel, color-formats, sizes, real-world-example, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Color Picker</h1>
@@ -216,7 +221,7 @@ const copySlots: ApiSlot[] = [
     </header>
 
     <!-- Compound API: Full -->
-    <section>
+    <section id="compound-api">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Compound API</h2>
       <DemoSection
         title="Full Compound Layout"
@@ -246,7 +251,7 @@ const copySlots: ApiSlot[] = [
     </section>
 
     <!-- Compound API: Spectrum Only -->
-    <section>
+    <section id="custom-compositions">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Compositions</h2>
       <DemoSection
         title="Spectrum Only"
@@ -328,7 +333,7 @@ const copySlots: ApiSlot[] = [
     </section>
 
     <!-- Simple API -->
-    <section>
+    <section id="simple-api">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Simple API</h2>
       <DemoSection
         title="Default Inline Picker"
@@ -351,7 +356,7 @@ const copySlots: ApiSlot[] = [
     </section>
 
     <!-- Dropdown Mode -->
-    <section>
+    <section id="dropdown-mode">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Dropdown Mode</h2>
       <DemoSection
         title="Trigger Button with Popup"
@@ -370,7 +375,7 @@ const copySlots: ApiSlot[] = [
     </section>
 
     <!-- Custom Triggers -->
-    <section>
+    <section id="custom-triggers">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Triggers</h2>
       <DemoSection
         title="Any Element as Trigger"
@@ -425,7 +430,7 @@ const copySlots: ApiSlot[] = [
     </section>
 
     <!-- Alpha Channel -->
-    <section>
+    <section id="alpha-channel">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Alpha Channel</h2>
       <DemoSection
         title="Transparency Support"
@@ -447,7 +452,7 @@ const copySlots: ApiSlot[] = [
     </section>
 
     <!-- Color Formats -->
-    <section>
+    <section id="color-formats">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Color Formats</h2>
       <DemoSection
         title="Output Formats"
@@ -476,7 +481,7 @@ const copySlots: ApiSlot[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection
         title="Size Variants"
@@ -502,7 +507,7 @@ const copySlots: ApiSlot[] = [
     </section>
 
     <!-- Real-World Example -->
-    <section>
+    <section id="real-world-example">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Example</h2>
       <DemoSection
         title="Theme Customizer"

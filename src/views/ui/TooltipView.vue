@@ -404,6 +404,11 @@ const advancedCode = `<!-- User profile preview -->
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component STooltip -->
+    <!-- @props placement, trigger, content, showDelay, hideDelay, offset, arrow, arrowSize, theme, color, textColor, maxWidth, disabled, visible, interactive, teleport, zIndex, transition -->
+    <!-- @events @show, @hide, @toggle, @update:visible -->
+    <!-- @slots default, content -->
+    <!-- @sections features, basic-usage, placements, trigger-types, show-hide-delays, themes, arrow-customization, maximum-width, rich-content, interactive-tooltips, disabled-state, real-world-examples, with-keyboard-shortcuts -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Tooltips</h1>
@@ -413,7 +418,7 @@ const advancedCode = `<!-- User profile preview -->
     </header>
 
     <!-- Features -->
-    <article class="space-y-4">
+    <article id="features" class="space-y-4">
       <h2 class="text-2xl font-bold text-(--s-text-primary)">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -462,7 +467,7 @@ const advancedCode = `<!-- User profile preview -->
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection 
         title="Simple Tooltips"
@@ -488,7 +493,7 @@ const advancedCode = `<!-- User profile preview -->
     </section>
 
     <!-- Placements -->
-    <section>
+    <section id="placements">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Placements</h2>
       <DemoSection 
         title="Tooltip Positions"
@@ -557,7 +562,7 @@ const advancedCode = `<!-- User profile preview -->
     </section>
 
     <!-- Triggers -->
-    <section>
+    <section id="trigger-types">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Trigger Types</h2>
       <DemoSection 
         title="Activation Methods"
@@ -585,7 +590,7 @@ const advancedCode = `<!-- User profile preview -->
     </section>
 
     <!-- Delays -->
-    <section>
+    <section id="show-hide-delays">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Show/Hide Delays</h2>
       <DemoSection 
         title="Custom Delays"
@@ -611,7 +616,7 @@ const advancedCode = `<!-- User profile preview -->
     </section>
 
     <!-- Themes -->
-    <section>
+    <section id="themes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Themes</h2>
       <DemoSection 
         title="Color Themes"
@@ -647,7 +652,7 @@ const advancedCode = `<!-- User profile preview -->
     </section>
 
     <!-- Arrow Styles -->
-    <section>
+    <section id="arrow-customization">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Arrow Customization</h2>
       <DemoSection 
         title="Arrow Options"
@@ -673,7 +678,7 @@ const advancedCode = `<!-- User profile preview -->
     </section>
 
     <!-- Max Width -->
-    <section>
+    <section id="maximum-width">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Maximum Width</h2>
       <DemoSection 
         title="Width Control"
@@ -702,7 +707,7 @@ const advancedCode = `<!-- User profile preview -->
     </section>
 
     <!-- Rich Content -->
-    <section>
+    <section id="rich-content">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Rich Content</h2>
       <DemoSection 
         title="HTML & Slots"
@@ -750,7 +755,7 @@ const advancedCode = `<!-- User profile preview -->
     </section>
 
     <!-- Interactive -->
-    <section>
+    <section id="interactive-tooltips">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Interactive Tooltips</h2>
       <DemoSection 
         title="Hoverable Content"
@@ -793,7 +798,7 @@ const advancedCode = `<!-- User profile preview -->
     </section>
 
     <!-- Disabled -->
-    <section>
+    <section id="disabled-state">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Disabled State</h2>
       <DemoSection 
         title="Disabled Tooltips"
@@ -813,7 +818,7 @@ const advancedCode = `<!-- User profile preview -->
     </section>
 
     <!-- Real-World Examples -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Examples</h2>
       <DemoSection 
         title="Real-World Use Cases"
@@ -900,7 +905,7 @@ const advancedCode = `<!-- User profile preview -->
     </section>
 
     <!-- With Keyboard Shortcuts -->
-    <section>
+    <section id="with-keyboard-shortcuts">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">With Keyboard Shortcuts</h2>
       <DemoSection
         title="Tooltip Shortcut Hints"

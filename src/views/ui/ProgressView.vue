@@ -279,6 +279,11 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SProgress -->
+    <!-- @props modelValue, min, max, variant, size, orientation, rounded, color, trackColor, gradientColors, bufferValue, bufferColor, segments, segmentGap, animated, animationType, animationSpeed, indeterminate, showValue, valuePosition, valueFormat, label, labelPosition, disabled -->
+    <!-- @events update:modelValue -->
+    <!-- @slots default -->
+    <!-- @sections basic-usage, sizes, variants, animations, display-options, vertical-orientation, range-slider, real-world-example, max-range-constraint, range-with-marks, live-demo, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Progress</h1>
@@ -288,7 +293,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
     </header>
 
     <!-- Features -->
-    <article class="space-y-4">
+    <article id="features" class="space-y-4">
       <h2 class="text-2xl font-bold text-(--s-text-primary)">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
@@ -337,7 +342,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection
         title="Simple Progress Bar"
@@ -362,7 +367,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection
         title="Progress Bar Sizes"
@@ -396,7 +401,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
       <DemoSection
         title="Visual Variants"
@@ -459,7 +464,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
     </section>
 
     <!-- Animations -->
-    <section>
+    <section id="animations">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Animations</h2>
       <DemoSection
         title="Animation Types"
@@ -502,7 +507,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
     </section>
 
     <!-- Display Options -->
-    <section>
+    <section id="display-options">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Display Options</h2>
       <DemoSection
         title="Labels & Values"
@@ -551,7 +556,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
     </section>
 
     <!-- Vertical -->
-    <section>
+    <section id="vertical-orientation">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Vertical Orientation</h2>
       <DemoSection
         title="Vertical Progress Bars"
@@ -604,7 +609,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
     </section>
 
     <!-- Range Slider -->
-    <section>
+    <section id="range-slider">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Range Slider</h2>
       <DemoSection
         title="Single & Dual Handle Sliders"
@@ -637,7 +642,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
     </section>
 
     <!-- Price Filter Example -->
-    <section>
+    <section id="real-world-example">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Example</h2>
       <DemoSection
         title="Price Range Filter"
@@ -676,7 +681,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
     </section>
 
     <!-- Max Range Constraint -->
-    <section>
+    <section id="max-range-constraint">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Max Range Constraint</h2>
       <DemoSection
         title="Limited Selection Span"
@@ -722,7 +727,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
     </section>
 
     <!-- Range with Marks -->
-    <section>
+    <section id="range-with-marks">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Range with Marks</h2>
       <DemoSection
         title="Custom Tick Marks"
@@ -748,7 +753,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
     </section>
 
     <!-- Live Demo -->
-    <section>
+    <section id="live-demo">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Live Demo</h2>
       <DemoSection
         title="Animated Progress Simulation"

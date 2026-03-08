@@ -588,6 +588,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SStepper -->
+    <!-- @props modelValue, defaultValue, orientation, variant, linear, clickable, size, color, animated -->
+    <!-- @events update:modelValue, change -->
+    <!-- @slots default -->
+    <!-- @sections basic-usage, line-variant, vertical-orientation, sizes, non-linear-navigation, custom-color, custom-indicators, states, form-wizard, api-reference -->
     <!-- Page Header -->
     <div>
       <h1 class="text-4xl font-extrabold text-foreground mb-2">Stepper</h1>

@@ -437,6 +437,11 @@ const otpMethods: ApiMethod[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SOTP -->
+    <!-- @props modelValue, maxlength, mode, variant, size, color, rounded, gap, animation, entryAnimation, inputAnimation, successAnimation, errorAnimation, morphText, morphDuration, showPlaceholder, placeholderChar, maskChar, disabled, readonly, loading, error, success, autoFocus, autoSubmit, masked, clearOnError, allowPaste, label, hint, errorMessage, successMessage, countdown, resendText -->
+    <!-- @events @update:modelValue, @complete, @change, @input, @focus, @blur, @paste, @resend, @error, @success -->
+    <!-- @slots default, resend -->
+    <!-- @sections features, compound-components, basic-usage, variants, sizes, input-animations, success-animations, error-state, additional-features, custom-slots, real-world-example, api-reference, accessibility -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">OTP Input</h1>
@@ -446,7 +451,7 @@ const otpMethods: ApiMethod[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-violet-500/5 border border-(--s-border)">
@@ -495,7 +500,7 @@ const otpMethods: ApiMethod[] = [
     </article>
 
     <!-- Compound Components -->
-    <section>
+    <section id="compound-components">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Compound Components</h2>
       <DemoSection
         title="Composable Pattern"
@@ -538,7 +543,7 @@ const otpMethods: ApiMethod[] = [
     </section>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection
         title="Input Modes"
@@ -593,7 +598,7 @@ const otpMethods: ApiMethod[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
       <DemoSection
         title="Visual Styles"
@@ -647,7 +652,7 @@ const otpMethods: ApiMethod[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection
         title="Size Options"
@@ -693,7 +698,7 @@ const otpMethods: ApiMethod[] = [
     </section>
 
     <!-- Input Animations -->
-    <section>
+    <section id="input-animations">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Input Animations</h2>
       <DemoSection
         title="Character Entry Animations"
@@ -739,7 +744,7 @@ const otpMethods: ApiMethod[] = [
     </section>
 
     <!-- Success Animations -->
-    <section>
+    <section id="success-animations">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Success Animations</h2>
       <DemoSection
         title="Completion Celebrations"
@@ -777,7 +782,7 @@ const otpMethods: ApiMethod[] = [
     </section>
 
     <!-- Error Animation -->
-    <section>
+    <section id="error-state">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Error State</h2>
       <DemoSection
         title="Error Animation"
@@ -814,7 +819,7 @@ otpRef.value.triggerError('Invalid code')`"
     </section>
 
     <!-- Additional Features -->
-    <section>
+    <section id="additional-features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Additional Features</h2>
       <DemoSection
         title="Extra Functionality"
@@ -885,7 +890,7 @@ otpRef.value.triggerError('Invalid code')`"
     </section>
 
     <!-- Custom Slots -->
-    <section>
+    <section id="custom-slots">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Slots</h2>
       <DemoSection
         title="Customizable Templates"
@@ -940,7 +945,7 @@ otpRef.value.triggerError('Invalid code')`"
     </section>
 
     <!-- Real-world Example -->
-    <section>
+    <section id="real-world-example">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-world Example</h2>
       <DemoSection
         title="Phone Verification"
@@ -998,7 +1003,7 @@ otpRef.value.triggerError('Invalid code')`"
     </section>
 
     <!-- API Reference -->
-    <section>
+    <section id="api-reference">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
 
       <SApiSection title="SOTP">
@@ -1024,7 +1029,7 @@ otpRef.value.triggerError('Invalid code')`"
     </section>
 
     <!-- Accessibility -->
-    <section>
+    <section id="accessibility">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Accessibility</h2>
       <div class="bg-(--s-bg-secondary)/50 border border-(--s-border) rounded-xl p-6">
         <ul class="space-y-3 text-(--s-text-secondary)">

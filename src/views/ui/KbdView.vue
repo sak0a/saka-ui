@@ -95,6 +95,10 @@ const shortcutProps: ApiProp[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SKbd -->
+    <!-- @props variant, size, color -->
+    <!-- @slots default -->
+    <!-- @sections features, basic-usage, sizes, variants, key-combinations, custom-colors, inline-with-text, with-other-components, real-world-examples, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Kbd</h1>
@@ -102,7 +106,7 @@ const shortcutProps: ApiProp[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -151,7 +155,7 @@ const shortcutProps: ApiProp[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection
         title="Single Keys"
@@ -177,7 +181,7 @@ const shortcutProps: ApiProp[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection
         title="Key Sizes"
@@ -207,7 +211,7 @@ const shortcutProps: ApiProp[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
       <DemoSection
         title="Style Variants"
@@ -261,7 +265,7 @@ const shortcutProps: ApiProp[] = [
     </section>
 
     <!-- Key Combinations -->
-    <section>
+    <section id="key-combinations">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Key Combinations</h2>
       <DemoSection
         title="Keyboard Shortcuts"
@@ -315,7 +319,7 @@ const shortcutProps: ApiProp[] = [
     </section>
 
     <!-- Custom Colors -->
-    <section>
+    <section id="custom-colors">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Colors</h2>
       <DemoSection
         title="Colored Keys"
@@ -349,7 +353,7 @@ const shortcutProps: ApiProp[] = [
     </section>
 
     <!-- Inline with Text -->
-    <section>
+    <section id="inline-with-text">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Inline with Text</h2>
       <DemoSection
         title="In Paragraphs"
@@ -372,7 +376,7 @@ const shortcutProps: ApiProp[] = [
     </section>
 
     <!-- With Other Components -->
-    <section>
+    <section id="with-other-components">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">With Other Components</h2>
       <DemoSection
         title="Component Integration"
@@ -472,7 +476,7 @@ const shortcutProps: ApiProp[] = [
     </section>
 
     <!-- Real-World Examples -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Examples</h2>
       <DemoSection
         title="Practical Patterns"

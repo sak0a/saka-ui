@@ -286,6 +286,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SAlert -->
+    <!-- @props variant, size, color, title, description, icon, autoDismiss, duration, showProgress, border, rounded, elevation, position, closable, dismissible -->
+    <!-- @events @close, @dismiss -->
+    <!-- @slots default, title, icon, actions -->
+    <!-- @sections features, basic-usage, sizes, titles-descriptions, auto-dismiss, icons, border-styles, action-buttons, positioning, stacked-alerts, rich-content, customization, real-world-examples -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Alerts</h1>
@@ -295,7 +300,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -344,7 +349,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection 
         title="Alert Variants"
@@ -363,7 +368,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection 
         title="Alert Sizes"
@@ -380,7 +385,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Titles and Descriptions -->
-    <section>
+    <section id="titles-descriptions">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Titles & Descriptions</h2>
       <DemoSection 
         title="Content Variations"
@@ -401,7 +406,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Auto Dismiss -->
-    <section>
+    <section id="auto-dismiss">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Auto Dismiss</h2>
       <DemoSection 
         title="Automatic Dismissal"
@@ -437,7 +442,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Custom Icons -->
-    <section>
+    <section id="icons">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Icons</h2>
       <DemoSection 
         title="Icon Customization"
@@ -459,7 +464,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Borders -->
-    <section>
+    <section id="border-styles">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Border Styles</h2>
       <DemoSection 
         title="Border Options"
@@ -477,7 +482,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Actions -->
-    <section>
+    <section id="action-buttons">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Action Buttons</h2>
       <DemoSection 
         title="Alerts with Actions"
@@ -504,7 +509,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Positioning -->
-    <section>
+    <section id="positioning">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Positioning</h2>
       <DemoSection 
         title="Toast-style Alerts"
@@ -535,7 +540,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Stacked Alerts -->
-    <section>
+    <section id="stacked-alerts">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Stacked Alerts</h2>
       <DemoSection 
         title="Multiple Alerts"
@@ -563,7 +568,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Rich Content -->
-    <section>
+    <section id="rich-content">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Rich Content</h2>
       <DemoSection 
         title="Custom Content"
@@ -597,7 +602,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Customization -->
-    <section>
+    <section id="customization">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Customization</h2>
       <DemoSection 
         title="Advanced Customization"
@@ -626,7 +631,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Real-World Examples -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Examples</h2>
       <DemoSection 
         title="Notification System"

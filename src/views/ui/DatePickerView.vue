@@ -193,6 +193,10 @@ const datePickerKeyboard: KeyboardShortcut[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SDatePicker -->
+    <!-- @props modelValue, mode, variant, size, color, minDate, maxDate, disabledDates, disabledWeekdays, enableTime, timeFormat, firstDayOfWeek, clearable, disabled, loading, label -->
+    <!-- @events update:modelValue, open, close, clear, monthChange -->
+    <!-- @sections basic-usage, selection-modes, variants, sizes, colors, date-constraints, time-picker, week-configuration, states, real-world-examples, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Date Picker</h1>
@@ -203,7 +207,7 @@ const datePickerKeyboard: KeyboardShortcut[] = [
     </header>
 
     <!-- Features -->
-    <article class="space-y-4">
+    <article id="features" class="space-y-4">
       <h2 class="text-2xl font-bold text-(--s-text-primary)">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -252,7 +256,7 @@ const datePickerKeyboard: KeyboardShortcut[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection 
         title="Single Date Selection"
@@ -270,7 +274,7 @@ const datePickerKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Selection Modes -->
-    <section>
+    <section id="selection-modes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Selection Modes</h2>
       
       <div class="space-y-6">
@@ -318,7 +322,7 @@ const datePickerKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
       <DemoSection 
         title="Visual Variants"
@@ -335,7 +339,7 @@ const datePickerKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection 
         title="Size Options"
@@ -352,7 +356,7 @@ const datePickerKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Colors -->
-    <section>
+    <section id="colors">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Colors</h2>
       <DemoSection 
         title="Custom Colors"
@@ -369,7 +373,7 @@ const datePickerKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Constraints -->
-    <section>
+    <section id="date-constraints">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Date Constraints</h2>
       
       <div class="space-y-6">
@@ -414,7 +418,7 @@ const datePickerKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Time Picker -->
-    <section>
+    <section id="time-picker">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Time Picker</h2>
       <DemoSection 
         title="Date & Time Selection"
@@ -450,7 +454,7 @@ const datePickerKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Week Configuration -->
-    <section>
+    <section id="week-configuration">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Week Configuration</h2>
       <DemoSection 
         title="First Day of Week"
@@ -466,7 +470,7 @@ const datePickerKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- States -->
-    <section>
+    <section id="states">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">States</h2>
       <DemoSection 
         title="Disabled, Loading & Read Only"
@@ -483,7 +487,7 @@ const datePickerKeyboard: KeyboardShortcut[] = [
     </section>
 
     <!-- Real-World Examples -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Examples</h2>
       <DemoSection 
         title="Booking Form"

@@ -325,6 +325,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SAccordion -->
+    <!-- @props modelValue, multiple, collapsible, type, size, color, dense, iconPlacement, animated -->
+    <!-- @events update:modelValue, change, before-expand, after-expand, before-collapse, after-collapse -->
+    <!-- @slots default, #icon, #arrow -->
+    <!-- @sections features, basic-usage, custom-icons, custom-arrow, multiple-expansion, variants, sizes, dense-mode, icon-placement, disabled-items, nested-accordions, custom-colors, real-world-example, simple-api -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-foreground mb-2">Accordion</h1>
@@ -332,7 +337,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h3 class="text-xl font-semibold text-foreground mb-4">Features</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-border">
@@ -381,7 +386,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-foreground mb-6">Basic Usage</h2>
       <DemoSection
         title="Compound API"
@@ -418,7 +423,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Custom Icons -->
-    <section>
+    <section id="custom-icons">
       <h2 class="text-2xl font-bold text-foreground mb-6">Custom Icons</h2>
       <DemoSection
         title="#icon Slot"
@@ -478,7 +483,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Custom Arrow -->
-    <section>
+    <section id="custom-arrow">
       <h2 class="text-2xl font-bold text-foreground mb-6">Custom Arrow</h2>
       <DemoSection
         title="#arrow Slot & hideArrow"
@@ -533,7 +538,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Multiple Expansion -->
-    <section>
+    <section id="multiple-expansion">
       <h2 class="text-2xl font-bold text-foreground mb-6">Multiple Expansion</h2>
       <DemoSection
         title="Allow Multiple Open Items"
@@ -579,7 +584,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-foreground mb-6">Variants</h2>
       <DemoSection
         title="Visual Style Variants"
@@ -672,7 +677,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-foreground mb-6">Sizes</h2>
       <DemoSection
         title="Size Variants"
@@ -719,7 +724,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Dense Mode -->
-    <section>
+    <section id="dense-mode">
       <h2 class="text-2xl font-bold text-foreground mb-6">Dense Mode</h2>
       <DemoSection
         title="Compact Layout"
@@ -759,7 +764,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Icon Placement -->
-    <section>
+    <section id="icon-placement">
       <h2 class="text-2xl font-bold text-foreground mb-6">Icon Placement</h2>
       <DemoSection
         title="Expand Arrow Position"
@@ -811,7 +816,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Disabled Items -->
-    <section>
+    <section id="disabled-items">
       <h2 class="text-2xl font-bold text-foreground mb-6">Disabled Items</h2>
       <DemoSection
         title="Disabled State"
@@ -839,7 +844,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Nested -->
-    <section>
+    <section id="nested-accordions">
       <h2 class="text-2xl font-bold text-foreground mb-6">Nested Accordions</h2>
       <DemoSection
         title="Accordions Inside Accordions"
@@ -900,7 +905,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Custom Colors -->
-    <section>
+    <section id="custom-colors">
       <h2 class="text-2xl font-bold text-foreground mb-6">Custom Colors</h2>
       <DemoSection
         title="Accent Color Customization"
@@ -941,7 +946,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- FAQ Example -->
-    <section>
+    <section id="real-world-example">
       <h2 class="text-2xl font-bold text-foreground mb-6">Real-World Example</h2>
       <DemoSection
         title="FAQ Section"
@@ -991,7 +996,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Simple API (legacy) -->
-    <section>
+    <section id="simple-api">
       <h2 class="text-2xl font-bold text-foreground mb-6">Simple API</h2>
       <DemoSection
         title="Title Prop Shorthand"

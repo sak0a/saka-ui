@@ -197,6 +197,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SGlassButton -->
+    <!-- @props tint, blur, saturation, highlightIntensity, size, color, rounded, block, iconLeft, iconRight, iconOnly, disabled, loading, preserveSize, ripple, animationType, animateInactive, href, to, type, tag -->
+    <!-- @events @click -->
+    <!-- @slots default, icon-left, icon-right, animate -->
+    <!-- @sections features, basic-usage, tint-modes, on-dark-backgrounds, on-light-backgrounds, on-image-backgrounds, sizes, border-radius, with-icons, loading-state, disabled-state, block-full-width, blur-highlight-customization, hover-animations, color-tinting, as-links, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Glass Button</h1>
@@ -204,7 +209,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
@@ -253,7 +258,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection
         title="Glass Buttons on Gradient"
@@ -278,7 +283,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Tint Modes -->
-    <section>
+    <section id="tint-modes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Tint Modes</h2>
       <DemoSection
         title="Light, Dark & Auto Tint"
@@ -325,7 +330,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- On Dark Backgrounds -->
-    <section>
+    <section id="on-dark-backgrounds">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">On Dark Backgrounds</h2>
       <DemoSection
         title="Pure Black Background"
@@ -347,7 +352,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- On Light Backgrounds -->
-    <section>
+    <section id="on-light-backgrounds">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">On Light Backgrounds</h2>
       <DemoSection
         title="Pure White Background"
@@ -369,7 +374,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- On Image Backgrounds -->
-    <section>
+    <section id="on-image-backgrounds">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">On Image Backgrounds</h2>
       <DemoSection
         title="Real Photo Backgrounds"
@@ -480,7 +485,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection
         title="Button Sizes"
@@ -517,7 +522,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Border Radius -->
-    <section>
+    <section id="border-radius">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Border Radius</h2>
       <DemoSection
         title="Rounded Corners"
@@ -554,7 +559,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Icons -->
-    <section>
+    <section id="with-icons">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">With Icons</h2>
       <DemoSection
         title="Icon Buttons"
@@ -583,7 +588,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Loading State -->
-    <section>
+    <section id="loading-state">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Loading State</h2>
       <DemoSection
         title="Loading Buttons"
@@ -614,7 +619,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Disabled State -->
-    <section>
+    <section id="disabled-state">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Disabled State</h2>
       <DemoSection
         title="Disabled Buttons"
@@ -641,7 +646,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Block / Full Width -->
-    <section>
+    <section id="block-full-width">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Block / Full Width</h2>
       <DemoSection
         title="Full Width Buttons"
@@ -660,7 +665,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Blur & Highlight Customization -->
-    <section>
+    <section id="blur-highlight-customization">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Blur & Highlight Customization</h2>
       <DemoSection
         title="Fine-tuning the Glass Effect"
@@ -705,7 +710,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Hover Animations -->
-    <section>
+    <section id="hover-animations">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Hover Animations</h2>
       <DemoSection
         title="Animated Glass Buttons"
@@ -758,7 +763,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Color Tinting -->
-    <section>
+    <section id="color-tinting">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Color Tinting</h2>
       <DemoSection
         title="Accent Colors"
@@ -780,7 +785,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- As Links -->
-    <section>
+    <section id="as-links">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">As Links</h2>
       <DemoSection
         title="Button Links"

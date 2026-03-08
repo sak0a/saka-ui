@@ -153,6 +153,9 @@ const skeletonProps: ApiProp[] = [
 
 <template>
   <div class="max-w-4xl mx-auto space-y-10 pb-16">
+    <!-- @component SSkeleton -->
+    <!-- @props shape, animation, width, height, size, borderRadius, lines, lineGap, skeletonClass -->
+    <!-- @sections api-reference -->
     <!-- Header -->
     <div>
       <h1 class="text-4xl font-bold text-foreground mb-3">Skeleton</h1>

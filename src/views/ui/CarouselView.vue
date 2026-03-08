@@ -314,6 +314,11 @@ const carouselSlideSlots: ApiSlot[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SCarousel -->
+    <!-- @props modelValue, direction, effect, easing, speed, loop, rewind, mousewheel, grabCursor, touchSensitivity, autoplay, autoplayDelay, dotsStyle, arrowStyle, showCounter, showThumbnails, aspectRatio -->
+    <!-- @events change, slideStart, slideEnd, reachStart, reachEnd, click, doubleClick, touchStart, touchMove, touchEnd -->
+    <!-- @slots default, thumbnail -->
+    <!-- @sections basic-usage, 12-transition-effects, pagination-styles, arrow-placement, easing-functions, autoplay-&-counter, mousewheel-navigation, vertical-direction, loop-&-rewind, programmatic-control, real-world-examples, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Carousel</h1>
@@ -323,7 +328,7 @@ const carouselSlideSlots: ApiSlot[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -372,7 +377,7 @@ const carouselSlideSlots: ApiSlot[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection 
         title="Simple Carousel"
@@ -403,7 +408,7 @@ const carouselSlideSlots: ApiSlot[] = [
     </section>
 
     <!-- Effects Showcase - 12 EFFECTS -->
-    <section>
+    <section id="12-transition-effects">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">12 Transition Effects</h2>
       <DemoSection 
         title="Stunning Visual Effects"
@@ -451,7 +456,7 @@ const carouselSlideSlots: ApiSlot[] = [
     </section>
 
     <!-- Pagination Styles -->
-    <section>
+    <section id="pagination-styles">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Pagination Styles</h2>
       <DemoSection 
         title="4 Pagination Variants"
@@ -492,7 +497,7 @@ const carouselSlideSlots: ApiSlot[] = [
     </section>
 
     <!-- Arrow Placement -->
-    <section>
+    <section id="arrow-placement">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Arrow Placement</h2>
       <DemoSection 
         title="7 Arrow Positioning Options"
@@ -536,7 +541,7 @@ const carouselSlideSlots: ApiSlot[] = [
     </section>
 
     <!-- Easing Functions -->
-    <section>
+    <section id="easing-functions">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Easing Functions</h2>
       <DemoSection 
         title="7 Easing Options"
@@ -581,7 +586,7 @@ const carouselSlideSlots: ApiSlot[] = [
     </section>
 
     <!-- Autoplay with Counter -->
-    <section>
+    <section id="autoplay-&-counter">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Autoplay & Counter</h2>
       <DemoSection 
         title="Auto-Advancing with Progress & Counter"
@@ -627,7 +632,7 @@ const carouselSlideSlots: ApiSlot[] = [
     </section>
 
     <!-- Mousewheel -->
-    <section>
+    <section id="mousewheel-navigation">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Mousewheel Navigation</h2>
       <DemoSection 
         title="Scroll to Navigate"
@@ -661,7 +666,7 @@ const carouselSlideSlots: ApiSlot[] = [
     </section>
 
     <!-- Vertical -->
-    <section>
+    <section id="vertical-direction">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Vertical Direction</h2>
       <DemoSection 
         title="Vertical Carousel"
@@ -692,7 +697,7 @@ const carouselSlideSlots: ApiSlot[] = [
     </section>
 
     <!-- Loop & Rewind -->
-    <section>
+    <section id="loop-&-rewind">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Loop & Rewind</h2>
       <DemoSection 
         title="Infinite Navigation"
@@ -724,7 +729,7 @@ const carouselSlideSlots: ApiSlot[] = [
     </section>
 
     <!-- Programmatic Control -->
-    <section>
+    <section id="programmatic-control">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Programmatic Control</h2>
       <DemoSection 
         title="Exposed Methods & API"
@@ -786,7 +791,7 @@ const carouselSlideSlots: ApiSlot[] = [
     </section>
 
     <!-- Real-World Examples -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Examples</h2>
       <DemoSection 
         title="Product Gallery"

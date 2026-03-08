@@ -467,6 +467,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SDrawer -->
+    <!-- @props modelValue, side, size, variant, title, description, closable, closeOnBackdrop, closeOnEscape, lockScroll, trapFocus, swipeable, swipeThreshold, showHandle, modal, rounded, backdrop, backdropBlur, duration, overlayOpacity, hideHeader, teleport, zIndex -->
+    <!-- @events update:modelValue, open, close, opened, closed, drag-start, drag-end, snap -->
+    <!-- @slots default, header, footer -->
+    <!-- @sections features, basic-usage, drawer-sides, sizes, variants, mobile-modal-style, navigation-menu, shopping-cart, form-drawer, settings-panel, notifications-panel, composable-components, real-world-examples -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Drawer</h1>
@@ -474,7 +479,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -523,7 +528,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection
         title="Basic Drawer"
@@ -575,7 +580,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Sides -->
-    <section>
+    <section id="drawer-sides">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Drawer Sides</h2>
       <DemoSection
         title="Position Options"
@@ -624,7 +629,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection
         title="Drawer Sizes"
@@ -670,7 +675,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
       <DemoSection
         title="Visual Variants"
@@ -706,7 +711,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Mobile Modal Style -->
-    <section>
+    <section id="mobile-modal-style">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Mobile Modal Style</h2>
       <DemoSection
         title="Mobile-Optimized Drawer"
@@ -784,7 +789,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Navigation Menu -->
-    <section>
+    <section id="navigation-menu">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Navigation Menu</h2>
       <DemoSection
         title="Side Menu Drawer"
@@ -844,7 +849,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Shopping Cart -->
-    <section>
+    <section id="shopping-cart">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Shopping Cart</h2>
       <DemoSection
         title="Cart Drawer"
@@ -907,7 +912,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Form Drawer -->
-    <section>
+    <section id="form-drawer">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Form Drawer</h2>
       <DemoSection
         title="Drawer with Form"
@@ -970,7 +975,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Settings Drawer -->
-    <section>
+    <section id="settings-panel">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Settings Panel</h2>
       <DemoSection
         title="Settings Drawer"
@@ -1030,7 +1035,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Notifications -->
-    <section>
+    <section id="notifications-panel">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Notifications Panel</h2>
       <DemoSection
         title="Notifications Drawer"
@@ -1105,7 +1110,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Composable Components -->
-    <section>
+    <section id="composable-components">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Composable Components</h2>
       <DemoSection
         title="Custom Layout"
@@ -1173,7 +1178,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Real-World Examples -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Examples</h2>
       <p class="text-(--s-text-secondary) mb-4">
         See the Shopping Cart, Navigation Menu, Form, Settings, and Notifications drawers above for comprehensive real-world examples.

@@ -186,6 +186,11 @@ const triggerCode = `<STabs v-model="active" type="line" trigger="hover">
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component STabs -->
+    <!-- @props modelValue, type, size, placement, animated, closable, trigger, justifyContent, barColor, chipColor, chipActiveColor, tabsWrapperClass, tabClass, activeTabClass, panelClass -->
+    <!-- @events update:modelValue, close, before-leave -->
+    <!-- @slots default, tab -->
+    <!-- @sections features, subcomponents -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Tabs</h1>
@@ -195,7 +200,7 @@ const triggerCode = `<STabs v-model="active" type="line" trigger="hover">
     </header>
 
     <!-- Features -->
-    <article class="space-y-4">
+    <article id="features" class="space-y-4">
       <h2 class="text-2xl font-bold text-(--s-text-primary)">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -698,7 +703,7 @@ const triggerCode = `<STabs v-model="active" type="line" trigger="hover">
     <!-- ============================================ -->
     <!-- SUBCOMPONENTS -->
     <!-- ============================================ -->
-    <section>
+    <section id="subcomponents">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Subcomponents</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl border border-(--s-border) bg-(--s-bg-secondary)">

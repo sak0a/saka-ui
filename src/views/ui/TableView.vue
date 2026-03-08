@@ -540,6 +540,11 @@ const formatSalary = (value: number) => {
 
 <template>
   <div class="space-y-12">
+    <!-- @component SDataTable -->
+    <!-- @props data, columns, rowKey, variant, size, selectionMode, hoverable, stickyHeader, stickyOffset, animateRows, loading, skeletonRows, pagination, pageSize, pageSizeOptions, multiSelect, initialSort, tableClass, fixedLayout, maxHeight, emptyMessage, emptyIcon, caption, captionSide -->
+    <!-- @events row-click, row-dblclick, sort-change, selection-change, update:selected, page-change, page-size-change, expanded-change -->
+    <!-- @slots toolbar, header, header-{key}, cell-{key}, row-actions, select-header, select-cell, expanded, loading, empty, pagination, footer -->
+    <!-- @sections accessibility, performance -->
     <!-- Page Header -->
     <div>
       <h1 class="text-3xl font-bold text-(--s-text-primary) mb-2">Data Table</h1>
@@ -974,7 +979,7 @@ const formatSalary = (value: number) => {
     </SApiSection>
 
     <!-- Accessibility Notes -->
-    <section class="space-y-4">
+    <section id="accessibility" class="space-y-4">
       <h2 class="text-xl font-semibold text-(--s-text-primary)">Accessibility</h2>
       <div class="bg-(--s-bg-secondary) rounded-xl p-6 space-y-3">
         <div class="flex gap-3">
@@ -1018,7 +1023,7 @@ const formatSalary = (value: number) => {
     </section>
 
     <!-- Performance Notes -->
-    <section class="space-y-4">
+    <section id="performance" class="space-y-4">
       <h2 class="text-xl font-semibold text-(--s-text-primary)">Performance</h2>
       <div class="bg-(--s-bg-secondary) rounded-xl p-6 space-y-3">
         <div class="flex gap-3">

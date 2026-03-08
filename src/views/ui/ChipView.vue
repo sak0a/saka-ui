@@ -127,6 +127,11 @@ const chipSlots: ApiSlot[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SChip -->
+    <!-- @props variant, size, color, closable, disabled -->
+    <!-- @events @close, @click -->
+    <!-- @slots default -->
+    <!-- @sections features, basic-usage, with-icons, variants, sizes, closable-chips, disabled-state, clickable-chips, combined-features, real-world-examples -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Chips</h1>
@@ -134,7 +139,7 @@ const chipSlots: ApiSlot[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -183,7 +188,7 @@ const chipSlots: ApiSlot[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection 
         title="Basic Chips"
@@ -201,7 +206,7 @@ const chipSlots: ApiSlot[] = [
     </section>
 
     <!-- Icons -->
-    <section>
+    <section id="with-icons">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">With Icons</h2>
       <DemoSection 
         title="Chips with Icons"
@@ -231,7 +236,7 @@ const chipSlots: ApiSlot[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
       <DemoSection 
         title="Chip Variants"
@@ -257,7 +262,7 @@ const chipSlots: ApiSlot[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection 
         title="Chip Sizes"
@@ -283,7 +288,7 @@ const chipSlots: ApiSlot[] = [
     </section>
 
     <!-- Closable -->
-    <section>
+    <section id="closable-chips">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Closable Chips</h2>
       <DemoSection 
         title="Closable"
@@ -309,7 +314,7 @@ const chipSlots: ApiSlot[] = [
     </section>
 
     <!-- Disabled -->
-    <section>
+    <section id="disabled-state">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Disabled State</h2>
       <DemoSection 
         title="Disabled Chips"
@@ -326,7 +331,7 @@ const chipSlots: ApiSlot[] = [
     </section>
 
     <!-- Clickable -->
-    <section>
+    <section id="clickable-chips">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Clickable Chips</h2>
       <DemoSection 
         title="Click Events"
@@ -358,7 +363,7 @@ const chipSlots: ApiSlot[] = [
     </section>
 
     <!-- Combined Features -->
-    <section>
+    <section id="combined-features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Combined Features</h2>
       <DemoSection 
         title="Interactive Tags"
@@ -387,9 +392,9 @@ const chipSlots: ApiSlot[] = [
     </section>
 
     <!-- Real-World Examples -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Examples</h2>
-      <DemoSection 
+      <DemoSection
         title="Filter Tags"
         description="Using chips as filter tags in a search interface."
         :code="filterTagsCode"

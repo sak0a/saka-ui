@@ -231,6 +231,9 @@ const alertProps: ApiProp[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component useDialog -->
+    <!-- @props title, description, confirmText, cancelText, variant, icon, closeOnBackdrop, closeOnEscape, placeholder, defaultValue, required, inputType, minLength, maxLength, validate, buttonText -->
+    <!-- @sections quick-demo, confirm-dialog, prompt-dialog, alert-dialog, dialog-variants, common-use-cases, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">useDialog</h1>
@@ -240,7 +243,7 @@ const alertProps: ApiProp[] = [
     </header>
 
     <!-- Quick Demo -->
-    <section>
+    <section id="quick-demo">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Quick Demo</h2>
       <SCard variant="outlined">
         <SCardContent class="space-y-4">
@@ -263,7 +266,7 @@ const alertProps: ApiProp[] = [
     </section>
 
     <!-- Confirm Dialog -->
-    <section>
+    <section id="confirm-dialog">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Confirm Dialog</h2>
       <DemoSection
         title="Confirmation Dialogs"
@@ -280,7 +283,7 @@ const alertProps: ApiProp[] = [
     </section>
 
     <!-- Prompt Dialog -->
-    <section>
+    <section id="prompt-dialog">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Prompt Dialog</h2>
       <DemoSection
         title="Input Prompts"
@@ -297,7 +300,7 @@ const alertProps: ApiProp[] = [
     </section>
 
     <!-- Alert Dialog -->
-    <section>
+    <section id="alert-dialog">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Alert Dialog</h2>
       <DemoSection
         title="Alert Messages"
@@ -313,7 +316,7 @@ const alertProps: ApiProp[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="dialog-variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Dialog Variants</h2>
       <DemoSection
         title="Visual Variants"
@@ -335,7 +338,7 @@ const alertProps: ApiProp[] = [
     </section>
 
     <!-- Use Cases -->
-    <section>
+    <section id="common-use-cases">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Common Use Cases</h2>
       <SCard variant="outlined">
         <SCardHeader>
@@ -376,7 +379,7 @@ const alertProps: ApiProp[] = [
     </section>
 
     <!-- API Reference -->
-    <section>
+    <section id="api-reference">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">API Reference</h2>
       
       <SApiSection title="useDialog Methods">

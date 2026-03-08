@@ -260,6 +260,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SButton -->
+    <!-- @props variant, size, color, rounded, block, iconLeft, iconRight, iconOnly, disabled, loading, preserveSize, ripple, animationType, animateInactive, href, to, type, tag -->
+    <!-- @events @click -->
+    <!-- @slots default, icon-left, icon-right, animate -->
+    <!-- @sections features, basic-usage, variants, variant-colors, sizes, border-radius, with-icons, loading-state, disabled-state, block-full-width, as-links, button-groups, combined-features, ripple-effect, hover-animations, with-keyboard-shortcuts, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Buttons</h1>
@@ -267,7 +272,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -316,7 +321,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection 
         title="Basic Buttons"
@@ -334,7 +339,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
       <DemoSection 
         title="Button Variants"
@@ -368,7 +373,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Variant Colors -->
-    <section>
+    <section id="variant-colors">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variant Colors</h2>
       <DemoSection 
         title="Colored Variants"
@@ -400,7 +405,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection 
         title="Button Sizes"
@@ -434,7 +439,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Border Radius -->
-    <section>
+    <section id="border-radius">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Border Radius</h2>
       <DemoSection 
         title="Rounded Corners"
@@ -468,7 +473,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Icons -->
-    <section>
+    <section id="with-icons">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">With Icons</h2>
       <DemoSection 
         title="Icon Buttons"
@@ -494,7 +499,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Loading State -->
-    <section>
+    <section id="loading-state">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Loading State</h2>
       <DemoSection 
         title="Loading Buttons"
@@ -530,7 +535,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Disabled State -->
-    <section>
+    <section id="disabled-state">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Disabled State</h2>
       <DemoSection 
         title="Disabled Buttons"
@@ -549,7 +554,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Block/Full Width -->
-    <section>
+    <section id="block-full-width">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Block / Full Width</h2>
       <DemoSection 
         title="Full Width Buttons"
@@ -566,7 +571,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- As Links -->
-    <section>
+    <section id="as-links">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">As Links</h2>
       <DemoSection 
         title="Button Links"
@@ -589,7 +594,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Button Groups -->
-    <section>
+    <section id="button-groups">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Button Groups</h2>
       <DemoSection 
         title="Grouped Buttons"
@@ -619,7 +624,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Combined Features -->
-    <section>
+    <section id="combined-features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Combined Features</h2>
       <DemoSection 
         title="Real-world Examples"
@@ -664,7 +669,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Ripple Effect Demo -->
-    <section>
+    <section id="ripple-effect">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Ripple Effect</h2>
       <DemoSection 
         title="Click Animation"
@@ -680,7 +685,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Animate Slot -->
-    <section>
+    <section id="hover-animations">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Hover Animations</h2>
       <DemoSection 
         title="Animated Buttons"
@@ -762,7 +767,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- With Keyboard Shortcuts -->
-    <section>
+    <section id="with-keyboard-shortcuts">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">With Keyboard Shortcuts</h2>
       <DemoSection
         title="Shortcut Hints"

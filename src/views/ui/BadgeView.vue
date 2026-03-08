@@ -175,6 +175,11 @@ const badgeSlots: ApiSlot[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SBadge -->
+    <!-- @props variant, size, color, bordered, content, max, showZero, dot, position, offset, standalone, pulse -->
+    <!-- @events @click -->
+    <!-- @slots default, content -->
+    <!-- @sections features, basic-usage, overlay-badges, variants, sizes, colors, dot-badges, max-value, positions, bordered-badges, pulse-animation, interactive-demo, show-zero, real-world-examples -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Badges</h1>
@@ -182,7 +187,7 @@ const badgeSlots: ApiSlot[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -231,7 +236,7 @@ const badgeSlots: ApiSlot[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection 
         title="Standalone Badges"
@@ -249,7 +254,7 @@ const badgeSlots: ApiSlot[] = [
     </section>
 
     <!-- Overlay Badges -->
-    <section>
+    <section id="overlay-badges">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Overlay Badges</h2>
       <DemoSection 
         title="Badge Overlays"
@@ -275,7 +280,7 @@ const badgeSlots: ApiSlot[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
       <DemoSection 
         title="Badge Variants"
@@ -301,7 +306,7 @@ const badgeSlots: ApiSlot[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection 
         title="Badge Sizes"
@@ -327,7 +332,7 @@ const badgeSlots: ApiSlot[] = [
     </section>
 
     <!-- Colors -->
-    <section>
+    <section id="colors">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Colors</h2>
       <DemoSection 
         title="Custom Colors"
@@ -347,7 +352,7 @@ const badgeSlots: ApiSlot[] = [
     </section>
 
     <!-- Dot Badges -->
-    <section>
+    <section id="dot-badges">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Dot Badges</h2>
       <DemoSection 
         title="Dot Mode"
@@ -373,7 +378,7 @@ const badgeSlots: ApiSlot[] = [
     </section>
 
     <!-- Max Value -->
-    <section>
+    <section id="max-value">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Max Value</h2>
       <DemoSection 
         title="Overflow Handling"
@@ -405,7 +410,7 @@ const badgeSlots: ApiSlot[] = [
     </section>
 
     <!-- Positions -->
-    <section>
+    <section id="positions">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Positions</h2>
       <DemoSection 
         title="Badge Positioning"
@@ -443,7 +448,7 @@ const badgeSlots: ApiSlot[] = [
     </section>
 
     <!-- Bordered -->
-    <section>
+    <section id="bordered-badges">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Bordered Badges</h2>
       <DemoSection 
         title="With Border"
@@ -469,7 +474,7 @@ const badgeSlots: ApiSlot[] = [
     </section>
 
     <!-- Pulse Animation -->
-    <section>
+    <section id="pulse-animation">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Pulse Animation</h2>
       <DemoSection 
         title="Animated Badges"
@@ -492,7 +497,7 @@ const badgeSlots: ApiSlot[] = [
     </section>
 
     <!-- Interactive Demo -->
-    <section>
+    <section id="interactive-demo">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Interactive Demo</h2>
       <DemoSection 
         title="Dynamic Badges"
@@ -519,7 +524,7 @@ const badgeSlots: ApiSlot[] = [
     </section>
 
     <!-- Show Zero -->
-    <section>
+    <section id="show-zero">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Show Zero</h2>
       <DemoSection 
         title="Zero Value Display"
@@ -545,9 +550,9 @@ const badgeSlots: ApiSlot[] = [
     </section>
 
     <!-- Real-World Examples -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Examples</h2>
-      <DemoSection 
+      <DemoSection
         title="Navigation Badges"
         description="Common badge patterns for navigation items showing unread counts and status indicators."
         :code="navigationCode"

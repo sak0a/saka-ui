@@ -229,6 +229,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SPagination -->
+    <!-- @props modelValue, total, pageSize, maxVisiblePages, variant, size, shape, color, background, showFirstLast, showPrevNext, showTotal, showQuickJump, showPageSize, showProgress, pageSizeOptions, simple, compact, hideSinglePage, disabled, loading, animation, prevText, nextText, firstText, lastText, keyboard, totalFormat -->
+    <!-- @events @update:modelValue, @change, @update:pageSize, @pageSizeChange -->
+    <!-- @slots prev, next, first, last, page, ellipsis, total, pageSize, quickJump, simple-content -->
+    <!-- @sections interactive-demo, basic-usage, variants, sizes, shapes, colors, simple-mode, full-featured, animations, custom-templates, states, real-world-example, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Pagination</h1>
@@ -236,7 +241,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -285,7 +290,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </article>
 
     <!-- Interactive Demo -->
-    <section>
+    <section id="interactive-demo">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Interactive Demo</h2>
       <div class="p-6 rounded-2xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
         <!-- Controls -->
@@ -353,7 +358,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection 
         title="Simple Pagination"
@@ -366,7 +371,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
       <DemoSection 
         title="Pagination Variants"
@@ -400,7 +405,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection 
         title="Pagination Sizes"
@@ -434,7 +439,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Shapes -->
-    <section>
+    <section id="shapes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Shapes</h2>
       <DemoSection 
         title="Button Shapes"
@@ -460,7 +465,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Colors -->
-    <section>
+    <section id="colors">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Colors</h2>
       <DemoSection 
         title="Custom Colors"
@@ -478,7 +483,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Simple Mode -->
-    <section>
+    <section id="simple-mode">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Simple Mode</h2>
       <DemoSection 
         title="Simplified Pagination"
@@ -494,7 +499,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Full Featured -->
-    <section>
+    <section id="full-featured">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Full Featured</h2>
       <DemoSection 
         title="All Features Enabled"
@@ -518,7 +523,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Animations -->
-    <section>
+    <section id="animations">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Animations</h2>
       <DemoSection 
         title="Page Transition Animations"
@@ -548,7 +553,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Custom Templates -->
-    <section>
+    <section id="custom-templates">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Templates</h2>
       <DemoSection 
         title="Slot Customization"
@@ -602,7 +607,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Loading State -->
-    <section>
+    <section id="states">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">States</h2>
       <DemoSection 
         title="Loading & Disabled States"
@@ -624,7 +629,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Real-world Example -->
-    <section>
+    <section id="real-world-example">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-world Example</h2>
       <DemoSection 
         title="Data Table Pagination"

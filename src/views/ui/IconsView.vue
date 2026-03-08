@@ -57,6 +57,9 @@ const iconProps: ApiProp[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SIcon -->
+    <!-- @props component, size, color, depth -->
+    <!-- @sections depth-levels, sizes-colors, mdi-font-icons, real-world-examples, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Icons</h1>
@@ -64,7 +67,7 @@ const iconProps: ApiProp[] = [
     </header>
 
     <!-- Basic Usage (Depth) -->
-    <section>
+    <section id="depth-levels">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Depth Levels</h2>
       <DemoSection 
         title="Depth Levels"
@@ -98,7 +101,7 @@ const iconProps: ApiProp[] = [
     </section>
 
     <!-- Sizes & Colors -->
-    <section>
+    <section id="sizes-colors">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes & Colors</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Sizes -->
@@ -134,7 +137,7 @@ const iconProps: ApiProp[] = [
     </section>
 
     <!-- MDI Font Icons -->
-    <section>
+    <section id="mdi-font-icons">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">MDI Font Icons</h2>
       <DemoSection 
         title="MDI Font Icons"
@@ -172,7 +175,7 @@ const iconProps: ApiProp[] = [
     </section>
 
     <!-- Real-World Examples -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Examples</h2>
       <DemoSection 
         title="Icon Navigation Bar"

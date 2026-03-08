@@ -121,12 +121,16 @@ const ellipsisSlots: ApiSlot[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SBreadcrumb -->
+    <!-- @props label, tag, href, to -->
+    <!-- @slots default -->
+    <!-- @sections features, basic-usage, current-page, custom-separator, ellipsis-overflow -->
     <header>
       <h1 class="text-4xl font-extrabold text-foreground mb-2">Breadcrumb</h1>
       <p class="text-lg text-muted-foreground">Compose accessible breadcrumb trails with links, a current-page primitive, custom separators, and collapsed overflow states.</p>
     </header>
 
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-foreground mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-border">
@@ -160,7 +164,7 @@ const ellipsisSlots: ApiSlot[] = [
       </div>
     </article>
 
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-foreground mb-6">Basic Usage</h2>
       <DemoSection
         title="Simple Trail"
@@ -182,7 +186,7 @@ const ellipsisSlots: ApiSlot[] = [
       </DemoSection>
     </section>
 
-    <section>
+    <section id="current-page">
       <h2 class="text-2xl font-bold text-foreground mb-6">Current Page</h2>
       <DemoSection
         title="Mark the Active Segment"
@@ -211,7 +215,7 @@ const ellipsisSlots: ApiSlot[] = [
       </DemoSection>
     </section>
 
-    <section>
+    <section id="custom-separator">
       <h2 class="text-2xl font-bold text-foreground mb-6">Custom Separator</h2>
       <DemoSection
         title="Swap the Default Chevron"
@@ -241,7 +245,7 @@ const ellipsisSlots: ApiSlot[] = [
       </DemoSection>
     </section>
 
-    <section>
+    <section id="ellipsis-overflow">
       <h2 class="text-2xl font-bold text-foreground mb-6">Ellipsis &amp; Overflow</h2>
       <DemoSection
         title="Collapsed Trail Composition"

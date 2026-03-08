@@ -103,6 +103,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SGlassCard -->
+    <!-- @props tint, blur, saturation, highlightIntensity, color, size, rounded, width, height, maxWidth, padding, horizontal, mediaRight, hoverable, pressable, clickable, spotlight, spotlightColor, tilt, loading, disabled, href, to, tag -->
+    <!-- @events @click -->
+    <!-- @slots default -->
+    <!-- @sections features, basic-usage, tint-modes, on-gradient-backgrounds, on-dark-backgrounds, on-light-backgrounds, on-image-backgrounds, with-sub-components, sizes, interactive-cards, spotlight-tilt, blur-highlight-customization, loading-disabled-states, as-links, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Glass Card</h1>
@@ -110,7 +115,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
@@ -159,7 +164,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection
         title="Glass Card on Gradient"
@@ -190,7 +195,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Tint Modes -->
-    <section>
+    <section id="tint-modes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Tint Modes</h2>
       <DemoSection
         title="Light, Dark & Auto Tint"
@@ -247,7 +252,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- On Gradient Backgrounds -->
-    <section>
+    <section id="on-gradient-backgrounds">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">On Gradient Backgrounds</h2>
       <DemoSection
         title="Multiple Gradient Palettes"
@@ -318,7 +323,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- On Dark Backgrounds -->
-    <section>
+    <section id="on-dark-backgrounds">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">On Dark Backgrounds</h2>
       <DemoSection
         title="Pure Black Background"
@@ -371,7 +376,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- On Light Backgrounds -->
-    <section>
+    <section id="on-light-backgrounds">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">On Light Backgrounds</h2>
       <DemoSection
         title="White Background"
@@ -405,7 +410,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- On Image Backgrounds -->
-    <section>
+    <section id="on-image-backgrounds">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">On Image Backgrounds</h2>
       <DemoSection
         title="Real Photo Backgrounds"
@@ -487,7 +492,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- With Sub-components -->
-    <section>
+    <section id="with-sub-components">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">With Sub-components</h2>
       <DemoSection
         title="SCardHeader, SCardContent, SCardFooter"
@@ -542,7 +547,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection
         title="Card Sizes"
@@ -580,7 +585,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Interactive -->
-    <section>
+    <section id="interactive-cards">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Interactive Cards</h2>
       <DemoSection
         title="Hoverable, Pressable, Clickable"
@@ -609,7 +614,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Spotlight & Tilt -->
-    <section>
+    <section id="spotlight-tilt">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Spotlight & Tilt</h2>
       <DemoSection
         title="Mouse-tracking Effects"
@@ -633,7 +638,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Blur & Highlight Customization -->
-    <section>
+    <section id="blur-highlight-customization">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Blur & Highlight Customization</h2>
       <DemoSection
         title="Fine-tuning the Glass Effect"
@@ -682,7 +687,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Loading & Disabled -->
-    <section>
+    <section id="loading-disabled-states">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Loading & Disabled States</h2>
       <DemoSection
         title="State Variants"
@@ -720,7 +725,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- As Links -->
-    <section>
+    <section id="as-links">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">As Links</h2>
       <DemoSection
         title="Card Links"

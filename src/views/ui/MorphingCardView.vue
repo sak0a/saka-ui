@@ -196,6 +196,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SMorphingCard -->
+    <!-- @props modelValue, duration, easing, closeOnBackdrop, closeOnEscape, lockScroll, zIndex, backdropBlur, maxWidth, maxHeight -->
+    <!-- @events update:modelValue, open, close, opened, closed -->
+    <!-- @slots trigger, content -->
+    <!-- @sections features, basic-usage, image-gallery, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Morphing Card</h1>
@@ -205,7 +210,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-purple-500/5 border border-(--s-border)">
@@ -254,7 +259,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </article>
 
     <!-- Basic Example -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection
         title="Single Card"
@@ -313,7 +318,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Gallery Example -->
-    <section>
+    <section id="image-gallery">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Image Gallery</h2>
       <DemoSection
         title="Gallery Grid"

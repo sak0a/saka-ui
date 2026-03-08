@@ -337,6 +337,11 @@ const actionsSlots: ApiSlot[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SCard -->
+    <!-- @props variant, size, rounded, hoverable, pressable, clickable, loading, disabled, spotlight, spotlightColor, tilt, gradientBorder, gradientBg, horizontal, mediaRight, width, maxWidth, height, tag, href, to -->
+    <!-- @events @click -->
+    <!-- @slots default -->
+    <!-- @sections features, basic-usage, variants, interactive-effects, media-cards, horizontal-layout, content-animations, loading-states, real-world-examples, glass-morphism, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Card</h1>
@@ -347,7 +352,7 @@ const actionsSlots: ApiSlot[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-violet-500/5 border border-(--s-border)">
@@ -396,7 +401,7 @@ const actionsSlots: ApiSlot[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection 
         title="Complete Card"
@@ -468,7 +473,7 @@ const actionsSlots: ApiSlot[] = [
     </section>
 
     <!-- Variants -->
-    <section>
+    <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
       <DemoSection 
         title="Card Variants"
@@ -547,7 +552,7 @@ const actionsSlots: ApiSlot[] = [
     </section>
 
     <!-- Interactive Effects -->
-    <section>
+    <section id="interactive-effects">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Interactive Effects</h2>
       <DemoSection 
         title="Hover & Click Effects"
@@ -589,7 +594,7 @@ const actionsSlots: ApiSlot[] = [
     </section>
 
     <!-- Media Cards -->
-    <section>
+    <section id="media-cards">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Media Cards</h2>
       <DemoSection 
         title="Cards with Images"
@@ -673,7 +678,7 @@ const actionsSlots: ApiSlot[] = [
     </section>
 
     <!-- Horizontal Cards -->
-    <section>
+    <section id="horizontal-layout">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Horizontal Layout</h2>
       <DemoSection 
         title="Side-by-side Media"
@@ -723,7 +728,7 @@ const actionsSlots: ApiSlot[] = [
     </section>
 
     <!-- Content Animations -->
-    <section>
+    <section id="content-animations">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Content Animations</h2>
       <DemoSection 
         title="Animated Card Content"
@@ -862,7 +867,7 @@ const actionsSlots: ApiSlot[] = [
     </section>
 
     <!-- Loading States -->
-    <section>
+    <section id="loading-states">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Loading States</h2>
       <DemoSection 
         title="Loading & Skeleton"
@@ -912,7 +917,7 @@ const actionsSlots: ApiSlot[] = [
     </section>
 
     <!-- Team Cards Grid -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Examples</h2>
       <DemoSection 
         title="Team Members"
@@ -995,7 +1000,7 @@ const actionsSlots: ApiSlot[] = [
     </section>
 
     <!-- Glass Card with Background -->
-    <section>
+    <section id="glass-morphism">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Glass Morphism</h2>
       <DemoSection 
         title="Glass Cards"

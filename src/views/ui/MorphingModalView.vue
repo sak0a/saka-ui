@@ -170,6 +170,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SMorphingModal -->
+    <!-- @props modelValue, duration, easing, closeOnBackdrop, closeOnEscape, lockScroll, zIndex, backdropBlur -->
+    <!-- @events update:modelValue, open, close, opened, closed -->
+    <!-- @slots trigger, content -->
+    <!-- @sections features, basic-example, image-gallery, custom-animation, component-structure, api-reference -->
     <!-- Header -->
     <header>
       <div class="flex items-center gap-3 mb-2">
@@ -183,7 +188,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-purple-500/5 border border-(--s-border)">
@@ -232,7 +237,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </article>
 
     <!-- Basic Example -->
-    <section>
+    <section id="basic-example">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Example</h2>
       <DemoSection
         title="Morphing Dialog"
@@ -359,7 +364,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Image Gallery Example -->
-    <section>
+    <section id="image-gallery">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Image Gallery</h2>
       <DemoSection
         title="Image Gallery Modal"
@@ -448,7 +453,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Custom Duration Example -->
-    <section>
+    <section id="custom-animation">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Custom Animation</h2>
       <DemoSection
         title="Custom Duration & Easing"
@@ -537,7 +542,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     </section>
 
     <!-- Component Structure -->
-    <section>
+    <section id="component-structure">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Component Structure</h2>
       <div class="p-6 rounded-2xl bg-(--s-bg-primary) border border-(--s-border)">
         <pre class="text-sm text-(--s-text-secondary) overflow-x-auto"><code>&lt;SMorphingModal&gt;

@@ -239,6 +239,11 @@ const avatarSlots: ApiSlot[] = [
 
 <template>
   <div class="space-y-12 pb-20">
+    <!-- @component SAvatar -->
+    <!-- @props size, shape, bordered, borderColor, ring, ringColor, status, statusPosition -->
+    <!-- @events @load, @error -->
+    <!-- @slots default -->
+    <!-- @sections features, basic-usage, sizes, shapes, fallback, status-indicator, bordered-ring, avatar-group, fallback-delay, interactive-demo, real-world-examples -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Avatar</h1>
@@ -248,7 +253,7 @@ const avatarSlots: ApiSlot[] = [
     </header>
 
     <!-- Features -->
-    <article>
+    <article id="features">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
@@ -297,7 +302,7 @@ const avatarSlots: ApiSlot[] = [
     </article>
 
     <!-- Basic Usage -->
-    <section>
+    <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Basic Usage</h2>
       <DemoSection 
         title="Avatar with Image and Fallback"
@@ -323,7 +328,7 @@ const avatarSlots: ApiSlot[] = [
     </section>
 
     <!-- Sizes -->
-    <section>
+    <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection 
         title="Avatar Sizes"
@@ -386,7 +391,7 @@ const avatarSlots: ApiSlot[] = [
     </section>
 
     <!-- Shapes -->
-    <section>
+    <section id="shapes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Shapes</h2>
       <DemoSection 
         title="Avatar Shapes"
@@ -421,7 +426,7 @@ const avatarSlots: ApiSlot[] = [
     </section>
 
     <!-- Fallback -->
-    <section>
+    <section id="fallback">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Fallback</h2>
       <DemoSection 
         title="Fallback Content"
@@ -462,7 +467,7 @@ const avatarSlots: ApiSlot[] = [
     </section>
 
     <!-- Status -->
-    <section>
+    <section id="status-indicator">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Status Indicator</h2>
       <DemoSection 
         title="Online Status"
@@ -544,7 +549,7 @@ const avatarSlots: ApiSlot[] = [
     </section>
 
     <!-- Bordered & Ring -->
-    <section>
+    <section id="bordered-ring">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Bordered & Ring</h2>
       <DemoSection 
         title="Border Styles"
@@ -586,7 +591,7 @@ const avatarSlots: ApiSlot[] = [
     </section>
 
     <!-- Avatar Group -->
-    <section>
+    <section id="avatar-group">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Avatar Group</h2>
       <DemoSection 
         title="Stacked Avatars"
@@ -629,7 +634,7 @@ const avatarSlots: ApiSlot[] = [
     </section>
 
     <!-- Fallback Delay -->
-    <section>
+    <section id="fallback-delay">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Fallback Delay</h2>
       <DemoSection 
         title="Delayed Fallback"
@@ -657,7 +662,7 @@ const avatarSlots: ApiSlot[] = [
     </section>
 
     <!-- Interactive Demo -->
-    <section>
+    <section id="interactive-demo">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Interactive Demo</h2>
       <DemoSection 
         title="Toggle Status"
@@ -678,9 +683,9 @@ const avatarSlots: ApiSlot[] = [
     </section>
 
     <!-- Real-World Examples -->
-    <section>
+    <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Real-World Examples</h2>
-      <DemoSection 
+      <DemoSection
         title="User Profile Card"
         description="A typical user profile display with avatar, status, and details."
         :code="profileCardCode"
