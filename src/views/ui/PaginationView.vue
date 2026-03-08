@@ -73,37 +73,40 @@ const basicCode = `<SPagination
 />`
 
 const variantsCode = `<!-- Default -->
-<SPagination variant="default" :total="100" :model-value="3" />
+<SPagination variant="default" :total="100" />
 
 <!-- Outlined -->
-<SPagination variant="outlined" :total="100" :model-value="3" />
+<SPagination variant="outlined" :total="100" />
 
 <!-- Ghost -->
-<SPagination variant="ghost" :total="100" :model-value="3" />
+<SPagination variant="ghost" :total="100" />
 
 <!-- Minimal -->
-<SPagination variant="minimal" :total="100" :model-value="3" />
+<SPagination variant="minimal" :total="100" />
 
 <!-- Dots -->
-<SPagination variant="dots" :total="50" :page-size="10" :model-value="3" />`
+<SPagination variant="dots" :total="100" />`
 
-const sizesCode = `<SPagination size="xs" :total="100" :model-value="3" />
-<SPagination size="sm" :total="100" :model-value="3" />
-<SPagination size="md" :total="100" :model-value="3" />
-<SPagination size="lg" :total="100" :model-value="3" />
-<SPagination size="xl" :total="100" :model-value="3" />`
+const sizesCode = `<SPagination size="xs" :total="100" />
+<SPagination size="sm" :total="100" />
+<SPagination size="md" :total="100" />
+<SPagination size="lg" :total="100" />
+<SPagination size="xl" :total="100" />`
 
-const shapesCode = `<SPagination shape="rounded" :total="100" :model-value="3" />
-<SPagination shape="square" :total="100" :model-value="3" />
-<SPagination shape="pill" :total="100" :model-value="3" />`
+const shapesCode = `<SPagination shape="rounded" :total="100" />
+<SPagination shape="square" :total="100" />
+<SPagination shape="pill" :total="100" />`
 
-const colorsCode = `<SPagination color="#3b82f6" :total="100" :model-value="3" />
-<SPagination color="#ec4899" :total="100" :model-value="3" />
-<SPagination color="#f59e0b" :total="100" :model-value="3" />
-<SPagination color="#8b5cf6" :total="100" :model-value="3" />`
+const colorsCode = `<SPagination color="#3b82f6" :total="100" />
+<SPagination color="#ec4899" :total="100" />
+<SPagination color="#f59e0b" :total="100" />
+<SPagination color="#8b5cf6" :total="100" />`
 
-const simpleCode = `<SPagination simple :total="100" :page-size="10" :model-value="5" />
-<SPagination simple :total="100" :page-size="10" :model-value="5" color="#8b5cf6" variant="outlined" />`
+const simpleCode = `<SPagination 
+  simple 
+  :total="100" 
+  :page-size="10"
+/>`
 
 const fullFeaturedCode = `<SPagination 
   v-model="currentPage" 
@@ -118,45 +121,35 @@ const fullFeaturedCode = `<SPagination
   background
 />`
 
-const customTemplatesCode = `<!-- Custom prev/next buttons -->
-<SPagination :total="100" :model-value="5">
+const customTemplatesCode = `<SPagination :total="100">
+  <!-- Custom prev button -->
   <template #prev>
-    <span class="flex items-center gap-1.5">
-      <span class="mdi mdi-arrow-left-bold"></span>
+    <span class="flex items-center gap-1">
+      <span class="mdi mdi-arrow-left"></span>
       Back
     </span>
   </template>
+  
+  <!-- Custom next button -->
   <template #next>
-    <span class="flex items-center gap-1.5">
+    <span class="flex items-center gap-1">
       Forward
-      <span class="mdi mdi-arrow-right-bold"></span>
+      <span class="mdi mdi-arrow-right"></span>
     </span>
   </template>
-</SPagination>
-
-<!-- Custom total format -->
-<SPagination
-  :total="247"
-  :page-size="10"
-  :model-value="3"
-  show-total
-  :total-format="(total, range) => \`Showing \${range[0]} to \${range[1]} of \${total} entries\`"
-/>
-
-<!-- Custom ellipsis -->
-<SPagination :total="200" :model-value="10">
-  <template #ellipsis>
-    <span class="text-(--s-text-tertiary) text-xs">...</span>
+  
+  <!-- Custom page button -->
+  <template #page="{ page, active }">
+    <span :class="{ 'font-bold': active }">
+      {{ page }}
+    </span>
   </template>
 </SPagination>`
 
-const animationsCode = `<SPagination animation="scale" :total="100" color="#10b981" />
-<SPagination animation="fade" :total="100" color="#3b82f6" />
-<SPagination animation="slide" :total="100" color="#ec4899" />
-<SPagination animation="flip" :total="100" color="#f59e0b" />`
-
-const statesCode = `<SPagination :total="100" :model-value="3" loading />
-<SPagination :total="100" :model-value="3" disabled />`
+const animationsCode = `<SPagination animation="scale" :total="100" />
+<SPagination animation="fade" :total="100" />
+<SPagination animation="slide" :total="100" />
+<SPagination animation="flip" :total="100" />`
 
 // API Reference data
 const paginationProps: ApiProp[] = [
@@ -607,7 +600,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       <DemoSection 
         title="Loading & Disabled States"
         description="Show loading spinner or disable pagination."
-        :code="statesCode"
+        code="<SPagination :total='100' loading />
+<SPagination :total='100' disabled />"
         language="vue"
       >
         <div class="space-y-6">
