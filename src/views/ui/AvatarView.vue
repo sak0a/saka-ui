@@ -25,67 +25,174 @@ const toggleStatus = () => {
 const basicUsageCode = `<SAvatar>
   <SAvatarImage src="https://i.pravatar.cc/150?u=john" alt="John Doe" />
   <SAvatarFallback>JD</SAvatarFallback>
+</SAvatar>
+<SAvatar>
+  <SAvatarImage src="https://i.pravatar.cc/150?u=jane" alt="Jane Smith" />
+  <SAvatarFallback>JS</SAvatarFallback>
+</SAvatar>
+<SAvatar>
+  <SAvatarImage src="https://i.pravatar.cc/150?u=mike" alt="Mike Johnson" />
+  <SAvatarFallback>MJ</SAvatarFallback>
 </SAvatar>`
 
-const sizesCode = `<SAvatar size="xs">...</SAvatar>
-<SAvatar size="sm">...</SAvatar>
-<SAvatar size="md">...</SAvatar>
-<SAvatar size="lg">...</SAvatar>
-<SAvatar size="xl">...</SAvatar>
-<SAvatar size="2xl">...</SAvatar>
-<SAvatar :size="80">...</SAvatar> <!-- Custom size in pixels -->`
+const sizesCode = `<SAvatar size="xs">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>XS</SAvatarFallback>
+</SAvatar>
+<SAvatar size="sm">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>SM</SAvatarFallback>
+</SAvatar>
+<SAvatar size="md">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>MD</SAvatarFallback>
+</SAvatar>
+<SAvatar size="lg">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>LG</SAvatarFallback>
+</SAvatar>
+<SAvatar size="xl">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>XL</SAvatarFallback>
+</SAvatar>
+<SAvatar size="2xl">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>2XL</SAvatarFallback>
+</SAvatar>
+<SAvatar :size="80">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>80</SAvatarFallback>
+</SAvatar>`
 
-const shapesCode = `<SAvatar shape="circle">...</SAvatar>
-<SAvatar shape="rounded">...</SAvatar>
-<SAvatar shape="square">...</SAvatar>`
+const shapesCode = `<SAvatar shape="circle" size="lg">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>JD</SAvatarFallback>
+</SAvatar>
+<SAvatar shape="rounded" size="lg">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>JS</SAvatarFallback>
+</SAvatar>
+<SAvatar shape="square" size="lg">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>MJ</SAvatarFallback>
+</SAvatar>`
 
 const fallbackCode = `<!-- With initials -->
-<SAvatar>
+<SAvatar size="lg">
   <SAvatarImage src="/broken-link.jpg" />
   <SAvatarFallback>CN</SAvatarFallback>
 </SAvatar>
 
 <!-- With icon (default) -->
-<SAvatar>
+<SAvatar size="lg">
   <SAvatarFallback />
 </SAvatar>
 
 <!-- With custom content -->
-<SAvatar>
+<SAvatar size="lg">
   <SAvatarFallback>
-    <span class="mdi mdi-account-group" />
+    <span class="mdi mdi-account-group text-[1.2em]" />
   </SAvatarFallback>
-</SAvatar>`
-
-const statusCode = `<SAvatar status="online">...</SAvatar>
-<SAvatar status="away">...</SAvatar>
-<SAvatar status="busy">...</SAvatar>
-<SAvatar status="offline">...</SAvatar>`
-
-const borderedCode = `<SAvatar bordered borderColor="var(--s-primary)">
-  ...
 </SAvatar>
 
-<SAvatar ring ringColor="var(--s-primary)">
-  ...
+<!-- Custom colors -->
+<SAvatar size="lg">
+  <SAvatarFallback color="#fff" bgColor="#8b5cf6">AB</SAvatarFallback>
 </SAvatar>`
 
-const groupCode = `<SAvatarGroup spacing="normal">
-  <SAvatar>
-    <SAvatarImage src="..." />
-    <SAvatarFallback>JD</SAvatarFallback>
+const statusCode = `<SAvatar size="lg" status="online">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>JD</SAvatarFallback>
+</SAvatar>
+<SAvatar size="lg" status="away">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>JS</SAvatarFallback>
+</SAvatar>
+<SAvatar size="lg" status="busy">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>MJ</SAvatarFallback>
+</SAvatar>
+<SAvatar size="lg" status="offline">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>SW</SAvatarFallback>
+</SAvatar>`
+
+const statusPositionsCode = `<SAvatar size="xl" status="online" statusPosition="top-right">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>JD</SAvatarFallback>
+</SAvatar>
+<SAvatar size="xl" status="online" statusPosition="top-left">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>JS</SAvatarFallback>
+</SAvatar>
+<SAvatar size="xl" status="online" statusPosition="bottom-right">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>MJ</SAvatarFallback>
+</SAvatar>
+<SAvatar size="xl" status="online" statusPosition="bottom-left">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>SW</SAvatarFallback>
+</SAvatar>`
+
+const borderedCode = `<SAvatar size="xl" bordered borderColor="var(--s-border)">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>JD</SAvatarFallback>
+</SAvatar>
+<SAvatar size="xl" bordered borderColor="var(--s-primary)">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>JS</SAvatarFallback>
+</SAvatar>
+<SAvatar size="xl" ring ringColor="var(--s-primary)">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>MJ</SAvatarFallback>
+</SAvatar>
+<SAvatar size="xl" ring ringColor="#ec4899">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>SW</SAvatarFallback>
+</SAvatar>`
+
+const groupCode = `<!-- Normal spacing -->
+<SAvatarGroup>
+  <SAvatar v-for="user in users" :key="user.name">
+    <SAvatarImage :src="user.src" :alt="user.name" />
+    <SAvatarFallback>{{ user.initials }}</SAvatarFallback>
   </SAvatar>
-  <SAvatar>
-    <SAvatarImage src="..." />
-    <SAvatarFallback>JS</SAvatarFallback>
+</SAvatarGroup>
+
+<!-- Tight spacing -->
+<SAvatarGroup spacing="tight">
+  <SAvatar v-for="user in users" :key="user.name">
+    <SAvatarImage :src="user.src" :alt="user.name" />
+    <SAvatarFallback>{{ user.initials }}</SAvatarFallback>
   </SAvatar>
-  <!-- More avatars... -->
+</SAvatarGroup>
+
+<!-- Loose spacing (large size) -->
+<SAvatarGroup spacing="loose">
+  <SAvatar v-for="user in users" :key="user.name" size="lg">
+    <SAvatarImage :src="user.src" :alt="user.name" />
+    <SAvatarFallback>{{ user.initials }}</SAvatarFallback>
+  </SAvatar>
 </SAvatarGroup>`
 
-const delayCode = `<!-- Show fallback after 600ms delay if image hasn't loaded -->
-<SAvatar>
-  <SAvatarImage src="https://slow-server.com/image.jpg" />
-  <SAvatarFallback :delayMs="600">JD</SAvatarFallback>
+const delayCode = `<SAvatar size="lg">
+  <SAvatarImage src="https://slow-loading-image.test/avatar.jpg" />
+  <SAvatarFallback :delayMs="0">Instant</SAvatarFallback>
+</SAvatar>
+
+<SAvatar size="lg">
+  <SAvatarImage src="https://slow-loading-image.test/avatar2.jpg" />
+  <SAvatarFallback :delayMs="600">Delayed</SAvatarFallback>
+</SAvatar>`
+
+const interactiveCode = `<SAvatar size="xl" :status="currentStatus">
+  <SAvatarImage src="..." />
+  <SAvatarFallback>JD</SAvatarFallback>
+</SAvatar>`
+
+const profileCardCode = `<SAvatar size="2xl" status="online" ring ringColor="var(--s-primary)">
+  <SAvatarImage src="..." alt="John Doe" />
+  <SAvatarFallback>JD</SAvatarFallback>
 </SAvatar>`
 
 // API Reference data
@@ -399,7 +506,7 @@ const avatarSlots: ApiSlot[] = [
       <DemoSection 
         title="Status Positions"
         description="Position the status indicator at different corners."
-        code="<SAvatar status='online' statusPosition='top-right'>...</SAvatar>"
+        :code="statusPositionsCode"
         language="vue"
         class="mt-6"
       >
@@ -555,7 +662,7 @@ const avatarSlots: ApiSlot[] = [
       <DemoSection 
         title="Toggle Status"
         description="Click the button to cycle through status states."
-        code="<SAvatar :status='currentStatus'>...</SAvatar>"
+        :code="interactiveCode"
         language="vue"
       >
         <div class="flex items-center gap-6">
@@ -576,7 +683,7 @@ const avatarSlots: ApiSlot[] = [
       <DemoSection 
         title="User Profile Card"
         description="A typical user profile display with avatar, status, and details."
-        code="<SAvatar size='xl' :status='userStatus'>...</SAvatar>"
+        :code="profileCardCode"
         language="vue"
       >
         <div class="p-6 rounded-xl bg-(--s-bg-primary) border border-(--s-border) max-w-xs">

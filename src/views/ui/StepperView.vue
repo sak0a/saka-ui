@@ -38,7 +38,7 @@ const simulateLoading = () => {
 }
 
 // ─── Code Snippets ──────────────────────────────────────────────────────────────
-const basicCode = `<SStepper v-model="step">
+const basicCode = `<SStepper v-model="basicStep">
   <template #default="{ nextStep, prevStep, canGoNext, canGoPrev, isLastStep }">
     <div class="flex items-center w-full">
       <SStepperItem :step="1">
@@ -51,50 +51,105 @@ const basicCode = `<SStepper v-model="step">
         </SStepperTrigger>
         <SStepperSeparator />
       </SStepperItem>
-      <!-- more steps... -->
+      <SStepperItem :step="2">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Profile</SStepperTitle>
+            <SStepperDescription>Set up your profile</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="3">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Complete</SStepperTitle>
+            <SStepperDescription>Review and finish</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+      </SStepperItem>
     </div>
 
-    <SStepperContent :step="1">Step 1 content</SStepperContent>
-
-    <div class="flex justify-between mt-4">
-      <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined">Back</SButton>
-      <SButton @click="nextStep" :disabled="isLastStep">Next</SButton>
-    </div>
+    <SStepperContent :step="1">
+      <h3>Create your account</h3>
+      <p>Enter your email and password to get started.</p>
+    </SStepperContent>
+    <SStepperContent :step="2">
+      <h3>Set up your profile</h3>
+      <p>Add your personal information and preferences.</p>
+    </SStepperContent>
+    <SStepperContent :step="3">
+      <h3>All done!</h3>
+      <p>Your account is ready. Welcome aboard!</p>
+    </SStepperContent>
   </template>
 </SStepper>`
 
-const lineCode = `<SStepper v-model="step" variant="line">
-  <template #default="{ nextStep, prevStep }">
+const lineCode = `<SStepper v-model="lineStep" variant="line">
+  <template #default="{ nextStep, prevStep, canGoNext, canGoPrev, isLastStep }">
     <div class="flex items-center w-full">
       <SStepperItem :step="1">
         <SStepperTrigger>
           <SStepperIndicator>
-            <span class="mdi mdi-map-marker" />
+            <template #default><span class="mdi mdi-map-marker" /></template>
           </SStepperIndicator>
           <SStepperTitle>Address</SStepperTitle>
           <SStepperDescription>Add your address</SStepperDescription>
         </SStepperTrigger>
         <SStepperSeparator />
       </SStepperItem>
-      <!-- more steps... -->
+      <SStepperItem :step="2">
+        <SStepperTrigger>
+          <SStepperIndicator>
+            <template #default><span class="mdi mdi-truck" /></template>
+          </SStepperIndicator>
+          <SStepperTitle>Shipping</SStepperTitle>
+          <SStepperDescription>Set your preferred</SStepperDescription>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="3">
+        <SStepperTrigger>
+          <SStepperIndicator>
+            <template #default><span class="mdi mdi-credit-card" /></template>
+          </SStepperIndicator>
+          <SStepperTitle>Payment</SStepperTitle>
+          <SStepperDescription>Add any payment</SStepperDescription>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="4">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <SStepperTitle>Checkout</SStepperTitle>
+          <SStepperDescription>Confirm your order</SStepperDescription>
+        </SStepperTrigger>
+      </SStepperItem>
     </div>
+
+    <SStepperContent :step="1">Enter your shipping address</SStepperContent>
+    <SStepperContent :step="2">Choose shipping speed</SStepperContent>
+    <SStepperContent :step="3">Enter payment details</SStepperContent>
+    <SStepperContent :step="4">Review and confirm your order</SStepperContent>
   </template>
 </SStepper>`
 
-const verticalCode = `<SStepper v-model="step" orientation="vertical">
-  <template #default="{ nextStep, prevStep }">
+const verticalCode = `<SStepper v-model="verticalStep" orientation="vertical">
+  <template #default="{ nextStep, prevStep, canGoNext, canGoPrev, isLastStep }">
     <SStepperItem :step="1">
       <div class="flex flex-col items-center">
         <SStepperTrigger class="!p-0">
           <SStepperIndicator />
         </SStepperTrigger>
-        <SStepperSeparator />
+        <SStepperSeparator class="flex-1" />
       </div>
       <div class="flex-1 pb-8">
         <SStepperTrigger class="!px-0">
           <div>
-            <SStepperTitle>Step Title</SStepperTitle>
-            <SStepperDescription>Description</SStepperDescription>
+            <SStepperTitle>Account Setup</SStepperTitle>
+            <SStepperDescription>Enter your credentials</SStepperDescription>
           </div>
         </SStepperTrigger>
         <SStepperContent :step="1" class="mt-3">
@@ -102,64 +157,355 @@ const verticalCode = `<SStepper v-model="step" orientation="vertical">
         </SStepperContent>
       </div>
     </SStepperItem>
+
+    <SStepperItem :step="2">
+      <div class="flex flex-col items-center">
+        <SStepperTrigger class="!p-0">
+          <SStepperIndicator />
+        </SStepperTrigger>
+        <SStepperSeparator class="flex-1" />
+      </div>
+      <div class="flex-1 pb-8">
+        <SStepperTrigger class="!px-0">
+          <div>
+            <SStepperTitle>Personal Info</SStepperTitle>
+            <SStepperDescription>Tell us about yourself</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+        <SStepperContent :step="2" class="mt-3">
+          <!-- content -->
+        </SStepperContent>
+      </div>
+    </SStepperItem>
+
+    <SStepperItem :step="3">
+      <div class="flex flex-col items-center">
+        <SStepperTrigger class="!p-0">
+          <SStepperIndicator />
+        </SStepperTrigger>
+      </div>
+      <div class="flex-1">
+        <SStepperTrigger class="!px-0">
+          <div>
+            <SStepperTitle>Confirmation</SStepperTitle>
+            <SStepperDescription>Review your details</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+        <SStepperContent :step="3" class="mt-3">
+          <!-- content -->
+        </SStepperContent>
+      </div>
+    </SStepperItem>
   </template>
 </SStepper>`
 
-const nonLinearCode = `<SStepper v-model="step" :linear="false">
-  <!-- All steps are clickable regardless of completion -->
-</SStepper>`
-
-const colorCode = `<SStepper v-model="step" color="#8b5cf6">
-  <!-- Custom color on indicators and separators -->
-</SStepper>`
-
-const errorCode = `<SStepperItem :step="2" :error="true">
-  <!-- Step indicator shows error state (red with alert icon) -->
-</SStepperItem>`
-
-const loadingCode = `<SStepperItem :step="2" :loading="true">
-  <!-- Step indicator shows loading spinner -->
-</SStepperItem>`
-
-const sizesCode = `<SStepper size="small">...</SStepper>
-<SStepper size="medium">...</SStepper>
-<SStepper size="large">...</SStepper>`
-
-const customIndicatorCode = `<SStepperIndicator>
+const nonLinearCode = `<SStepper v-model="nonLinearStep" :linear="false">
   <template #default>
-    <span class="mdi mdi-account" />
-  </template>
-</SStepperIndicator>`
+    <div class="flex items-center w-full">
+      <SStepperItem :step="1">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <SStepperTitle>Details</SStepperTitle>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="2">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <SStepperTitle>Shipping</SStepperTitle>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="3">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <SStepperTitle>Payment</SStepperTitle>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="4">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <SStepperTitle>Review</SStepperTitle>
+        </SStepperTrigger>
+      </SStepperItem>
+    </div>
 
-const disabledCode = `<SStepperItem :step="2" :disabled="true">
-  <!-- Step is non-interactive and visually dimmed -->
-</SStepperItem>`
+    <SStepperContent :step="1">Order Details</SStepperContent>
+    <SStepperContent :step="2">Shipping Method</SStepperContent>
+    <SStepperContent :step="3">Payment Info</SStepperContent>
+    <SStepperContent :step="4">Order Review</SStepperContent>
+  </template>
+</SStepper>`
+
+const colorCode = `<SStepper v-model="colorStep" color="#8b5cf6">
+  <template #default="{ nextStep, prevStep, canGoNext, canGoPrev, isLastStep }">
+    <div class="flex items-center w-full">
+      <SStepperItem :step="1">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Design</SStepperTitle>
+            <SStepperDescription>Create mockups</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="2">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Develop</SStepperTitle>
+            <SStepperDescription>Write the code</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="3">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Deploy</SStepperTitle>
+            <SStepperDescription>Ship it</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+      </SStepperItem>
+    </div>
+
+    <SStepperContent :step="1">Design phase: wireframes, prototypes, and user testing.</SStepperContent>
+    <SStepperContent :step="2">Development: implementation, code review, and QA.</SStepperContent>
+    <SStepperContent :step="3">Deployment: staging, production, and monitoring.</SStepperContent>
+  </template>
+</SStepper>`
+
+const errorCode = `<SStepper v-model="errorStep">
+  <template #default="{ nextStep, prevStep, canGoNext, canGoPrev }">
+    <div class="flex items-center w-full">
+      <SStepperItem :step="1" :completed="true">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Personal</SStepperTitle>
+            <SStepperDescription>Completed</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="2" :error="hasPaymentError">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Payment</SStepperTitle>
+            <SStepperDescription>Card declined</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="3">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Confirm</SStepperTitle>
+            <SStepperDescription>Review order</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+      </SStepperItem>
+    </div>
+  </template>
+</SStepper>`
+
+const loadingCode = `<SStepper v-model="loadingStep">
+  <template #default="{ nextStep, prevStep, canGoNext, canGoPrev }">
+    <div class="flex items-center w-full">
+      <SStepperItem :step="1" :completed="true">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Upload</SStepperTitle>
+            <SStepperDescription>Files uploaded</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="2" :loading="isProcessing">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Processing</SStepperTitle>
+            <SStepperDescription>Analyzing data...</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="3">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Complete</SStepperTitle>
+            <SStepperDescription>Waiting</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+      </SStepperItem>
+    </div>
+  </template>
+</SStepper>`
+
+const sizesCode = `<SStepper :model-value="2" size="small">
+  <template #default>
+    <div class="flex items-center w-full">
+      <SStepperItem :step="1" :completed="true">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Account</SStepperTitle>
+            <SStepperDescription>Set up credentials</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="2">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Profile</SStepperTitle>
+            <SStepperDescription>Personal info</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="3">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Done</SStepperTitle>
+            <SStepperDescription>All finished</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+      </SStepperItem>
+    </div>
+  </template>
+</SStepper>
+
+<!-- Also available: size="medium", size="large" -->`
+
+const customIndicatorCode = `<SStepper v-model="customStep">
+  <template #default="{ nextStep, prevStep, canGoNext, canGoPrev, isLastStep }">
+    <div class="flex items-center w-full">
+      <SStepperItem :step="1">
+        <SStepperTrigger>
+          <SStepperIndicator>
+            <template #default><span class="mdi mdi-account" /></template>
+          </SStepperIndicator>
+          <SStepperTitle>Account</SStepperTitle>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="2">
+        <SStepperTrigger>
+          <SStepperIndicator>
+            <template #default><span class="mdi mdi-cog" /></template>
+          </SStepperIndicator>
+          <SStepperTitle>Settings</SStepperTitle>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="3">
+        <SStepperTrigger>
+          <SStepperIndicator>
+            <template #default><span class="mdi mdi-rocket-launch" /></template>
+          </SStepperIndicator>
+          <SStepperTitle>Launch</SStepperTitle>
+        </SStepperTrigger>
+      </SStepperItem>
+    </div>
+
+    <SStepperContent :step="1">Set up your account credentials.</SStepperContent>
+    <SStepperContent :step="2">Configure preferences and integrations.</SStepperContent>
+    <SStepperContent :step="3">Ready for launch!</SStepperContent>
+  </template>
+</SStepper>`
+
+const disabledCode = `<SStepper v-model="disabledStep" :linear="false">
+  <template #default>
+    <div class="flex items-center w-full">
+      <SStepperItem :step="1">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <SStepperTitle>Available</SStepperTitle>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="2" :disabled="true">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <SStepperTitle>Locked</SStepperTitle>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="3">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <SStepperTitle>Available</SStepperTitle>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="4" :disabled="true">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <SStepperTitle>Locked</SStepperTitle>
+        </SStepperTrigger>
+      </SStepperItem>
+    </div>
+  </template>
+</SStepper>`
 
 const wizardCode = `<SStepper v-model="wizardStep">
   <template #default="{ nextStep, prevStep, canGoNext, canGoPrev, isLastStep }">
-    <!-- Step headers -->
     <div class="flex items-center w-full mb-8">
       <SStepperItem :step="1">
         <SStepperTrigger>
           <SStepperIndicator />
           <div>
             <SStepperTitle>Personal</SStepperTitle>
-            <SStepperDescription>Your info</SStepperDescription>
+            <SStepperDescription>Your information</SStepperDescription>
           </div>
         </SStepperTrigger>
         <SStepperSeparator />
       </SStepperItem>
-      <!-- ... -->
+      <SStepperItem :step="2">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Plan</SStepperTitle>
+            <SStepperDescription>Choose a plan</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+        <SStepperSeparator />
+      </SStepperItem>
+      <SStepperItem :step="3">
+        <SStepperTrigger>
+          <SStepperIndicator />
+          <div>
+            <SStepperTitle>Payment</SStepperTitle>
+            <SStepperDescription>Billing details</SStepperDescription>
+          </div>
+        </SStepperTrigger>
+      </SStepperItem>
     </div>
-    <!-- Step content panels -->
+
     <SStepperContent :step="1">
-      <SInput v-model="form.name" label="Name" />
+      <SInput v-model="formData.name" label="Full Name" placeholder="John Doe" />
+      <SInput v-model="formData.email" label="Email" placeholder="john@example.com" type="email" />
     </SStepperContent>
-    <!-- Navigation -->
-    <div class="flex justify-between mt-6">
-      <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined">Back</SButton>
-      <SButton @click="nextStep">{{ isLastStep ? 'Submit' : 'Continue' }}</SButton>
-    </div>
+
+    <SStepperContent :step="2">
+      <!-- Plan selection buttons -->
+    </SStepperContent>
+
+    <SStepperContent :step="3">
+      <SInput v-model="formData.cardNumber" label="Card Number" placeholder="4242 4242 4242 4242" />
+      <!-- Order summary -->
+    </SStepperContent>
   </template>
 </SStepper>`
 
