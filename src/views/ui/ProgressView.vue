@@ -219,42 +219,42 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
     <article class="space-y-4">
       <h2 class="text-2xl font-bold text-(--s-text-primary)">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-palette text-2xl text-cyan-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">6 Visual Variants</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Default, gradient, striped, buffer, segments, and liquid styles.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-violet-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-animation text-2xl text-violet-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Rich Animations</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Pulse, wave, shimmer, flow, bounce and indeterminate modes.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-arrow-left-right text-2xl text-emerald-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Range Slider</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Single or dual-handle sliders for filter controls like price ranges.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-resize text-2xl text-amber-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">5 Size Options</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Extra small to extra large sizes for any use case.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-rose-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-rotate-3d text-2xl text-rose-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Vertical & Horizontal</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Both orientations with full feature support.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-slot-machine text-2xl text-blue-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Custom Templates</h3>

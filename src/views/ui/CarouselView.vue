@@ -195,42 +195,42 @@ const carouselSlideSlots: ApiSlot[] = [
     <article>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-animation text-xl text-emerald-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">12 Visual Effects</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Slide, fade, cube, flip, coverflow, cards, zoom, creative, parallax, stack, swirl, kenburns.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-timer-outline text-xl text-blue-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Autoplay</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Auto-advance with configurable delay, pause on hover, and progress bar.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-purple-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-gesture-swipe-horizontal text-xl text-purple-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Touch & Mousewheel</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Full touch gesture support and mousewheel navigation.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-arrow-all text-xl text-amber-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Flexible Navigation</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">7 arrow placements, 4 pagination styles, and programmatic control.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-red-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-swap-vertical text-xl text-red-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Vertical Mode</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Horizontal or vertical slide direction with full feature support.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-infinity text-xl text-cyan-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Loop & Rewind</h3>

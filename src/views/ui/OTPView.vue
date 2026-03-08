@@ -438,54 +438,47 @@ const otpMethods: ApiMethod[] = [
     <article>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-violet-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-puzzle text-xl text-violet-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Compound Components</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Compose SOTP, SOTPSlot, SOTPGroup, and SOTPSeparator for flexible layouts.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-violet-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-animation text-xl text-violet-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Rich Animations</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Multiple entry, input, success, and error animations to choose from.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-text-box-edit text-xl text-blue-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Text Morphing</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Smooth character transitions with scale and rotation effects.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-format-letter-case text-xl text-emerald-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Multiple Modes</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Numeric, alphanumeric, alphabetic, or any character support.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-pink-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-palette text-xl text-pink-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">5 Variants</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Outlined, filled, underlined, ghost, and morphing styles.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-content-paste text-xl text-amber-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Clipboard Support</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Paste OTP codes directly from clipboard with validation.</p>
-        </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
-          <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-timer text-xl text-cyan-500"></span>
-            <h3 class="font-semibold text-(--s-text-primary)">Countdown Timer</h3>
-          </div>
-          <p class="text-sm text-(--s-text-secondary)">Built-in resend countdown with customizable duration.</p>
         </div>
       </div>
     </article>
