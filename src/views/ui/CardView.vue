@@ -1,11 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { 
+import { ref, computed } from 'vue'
+import {
   SCard, SCardHeader, SCardContent, SCardFooter, SCardMedia, SCardActions,
   SButton, SBadge, SChip, SApiSection, SApiTable
 } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
+import { useCustomizer } from '../../composables/useCustomizer'
+import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+
+const { ri, iconPack } = useCustomizer()
+
+const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const cp = (mdiName: string, attr = 'icon') => {
+  if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
+  const name = getLucideImportName(mdiName)
+  return name ? `:icon="${name}"` : `${attr}="${mdiName}"`
+}
+const li = (...mdiNames: string[]) => {
+  if (iconPack.value === 'mdi') return ''
+  return '\n' + lucideImportStatement(mdiNames)
+}
 
 // Demo state
 const isLoading = ref(false)
@@ -37,11 +52,11 @@ const products = [
 ]
 
 // Code snippets
-const basicCode = `<SCard>
+const basicCode = computed(() => `<SCard>
   <SCardHeader
     title="Project Overview"
     subtitle="Updated 2 hours ago"
-    icon="folder-outline"
+    ${cp('folder-outline')}
   />
   <SCardContent>
     This is the card content area. Cards are surfaces that display content
@@ -51,7 +66,7 @@ const basicCode = `<SCard>
     <SButton variant="ghost" size="small">Cancel</SButton>
     <SButton size="small">Save</SButton>
   </SCardFooter>
-</SCard>`
+</SCard>`)
 
 const variantsCode = `<!-- Elevated (default) -->
 <SCard variant="elevated">
@@ -78,9 +93,9 @@ const variantsCode = `<!-- Elevated (default) -->
   <SCardContent>Glassmorphism effect</SCardContent>
 </SCard>`
 
-const interactiveCode = `<!-- Hoverable -->
+const interactiveCode = computed(() => `<!-- Hoverable -->
 <SCard hoverable>
-  <SCardHeader title="Hoverable" icon="arrow-up" icon-color="#3b82f6" />
+  <SCardHeader title="Hoverable" ${cp('arrow-up')} icon-color="#3b82f6" />
   <SCardContent>
     Hover me for a lift effect with enhanced shadow!
   </SCardContent>
@@ -88,7 +103,7 @@ const interactiveCode = `<!-- Hoverable -->
 
 <!-- Pressable -->
 <SCard pressable clickable>
-  <SCardHeader title="Pressable" icon="gesture-tap" icon-color="#ef4444" />
+  <SCardHeader title="Pressable" ${cp('gesture-tap')} icon-color="#ef4444" />
   <SCardContent>
     Click me! I have a satisfying press effect.
   </SCardContent>
@@ -96,7 +111,7 @@ const interactiveCode = `<!-- Hoverable -->
 
 <!-- With spotlight glow -->
 <SCard spotlight spotlight-color="#8b5cf6" variant="outlined">
-  <SCardHeader title="Spotlight" icon="spotlight-beam" icon-color="#8b5cf6" />
+  <SCardHeader title="Spotlight" ${cp('spotlight-beam')} icon-color="#8b5cf6" />
   <SCardContent>
     Move your mouse around for a glow effect!
   </SCardContent>
@@ -108,7 +123,7 @@ const interactiveCode = `<!-- Hoverable -->
   <SCardContent>
     Perspective-based 3D rotation on hover.
   </SCardContent>
-</SCard>`
+</SCard>`)
 
 const mediaCode = `<SCard hoverable>
   <SCardMedia
@@ -182,9 +197,9 @@ const animationsCode = `<!-- Floating icons -->
   <div class="animate-progress-85" />
 </SCard>`
 
-const loadingCode = `<!-- Loading overlay -->
+const loadingCode = computed(() => `<!-- Loading overlay -->
 <SCard :loading="isLoading">
-  <SCardHeader title="Loading Overlay" subtitle="Click button below" icon="loading" />
+  <SCardHeader title="Loading Overlay" subtitle="Click button below" ${cp('loading')} />
   <SCardContent>
     This card shows a shimmer loading overlay when loading is true.
   </SCardContent>
@@ -199,7 +214,7 @@ const loadingCode = `<!-- Loading overlay -->
 <!-- Skeleton with avatar -->
 <SCard>
   <SCardContent :skeleton="true" :skeleton-lines="4" />
-</SCard>`
+</SCard>`)
 
 const overlayCode = `<SCard>
   <SCardMedia 
@@ -412,10 +427,10 @@ const actionsSlots: ApiSlot[] = [
       >
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <SCard>
-            <SCardHeader 
-              title="Project Overview" 
+            <SCardHeader
+              title="Project Overview"
               subtitle="Updated 2 hours ago"
-              icon="folder-outline"
+              :icon="ri('folder-outline')"
             />
             <SCardContent class="mt-4">
               This is the card content area. Cards are surfaces that display content and actions on a single topic, making it easy to scan for relevant information.
@@ -449,7 +464,7 @@ const actionsSlots: ApiSlot[] = [
             <SCardHeader 
               title="Statistics" 
               subtitle="This month"
-              icon="chart-line"
+              :icon="ri('chart-line')"
               icon-color="#10b981"
             />
             <SCardContent class="mt-4">
@@ -563,28 +578,28 @@ const actionsSlots: ApiSlot[] = [
       >
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <SCard hoverable>
-            <SCardHeader title="Hoverable" icon="arrow-up" icon-color="#3b82f6" />
+            <SCardHeader title="Hoverable" :icon="ri('arrow-up')" icon-color="#3b82f6" />
             <SCardContent class="mt-3 text-sm">
               Hover me for a lift effect with enhanced shadow!
             </SCardContent>
           </SCard>
           
           <SCard pressable clickable>
-            <SCardHeader title="Pressable" icon="gesture-tap" icon-color="#ef4444" />
+            <SCardHeader title="Pressable" :icon="ri('gesture-tap')" icon-color="#ef4444" />
             <SCardContent class="mt-3 text-sm">
               Click me! I have a satisfying press effect.
             </SCardContent>
           </SCard>
           
           <SCard spotlight spotlight-color="#8b5cf6" variant="outlined">
-            <SCardHeader title="Spotlight" icon="spotlight-beam" icon-color="#8b5cf6" />
+            <SCardHeader title="Spotlight" :icon="ri('spotlight-beam')" icon-color="#8b5cf6" />
             <SCardContent class="mt-3 text-sm">
               Move your mouse around for a glow effect!
             </SCardContent>
           </SCard>
           
           <SCard tilt hoverable>
-            <SCardHeader title="3D Tilt" icon="rotate-3d-variant" icon-color="#10b981" />
+            <SCardHeader title="3D Tilt" :icon="ri('rotate-3d-variant')" icon-color="#10b981" />
             <SCardContent class="mt-3 text-sm">
               Perspective-based 3D rotation on hover.
             </SCardContent>
@@ -757,7 +772,7 @@ const actionsSlots: ApiSlot[] = [
 
           <!-- Pulse Animation -->
           <SCard hoverable>
-            <SCardHeader title="Pulse Effect" icon="heart-pulse" icon-color="#ef4444" />
+            <SCardHeader title="Pulse Effect" :icon="ri('heart-pulse')" icon-color="#ef4444" />
             <SCardContent class="mt-3">
               <div class="flex items-center justify-center gap-4">
                 <div class="relative">
@@ -776,7 +791,7 @@ const actionsSlots: ApiSlot[] = [
 
           <!-- Typing Animation -->
           <SCard hoverable>
-            <SCardHeader title="Typewriter" icon="keyboard" icon-color="#3b82f6" />
+            <SCardHeader title="Typewriter" :icon="ri('keyboard')" icon-color="#3b82f6" />
             <SCardContent class="mt-3">
               <div class="bg-(--s-bg-secondary) rounded-lg p-3 font-mono text-sm">
                 <span class="text-emerald-500">const</span> <span class="text-blue-400">greeting</span> = <span class="animate-typewriter text-amber-400">"Hello World!"</span>
@@ -788,7 +803,7 @@ const actionsSlots: ApiSlot[] = [
 
           <!-- Counter Animation -->
           <SCard hoverable>
-            <SCardHeader title="Counting Up" icon="counter" icon-color="#10b981" />
+            <SCardHeader title="Counting Up" :icon="ri('counter')" icon-color="#10b981" />
             <SCardContent class="mt-3">
               <div class="grid grid-cols-3 gap-3 text-center">
                 <div>
@@ -810,7 +825,7 @@ const actionsSlots: ApiSlot[] = [
 
           <!-- Progress Animation -->
           <SCard hoverable>
-            <SCardHeader title="Progress Bars" icon="chart-line-variant" icon-color="#f59e0b" />
+            <SCardHeader title="Progress Bars" :icon="ri('chart-line-variant')" icon-color="#f59e0b" />
             <SCardContent class="mt-3 space-y-3">
               <div>
                 <div class="flex justify-between text-xs mb-1">
@@ -844,7 +859,7 @@ const actionsSlots: ApiSlot[] = [
 
           <!-- Staggered List Animation -->
           <SCard hoverable>
-            <SCardHeader title="Staggered List" icon="format-list-bulleted" icon-color="#8b5cf6" />
+            <SCardHeader title="Staggered List" :icon="ri('format-list-bulleted')" icon-color="#8b5cf6" />
             <SCardContent class="mt-3">
               <ul class="space-y-2">
                 <li class="flex items-center gap-2 p-2 rounded-lg bg-(--s-bg-secondary) animate-slide-in" style="animation-delay: 0s">
@@ -879,7 +894,7 @@ const actionsSlots: ApiSlot[] = [
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="space-y-3">
             <SCard :loading="isLoading">
-              <SCardHeader title="Loading Overlay" subtitle="Click button below" icon="loading" />
+              <SCardHeader title="Loading Overlay" subtitle="Click button below" :icon="ri('loading')" />
               <SCardContent class="mt-3">
                 This card shows a shimmer loading overlay when loading is true.
               </SCardContent>
