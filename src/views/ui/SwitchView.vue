@@ -1,8 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { SSwitch, SApiSection, SApiTable } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
+import { useCustomizer } from '../../composables/useCustomizer'
+import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+
+const { ri, iconPack } = useCustomizer()
+
+const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const cp = (mdiName: string, attr = 'icon') => {
+  if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
+  const name = getLucideImportName(mdiName)
+  return name ? `:icon="${name}"` : `${attr}="${mdiName}"`
+}
+const li = (...mdiNames: string[]) => {
+  if (iconPack.value === 'mdi') return ''
+  return '\n' + lucideImportStatement(mdiNames)
+}
 
 // State for demos
 const basicSwitch = ref(false)
@@ -65,25 +80,30 @@ const labelsCode = `<SSwitch v-model="value" label-after="Enable notifications" 
   label-after="On" 
 />`
 
-const iconsCode = `<!-- Using icon names -->
-<SSwitch
-  v-model="value"
-  checked-icon="check"
-  unchecked-icon="close"
-  size="large"
-/>
+const iconsCode = computed(() => `<script setup>${li('check', 'close')}
+<\/script>
 
-<!-- Using custom content via slots -->
-<SSwitch v-model="value" size="large">
-  <template #checked-icon>🤔</template>
-  <template #unchecked-icon>➡️</template>
-</SSwitch>
+<template>
+  <!-- Using icon names -->
+  <SSwitch
+    v-model="value"
+    ${cp('check', 'checked-icon')}
+    ${cp('close', 'unchecked-icon')}
+    size="large"
+  />
 
-<!-- Emoji icons with custom color -->
-<SSwitch v-model="value" size="large" color="#f59e0b">
-  <template #checked-icon>☀️</template>
-  <template #unchecked-icon>🌙</template>
-</SSwitch>`
+  <!-- Using custom content via slots -->
+  <SSwitch v-model="value" size="large">
+    <template #checked-icon>🤔</template>
+    <template #unchecked-icon>➡️</template>
+  </SSwitch>
+
+  <!-- Emoji icons with custom color -->
+  <SSwitch v-model="value" size="large" color="#f59e0b">
+    <template #checked-icon>☀️</template>
+    <template #unchecked-icon>🌙</template>
+  </SSwitch>
+</template>`)
 
 const trackTextCode = `<!-- Text inside track -->
 <SSwitch
@@ -117,24 +137,29 @@ const status = ref('inactive')
   />
 </template>`
 
-const realWorldCode = `<div class="settings-panel">
-  <SSwitch 
-    v-model="notifications" 
-    label-after="Push Notifications"
-    color="#10b981"
-  />
-  <SSwitch 
-    v-model="darkMode" 
-    label-after="Dark Mode"
-    checked-icon="weather-night"
-    unchecked-icon="weather-sunny"
-  />
-  <SSwitch 
-    v-model="autoSave" 
-    label-after="Auto-save documents"
-    color="#3b82f6"
-  />
-</div>`
+const realWorldCode = computed(() => `<script setup>${li('weather-night', 'weather-sunny')}
+<\/script>
+
+<template>
+  <div class="settings-panel">
+    <SSwitch
+      v-model="notifications"
+      label-after="Push Notifications"
+      color="#10b981"
+    />
+    <SSwitch
+      v-model="darkMode"
+      label-after="Dark Mode"
+      ${cp('weather-night', 'checked-icon')}
+      ${cp('weather-sunny', 'unchecked-icon')}
+    />
+    <SSwitch
+      v-model="autoSave"
+      label-after="Auto-save documents"
+      color="#3b82f6"
+    />
+  </div>
+</template>`)
 </script>
 
 <template>
@@ -344,10 +369,10 @@ const realWorldCode = `<div class="settings-panel">
       >
         <div class="flex flex-wrap gap-8 items-center">
           <div class="flex flex-col items-center gap-3">
-            <SSwitch 
-              v-model="iconSwitch" 
-              checked-icon="check" 
-              unchecked-icon="close"
+            <SSwitch
+              v-model="iconSwitch"
+              :checked-icon="ri('check')"
+              :unchecked-icon="ri('close')"
               size="large"
             />
             <span class="text-xs font-mono text-(--s-text-secondary)">Icon props</span>
@@ -477,11 +502,11 @@ const realWorldCode = `<div class="settings-panel">
             />
           </div>
           <div>
-            <SSwitch 
-              v-model="settingsDarkMode" 
+            <SSwitch
+              v-model="settingsDarkMode"
               label-after="Dark Mode"
-              checked-icon="weather-night"
-              unchecked-icon="weather-sunny"
+              :checked-icon="ri('weather-night')"
+              :unchecked-icon="ri('weather-sunny')"
             />
           </div>
           <div>
