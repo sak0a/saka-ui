@@ -192,42 +192,42 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     <article>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-blur text-xl text-cyan-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Liquid Glass Effect</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Backdrop blur, specular highlight, and rim light create a realistic glass surface.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-purple-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-theme-light-dark text-xl text-purple-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Three Tint Modes</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Auto, light, and dark tints adapt the glass to any background context.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-button-cursor text-xl text-emerald-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Full SButton Parity</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Sizes, icons, loading, ripple, animations, links - everything SButton has.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-image-multiple text-xl text-amber-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Backdrop Aware</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Looks beautiful on dark, light, gradient, and image backgrounds.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-red-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-tune-vertical text-xl text-red-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Customizable</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Fine-tune blur, saturation, and highlight intensity per usage context.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-shimmer text-xl text-blue-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Glass Ripple</h3>
