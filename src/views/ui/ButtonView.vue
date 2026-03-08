@@ -1,9 +1,39 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { SButton, SKbd, SKbdShortcut, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 import { Palette, Sparkles, LoaderCircle } from 'lucide-vue-next'
+import { useCustomizer } from '../../composables/useCustomizer'
+import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+
+const { ri, iconPack } = useCustomizer()
+
+// Code generation helpers
+const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const cp = (mdiName: string, attr = 'icon') => {
+  if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
+  const name = getLucideImportName(mdiName)
+  return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
+}
+const li = (...mdiNames: string[]) => {
+  if (iconPack.value === 'mdi') return ''
+  return '\n' + lucideImportStatement(mdiNames)
+}
+/** Render an inline icon element for code snippets: MDI span or Lucide component */
+const si = (mdiName: string, extraClass = '') => {
+  if (iconPack.value === 'mdi') {
+    const cls = extraClass ? `mdi mdi-${mdiName} ${extraClass}` : `mdi mdi-${mdiName}`
+    return `<span class="${cls}"></span>`
+  }
+  const name = getLucideImportName(mdiName)
+  if (!name) {
+    const cls = extraClass ? `mdi mdi-${mdiName} ${extraClass}` : `mdi mdi-${mdiName}`
+    return `<span class="${cls}"></span>`
+  }
+  const cls = extraClass ? `class="w-4 h-4 ${extraClass}"` : 'class="w-4 h-4"'
+  return `<${name} ${cls} />`
+}
 
 // State for interactive demos
 const isLoading = ref(false)
@@ -58,20 +88,24 @@ const roundedCode = `<SButton rounded="none" color="#3b82f6">None</SButton>
 <SButton rounded="lg" color="#3b82f6">Large</SButton>
 <SButton rounded="full" color="#3b82f6">Pill</SButton>`
 
-const iconsCode = `<SButton iconLeft="home">Home</SButton>
-<SButton iconRight="arrow-right" color="#3b82f6">Continue</SButton>
-<SButton iconLeft="plus" iconRight="chevron-down" variant="outlined">New Item</SButton>
+const iconsCode = computed(() => {
+  const imports = li('home', 'arrow-right', 'plus', 'chevron-down', 'heart', 'cog', 'bell')
+  const scriptBlock = imports ? `<script setup>${imports}\n<\/script>\n\n` : ''
+  return `${scriptBlock}<SButton ${cp('home', 'iconLeft')}>Home</SButton>
+<SButton ${cp('arrow-right', 'iconRight')} color="#3b82f6">Continue</SButton>
+<SButton ${cp('plus', 'iconLeft')} ${cp('chevron-down', 'iconRight')} variant="outlined">New Item</SButton>
 <SButton iconOnly rounded="full" color="#ec4899">
-  <span class="mdi mdi-heart"></span>
+  ${si('heart')}
 </SButton>
 <SButton iconOnly variant="ghost">
-  <span class="mdi mdi-cog"></span>
+  ${si('cog')}
 </SButton>
 <SButton iconOnly variant="light" color="#8b5cf6">
-  <span class="mdi mdi-bell"></span>
+  ${si('bell')}
 </SButton>`
+})
 
-const loadingCode = `<SButton :loading="isLoading">
+const loadingCode = computed(() => `<SButton :loading="isLoading">
   {{ isLoading ? 'Loading...' : 'Click to Load' }}
 </SButton>
 <SButton loading variant="outlined">Loading...</SButton>
@@ -82,12 +116,12 @@ const loadingCode = `<SButton :loading="isLoading">
 <SButton :loading="isLoading" preserveSize>
   Submit Order
 </SButton>
-<SButton loading preserveSize variant="outlined" iconLeft="cloud-upload">
+<SButton loading preserveSize variant="outlined" ${cp('cloud-upload', 'iconLeft')}>
   Upload File
 </SButton>
-<SButton loading preserveSize variant="light" color="#8b5cf6" iconRight="arrow-right">
+<SButton loading preserveSize variant="light" color="#8b5cf6" ${cp('arrow-right', 'iconRight')}>
   Continue
-</SButton>`
+</SButton>`)
 
 const disabledCode = `<SButton disabled>Disabled Filled</SButton>
 <SButton disabled variant="outlined">Disabled Outlined</SButton>
@@ -98,25 +132,25 @@ const disabledCode = `<SButton disabled>Disabled Filled</SButton>
 const rippleCode = `<SButton size="large" color="#3b82f6">Click me for ripple!</SButton>
 <SButton size="large" :ripple="false" variant="outlined">No Ripple</SButton>`
 
-const blockCode = `<SButton block size="large" iconLeft="rocket-launch">Full Width Button</SButton>
+const blockCode = computed(() => `<SButton block size="large" ${cp('rocket-launch', 'iconLeft')}>Full Width Button</SButton>
 <SButton block variant="outlined" color="#3b82f6">Full Width Outlined</SButton>
-<SButton block variant="light" color="#8b5cf6">Full Width Light</SButton>`
+<SButton block variant="light" color="#8b5cf6">Full Width Light</SButton>`)
 
-const linksCode = `<SButton href="https://google.com" target="_blank" iconRight="open-in-new">
+const linksCode = computed(() => `<SButton href="https://google.com" target="_blank" ${cp('open-in-new', 'iconRight')}>
   External Link
 </SButton>
-<SButton to="/ui/chips" variant="light" iconLeft="arrow-left">
+<SButton to="/ui/chips" variant="light" ${cp('arrow-left', 'iconLeft')}>
   Go to Chips
 </SButton>
-<SButton to="/ui/switch" variant="outlined" iconRight="arrow-right">
+<SButton to="/ui/switch" variant="outlined" ${cp('arrow-right', 'iconRight')}>
   Go to Switch
-</SButton>`
+</SButton>`)
 
-const combinedCode = `<SButton
+const combinedCode = computed(() => `<SButton
   variant="filled"
   size="large"
   color="#8b5cf6"
-  iconLeft="rocket-launch"
+  ${cp('rocket-launch', 'iconLeft')}
   rounded="lg"
 >
   Launch Project
@@ -126,7 +160,7 @@ const combinedCode = `<SButton
   variant="outlined"
   size="small"
   color="#10b981"
-  iconRight="check"
+  ${cp('check', 'iconRight')}
   rounded="full"
 >
   Completed
@@ -135,23 +169,26 @@ const combinedCode = `<SButton
 <SButton
   variant="light"
   color="#ef4444"
-  iconLeft="trash-can"
+  ${cp('trash-can', 'iconLeft')}
 >
   Delete
 </SButton>
 
 <SButton
   variant="ghost"
-  iconLeft="share-variant"
+  ${cp('share-variant', 'iconLeft')}
 >
   Share
-</SButton>`
+</SButton>`)
 
-const animateCode = `<!-- Slide animation (default) -->
+const animateCode = computed(() => {
+  const imports = li('home', 'email-send', 'heart', 'cog')
+  const scriptBlock = imports ? `<script setup>${imports}\n<\/script>\n\n` : ''
+  return `${scriptBlock}<!-- Slide animation (default) -->
 <SButton size="large">
   Home
   <template #animate>
-    <span class="mdi mdi-home mr-1"></span> Go Home
+    ${si('home', 'mr-1')} Go Home
   </template>
 </SButton>
 
@@ -159,7 +196,7 @@ const animateCode = `<!-- Slide animation (default) -->
 <SButton size="large" animation-type="vertical" color="#10b981">
   Message
   <template #animate>
-    <span class="mdi mdi-email-send mr-1"></span> Send
+    ${si('email-send', 'mr-1')} Send
   </template>
 </SButton>
 
@@ -167,7 +204,7 @@ const animateCode = `<!-- Slide animation (default) -->
 <SButton size="large" animation-type="scale" color="#8b5cf6">
   Like
   <template #animate>
-    <span class="mdi mdi-heart text-lg"></span>
+    ${si('heart', 'text-lg')}
   </template>
 </SButton>
 
@@ -175,11 +212,15 @@ const animateCode = `<!-- Slide animation (default) -->
 <SButton size="large" animation-type="rotate" color="#f59e0b">
   Settings
   <template #animate>
-    <span class="mdi mdi-cog text-lg"></span>
+    ${si('cog', 'text-lg')}
   </template>
 </SButton>`
+})
 
-const buttonGroupCode = `<div class="inline-flex">
+const buttonGroupCode = computed(() => {
+  const imports = li('format-bold', 'format-italic', 'format-underline')
+  const scriptBlock = imports ? `<script setup>${imports}\n<\/script>\n\n` : ''
+  return `${scriptBlock}<div class="inline-flex">
   <SButton rounded="none" class="rounded-l-lg border-r-0">Left</SButton>
   <SButton rounded="none" variant="outlined" class="border-x-0">Center</SButton>
   <SButton rounded="none" class="rounded-r-lg border-l-0">Right</SButton>
@@ -187,15 +228,16 @@ const buttonGroupCode = `<div class="inline-flex">
 
 <div class="inline-flex">
   <SButton rounded="none" variant="outlined" color="#8b5cf6" class="rounded-l-lg">
-    <span class="mdi mdi-format-bold"></span>
+    ${si('format-bold')}
   </SButton>
   <SButton rounded="none" variant="outlined" color="#8b5cf6">
-    <span class="mdi mdi-format-italic"></span>
+    ${si('format-italic')}
   </SButton>
   <SButton rounded="none" variant="outlined" color="#8b5cf6" class="rounded-r-lg">
-    <span class="mdi mdi-format-underline"></span>
+    ${si('format-underline')}
   </SButton>
 </div>`
+})
 
 const kbdShortcutCode = `<SButton variant="outlined">
   Search
@@ -482,9 +524,9 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="flex flex-wrap gap-3 items-center">
-          <SButton iconLeft="home">Home</SButton>
-          <SButton iconRight="arrow-right" color="#3b82f6">Continue</SButton>
-          <SButton iconLeft="plus" iconRight="chevron-down" variant="outlined">New Item</SButton>
+          <SButton :iconLeft="ri('home')">Home</SButton>
+          <SButton :iconRight="ri('arrow-right')" color="#3b82f6">Continue</SButton>
+          <SButton :iconLeft="ri('plus')" :iconRight="ri('chevron-down')" variant="outlined">New Item</SButton>
           <SButton iconOnly rounded="full" color="#ec4899">
             <span class="mdi mdi-heart"></span>
           </SButton>
@@ -522,10 +564,10 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               <SButton :loading="isLoading" preserveSize @click="simulateLoading">
                 Submit Order
               </SButton>
-              <SButton loading preserveSize variant="outlined" iconLeft="cloud-upload">
+              <SButton loading preserveSize variant="outlined" :iconLeft="ri('cloud-upload')">
                 Upload File
               </SButton>
-              <SButton loading preserveSize variant="light" color="#8b5cf6" iconRight="arrow-right">
+              <SButton loading preserveSize variant="light" color="#8b5cf6" :iconRight="ri('arrow-right')">
                 Continue
               </SButton>
             </div>
@@ -563,7 +605,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="space-y-3 max-w-md">
-          <SButton block size="large" iconLeft="rocket-launch">Full Width Button</SButton>
+          <SButton block size="large" :iconLeft="ri('rocket-launch')">Full Width Button</SButton>
           <SButton block variant="outlined" color="#3b82f6">Full Width Outlined</SButton>
           <SButton block variant="light" color="#8b5cf6">Full Width Light</SButton>
         </div>
@@ -580,13 +622,13 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="flex flex-wrap gap-3 items-center">
-          <SButton href="https://google.com" target="_blank" iconRight="open-in-new">
+          <SButton href="https://google.com" target="_blank" :iconRight="ri('open-in-new')">
             External Link
           </SButton>
-          <SButton to="/ui/chips" variant="light" iconLeft="arrow-left">
+          <SButton to="/ui/chips" variant="light" :iconLeft="ri('arrow-left')">
             Go to Chips
           </SButton>
-          <SButton to="/ui/switch" variant="outlined" iconRight="arrow-right">
+          <SButton to="/ui/switch" variant="outlined" :iconRight="ri('arrow-right')">
             Go to Switch
           </SButton>
         </div>
@@ -633,34 +675,34 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="flex flex-wrap gap-4 items-center">
-          <SButton 
-            variant="filled" 
-            size="large" 
-            color="#8b5cf6" 
-            iconLeft="rocket-launch"
+          <SButton
+            variant="filled"
+            size="large"
+            color="#8b5cf6"
+            :iconLeft="ri('rocket-launch')"
             rounded="lg"
           >
             Launch Project
           </SButton>
-          <SButton 
-            variant="outlined" 
-            size="small" 
+          <SButton
+            variant="outlined"
+            size="small"
             color="#10b981"
-            iconRight="check"
+            :iconRight="ri('check')"
             rounded="full"
           >
             Completed
           </SButton>
-          <SButton 
-            variant="light" 
+          <SButton
+            variant="light"
             color="#ef4444"
-            iconLeft="trash-can"
+            :iconLeft="ri('trash-can')"
           >
             Delete
           </SButton>
-          <SButton 
+          <SButton
             variant="ghost"
-            iconLeft="share-variant"
+            :iconLeft="ri('share-variant')"
           >
             Share
           </SButton>
