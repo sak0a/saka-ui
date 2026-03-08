@@ -189,42 +189,42 @@ const radioKeyboard: KeyboardShortcut[] = [
     <article class="space-y-4">
       <h2 class="text-2xl font-bold text-(--s-text-primary)">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-radiobox-marked text-2xl text-emerald-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Four Visual Variants</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Default ring, filled background, outlined border, and button toggle styles.</p>
         </div>
-        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-view-grid text-2xl text-blue-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Radio Group Layouts</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Horizontal, vertical, and grid orientations with gap control.</p>
         </div>
-        <div class="p-4 rounded-xl bg-rose-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-palette-outline text-2xl text-rose-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Custom Colors</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Use any CSS color value to customize selection states.</p>
         </div>
-        <div class="p-4 rounded-xl bg-violet-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-image-outline text-2xl text-violet-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Custom Icons</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Replace the standard dot with any MDI icon in the center.</p>
         </div>
-        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-keyboard text-2xl text-amber-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Keyboard Navigation</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Full arrow key navigation with Tab, Space, and Enter support.</p>
         </div>
-        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-animation-outline text-2xl text-cyan-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Ripple Effects</h3>

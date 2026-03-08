@@ -232,42 +232,42 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     <article>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-palette-outline text-xl text-emerald-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Five Variants</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Default, outlined, ghost, minimal, and dots variants with custom colors.</p>
         </div>
-        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-animation text-xl text-blue-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Smooth Animations</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Scale, fade, slide, and flip animations for page transitions.</p>
         </div>
-        <div class="p-4 rounded-xl bg-purple-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-puzzle-outline text-xl text-purple-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Rich Templates</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">10 template slots for complete control over every element.</p>
         </div>
-        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-lightning-bolt text-xl text-amber-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Quick Jump</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Jump to any page instantly with the built-in quick jump input.</p>
         </div>
-        <div class="p-4 rounded-xl bg-red-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-keyboard text-xl text-red-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Keyboard Navigation</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Full keyboard support with arrow keys, Home, and End.</p>
         </div>
-        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-progress-check text-xl text-cyan-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Progress Bar</h3>

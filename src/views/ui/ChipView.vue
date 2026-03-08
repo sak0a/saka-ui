@@ -132,42 +132,42 @@ const chipSlots: ApiSlot[] = [
     <article>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-palette-outline text-xl text-emerald-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Three Variants</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Filled, outlined, and light variants with custom color support.</p>
         </div>
-        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-close-circle text-xl text-blue-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Closable</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Add a close button for removable tags and filters.</p>
         </div>
-        <div class="p-4 rounded-xl bg-purple-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-cursor-default-click text-xl text-purple-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Clickable</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Handle click events for interactive chip actions.</p>
         </div>
-        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-resize text-xl text-amber-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Three Sizes</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Small, medium, and large sizes for different contexts.</p>
         </div>
-        <div class="p-4 rounded-xl bg-red-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-shape text-xl text-red-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Icon Support</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Add icons before or after chip text using the default slot.</p>
         </div>
-        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-format-color-fill text-xl text-cyan-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Custom Colors</h3>

@@ -144,42 +144,42 @@ const avatarSlots: ApiSlot[] = [
     <article>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-resize text-xl text-emerald-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Multiple Sizes</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Six preset sizes from xs to 2xl, plus custom pixel values for maximum flexibility.</p>
         </div>
-        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-shape-outline text-xl text-blue-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Flexible Shapes</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Circle, square, or rounded shapes to match your design system requirements.</p>
         </div>
-        <div class="p-4 rounded-xl bg-purple-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-account-alert text-xl text-purple-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Smart Fallback</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Automatic fallback with initials, icons, or custom content when image fails to load.</p>
         </div>
-        <div class="p-4 rounded-xl bg-green-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-circle text-xl text-green-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Status Indicator</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Show online, offline, busy, or away status with customizable position.</p>
         </div>
-        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-account-group text-xl text-amber-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Avatar Groups</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Stack multiple avatars with configurable spacing and overlap effects.</p>
         </div>
-        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-timer-sand text-xl text-cyan-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Delayed Fallback</h3>

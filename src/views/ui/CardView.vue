@@ -298,42 +298,42 @@ const actionsSlots: ApiSlot[] = [
     <article>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-violet-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-palette-outline text-xl text-violet-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">5 Variants</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Elevated, outlined, filled, ghost, and glass morphism styles.</p>
         </div>
-        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-gesture-tap text-xl text-blue-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Interactive Effects</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Hover lift, press scale, spotlight glow, and 3D tilt effects.</p>
         </div>
-        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-image-multiple text-xl text-emerald-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Rich Media</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Images, videos with zoom, overlays, and lazy loading.</p>
         </div>
-        <div class="p-4 rounded-xl bg-pink-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-gradient-horizontal text-xl text-pink-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Gradient Support</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Beautiful gradient borders and background overlays.</p>
         </div>
-        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-view-module text-xl text-amber-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Flexible Layout</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Vertical and horizontal layouts with composable sub-components.</p>
         </div>
-        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-loading text-xl text-cyan-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Loading States</h3>

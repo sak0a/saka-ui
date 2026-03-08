@@ -138,42 +138,42 @@ const realWorldCode = `<div class="settings-panel">
     <article class="space-y-4">
       <h2 class="text-2xl font-bold text-(--s-text-primary)">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-toggle-switch text-2xl text-emerald-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Two Visual Types</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Inset (thumb inside track) and outset (thumb extends beyond) styles.</p>
         </div>
-        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-format-text text-2xl text-blue-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Track Text</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Display ON/OFF or custom text inside the switch track.</p>
         </div>
-        <div class="p-4 rounded-xl bg-rose-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-emoticon text-2xl text-rose-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Custom Icons</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Icons or emoji in the thumb via props or slots for checked/unchecked states.</p>
         </div>
-        <div class="p-4 rounded-xl bg-violet-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-code-braces text-2xl text-violet-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Custom Values</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Use any values (strings, numbers) instead of boolean true/false.</p>
         </div>
-        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-label-outline text-2xl text-amber-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Flexible Labels</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Add labels before and/or after the switch for better context.</p>
         </div>
-        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-keyboard text-2xl text-cyan-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Keyboard Support</h3>

@@ -178,42 +178,42 @@ const triggerCode = `<STabs v-model="active" type="line" trigger="hover">
     <article class="space-y-4">
       <h2 class="text-2xl font-bold text-(--s-text-primary)">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-puzzle-outline text-2xl text-emerald-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Compound API</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Composable subcomponents for full layout control and custom trigger content.</p>
         </div>
-        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-shape-outline text-2xl text-blue-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Morphing Indicator</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">STabsIndicator morphs between tabs as underline, pill, or background.</p>
         </div>
-        <div class="p-4 rounded-xl bg-rose-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-tab text-2xl text-rose-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Five Tab Types</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Line, card, segment, bar, and chip styles for different use cases.</p>
         </div>
-        <div class="p-4 rounded-xl bg-violet-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-animation-outline text-2xl text-violet-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Smooth Animations</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Optional panel transitions with cubic-bezier easing effects.</p>
         </div>
-        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-view-carousel-outline text-2xl text-amber-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Vertical Placement</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Top, bottom, left, and right tab placements.</p>
         </div>
-        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-layers-outline text-2xl text-cyan-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Dual API</h3>

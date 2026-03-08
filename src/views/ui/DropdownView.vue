@@ -238,42 +238,42 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
     <article class="space-y-4">
       <h2 class="text-2xl font-bold text-(--s-text-primary)">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-gesture-tap text-2xl text-emerald-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Multiple Triggers</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Click, hover, context menu, or manual control for maximum flexibility.</p>
         </div>
-        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-animation-play text-2xl text-blue-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Rich Animations</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Fade, slide, scale, and reveal animations with smart placement.</p>
         </div>
-        <div class="p-4 rounded-xl bg-rose-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <KeyboardIcon class="w-6 h-6 text-rose-400" />
             <h3 class="font-semibold text-(--s-text-primary)">Keyboard Navigation</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Full keyboard support with arrows, Enter, Escape, and shortcuts display.</p>
         </div>
-        <div class="p-4 rounded-xl bg-violet-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <Search class="w-6 h-6 text-violet-400" />
             <h3 class="font-semibold text-(--s-text-primary)">Searchable Menu</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Built-in search filtering for long lists of options.</p>
         </div>
-        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-checkbox-multiple-marked text-2xl text-amber-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Checkable Items</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Toggle items with visual checkmarks for settings menus.</p>
         </div>
-        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <Palette class="w-6 h-6 text-cyan-400" />
             <h3 class="font-semibold text-(--s-text-primary)">Customizable</h3>

@@ -135,42 +135,42 @@ const badgeSlots: ApiSlot[] = [
     <article>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-palette-outline text-xl text-emerald-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Three Variants</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Filled, outlined, and light variants with custom color support for any design.</p>
         </div>
-        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-dots-horizontal text-xl text-blue-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Dot Mode</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Show minimal dot indicators for subtle status without content.</p>
         </div>
-        <div class="p-4 rounded-xl bg-purple-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-numeric-9-plus text-xl text-purple-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Max Value</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Cap displayed numbers with overflow indicator (e.g., 99+).</p>
         </div>
-        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-arrow-all text-xl text-amber-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Flexible Positioning</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Four corner positions with custom pixel offset support.</p>
         </div>
-        <div class="p-4 rounded-xl bg-red-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-pulse text-xl text-red-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Pulse Animation</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Animated pulse effect to draw attention to important notifications.</p>
         </div>
-        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-view-dashboard-outline text-xl text-cyan-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Standalone Mode</h3>

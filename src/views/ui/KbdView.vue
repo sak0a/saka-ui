@@ -100,42 +100,42 @@ const shortcutProps: ApiProp[] = [
     <article>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-xml text-xl text-emerald-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Semantic HTML</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Renders native <code class="text-xs px-1 py-0.5 rounded bg-(--s-bg-tertiary)">&lt;kbd&gt;</code> elements for proper accessibility and semantics.</p>
         </div>
-        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-palette-outline text-xl text-blue-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Four Variants</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Default raised 3D keycap, outlined, flat, and ghost styles for any context.</p>
         </div>
-        <div class="p-4 rounded-xl bg-purple-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-resize text-xl text-purple-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Four Sizes</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">From extra small to large — fits inside buttons, tooltips, or standalone text.</p>
         </div>
-        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-keyboard text-xl text-amber-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Key Combinations</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">SKbdShortcut helper renders multi-key shortcuts with configurable separators.</p>
         </div>
-        <div class="p-4 rounded-xl bg-red-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-invert-colors text-xl text-red-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Custom Colors</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Pass any CSS color to match your brand or highlight specific keys.</p>
         </div>
-        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-text text-xl text-cyan-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Inline-Friendly</h3>

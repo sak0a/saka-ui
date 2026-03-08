@@ -373,42 +373,42 @@ const optionGroupSlots: ApiSlot[] = [
     <article class="space-y-4">
       <h2 class="text-2xl font-bold text-(--s-text-primary)">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-format-list-checks text-2xl text-emerald-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Multiple Selection</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Select multiple options with animated tag display and configurable limits.</p>
         </div>
-        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-magnify text-2xl text-blue-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Searchable</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Built-in search functionality to filter through large option lists.</p>
         </div>
-        <div class="p-4 rounded-xl bg-rose-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-plus-circle text-2xl text-rose-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Creatable Options</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Allow users to create new options by typing custom values.</p>
         </div>
-        <div class="p-4 rounded-xl bg-violet-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-group text-2xl text-violet-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Grouped Options</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Organize options with group headers for better categorization.</p>
         </div>
-        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-image-outline text-2xl text-amber-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Rich Options</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Options with icons, images, descriptions, and custom colors.</p>
         </div>
-        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-(--s-bg-secondary) border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-keyboard text-2xl text-cyan-400"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Keyboard Navigation</h3>
