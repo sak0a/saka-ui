@@ -101,6 +101,11 @@ const iconsCode = `<SChip color="#3b82f6">
   <span class="mdi mdi-bell ml-1"></span>
 </SChip>`
 
+const filterTagsCode = `<SChip color="#3b82f6" variant="light" closable size="small">Category: Electronics</SChip>
+<SChip color="#10b981" variant="light" closable size="small">Price: $50-$200</SChip>
+<SChip color="#f59e0b" variant="light" closable size="small">Rating: 4+ Stars</SChip>
+<SChip color="#8b5cf6" variant="light" closable size="small">In Stock</SChip>`
+
 // API Reference data
 const chipProps: ApiProp[] = [
   { name: 'variant', type: "'filled' | 'outlined' | 'light'", default: "'filled'", description: 'Visual style variant', category: 'Appearance' },
@@ -387,7 +392,7 @@ const chipSlots: ApiSlot[] = [
       <DemoSection 
         title="Filter Tags"
         description="Using chips as filter tags in a search interface."
-        :code="combinedCode"
+        :code="filterTagsCode"
         language="vue"
       >
         <div class="space-y-4">

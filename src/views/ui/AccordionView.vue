@@ -61,26 +61,54 @@ const expanded = ref('item-1')
     <SAccordionItem name="item-1">
       <SAccordionTrigger>What is Vue.js?</SAccordionTrigger>
       <SAccordionContent>
-        A progressive JavaScript framework for building user interfaces.
+        Vue.js is a progressive JavaScript framework for building user interfaces.
+        It was created by Evan You and is designed to be incrementally adoptable.
       </SAccordionContent>
     </SAccordionItem>
     <SAccordionItem name="item-2">
       <SAccordionTrigger>Why choose Vue?</SAccordionTrigger>
       <SAccordionContent>
-        Gentle learning curve, excellent docs, flexible architecture.
+        Vue offers a gentle learning curve, excellent documentation, and a flexible
+        architecture that scales from small widgets to enterprise applications.
+      </SAccordionContent>
+    </SAccordionItem>
+    <SAccordionItem name="item-3">
+      <SAccordionTrigger>How do I get started?</SAccordionTrigger>
+      <SAccordionContent>
+        Scaffold with Vite, install saka-ui, and start building.
+        Check the official documentation at vuejs.org.
       </SAccordionContent>
     </SAccordionItem>
   </SAccordion>
 </template>`
 
-const multipleCode = `<SAccordion v-model="expanded" multiple>
+const multipleCode = `<SAccordion v-model="expanded" type="bordered" multiple>
   <SAccordionItem name="item-1">
-    <SAccordionTrigger>Features</SAccordionTrigger>
-    <SAccordionContent>...</SAccordionContent>
+    <SAccordionTrigger>
+      <template #icon><span class="mdi mdi-star text-lg text-amber-400" /></template>
+      Features
+    </SAccordionTrigger>
+    <SAccordionContent>
+      Multiple items can be expanded at the same time.
+    </SAccordionContent>
   </SAccordionItem>
   <SAccordionItem name="item-2">
-    <SAccordionTrigger>Performance</SAccordionTrigger>
-    <SAccordionContent>...</SAccordionContent>
+    <SAccordionTrigger>
+      <template #icon><span class="mdi mdi-speedometer text-lg text-blue-400" /></template>
+      Performance
+    </SAccordionTrigger>
+    <SAccordionContent>
+      Lazy loading available for heavy content.
+    </SAccordionContent>
+  </SAccordionItem>
+  <SAccordionItem name="item-3">
+    <SAccordionTrigger>
+      <template #icon><span class="mdi mdi-palette text-lg text-violet-400" /></template>
+      Customization
+    </SAccordionTrigger>
+    <SAccordionContent>
+      Full control over styles, icons, colors, and content.
+    </SAccordionContent>
   </SAccordionItem>
 </SAccordion>`
 
@@ -103,52 +131,138 @@ const sizesCode = `<SAccordion size="small">...</SAccordion>
 <SAccordion size="medium">...</SAccordion>
 <SAccordion size="large">...</SAccordion>`
 
-const customIconCode = `<SAccordionItem name="settings">
-  <SAccordionTrigger>
-    <template #icon>
-      <!-- Any component: Lucide, Heroicons, SVG, emoji -->
-      <svg class="w-5 h-5 text-blue-500">...</svg>
-    </template>
-    Settings
-  </SAccordionTrigger>
-  <SAccordionContent>...</SAccordionContent>
-</SAccordionItem>`
+const customIconCode = `<SAccordion v-model="expanded" type="separated">
+  <SAccordionItem name="settings">
+    <SAccordionTrigger>
+      <template #icon>
+        <!-- Any SVG, Lucide, Heroicons, or emoji -->
+        <svg class="w-[18px] h-[18px] text-muted-foreground">...</svg>
+      </template>
+      Settings
+    </SAccordionTrigger>
+    <SAccordionContent>
+      Customize your application settings, notifications, and more.
+    </SAccordionContent>
+  </SAccordionItem>
+  <SAccordionItem name="users">
+    <SAccordionTrigger>
+      <template #icon><svg><!-- users icon --></svg></template>
+      Team Members
+    </SAccordionTrigger>
+    <SAccordionContent>
+      Add, remove, or modify team member permissions and roles.
+    </SAccordionContent>
+  </SAccordionItem>
+  <SAccordionItem name="security">
+    <SAccordionTrigger>
+      <template #icon><svg><!-- shield icon --></svg></template>
+      Security
+    </SAccordionTrigger>
+    <SAccordionContent>
+      Enable two-factor authentication, manage sessions, and security keys.
+    </SAccordionContent>
+  </SAccordionItem>
+  <SAccordionItem name="billing">
+    <SAccordionTrigger>
+      <template #icon><svg><!-- credit card icon --></svg></template>
+      Billing
+    </SAccordionTrigger>
+    <SAccordionContent>
+      View invoices, update payment methods, and manage subscriptions.
+    </SAccordionContent>
+  </SAccordionItem>
+</SAccordion>`
 
-const customArrowCode = `<SAccordionItem name="item-1">
-  <SAccordionTrigger>
-    Section Title
-    <template #arrow="{ expanded }">
-      <!-- Replace the default chevron with anything -->
-      <LucideChevronRight :class="expanded ? 'rotate-90' : ''" />
-    </template>
-  </SAccordionTrigger>
-  <SAccordionContent>...</SAccordionContent>
-</SAccordionItem>
+const customArrowCode = `<SAccordion v-model="expanded" type="card">
+  <SAccordionItem name="item-1">
+    <SAccordionTrigger>
+      <template #icon><svg><!-- info icon --></svg></template>
+      Custom right-chevron arrow
+      <template #arrow="{ expanded }">
+        <!-- Replace the default chevron with anything -->
+        <svg :class="expanded ? 'rotate-90' : ''"><!-- chevron-right --></svg>
+      </template>
+    </SAccordionTrigger>
+    <SAccordionContent>
+      The #arrow slot receives { expanded, disabled } so you can animate it.
+    </SAccordionContent>
+  </SAccordionItem>
+  <SAccordionItem name="item-2">
+    <SAccordionTrigger>
+      <template #icon><svg><!-- plus icon --></svg></template>
+      Plus/minus arrow
+      <template #arrow="{ expanded }">
+        <svg :class="expanded ? 'rotate-45' : ''"><!-- plus --></svg>
+      </template>
+    </SAccordionTrigger>
+    <SAccordionContent>
+      A plus icon that rotates 45 degrees to become an X when expanded.
+    </SAccordionContent>
+  </SAccordionItem>
+  <SAccordionItem name="item-3">
+    <SAccordionTrigger :hide-arrow="true">
+      <template #icon><span>🚀</span></template>
+      No arrow at all (hideArrow)
+    </SAccordionTrigger>
+    <SAccordionContent>
+      Set hide-arrow on SAccordionTrigger to remove the indicator entirely.
+    </SAccordionContent>
+  </SAccordionItem>
+</SAccordion>`
 
-<!-- Or hide the arrow entirely -->
-<SAccordionTrigger :hide-arrow="true">No Arrow</SAccordionTrigger>`
-
-const nestedCode = `<SAccordion v-model="parent">
+const nestedCode = `<SAccordion v-model="parent" type="bordered">
   <SAccordionItem name="parent-1">
     <SAccordionTrigger>
-      <template #icon><span class="mdi mdi-folder text-amber-500" /></template>
+      <template #icon><span class="mdi mdi-folder text-lg text-amber-400" /></template>
       Project Files
     </SAccordionTrigger>
     <SAccordionContent>
       <SAccordion v-model="child" type="card">
         <SAccordionItem name="child-1">
-          <SAccordionTrigger>Nested Item</SAccordionTrigger>
-          <SAccordionContent>Nested content</SAccordionContent>
+          <SAccordionTrigger>
+            <template #icon><span class="mdi mdi-file-document text-lg" /></template>
+            README.md
+          </SAccordionTrigger>
+          <SAccordionContent>Documentation for the project.</SAccordionContent>
+        </SAccordionItem>
+        <SAccordionItem name="child-2">
+          <SAccordionTrigger>
+            <template #icon><span class="mdi mdi-file-code text-lg" /></template>
+            package.json
+          </SAccordionTrigger>
+          <SAccordionContent>Project dependencies and scripts.</SAccordionContent>
+        </SAccordionItem>
+        <SAccordionItem name="child-3">
+          <SAccordionTrigger>
+            <template #icon><span class="mdi mdi-folder-open text-lg" /></template>
+            src/
+          </SAccordionTrigger>
+          <SAccordionContent>Source code directory.</SAccordionContent>
         </SAccordionItem>
       </SAccordion>
+    </SAccordionContent>
+  </SAccordionItem>
+  <SAccordionItem name="parent-2">
+    <SAccordionTrigger>
+      <template #icon><span class="mdi mdi-cog text-lg" /></template>
+      Configuration
+    </SAccordionTrigger>
+    <SAccordionContent>
+      Configure project settings: build, environment variables, plugins.
     </SAccordionContent>
   </SAccordionItem>
 </SAccordion>`
 
 const simpleApiCode = `<!-- Simple API: title prop instead of subcomponents -->
-<SAccordion v-model="expanded">
-  <SAccordionItem name="item-1" title="Section Title" icon="cog" subtitle="Optional subtitle">
-    Content goes here
+<SAccordion v-model="expanded" type="separated" color="#8b5cf6">
+  <SAccordionItem name="item-1" icon="cog" title="Settings" subtitle="Configure your preferences">
+    Customize your application settings, notifications, and more.
+  </SAccordionItem>
+  <SAccordionItem name="item-2" icon="account-group" title="Team Members" subtitle="Manage your team">
+    Add, remove, or modify team member permissions and roles.
+  </SAccordionItem>
+  <SAccordionItem name="item-3" icon="shield-lock" title="Security" subtitle="Keep your account safe">
+    Enable two-factor authentication, manage sessions, and security keys.
   </SAccordionItem>
 </SAccordion>`
 

@@ -41,9 +41,16 @@ const compoundLineCode = `<STabs v-model="active" type="line">
     <STabsIndicator />
   </STabsList>
 
-  <STabsContent value="overview">Overview content...</STabsContent>
-  <STabsContent value="details">Details content...</STabsContent>
-  <STabsContent value="settings">Settings content...</STabsContent>
+  <STabsContent value="overview">
+    This is the Overview tab content.
+    The underline indicator slides smoothly between tabs.
+  </STabsContent>
+  <STabsContent value="details">
+    This is the Details tab content with more information.
+  </STabsContent>
+  <STabsContent value="settings">
+    Settings and configuration options go here.
+  </STabsContent>
 </STabs>`
 
 const compoundChipCode = `<STabs v-model="active" type="chip">
@@ -51,13 +58,15 @@ const compoundChipCode = `<STabs v-model="active" type="chip">
     <STabsTrigger value="react">React</STabsTrigger>
     <STabsTrigger value="vue">Vue.js</STabsTrigger>
     <STabsTrigger value="angular">Angular</STabsTrigger>
+    <STabsTrigger value="svelte">Svelte</STabsTrigger>
     <!-- Morphing pill indicator -->
     <STabsIndicator color="#3b82f6" />
   </STabsList>
 
-  <STabsContent value="react">React framework...</STabsContent>
-  <STabsContent value="vue">Vue.js framework...</STabsContent>
-  <STabsContent value="angular">Angular framework...</STabsContent>
+  <STabsContent value="react">React framework selected. The pill morphs to each tab.</STabsContent>
+  <STabsContent value="vue">Vue.js framework selected. Smooth pill transition!</STabsContent>
+  <STabsContent value="angular">Angular framework selected.</STabsContent>
+  <STabsContent value="svelte">Svelte framework selected.</STabsContent>
 </STabs>`
 
 const compoundSegmentCode = `<STabs v-model="active" type="segment">
@@ -69,9 +78,11 @@ const compoundSegmentCode = `<STabs v-model="active" type="segment">
     <STabsIndicator />
   </STabsList>
 
-  <STabsContent value="daily">Daily view...</STabsContent>
-  <STabsContent value="weekly">Weekly view...</STabsContent>
-  <STabsContent value="monthly">Monthly view...</STabsContent>
+  <STabsContent value="daily">
+    Daily view content. The background morphs between options.
+  </STabsContent>
+  <STabsContent value="weekly">Weekly view content.</STabsContent>
+  <STabsContent value="monthly">Monthly view content.</STabsContent>
 </STabs>`
 
 const compoundCardCode = `<STabs v-model="active" type="card">
@@ -82,8 +93,8 @@ const compoundCardCode = `<STabs v-model="active" type="card">
     <STabsIndicator />
   </STabsList>
 
-  <STabsContent value="general">General settings...</STabsContent>
-  <STabsContent value="advanced">Advanced options...</STabsContent>
+  <STabsContent value="general">General settings panel.</STabsContent>
+  <STabsContent value="advanced">Advanced configuration options.</STabsContent>
 </STabs>`
 
 const compoundCustomCode = `<STabs v-model="active" type="line" :animated="true">
@@ -91,20 +102,22 @@ const compoundCustomCode = `<STabs v-model="active" type="line" :animated="true"
     <STabsTrigger value="inbox" v-slot="{ active }">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full"
-          :class="active ? 'bg-emerald-400 animate-pulse' : 'bg-muted-foreground'" />
+          :class="active ? 'bg-emerald-400 animate-pulse' : 'bg-(--s-text-tertiary)'" />
         <span>Inbox</span>
         <span class="text-xs px-1.5 py-0.5 rounded-full"
-          :class="active ? 'bg-emerald-500/20 text-emerald-400' : 'bg-muted text-muted-foreground'">
+          :class="active ? 'bg-emerald-500/20 text-emerald-400' : 'bg-(--s-bg-tertiary) text-(--s-text-secondary)'">
           3
         </span>
       </div>
     </STabsTrigger>
     <STabsTrigger value="sent">Sent</STabsTrigger>
+    <STabsTrigger value="drafts">Drafts</STabsTrigger>
     <STabsIndicator color="#10b981" />
   </STabsList>
 
   <STabsContent value="inbox">You have 3 new messages!</STabsContent>
   <STabsContent value="sent">Sent messages archive.</STabsContent>
+  <STabsContent value="drafts">Draft messages.</STabsContent>
 </STabs>`
 
 const compoundVerticalCode = `<STabs v-model="active" type="line" placement="left" :animated="true">
@@ -115,40 +128,46 @@ const compoundVerticalCode = `<STabs v-model="active" type="line" placement="lef
     <STabsIndicator color="#8b5cf6" />
   </STabsList>
 
-  <STabsContent value="dashboard">Dashboard overview...</STabsContent>
-  <STabsContent value="users">Users management...</STabsContent>
-  <STabsContent value="reports">Reports & analytics...</STabsContent>
+  <STabsContent value="dashboard">
+    Dashboard — Your main analytics overview.
+  </STabsContent>
+  <STabsContent value="users">
+    Users — Manage your team members.
+  </STabsContent>
+  <STabsContent value="reports">
+    Reports — View analytics and reports.
+  </STabsContent>
 </STabs>`
 
 // Simple API code snippets
 const lineTypeCode = `<STabs v-model="active" type="line">
-  <STabPane name="tab1" tab="Overview">Overview content...</STabPane>
-  <STabPane name="tab2" tab="Details">Details content...</STabPane>
-  <STabPane name="tab3" tab="Settings">Settings content...</STabPane>
+  <STabPane name="tab1" tab="Overview">This is the Overview tab content.</STabPane>
+  <STabPane name="tab2" tab="Details">This is the Details tab content.</STabPane>
+  <STabPane name="tab3" tab="Settings">Settings and configuration options.</STabPane>
 </STabs>`
 
 const chipTypeCode = `<STabs v-model="active" type="chip" :animated="true"
   chip-active-color="#3b82f6">
-  <STabPane name="react" tab="React">React framework...</STabPane>
-  <STabPane name="vue" tab="Vue.js">Vue.js framework...</STabPane>
-  <STabPane name="angular" tab="Angular">Angular framework...</STabPane>
+  <STabPane name="react" tab="React">React framework selected.</STabPane>
+  <STabPane name="vue" tab="Vue.js">Vue.js framework selected.</STabPane>
+  <STabPane name="angular" tab="Angular">Angular framework selected.</STabPane>
 </STabs>`
 
 const segmentTypeCode = `<STabs v-model="active" type="segment">
-  <STabPane name="option1" tab="Daily">Daily view...</STabPane>
-  <STabPane name="option2" tab="Weekly">Weekly view...</STabPane>
-  <STabPane name="option3" tab="Monthly">Monthly view...</STabPane>
+  <STabPane name="option1" tab="Daily">Daily view content.</STabPane>
+  <STabPane name="option2" tab="Weekly">Weekly view content.</STabPane>
+  <STabPane name="option3" tab="Monthly">Monthly view content.</STabPane>
 </STabs>`
 
 const barTypeCode = `<STabs v-model="active" type="bar">
-  <STabPane name="home" tab="Home" icon="home">Home page...</STabPane>
-  <STabPane name="search" tab="Search" icon="magnify">Search...</STabPane>
-  <STabPane name="profile" tab="Profile" icon="account">Profile...</STabPane>
+  <STabPane name="home" tab="Home" icon="home">Home page content.</STabPane>
+  <STabPane name="search" tab="Search" icon="magnify">Search functionality goes here.</STabPane>
+  <STabPane name="profile" tab="Profile" icon="account">User profile information.</STabPane>
 </STabs>`
 
 const animatedCode = `<STabs v-model="active" type="line" :animated="true" bar-color="#f59e0b">
-  <STabPane name="first" tab="First">First panel with animation.</STabPane>
-  <STabPane name="second" tab="Second">Second panel with transition!</STabPane>
+  <STabPane name="first" tab="First">First panel with smooth slide animation.</STabPane>
+  <STabPane name="second" tab="Second">Second panel - notice the smooth transition!</STabPane>
 </STabs>`
 
 const closableCode = `<STabs type="card" :closable="true" @close="handleTabClose">
@@ -159,8 +178,9 @@ const closableCode = `<STabs type="card" :closable="true" @close="handleTabClose
 </STabs>`
 
 const triggerCode = `<STabs v-model="active" type="line" trigger="hover">
-  <STabPane name="hover1" tab="Hover Me">Hovered tab 1</STabPane>
-  <STabPane name="hover2" tab="Don't Click">Hovered tab 2</STabPane>
+  <STabPane name="hover1" tab="Hover Me">Hover over the tabs to switch!</STabPane>
+  <STabPane name="hover2" tab="Don't Click">No need to click, just hover.</STabPane>
+  <STabPane name="hover3" tab="Just Hover">Smooth switching on mouse enter.</STabPane>
 </STabs>`
 </script>
 
