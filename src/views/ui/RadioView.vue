@@ -1,8 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { SRadio, SRadioGroup, SButton, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
+import { useCustomizer } from '../../composables/useCustomizer'
+import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+
+const { ri, iconPack } = useCustomizer()
+
+// Code generation helpers
+const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const cp = (mdiName: string, attr = 'icon') => {
+  if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
+  const name = getLucideImportName(mdiName)
+  return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
+}
+const li = (...mdiNames: string[]) => {
+  if (iconPack.value === 'mdi') return ''
+  return '\n' + lucideImportStatement(mdiNames)
+}
 
 // Basic usage
 const basicValue = ref('option1')
@@ -144,9 +160,9 @@ const buttonGroupCode = `<SRadioGroup
   color="#8b5cf6"
 />`
 
-const iconsCode = `<SRadio v-model="v" value="card" icon="credit-card" color="#3b82f6" label="Credit Card" />
-<SRadio v-model="v" value="bank" icon="bank" color="#10b981" label="Bank Transfer" />
-<SRadio v-model="v" value="paypal" icon="wallet" color="#f59e0b" label="E-Wallet" />`
+const iconsCode = computed(() => `<SRadio v-model="v" value="card" ${cp('credit-card')} color="#3b82f6" label="Credit Card" />
+<SRadio v-model="v" value="bank" ${cp('bank')} color="#10b981" label="Bank Transfer" />
+<SRadio v-model="v" value="paypal" ${cp('wallet')} color="#f59e0b" label="E-Wallet" />`)
 
 const statesCode = `<SRadio v-model="value" value="enabled" label="Enabled" />
 <SRadio v-model="value" value="disabled" disabled label="Disabled" />
@@ -476,9 +492,9 @@ const radioKeyboard: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="flex flex-wrap gap-6">
-          <SRadio v-model="iconValue" value="card" icon="credit-card" color="#3b82f6" label="Credit Card" />
-          <SRadio v-model="iconValue" value="bank" icon="bank" color="#10b981" label="Bank Transfer" />
-          <SRadio v-model="iconValue" value="paypal" icon="wallet" color="#f59e0b" label="E-Wallet" />
+          <SRadio v-model="iconValue" value="card" :icon="ri('credit-card')" color="#3b82f6" label="Credit Card" />
+          <SRadio v-model="iconValue" value="bank" :icon="ri('bank')" color="#10b981" label="Bank Transfer" />
+          <SRadio v-model="iconValue" value="paypal" :icon="ri('wallet')" color="#f59e0b" label="E-Wallet" />
         </div>
       </DemoSection>
     </section>

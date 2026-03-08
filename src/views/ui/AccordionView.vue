@@ -1,8 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { SAccordion, SAccordionItem, SAccordionTrigger, SAccordionContent, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
+import { useCustomizer } from '../../composables/useCustomizer'
+import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+
+const { ri, iconPack } = useCustomizer()
+
+// Code generation helpers
+const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const cp = (mdiName: string, attr = 'icon') => {
+  if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
+  const name = getLucideImportName(mdiName)
+  return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
+}
+const li = (...mdiNames: string[]) => {
+  if (iconPack.value === 'mdi') return ''
+  return '\n' + lucideImportStatement(mdiNames)
+}
 
 // Basic usage
 const basicValue = ref<string | number>('item-1')
@@ -253,18 +269,18 @@ const nestedCode = `<SAccordion v-model="parent" type="bordered">
   </SAccordionItem>
 </SAccordion>`
 
-const simpleApiCode = `<!-- Simple API: title prop instead of subcomponents -->
+const simpleApiCode = computed(() => `<!-- Simple API: title prop instead of subcomponents -->
 <SAccordion v-model="expanded" type="separated" color="#8b5cf6">
-  <SAccordionItem name="item-1" icon="cog" title="Settings" subtitle="Configure your preferences">
+  <SAccordionItem name="item-1" ${cp('cog')} title="Settings" subtitle="Configure your preferences">
     Customize your application settings, notifications, and more.
   </SAccordionItem>
-  <SAccordionItem name="item-2" icon="account-group" title="Team Members" subtitle="Manage your team">
+  <SAccordionItem name="item-2" ${cp('account-group')} title="Team Members" subtitle="Manage your team">
     Add, remove, or modify team member permissions and roles.
   </SAccordionItem>
-  <SAccordionItem name="item-3" icon="shield-lock" title="Security" subtitle="Keep your account safe">
+  <SAccordionItem name="item-3" ${cp('shield-lock')} title="Security" subtitle="Keep your account safe">
     Enable two-factor authentication, manage sessions, and security keys.
   </SAccordionItem>
-</SAccordion>`
+</SAccordion>`)
 
 // API Reference data
 const accordionProps: ApiProp[] = [
@@ -1006,13 +1022,13 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       >
         <div class="max-w-xl">
           <SAccordion v-model="simpleValue" type="separated" color="#8b5cf6">
-            <SAccordionItem name="item-1" icon="cog" title="Settings" subtitle="Configure your preferences">
+            <SAccordionItem name="item-1" :icon="ri('cog')" title="Settings" subtitle="Configure your preferences">
               Customize your application settings, notifications, and more.
             </SAccordionItem>
-            <SAccordionItem name="item-2" icon="account-group" title="Team Members" subtitle="Manage your team">
+            <SAccordionItem name="item-2" :icon="ri('account-group')" title="Team Members" subtitle="Manage your team">
               Add, remove, or modify team member permissions and roles.
             </SAccordionItem>
-            <SAccordionItem name="item-3" icon="shield-lock" title="Security" subtitle="Keep your account safe">
+            <SAccordionItem name="item-3" :icon="ri('shield-lock')" title="Security" subtitle="Keep your account safe">
               Enable two-factor authentication, manage sessions, and security keys.
             </SAccordionItem>
           </SAccordion>

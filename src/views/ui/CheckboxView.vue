@@ -3,6 +3,22 @@ import { ref, computed } from 'vue'
 import { SCheckbox, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
+import { useCustomizer } from '../../composables/useCustomizer'
+import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+
+const { ri, iconPack } = useCustomizer()
+
+// Code generation helpers
+const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const cp = (mdiName: string, attr = 'icon') => {
+  if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
+  const name = getLucideImportName(mdiName)
+  return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
+}
+const li = (...mdiNames: string[]) => {
+  if (iconPack.value === 'mdi') return ''
+  return '\n' + lucideImportStatement(mdiNames)
+}
 
 // State for demos
 const basicCheck = ref(false)
@@ -116,9 +132,9 @@ const fruits = ['apple', 'banana', 'orange', 'mango', 'grape']
 const roundedCode = `<SCheckbox v-model="value" rounded label="Rounded checkbox" />
 <SCheckbox v-model="value2" rounded color="#ec4899" label="Pink rounded" />`
 
-const iconsCode = `<SCheckbox v-model="v1" icon="check-bold" label="Bold check" />
-<SCheckbox v-model="v2" icon="heart" color="#ec4899" label="Heart" />
-<SCheckbox v-model="v3" icon="star" color="#f59e0b" label="Star" />`
+const iconsCode = computed(() => `<SCheckbox v-model="v1" ${cp('check-bold')} label="Bold check" />
+<SCheckbox v-model="v2" ${cp('heart')} color="#ec4899" label="Heart" />
+<SCheckbox v-model="v3" ${cp('star')} color="#f59e0b" label="Star" />`)
 
 const statesCode = `<SCheckbox :model-value="false" disabled label="Disabled Off" />
 <SCheckbox v-model="disabledOn" disabled label="Disabled On" />
@@ -410,9 +426,9 @@ const checkboxKeyboard: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="flex flex-wrap gap-8 items-center">
-          <SCheckbox v-model="iconCheck1" icon="check-bold" label="Bold check" />
-          <SCheckbox v-model="iconCheck2" icon="heart" color="#ec4899" label="Heart" />
-          <SCheckbox v-model="iconCheck3" icon="star" color="#f59e0b" label="Star" />
+          <SCheckbox v-model="iconCheck1" :icon="ri('check-bold')" label="Bold check" />
+          <SCheckbox v-model="iconCheck2" :icon="ri('heart')" color="#ec4899" label="Heart" />
+          <SCheckbox v-model="iconCheck3" :icon="ri('star')" color="#f59e0b" label="Star" />
         </div>
       </DemoSection>
     </section>

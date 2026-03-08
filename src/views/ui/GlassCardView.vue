@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import {
   SGlassCard,
   SCardHeader,
@@ -13,6 +13,22 @@ import {
 } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
+import { useCustomizer } from '../../composables/useCustomizer'
+import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+
+const { ri, iconPack } = useCustomizer()
+
+// Code generation helpers
+const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const cp = (mdiName: string, attr = 'icon') => {
+  if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
+  const name = getLucideImportName(mdiName)
+  return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
+}
+const li = (...mdiNames: string[]) => {
+  if (iconPack.value === 'mdi') return ''
+  return '\n' + lucideImportStatement(mdiNames)
+}
 
 const isLoading = ref(false)
 const simulateLoading = () => {
@@ -21,8 +37,8 @@ const simulateLoading = () => {
 }
 
 // Code snippets
-const basicUsageCode = `<SGlassCard tint="light">
-  <SCardHeader title="Glass Card" subtitle="Liquid glass surface" icon="blur" />
+const basicUsageCode = computed(() => `<SGlassCard tint="light">
+  <SCardHeader title="Glass Card" subtitle="Liquid glass surface" ${cp('blur')} />
   <SCardContent>
     <p>A translucent card with backdrop blur, specular highlight, and barrel-distortion refraction.</p>
   </SCardContent>
@@ -30,7 +46,7 @@ const basicUsageCode = `<SGlassCard tint="light">
     <SButton size="small" variant="ghost">Cancel</SButton>
     <SButton size="small">Learn More</SButton>
   </SCardFooter>
-</SGlassCard>`
+</SGlassCard>`)
 
 const tintModesCode = `<!-- Light tint (for dark backgrounds) -->
 <SGlassCard tint="light">...</SGlassCard>
@@ -180,7 +196,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           </div>
           <div class="relative max-w-sm">
             <SGlassCard tint="light">
-              <SCardHeader title="Glass Card" subtitle="Liquid glass surface" icon="blur" />
+              <SCardHeader title="Glass Card" subtitle="Liquid glass surface" :icon="ri('blur')" />
               <SCardContent>
                 <p>A translucent card with backdrop blur, specular highlight, and barrel-distortion refraction.</p>
               </SCardContent>
@@ -211,7 +227,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-slate-800 to-gray-900"></div>
               <div class="relative max-w-xs">
                 <SGlassCard tint="light">
-                  <SCardHeader title="Light Tint" subtitle="White-frosted glass" icon="white-balance-sunny" />
+                  <SCardHeader title="Light Tint" subtitle="White-frosted glass" :icon="ri('white-balance-sunny')" />
                   <SCardContent>
                     <p>Best for dark or colorful backgrounds.</p>
                   </SCardContent>
@@ -225,7 +241,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             <div class="rounded-2xl p-6 bg-white border border-gray-200">
               <div class="max-w-xs">
                 <SGlassCard tint="dark">
-                  <SCardHeader title="Dark Tint" subtitle="Dark-frosted glass" icon="moon-waning-crescent" />
+                  <SCardHeader title="Dark Tint" subtitle="Dark-frosted glass" :icon="ri('moon-waning-crescent')" />
                   <SCardContent>
                     <p>Best for light or white backgrounds.</p>
                   </SCardContent>
@@ -239,7 +255,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             <div class="rounded-2xl p-6 bg-(--s-bg-primary) border border-(--s-border)">
               <div class="max-w-xs">
                 <SGlassCard tint="auto">
-                  <SCardHeader title="Auto Tint" subtitle="Theme-aware" icon="theme-light-dark" />
+                  <SCardHeader title="Auto Tint" subtitle="Theme-aware" :icon="ri('theme-light-dark')" />
                   <SCardContent>
                     <p>Toggle the theme to see it switch.</p>
                   </SCardContent>
@@ -266,13 +282,13 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500"></div>
             <div class="relative grid grid-cols-1 sm:grid-cols-2 gap-4">
               <SGlassCard tint="light">
-                <SCardHeader title="Analytics" subtitle="Dashboard overview" icon="chart-line" />
+                <SCardHeader title="Analytics" subtitle="Dashboard overview" :icon="ri('chart-line')" />
                 <SCardContent>
                   <p>View your real-time analytics and performance metrics at a glance.</p>
                 </SCardContent>
               </SGlassCard>
               <SGlassCard tint="light">
-                <SCardHeader title="Reports" subtitle="Weekly summary" icon="file-document-outline" />
+                <SCardHeader title="Reports" subtitle="Weekly summary" :icon="ri('file-document-outline')" />
                 <SCardContent>
                   <p>Automated reports delivered to your inbox every Monday morning.</p>
                 </SCardContent>
@@ -284,7 +300,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-500"></div>
             <div class="relative max-w-sm">
               <SGlassCard tint="light">
-                <SCardHeader title="Eco Stats" subtitle="Carbon footprint tracker" icon="leaf" />
+                <SCardHeader title="Eco Stats" subtitle="Carbon footprint tracker" :icon="ri('leaf')" />
                 <SCardContent>
                   <div class="space-y-2">
                     <div class="flex justify-between text-sm">
@@ -305,7 +321,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             <div class="absolute inset-0 bg-gradient-to-br from-amber-500 via-orange-500 to-red-500"></div>
             <div class="relative max-w-sm">
               <SGlassCard tint="light">
-                <SCardHeader title="Weather" subtitle="San Francisco, CA" icon="weather-partly-cloudy" />
+                <SCardHeader title="Weather" subtitle="San Francisco, CA" :icon="ri('weather-partly-cloudy')" />
                 <SCardContent>
                   <div class="flex items-center gap-4">
                     <span class="text-4xl font-light">72&deg;F</span>
@@ -356,7 +372,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </SGlassCard>
             <!-- Notification card -->
             <SGlassCard tint="light">
-              <SCardHeader title="Notifications" icon="bell-outline" />
+              <SCardHeader title="Notifications" :icon="ri('bell-outline')" />
               <SCardContent>
                 <div class="space-y-2 text-sm">
                   <div class="flex items-center gap-2">
@@ -387,7 +403,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <div class="rounded-2xl p-8 bg-white border border-gray-200">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <SGlassCard tint="dark">
-              <SCardHeader title="Settings" subtitle="Account preferences" icon="cog-outline" />
+              <SCardHeader title="Settings" subtitle="Account preferences" :icon="ri('cog-outline')" />
               <SCardContent>
                 <p>Manage your account settings and notification preferences.</p>
               </SCardContent>
@@ -396,7 +412,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               </SCardFooter>
             </SGlassCard>
             <SGlassCard tint="dark">
-              <SCardHeader title="Security" subtitle="Two-factor auth" icon="shield-check-outline" />
+              <SCardHeader title="Security" subtitle="Two-factor auth" :icon="ri('shield-check-outline')" />
               <SCardContent>
                 <p>Enable two-factor authentication for enhanced account protection.</p>
               </SCardContent>
@@ -434,7 +450,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                     <p class="text-xs text-white/60 mb-3 drop-shadow-md">Scroll down to see glass over different parts &darr;</p>
                     <div class="max-w-sm">
                       <SGlassCard tint="light">
-                        <SCardHeader title="Mountain Retreat" subtitle="Yosemite Valley" icon="image-filter-hdr" />
+                        <SCardHeader title="Mountain Retreat" subtitle="Yosemite Valley" :icon="ri('image-filter-hdr')" />
                         <SCardContent>
                           <p>Discover the serenity of alpine lakes and towering granite cliffs.</p>
                         </SCardContent>
@@ -520,7 +536,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </SGlassCard>
             <!-- With icon header -->
             <SGlassCard tint="light">
-              <SCardHeader title="Project Update" subtitle="Sprint 14" icon="rocket-launch" divider />
+              <SCardHeader title="Project Update" subtitle="Sprint 14" :icon="ri('rocket-launch')" divider />
               <SCardContent>
                 <div class="space-y-2 text-sm">
                   <div class="flex justify-between">
@@ -560,21 +576,21 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           <div class="relative grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="space-y-2">
               <SGlassCard tint="light" size="compact">
-                <SCardHeader title="Compact" icon="arrow-collapse" />
+                <SCardHeader title="Compact" :icon="ri('arrow-collapse')" />
                 <SCardContent><p class="text-sm">Tight padding for dense layouts.</p></SCardContent>
               </SGlassCard>
               <span class="text-xs font-mono text-white/60 block text-center">compact</span>
             </div>
             <div class="space-y-2">
               <SGlassCard tint="light" size="default">
-                <SCardHeader title="Default" icon="arrow-expand-horizontal" />
+                <SCardHeader title="Default" :icon="ri('arrow-expand-horizontal')" />
                 <SCardContent><p class="text-sm">Balanced padding for most use cases.</p></SCardContent>
               </SGlassCard>
               <span class="text-xs font-mono text-white/60 block text-center">default</span>
             </div>
             <div class="space-y-2">
               <SGlassCard tint="light" size="comfortable">
-                <SCardHeader title="Comfortable" icon="arrow-expand" />
+                <SCardHeader title="Comfortable" :icon="ri('arrow-expand')" />
                 <SCardContent><p class="text-sm">Generous padding for spacious layouts.</p></SCardContent>
               </SGlassCard>
               <span class="text-xs font-mono text-white/60 block text-center">comfortable</span>
@@ -597,15 +613,15 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           <div class="absolute inset-0 bg-gradient-to-br from-rose-600 via-pink-600 to-fuchsia-600"></div>
           <div class="relative grid grid-cols-1 sm:grid-cols-3 gap-4">
             <SGlassCard tint="light" hoverable>
-              <SCardHeader title="Hoverable" icon="cursor-default-click-outline" />
+              <SCardHeader title="Hoverable" :icon="ri('cursor-default-click-outline')" />
               <SCardContent><p class="text-sm">Hover to see the lift animation.</p></SCardContent>
             </SGlassCard>
             <SGlassCard tint="light" pressable>
-              <SCardHeader title="Pressable" icon="gesture-tap" />
+              <SCardHeader title="Pressable" :icon="ri('gesture-tap')" />
               <SCardContent><p class="text-sm">Click/press to see the scale effect.</p></SCardContent>
             </SGlassCard>
             <SGlassCard tint="light" hoverable pressable clickable @click="() => {}">
-              <SCardHeader title="All Combined" icon="star" />
+              <SCardHeader title="All Combined" :icon="ri('star')" />
               <SCardContent><p class="text-sm">Hoverable + pressable + clickable.</p></SCardContent>
             </SGlassCard>
           </div>
@@ -625,11 +641,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <div class="rounded-2xl p-8 bg-black">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <SGlassCard tint="light" spotlight>
-              <SCardHeader title="Spotlight" icon="flashlight" />
+              <SCardHeader title="Spotlight" :icon="ri('flashlight')" />
               <SCardContent><p>Move your mouse over this card to see the radial glow.</p></SCardContent>
             </SGlassCard>
             <SGlassCard tint="light" spotlight tilt>
-              <SCardHeader title="Spotlight + Tilt" icon="rotate-3d-variant" />
+              <SCardHeader title="Spotlight + Tilt" :icon="ri('rotate-3d-variant')" />
               <SCardContent><p>Move your mouse for 3D perspective rotation with spotlight glow.</p></SCardContent>
             </SGlassCard>
           </div>
@@ -700,21 +716,21 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           <div class="relative grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="space-y-2">
               <SGlassCard tint="light" :loading="isLoading" @click="simulateLoading" clickable>
-                <SCardHeader title="Loading" icon="loading" />
+                <SCardHeader title="Loading" :icon="ri('loading')" />
                 <SCardContent><p class="text-sm">Click to toggle loading state.</p></SCardContent>
               </SGlassCard>
               <span class="text-xs font-mono text-white/60 block text-center">click to test</span>
             </div>
             <div class="space-y-2">
               <SGlassCard tint="light" loading>
-                <SCardHeader title="Always Loading" icon="timer-sand" />
+                <SCardHeader title="Always Loading" :icon="ri('timer-sand')" />
                 <SCardContent><p class="text-sm">Permanent loading state.</p></SCardContent>
               </SGlassCard>
               <span class="text-xs font-mono text-white/60 block text-center">loading</span>
             </div>
             <div class="space-y-2">
               <SGlassCard tint="light" disabled>
-                <SCardHeader title="Disabled" icon="cancel" />
+                <SCardHeader title="Disabled" :icon="ri('cancel')" />
                 <SCardContent><p class="text-sm">Cannot interact with this card.</p></SCardContent>
               </SGlassCard>
               <span class="text-xs font-mono text-white/60 block text-center">disabled</span>
@@ -737,11 +753,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           <div class="absolute inset-0 bg-gradient-to-r from-slate-700 via-slate-600 to-slate-700"></div>
           <div class="relative grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
             <SGlassCard tint="light" hoverable to="/ui/card">
-              <SCardHeader title="Router Link" icon="arrow-left" />
+              <SCardHeader title="Router Link" :icon="ri('arrow-left')" />
               <SCardContent><p class="text-sm">Navigate to SCard page via Vue Router.</p></SCardContent>
             </SGlassCard>
             <SGlassCard tint="light" hoverable href="https://vuejs.org" tag="a">
-              <SCardHeader title="External Link" icon="open-in-new" />
+              <SCardHeader title="External Link" :icon="ri('open-in-new')" />
               <SCardContent><p class="text-sm">Opens vuejs.org in the same tab.</p></SCardContent>
             </SGlassCard>
           </div>

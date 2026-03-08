@@ -1,11 +1,27 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import {
   STabs, STabPane, STabsList, STabsTrigger, STabsContent, STabsIndicator,
   SApiSection, SApiTable
 } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
+import { useCustomizer } from '../../composables/useCustomizer'
+import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+
+const { ri, iconPack } = useCustomizer()
+
+// Code generation helpers
+const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const cp = (mdiName: string, attr = 'icon') => {
+  if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
+  const name = getLucideImportName(mdiName)
+  return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
+}
+const li = (...mdiNames: string[]) => {
+  if (iconPack.value === 'mdi') return ''
+  return '\n' + lucideImportStatement(mdiNames)
+}
 
 // Compound API states
 const compoundLineTab = ref('overview')
@@ -159,11 +175,11 @@ const segmentTypeCode = `<STabs v-model="active" type="segment">
   <STabPane name="option3" tab="Monthly">Monthly view content.</STabPane>
 </STabs>`
 
-const barTypeCode = `<STabs v-model="active" type="bar">
-  <STabPane name="home" tab="Home" icon="home">Home page content.</STabPane>
-  <STabPane name="search" tab="Search" icon="magnify">Search functionality goes here.</STabPane>
-  <STabPane name="profile" tab="Profile" icon="account">User profile information.</STabPane>
-</STabs>`
+const barTypeCode = computed(() => `<STabs v-model="active" type="bar">
+  <STabPane name="home" tab="Home" ${cp('home')}>Home page content.</STabPane>
+  <STabPane name="search" tab="Search" ${cp('magnify')}>Search functionality goes here.</STabPane>
+  <STabPane name="profile" tab="Profile" ${cp('account')}>User profile information.</STabPane>
+</STabs>`)
 
 const animatedCode = `<STabs v-model="active" type="line" :animated="true" bar-color="#f59e0b">
   <STabPane name="first" tab="First">First panel with smooth slide animation.</STabPane>
@@ -573,17 +589,17 @@ const triggerCode = `<STabs v-model="active" type="line" trigger="hover">
           language="vue"
         >
           <STabs v-model="barTabValue" type="bar">
-            <STabPane name="home" tab="Home" icon="home">
+            <STabPane name="home" tab="Home" :icon="ri('home')">
               <div class="p-6 text-(--s-text-secondary)">
                 <p>Home page content.</p>
               </div>
             </STabPane>
-            <STabPane name="search" tab="Search" icon="magnify">
+            <STabPane name="search" tab="Search" :icon="ri('magnify')">
               <div class="p-6 text-(--s-text-secondary)">
                 <p>Search functionality goes here.</p>
               </div>
             </STabPane>
-            <STabPane name="profile" tab="Profile" icon="account">
+            <STabPane name="profile" tab="Profile" :icon="ri('account')">
               <div class="p-6 text-(--s-text-secondary)">
                 <p>User profile information.</p>
               </div>
