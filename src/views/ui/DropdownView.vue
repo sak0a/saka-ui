@@ -222,20 +222,48 @@ const onSelect = (key) => {
   />
 </template>`
 
-const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-select="false">
+const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :close-on-select="false">
   <template #default>
     <SDropdownItem item-key="new" icon="file-plus" label="New" />
     <SDropdownItem item-key="open" icon="folder-open" label="Open" />
     <SDropdownDivider />
-    
-    <!-- Nested dropdown for Export -->
-    <SDropdown 
+
+    <!-- Nested dropdown for Share -->
+    <SDropdown
       :items="[
-        { key: 'pdf', label: 'Export as PDF', icon: 'file-pdf-box' },
-        { key: 'docx', label: 'Export as DOCX', icon: 'file-word-box' }
+        { key: 'email', label: 'Email', icon: 'email' },
+        { key: 'link', label: 'Copy Link', icon: 'link-variant' },
+        { key: 'social', label: 'Social Media', icon: 'share-variant' }
       ]"
       trigger="hover"
       placement="right-start"
+      :width="200"
+      :close-on-select="false"
+    >
+      <template #trigger>
+        <div class="s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none mx-1.5 rounded-lg px-3 py-2 text-sm text-(--s-text-primary) hover:bg-(--s-bg-tertiary)">
+          <span class="mdi mdi-share-variant text-base mr-2.5 text-(--s-text-secondary)"></span>
+          <div class="flex-1 min-w-0">
+            <div class="truncate">Share</div>
+          </div>
+          <span class="mdi mdi-chevron-right text-base ml-4 shrink-0 text-(--s-text-tertiary)"></span>
+        </div>
+      </template>
+    </SDropdown>
+
+    <SDropdownDivider />
+
+    <!-- Nested dropdown for Export -->
+    <SDropdown
+      :items="[
+        { key: 'pdf', label: 'Export as PDF', icon: 'file-pdf-box' },
+        { key: 'docx', label: 'Export as DOCX', icon: 'file-word-box' },
+        { key: 'xlsx', label: 'Export as XLSX', icon: 'file-excel-box' },
+        { key: 'csv', label: 'Export as CSV', icon: 'file-delimited' }
+      ]"
+      trigger="hover"
+      placement="right-start"
+      :width="220"
       :close-on-select="false"
     >
       <template #trigger>
@@ -248,7 +276,30 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
         </div>
       </template>
     </SDropdown>
-    
+
+    <!-- Nested dropdown for Import -->
+    <SDropdown
+      :items="[
+        { key: 'from-file', label: 'From File', icon: 'file-upload' },
+        { key: 'from-url', label: 'From URL', icon: 'link' },
+        { key: 'from-cloud', label: 'From Cloud', icon: 'cloud-upload' }
+      ]"
+      trigger="hover"
+      placement="right-start"
+      :width="200"
+      :close-on-select="false"
+    >
+      <template #trigger>
+        <div class="s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none mx-1.5 rounded-lg px-3 py-2 text-sm text-(--s-text-primary) hover:bg-(--s-bg-tertiary)">
+          <span class="mdi mdi-import text-base mr-2.5 text-(--s-text-secondary)"></span>
+          <div class="flex-1 min-w-0">
+            <div class="truncate">Import</div>
+          </div>
+          <span class="mdi mdi-chevron-right text-base ml-4 shrink-0 text-(--s-text-tertiary)"></span>
+        </div>
+      </template>
+    </SDropdown>
+
     <SDropdownDivider />
     <SDropdownItem item-key="preferences" icon="cog" label="Preferences" />
   </template>
@@ -812,6 +863,25 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :close-on-selec
       <div class=&quot;flex items-center justify-between w-full&quot;>
         <span>Cut</span>
         <SKbdShortcut :keys=&quot;['⌘', 'X']&quot; size=&quot;xs&quot; variant=&quot;flat&quot; />
+      </div>
+    </SDropdownItem>
+    <SDropdownItem item-key=&quot;copy&quot; icon=&quot;content-copy&quot;>
+      <div class=&quot;flex items-center justify-between w-full&quot;>
+        <span>Copy</span>
+        <SKbdShortcut :keys=&quot;['⌘', 'C']&quot; size=&quot;xs&quot; variant=&quot;flat&quot; />
+      </div>
+    </SDropdownItem>
+    <SDropdownItem item-key=&quot;paste&quot; icon=&quot;content-paste&quot;>
+      <div class=&quot;flex items-center justify-between w-full&quot;>
+        <span>Paste</span>
+        <SKbdShortcut :keys=&quot;['⌘', 'V']&quot; size=&quot;xs&quot; variant=&quot;flat&quot; />
+      </div>
+    </SDropdownItem>
+    <SDropdownDivider />
+    <SDropdownItem item-key=&quot;select-all&quot; icon=&quot;select-all&quot;>
+      <div class=&quot;flex items-center justify-between w-full&quot;>
+        <span>Select All</span>
+        <SKbdShortcut :keys=&quot;['⌘', 'A']&quot; size=&quot;xs&quot; variant=&quot;flat&quot; />
       </div>
     </SDropdownItem>
   </template>
