@@ -205,42 +205,42 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     <article>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <Palette class="w-5 h-5 text-emerald-500" />
             <h3 class="font-semibold text-(--s-text-primary)">Five Variants</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Filled, outlined, light, ghost, and link variants with custom color support.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-resize text-xl text-blue-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Five Sizes</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">From extra small to extra large sizes for any context.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-purple-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <Sparkles class="w-5 h-5 text-purple-500" />
             <h3 class="font-semibold text-(--s-text-primary)">Ripple Effect</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Built-in ripple animation on click for tactile feedback.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-link-variant text-xl text-amber-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Link Support</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Render as anchor links or Vue Router links with href/to props.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-red-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <LoaderCircle class="w-5 h-5 text-red-500" />
             <h3 class="font-semibold text-(--s-text-primary)">Loading State</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Built-in loading spinner with automatic interaction prevention.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-keyboard text-xl text-cyan-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Keyboard Support</h3>

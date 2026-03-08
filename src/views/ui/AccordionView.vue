@@ -221,42 +221,42 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     <article>
       <h3 class="text-xl font-semibold text-foreground mb-4">Features</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-muted border border-border">
+        <div class="p-4 rounded-xl bg-emerald-500/5 border border-border">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-puzzle text-xl text-emerald-400"></span>
             <span class="font-semibold text-foreground">Compound API</span>
           </div>
           <p class="text-sm text-muted-foreground">SAccordionTrigger + SAccordionContent for full composability.</p>
         </div>
-        <div class="p-4 rounded-xl bg-muted border border-border">
+        <div class="p-4 rounded-xl bg-blue-500/5 border border-border">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-image-filter-vintage text-xl text-blue-400"></span>
             <span class="font-semibold text-foreground">Any Icon Library</span>
           </div>
           <p class="text-sm text-muted-foreground">Use Lucide, Heroicons, SVGs, or emoji via #icon and #arrow slots.</p>
         </div>
-        <div class="p-4 rounded-xl bg-muted border border-border">
+        <div class="p-4 rounded-xl bg-violet-500/5 border border-border">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-view-sequential text-xl text-violet-400"></span>
             <span class="font-semibold text-foreground">Five Variants</span>
           </div>
           <p class="text-sm text-muted-foreground">Default, bordered, separated, card, and minimal styles.</p>
         </div>
-        <div class="p-4 rounded-xl bg-muted border border-border">
+        <div class="p-4 rounded-xl bg-amber-500/5 border border-border">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-animation text-xl text-amber-400"></span>
             <span class="font-semibold text-foreground">Smooth Animations</span>
           </div>
           <p class="text-sm text-muted-foreground">Hardware-accelerated expand/collapse with configurable timing.</p>
         </div>
-        <div class="p-4 rounded-xl bg-muted border border-border">
+        <div class="p-4 rounded-xl bg-pink-500/5 border border-border">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-keyboard text-xl text-pink-400"></span>
             <span class="font-semibold text-foreground">Keyboard Navigation</span>
           </div>
           <p class="text-sm text-muted-foreground">Full keyboard support with Tab, Enter, and Space.</p>
         </div>
-        <div class="p-4 rounded-xl bg-muted border border-border">
+        <div class="p-4 rounded-xl bg-cyan-500/5 border border-border">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-checkbox-multiple-marked text-xl text-cyan-400"></span>
             <span class="font-semibold text-foreground">Single & Multiple</span>

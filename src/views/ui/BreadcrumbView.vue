@@ -129,28 +129,28 @@ const ellipsisSlots: ApiSlot[] = [
     <article>
       <h2 class="text-2xl font-bold text-foreground mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="p-4 rounded-xl bg-muted border border-border">
+        <div class="p-4 rounded-xl bg-emerald-500/5 border border-border">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-puzzle text-xl text-emerald-400"></span>
             <span class="font-semibold text-foreground">Compound API</span>
           </div>
           <p class="text-sm text-muted-foreground">Compose the trail with focused primitives instead of a monolithic data prop.</p>
         </div>
-        <div class="p-4 rounded-xl bg-muted border border-border">
+        <div class="p-4 rounded-xl bg-cyan-500/5 border border-border">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-navigation-variant-outline text-xl text-cyan-400"></span>
             <span class="font-semibold text-foreground">Current Page</span>
           </div>
           <p class="text-sm text-muted-foreground">Use `SBreadcrumbPage` for the active location with the correct `aria-current` semantics.</p>
         </div>
-        <div class="p-4 rounded-xl bg-muted border border-border">
+        <div class="p-4 rounded-xl bg-violet-500/5 border border-border">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-swap-horizontal text-xl text-violet-400"></span>
             <span class="font-semibold text-foreground">Custom Separators</span>
           </div>
           <p class="text-sm text-muted-foreground">Swap the default chevron for your own icon or text using the separator slot.</p>
         </div>
-        <div class="p-4 rounded-xl bg-muted border border-border">
+        <div class="p-4 rounded-xl bg-amber-500/5 border border-border">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-dots-horizontal-circle-outline text-xl text-amber-400"></span>
             <span class="font-semibold text-foreground">Overflow Ready</span>
