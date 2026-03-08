@@ -195,42 +195,42 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     <article>
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Features</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-purple-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-animation-play text-xl text-purple-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Smooth Morphing</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Card smoothly transitions from trigger position to expanded view.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-image-multiple text-xl text-blue-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Image Gallery Ready</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Perfect for portfolios, product cards, and photo galleries.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-keyboard text-xl text-emerald-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Keyboard Support</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Full keyboard navigation with ESC to close.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-cyan-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-blur text-xl text-cyan-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Backdrop Blur</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Beautiful frosted glass backdrop effect.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-puzzle text-xl text-amber-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Composable</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Flexible sub-components for complete customization.</p>
         </div>
-        <div class="p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
+        <div class="p-4 rounded-xl bg-red-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <span class="mdi mdi-eye text-xl text-red-500"></span>
             <h3 class="font-semibold text-(--s-text-primary)">Accessible</h3>
