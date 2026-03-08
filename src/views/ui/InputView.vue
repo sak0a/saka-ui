@@ -1,11 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import {
   SInput, SButton, SKbd, SKbdShortcut, SApiSection, SApiTable
 } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, ApiMethod } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 import { Sparkles, ShieldCheck, Wrench } from 'lucide-vue-next'
+import { useCustomizer } from '../../composables/useCustomizer'
+import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+
+const { ri, iconPack } = useCustomizer()
+
+const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const cp = (mdiName: string, attr = 'icon') => {
+  if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
+  const name = getLucideImportName(mdiName)
+  return name ? `:icon="${name}"` : `${attr}="${mdiName}"`
+}
+const li = (...mdiNames: string[]) => {
+  if (iconPack.value === 'mdi') return ''
+  return '\n' + lucideImportStatement(mdiNames)
+}
 
 // Demo state
 const basicValue = ref('')
@@ -105,21 +120,25 @@ const floatingCode = `<!-- Floating label -->
   placeholder="Focus to see animation..."
 />`
 
-const iconsCode = `<!-- Left icon with clearable -->
-<SInput v-model="search" icon-left="magnify" placeholder="Search..." clearable />
+const iconsCode = computed(() => `<script setup>${li('magnify', 'link-variant', 'account', 'check-circle', 'email')}<\/script>
+
+<template>
+<!-- Left icon with clearable -->
+<SInput v-model="search" ${cp('magnify', 'icon-left')} placeholder="Search..." clearable />
 
 <!-- Right icon -->
-<SInput v-model="url" icon-right="link-variant" label="Website" placeholder="https://..." />
+<SInput v-model="url" ${cp('link-variant', 'icon-right')} label="Website" placeholder="https://..." />
 
 <!-- Prefix/suffix text -->
 <SInput v-model="price" prefix="$" suffix=".00" label="Price" placeholder="0" type="number" />
 <SInput v-model="weight" suffix="kg" label="Weight" placeholder="Enter weight" type="number" />
 
 <!-- Both icons with success -->
-<SInput icon-left="account" icon-right="check-circle" label="Username" placeholder="Available username" success />
+<SInput ${cp('account', 'icon-left')} ${cp('check-circle', 'icon-right')} label="Username" placeholder="Available username" success />
 
 <!-- Icon with hint -->
-<SInput icon-left="email" label="Email" placeholder="user@example.com" hint="We'll never share your email" />`
+<SInput ${cp('email', 'icon-left')} label="Email" placeholder="user@example.com" hint="We'll never share your email" />
+</template>`)
 
 const validationCode = `<!-- Required field -->
 <SInput
@@ -223,12 +242,50 @@ const featuresCode = `<!-- Clearable -->
   placeholder="Enter a longer message..."
 />`
 
-const kbdSearchCode = `<!-- Search input with keyboard shortcut hint -->
-<SInput placeholder="Search..." iconLeft="magnify">
+const kbdSearchCode = computed(() => `<script setup>${li('magnify')}<\/script>
+
+<template>
+<!-- Search input with keyboard shortcut hint -->
+<SInput placeholder="Search..." ${cp('magnify', 'iconLeft')}>
   <template #suffix>
     <SKbdShortcut :keys="['⌘', 'K']" size="xs" variant="flat" />
   </template>
-</SInput>`
+</SInput>
+</template>`)
+
+const emailAutoCode = computed(() => `<script setup>${li('email')}<\/script>
+
+<template>
+<SInput
+  v-model='email'
+  type='email'
+  label='Email Address'
+  :suggestions='emailSuggestions'
+  placeholder='Type @ to see suggestions'
+  ${cp('email', 'icon-left')}
+  hint='Type your email and see suggestions after @'
+/>
+</template>`)
+
+const loginFormCode = computed(() => `<script setup>${li('email', 'lock')}<\/script>
+
+<template>
+<SInput v-model='email' type='email' label='Email' placeholder='you@example.com' ${cp('email', 'icon-left')} required />
+<SInput v-model='password' type='password' label='Password' placeholder='••••••••' ${cp('lock', 'icon-left')} show-password-toggle required />
+<SButton block>Sign In</SButton>
+</template>`)
+
+const searchBarCode = computed(() => `<script setup>${li('magnify')}<\/script>
+
+<template>
+<SInput v-model='query' ${cp('magnify', 'icon-left')} placeholder='Search anything...' clearable variant='filled' rounded='full' size='large' />
+</template>`)
+
+const creditCardCode = computed(() => `<script setup>${li('credit-card')}<\/script>
+
+<template>
+<SInput v-model='cardNumber' ${cp('credit-card', 'icon-left')} placeholder='4242 4242 4242 4242' label='Card Number' :max-length='19' counter />
+</template>`)
 
 // API Reference
 const inputProps: ApiProp[] = [
@@ -459,16 +516,16 @@ const inputMethods: ApiMethod[] = [
         language="vue"
       >
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <SInput 
-            v-model="searchValue" 
-            icon-left="magnify" 
+          <SInput
+            v-model="searchValue"
+            :icon-left="ri('magnify')"
             placeholder="Search..."
             clearable
           />
-          <SInput 
-            v-model="urlValue" 
-            icon-right="link-variant" 
-            label="Website" 
+          <SInput
+            v-model="urlValue"
+            :icon-right="ri('link-variant')"
+            label="Website"
             placeholder="https://..."
           />
           <SInput 
@@ -486,15 +543,15 @@ const inputMethods: ApiMethod[] = [
             placeholder="Enter weight"
             type="number"
           />
-          <SInput 
-            icon-left="account" 
-            icon-right="check-circle" 
+          <SInput
+            :icon-left="ri('account')"
+            :icon-right="ri('check-circle')"
             label="Username"
             placeholder="Available username"
             success
           />
-          <SInput 
-            icon-left="email" 
+          <SInput
+            :icon-left="ri('email')"
             label="Email"
             placeholder="user@example.com"
             hint="We'll never share your email"
@@ -655,15 +712,7 @@ const inputMethods: ApiMethod[] = [
       <DemoSection 
         title="Email Suggestions"
         description="Auto-suggest popular email domains as you type. Press Tab to accept the first suggestion or use arrow keys to navigate."
-        :code="`<SInput
-  v-model='email'
-  type='email'
-  label='Email Address'
-  :suggestions='emailSuggestions'
-  placeholder='Type @ to see suggestions'
-  icon-left='email'
-  hint='Type your email and see suggestions after @'
-/>`"
+        :code="emailAutoCode"
         language="vue"
       >
         <div class="max-w-md mx-auto">
@@ -673,7 +722,7 @@ const inputMethods: ApiMethod[] = [
             label="Email Address"
             :suggestions="emailSuggestions"
             placeholder="Type @ to see suggestions"
-            icon-left="email"
+            :icon-left="ri('email')"
             hint="Type your email and see suggestions after @"
           />
         </div>
@@ -730,9 +779,7 @@ const inputMethods: ApiMethod[] = [
       <DemoSection 
         title="Login Form"
         description="A complete login form example."
-        :code="`<SInput v-model='email' type='email' label='Email' placeholder='you@example.com' icon-left='email' required />
-<SInput v-model='password' type='password' label='Password' placeholder='••••••••' icon-left='lock' show-password-toggle required />
-<SButton block>Sign In</SButton>`"
+        :code="loginFormCode"
         language="vue"
       >
         <div class="max-w-md mx-auto space-y-4">
@@ -741,7 +788,7 @@ const inputMethods: ApiMethod[] = [
             type="email"
             label="Email"
             placeholder="you@example.com"
-            icon-left="email"
+            :icon-left="ri('email')"
             required
           />
           <SInput 
@@ -749,7 +796,7 @@ const inputMethods: ApiMethod[] = [
             type="password"
             label="Password"
             placeholder="••••••••"
-            icon-left="lock"
+            :icon-left="ri('lock')"
             show-password-toggle
             required
           />
@@ -761,13 +808,13 @@ const inputMethods: ApiMethod[] = [
         <DemoSection 
           title="Search Bar"
           description="A search input with icon and clear button."
-          :code="`<SInput v-model='query' icon-left='magnify' placeholder='Search anything...' clearable variant='filled' rounded='full' size='large' />`"
+          :code="searchBarCode"
           language="vue"
         >
           <div class="max-w-lg mx-auto">
             <SInput 
               v-model="searchQuery"
-              icon-left="magnify"
+              :icon-left="ri('magnify')"
               placeholder="Search anything..."
               clearable
               variant="filled"
@@ -782,13 +829,13 @@ const inputMethods: ApiMethod[] = [
         <DemoSection 
           title="Credit Card Input"
           description="Formatted credit card input with prefix icon."
-          :code="`<SInput v-model='cardNumber' icon-left='credit-card' placeholder='4242 4242 4242 4242' label='Card Number' :max-length='19' counter />`"
+          :code="creditCardCode"
           language="vue"
         >
           <div class="max-w-md mx-auto">
             <SInput 
               v-model="creditCard"
-              icon-left="credit-card"
+              :icon-left="ri('credit-card')"
               placeholder="4242 4242 4242 4242"
               label="Card Number"
               :max-length="19"
@@ -809,7 +856,7 @@ const inputMethods: ApiMethod[] = [
         language="vue"
       >
         <div class="max-w-md">
-          <SInput placeholder="Search..." iconLeft="magnify">
+          <SInput placeholder="Search..." :iconLeft="ri('magnify')">
             <template #suffix>
               <SKbdShortcut :keys="['⌘', 'K']" size="xs" variant="flat" />
             </template>
