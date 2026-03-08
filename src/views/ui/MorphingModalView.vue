@@ -47,7 +47,7 @@ const basicCode = `<SMorphingModal>
   </template>
 </SMorphingModal>`
 
-const customDurationCode = `<SMorphingModal :duration="800" easing="cubic-bezier(0.34, 1.56, 0.64, 1)">
+const customDurationCode = `<SMorphingModal :duration="1000" easing="cubic-bezier(0.34, 1.56, 0.64, 1)">
   <template #trigger>
     <SMorphingModalTrigger>
       <!-- trigger content -->
