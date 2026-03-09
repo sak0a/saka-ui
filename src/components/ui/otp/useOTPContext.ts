@@ -36,7 +36,7 @@ export interface SOTPContext {
 
   // Computed helpers
   inputPattern: Readonly<Ref<string>>
-  inputMode: Readonly<Ref<string>>
+  inputMode: Readonly<Ref<'text' | 'numeric' | 'none' | 'search' | 'email' | 'tel' | 'url' | 'decimal'>>
 
   // Methods for SOTPSlot to call
   registerInput: (index: number, el: HTMLInputElement | null) => void

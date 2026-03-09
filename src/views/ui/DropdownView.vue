@@ -52,19 +52,6 @@ const groupedItems = computed<DropdownMenuItem[]>(() => [
   { key: 'size', label: 'Size', icon: ri('chart-bar') }
 ])
 
-// Nested dropdown items
-const _nestedItems = computed<DropdownMenuItem[]>(() => [
-  { key: 'new', label: 'New', icon: ri('file-plus') },
-  { key: 'open', label: 'Open', icon: ri('folder-open') },
-  { key: 'divider1', divider: true },
-  { key: 'export', label: 'Export', icon: ri('export') },
-  { key: 'import', label: 'Import', icon: ri('import') },
-  { key: 'divider2', divider: true },
-  { key: 'share', label: 'Share', icon: ri('share-variant') },
-  { key: 'divider3', divider: true },
-  { key: 'preferences', label: 'Preferences', icon: ri('cog') }
-])
-
 // Checkable items - separate state for mutability
 const checkStates = ref<Record<string, boolean>>({
   bold: true,
@@ -109,16 +96,6 @@ const fileActions = computed<DropdownMenuItem[]>(() => [
   { key: 'import', label: 'Import', icon: ri('import'), description: 'Import from external source' },
   { key: 'divider2', divider: true },
   { key: 'download', label: 'Download All', icon: ri('download') }
-])
-
-// Colors for demo
-const _colorItems = computed<DropdownMenuItem[]>(() => [
-  { key: 'red', label: 'Red', icon: ri('circle') },
-  { key: 'orange', label: 'Orange', icon: ri('circle') },
-  { key: 'yellow', label: 'Yellow', icon: ri('circle') },
-  { key: 'green', label: 'Green', icon: ri('circle') },
-  { key: 'blue', label: 'Blue', icon: ri('circle') },
-  { key: 'purple', label: 'Purple', icon: ri('circle') }
 ])
 
 // Large list for searchable demo

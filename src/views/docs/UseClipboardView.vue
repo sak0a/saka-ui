@@ -2,14 +2,13 @@
 import { ref } from 'vue'
 import {
   SButton, SCard, SCardContent, SCardHeader, SApiSection, SApiTable,
-  SInput, SToastContainer, useToast
+  SInput, SToastContainer
 } from '../../index'
 import { useClipboard } from '../../composables/useClipboard'
 import type { ApiProp, ApiMethod } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
 const clipboard = useClipboard()
-const _toast = useToast()
 
 // Demo state
 const textToCopy = ref('Hello, World! This is sample text to copy.')

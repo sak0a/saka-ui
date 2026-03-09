@@ -7,19 +7,14 @@ import {
 import type { ApiProp, ApiEvent, ApiSlot } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 import { useCustomizer } from '../../composables/useCustomizer'
-import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+import { getLucideImportName } from '../../lib/iconMap'
 
 const { ri, iconPack } = useCustomizer()
 
-const _cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
 const cp = (mdiName: string, attr = 'icon') => {
   if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
   const name = getLucideImportName(mdiName)
   return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
-}
-const _li = (...mdiNames: string[]) => {
-  if (iconPack.value === 'mdi') return ''
-  return '\n' + lucideImportStatement(mdiNames)
 }
 
 // Demo state
@@ -215,22 +210,6 @@ const loadingCode = computed(() => `<!-- Loading overlay -->
 <SCard>
   <SCardContent :skeleton="true" :skeleton-lines="4" />
 </SCard>`)
-
-const _overlayCode = `<SCard>
-  <SCardMedia 
-    src="https://example.com/image.jpg"
-    ratio="16/9"
-    overlay="linear-gradient(to top, rgba(0,0,0,0.8), transparent)"
-    overlayMode="hover"
-  >
-    <template #overlay>
-      <div class="p-4 text-white">
-        <h3 class="font-bold">Hover Overlay</h3>
-        <p class="text-sm opacity-80">Content revealed on hover</p>
-      </div>
-    </template>
-  </SCardMedia>
-</SCard>`
 
 // API Reference
 const cardProps: ApiProp[] = [

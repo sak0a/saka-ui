@@ -4,20 +4,15 @@ import { SCheckbox, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 import { useCustomizer } from '../../composables/useCustomizer'
-import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+import { getLucideImportName } from '../../lib/iconMap'
 
 const { ri, iconPack } = useCustomizer()
 
 // Code generation helpers
-const _cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
 const cp = (mdiName: string, attr = 'icon') => {
   if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
   const name = getLucideImportName(mdiName)
   return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
-}
-const _li = (...mdiNames: string[]) => {
-  if (iconPack.value === 'mdi') return ''
-  return '\n' + lucideImportStatement(mdiNames)
 }
 
 // State for demos
@@ -31,14 +26,12 @@ const colorCheck3 = ref(true)
 const colorCheck4 = ref(true)
 const labelLeft = ref(false)
 const labelRight = ref(true)
-const _indeterminate = ref(false)
 const indeterminateDemo = ref(false)
 const roundedCheck = ref(false)
 const roundedCheck2 = ref(true)
 const iconCheck1 = ref(true)
 const iconCheck2 = ref(true)
 const iconCheck3 = ref(true)
-const _disabledOff = ref(false)
 const disabledOn = ref(true)
 const loadingCheck = ref(false)
 const requiredCheck = ref(false)

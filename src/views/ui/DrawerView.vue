@@ -51,7 +51,6 @@ const formDrawer = ref(false)
 const menuDrawer = ref(false)
 const settingsDrawer = ref(false)
 const cartDrawer = ref(false)
-const _filterDrawer = ref(false)
 const notificationDrawer = ref(false)
 const composableDrawer = ref(false)
 
@@ -83,14 +82,6 @@ const cartItems = ref([
 ])
 
 const cartTotal = ref(() => cartItems.value.reduce((sum, item) => sum + item.price * item.qty, 0))
-
-// Filter options
-const _filters = ref({
-  priceRange: [0, 500],
-  categories: ['Electronics', 'Accessories'],
-  inStock: true,
-  onSale: false
-})
 
 // Notifications
 const notifications = ref([

@@ -7,11 +7,10 @@ import type { ApiProp, ApiEvent, ApiSlot, ApiMethod } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 import { Sparkles, ShieldCheck, Wrench } from 'lucide-vue-next'
 import { useCustomizer } from '../../composables/useCustomizer'
-import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+import { getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
 
 const { ri, iconPack } = useCustomizer()
 
-const _cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
 const cp = (mdiName: string, attr = 'icon') => {
   if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
   const name = getLucideImportName(mdiName)

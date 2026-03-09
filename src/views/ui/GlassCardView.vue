@@ -13,20 +13,15 @@ import {
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 import { useCustomizer } from '../../composables/useCustomizer'
-import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+import { getLucideImportName } from '../../lib/iconMap'
 
 const { ri, iconPack } = useCustomizer()
 
 // Code generation helpers
-const _cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
 const cp = (mdiName: string, attr = 'icon') => {
   if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
   const name = getLucideImportName(mdiName)
   return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
-}
-const _li = (...mdiNames: string[]) => {
-  if (iconPack.value === 'mdi') return ''
-  return '\n' + lucideImportStatement(mdiNames)
 }
 
 const isLoading = ref(false)

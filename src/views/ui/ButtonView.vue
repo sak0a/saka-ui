@@ -5,12 +5,11 @@ import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 import { Palette, Sparkles, LoaderCircle } from 'lucide-vue-next'
 import { useCustomizer } from '../../composables/useCustomizer'
-import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+import { getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
 
 const { ri, iconPack } = useCustomizer()
 
 // Code generation helpers
-const _cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
 const cp = (mdiName: string, attr = 'icon') => {
   if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
   const name = getLucideImportName(mdiName)
