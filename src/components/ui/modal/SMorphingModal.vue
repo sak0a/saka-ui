@@ -1,12 +1,5 @@
-<script setup lang="ts">
-/**
- * SMorphingModal - Morphing Dialog Component
- * A dialog that uses layout animations to transition content from trigger to expanded view.
- * Inspired by motion-primitives MorphingDialog.
- */
-defineOptions({ inheritAttrs: false })
-
-import { type InjectionKey, type Ref, ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+<script lang="ts">
+import { type InjectionKey, type Ref } from 'vue'
 
 export interface SMorphingModalContext {
   isOpen: Ref<boolean>
@@ -19,6 +12,17 @@ export interface SMorphingModalContext {
 }
 
 export const SMorphingModalContextKey: InjectionKey<SMorphingModalContext> = Symbol('SMorphingModalContext')
+</script>
+
+<script setup lang="ts">
+/**
+ * SMorphingModal - Morphing Dialog Component
+ * A dialog that uses layout animations to transition content from trigger to expanded view.
+ * Inspired by motion-primitives MorphingDialog.
+ */
+defineOptions({ inheritAttrs: false })
+
+import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { cn } from '~/lib/utils'
 
 export interface Props {

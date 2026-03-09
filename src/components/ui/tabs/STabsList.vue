@@ -1,9 +1,6 @@
-<script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
-import { type InjectionKey, type Ref, inject, ref, computed, provide, onMounted, useAttrs } from 'vue'
-import { cn } from '~/lib/utils'
-import { STabsContextKey, type STabsContext, type TabType } from './STabs.vue'
+<script lang="ts">
+import { type InjectionKey, type Ref } from 'vue'
+import type { TabType } from './STabs.vue'
 
 export interface STabsListContext {
   listRef: Ref<HTMLElement | null>
@@ -13,6 +10,14 @@ export interface STabsListContext {
 }
 
 export const STabsListContextKey: InjectionKey<STabsListContext> = Symbol('STabsListContext')
+</script>
+
+<script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
+import { inject, ref, computed, provide, onMounted, useAttrs } from 'vue'
+import { cn } from '~/lib/utils'
+import { STabsContextKey, type STabsContext } from './STabs.vue'
 
 interface Props {
   type?: TabType

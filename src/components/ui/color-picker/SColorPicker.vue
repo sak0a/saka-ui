@@ -1,7 +1,5 @@
-<script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
-import { type InjectionKey, type Ref, type ComputedRef, ref, computed, watch, onMounted, onBeforeUnmount, provide, useSlots } from 'vue'
+<script lang="ts">
+import { type InjectionKey, type Ref, type ComputedRef } from 'vue'
 
 export interface SColorPickerContext {
   hsva: Ref<{ h: number; s: number; v: number; a: number }>
@@ -37,7 +35,10 @@ export interface SColorPickerContext {
 }
 
 export const SColorPickerContextKey: InjectionKey<SColorPickerContext> = Symbol('SColorPickerContext')
+</script>
 
+<script setup lang="ts">
+import { ref, computed, watch, onMounted, onBeforeUnmount, provide, useSlots } from 'vue'
 import SColorPickerSpectrum from './SColorPickerSpectrum.vue'
 import SColorPickerHueSlider from './SColorPickerHueSlider.vue'
 import SColorPickerAlphaSlider from './SColorPickerAlphaSlider.vue'
@@ -48,6 +49,8 @@ import SColorPickerInputs from './SColorPickerInputs.vue'
 import SColorPickerPresets from './SColorPickerPresets.vue'
 import SColorPickerRecent from './SColorPickerRecent.vue'
 import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 // ──── Props ────
 export interface Props {

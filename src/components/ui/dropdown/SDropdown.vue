@@ -1,11 +1,10 @@
-<script setup lang="ts">
+<script lang="ts">
 /**
  * SDropdown - Advanced Dropdown Menu Component
  * A highly customizable dropdown component for menus, actions, and navigation
  */
-import { type InjectionKey, type Ref, ref, computed, provide, inject, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
-import { type IconProp, isIconComponent } from '~/lib/icon'
-import { cn } from '~/lib/utils'
+import { type InjectionKey, type Ref } from 'vue'
+import { type IconProp } from '~/lib/icon'
 
 // Types
 export type DropdownTrigger = 'click' | 'hover' | 'context' | 'manual'
@@ -54,6 +53,12 @@ export interface SDropdownParentContext {
 }
 
 export const SDropdownParentKey: InjectionKey<SDropdownParentContext> = Symbol('SDropdownParent')
+</script>
+
+<script setup lang="ts">
+import { ref, computed, provide, inject, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { isIconComponent } from '~/lib/icon'
+import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
 

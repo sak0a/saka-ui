@@ -1,13 +1,6 @@
-<script setup lang="ts">
-/**
- * SModal - Advanced Modal/Dialog Component
- * A fully accessible, animated modal with keyboard navigation and focus trapping
- */
-defineOptions({ inheritAttrs: false })
+<script lang="ts">
+import { type InjectionKey, type Ref } from 'vue'
 
-import { type InjectionKey, type Ref, ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
-
-// Types
 export type ModalSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
 export type ModalVariant = 'default' | 'glass' | 'bordered' | 'elevated'
 export type ModalAnimation = 'fade' | 'scale' | 'slide-up' | 'slide-down' | 'zoom' | 'flip'
@@ -26,6 +19,16 @@ export interface SModalContext {
 }
 
 export const SModalContextKey: InjectionKey<SModalContext> = Symbol('SModalContext')
+</script>
+
+<script setup lang="ts">
+/**
+ * SModal - Advanced Modal/Dialog Component
+ * A fully accessible, animated modal with keyboard navigation and focus trapping
+ */
+defineOptions({ inheritAttrs: false })
+
+import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { cn } from '~/lib/utils'
 
 export interface Props {

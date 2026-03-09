@@ -1,13 +1,6 @@
-<script setup lang="ts">
-/**
- * SAccordion - Advanced Accordion Component
- * A highly customizable accordion component styled with TailwindCSS
- */
-defineOptions({ inheritAttrs: false })
+<script lang="ts">
+import { type InjectionKey, type Ref } from 'vue'
 
-import { type InjectionKey, type Ref, provide, ref, computed, watch } from 'vue'
-
-// Types
 export type AccordionType = 'default' | 'bordered' | 'separated' | 'card' | 'minimal'
 export type AccordionSize = 'small' | 'medium' | 'large'
 export type IconPlacement = 'left' | 'right'
@@ -51,6 +44,16 @@ export interface SAccordionItemContext {
 }
 
 export const SAccordionItemContextKey: InjectionKey<SAccordionItemContext> = Symbol('SAccordionItemContext')
+</script>
+
+<script setup lang="ts">
+/**
+ * SAccordion - Advanced Accordion Component
+ * A highly customizable accordion component styled with TailwindCSS
+ */
+defineOptions({ inheritAttrs: false })
+
+import { provide, ref, computed, watch } from 'vue'
 import { cn } from '~/lib/utils'
 
 export interface Props {

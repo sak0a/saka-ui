@@ -1,14 +1,7 @@
-<script setup lang="ts">
-/**
- * STabs - Custom Tab Component
- * Supports both simple (STabPane) and compound (STabsList + STabsTrigger + STabsContent) APIs
- */
-defineOptions({ inheritAttrs: false })
-
-import { type InjectionKey, type Ref, provide, ref, computed, watch, nextTick, onMounted } from 'vue'
+<script lang="ts">
+import { type InjectionKey, type Ref } from 'vue'
 import type { IconProp } from '~/lib/icon'
 
-// Types - exported for external use
 export type TabType = 'line' | 'card' | 'segment' | 'bar' | 'chip'
 export type TabSize = 'small' | 'medium' | 'large'
 export type TabPlacement = 'top' | 'left' | 'right' | 'bottom'
@@ -40,6 +33,16 @@ export interface STabsContext {
 }
 
 export const STabsContextKey: InjectionKey<STabsContext> = Symbol('STabsContext')
+</script>
+
+<script setup lang="ts">
+/**
+ * STabs - Custom Tab Component
+ * Supports both simple (STabPane) and compound (STabsList + STabsTrigger + STabsContent) APIs
+ */
+defineOptions({ inheritAttrs: false })
+
+import { provide, ref, computed, watch, nextTick, onMounted } from 'vue'
 import { cn } from '~/lib/utils'
 import { isIconComponent } from '~/lib/icon'
 

@@ -1,13 +1,6 @@
-<script setup lang="ts">
-/**
- * SDrawer - Advanced Drawer/Sheet Component
- * A fully accessible, animated drawer with swipe gestures, snap points, and keyboard navigation
- */
-defineOptions({ inheritAttrs: false })
+<script lang="ts">
+import { type InjectionKey, type Ref } from 'vue'
 
-import { type InjectionKey, type Ref, ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
-
-// Types
 export type DrawerSide = 'left' | 'right' | 'top' | 'bottom'
 export type DrawerSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
 export type DrawerVariant = 'default' | 'glass' | 'bordered' | 'elevated' | 'minimal'
@@ -27,6 +20,16 @@ export interface SDrawerContext {
 }
 
 export const SDrawerContextKey: InjectionKey<SDrawerContext> = Symbol('SDrawerContext')
+</script>
+
+<script setup lang="ts">
+/**
+ * SDrawer - Advanced Drawer/Sheet Component
+ * A fully accessible, animated drawer with swipe gestures, snap points, and keyboard navigation
+ */
+defineOptions({ inheritAttrs: false })
+
+import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { cn } from '~/lib/utils'
 
 export interface Props {

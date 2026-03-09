@@ -1,9 +1,9 @@
-<script setup lang="ts">
+<script lang="ts">
 /**
  * SCarouselSlide - Carousel Slide Component
  * Child component for slide content within SCarousel
  */
-import { type InjectionKey, type Ref, inject, ref, computed, onMounted, onUnmounted } from 'vue'
+import { type InjectionKey, type Ref } from 'vue'
 
 export interface SlideInfo {
   index: number
@@ -21,6 +21,10 @@ export interface SCarouselContext {
 }
 
 export const SCarouselContextKey: InjectionKey<SCarouselContext> = Symbol('SCarouselContext')
+</script>
+
+<script setup lang="ts">
+import { inject, ref, computed, onMounted, onUnmounted } from 'vue'
 import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
