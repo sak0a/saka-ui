@@ -1,6 +1,6 @@
 {
   "name": "@sakoa/ui",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "type": "module",
   "main": "./dist/saka-ui.umd.cjs",
   "module": "./dist/saka-ui.js",
