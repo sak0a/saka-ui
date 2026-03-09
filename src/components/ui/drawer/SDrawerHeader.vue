@@ -6,7 +6,7 @@ defineOptions({ inheritAttrs: false })
 
 import { inject, onMounted, onBeforeUnmount } from 'vue'
 import { cn } from '~/lib/utils'
-import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
+import { SDrawerContextKey, type SDrawerContext } from './context'
 
 export interface Props {
   /** Drawer title */

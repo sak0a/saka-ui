@@ -1,26 +1,3 @@
-<script lang="ts">
-import { type InjectionKey, type Ref } from 'vue'
-
-export type ModalSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
-export type ModalVariant = 'default' | 'glass' | 'bordered' | 'elevated'
-export type ModalAnimation = 'fade' | 'scale' | 'slide-up' | 'slide-down' | 'zoom' | 'flip'
-export type ModalPosition = 'center' | 'top' | 'bottom' | 'left' | 'right'
-
-export interface SModalContext {
-  close: () => void
-  isOpen: Ref<boolean>
-  size: ModalSize
-  hasHeader: Ref<boolean>
-  hasFooter: Ref<boolean>
-  setHasHeader: (value: boolean) => void
-  setHasFooter: (value: boolean) => void
-  titleId: string
-  descriptionId: string
-}
-
-export const SModalContextKey: InjectionKey<SModalContext> = Symbol('SModalContext')
-</script>
-
 <script setup lang="ts">
 /**
  * SModal - Advanced Modal/Dialog Component
@@ -30,6 +7,7 @@ defineOptions({ inheritAttrs: false })
 
 import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { cn } from '~/lib/utils'
+import { SModalContextKey, type ModalSize, type ModalVariant, type ModalAnimation, type ModalPosition } from './context'
 
 export interface Props {
   /** Control modal visibility */

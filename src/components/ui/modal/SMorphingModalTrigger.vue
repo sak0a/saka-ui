@@ -7,7 +7,7 @@ defineOptions({ inheritAttrs: false })
 
 import { ref, inject, onMounted, onBeforeUnmount, computed } from 'vue'
 import { cn } from '~/lib/utils'
-import { SMorphingModalContextKey } from './SMorphingModal.vue'
+import { SMorphingModalContextKey } from './morphing-context'
 
 export interface Props {
   /** Disable trigger */

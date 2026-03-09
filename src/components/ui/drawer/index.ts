@@ -15,6 +15,6 @@ export type {
   DrawerSize,
   DrawerVariant,
   SDrawerContext
-} from './SDrawer.vue'
+} from './context'
 
-export { SDrawerContextKey } from './SDrawer.vue'
+export { SDrawerContextKey } from './context'

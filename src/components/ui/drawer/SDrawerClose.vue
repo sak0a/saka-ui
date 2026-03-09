@@ -7,7 +7,7 @@ defineOptions({ inheritAttrs: false })
 import { inject } from 'vue'
 import { cn } from '~/lib/utils'
 import { type IconProp, isIconComponent } from '~/lib/icon'
-import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
+import { SDrawerContextKey, type SDrawerContext } from './context'
 
 export interface Props {
   /** Additional CSS class */

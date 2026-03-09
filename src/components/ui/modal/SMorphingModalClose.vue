@@ -6,7 +6,7 @@ defineOptions({ inheritAttrs: false })
 
 import { inject } from 'vue'
 import { cn } from '~/lib/utils'
-import { SMorphingModalContextKey } from './SMorphingModal.vue'
+import { SMorphingModalContextKey } from './morphing-context'
 
 export interface Props {
   /** Additional class */

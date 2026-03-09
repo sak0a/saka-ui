@@ -6,7 +6,7 @@ defineOptions({ inheritAttrs: false })
 
 import { inject, onMounted, onBeforeUnmount } from 'vue'
 import { cn } from '~/lib/utils'
-import { SModalContextKey, type SModalContext } from './SModal.vue'
+import { SModalContextKey, type SModalContext } from './context'
 
 export interface Props {
   /** Button alignment */

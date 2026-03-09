@@ -3,7 +3,7 @@ defineOptions({ inheritAttrs: false })
 
 import { inject, computed, watch, nextTick, onMounted } from 'vue'
 import { cn } from '~/lib/utils'
-import { SAccordionItemContextKey, SAccordionContextKey, type SAccordionItemContext, type SAccordionContext } from './SAccordion.vue'
+import { SAccordionItemContextKey, SAccordionContextKey, type SAccordionItemContext, type SAccordionContext } from './context'
 
 export interface Props {
   /** Custom content classes */

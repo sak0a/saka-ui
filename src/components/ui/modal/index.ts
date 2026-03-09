@@ -24,9 +24,9 @@ export type {
   ModalAnimation,
   ModalPosition,
   SModalContext
-} from './SModal.vue'
+} from './context'
 
-export { SModalContextKey } from './SModal.vue'
+export { SModalContextKey } from './context'
 
-export type { SMorphingModalContext } from './SMorphingModal.vue'
-export { SMorphingModalContextKey } from './SMorphingModal.vue'
+export type { SMorphingModalContext } from './morphing-context'
+export { SMorphingModalContextKey } from './morphing-context'

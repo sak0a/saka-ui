@@ -1,19 +1,3 @@
-<script lang="ts">
-import { type InjectionKey, type Ref } from 'vue'
-
-export interface SMorphingModalContext {
-  isOpen: Ref<boolean>
-  isExpanded: Ref<boolean>
-  triggerRect: Ref<DOMRect | null>
-  open: () => void
-  close: () => void
-  registerTrigger: (el: HTMLElement | null) => void
-  uniqueId: string
-}
-
-export const SMorphingModalContextKey: InjectionKey<SMorphingModalContext> = Symbol('SMorphingModalContext')
-</script>
-
 <script setup lang="ts">
 /**
  * SMorphingModal - Morphing Dialog Component
@@ -24,6 +8,7 @@ defineOptions({ inheritAttrs: false })
 
 import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { cn } from '~/lib/utils'
+import { SMorphingModalContextKey } from './morphing-context'
 
 export interface Props {
   /** Control modal visibility */

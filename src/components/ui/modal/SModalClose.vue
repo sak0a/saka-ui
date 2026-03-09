@@ -7,7 +7,7 @@ defineOptions({ inheritAttrs: false })
 
 import { inject } from 'vue'
 import { cn } from '~/lib/utils'
-import { SModalContextKey } from './SModal.vue'
+import { SModalContextKey } from './context'
 
 export interface Props {
   /** Additional class */
