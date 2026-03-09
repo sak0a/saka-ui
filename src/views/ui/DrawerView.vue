@@ -863,7 +863,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               >
                 <SIcon :icon="item.icon" :size="20" />
                 <span class="flex-1 text-left">{{ item.label }}</span>
-                <SBadge v-if="item.badge" size="sm" color="red">{{ item.badge }}</SBadge>
+                <SBadge v-if="item.badge" size="small" color="red">{{ item.badge }}</SBadge>
               </SButton>
             </nav>
           </SDrawerContent>
@@ -890,7 +890,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <SButton @click="cartDrawer = true">
           <SIcon :icon="ri('cart')" :size="20" class="mr-2" />
           View Cart
-          <SBadge size="sm" class="ml-2">{{ cartItems.length }}</SBadge>
+          <SBadge size="small" class="ml-2">{{ cartItems.length }}</SBadge>
         </SButton>
 
         <SDrawer
@@ -1076,7 +1076,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <SButton @click="notificationDrawer = true">
           <SIcon :icon="ri('bell')" :size="20" class="mr-2" />
           Notifications
-          <SBadge size="sm" color="red" class="ml-2">3</SBadge>
+          <SBadge size="small" color="red" class="ml-2">3</SBadge>
         </SButton>
 
         <SDrawer

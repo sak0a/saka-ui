@@ -29,7 +29,7 @@ export interface FieldState<T = unknown> {
 }
 
 /** Mapped type for type-safe field access */
-export type TypedFields<TValues extends Record<string, unknown>> = {
+export type TypedFields<TValues extends Record<string, any>> = {
     [K in keyof TValues]: FieldState<TValues[K]>
 }
 
@@ -50,7 +50,7 @@ export interface ZodLikeSchema<T = unknown> {
 }
 
 /** Form state returned by useForm composable */
-export interface FormState<TValues extends Record<string, unknown> = Record<string, unknown>> {
+export interface FormState<TValues extends Record<string, any> = Record<string, unknown>> {
     /** Type-safe field access */
     fields: TypedFields<TValues>
     errors: ComputedRef<Record<string, string>>
@@ -90,7 +90,7 @@ export interface FormState<TValues extends Record<string, unknown> = Record<stri
 }
 
 /** Options for useForm composable */
-export interface UseFormOptions<TValues extends Record<string, unknown> = Record<string, unknown>> {
+export interface UseFormOptions<TValues extends Record<string, any> = Record<string, unknown>> {
     /** Initial values for form fields */
     initialValues?: Partial<TValues>
     /** Field configurations with validation rules */
@@ -478,7 +478,7 @@ function validateWithZod<TValues>(
  *   await api.login(values)
  * })
  */
-export function useForm<TValues extends Record<string, unknown> = Record<string, unknown>>(
+export function useForm<TValues extends Record<string, any> = Record<string, unknown>>(
     options: UseFormOptions<TValues>
 ): FormState<TValues> {
     const { 

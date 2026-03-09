@@ -319,7 +319,7 @@ const supportedKeys: ApiProp[] = [
 
     <!-- Keyboard Hints -->
     <section v-if="isCtrlPressed">
-      <SCard variant="flat" class="border-2 border-blue-500">
+      <SCard variant="filled" class="border-2 border-blue-500">
         <SCardContent>
           <h3 class="font-semibold text-(--s-text-primary) mb-2">Available Shortcuts</h3>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">

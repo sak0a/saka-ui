@@ -186,7 +186,7 @@ const filteredItems = computed(() => {
   const query = searchQuery.value.toLowerCase()
   return props.items.filter(item => {
     if (item.divider || item.header) return true
-    return item.label.toLowerCase().includes(query)
+    return item.label?.toLowerCase().includes(query) ?? false
   })
 })
 

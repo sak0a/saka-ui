@@ -150,7 +150,7 @@ const wrapperClasses = computed(() => {
   return cn(
     'inline-flex items-center gap-2',
     { 'opacity-50 cursor-not-allowed': props.disabled },
-    (attrs as Record<string, unknown>).class,
+    (attrs as Record<string, unknown>).class as string,
   )
 })
 

@@ -1,10 +1,12 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SMorphingModal - Morphing Dialog Component
  * A dialog that uses layout animations to transition content from trigger to expanded view.
  * Inspired by motion-primitives MorphingDialog.
  */
-import { type InjectionKey, type Ref } from 'vue'
+defineOptions({ inheritAttrs: false })
+
+import { type InjectionKey, type Ref, ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
 export interface SMorphingModalContext {
   isOpen: Ref<boolean>
@@ -17,12 +19,6 @@ export interface SMorphingModalContext {
 }
 
 export const SMorphingModalContextKey: InjectionKey<SMorphingModalContext> = Symbol('SMorphingModalContext')
-</script>
-
-<script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
-import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { cn } from '~/lib/utils'
 
 export interface Props {
@@ -100,7 +96,7 @@ const triggerWrapperStyle = computed(() => {
 
   return {
     opacity: triggerOpacity.value,
-    pointerEvents: isVisible.value ? 'none' : 'auto',
+    pointerEvents: isVisible.value ? 'none' as const : 'auto' as const,
     transitionProperty: 'opacity',
     transitionDuration: `${duration}ms`,
     transitionTimingFunction: easing

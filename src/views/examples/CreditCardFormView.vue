@@ -534,7 +534,7 @@ onMounted(() => {
               <!-- Month -->
               <SSelect
                 :model-value="cardMonth"
-                @update:model-value="(v: unknown) => form.fields.cardMonth.value.value = v"
+                @update:model-value="(v: unknown) => form.fields.cardMonth.value.value = v as string"
                 @focus="() => handleFocus('cardMonth')"
                 @blur="handleBlur"
                 label="Month"
@@ -547,7 +547,7 @@ onMounted(() => {
               <!-- Year -->
               <SSelect
                 :model-value="cardYear"
-                @update:model-value="(v: unknown) => form.fields.cardYear.value.value = v"
+                @update:model-value="(v: unknown) => form.fields.cardYear.value.value = v as string"
                 @focus="() => handleFocus('cardYear')"
                 @blur="handleBlur"
                 label="Year"

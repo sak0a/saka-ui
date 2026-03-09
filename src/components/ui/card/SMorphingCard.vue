@@ -103,7 +103,7 @@ const triggerWrapperStyle = computed(() => {
 
   return {
     opacity: triggerOpacity.value,
-    pointerEvents: isVisible.value ? 'none' : 'auto',
+    pointerEvents: isVisible.value ? 'none' as const : 'auto' as const,
     transitionProperty: 'opacity',
     transitionDuration: `${duration}ms`,
     transitionTimingFunction: easing

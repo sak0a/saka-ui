@@ -9,6 +9,7 @@ import DemoSection from '../../components/DemoSection.vue'
 // ============================================================================
 
 interface User {
+  [key: string]: unknown
   id: number
   name: string
   email: string
@@ -169,9 +170,9 @@ const sortingCode = `const columns = [
 const customCellsCode = `<SDataTable :data="data" :columns="columns">
   <!-- Custom cell for status column -->
   <template #cell-status="{ value }">
-    <SChip 
+    <SChip
       :color="value === 'active' ? 'success' : 'danger'"
-      size="sm"
+      size="small"
     >
       {{ value }}
     </SChip>
@@ -179,10 +180,10 @@ const customCellsCode = `<SDataTable :data="data" :columns="columns">
   
   <!-- Row actions -->
   <template #row-actions="{ row }">
-    <SButton size="sm" variant="ghost" @click="edit(row)">
+    <SButton size="small" variant="ghost" @click="edit(row)">
       <span class="mdi mdi-pencil" />
     </SButton>
-    <SButton size="sm" variant="ghost" color="danger" @click="remove(row)">
+    <SButton size="small" variant="ghost" color="danger" @click="remove(row)">
       <span class="mdi mdi-delete" />
     </SButton>
   </template>
@@ -235,7 +236,7 @@ const emptyCode = `<SDataTable :data="[]" :columns="columns">
     <div class="flex flex-col items-center py-12">
       <span class="mdi mdi-folder-open-outline text-4xl opacity-40 mb-3" />
       <p>No records found</p>
-      <SButton size="sm" class="mt-4">Add First Record</SButton>
+      <SButton size="small" class="mt-4">Add First Record</SButton>
     </div>
   </template>
 </SDataTable>`
@@ -649,9 +650,9 @@ const formatSalary = (value: number) => {
           <span class="text-sm text-(--s-text-secondary)">
             Selected: {{ selectedKeys.length }} rows
           </span>
-          <SButton 
-            v-if="selectedKeys.length > 0" 
-            size="sm" 
+          <SButton
+            v-if="selectedKeys.length > 0"
+            size="small"
             variant="ghost"
             @click="selectedKeys = []"
           >
@@ -666,7 +667,7 @@ const formatSalary = (value: number) => {
           v-model:selected="selectedKeys"
         >
           <template #cell-status="{ value }">
-            <SChip :color="getStatusColor(value as string)" size="sm">
+            <SChip :color="getStatusColor(value as string)" size="small">
               {{ value }}
             </SChip>
           </template>
@@ -685,7 +686,7 @@ const formatSalary = (value: number) => {
         :columns="fullColumns"
       >
         <template #cell-status="{ value }">
-          <SChip :color="getStatusColor(value as string)" size="sm">
+          <SChip :color="getStatusColor(value as string)" size="small">
             {{ value }}
           </SChip>
         </template>
@@ -696,10 +697,10 @@ const formatSalary = (value: number) => {
         
         <template #row-actions="{ row: _row }">
           <div class="flex gap-1">
-            <SButton size="sm" variant="ghost" title="Edit">
+            <SButton size="small" variant="ghost" title="Edit">
               <span class="mdi mdi-pencil" />
             </SButton>
-            <SButton size="sm" variant="ghost" color="danger" title="Delete">
+            <SButton size="small" variant="ghost" color="danger" title="Delete">
               <span class="mdi mdi-delete" />
             </SButton>
           </div>
@@ -724,7 +725,7 @@ const formatSalary = (value: number) => {
             :page-size-options="[5, 10, 25]"
           >
             <template #cell-status="{ value }">
-              <SChip :color="getStatusColor(value as string)" size="sm">
+              <SChip :color="getStatusColor(value as string)" size="small">
                 {{ value }}
               </SChip>
             </template>
@@ -741,7 +742,7 @@ const formatSalary = (value: number) => {
             :page-size-options="[5, 10, 25]"
           >
             <template #cell-status="{ value }">
-              <SChip :color="getStatusColor(value as string)" size="sm">
+              <SChip :color="getStatusColor(value as string)" size="small">
                 {{ value }}
               </SChip>
             </template>
@@ -783,7 +784,7 @@ const formatSalary = (value: number) => {
           :skeleton-rows="5"
         >
           <template #cell-status="{ value }">
-            <SChip :color="getStatusColor(value as string)" size="sm">
+            <SChip :color="getStatusColor(value as string)" size="small">
               {{ value }}
             </SChip>
           </template>
@@ -816,7 +817,7 @@ const formatSalary = (value: number) => {
               <div class="flex flex-col items-center py-12">
                 <span class="mdi mdi-folder-open-outline text-5xl opacity-40 mb-4" />
                 <p class="text-(--s-text-secondary) mb-4">No users found</p>
-                <SButton size="sm">
+                <SButton size="small">
                   <span class="mdi mdi-plus mr-2" />
                   Add First User
                 </SButton>
@@ -840,7 +841,7 @@ const formatSalary = (value: number) => {
         max-height="400px"
       >
         <template #cell-status="{ value }">
-          <SChip :color="getStatusColor(value as string)" size="sm">
+          <SChip :color="getStatusColor(value as string)" size="small">
             {{ value }}
           </SChip>
         </template>

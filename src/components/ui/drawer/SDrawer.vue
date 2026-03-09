@@ -1,9 +1,11 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SDrawer - Advanced Drawer/Sheet Component
  * A fully accessible, animated drawer with swipe gestures, snap points, and keyboard navigation
  */
-import { type InjectionKey, type Ref } from 'vue'
+defineOptions({ inheritAttrs: false })
+
+import { type InjectionKey, type Ref, ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
 // Types
 export type DrawerSide = 'left' | 'right' | 'top' | 'bottom'
@@ -25,12 +27,6 @@ export interface SDrawerContext {
 }
 
 export const SDrawerContextKey: InjectionKey<SDrawerContext> = Symbol('SDrawerContext')
-</script>
-
-<script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
-import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { cn } from '~/lib/utils'
 
 export interface Props {
@@ -544,11 +540,9 @@ defineExpose({
 <template>
   <Teleport v-if="teleportTarget" :to="teleportTarget" :disabled="!teleportTarget">
     <Transition
-      enter-active-class="transition-opacity ease-out"
       :enter-active-class="`transition-opacity duration-${duration} ease-out`"
       enter-from-class="opacity-0"
       enter-to-class="opacity-100"
-      leave-active-class="transition-opacity ease-in"
       :leave-active-class="`transition-opacity duration-${Math.round(duration * 0.7)} ease-in`"
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"

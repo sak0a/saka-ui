@@ -85,7 +85,7 @@ const chipClasses = computed(() => {
       'cursor-pointer hover:brightness-110 active:scale-95': !props.disabled,
       'opacity-50 cursor-not-allowed': props.disabled,
     },
-    (attrs as Record<string, unknown>).class,
+    (attrs as Record<string, unknown>).class as string,
   )
 })
 

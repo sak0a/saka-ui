@@ -163,7 +163,7 @@ function useStorage<T>(
         if (typeof mergeDefaults === 'function') {
           parsedValue = mergeDefaults(parsedValue, defaultValue)
         } else {
-          parsedValue = deepMerge(defaultValue as Record<string, any>, parsedValue) as T
+          parsedValue = deepMerge(defaultValue as Record<string, any>, parsedValue as Partial<Record<string, any>>) as T
         }
       }
 
@@ -268,7 +268,7 @@ function useStorage<T>(
                 if (typeof mergeDefaults === 'function') {
                   parsedValue = mergeDefaults(parsedValue, defaultValue)
                 } else {
-                  parsedValue = deepMerge(defaultValue as Record<string, any>, parsedValue) as T
+                  parsedValue = deepMerge(defaultValue as Record<string, any>, parsedValue as Partial<Record<string, any>>) as T
                 }
               }
               

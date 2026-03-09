@@ -80,7 +80,7 @@ const kbdClasses = computed(() => {
       variant: props.variant,
       size: props.size,
     }),
-    (attrs as Record<string, unknown>).class,
+    (attrs as Record<string, unknown>).class as string,
   )
 })
 </script>

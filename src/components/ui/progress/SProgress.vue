@@ -363,7 +363,7 @@ watch(() => props.modelValue, (newVal) => {
             class="h-full transition-all duration-300 ease-out"
             :class="roundedClasses"
             :style="{
-              background: variant === 'gradient' ? `linear-gradient(90deg, ${gradientColors.join(', ')})` : color,
+              background: color,
               width: segment.filled ? '100%' : `${segment.partial}%`
             }"
           />

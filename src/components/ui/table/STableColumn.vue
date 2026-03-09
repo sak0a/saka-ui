@@ -116,5 +116,5 @@ onUnmounted(() => {
 
 <template>
   <!-- This is a renderless component - slots are used by SDataTable -->
-  <slot />
+  <slot :row="undefined as unknown" :value="undefined as unknown" :index="0" />
 </template>

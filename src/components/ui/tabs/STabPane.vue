@@ -7,6 +7,7 @@ defineOptions({ inheritAttrs: false })
 
 import { inject, onMounted, onUnmounted, computed, watch } from 'vue'
 import { cn } from '~/lib/utils'
+import type { IconProp } from '~/lib/icon'
 import { STabsContextKey, type TabPaneInfo } from './STabs.vue'
 
 // Props
@@ -15,8 +16,8 @@ interface Props {
   name: string | number
   /** Tab label text (required) */
   tab: string
-  /** Optional MDI icon name (without mdi- prefix) */
-  icon?: string
+  /** Optional icon */
+  icon?: IconProp
   /** Disable this tab */
   disabled?: boolean
   /** Override parent closable setting */

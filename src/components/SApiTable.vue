@@ -10,6 +10,7 @@ export interface ApiProp {
   default?: string
   description: string
   category?: string
+  required?: boolean
 }
 
 export interface ApiEvent {
@@ -141,7 +142,7 @@ const tableData = computed(() => {
         <tbody class="bg-background/40 text-muted-foreground">
           <template v-for="(row, index) in tableData" :key="index">
             <!-- Category row (for props with categories) -->
-            <tr v-if="type === 'props' && (row as ApiProp & { isCategory?: boolean }).isCategory" 
+            <tr v-if="type === 'props' && 'isCategory' in row && (row as any).isCategory" 
                 class="border-t border-border/70 bg-muted/60">
               <td :colspan="columns.length" 
                   class="px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
