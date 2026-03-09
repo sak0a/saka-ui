@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { STooltip, SButton, SKbd, SKbdShortcut, SApiSection, SApiTable, SApiKeyboard } from '../../index'
+import { STooltip, SButton, SKbdShortcut, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, ApiMethod, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 

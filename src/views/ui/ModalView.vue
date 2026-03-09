@@ -18,8 +18,7 @@ import {
   SApiTable,
   SApiKeyboard,
   SBadge,
-  SKbd,
-  SKbdShortcut
+  SKbd
 } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 
@@ -64,7 +63,7 @@ const basicCode = `<SButton @click="showModal = true">Open Modal</SButton>
     <p>Your content here...</p>
   </SModalContent>
   <SModalFooter>
-    <SButton variant="secondary">Cancel</SButton>
+    <SButton variant="outlined">Cancel</SButton>
     <SButton>Got it!</SButton>
   </SModalFooter>
 </SModal>`
@@ -115,12 +114,12 @@ const customHeaderCode = `<SModal v-model="showModal" hide-header>
       </div>
     </template>
     <template #extra>
-      <SBadge color="amber" variant="subtle">PRO</SBadge>
+      <SBadge color="amber" variant="light">PRO</SBadge>
     </template>
   </SModalHeader>
   <SModalContent>...</SModalContent>
   <SModalFooter>
-    <SButton variant="secondary">Maybe Later</SButton>
+    <SButton variant="outlined">Maybe Later</SButton>
     <SButton color="amber">Upgrade Now</SButton>
   </SModalFooter>
 </SModal>`
@@ -147,7 +146,7 @@ const composableCode = `<SModal v-model="showModal" hide-header>
   </SModalContent>
 
   <SModalFooter>
-    <SButton variant="secondary">Cancel</SButton>
+    <SButton variant="outlined">Cancel</SButton>
     <SButton>Got it!</SButton>
   </SModalFooter>
 </SModal>`
@@ -163,7 +162,7 @@ const confirmCode = `<SModal v-model="confirmModal" size="sm" animation="zoom">
     </p>
   </SModalContent>
   <SModalFooter align="stretch" gap="md" stack-on-mobile>
-    <SButton variant="secondary">Cancel</SButton>
+    <SButton variant="outlined">Cancel</SButton>
     <SButton color="red">Delete</SButton>
   </SModalFooter>
 </SModal>`
@@ -185,7 +184,7 @@ const formCode = `<SModal
     </form>
   </SModalContent>
   <SModalFooter>
-    <SButton variant="secondary">Cancel</SButton>
+    <SButton variant="outlined">Cancel</SButton>
     <SButton>Create Account</SButton>
   </SModalFooter>
 </SModal>`
@@ -201,7 +200,7 @@ const scrollCode = `<SModal
     </div>
   </SModalContent>
   <SModalFooter>
-    <SButton variant="secondary">Decline</SButton>
+    <SButton variant="outlined">Decline</SButton>
     <SButton>Accept</SButton>
   </SModalFooter>
 </SModal>`
@@ -217,7 +216,7 @@ const nestedCode = `<SModal
     <SButton>Open Second Modal</SButton>
   </SModalContent>
   <SModalFooter>
-    <SButton variant="secondary">Close</SButton>
+    <SButton variant="outlined">Close</SButton>
   </SModalFooter>
 </SModal>
 
@@ -487,7 +486,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </ul>
           </SModalContent>
           <SModalFooter>
-            <SButton variant="secondary" @click="basicModal = false">Cancel</SButton>
+            <SButton variant="outlined" @click="basicModal = false">Cancel</SButton>
             <SButton @click="basicModal = false">Got it!</SButton>
           </SModalFooter>
         </SModal>
@@ -597,10 +596,10 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="flex flex-wrap gap-3">
-          <SButton variant="secondary" @click="selectedVariant = 'default'; variantModal = true">Default</SButton>
-          <SButton variant="secondary" @click="selectedVariant = 'bordered'; variantModal = true">Bordered</SButton>
-          <SButton variant="secondary" @click="selectedVariant = 'elevated'; variantModal = true">Elevated</SButton>
-          <SButton variant="secondary" @click="glassModal = true">
+          <SButton variant="outlined" @click="selectedVariant = 'default'; variantModal = true">Default</SButton>
+          <SButton variant="outlined" @click="selectedVariant = 'bordered'; variantModal = true">Bordered</SButton>
+          <SButton variant="outlined" @click="selectedVariant = 'elevated'; variantModal = true">Elevated</SButton>
+          <SButton variant="outlined" @click="glassModal = true">
             <span class="mdi mdi-blur mr-2" />
             Glass
           </SButton>
@@ -651,11 +650,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="flex flex-wrap gap-3">
-          <SButton variant="secondary" @click="selectedPosition = 'center'; positionModal = true">Center</SButton>
-          <SButton variant="secondary" @click="selectedPosition = 'top'; positionModal = true">Top</SButton>
-          <SButton variant="secondary" @click="selectedPosition = 'bottom'; positionModal = true">Bottom</SButton>
-          <SButton variant="secondary" @click="selectedPosition = 'left'; positionModal = true">Left</SButton>
-          <SButton variant="secondary" @click="selectedPosition = 'right'; positionModal = true">Right</SButton>
+          <SButton variant="outlined" @click="selectedPosition = 'center'; positionModal = true">Center</SButton>
+          <SButton variant="outlined" @click="selectedPosition = 'top'; positionModal = true">Top</SButton>
+          <SButton variant="outlined" @click="selectedPosition = 'bottom'; positionModal = true">Bottom</SButton>
+          <SButton variant="outlined" @click="selectedPosition = 'left'; positionModal = true">Left</SButton>
+          <SButton variant="outlined" @click="selectedPosition = 'right'; positionModal = true">Right</SButton>
         </div>
 
         <SModal
@@ -705,7 +704,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               </div>
             </template>
             <template #extra>
-              <SBadge color="amber" variant="subtle">PRO</SBadge>
+              <SBadge color="amber" variant="light">PRO</SBadge>
             </template>
           </SModalHeader>
           <SModalContent>
@@ -725,7 +724,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </div>
           </SModalContent>
           <SModalFooter>
-            <SButton variant="secondary" @click="customHeaderModal = false">Maybe Later</SButton>
+            <SButton variant="outlined" @click="customHeaderModal = false">Maybe Later</SButton>
             <SButton color="amber" @click="customHeaderModal = false">Upgrade Now</SButton>
           </SModalFooter>
         </SModal>
@@ -789,7 +788,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           </SModalContent>
           
           <SModalFooter>
-            <SButton variant="secondary" @click="composableModal = false">Cancel</SButton>
+            <SButton variant="outlined" @click="composableModal = false">Cancel</SButton>
             <SButton @click="composableModal = false">Got it!</SButton>
           </SModalFooter>
         </SModal>
@@ -825,7 +824,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </p>
           </SModalContent>
           <SModalFooter align="stretch" gap="md" stack-on-mobile>
-            <SButton variant="secondary" @click="confirmModal = false">Cancel</SButton>
+            <SButton variant="outlined" @click="confirmModal = false">Cancel</SButton>
             <SButton color="red" @click="confirmModal = false">
               <span class="mdi mdi-delete mr-2" />
               Delete
@@ -877,7 +876,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </form>
           </SModalContent>
           <SModalFooter>
-            <SButton variant="secondary" @click="formModal = false">Cancel</SButton>
+            <SButton variant="outlined" @click="formModal = false">Cancel</SButton>
             <SButton @click="formModal = false">Create Account</SButton>
           </SModalFooter>
         </SModal>
@@ -915,7 +914,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </div>
           </SModalContent>
           <SModalFooter>
-            <SButton variant="secondary" @click="scrollModal = false">Decline</SButton>
+            <SButton variant="outlined" @click="scrollModal = false">Decline</SButton>
             <SButton @click="scrollModal = false">Accept</SButton>
           </SModalFooter>
         </SModal>
@@ -952,7 +951,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </SButton>
           </SModalContent>
           <SModalFooter>
-            <SButton variant="secondary" @click="nestedModal1 = false">Close</SButton>
+            <SButton variant="outlined" @click="nestedModal1 = false">Close</SButton>
           </SModalFooter>
         </SModal>
 

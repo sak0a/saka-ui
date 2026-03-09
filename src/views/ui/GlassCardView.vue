@@ -5,7 +5,6 @@ import {
   SCardHeader,
   SCardContent,
   SCardFooter,
-  SCardMedia,
   SButton,
   SApiSection,
   SApiTable,
@@ -19,13 +18,13 @@ import { iconToCode, getLucideImportName, lucideImportStatement } from '../../li
 const { ri, iconPack } = useCustomizer()
 
 // Code generation helpers
-const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const _cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
 const cp = (mdiName: string, attr = 'icon') => {
   if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
   const name = getLucideImportName(mdiName)
   return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
 }
-const li = (...mdiNames: string[]) => {
+const _li = (...mdiNames: string[]) => {
   if (iconPack.value === 'mdi') return ''
   return '\n' + lucideImportStatement(mdiNames)
 }

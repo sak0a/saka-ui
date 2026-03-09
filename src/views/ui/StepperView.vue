@@ -687,7 +687,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       :code="lineCode"
     >
       <SStepper v-model="lineStep" variant="line">
-        <template #default="{ nextStep, prevStep, canGoNext, canGoPrev, isLastStep }">
+        <template #default="{ nextStep, prevStep, canGoNext, canGoPrev, isLastStep: _isLastStep }">
           <div class="flex items-center w-full">
             <SStepperItem :step="1">
               <SStepperTrigger>
@@ -768,7 +768,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       :code="verticalCode"
     >
       <SStepper v-model="verticalStep" orientation="vertical" class="max-w-lg">
-        <template #default="{ nextStep, prevStep, canGoNext, canGoPrev, isLastStep }">
+        <template #default="{ nextStep, prevStep, canGoNext: _canGoNext, canGoPrev: _canGoPrev, isLastStep: _isLastStep }">
           <SStepperItem :step="1">
             <div class="flex flex-col items-center">
               <SStepperTrigger class="!p-0">
@@ -981,7 +981,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       :code="colorCode"
     >
       <SStepper v-model="colorStep" color="#8b5cf6">
-        <template #default="{ nextStep, prevStep, canGoNext, canGoPrev, isLastStep }">
+        <template #default="{ nextStep, prevStep, canGoNext: _canGoNext, canGoPrev, isLastStep }">
           <div class="flex items-center w-full">
             <SStepperItem :step="1">
               <SStepperTrigger>
@@ -1049,7 +1049,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       :code="customIndicatorCode"
     >
       <SStepper v-model="customStep">
-        <template #default="{ nextStep, prevStep, canGoNext, canGoPrev, isLastStep }">
+        <template #default="{ nextStep, prevStep, canGoNext, canGoPrev, isLastStep: _isLastStep }">
           <div class="flex items-center w-full">
             <SStepperItem :step="1">
               <SStepperTrigger>
@@ -1153,7 +1153,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                 <p class="text-sm text-muted-foreground mb-3">
                   {{ hasPaymentError ? 'Payment failed. Fix the error to continue.' : 'Payment details accepted.' }}
                 </p>
-                <SButton size="small" :variant="hasPaymentError ? 'default' : 'outlined'" @click="hasPaymentError = !hasPaymentError">
+                <SButton size="small" :variant="hasPaymentError ? 'filled' : 'outlined'" @click="hasPaymentError = !hasPaymentError">
                   <span class="mdi mr-1.5" :class="hasPaymentError ? 'mdi-check' : 'mdi-alert-circle'" />
                   {{ hasPaymentError ? 'Fix Error' : 'Simulate Error' }}
                 </SButton>

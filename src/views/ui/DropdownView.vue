@@ -1,122 +1,175 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { SDropdown, SDropdownItem, SDropdownDivider, SDropdownGroup, SKbd, SKbdShortcut, SButton, SApiSection, SApiTable, SApiKeyboard } from '../../index'
+import { ref, computed } from 'vue'
+import { SDropdown, SDropdownItem, SDropdownDivider, SDropdownGroup, SKbdShortcut, SButton, SIcon, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import type { DropdownMenuItem } from '../../components/ui/dropdown/SDropdown.vue'
 import DemoSection from '../../components/DemoSection.vue'
-import { Pencil, Copy, Archive, Trash2, Mail, Link, Code, QrCode, Search, Palette, Keyboard as KeyboardIcon } from 'lucide-vue-next'
+import { Search, Palette, Keyboard as KeyboardIcon } from 'lucide-vue-next'
+import { useCustomizer } from '../../composables/useCustomizer'
+import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+
+const { ri, iconPack } = useCustomizer()
+
+// Code generation helpers
+const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const cp = (mdiName: string, attr = 'icon') => {
+  if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
+  const name = getLucideImportName(mdiName)
+  return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
+}
+const li = (...mdiNames: string[]) => {
+  if (iconPack.value === 'mdi') return ''
+  return '\n' + lucideImportStatement(mdiNames)
+}
 
 // Basic items
-const basicItems: DropdownMenuItem[] = [
-  { key: 'edit', label: 'Edit', icon: Pencil },
-  { key: 'duplicate', label: 'Duplicate', icon: Copy },
-  { key: 'archive', label: 'Archive', icon: Archive },
+const basicItems = computed<DropdownMenuItem[]>(() => [
+  { key: 'edit', label: 'Edit', icon: ri('pencil') },
+  { key: 'duplicate', label: 'Duplicate', icon: ri('content-copy') },
+  { key: 'archive', label: 'Archive', icon: ri('archive') },
   { key: 'divider1', divider: true },
-  { key: 'delete', label: 'Delete', icon: Trash2, danger: true }
-]
+  { key: 'delete', label: 'Delete', icon: ri('delete'), danger: true }
+])
 
 // Items with descriptions
-const richItems: DropdownMenuItem[] = [
-  { key: 'email', label: 'Send via Email', icon: Mail, description: 'Send to recipient email address', shortcut: '⌘E' },
-  { key: 'link', label: 'Copy Link', icon: Link, description: 'Copy shareable link to clipboard', shortcut: '⌘L' },
-  { key: 'embed', label: 'Embed', icon: Code, description: 'Get embed code for websites' },
+const richItems = computed<DropdownMenuItem[]>(() => [
+  { key: 'email', label: 'Send via Email', icon: ri('email'), description: 'Send to recipient email address', shortcut: '⌘E' },
+  { key: 'link', label: 'Copy Link', icon: ri('link'), description: 'Copy shareable link to clipboard', shortcut: '⌘L' },
+  { key: 'embed', label: 'Embed', icon: ri('code-tags'), description: 'Get embed code for websites' },
   { key: 'divider1', divider: true },
-  { key: 'qr', label: 'Generate QR Code', icon: QrCode, description: 'Create scannable QR code' }
-]
+  { key: 'qr', label: 'Generate QR Code', icon: ri('qrcode'), description: 'Create scannable QR code' }
+])
 
 // Grouped items
-const groupedItems: DropdownMenuItem[] = [
+const groupedItems = computed<DropdownMenuItem[]>(() => [
   { key: 'header-view', header: 'View' },
-  { key: 'list', label: 'List View', icon: 'view-list' },
-  { key: 'grid', label: 'Grid View', icon: 'view-grid' },
-  { key: 'kanban', label: 'Kanban Board', icon: 'view-column' },
+  { key: 'list', label: 'List View', icon: ri('view-list') },
+  { key: 'grid', label: 'Grid View', icon: ri('view-grid') },
+  { key: 'kanban', label: 'Kanban Board', icon: ri('view-column') },
   { key: 'header-sort', header: 'Sort By' },
-  { key: 'name', label: 'Name', icon: 'sort-alphabetical-ascending' },
-  { key: 'date', label: 'Date Modified', icon: 'calendar' },
-  { key: 'size', label: 'Size', icon: 'chart-bar' }
-]
+  { key: 'name', label: 'Name', icon: ri('sort-alphabetical-ascending') },
+  { key: 'date', label: 'Date Modified', icon: ri('calendar') },
+  { key: 'size', label: 'Size', icon: ri('chart-bar') }
+])
 
 // Nested dropdown items
-const nestedItems: DropdownMenuItem[] = [
-  { key: 'new', label: 'New', icon: 'file-plus' },
-  { key: 'open', label: 'Open', icon: 'folder-open' },
+const _nestedItems = computed<DropdownMenuItem[]>(() => [
+  { key: 'new', label: 'New', icon: ri('file-plus') },
+  { key: 'open', label: 'Open', icon: ri('folder-open') },
   { key: 'divider1', divider: true },
-  { key: 'export', label: 'Export', icon: 'export' },
-  { key: 'import', label: 'Import', icon: 'import' },
+  { key: 'export', label: 'Export', icon: ri('export') },
+  { key: 'import', label: 'Import', icon: ri('import') },
   { key: 'divider2', divider: true },
-  { key: 'share', label: 'Share', icon: 'share-variant' },
+  { key: 'share', label: 'Share', icon: ri('share-variant') },
   { key: 'divider3', divider: true },
-  { key: 'preferences', label: 'Preferences', icon: 'cog' }
-]
+  { key: 'preferences', label: 'Preferences', icon: ri('cog') }
+])
 
-// Checkable items
-const checkableItems = ref<DropdownMenuItem[]>([
-  { key: 'bold', label: 'Bold', icon: 'format-bold', checked: true, shortcut: '⌘B' },
-  { key: 'italic', label: 'Italic', icon: 'format-italic', checked: false, shortcut: '⌘I' },
-  { key: 'underline', label: 'Underline', icon: 'format-underline', checked: true, shortcut: '⌘U' },
+// Checkable items - separate state for mutability
+const checkStates = ref<Record<string, boolean>>({
+  bold: true,
+  italic: false,
+  underline: true,
+  strike: false
+})
+
+const checkableItems = computed<DropdownMenuItem[]>(() => [
+  { key: 'bold', label: 'Bold', icon: ri('format-bold'), checked: checkStates.value.bold, shortcut: '⌘B' },
+  { key: 'italic', label: 'Italic', icon: ri('format-italic'), checked: checkStates.value.italic, shortcut: '⌘I' },
+  { key: 'underline', label: 'Underline', icon: ri('format-underline'), checked: checkStates.value.underline, shortcut: '⌘U' },
   { key: 'divider1', divider: true },
-  { key: 'strike', label: 'Strikethrough', icon: 'format-strikethrough', checked: false }
+  { key: 'strike', label: 'Strikethrough', icon: ri('format-strikethrough'), checked: checkStates.value.strike }
 ])
 
 const toggleCheckable = (key: string) => {
-  const item = checkableItems.value.find(i => i.key === key)
-  if (item && item.checked !== undefined) {
-    item.checked = !item.checked
+  if (key in checkStates.value) {
+    checkStates.value[key] = !checkStates.value[key]
   }
 }
 
 // Navigation items
-const navItems: DropdownMenuItem[] = [
-  { key: 'profile', label: 'Profile', icon: 'account', description: 'View and edit your profile' },
-  { key: 'settings', label: 'Settings', icon: 'cog', description: 'Manage preferences' },
-  { key: 'billing', label: 'Billing', icon: 'credit-card', description: 'Subscription & payments' },
-  { key: 'team', label: 'Team', icon: 'account-group', description: 'Manage team members' },
+const navItems = computed<DropdownMenuItem[]>(() => [
+  { key: 'profile', label: 'Profile', icon: ri('account'), description: 'View and edit your profile' },
+  { key: 'settings', label: 'Settings', icon: ri('cog'), description: 'Manage preferences' },
+  { key: 'billing', label: 'Billing', icon: ri('credit-card'), description: 'Subscription & payments' },
+  { key: 'team', label: 'Team', icon: ri('account-group'), description: 'Manage team members' },
   { key: 'divider1', divider: true },
-  { key: 'docs', label: 'Documentation', icon: 'book-open-variant', trailingIcon: 'open-in-new' },
-  { key: 'support', label: 'Support', icon: 'lifebuoy', trailingIcon: 'open-in-new' },
+  { key: 'docs', label: 'Documentation', icon: ri('book-open-variant'), trailingIcon: ri('open-in-new') },
+  { key: 'support', label: 'Support', icon: ri('lifebuoy'), trailingIcon: ri('open-in-new') },
   { key: 'divider2', divider: true },
-  { key: 'logout', label: 'Sign out', icon: 'logout', danger: true }
-]
+  { key: 'logout', label: 'Sign out', icon: ri('logout'), danger: true }
+])
 
 // File actions
-const fileActions: DropdownMenuItem[] = [
-  { key: 'new-file', label: 'New File', icon: 'file-plus', shortcut: '⌘N' },
-  { key: 'new-folder', label: 'New Folder', icon: 'folder-plus', shortcut: '⌘⇧N' },
+const fileActions = computed<DropdownMenuItem[]>(() => [
+  { key: 'new-file', label: 'New File', icon: ri('file-plus'), shortcut: '⌘N' },
+  { key: 'new-folder', label: 'New Folder', icon: ri('folder-plus'), shortcut: '⌘⇧N' },
   { key: 'divider1', divider: true },
-  { key: 'upload', label: 'Upload File', icon: 'upload', shortcut: '⌘U' },
-  { key: 'import', label: 'Import', icon: 'import', description: 'Import from external source' },
+  { key: 'upload', label: 'Upload File', icon: ri('upload'), shortcut: '⌘U' },
+  { key: 'import', label: 'Import', icon: ri('import'), description: 'Import from external source' },
   { key: 'divider2', divider: true },
-  { key: 'download', label: 'Download All', icon: 'download' }
-]
+  { key: 'download', label: 'Download All', icon: ri('download') }
+])
 
 // Colors for demo
-const colorItems: DropdownMenuItem[] = [
-  { key: 'red', label: 'Red', icon: 'circle' },
-  { key: 'orange', label: 'Orange', icon: 'circle' },
-  { key: 'yellow', label: 'Yellow', icon: 'circle' },
-  { key: 'green', label: 'Green', icon: 'circle' },
-  { key: 'blue', label: 'Blue', icon: 'circle' },
-  { key: 'purple', label: 'Purple', icon: 'circle' }
-]
+const _colorItems = computed<DropdownMenuItem[]>(() => [
+  { key: 'red', label: 'Red', icon: ri('circle') },
+  { key: 'orange', label: 'Orange', icon: ri('circle') },
+  { key: 'yellow', label: 'Yellow', icon: ri('circle') },
+  { key: 'green', label: 'Green', icon: ri('circle') },
+  { key: 'blue', label: 'Blue', icon: ri('circle') },
+  { key: 'purple', label: 'Purple', icon: ri('circle') }
+])
 
 // Large list for searchable demo
-const countryItems: DropdownMenuItem[] = [
-  { key: 'us', label: 'United States', icon: 'flag' },
-  { key: 'uk', label: 'United Kingdom', icon: 'flag' },
-  { key: 'de', label: 'Germany', icon: 'flag' },
-  { key: 'fr', label: 'France', icon: 'flag' },
-  { key: 'es', label: 'Spain', icon: 'flag' },
-  { key: 'it', label: 'Italy', icon: 'flag' },
-  { key: 'jp', label: 'Japan', icon: 'flag' },
-  { key: 'cn', label: 'China', icon: 'flag' },
-  { key: 'kr', label: 'South Korea', icon: 'flag' },
-  { key: 'br', label: 'Brazil', icon: 'flag' },
-  { key: 'au', label: 'Australia', icon: 'flag' },
-  { key: 'ca', label: 'Canada', icon: 'flag' },
-  { key: 'mx', label: 'Mexico', icon: 'flag' },
-  { key: 'in', label: 'India', icon: 'flag' },
-  { key: 'ru', label: 'Russia', icon: 'flag' }
-]
+const countryItems = computed<DropdownMenuItem[]>(() => [
+  { key: 'us', label: 'United States', icon: ri('flag') },
+  { key: 'uk', label: 'United Kingdom', icon: ri('flag') },
+  { key: 'de', label: 'Germany', icon: ri('flag') },
+  { key: 'fr', label: 'France', icon: ri('flag') },
+  { key: 'es', label: 'Spain', icon: ri('flag') },
+  { key: 'it', label: 'Italy', icon: ri('flag') },
+  { key: 'jp', label: 'Japan', icon: ri('flag') },
+  { key: 'cn', label: 'China', icon: ri('flag') },
+  { key: 'kr', label: 'South Korea', icon: ri('flag') },
+  { key: 'br', label: 'Brazil', icon: ri('flag') },
+  { key: 'au', label: 'Australia', icon: ri('flag') },
+  { key: 'ca', label: 'Canada', icon: ri('flag') },
+  { key: 'mx', label: 'Mexico', icon: ri('flag') },
+  { key: 'in', label: 'India', icon: ri('flag') },
+  { key: 'ru', label: 'Russia', icon: ri('flag') }
+])
+
+// Nested sub-items (extracted from inline arrays)
+const shareSubItems = computed<DropdownMenuItem[]>(() => [
+  { key: 'email', label: 'Email', icon: ri('email') },
+  { key: 'link', label: 'Copy Link', icon: ri('link-variant') },
+  { key: 'social', label: 'Social Media', icon: ri('share-variant') }
+])
+
+const exportSubItems = computed<DropdownMenuItem[]>(() => [
+  { key: 'pdf', label: 'Export as PDF', icon: ri('file-pdf-box') },
+  { key: 'docx', label: 'Export as DOCX', icon: ri('file-word-box') },
+  { key: 'xlsx', label: 'Export as XLSX', icon: ri('file-excel-box') },
+  { key: 'csv', label: 'Export as CSV', icon: ri('file-delimited') }
+])
+
+const importSubItems = computed<DropdownMenuItem[]>(() => [
+  { key: 'from-file', label: 'From File', icon: ri('file-upload') },
+  { key: 'from-url', label: 'From URL', icon: ri('link') },
+  { key: 'from-cloud', label: 'From Cloud', icon: ri('cloud-upload') }
+])
+
+const editMenuItems = computed<DropdownMenuItem[]>(() => [
+  { key: 'undo', label: 'Undo', icon: ri('undo'), shortcut: '⌘Z' },
+  { key: 'redo', label: 'Redo', icon: ri('redo'), shortcut: '⌘⇧Z' },
+  { key: 'divider1', divider: true },
+  { key: 'cut', label: 'Cut', icon: ri('content-cut'), shortcut: '⌘X' },
+  { key: 'copy', label: 'Copy', icon: ri('content-copy'), shortcut: '⌘C' },
+  { key: 'paste', label: 'Paste', icon: ri('content-paste'), shortcut: '⌘V' },
+  { key: 'divider2', divider: true },
+  { key: 'select-all', label: 'Select All', icon: ri('select-all'), shortcut: '⌘A' }
+])
 
 // Event handling
 const lastSelected = ref<string | null>(null)
@@ -125,62 +178,62 @@ const handleSelect = (key: string) => {
   lastSelected.value = key
 }
 
-// Code snippets
-const basicCode = `<script setup>
+// Code snippets - all computed for icon pack reactivity
+const basicCode = computed(() => `<script setup>${li('pencil', 'content-copy', 'archive', 'delete', 'menu')}
 import { SDropdown } from 'saka-ui'
 
 const items = [
-  { key: 'edit', label: 'Edit', icon: 'pencil' },
-  { key: 'duplicate', label: 'Duplicate', icon: 'content-copy' },
-  { key: 'archive', label: 'Archive', icon: 'archive' },
+  { key: 'edit', label: 'Edit', icon: ${cv('pencil')} },
+  { key: 'duplicate', label: 'Duplicate', icon: ${cv('content-copy')} },
+  { key: 'archive', label: 'Archive', icon: ${cv('archive')} },
   { key: 'divider1', divider: true },
-  { key: 'delete', label: 'Delete', icon: 'delete', danger: true }
+  { key: 'delete', label: 'Delete', icon: ${cv('delete')}, danger: true }
 ]
 <\/script>
 
 <template>
-  <SDropdown :items="items" label="Actions" icon="menu" />
-</template>`
+  <SDropdown :items="items" label="Actions" ${cp('menu')} />
+</template>`)
 
-const slotCode = `<SDropdown>
+const slotCode = computed(() => `<SDropdown>
   <template #trigger>
     <SButton class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-lg font-medium hover:opacity-90 transition-opacity">
-      <span class="mdi mdi-rocket-launch"></span>
+      <SIcon ${cp('rocket-launch')} :size="16" />
       Quick Actions
     </SButton>
   </template>
 
-  <SDropdownItem item-key="new" icon="plus" label="Create New" description="Start a new project" />
-  <SDropdownItem item-key="import" icon="import" label="Import" description="Import existing project" />
+  <SDropdownItem item-key="new" ${cp('plus')} label="Create New" description="Start a new project" />
+  <SDropdownItem item-key="import" ${cp('import')} label="Import" description="Import existing project" />
   <SDropdownDivider />
   <SDropdownGroup label="Recent">
-    <SDropdownItem item-key="project-1" icon="folder" label="My Project" />
-    <SDropdownItem item-key="project-2" icon="folder" label="Design System" />
+    <SDropdownItem item-key="project-1" ${cp('folder')} label="My Project" />
+    <SDropdownItem item-key="project-2" ${cp('folder')} label="Design System" />
   </SDropdownGroup>
-</SDropdown>`
+</SDropdown>`)
 
-const hoverCode = `<SDropdown
+const hoverCode = computed(() => `<SDropdown
   :items="items"
   trigger="click"
   label="Click"
-  icon="cursor-default-click"
+  ${cp('cursor-default-click')}
 />
 <SDropdown
   :items="items"
   trigger="hover"
   label="Hover"
-  icon="cursor-default"
+  ${cp('cursor-default')}
   :show-delay="100"
   :hide-delay="200"
 />
 <SDropdown :items="items" trigger="context">
   <template #trigger>
     <div class="px-6 py-4 border-2 border-dashed border-(--s-border) rounded-xl text-(--s-text-secondary) text-sm hover:border-(--s-border-hover) transition-colors cursor-context-menu">
-      <span class="mdi mdi-mouse-right-click mr-2"></span>
+      <SIcon ${cp('mouse-right-click')} :size="16" class="mr-2" />
       Right-click me
     </div>
   </template>
-</SDropdown>`
+</SDropdown>`)
 
 const placementCode = `<SDropdown :items="items" placement="top-start" label="Top Start" />
 <SDropdown :items="items" placement="top" label="Top" />
@@ -191,22 +244,25 @@ const placementCode = `<SDropdown :items="items" placement="top-start" label="To
 <SDropdown :items="items" placement="bottom" label="Bottom" />
 <SDropdown :items="items" placement="bottom-end" label="Bottom End" />`
 
-const animationCode = `<SDropdown :items="items" animation="fade" label="Fade" icon="blur" />
-<SDropdown :items="items" animation="slide" label="Slide" icon="arrow-expand-down" />
-<SDropdown :items="items" animation="scale" label="Scale" icon="resize" />
-<SDropdown :items="items" animation="reveal" label="Reveal" icon="blur-radial" />`
+const animationCode = computed(() => `<SDropdown :items="items" animation="fade" label="Fade" ${cp('blur')} />
+<SDropdown :items="items" animation="slide" label="Slide" ${cp('arrow-expand-down')} />
+<SDropdown :items="items" animation="scale" label="Scale" ${cp('resize')} />
+<SDropdown :items="items" animation="reveal" label="Reveal" ${cp('blur-radial')} />`)
 
-const searchableCode = `<SDropdown
+const searchableCode = computed(() => `<SDropdown
   :items="countryItems"
   searchable
   search-placeholder="Search countries..."
   label="Select Country"
-  icon="earth"
+  ${cp('earth')}
   :width="260"
   max-height="280px"
-/>`
+/>`)
 
-const checkableCode = `<script setup>
+const checkableCode = computed(() => `<script setup>${li('format-text')}
+import { ref } from 'vue'
+import { SDropdown } from 'saka-ui'
+
 const items = ref([
   { key: 'bold', label: 'Bold', checked: true },
   { key: 'italic', label: 'Italic', checked: false }
@@ -222,25 +278,25 @@ const onSelect = (key) => {
   <SDropdown
     :items="items"
     label="Format"
-    icon="format-text"
+    ${cp('format-text')}
     :width="220"
     :close-on-select="false"
     @select="onSelect"
   />
-</template>`
+</template>`)
 
-const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :close-on-select="false">
+const nestedCode = computed(() => `<SDropdown label="File" ${cp('file-document')} :width="220" :close-on-select="false">
   <template #default>
-    <SDropdownItem item-key="new" icon="file-plus" label="New" />
-    <SDropdownItem item-key="open" icon="folder-open" label="Open" />
+    <SDropdownItem item-key="new" ${cp('file-plus')} label="New" />
+    <SDropdownItem item-key="open" ${cp('folder-open')} label="Open" />
     <SDropdownDivider />
 
     <!-- Nested dropdown for Share -->
     <SDropdown
       :items="[
-        { key: 'email', label: 'Email', icon: 'email' },
-        { key: 'link', label: 'Copy Link', icon: 'link-variant' },
-        { key: 'social', label: 'Social Media', icon: 'share-variant' }
+        { key: 'email', label: 'Email', icon: ${cv('email')} },
+        { key: 'link', label: 'Copy Link', icon: ${cv('link-variant')} },
+        { key: 'social', label: 'Social Media', icon: ${cv('share-variant')} }
       ]"
       trigger="hover"
       placement="right-start"
@@ -249,11 +305,11 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     >
       <template #trigger>
         <div class="s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none mx-1.5 rounded-lg px-3 py-2 text-sm text-(--s-text-primary) hover:bg-(--s-bg-tertiary)">
-          <span class="mdi mdi-share-variant text-base mr-2.5 text-(--s-text-secondary)"></span>
+          <SIcon ${cp('share-variant')} :size="16" class="mr-2.5 text-(--s-text-secondary)" />
           <div class="flex-1 min-w-0">
             <div class="truncate">Share</div>
           </div>
-          <span class="mdi mdi-chevron-right text-base ml-4 shrink-0 text-(--s-text-tertiary)"></span>
+          <SIcon ${cp('chevron-right')} :size="16" class="ml-4 shrink-0 text-(--s-text-tertiary)" />
         </div>
       </template>
     </SDropdown>
@@ -263,10 +319,10 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Nested dropdown for Export -->
     <SDropdown
       :items="[
-        { key: 'pdf', label: 'Export as PDF', icon: 'file-pdf-box' },
-        { key: 'docx', label: 'Export as DOCX', icon: 'file-word-box' },
-        { key: 'xlsx', label: 'Export as XLSX', icon: 'file-excel-box' },
-        { key: 'csv', label: 'Export as CSV', icon: 'file-delimited' }
+        { key: 'pdf', label: 'Export as PDF', icon: ${cv('file-pdf-box')} },
+        { key: 'docx', label: 'Export as DOCX', icon: ${cv('file-word-box')} },
+        { key: 'xlsx', label: 'Export as XLSX', icon: ${cv('file-excel-box')} },
+        { key: 'csv', label: 'Export as CSV', icon: ${cv('file-delimited')} }
       ]"
       trigger="hover"
       placement="right-start"
@@ -275,11 +331,11 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     >
       <template #trigger>
         <div class="s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none mx-1.5 rounded-lg px-3 py-2 text-sm text-(--s-text-primary) hover:bg-(--s-bg-tertiary)">
-          <span class="mdi mdi-export text-base mr-2.5 text-(--s-text-secondary)"></span>
+          <SIcon ${cp('export')} :size="16" class="mr-2.5 text-(--s-text-secondary)" />
           <div class="flex-1 min-w-0">
             <div class="truncate">Export</div>
           </div>
-          <span class="mdi mdi-chevron-right text-base ml-4 shrink-0 text-(--s-text-tertiary)"></span>
+          <SIcon ${cp('chevron-right')} :size="16" class="ml-4 shrink-0 text-(--s-text-tertiary)" />
         </div>
       </template>
     </SDropdown>
@@ -287,9 +343,9 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Nested dropdown for Import -->
     <SDropdown
       :items="[
-        { key: 'from-file', label: 'From File', icon: 'file-upload' },
-        { key: 'from-url', label: 'From URL', icon: 'link' },
-        { key: 'from-cloud', label: 'From Cloud', icon: 'cloud-upload' }
+        { key: 'from-file', label: 'From File', icon: ${cv('file-upload')} },
+        { key: 'from-url', label: 'From URL', icon: ${cv('link')} },
+        { key: 'from-cloud', label: 'From Cloud', icon: ${cv('cloud-upload')} }
       ]"
       trigger="hover"
       placement="right-start"
@@ -298,19 +354,69 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     >
       <template #trigger>
         <div class="s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none mx-1.5 rounded-lg px-3 py-2 text-sm text-(--s-text-primary) hover:bg-(--s-bg-tertiary)">
-          <span class="mdi mdi-import text-base mr-2.5 text-(--s-text-secondary)"></span>
+          <SIcon ${cp('import')} :size="16" class="mr-2.5 text-(--s-text-secondary)" />
           <div class="flex-1 min-w-0">
             <div class="truncate">Import</div>
           </div>
-          <span class="mdi mdi-chevron-right text-base ml-4 shrink-0 text-(--s-text-tertiary)"></span>
+          <SIcon ${cp('chevron-right')} :size="16" class="ml-4 shrink-0 text-(--s-text-tertiary)" />
         </div>
       </template>
     </SDropdown>
 
     <SDropdownDivider />
-    <SDropdownItem item-key="preferences" icon="cog" label="Preferences" />
+    <SDropdownItem item-key="preferences" ${cp('cog')} label="Preferences" />
   </template>
-</SDropdown>`
+</SDropdown>`)
+
+// Inline code snippets (extracted from template)
+const richCode = computed(() => `items = [
+  { key: 'email', label: 'Send via Email', icon: ${cv('email')}, description: 'Send to email', shortcut: '⌘E' },
+  { key: 'link', label: 'Copy Link', icon: ${cv('link-variant')}, shortcut: '⌘L' }
+]
+
+<SDropdown :items='items' label='Share' ${cp('share-variant')} :width='320' />`)
+
+const groupedCode = computed(() => `items = [
+  { key: 'header-view', header: 'View' },
+  { key: 'list', label: 'List View', icon: ${cv('view-list')} },
+  { key: 'header-sort', header: 'Sort By' },
+  { key: 'name', label: 'Name', icon: ${cv('sort-alphabetical-ascending')} }
+]
+
+<SDropdown :items='items' label='Display Options' ${cp('tune')} :width='220' />`)
+
+const kbdCode = computed(() => `<SDropdown>
+  <template #trigger>
+    <SButton variant="outlined">Edit Menu</SButton>
+  </template>
+  <template #default>
+    <SDropdownItem item-key="cut" ${cp('content-cut')}>
+      <div class="flex items-center justify-between w-full">
+        <span>Cut</span>
+        <SKbdShortcut :keys="['⌘', 'X']" size="xs" variant="flat" />
+      </div>
+    </SDropdownItem>
+    <SDropdownItem item-key="copy" ${cp('content-copy')}>
+      <div class="flex items-center justify-between w-full">
+        <span>Copy</span>
+        <SKbdShortcut :keys="['⌘', 'C']" size="xs" variant="flat" />
+      </div>
+    </SDropdownItem>
+    <SDropdownItem item-key="paste" ${cp('content-paste')}>
+      <div class="flex items-center justify-between w-full">
+        <span>Paste</span>
+        <SKbdShortcut :keys="['⌘', 'V']" size="xs" variant="flat" />
+      </div>
+    </SDropdownItem>
+    <SDropdownDivider />
+    <SDropdownItem item-key="select-all" ${cp('select-all')}>
+      <div class="flex items-center justify-between w-full">
+        <span>Select All</span>
+        <SKbdShortcut :keys="['⌘', 'A']" size="xs" variant="flat" />
+      </div>
+    </SDropdownItem>
+  </template>
+</SDropdown>`)
 </script>
 
 <template>
@@ -332,14 +438,14 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-gesture-tap text-2xl text-emerald-400"></span>
+            <SIcon name="gesture-tap" :size="24" class="text-emerald-400" />
             <h3 class="font-semibold text-(--s-text-primary)">Multiple Triggers</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Click, hover, context menu, or manual control for maximum flexibility.</p>
         </div>
         <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-animation-play text-2xl text-blue-400"></span>
+            <SIcon name="animation-play" :size="24" class="text-blue-400" />
             <h3 class="font-semibold text-(--s-text-primary)">Rich Animations</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Fade, slide, scale, and reveal animations with smart placement.</p>
@@ -360,7 +466,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
         </div>
         <div class="p-4 rounded-xl bg-amber-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
-            <span class="mdi mdi-checkbox-multiple-marked text-2xl text-amber-400"></span>
+            <SIcon name="checkbox-multiple-marked" :size="24" class="text-amber-400" />
             <h3 class="font-semibold text-(--s-text-primary)">Checkable Items</h3>
           </div>
           <p class="text-sm text-(--s-text-secondary)">Toggle items with visual checkmarks for settings menus.</p>
@@ -378,17 +484,17 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Basic Usage -->
     <section id="basic-usage">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Basic Usage</h2>
-      <DemoSection 
+      <DemoSection
         title="Simple Dropdown"
         description="Basic dropdown with items array. Click the button to open the menu."
         :code="basicCode"
         language="vue"
       >
         <div class="flex flex-wrap items-center gap-4">
-          <SDropdown 
-            :items="basicItems" 
+          <SDropdown
+            :items="basicItems"
             label="Actions"
-            icon="menu"
+            :icon="ri('menu')"
             @select="handleSelect"
           />
           <p v-if="lastSelected" class="text-sm text-(--s-text-secondary)">
@@ -401,7 +507,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- With Slots -->
     <section id="using-slots">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Using Slots</h2>
-      <DemoSection 
+      <DemoSection
         title="Custom Content with Slots"
         description="Use slots for custom triggers and menu items with full control."
         :code="slotCode"
@@ -412,17 +518,17 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
           <SDropdown @select="handleSelect">
             <template #trigger>
               <SButton class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-lg font-medium hover:opacity-90 transition-opacity">
-                <span class="mdi mdi-rocket-launch"></span>
+                <SIcon :icon="ri('rocket-launch')" :size="16" />
                 Quick Actions
               </SButton>
             </template>
-            
-            <SDropdownItem item-key="new" icon="plus" label="Create New" description="Start a new project" />
-            <SDropdownItem item-key="import" icon="import" label="Import" description="Import existing project" />
+
+            <SDropdownItem item-key="new" :icon="ri('plus')" label="Create New" description="Start a new project" />
+            <SDropdownItem item-key="import" :icon="ri('import')" label="Import" description="Import existing project" />
             <SDropdownDivider />
             <SDropdownGroup label="Recent">
-              <SDropdownItem item-key="project-1" icon="folder" label="My Project" />
-              <SDropdownItem item-key="project-2" icon="folder" label="Design System" />
+              <SDropdownItem item-key="project-1" :icon="ri('folder')" label="My Project" />
+              <SDropdownItem item-key="project-2" :icon="ri('folder')" label="Design System" />
             </SDropdownGroup>
           </SDropdown>
 
@@ -430,7 +536,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
           <SDropdown :items="basicItems" hide-arrow @select="handleSelect">
             <template #trigger>
               <SButton variant="ghost" iconOnly class="border border-(--s-border)">
-                <span class="mdi mdi-dots-vertical text-xl"></span>
+                <SIcon :icon="ri('dots-vertical')" :size="20" />
               </SButton>
             </template>
           </SDropdown>
@@ -441,34 +547,34 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Trigger Modes -->
     <section id="trigger-modes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Trigger Modes</h2>
-      <DemoSection 
+      <DemoSection
         title="Click, Hover & Context Menu"
         description="Different ways to trigger the dropdown menu."
         :code="hoverCode"
         language="vue"
       >
         <div class="flex flex-wrap items-center gap-4">
-          <SDropdown 
-            :items="basicItems" 
-            trigger="click" 
+          <SDropdown
+            :items="basicItems"
+            trigger="click"
             label="Click"
-            icon="cursor-default-click"
+            :icon="ri('cursor-default-click')"
           />
-          <SDropdown 
-            :items="basicItems" 
-            trigger="hover" 
+          <SDropdown
+            :items="basicItems"
+            trigger="hover"
             label="Hover"
-            icon="cursor-default"
+            :icon="ri('cursor-default')"
             :show-delay="100"
             :hide-delay="200"
           />
-          <SDropdown 
-            :items="basicItems" 
+          <SDropdown
+            :items="basicItems"
             trigger="context"
           >
             <template #trigger>
               <div class="px-6 py-4 border-2 border-dashed border-(--s-border) rounded-xl text-(--s-text-secondary) text-sm hover:border-(--s-border-hover) transition-colors cursor-context-menu">
-                <span class="mdi mdi-mouse-right-click mr-2"></span>
+                <SIcon :icon="ri('mouse-right-click')" :size="16" class="mr-2" />
                 Right-click me
               </div>
             </template>
@@ -480,7 +586,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Sizes -->
     <section id="sizes">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Sizes</h2>
-      <DemoSection 
+      <DemoSection
         title="Size Variants"
         description="Three size options: small, medium (default), and large."
         :code="`<SDropdown :items='items' size='small' label='Small' />
@@ -499,7 +605,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Variants -->
     <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Variants</h2>
-      <DemoSection 
+      <DemoSection
         title="Visual Variants"
         description="Different visual styles for the dropdown menu."
         :code="`<SDropdown :items='items' variant='default' label='Default' />
@@ -518,7 +624,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Placement -->
     <section id="placement">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Placement</h2>
-      <DemoSection 
+      <DemoSection
         title="Menu Positioning"
         description="12 placement options with automatic flip when near viewport edges."
         :code="placementCode"
@@ -535,7 +641,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
             <SDropdown :items="basicItems" placement="top-end" label="Top End" />
           </div>
           <div></div>
-          
+
           <div class="flex justify-start">
             <SDropdown :items="basicItems" placement="left-start" label="Left" />
           </div>
@@ -544,7 +650,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
           <div class="flex justify-end">
             <SDropdown :items="basicItems" placement="right-start" label="Right" />
           </div>
-          
+
           <div class="flex justify-center">
             <SDropdown :items="basicItems" placement="bottom-start" label="Bottom Start" />
           </div>
@@ -561,17 +667,17 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Animations -->
     <section id="animations">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Animations</h2>
-      <DemoSection 
+      <DemoSection
         title="Animation Types"
         description="Four beautiful animation styles for menu transitions."
         :code="animationCode"
         language="vue"
       >
         <div class="flex flex-wrap items-center gap-4">
-          <SDropdown :items="basicItems" animation="fade" label="Fade" icon="blur" />
-          <SDropdown :items="basicItems" animation="slide" label="Slide" icon="arrow-expand-down" />
-          <SDropdown :items="basicItems" animation="scale" label="Scale" icon="resize" />
-          <SDropdown :items="basicItems" animation="reveal" label="Reveal" icon="blur-radial" />
+          <SDropdown :items="basicItems" animation="fade" label="Fade" :icon="ri('blur')" />
+          <SDropdown :items="basicItems" animation="slide" label="Slide" :icon="ri('arrow-expand-down')" />
+          <SDropdown :items="basicItems" animation="scale" label="Scale" :icon="ri('resize')" />
+          <SDropdown :items="basicItems" animation="reveal" label="Reveal" :icon="ri('blur-radial')" />
         </div>
       </DemoSection>
     </section>
@@ -579,27 +685,22 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Rich Items -->
     <section id="rich-menu-items">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Rich Menu Items</h2>
-      <DemoSection 
+      <DemoSection
         title="Icons, Descriptions & Shortcuts"
         description="Menu items with leading icons, descriptions, and keyboard shortcuts."
-        :code="`items = [
-  { key: 'email', label: 'Send via Email', icon: 'email', description: 'Send to email', shortcut: '⌘E' },
-  { key: 'link', label: 'Copy Link', icon: 'link-variant', shortcut: '⌘L' }
-]
-
-<SDropdown :items='items' label='Share' icon='share-variant' :width='320' />`"
+        :code="richCode"
         language="javascript"
       >
         <div class="flex flex-wrap items-center gap-4">
-          <SDropdown 
-            :items="richItems" 
+          <SDropdown
+            :items="richItems"
             label="Share"
-            icon="share-variant"
+            :icon="ri('share-variant')"
             :width="320"
           />
-          
-          <SDropdown 
-            :items="navItems" 
+
+          <SDropdown
+            :items="navItems"
             :width="280"
           >
             <template #trigger>
@@ -609,7 +710,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
                   <div class="text-sm font-medium text-(--s-text-primary)">John Doe</div>
                   <div class="text-xs text-(--s-text-tertiary)">john@example.com</div>
                 </div>
-                <span class="mdi mdi-chevron-down text-(--s-text-tertiary)"></span>
+                <SIcon :icon="ri('chevron-down')" :size="16" class="text-(--s-text-tertiary)" />
               </div>
             </template>
           </SDropdown>
@@ -620,23 +721,16 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Grouped Items -->
     <section id="grouped-items">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Grouped Items</h2>
-      <DemoSection 
+      <DemoSection
         title="Section Headers"
         description="Organize menu items into groups with headers."
-        :code="`items = [
-  { key: 'header-view', header: 'View' },
-  { key: 'list', label: 'List View', icon: 'view-list' },
-  { key: 'header-sort', header: 'Sort By' },
-  { key: 'name', label: 'Name', icon: 'sort-alphabetical-ascending' }
-]
-
-<SDropdown :items='items' label='Display Options' icon='tune' :width='220' />`"
+        :code="groupedCode"
         language="javascript"
       >
-        <SDropdown 
-          :items="groupedItems" 
+        <SDropdown
+          :items="groupedItems"
           label="Display Options"
-          icon="tune"
+          :icon="ri('tune')"
           :width="220"
         />
       </DemoSection>
@@ -645,30 +739,26 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Nested Dropdowns -->
     <section id="nested-dropdowns">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Nested Dropdowns</h2>
-      <DemoSection 
+      <DemoSection
         title="Submenus with Nested Dropdowns"
         description="Create nested dropdown menus using slots. Perfect for complex navigation structures."
         :code="nestedCode"
         language="vue"
       >
-        <SDropdown 
+        <SDropdown
           label="File"
-          icon="file-document"
+          :icon="ri('file-document')"
           :width="220"
           :close-on-select="false"
         >
           <template #default>
-            <SDropdownItem item-key="new" icon="file-plus" label="New" />
-            <SDropdownItem item-key="open" icon="folder-open" label="Open" />
+            <SDropdownItem item-key="new" :icon="ri('file-plus')" label="New" />
+            <SDropdownItem item-key="open" :icon="ri('folder-open')" label="Open" />
             <SDropdownDivider />
-            
+
             <!-- Nested dropdown for Share -->
-            <SDropdown 
-              :items="[
-                { key: 'email', label: 'Email', icon: 'email' },
-                { key: 'link', label: 'Copy Link', icon: 'link-variant' },
-                { key: 'social', label: 'Social Media', icon: 'share-variant' }
-              ]"
+            <SDropdown
+              :items="shareSubItems"
               trigger="hover"
               placement="right-start"
               :width="200"
@@ -676,25 +766,20 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
             >
               <template #trigger>
                 <div class="s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none mx-1.5 rounded-lg px-3 py-2 text-sm text-(--s-text-primary) hover:bg-(--s-bg-tertiary)">
-                  <span class="mdi mdi-share-variant text-base mr-2.5 text-(--s-text-secondary)"></span>
+                  <SIcon :icon="ri('share-variant')" :size="16" class="mr-2.5 text-(--s-text-secondary)" />
                   <div class="flex-1 min-w-0">
                     <div class="truncate">Share</div>
                   </div>
-                  <span class="mdi mdi-chevron-right text-base ml-4 shrink-0 text-(--s-text-tertiary)"></span>
+                  <SIcon :icon="ri('chevron-right')" :size="16" class="ml-4 shrink-0 text-(--s-text-tertiary)" />
                 </div>
               </template>
             </SDropdown>
-            
+
             <SDropdownDivider />
-            
+
             <!-- Nested dropdown for Export -->
-            <SDropdown 
-              :items="[
-                { key: 'pdf', label: 'Export as PDF', icon: 'file-pdf-box' },
-                { key: 'docx', label: 'Export as DOCX', icon: 'file-word-box' },
-                { key: 'xlsx', label: 'Export as XLSX', icon: 'file-excel-box' },
-                { key: 'csv', label: 'Export as CSV', icon: 'file-delimited' }
-              ]"
+            <SDropdown
+              :items="exportSubItems"
               trigger="hover"
               placement="right-start"
               :width="220"
@@ -702,22 +787,18 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
             >
               <template #trigger>
                 <div class="s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none mx-1.5 rounded-lg px-3 py-2 text-sm text-(--s-text-primary) hover:bg-(--s-bg-tertiary)">
-                  <span class="mdi mdi-export text-base mr-2.5 text-(--s-text-secondary)"></span>
+                  <SIcon :icon="ri('export')" :size="16" class="mr-2.5 text-(--s-text-secondary)" />
                   <div class="flex-1 min-w-0">
                     <div class="truncate">Export</div>
                   </div>
-                  <span class="mdi mdi-chevron-right text-base ml-4 shrink-0 text-(--s-text-tertiary)"></span>
+                  <SIcon :icon="ri('chevron-right')" :size="16" class="ml-4 shrink-0 text-(--s-text-tertiary)" />
                 </div>
               </template>
             </SDropdown>
-            
+
             <!-- Nested dropdown for Import -->
-            <SDropdown 
-              :items="[
-                { key: 'from-file', label: 'From File', icon: 'file-upload' },
-                { key: 'from-url', label: 'From URL', icon: 'link' },
-                { key: 'from-cloud', label: 'From Cloud', icon: 'cloud-upload' }
-              ]"
+            <SDropdown
+              :items="importSubItems"
               trigger="hover"
               placement="right-start"
               :width="200"
@@ -725,17 +806,17 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
             >
               <template #trigger>
                 <div class="s-dropdown-item relative flex items-center cursor-pointer transition-all duration-150 select-none mx-1.5 rounded-lg px-3 py-2 text-sm text-(--s-text-primary) hover:bg-(--s-bg-tertiary)">
-                  <span class="mdi mdi-import text-base mr-2.5 text-(--s-text-secondary)"></span>
+                  <SIcon :icon="ri('import')" :size="16" class="mr-2.5 text-(--s-text-secondary)" />
                   <div class="flex-1 min-w-0">
                     <div class="truncate">Import</div>
                   </div>
-                  <span class="mdi mdi-chevron-right text-base ml-4 shrink-0 text-(--s-text-tertiary)"></span>
+                  <SIcon :icon="ri('chevron-right')" :size="16" class="ml-4 shrink-0 text-(--s-text-tertiary)" />
                 </div>
               </template>
             </SDropdown>
-            
+
             <SDropdownDivider />
-            <SDropdownItem item-key="preferences" icon="cog" label="Preferences" />
+            <SDropdownItem item-key="preferences" :icon="ri('cog')" label="Preferences" />
           </template>
         </SDropdown>
       </DemoSection>
@@ -744,16 +825,16 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Checkable Items -->
     <section id="checkable-items">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Checkable Items</h2>
-      <DemoSection 
+      <DemoSection
         title="Toggle States"
         description="Items with checkbox states for settings and toggle menus."
         :code="checkableCode"
         language="vue"
       >
-        <SDropdown 
-          :items="checkableItems" 
+        <SDropdown
+          :items="checkableItems"
           label="Format"
-          icon="format-text"
+          :icon="ri('format-text')"
           :width="220"
           :close-on-select="false"
           @select="toggleCheckable"
@@ -764,18 +845,18 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Searchable -->
     <section id="searchable">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Searchable</h2>
-      <DemoSection 
+      <DemoSection
         title="Search & Filter"
         description="Built-in search for filtering through long lists."
         :code="searchableCode"
         language="vue"
       >
-        <SDropdown 
-          :items="countryItems" 
+        <SDropdown
+          :items="countryItems"
           searchable
           search-placeholder="Search countries..."
           label="Select Country"
-          icon="earth"
+          :icon="ri('earth')"
           :width="260"
           max-height="280px"
         />
@@ -785,7 +866,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- Colors -->
     <section id="custom-colors">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Custom Colors</h2>
-      <DemoSection 
+      <DemoSection
         title="Accent Colors"
         description="Customize the accent color for checked items and highlights."
         :code="`<SDropdown :items='items' color='#3b82f6' label='Blue' :close-on-select='false' />
@@ -804,7 +885,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
     <!-- File Menu Example -->
     <section id="real-world-examples">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-4">Real-World Examples</h2>
-      <DemoSection 
+      <DemoSection
         title="Application Menu Bar"
         description="A typical desktop application menu bar with file, edit, and view menus."
         :code="`<SDropdown :items='fileActions' variant='filled' :width='240' hide-arrow>
@@ -826,8 +907,8 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
       >
         <div class="p-4 bg-(--s-bg-secondary) rounded-xl border border-(--s-border)">
           <div class="flex items-center gap-1 p-1 bg-(--s-bg-tertiary) rounded-lg w-fit">
-            <SDropdown 
-              :items="fileActions" 
+            <SDropdown
+              :items="fileActions"
               variant="filled"
               :width="240"
               hide-arrow
@@ -836,17 +917,8 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
                 <SButton variant="ghost" size="small">File</SButton>
               </template>
             </SDropdown>
-            <SDropdown 
-              :items="[
-                { key: 'undo', label: 'Undo', icon: 'undo', shortcut: '⌘Z' },
-                { key: 'redo', label: 'Redo', icon: 'redo', shortcut: '⌘⇧Z' },
-                { key: 'divider1', divider: true },
-                { key: 'cut', label: 'Cut', icon: 'content-cut', shortcut: '⌘X' },
-                { key: 'copy', label: 'Copy', icon: 'content-copy', shortcut: '⌘C' },
-                { key: 'paste', label: 'Paste', icon: 'content-paste', shortcut: '⌘V' },
-                { key: 'divider2', divider: true },
-                { key: 'select-all', label: 'Select All', icon: 'select-all', shortcut: '⌘A' }
-              ]" 
+            <SDropdown
+              :items="editMenuItems"
               variant="filled"
               :width="200"
               hide-arrow
@@ -855,8 +927,8 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
                 <SButton variant="ghost" size="small">Edit</SButton>
               </template>
             </SDropdown>
-            <SDropdown 
-              :items="groupedItems" 
+            <SDropdown
+              :items="groupedItems"
               variant="filled"
               :width="220"
               hide-arrow
@@ -876,38 +948,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
       <DemoSection
         title="Menu Items with Shortcuts"
         description="Use SKbdShortcut inside dropdown items to display keyboard shortcut hints."
-        code="<SDropdown>
-  <template #trigger>
-    <SButton variant=&quot;outlined&quot;>Edit Menu</SButton>
-  </template>
-  <template #default>
-    <SDropdownItem item-key=&quot;cut&quot; icon=&quot;content-cut&quot;>
-      <div class=&quot;flex items-center justify-between w-full&quot;>
-        <span>Cut</span>
-        <SKbdShortcut :keys=&quot;['⌘', 'X']&quot; size=&quot;xs&quot; variant=&quot;flat&quot; />
-      </div>
-    </SDropdownItem>
-    <SDropdownItem item-key=&quot;copy&quot; icon=&quot;content-copy&quot;>
-      <div class=&quot;flex items-center justify-between w-full&quot;>
-        <span>Copy</span>
-        <SKbdShortcut :keys=&quot;['⌘', 'C']&quot; size=&quot;xs&quot; variant=&quot;flat&quot; />
-      </div>
-    </SDropdownItem>
-    <SDropdownItem item-key=&quot;paste&quot; icon=&quot;content-paste&quot;>
-      <div class=&quot;flex items-center justify-between w-full&quot;>
-        <span>Paste</span>
-        <SKbdShortcut :keys=&quot;['⌘', 'V']&quot; size=&quot;xs&quot; variant=&quot;flat&quot; />
-      </div>
-    </SDropdownItem>
-    <SDropdownDivider />
-    <SDropdownItem item-key=&quot;select-all&quot; icon=&quot;select-all&quot;>
-      <div class=&quot;flex items-center justify-between w-full&quot;>
-        <span>Select All</span>
-        <SKbdShortcut :keys=&quot;['⌘', 'A']&quot; size=&quot;xs&quot; variant=&quot;flat&quot; />
-      </div>
-    </SDropdownItem>
-  </template>
-</SDropdown>"
+        :code="kbdCode"
         language="vue"
       >
         <SDropdown>
@@ -915,26 +956,26 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
             <SButton variant="outlined">Edit Menu</SButton>
           </template>
           <template #default>
-            <SDropdownItem item-key="cut" icon="content-cut">
+            <SDropdownItem item-key="cut" :icon="ri('content-cut')">
               <div class="flex items-center justify-between w-full">
                 <span>Cut</span>
                 <SKbdShortcut :keys="['⌘', 'X']" size="xs" variant="flat" />
               </div>
             </SDropdownItem>
-            <SDropdownItem item-key="copy" icon="content-copy">
+            <SDropdownItem item-key="copy" :icon="ri('content-copy')">
               <div class="flex items-center justify-between w-full">
                 <span>Copy</span>
                 <SKbdShortcut :keys="['⌘', 'C']" size="xs" variant="flat" />
               </div>
             </SDropdownItem>
-            <SDropdownItem item-key="paste" icon="content-paste">
+            <SDropdownItem item-key="paste" :icon="ri('content-paste')">
               <div class="flex items-center justify-between w-full">
                 <span>Paste</span>
                 <SKbdShortcut :keys="['⌘', 'V']" size="xs" variant="flat" />
               </div>
             </SDropdownItem>
             <SDropdownDivider />
-            <SDropdownItem item-key="select-all" icon="select-all">
+            <SDropdownItem item-key="select-all" :icon="ri('select-all')">
               <div class="flex items-center justify-between w-full">
                 <span>Select All</span>
                 <SKbdShortcut :keys="['⌘', 'A']" size="xs" variant="flat" />
@@ -951,7 +992,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
       <div class="space-y-8">
         <div>
           <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
-            <span class="mdi mdi-menu-down text-(--s-primary)" />
+            <SIcon name="menu-down" :size="16" class="text-(--s-primary)" />
             SDropdown
           </h3>
           <SApiTable
@@ -990,8 +1031,8 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
             :props="([
               { name: 'key', type: 'string', default: '-', description: 'Unique identifier for the item' },
               { name: 'label', type: 'string', default: '-', description: 'Display text' },
-              { name: 'icon', type: 'string', default: 'undefined', description: 'Leading icon (MDI name)' },
-              { name: 'trailingIcon', type: 'string', default: 'undefined', description: 'Trailing icon' },
+              { name: 'icon', type: 'IconProp', default: 'undefined', description: 'Leading icon (MDI name or Lucide component)' },
+              { name: 'trailingIcon', type: 'IconProp', default: 'undefined', description: 'Trailing icon' },
               { name: 'description', type: 'string', default: 'undefined', description: 'Description text below label' },
               { name: 'shortcut', type: 'string', default: 'undefined', description: 'Keyboard shortcut display' },
               { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the item' },
@@ -1029,7 +1070,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
 
         <div>
           <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
-            <span class="mdi mdi-menu-right text-(--s-primary)" />
+            <SIcon name="menu-right" :size="16" class="text-(--s-primary)" />
             SDropdownItem
           </h3>
           <SApiTable
@@ -1070,7 +1111,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
 
         <div>
           <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
-            <span class="mdi mdi-minus text-(--s-primary)" />
+            <SIcon name="minus" :size="16" class="text-(--s-primary)" />
             SDropdownDivider
           </h3>
           <SApiTable
@@ -1084,7 +1125,7 @@ const nestedCode = `<SDropdown label="File" icon="file-document" :width="220" :c
 
         <div>
           <h3 class="text-xl font-semibold text-(--s-text-primary) mb-4 flex items-center gap-2">
-            <span class="mdi mdi-folder-multiple-outline text-(--s-primary)" />
+            <SIcon name="folder-multiple-outline" :size="16" class="text-(--s-primary)" />
             SDropdownGroup
           </h3>
           <SApiTable

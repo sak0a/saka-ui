@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import {
-  SButton, SCard, SCardContent, SCardHeader, SApiSection, SApiTable, SInput
+  SButton, SCard, SCardContent, SCardHeader, SApiSection, SApiTable
 } from '../../index'
 import { useAsync, useLazyAsync } from '../../composables/useAsync'
 import type { ApiProp, ApiMethod } from '../../index'
@@ -55,12 +55,12 @@ const {
 
 // Demo: Retry logic
 const {
-  data: retryData,
+  data: _retryData,
   loading: retryLoading,
   error: retryError,
   execute: executeRetry,
   retry: retryRequest,
-  isSuccess: retrySuccess
+  isSuccess: _retrySuccess
 } = useAsync(failingRequest, {
   retry: 2,
   retryDelay: 500

@@ -9,13 +9,13 @@ import { iconToCode, getLucideImportName, lucideImportStatement } from '../../li
 const { ri, iconPack } = useCustomizer()
 
 // Code generation helpers
-const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const _cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
 const cp = (mdiName: string, attr = 'icon') => {
   if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
   const name = getLucideImportName(mdiName)
   return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
 }
-const li = (...mdiNames: string[]) => {
+const _li = (...mdiNames: string[]) => {
   if (iconPack.value === 'mdi') return ''
   return '\n' + lucideImportStatement(mdiNames)
 }
@@ -31,14 +31,14 @@ const colorCheck3 = ref(true)
 const colorCheck4 = ref(true)
 const labelLeft = ref(false)
 const labelRight = ref(true)
-const indeterminate = ref(false)
+const _indeterminate = ref(false)
 const indeterminateDemo = ref(false)
 const roundedCheck = ref(false)
 const roundedCheck2 = ref(true)
 const iconCheck1 = ref(true)
 const iconCheck2 = ref(true)
 const iconCheck3 = ref(true)
-const disabledOff = ref(false)
+const _disabledOff = ref(false)
 const disabledOn = ref(true)
 const loadingCheck = ref(false)
 const requiredCheck = ref(false)

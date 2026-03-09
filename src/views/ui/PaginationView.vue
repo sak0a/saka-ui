@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { SPagination, SButton, SSelect, SSwitch, SApiSection, SApiTable, SApiKeyboard } from '../../index'
+import { SPagination, SSelect, SSwitch, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut, PaginationVariant, PaginationSize, PaginationShape, SelectOption } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
@@ -61,7 +61,7 @@ const simulateLoading = async () => {
   isLoading.value = false
 }
 
-const handlePageChange = async (page: number) => {
+const handlePageChange = async (_page: number) => {
   await simulateLoading()
 }
 

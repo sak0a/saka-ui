@@ -694,7 +694,7 @@ const formatSalary = (value: number) => {
           <span class="font-mono">{{ formatSalary(value as number) }}</span>
         </template>
         
-        <template #row-actions="{ row }">
+        <template #row-actions="{ row: _row }">
           <div class="flex gap-1">
             <SButton size="sm" variant="ghost" title="Edit">
               <span class="mdi mdi-pencil" />

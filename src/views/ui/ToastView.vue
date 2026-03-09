@@ -5,7 +5,7 @@ import {
   SSelect, SOption, SInput,
   useToast, SToastContainer
 } from '../../index'
-import type { ApiProp, ApiMethod, ApiEvent, ToastPosition, ToastType } from '../../index'
+import type { ApiProp, ApiMethod, ApiEvent, ToastPosition } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
 const toast = useToast()

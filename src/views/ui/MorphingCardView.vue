@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import DemoSection from '../../components/DemoSection.vue'
 import {
   SMorphingCard,
@@ -301,7 +300,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                   {{ demoImages[0].description }}
                 </SMorphingCardDescription>
                 <div class="mt-6 flex gap-3">
-                  <SButton size="small" variant="secondary">
+                  <SButton size="small" variant="outlined">
                     <span class="mdi mdi-share-variant mr-2" />
                     Share
                   </SButton>

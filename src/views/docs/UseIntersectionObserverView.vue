@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import {
-  SButton, SCard, SCardContent, SCardHeader, SApiSection, SApiTable
+  SCard, SCardContent, SCardHeader, SApiSection, SApiTable
 } from '../../index'
 import { 
   useIntersectionObserver, 
@@ -48,7 +48,7 @@ const activeSections = ref<Set<string>>(new Set())
 
 sections.forEach((section, index) => {
   const sectionRef = computed(() => sectionRefs.value[index])
-  const { isVisible } = useIntersectionObserver(sectionRef, { 
+  const { isVisible: _isVisible } = useIntersectionObserver(sectionRef, {
     threshold: 0.5,
     onChange: (entries) => {
       entries.forEach(entry => {

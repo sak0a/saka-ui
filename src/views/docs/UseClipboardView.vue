@@ -9,7 +9,7 @@ import type { ApiProp, ApiMethod } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 
 const clipboard = useClipboard()
-const toast = useToast()
+const _toast = useToast()
 
 // Demo state
 const textToCopy = ref('Hello, World! This is sample text to copy.')
@@ -216,7 +216,7 @@ console.log(greeting)</code></pre>
         :code="stateCode"
         language="typescript"
       >
-        <SCard variant="flat" class="max-w-md">
+        <SCard variant="filled" class="max-w-md">
           <SCardContent class="space-y-2">
             <div class="flex justify-between text-sm">
               <span class="text-(--s-text-secondary)">Last copied:</span>

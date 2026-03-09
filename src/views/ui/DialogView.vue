@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import {
   SButton, SCard, SCardContent, SCardHeader, SApiSection, SApiTable,
-  SInput, SSelect, SOption, SAlert,
+  SSelect, SOption, SAlert,
   useDialog, useToast, SToastContainer
 } from '../../index'
 import type { ApiProp, ApiMethod, DialogVariant } from '../../index'

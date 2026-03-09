@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { SButton, SKbd, SKbdShortcut, SApiSection, SApiTable, SApiKeyboard } from '../../index'
+import { SButton, SKbdShortcut, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 import { Palette, Sparkles, LoaderCircle } from 'lucide-vue-next'
@@ -10,7 +10,7 @@ import { iconToCode, getLucideImportName, lucideImportStatement } from '../../li
 const { ri, iconPack } = useCustomizer()
 
 // Code generation helpers
-const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const _cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
 const cp = (mdiName: string, attr = 'icon') => {
   if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
   const name = getLucideImportName(mdiName)

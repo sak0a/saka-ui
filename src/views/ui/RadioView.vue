@@ -9,13 +9,13 @@ import { iconToCode, getLucideImportName, lucideImportStatement } from '../../li
 const { ri, iconPack } = useCustomizer()
 
 // Code generation helpers
-const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const _cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
 const cp = (mdiName: string, attr = 'icon') => {
   if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
   const name = getLucideImportName(mdiName)
   return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
 }
-const li = (...mdiNames: string[]) => {
+const _li = (...mdiNames: string[]) => {
   if (iconPack.value === 'mdi') return ''
   return '\n' + lucideImportStatement(mdiNames)
 }
@@ -558,7 +558,7 @@ const radioKeyboard: KeyboardShortcut[] = [
               </div>
             </label>
           </div>
-          <SButton variant="filled" block rounded="xl" color="#3b82f6" class="mt-6 py-3 font-semibold">
+          <SButton variant="filled" block rounded="lg" color="#3b82f6" class="mt-6 py-3 font-semibold">
             Continue with {{ paymentMethod === 'card' ? 'Card' : paymentMethod === 'paypal' ? 'PayPal' : 'Bank Transfer' }}
           </SButton>
         </div>

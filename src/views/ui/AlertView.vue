@@ -1,9 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { SAlert, SButton, SApiSection, SApiTable, SApiKeyboard } from '../../index'
+import { ref, computed } from 'vue'
+import { SAlert, SButton, SIcon, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, ApiMethod, KeyboardShortcut } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
 import { Timer, MousePointerClick, Keyboard } from 'lucide-vue-next'
+import { useCustomizer } from '../../composables/useCustomizer'
+import { iconToCode, getLucideImportName, lucideImportStatement } from '../../lib/iconMap'
+
+const { ri, iconPack } = useCustomizer()
+
+const _cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const cp = (mdiName: string, attr = 'icon') => {
+  if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
+  const name = getLucideImportName(mdiName)
+  return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
+}
+const li = (...mdiNames: string[]) => {
+  if (iconPack.value === 'mdi') return ''
+  return '\n' + lucideImportStatement(mdiNames)
+}
 
 // State for demo
 const showToast = ref(false)
@@ -85,17 +100,17 @@ const autoDismissCode = `<!-- Auto-dismiss with progress bar (default) -->
   :duration="10000"
 />`
 
-const iconsCode = `<!-- Without icon -->
+const iconsCode = computed(() => `<!-- Without icon -->
 <SAlert variant="success" title="No Icon" :icon="false" />
 
 <!-- Custom icon -->
-<SAlert variant="info" title="Custom Icon" icon="rocket" />
+<SAlert variant="info" title="Custom Icon" ${cp('rocket')} />
 
 <!-- Default icons (auto based on variant) -->
 <SAlert variant="success" title="Success Icon" description="Default check-circle icon" />
 <SAlert variant="warning" title="Warning Icon" description="Default alert icon" />
 <SAlert variant="error" title="Error Icon" description="Default alert-circle icon" />
-<SAlert variant="info" title="Info Icon" description="Default information icon" />`
+<SAlert variant="info" title="Info Icon" description="Default information icon" />`)
 
 const bordersCode = `<!-- No border -->
 <SAlert variant="success" title="No Border" border="none" />
@@ -179,10 +194,17 @@ function addToast() {
   </div>
 </template>`
 
-const richContentCode = `<SAlert variant="info">
+const richContentCode = computed(() => {
+  const iconSnippet = iconPack.value === 'mdi'
+    ? '<span class="mdi mdi-account-circle text-xl"></span>'
+    : '<CircleUser class="w-5 h-5" />'
+  const importLine = iconPack.value === 'mdi'
+    ? ''
+    : `<script setup>${li('account-circle')}\n<\/script>\n\n`
+  return `${importLine}<SAlert variant="info">
   <template #title>
     <div class="flex items-center gap-2">
-      <span class="mdi mdi-account-circle text-xl"></span>
+      ${iconSnippet}
       <span>User Profile Updated</span>
     </div>
   </template>
@@ -201,6 +223,7 @@ const richContentCode = `<SAlert variant="info">
     <SButton size="small" variant="filled" color="#059669">View Profile</SButton>
   </template>
 </SAlert>`
+})
 
 const customizationCode = `<!-- Custom color -->
 <SAlert
@@ -452,7 +475,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       >
         <div class="space-y-3">
           <SAlert variant="success" title="No Icon" :icon="false" />
-          <SAlert variant="info" title="Custom Icon" icon="rocket" />
+          <SAlert variant="info" title="Custom Icon" :icon="ri('rocket')" />
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <SAlert variant="success" title="Success Icon" description="Default check-circle icon" />
             <SAlert variant="warning" title="Warning Icon" description="Default alert icon" />
@@ -579,7 +602,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <SAlert variant="info">
           <template #title>
             <div class="flex items-center gap-2">
-              <span class="mdi mdi-account-circle text-xl"></span>
+              <SIcon :icon="ri('account-circle')" :size="20" />
               <span>User Profile Updated</span>
             </div>
           </template>

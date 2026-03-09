@@ -27,7 +27,7 @@ const screens = useMediaQueries({
 })
 
 // Demo: Predefined breakpoints helper
-const { isMobile: isMobileDevice, isTablet, isDesktop, isTouch, prefersReducedMotion: prefersMotion } = useBreakpoints()
+const { isMobile: isMobileDevice, isTablet, isDesktop, isTouch, prefersReducedMotion: _prefersMotion } = useBreakpoints()
 
 // Demo: Single breakpoint
 const isLandscape = useBreakpoint('landscape')

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import {
-  SInput, SButton, SKbd, SKbdShortcut, SApiSection, SApiTable
+  SInput, SButton, SKbdShortcut, SApiSection, SApiTable
 } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, ApiMethod } from '../../index'
 import DemoSection from '../../components/DemoSection.vue'
@@ -11,11 +11,11 @@ import { iconToCode, getLucideImportName, lucideImportStatement } from '../../li
 
 const { ri, iconPack } = useCustomizer()
 
-const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const _cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
 const cp = (mdiName: string, attr = 'icon') => {
   if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
   const name = getLucideImportName(mdiName)
-  return name ? `:icon="${name}"` : `${attr}="${mdiName}"`
+  return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
 }
 const li = (...mdiNames: string[]) => {
   if (iconPack.value === 'mdi') return ''

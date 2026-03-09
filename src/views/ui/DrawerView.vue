@@ -9,7 +9,6 @@ import {
   SDrawerTitle,
   SDrawerDescription,
   SDrawerClose,
-  SDrawerHandle,
   SButton,
   SInput,
   SSwitch,
@@ -35,7 +34,7 @@ const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
 const cp = (mdiName: string, attr = 'icon') => {
   if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
   const name = getLucideImportName(mdiName)
-  return name ? `:icon="${name}"` : `${attr}="${mdiName}"`
+  return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
 }
 const li = (...mdiNames: string[]) => {
   if (iconPack.value === 'mdi') return ''
@@ -52,7 +51,7 @@ const formDrawer = ref(false)
 const menuDrawer = ref(false)
 const settingsDrawer = ref(false)
 const cartDrawer = ref(false)
-const filterDrawer = ref(false)
+const _filterDrawer = ref(false)
 const notificationDrawer = ref(false)
 const composableDrawer = ref(false)
 
@@ -86,7 +85,7 @@ const cartItems = ref([
 const cartTotal = ref(() => cartItems.value.reduce((sum, item) => sum + item.price * item.qty, 0))
 
 // Filter options
-const filters = ref({
+const _filters = ref({
   priceRange: [0, 500],
   categories: ['Electronics', 'Accessories'],
   inStock: true,
@@ -123,7 +122,7 @@ const basicCode = `<SButton @click="showDrawer = true">Open Drawer</SButton>
     <p>Your content here...</p>
   </SDrawerContent>
   <SDrawerFooter>
-    <SButton variant="secondary">Cancel</SButton>
+    <SButton variant="outlined">Cancel</SButton>
     <SButton>Got it!</SButton>
   </SDrawerFooter>
 </SDrawer>`
@@ -205,7 +204,7 @@ const cartCode = `<SDrawer
   </SDrawerContent>
   <SDrawerFooter align="stretch">
     <SButton size="large" class="w-full">Checkout</SButton>
-    <SButton variant="secondary" class="w-full">Continue Shopping</SButton>
+    <SButton variant="outlined" class="w-full">Continue Shopping</SButton>
   </SDrawerFooter>
 </SDrawer>`
 
@@ -269,7 +268,7 @@ const formDrawerCode = computed(() => `<SDrawer
     </form>
   </SDrawerContent>
   <SDrawerFooter>
-    <SButton variant="secondary">Cancel</SButton>
+    <SButton variant="outlined">Cancel</SButton>
     <SButton>Save Contact</SButton>
   </SDrawerFooter>
 </SDrawer>`)
@@ -300,7 +299,7 @@ const settingsCode = `<SDrawer
     </div>
   </SDrawerContent>
   <SDrawerFooter>
-    <SButton variant="secondary">Close</SButton>
+    <SButton variant="outlined">Close</SButton>
   </SDrawerFooter>
 </SDrawer>`
 
@@ -354,7 +353,7 @@ const composableCode = `<SDrawer v-model="showDrawer" hide-header>
   </SDrawerContent>
 
   <SDrawerFooter>
-    <SButton variant="secondary">Cancel</SButton>
+    <SButton variant="outlined">Cancel</SButton>
     <SButton>Got it!</SButton>
   </SDrawerFooter>
 </SDrawer>`
@@ -603,7 +602,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </ul>
           </SDrawerContent>
           <SDrawerFooter>
-            <SButton variant="secondary" @click="basicDrawer = false">Cancel</SButton>
+            <SButton variant="outlined" @click="basicDrawer = false">Cancel</SButton>
             <SButton @click="basicDrawer = false">Got it!</SButton>
           </SDrawerFooter>
         </SDrawer>
@@ -620,19 +619,19 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="flex flex-wrap gap-3">
-          <SButton variant="secondary" @click="selectedSide = 'bottom'; sideDrawer = true">
+          <SButton variant="outlined" @click="selectedSide = 'bottom'; sideDrawer = true">
             <span class="mdi mdi-dock-bottom mr-2" />
             Bottom
           </SButton>
-          <SButton variant="secondary" @click="selectedSide = 'top'; sideDrawer = true">
+          <SButton variant="outlined" @click="selectedSide = 'top'; sideDrawer = true">
             <span class="mdi mdi-dock-top mr-2" />
             Top
           </SButton>
-          <SButton variant="secondary" @click="selectedSide = 'left'; sideDrawer = true">
+          <SButton variant="outlined" @click="selectedSide = 'left'; sideDrawer = true">
             <span class="mdi mdi-dock-left mr-2" />
             Left
           </SButton>
-          <SButton variant="secondary" @click="selectedSide = 'right'; sideDrawer = true">
+          <SButton variant="outlined" @click="selectedSide = 'right'; sideDrawer = true">
             <span class="mdi mdi-dock-right mr-2" />
             Right
           </SButton>
@@ -715,11 +714,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="flex flex-wrap gap-3">
-          <SButton variant="secondary" @click="selectedVariant = 'default'; variantDrawer = true">Default</SButton>
-          <SButton variant="secondary" @click="selectedVariant = 'glass'; variantDrawer = true">Glass</SButton>
-          <SButton variant="secondary" @click="selectedVariant = 'bordered'; variantDrawer = true">Bordered</SButton>
-          <SButton variant="secondary" @click="selectedVariant = 'elevated'; variantDrawer = true">Elevated</SButton>
-          <SButton variant="secondary" @click="selectedVariant = 'minimal'; variantDrawer = true">Minimal</SButton>
+          <SButton variant="outlined" @click="selectedVariant = 'default'; variantDrawer = true">Default</SButton>
+          <SButton variant="outlined" @click="selectedVariant = 'glass'; variantDrawer = true">Glass</SButton>
+          <SButton variant="outlined" @click="selectedVariant = 'bordered'; variantDrawer = true">Bordered</SButton>
+          <SButton variant="outlined" @click="selectedVariant = 'elevated'; variantDrawer = true">Elevated</SButton>
+          <SButton variant="outlined" @click="selectedVariant = 'minimal'; variantDrawer = true">Minimal</SButton>
         </div>
 
         <SDrawer
@@ -934,7 +933,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               <SIcon :icon="ri('lock')" :size="20" class="mr-2" />
               Checkout
             </SButton>
-            <SButton variant="secondary" class="w-full" @click="cartDrawer = false">
+            <SButton variant="outlined" class="w-full" @click="cartDrawer = false">
               Continue Shopping
             </SButton>
           </SDrawerFooter>
@@ -995,7 +994,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </form>
           </SDrawerContent>
           <SDrawerFooter>
-            <SButton variant="secondary" @click="formDrawer = false">Cancel</SButton>
+            <SButton variant="outlined" @click="formDrawer = false">Cancel</SButton>
             <SButton @click="formDrawer = false">
               <SIcon :icon="ri('check')" :size="20" class="mr-2" />
               Save Contact
@@ -1059,7 +1058,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </div>
           </SDrawerContent>
           <SDrawerFooter>
-            <SButton variant="secondary" @click="settingsDrawer = false">Close</SButton>
+            <SButton variant="outlined" @click="settingsDrawer = false">Close</SButton>
           </SDrawerFooter>
         </SDrawer>
       </DemoSection>
@@ -1201,7 +1200,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           </SDrawerContent>
           
           <SDrawerFooter>
-            <SButton variant="secondary" @click="composableDrawer = false">Cancel</SButton>
+            <SButton variant="outlined" @click="composableDrawer = false">Cancel</SButton>
             <SButton @click="composableDrawer = false">Got it!</SButton>
           </SDrawerFooter>
         </SDrawer>

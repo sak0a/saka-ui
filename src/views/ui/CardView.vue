@@ -11,13 +11,13 @@ import { iconToCode, getLucideImportName, lucideImportStatement } from '../../li
 
 const { ri, iconPack } = useCustomizer()
 
-const cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
+const _cv = (mdiName: string) => iconToCode(mdiName, iconPack.value)
 const cp = (mdiName: string, attr = 'icon') => {
   if (iconPack.value === 'mdi') return `${attr}="${mdiName}"`
   const name = getLucideImportName(mdiName)
   return name ? `:${attr}="${name}"` : `${attr}="${mdiName}"`
 }
-const li = (...mdiNames: string[]) => {
+const _li = (...mdiNames: string[]) => {
   if (iconPack.value === 'mdi') return ''
   return '\n' + lucideImportStatement(mdiNames)
 }
@@ -216,7 +216,7 @@ const loadingCode = computed(() => `<!-- Loading overlay -->
   <SCardContent :skeleton="true" :skeleton-lines="4" />
 </SCard>`)
 
-const overlayCode = `<SCard>
+const _overlayCode = `<SCard>
   <SCardMedia 
     src="https://example.com/image.jpg"
     ratio="16/9"

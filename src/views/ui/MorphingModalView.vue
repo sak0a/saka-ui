@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import DemoSection from '../../components/DemoSection.vue'
 import {
-  SButton,
   SApiSection,
   SApiTable,
   SApiKeyboard,
@@ -11,8 +10,7 @@ import {
   SMorphingModalClose,
   SMorphingModalTitle,
   SMorphingModalSubtitle,
-  SMorphingModalDescription,
-  SMorphingModalImage
+  SMorphingModalDescription
 } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
 
