@@ -47,7 +47,7 @@ export interface AlertOptions extends Omit<ConfirmOptions, 'cancelText'> {
   buttonText?: string
 }
 
-export interface CustomDialogOptions<T = unknown> {
+export interface CustomDialogOptions<_T = unknown> {
   /** Dialog title (optional for custom component) */
   title?: string
   /** Custom component to render */

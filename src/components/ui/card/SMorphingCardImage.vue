@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<Props>(), {
   loading: 'lazy'
 })
 
-const context = inject(SMorphingCardContextKey)
+inject(SMorphingCardContextKey)
 const isLoaded = ref(false)
 const hasError = ref(false)
 

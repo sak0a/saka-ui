@@ -245,7 +245,7 @@ const unregisterSlide = (index: number) => {
 const updateSlideProgress = () => {
   if (!props.watchSlidesProgress) return
   
-  slideElements.value.forEach((el, index) => {
+  slideElements.value.forEach((_el, index) => {
     const progress = Math.abs(index - activeIndex.value)
     slideProgress.value.set(index, progress)
   })
@@ -467,21 +467,6 @@ const handleKeydown = (e: KeyboardEvent) => {
   }
   if (e.key === 'Home') { e.preventDefault(); goTo(0) }
   if (e.key === 'End') { e.preventDefault(); goTo(totalSlides.value - 1) }
-}
-
-// Click handling
-let clickTimeout: number | null = null
-const handleSlideClick = (index: number) => {
-  if (clickTimeout) {
-    clearTimeout(clickTimeout)
-    clickTimeout = null
-    emit('doubleClick', index)
-  } else {
-    clickTimeout = window.setTimeout(() => {
-      emit('click', index)
-      clickTimeout = null
-    }, 250)
-  }
 }
 
 // Watch for external modelValue changes

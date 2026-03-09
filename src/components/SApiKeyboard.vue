@@ -17,7 +17,6 @@ interface Props {
   columns?: 2 | 3 | 4
 }
 
-import { cn } from '~/lib/utils'
 import SKbd from '~/components/ui/SKbd.vue'
 
 defineOptions({ inheritAttrs: false })

@@ -114,7 +114,7 @@ function generateId(): string {
 
 function normalizeOptions(
   messageOrOptions: string | ToastOptions,
-  type: ToastType
+  _type: ToastType
 ): ToastOptions {
   if (typeof messageOrOptions === 'string') {
     return { description: messageOrOptions }

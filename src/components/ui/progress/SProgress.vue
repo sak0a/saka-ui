@@ -81,7 +81,8 @@ const emit = defineEmits<{
 }>()
 
 // Refs
-const progressRef = ref<HTMLElement | null>(null)
+const progressRef = ref<HTMLElement | null>(null) // used as template ref
+void progressRef
 const showTooltip = ref(false)
 const animatedValue = ref(0)
 

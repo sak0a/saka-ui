@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, provide } from 'vue'
 import { cn } from '~/lib/utils'
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
 import { cardContextKey } from './index'
 
 const cardVariants = cva('s-card relative overflow-hidden', {
@@ -34,8 +34,6 @@ const cardVariants = cva('s-card relative overflow-hidden', {
     rounded: 'lg'
   }
 })
-
-type CardVariants = VariantProps<typeof cardVariants>
 
 interface Props {
   /** Visual style variant */

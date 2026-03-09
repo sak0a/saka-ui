@@ -109,7 +109,8 @@ const emit = defineEmits<{
 
 // Refs
 const inputRefs = ref<(HTMLInputElement | null)[]>([])
-const containerRef = ref<HTMLElement | null>(null)
+const containerRef = ref<HTMLElement | null>(null) // used as template ref
+void containerRef
 const digits = ref<string[]>(Array(props.maxlength).fill(''))
 const activeIndex = ref(-1)
 const isComplete = ref(false)
@@ -123,7 +124,6 @@ const countdownValue = ref(props.countdown)
 const countdownInterval = ref<ReturnType<typeof setInterval> | null>(null)
 
 // Computed
-const isNumericMode = computed(() => props.mode === 'numeric')
 const inputPattern = computed(() => {
   switch (props.mode) {
     case 'numeric': return '[0-9]'
@@ -180,30 +180,6 @@ const gapConfig = computed(() => {
     wide: 'gap-4'
   }
   return gaps[props.gap]
-})
-
-// Rounded configurations
-const roundedConfig = computed(() => {
-  const radii = {
-    none: 'rounded-none',
-    sm: 'rounded',
-    md: 'rounded-lg',
-    lg: 'rounded-xl',
-    full: 'rounded-full'
-  }
-  return radii[props.rounded]
-})
-
-// Variant classes
-const variantClasses = computed(() => {
-  const base = {
-    outlined: 'border-2 bg-background border-border',
-    filled: 'border-2 border-transparent bg-accent',
-    underlined: 'border-b-2 border-t-0 border-l-0 border-r-0 rounded-none! bg-transparent border-border',
-    ghost: 'border-2 border-transparent bg-transparent',
-    morphing: 'border-2 bg-muted border-border shadow-inner'
-  }
-  return base[props.variant]
 })
 
 // Check if value at index is valid
@@ -551,12 +527,6 @@ const formattedCountdown = computed(() => {
   const seconds = countdownValue.value % 60
   return `${minutes}:${seconds.toString().padStart(2, '0')}`
 })
-
-// Should show separator after index
-const shouldShowSeparator = (index: number): boolean => {
-  if (!props.separator || !props.separatorPosition?.length) return false
-  return props.separatorPosition.includes(index + 1) && index < props.maxlength - 1
-}
 
 // Register input from SOTPSlot
 const registerInput = (index: number, el: HTMLInputElement | null) => {

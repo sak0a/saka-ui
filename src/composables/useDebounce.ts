@@ -75,7 +75,6 @@ function createDebouncedFn<T extends (...args: any[]) => any>(
   let timeoutId: ReturnType<typeof setTimeout> | null = null
   let maxWaitTimeoutId: ReturnType<typeof setTimeout> | null = null
   let lastArgs: Parameters<T> | null = null
-  let lastCallTime: number | null = null
   let hasBeenCalled = false
 
   function invoke() {
@@ -96,12 +95,10 @@ function createDebouncedFn<T extends (...args: any[]) => any>(
       clearTimeout(maxWaitTimeoutId)
       maxWaitTimeoutId = null
     }
-    lastCallTime = null
   }
 
   const debouncedFn = function (...args: Parameters<T>) {
     lastArgs = args
-    lastCallTime = Date.now()
 
     // Immediate mode: execute on first call
     if (immediate && !hasBeenCalled && !timeoutId) {

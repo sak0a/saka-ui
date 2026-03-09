@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, nextTick, onMounted, onBeforeUnmount, type VNode } from 'vue'
+import { computed, ref, watch, nextTick } from 'vue'
 import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
@@ -72,8 +72,10 @@ export interface Props {
 // Ellipsis hover state
 const ellipsisStartHover = ref(false)
 const ellipsisEndHover = ref(false)
-const ellipsisStartRef = ref<HTMLElement | null>(null)
-const ellipsisEndRef = ref<HTMLElement | null>(null)
+const ellipsisStartRef = ref<HTMLElement | null>(null) // used as template ref
+const ellipsisEndRef = ref<HTMLElement | null>(null) // used as template ref
+void ellipsisStartRef
+void ellipsisEndRef
 let hoverTimeout: ReturnType<typeof setTimeout> | null = null
 
 const props = withDefaults(defineProps<Props>(), {
@@ -249,7 +251,7 @@ const handleEllipsisLeave = (type: 'start' | 'end') => {
   }, 150)
 }
 
-const handleDropdownEnter = (type: 'start' | 'end') => {
+const handleDropdownEnter = (_type: 'start' | 'end') => {
   if (hoverTimeout) clearTimeout(hoverTimeout)
 }
 

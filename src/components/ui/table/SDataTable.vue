@@ -5,7 +5,7 @@
  * A highly customizable, accessible table with sorting, selection,
  * pagination, and smooth animations.
  */
-import { provide, computed, toRef, watch, ref } from 'vue'
+import { provide, computed, toRef, watch, ref, type Ref, type ComputedRef } from 'vue'
 import { cn } from '~/lib/utils'
 import {
   SDataTableContextKey,
@@ -20,7 +20,7 @@ import { SPagination } from '../pagination'
 
 defineOptions({ inheritAttrs: false })
 
-export interface Props {
+interface Props {
   /** Table data array */
   data?: T[]
   /** Column definitions */
@@ -152,12 +152,12 @@ provide(SDataTableContextKey, {
   hoverable: props.hoverable,
   stickyHeader: props.stickyHeader,
   animateRows: props.animateRows,
-  columns: table.columns,
-  visibleColumns: table.visibleColumns,
+  columns: table.columns as Ref<TableColumn[]>,
+  visibleColumns: table.visibleColumns as unknown as ComputedRef<TableColumn[]>,
   sortState: table.sortState,
   selectedKeys: table.selectedKeys,
   expandedKeys: table.expandedKeys,
-  getRowKey: table.getRowKey,
+  getRowKey: table.getRowKey as (row: unknown, index: number) => string | number,
   toggleSort: table.toggleSort,
   toggleRowSelection: table.toggleRowSelection,
   toggleAllSelection: table.toggleAllSelection,
@@ -238,11 +238,6 @@ function getCellValue(row: T, column: TableColumn<T>): unknown {
   }
   return (row as Record<string, unknown>)[column.key]
 }
-
-// Check for reduced motion preference
-const prefersReducedMotion = typeof window !== 'undefined'
-  ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  : false
 
 // Expose table methods
 defineExpose({

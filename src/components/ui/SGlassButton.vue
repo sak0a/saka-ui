@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, useSlots, onMounted, onUnmounted } from 'vue'
 import { useTheme } from '../../composables/useTheme'
-import { cn } from '~/lib/utils'
 import { type IconProp, isIconComponent } from '~/lib/icon'
 
 defineOptions({ inheritAttrs: false })

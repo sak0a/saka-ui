@@ -1,9 +1,9 @@
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
-import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { cn } from '~/lib/utils'
-import type { ToastType, ToastOptions } from '../../../composables/useToast'
+import type { ToastType } from '../../../composables/useToast'
 import { dismissToast, pauseToast, resumeToast } from '../../../composables/useToast'
 import SIcon from '../SIcon.vue'
 

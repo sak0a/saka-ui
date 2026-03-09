@@ -135,7 +135,8 @@ const messageId = computed(() => `${inputId.value}-message`)
 // Suggestions state
 const showSuggestions = ref(false)
 const selectedSuggestionIndex = ref(-1)
-const suggestionsRef = ref<HTMLUListElement | null>(null)
+const suggestionsRef = ref<HTMLUListElement | null>(null) // used as template ref
+void suggestionsRef
 
 // Debounce timer
 let validateTimer: ReturnType<typeof setTimeout> | null = null

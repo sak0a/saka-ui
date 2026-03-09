@@ -1,15 +1,10 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SDrawerTrigger - Button that triggers drawer open
  */
-</script>
-
-<script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
-import { inject } from 'vue'
 import { cn } from '~/lib/utils'
-import { SDrawerContextKey, type SDrawerContext } from './SDrawer.vue'
 
 export interface Props {
   /** Disable the trigger */

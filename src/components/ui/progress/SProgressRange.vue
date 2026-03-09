@@ -206,20 +206,6 @@ const ticks = computed(() => {
   return result
 })
 
-// Track style
-const activeTrackStyle = computed(() => {
-  if (props.range) {
-    return {
-      left: `${minPercent.value}%`,
-      width: `${maxPercent.value - minPercent.value}%`
-    }
-  }
-  return {
-    left: '0%',
-    width: `${minPercent.value}%`
-  }
-})
-
 // Event handlers
 const getPercentFromEvent = (event: MouseEvent | Touch): number => {
   if (!trackRef.value) return 0
@@ -353,7 +339,7 @@ const handleMouseUp = () => {
   }
 }
 
-const handleTouchStart = (event: TouchEvent, handle: 'min' | 'max' | 'single') => {
+const handleTouchStart = (_event: TouchEvent, handle: 'min' | 'max' | 'single') => {
   if (props.disabled || props.readonly) return
   isDragging.value = true
   activeHandle.value = handle

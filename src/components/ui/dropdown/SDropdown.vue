@@ -20,7 +20,7 @@ export type DropdownAnimation = 'fade' | 'slide' | 'scale' | 'reveal'
 
 export interface DropdownMenuItem {
   key: string
-  label: string
+  label?: string
   icon?: IconProp
   trailingIcon?: IconProp
   description?: string
@@ -266,8 +266,7 @@ const animationClasses = computed(() => {
   const isTop = placement.startsWith('top')
   const isBottom = placement.startsWith('bottom')
   const isLeft = placement.startsWith('left')
-  const isRight = placement.startsWith('right')
-  
+
   return {
     fade: {
       enter: 'transition-opacity duration-200 ease-out',

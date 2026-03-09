@@ -128,11 +128,6 @@ const borderedStyle = computed<CSSProperties | undefined>(() => {
   return { boxShadow: '0 0 0 2px var(--s-background)' }
 })
 
-const sizeClasses = computed(() => {
-  if (props.dot) return dotSizeClasses[props.size]
-  return undefined
-})
-
 const badgeClasses = computed(() => {
   if (props.dot) {
     return cn(

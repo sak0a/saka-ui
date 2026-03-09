@@ -5,7 +5,7 @@
  */
 defineOptions({ inheritAttrs: false })
 
-import { type InjectionKey, type Ref, provide, ref, computed, watch, nextTick, onMounted, useSlots } from 'vue'
+import { type InjectionKey, type Ref, provide, ref, computed, watch, nextTick, onMounted } from 'vue'
 import type { IconProp } from '~/lib/icon'
 
 // Types - exported for external use
@@ -102,8 +102,6 @@ const emit = defineEmits<{
   (e: 'before-leave', from: string | number, to: string | number): void
 }>()
 
-const slots = useSlots()
-
 // State
 const registeredPanes = ref<TabPaneInfo[]>([])
 const internalActiveTab = ref<string | number>('')
@@ -174,7 +172,7 @@ const setTabRef = (name: string | number, el: HTMLElement | null) => {
 }
 
 // Allow STabsList to register its ref for compound API
-const setListRef = (el: HTMLElement) => {
+const setListRef = (_el: HTMLElement) => {
   // Not needed for simple API indicator, but kept for potential future use
 }
 

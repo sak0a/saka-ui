@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
-import { inject, ref, computed, onMounted, onBeforeUnmount, watch, nextTick, provide, useSlots } from 'vue'
+import { inject, ref, computed, onMounted, onBeforeUnmount, watch, nextTick, provide } from 'vue'
 import { cn } from '~/lib/utils'
 import { type IconProp, isIconComponent } from '~/lib/icon'
 import { SAccordionContextKey, SAccordionItemContextKey, type SAccordionContext } from './SAccordion.vue'
@@ -41,8 +41,6 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{
   'toggle': [expanded: boolean]
 }>()
-
-const slots = useSlots()
 
 // Inject context
 const context = inject<SAccordionContext>(SAccordionContextKey)
@@ -179,7 +177,7 @@ const headerClasses = computed(() => {
   return `${base} ${sizeConfig.value.header} ${typeStyles[type]} ${disabledStyles} ${expandedStyles} ${props.headerClass}`
 })
 
-const contentWrapperStyle = computed(() => {
+const contentWrapperStyle = computed((): Record<string, string> => {
   if (!context?.animated) {
     return isExpanded.value ? {} : { display: 'none' }
   }

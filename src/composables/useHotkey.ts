@@ -51,8 +51,6 @@ export interface ParsedHotkey {
 // Constants
 // ============================================================================
 
-const MODIFIER_KEYS = ['ctrl', 'alt', 'shift', 'meta', 'control', 'option', 'command', 'cmd'] as const
-
 const KEY_ALIASES: Record<string, string> = {
   // Modifier aliases
   'control': 'ctrl',
