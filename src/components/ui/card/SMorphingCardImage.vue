@@ -4,7 +4,7 @@
  * Used in both trigger and expanded content
  */
 import { inject, computed, ref } from 'vue'
-import { SMorphingCardContextKey } from './SMorphingCard.vue'
+import { SMorphingCardContextKey } from './morphing-context'
 import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })

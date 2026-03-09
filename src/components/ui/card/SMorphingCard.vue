@@ -1,19 +1,3 @@
-<script lang="ts">
-import { type InjectionKey, type Ref } from 'vue'
-
-export interface SMorphingCardContext {
-  isOpen: Ref<boolean>
-  isExpanded: Ref<boolean>
-  triggerRect: Ref<DOMRect | null>
-  open: () => void
-  close: () => void
-  registerTrigger: (el: HTMLElement | null) => void
-  uniqueId: string
-}
-
-export const SMorphingCardContextKey: InjectionKey<SMorphingCardContext> = Symbol('SMorphingCardContext')
-</script>
-
 <script setup lang="ts">
 /**
  * SMorphingCard - Morphing Card Component
@@ -22,6 +6,7 @@ export const SMorphingCardContextKey: InjectionKey<SMorphingCardContext> = Symbo
  */
 import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { cn } from '~/lib/utils'
+import { SMorphingCardContextKey } from './morphing-context'
 
 defineOptions({ inheritAttrs: false })
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { provide, ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { cn } from '~/lib/utils'
-import { SCarouselContextKey, type SCarouselContext } from './SCarouselSlide.vue'
+import { SCarouselContextKey, type SCarouselContext } from './context'
 
 defineOptions({ inheritAttrs: false })
 

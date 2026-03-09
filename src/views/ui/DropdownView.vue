@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { SDropdown, SDropdownItem, SDropdownDivider, SDropdownGroup, SKbdShortcut, SButton, SIcon, SApiSection, SApiTable, SApiKeyboard } from '../../index'
 import type { ApiProp, ApiEvent, ApiSlot, KeyboardShortcut } from '../../index'
-import type { DropdownMenuItem } from '../../components/ui/dropdown/SDropdown.vue'
+import type { DropdownMenuItem } from '../../components/ui/dropdown/context'
 import DemoSection from '../../components/DemoSection.vue'
 import { Search, Palette, Keyboard as KeyboardIcon } from 'lucide-vue-next'
 import { useCustomizer } from '../../composables/useCustomizer'

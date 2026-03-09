@@ -1,31 +1,11 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SCarouselSlide - Carousel Slide Component
  * Child component for slide content within SCarousel
  */
-import { type InjectionKey, type Ref } from 'vue'
-
-export interface SlideInfo {
-  index: number
-  isActive: boolean
-  isVisible: boolean
-}
-
-export interface SCarouselContext {
-  registerSlide: (el: HTMLElement | null, index: number) => void
-  unregisterSlide: (index: number) => void
-  activeIndex: Ref<number>
-  effect: string
-  direction: string
-  slidesPerView: number
-}
-
-export const SCarouselContextKey: InjectionKey<SCarouselContext> = Symbol('SCarouselContext')
-</script>
-
-<script setup lang="ts">
 import { inject, ref, computed, onMounted, onUnmounted } from 'vue'
 import { cn } from '~/lib/utils'
+import { SCarouselContextKey } from './context'
 
 defineOptions({ inheritAttrs: false })
 

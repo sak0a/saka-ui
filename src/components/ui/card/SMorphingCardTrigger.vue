@@ -4,7 +4,7 @@
  * The card preview that users click to expand
  */
 import { ref, inject, onMounted, onBeforeUnmount, computed } from 'vue'
-import { SMorphingCardContextKey } from './SMorphingCard.vue'
+import { SMorphingCardContextKey } from './morphing-context'
 import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })

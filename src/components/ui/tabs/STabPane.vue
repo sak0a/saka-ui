@@ -8,7 +8,7 @@ defineOptions({ inheritAttrs: false })
 import { inject, onMounted, onUnmounted, computed, watch } from 'vue'
 import { cn } from '~/lib/utils'
 import type { IconProp } from '~/lib/icon'
-import { STabsContextKey, type TabPaneInfo } from './STabs.vue'
+import { STabsContextKey, type TabPaneInfo } from './context'
 
 // Props
 interface Props {

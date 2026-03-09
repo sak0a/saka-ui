@@ -5,7 +5,7 @@ import { inject, computed } from 'vue'
 import { cn } from '~/lib/utils'
 import { type IconProp } from '~/lib/icon'
 import SIcon from '../SIcon.vue'
-import { SDropdownContextKey, type SDropdownContext } from './SDropdown.vue'
+import { SDropdownContextKey, type SDropdownContext } from './context'
 
 export interface Props {
   /** Group header label */

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, inject, onMounted } from 'vue'
-import { SColorPickerContextKey, type SColorPickerContext } from './SColorPicker.vue'
+import { SColorPickerContextKey, type SColorPickerContext } from './context'
 
 const ctx = inject<SColorPickerContext>(SColorPickerContextKey)
 if (!ctx) console.warn('[SColorPickerEyeDropper] Must be used inside SColorPicker')

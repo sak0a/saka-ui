@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject } from 'vue'
-import { SColorPickerContextKey, type SColorPickerContext } from './SColorPicker.vue'
+import { SColorPickerContextKey, type SColorPickerContext } from './context'
 
 export interface Props {
   label?: string

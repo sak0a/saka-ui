@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, inject, onBeforeUnmount } from 'vue'
-import { SColorPickerContextKey, type SColorPickerContext } from './SColorPicker.vue'
+import { SColorPickerContextKey, type SColorPickerContext } from './context'
 
 const ctx = inject<SColorPickerContext>(SColorPickerContextKey)
 if (!ctx) console.warn('[SColorPickerAlphaSlider] Must be used inside SColorPicker')

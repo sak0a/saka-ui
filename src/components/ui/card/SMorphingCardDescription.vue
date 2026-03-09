@@ -4,7 +4,7 @@
  * Only visible when the card is expanded
  */
 import { inject, computed } from 'vue'
-import { SMorphingCardContextKey } from './SMorphingCard.vue'
+import { SMorphingCardContextKey } from './morphing-context'
 import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })

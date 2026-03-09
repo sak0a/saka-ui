@@ -30,5 +30,5 @@ export { default as SMorphingCardDescription } from './SMorphingCardDescription.
 export { default as SMorphingCardClose } from './SMorphingCardClose.vue'
 
 // Type exports
-export type { SMorphingCardContext } from './SMorphingCard.vue'
-export { SMorphingCardContextKey } from './SMorphingCard.vue'
+export type { SMorphingCardContext } from './morphing-context'
+export { SMorphingCardContextKey } from './morphing-context'

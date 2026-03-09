@@ -3,7 +3,7 @@ defineOptions({ inheritAttrs: false })
 
 import { inject, computed, useAttrs } from 'vue'
 import { cn } from '~/lib/utils'
-import { STabsContextKey, type STabsContext } from './STabs.vue'
+import { STabsContextKey, type STabsContext } from './context'
 
 interface Props {
   value: string | number

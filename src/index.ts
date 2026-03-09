@@ -186,7 +186,7 @@ export {
 } from './composables/useForm'
 
 
-export * from './components/ui/tabs/STabs.vue'
+export * from './components/ui/tabs/context'
 
 // Table components
 export {

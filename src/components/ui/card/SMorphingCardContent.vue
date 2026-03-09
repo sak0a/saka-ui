@@ -1,12 +1,9 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SMorphingCardContent - Content wrapper for expanded morphing card
  */
-</script>
-
-<script setup lang="ts">
 import { inject, computed } from 'vue'
-import { SMorphingCardContextKey } from './SMorphingCard.vue'
+import { SMorphingCardContextKey } from './morphing-context'
 
 export interface Props {
   /** Padding size */

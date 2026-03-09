@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { inject, ref, computed, watch, onMounted, nextTick } from 'vue'
-import { STabsContextKey, type STabsContext } from './STabs.vue'
-import { STabsListContextKey, type STabsListContext } from './STabsList.vue'
+import { STabsContextKey, type STabsContext } from './context'
+import { STabsListContextKey, type STabsListContext } from './list-context'
 
 interface Props {
   color?: string

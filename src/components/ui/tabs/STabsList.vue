@@ -1,23 +1,10 @@
-<script lang="ts">
-import { type InjectionKey, type Ref } from 'vue'
-import type { TabType } from './STabs.vue'
-
-export interface STabsListContext {
-  listRef: Ref<HTMLElement | null>
-  type: Ref<TabType>
-  triggerRefs: Ref<Map<string | number, HTMLElement>>
-  setTriggerRef: (name: string | number, el: HTMLElement | null) => void
-}
-
-export const STabsListContextKey: InjectionKey<STabsListContext> = Symbol('STabsListContext')
-</script>
-
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
 import { inject, ref, computed, provide, onMounted, useAttrs } from 'vue'
 import { cn } from '~/lib/utils'
-import { STabsContextKey, type STabsContext } from './STabs.vue'
+import { STabsContextKey, type STabsContext, type TabType } from './context'
+import { STabsListContextKey } from './list-context'
 
 interface Props {
   type?: TabType

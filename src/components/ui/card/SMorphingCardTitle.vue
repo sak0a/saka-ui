@@ -3,7 +3,7 @@
  * SMorphingCardTitle - Title element for morphing card
  */
 import { inject } from 'vue'
-import { SMorphingCardContextKey } from './SMorphingCard.vue'
+import { SMorphingCardContextKey } from './morphing-context'
 import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
