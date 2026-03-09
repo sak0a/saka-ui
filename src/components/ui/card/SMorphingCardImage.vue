@@ -1,11 +1,8 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SMorphingCardImage - Image element for morphing card
  * Used in both trigger and expanded content
  */
-</script>
-
-<script setup lang="ts">
 import { inject, computed, ref } from 'vue'
 import { SMorphingCardContextKey } from './SMorphingCard.vue'
 import { cn } from '~/lib/utils'

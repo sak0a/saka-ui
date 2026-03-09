@@ -1,10 +1,11 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SMorphingCard - Morphing Card Component
  * A card that expands from a thumbnail/preview state to a full detail view
  * with smooth layout animations.
  */
-import { type InjectionKey, type Ref } from 'vue'
+import { type InjectionKey, type Ref, ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { cn } from '~/lib/utils'
 
 export interface SMorphingCardContext {
   isOpen: Ref<boolean>
@@ -17,11 +18,6 @@ export interface SMorphingCardContext {
 }
 
 export const SMorphingCardContextKey: InjectionKey<SMorphingCardContext> = Symbol('SMorphingCardContext')
-</script>
-
-<script setup lang="ts">
-import { ref, computed, provide, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
-import { cn } from '~/lib/utils'
 
 defineOptions({ inheritAttrs: false })
 

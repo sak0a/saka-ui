@@ -1,11 +1,8 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SMorphingCardDescription - Description content for morphing card
  * Only visible when the card is expanded
  */
-</script>
-
-<script setup lang="ts">
 import { inject, computed } from 'vue'
 import { SMorphingCardContextKey } from './SMorphingCard.vue'
 import { cn } from '~/lib/utils'

@@ -1,10 +1,7 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SMorphingCardTitle - Title element for morphing card
  */
-</script>
-
-<script setup lang="ts">
 import { inject } from 'vue'
 import { SMorphingCardContextKey } from './SMorphingCard.vue'
 import { cn } from '~/lib/utils'

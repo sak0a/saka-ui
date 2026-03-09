@@ -1,10 +1,7 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SMorphingCardClose - Close button for morphing card
  */
-</script>
-
-<script setup lang="ts">
 import { inject, computed } from 'vue'
 import { SMorphingCardContextKey } from './SMorphingCard.vue'
 import { cn } from '~/lib/utils'

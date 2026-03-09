@@ -228,6 +228,22 @@ const handleRowDblClick = (row: T, index: number, event: MouseEvent) => {
   emit('row-dblclick', row, index, event)
 }
 
+// Helper to get cell value
+function getCellValue(row: T, column: TableColumn<T>): unknown {
+  if (typeof column.accessor === 'function') {
+    return column.accessor(row, 0)
+  }
+  if (column.accessor) {
+    return (row as Record<string, unknown>)[column.accessor as string]
+  }
+  return (row as Record<string, unknown>)[column.key]
+}
+
+// Check for reduced motion preference
+const prefersReducedMotion = typeof window !== 'undefined'
+  ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  : false
+
 // Expose table methods
 defineExpose({
   ...table,
@@ -573,26 +589,6 @@ defineExpose({
     </Transition>
   </div>
 </template>
-
-<script lang="ts">
-import type { TableColumn } from './index'
-
-// Helper to get cell value
-function getCellValue<T>(row: T, column: TableColumn<T>): unknown {
-  if (typeof column.accessor === 'function') {
-    return column.accessor(row, 0)
-  }
-  if (column.accessor) {
-    return (row as Record<string, unknown>)[column.accessor as string]
-  }
-  return (row as Record<string, unknown>)[column.key]
-}
-
-// Check for reduced motion preference
-const prefersReducedMotion = typeof window !== 'undefined' 
-  ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
-  : false
-</script>
 
 <style scoped>
 /* ===== CSS Variables ===== */

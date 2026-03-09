@@ -1,14 +1,15 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SDropdown - Advanced Dropdown Menu Component
  * A highly customizable dropdown component for menus, actions, and navigation
  */
-import { type InjectionKey, type Ref } from 'vue'
+import { type InjectionKey, type Ref, ref, computed, provide, inject, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { type IconProp, isIconComponent } from '~/lib/icon'
+import { cn } from '~/lib/utils'
 
 // Types
 export type DropdownTrigger = 'click' | 'hover' | 'context' | 'manual'
-export type DropdownPlacement = 
+export type DropdownPlacement =
   | 'top' | 'top-start' | 'top-end'
   | 'bottom' | 'bottom-start' | 'bottom-end'
   | 'left' | 'left-start' | 'left-end'
@@ -53,13 +54,8 @@ export interface SDropdownParentContext {
 }
 
 export const SDropdownParentKey: InjectionKey<SDropdownParentContext> = Symbol('SDropdownParent')
-</script>
 
-<script setup lang="ts">
 defineOptions({ inheritAttrs: false })
-
-import { ref, computed, provide, inject, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
-import { cn } from '~/lib/utils'
 
 export interface Props {
   /** Menu items (alternative to slots) */
@@ -237,6 +233,7 @@ const sizeConfig = computed(() => ({
     menu: 'py-1 px-1',
     item: 'px-2 py-0.5 text-xs',
     icon: 'text-sm',
+    iconPx: 14,
     search: 'text-xs px-2 py-0.5'
   },
   medium: {
@@ -244,6 +241,7 @@ const sizeConfig = computed(() => ({
     menu: 'py-1 px-1',
     item: 'px-2 py-0.5 text-sm',
     icon: 'text-base',
+    iconPx: 16,
     search: 'text-sm px-2 py-0.5'
   },
   large: {
@@ -251,6 +249,7 @@ const sizeConfig = computed(() => ({
     menu: 'py-1.5 px-1.5',
     item: 'px-2.5 py-0.5 text-base',
     icon: 'text-lg',
+    iconPx: 18,
     search: 'text-base px-2.5 py-0.5'
   }
 }[props.size]))
@@ -630,13 +629,14 @@ defineExpose({
           ]"
           :disabled="disabled"
         >
-          <component v-if="icon && isIconComponent(icon)" :is="icon" :class="[sizeConfig.icon]" />
-          <span v-else-if="icon" :class="['mdi', `mdi-${icon}`, sizeConfig.icon]" />
+          <component v-if="icon && isIconComponent(icon)" :is="icon" :size="sizeConfig.iconPx" />
+          <span v-else-if="icon" :class="['mdi', `mdi-${icon}`]" :style="{ fontSize: sizeConfig.iconPx + 'px' }" />
           <span v-if="label">{{ label }}</span>
-          <span 
-            v-if="!hideArrow" 
+          <span
+            v-if="!hideArrow"
             class="mdi mdi-chevron-down transition-transform duration-200"
-            :class="[sizeConfig.icon, { 'rotate-180': isOpen }]"
+            :class="{ 'rotate-180': isOpen }"
+            :style="{ fontSize: sizeConfig.iconPx + 'px' }"
           />
         </button>
       </slot>
@@ -677,7 +677,7 @@ defineExpose({
           <!-- Search input -->
           <div v-if="searchable" class="p-2 border-b border-border">
             <div class="relative">
-              <span class="absolute left-3 top-1/2 -translate-y-1/2 mdi mdi-magnify text-muted-foreground" />
+              <span class="mdi mdi-magnify absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" :style="{ fontSize: sizeConfig.iconPx + 'px' }" />
               <input
                 ref="searchInputRef"
                 v-model="searchQuery"
@@ -734,22 +734,24 @@ defineExpose({
                   @mouseenter="highlightedIndex = index"
                 >
                   <!-- Checkbox for checkable items -->
-                  <span 
+                  <span
                     v-if="item.checked !== undefined"
-                    class="mdi mr-2 transition-all duration-150"
-                    :class="[
-                      item.checked ? 'mdi-checkbox-marked' : 'mdi-checkbox-blank-outline',
-                      sizeConfig.icon,
-                      item.checked ? '' : 'text-muted-foreground'
-                    ]"
-                    :style="item.checked ? { color: color } : {}"
+                    :class="['mdi', item.checked ? 'mdi-checkbox-marked' : 'mdi-checkbox-blank-outline', 'mr-2 transition-all duration-150', item.checked ? '' : 'text-muted-foreground']"
+                    :style="{ fontSize: sizeConfig.iconPx + 'px', color: item.checked ? color : undefined }"
                   />
-                  
-                  <!-- Leading icon -->
-                  <component v-else-if="item.icon && isIconComponent(item.icon)" :is="item.icon" :class="[sizeConfig.icon, 'mr-2.5', item.danger ? '' : 'text-muted-foreground']" />
+
+                  <!-- Leading icon (component) -->
+                  <component
+                    v-else-if="item.icon && isIconComponent(item.icon)"
+                    :is="item.icon"
+                    :size="sizeConfig.iconPx"
+                    :class="['mr-2.5', item.danger ? '' : 'text-muted-foreground']"
+                  />
+                  <!-- Leading icon (MDI string) -->
                   <span
                     v-else-if="item.icon"
-                    :class="['mdi', `mdi-${item.icon}`, sizeConfig.icon, 'mr-2.5', item.danger ? '' : 'text-muted-foreground']"
+                    :class="['mdi', `mdi-${item.icon}`, 'mr-2.5', item.danger ? '' : 'text-muted-foreground']"
+                    :style="{ fontSize: sizeConfig.iconPx + 'px' }"
                   />
 
                   <!-- Content -->
@@ -774,18 +776,25 @@ defineExpose({
                       {{ item.shortcut }}
                     </kbd>
                     
-                    <!-- Trailing icon -->
-                    <component v-if="item.trailingIcon && isIconComponent(item.trailingIcon)" :is="item.trailingIcon" :class="[sizeConfig.icon, 'text-muted-foreground']" />
+                    <!-- Trailing icon (component) -->
+                    <component
+                      v-if="item.trailingIcon && isIconComponent(item.trailingIcon)"
+                      :is="item.trailingIcon"
+                      :size="sizeConfig.iconPx"
+                      class="text-muted-foreground"
+                    />
+                    <!-- Trailing icon (MDI string) -->
                     <span
                       v-else-if="item.trailingIcon"
-                      :class="['mdi', `mdi-${item.trailingIcon}`, sizeConfig.icon, 'text-muted-foreground']"
+                      :class="['mdi', `mdi-${item.trailingIcon}`, 'text-muted-foreground']"
+                      :style="{ fontSize: sizeConfig.iconPx + 'px' }"
                     />
-                    
+
                     <!-- Submenu indicator -->
-                    <span 
+                    <span
                       v-if="item.children && item.children.length > 0"
                       class="mdi mdi-chevron-right text-muted-foreground"
-                      :class="sizeConfig.icon"
+                      :style="{ fontSize: sizeConfig.iconPx + 'px' }"
                     />
                   </div>
                 </div>
@@ -800,7 +809,7 @@ defineExpose({
               v-if="searchable && searchQuery && (!filteredItems || filteredItems.length === 0)"
               class="px-4 py-8 text-center"
             >
-              <span class="mdi mdi-magnify-close text-3xl text-muted-foreground mb-2 block" />
+              <span class="mdi mdi-magnify-close text-muted-foreground mb-2 block" :style="{ fontSize: '30px' }" />
               <p class="text-sm text-muted-foreground">No results found</p>
             </div>
           </div>

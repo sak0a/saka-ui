@@ -1,5 +1,7 @@
-<script lang="ts">
-import { type InjectionKey, type Ref, type ComputedRef } from 'vue'
+<script setup lang="ts">
+defineOptions({ inheritAttrs: false })
+
+import { type InjectionKey, type Ref, type ComputedRef, ref, computed, watch, onMounted, onBeforeUnmount, provide, useSlots } from 'vue'
 
 export interface SColorPickerContext {
   hsva: Ref<{ h: number; s: number; v: number; a: number }>
@@ -45,26 +47,6 @@ import SColorPickerCopy from './SColorPickerCopy.vue'
 import SColorPickerInputs from './SColorPickerInputs.vue'
 import SColorPickerPresets from './SColorPickerPresets.vue'
 import SColorPickerRecent from './SColorPickerRecent.vue'
-
-export default {
-  components: {
-    SColorPickerSpectrum,
-    SColorPickerHueSlider,
-    SColorPickerAlphaSlider,
-    SColorPickerPreview,
-    SColorPickerEyeDropper,
-    SColorPickerCopy,
-    SColorPickerInputs,
-    SColorPickerPresets,
-    SColorPickerRecent
-  }
-}
-</script>
-
-<script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
-import { ref, computed, watch, onMounted, onBeforeUnmount, provide, useSlots } from 'vue'
 import { cn } from '~/lib/utils'
 
 // ──── Props ────
