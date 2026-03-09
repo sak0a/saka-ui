@@ -1,10 +1,7 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SDrawerClose - Drawer close button that uses context
  */
-</script>
-
-<script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
 import { inject } from 'vue'

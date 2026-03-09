@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useTheme } from '../composables/useTheme'
 import STableOfContents from '../components/STableOfContents.vue'
+import SCustomizer from '../components/SCustomizer.vue'
 
 const route = useRoute()
 const { theme, toggleTheme } = useTheme()
@@ -173,5 +174,8 @@ const getThemeIcon = () => {
         </div>
       </main>
     </div>
+
+    <!-- Global Customizer -->
+    <SCustomizer />
   </div>
 </template>

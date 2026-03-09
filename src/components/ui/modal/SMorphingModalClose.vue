@@ -1,10 +1,7 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SMorphingModalClose - Close button for morphing modal
  */
-</script>
-
-<script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
 import { inject } from 'vue'

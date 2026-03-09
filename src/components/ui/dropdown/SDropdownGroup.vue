@@ -3,7 +3,8 @@ defineOptions({ inheritAttrs: false })
 
 import { inject, computed } from 'vue'
 import { cn } from '~/lib/utils'
-import { type IconProp, isIconComponent } from '~/lib/icon'
+import { type IconProp } from '~/lib/icon'
+import SIcon from '../SIcon.vue'
 import { SDropdownContextKey, type SDropdownContext } from './SDropdown.vue'
 
 export interface Props {
@@ -34,8 +35,7 @@ const sizeConfig = computed(() => ({
       class="font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-2 sticky top-0 bg-background/95 backdrop-blur-sm"
       :class="sizeConfig"
     >
-      <component v-if="icon && isIconComponent(icon)" :is="icon" class="text-xs" />
-      <span v-else-if="icon" :class="['mdi', `mdi-${icon}`, 'text-xs']" />
+      <SIcon v-if="icon" :icon="icon" :size="12" />
       <span>{{ label }}</span>
     </div>
     

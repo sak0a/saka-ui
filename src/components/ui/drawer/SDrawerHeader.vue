@@ -1,10 +1,7 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SDrawerHeader - Drawer header component with title, description, and close button
  */
-</script>
-
-<script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
 import { inject, onMounted, onBeforeUnmount } from 'vue'

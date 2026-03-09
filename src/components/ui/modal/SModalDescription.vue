@@ -1,11 +1,8 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SModalDescription - Description element for modal
  * Automatically binds to ARIA describedby via context
  */
-</script>
-
-<script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
 import { inject } from 'vue'

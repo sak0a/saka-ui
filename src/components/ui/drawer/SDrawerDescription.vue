@@ -1,10 +1,7 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SDrawerDescription - Drawer description component that automatically binds to ARIA
  */
-</script>
-
-<script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
 import { inject, computed } from 'vue'

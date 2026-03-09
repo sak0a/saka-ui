@@ -1,11 +1,8 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SMorphingModalDescription - Description content for morphing modal
  * Only visible when the modal is expanded
  */
-</script>
-
-<script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
 import { inject, computed } from 'vue'

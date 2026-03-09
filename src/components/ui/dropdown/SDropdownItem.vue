@@ -128,22 +128,25 @@ const handleClick = (event: MouseEvent) => {
     @click="handleClick"
   >
     <!-- Checkbox for checkable items -->
-    <span 
+    <span
       v-if="checked !== undefined"
-      class="mdi mr-2.5 transition-all duration-150"
-      :class="[
-        checked ? 'mdi-checkbox-marked' : 'mdi-checkbox-blank-outline',
-        sizeConfig.icon,
-        checked ? '' : 'text-muted-foreground'
-      ]"
-      :style="checked ? { color: accentColor } : {}"
+      :class="['mdi', checked ? 'mdi-checkbox-marked' : 'mdi-checkbox-blank-outline', 'mr-2.5 transition-all duration-150', checked ? '' : 'text-muted-foreground']"
+      :style="{ fontSize: sizeConfig.iconPx + 'px', color: checked ? accentColor : undefined }"
     />
-    
-    <!-- Leading icon -->
-    <component v-else-if="icon && isIconComponent(icon)" :is="icon" :size="sizeConfig.iconPx" :class="['mr-2.5 shrink-0', !iconColor && !danger ? 'text-muted-foreground group-hover:text-foreground' : '']" :style="iconColor ? { color: iconColor } : {}" />
+
+    <!-- Leading icon (component) -->
+    <component
+      v-else-if="icon && isIconComponent(icon)"
+      :is="icon"
+      :size="sizeConfig.iconPx"
+      :class="['mr-2.5 shrink-0', !iconColor && !danger ? 'text-muted-foreground group-hover:text-foreground' : '']"
+      :style="iconColor ? { color: iconColor } : undefined"
+    />
+    <!-- Leading icon (MDI string) -->
     <span
       v-else-if="icon"
-      :class="['mdi', `mdi-${icon}`, sizeConfig.icon, 'mr-2.5', danger ? '' : 'text-muted-foreground group-hover:text-foreground']"
+      :class="['mdi', `mdi-${icon}`, 'mr-2.5 shrink-0', !iconColor && !danger ? 'text-muted-foreground group-hover:text-foreground' : '']"
+      :style="{ fontSize: sizeConfig.iconPx + 'px', ...(iconColor ? { color: iconColor } : {}) }"
     />
 
     <!-- Content -->
@@ -170,11 +173,18 @@ const handleClick = (event: MouseEvent) => {
         {{ shortcut }}
       </kbd>
       
-      <!-- Trailing icon -->
-      <component v-if="trailingIcon && isIconComponent(trailingIcon)" :is="trailingIcon" :size="sizeConfig.iconPx" class="text-muted-foreground" />
+      <!-- Trailing icon (component) -->
+      <component
+        v-if="trailingIcon && isIconComponent(trailingIcon)"
+        :is="trailingIcon"
+        :size="sizeConfig.iconPx"
+        class="text-muted-foreground"
+      />
+      <!-- Trailing icon (MDI string) -->
       <span
         v-else-if="trailingIcon"
-        :class="['mdi', `mdi-${trailingIcon}`, sizeConfig.icon, 'text-muted-foreground']"
+        :class="['mdi', `mdi-${trailingIcon}`, 'text-muted-foreground']"
+        :style="{ fontSize: sizeConfig.iconPx + 'px' }"
       />
       
       <!-- Custom trailing slot -->

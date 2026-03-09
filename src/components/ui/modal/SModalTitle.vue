@@ -1,11 +1,8 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SModalTitle - Title element for modal
  * Automatically binds to ARIA labelledby via context
  */
-</script>
-
-<script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
 import { inject } from 'vue'

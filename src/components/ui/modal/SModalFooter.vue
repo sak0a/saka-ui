@@ -1,10 +1,7 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SModalFooter - Modal footer with action buttons
  */
-</script>
-
-<script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
 import { inject, onMounted, onBeforeUnmount } from 'vue'

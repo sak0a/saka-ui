@@ -1,11 +1,8 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SMorphingModalImage - Image element for morphing modal
  * Maintains aspect ratio during transition
  */
-</script>
-
-<script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
 import { cn } from '~/lib/utils'

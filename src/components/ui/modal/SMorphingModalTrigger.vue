@@ -1,11 +1,8 @@
-<script lang="ts">
+<script setup lang="ts">
 /**
  * SMorphingModalTrigger - Trigger element for morphing modal
  * Captures its position for the morphing animation
  */
-</script>
-
-<script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 
 import { ref, inject, onMounted, onBeforeUnmount, computed } from 'vue'

@@ -1,21 +1,42 @@
 <script setup lang="ts">
 import { computed, type CSSProperties, type Component } from 'vue'
 import { cn } from '~/lib/utils'
+import { type IconProp, isIconComponent } from '~/lib/icon'
 
 defineOptions({ inheritAttrs: false })
 
 export interface Props {
+  /** Unified icon prop - accepts MDI string name or Vue component */
+  icon?: IconProp
+  /** Vue component icon (explicit) */
   component?: Component
+  /** MDI icon name (explicit) */
+  name?: string
   size?: number | string
   color?: string
   depth?: 1 | 2 | 3 | 4 | 5
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  icon: undefined,
   component: undefined,
+  name: undefined,
   size: 24,
   color: undefined,
   depth: undefined
+})
+
+// Resolve rendering: icon > component > name > slot
+const resolvedComponent = computed<Component | undefined>(() => {
+  if (props.icon && isIconComponent(props.icon)) return props.icon as Component
+  if (props.component) return props.component
+  return undefined
+})
+
+const resolvedName = computed<string | undefined>(() => {
+  if (props.icon && !isIconComponent(props.icon)) return props.icon as string
+  if (props.name) return props.name
+  return undefined
 })
 
 const computedStyle = computed<CSSProperties>(() => {
@@ -57,7 +78,8 @@ const computedStyle = computed<CSSProperties>(() => {
     role="img"
     v-bind="{ ...$attrs, class: undefined }"
   >
-    <component :is="component" v-if="component" />
+    <component :is="resolvedComponent" v-if="resolvedComponent" />
+    <span v-else-if="resolvedName" :class="['mdi', `mdi-${resolvedName}`]" />
     <slot v-else />
   </i>
 </template>
