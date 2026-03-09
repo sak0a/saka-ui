@@ -2,7 +2,7 @@
   "name": "tooltip",
   "displayName": "STooltip",
   "description": "Tooltip with positioning, triggers, delays, and arrow indicator",
-  "version": "0.1.0",
+  "version": "0.2.7",
   "files": [
     "components/ui/STooltip.vue"
   ],

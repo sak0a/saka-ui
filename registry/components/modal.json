@@ -2,9 +2,11 @@
   "name": "modal",
   "displayName": "SModal",
   "description": "Modal dialog with trigger, content, header, footer, close button, and morphing variant",
-  "version": "0.1.0",
+  "version": "0.2.7",
   "files": [
     "components/ui/modal/index.ts",
+    "components/ui/modal/context.ts",
+    "components/ui/modal/morphing-context.ts",
     "components/ui/modal/SModal.vue",
     "components/ui/modal/SModalClose.vue",
     "components/ui/modal/SModalContent.vue",

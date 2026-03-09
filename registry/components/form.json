@@ -2,14 +2,16 @@
   "name": "form",
   "displayName": "SForm",
   "description": "Form container with field validation, error display, and form state management",
-  "version": "0.1.0",
+  "version": "0.2.7",
   "files": [
     "components/ui/form/index.ts",
     "components/ui/form/SForm.vue",
     "components/ui/form/SFormField.vue"
   ],
   "dependencies": [],
-  "composables": ["useForm"],
+  "composables": [
+    "useForm"
+  ],
   "peerDependencies": {
     "vue": "^3.2.0"
   }

@@ -17,6 +17,10 @@ const REGISTRY = resolve(ROOT, 'registry')
 const SOURCE_OUT = resolve(REGISTRY, 'source')
 const MANIFESTS_DIR = resolve(REGISTRY, 'components')
 
+// Read package version
+const pkg = JSON.parse(readFileSync(resolve(ROOT, 'package.json'), 'utf-8'))
+const PKG_VERSION: string = pkg.version
+
 interface ComponentManifest {
   name: string
   displayName: string
@@ -40,15 +44,21 @@ const indexPath = resolve(REGISTRY, 'index.json')
 const index = JSON.parse(readFileSync(indexPath, 'utf-8'))
 const componentNames: string[] = index.components
 
-console.log(`\n📦 Building registry for ${componentNames.length} components...\n`)
+console.log(`\n📦 Building registry for ${componentNames.length} components (v${PKG_VERSION})...\n`)
 
-// 3. Load all manifests
+// 3. Load all manifests and sync versions from package.json
 const manifests: ComponentManifest[] = componentNames.map((name) => {
   const manifestPath = resolve(MANIFESTS_DIR, `${name}.json`)
   if (!existsSync(manifestPath)) {
     throw new Error(`Manifest not found: ${manifestPath}`)
   }
-  return JSON.parse(readFileSync(manifestPath, 'utf-8'))
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'))
+  if (manifest.version !== PKG_VERSION) {
+    manifest.version = PKG_VERSION
+    writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n', 'utf-8')
+    console.log(`  ↑ ${name}: version bumped to ${PKG_VERSION}`)
+  }
+  return manifest
 })
 
 // 4. Copy shared lib files (always included)

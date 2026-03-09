@@ -2,9 +2,11 @@
   "name": "tabs",
   "displayName": "STabs",
   "description": "Tabs with tab panes, dynamic tab management, and customizable styling",
-  "version": "0.1.0",
+  "version": "0.2.7",
   "files": [
     "components/ui/tabs/index.ts",
+    "components/ui/tabs/context.ts",
+    "components/ui/tabs/list-context.ts",
     "components/ui/tabs/STabs.vue",
     "components/ui/tabs/STabPane.vue"
   ],

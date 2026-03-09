@@ -2,7 +2,7 @@
   "name": "progress",
   "displayName": "SProgress",
   "description": "Progress bar and range slider with linear, circular, and gradient variants",
-  "version": "0.1.0",
+  "version": "0.2.7",
   "files": [
     "components/ui/progress/index.ts",
     "components/ui/progress/SProgress.vue",

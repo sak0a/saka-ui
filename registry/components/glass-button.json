@@ -2,12 +2,14 @@
   "name": "glass-button",
   "displayName": "SGlassButton",
   "description": "Glassmorphism-styled button with theme integration, variants, sizes, and icons",
-  "version": "0.1.0",
+  "version": "0.2.7",
   "files": [
     "components/ui/SGlassButton.vue"
   ],
   "dependencies": [],
-  "composables": ["useTheme"],
+  "composables": [
+    "useTheme"
+  ],
   "peerDependencies": {
     "vue": "^3.2.0"
   },

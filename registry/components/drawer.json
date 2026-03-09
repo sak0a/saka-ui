@@ -2,9 +2,10 @@
   "name": "drawer",
   "displayName": "SDrawer",
   "description": "Slide-in drawer panel with trigger, content, header, footer, handle, and close button",
-  "version": "0.1.0",
+  "version": "0.2.7",
   "files": [
     "components/ui/drawer/index.ts",
+    "components/ui/drawer/context.ts",
     "components/ui/drawer/SDrawer.vue",
     "components/ui/drawer/SDrawerClose.vue",
     "components/ui/drawer/SDrawerContent.vue",
