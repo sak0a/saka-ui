@@ -72,7 +72,7 @@ const triggerClasses = computed(() => {
     ${sizeClasses.value}
   `
 
-  const disabledClass = props.disabled ? 'opacity-40 cursor-not-allowed' : ''
+  const disabledClass = props.disabled ? 'opacity-(--s-opacity-disabled) cursor-not-allowed' : ''
 
   // For background indicator types, the trigger just needs text styling (z-index above indicator)
   const typeStyles: Record<TabType, string> = {
@@ -118,7 +118,7 @@ const triggerClasses = computed(() => {
 
 <style scoped>
 button:focus-visible {
-  outline: 2px solid rgba(99, 226, 183, 0.5);
+  outline: 2px solid color-mix(in srgb, var(--s-ring) 50%, transparent);
   outline-offset: 2px;
 }
 </style>
