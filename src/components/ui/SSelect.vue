@@ -28,7 +28,7 @@ export interface Props {
   size?: 'small' | 'medium' | 'large'
   color?: string
   variant?: 'outlined' | 'filled' | 'underlined'
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
   maxHeight?: string
   closeOnSelect?: boolean
   tagLimit?: number
@@ -587,9 +587,10 @@ const sizeConfig = computed(() => {
 const roundedConfig = computed(() => {
   const radii = {
     none: 'rounded-none',
-    sm: 'rounded',
-    md: 'rounded-lg',
-    lg: 'rounded-xl',
+    sm: 'rounded-sm',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
     full: 'rounded-full'
   }
   return radii[props.rounded]
@@ -599,9 +600,10 @@ const roundedConfig = computed(() => {
 const dropdownRoundedConfig = computed(() => {
   const radii = {
     none: 'rounded-none',
-    sm: 'rounded',
-    md: 'rounded-lg',
-    lg: 'rounded-xl',
+    sm: 'rounded-sm',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
     full: 'rounded-xl'  // Cap at xl for dropdown
   }
   return radii[props.rounded]
@@ -734,7 +736,7 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
         variantClasses,
         focusClasses,
         {
-          'opacity-50 cursor-not-allowed': disabled,
+          'opacity-(--s-opacity-disabled) cursor-not-allowed': disabled,
           'cursor-wait': loading,
           's-select-trigger--float-label': labelPlaceholder,
           's-select-trigger--elevated': (isFocused || isOpen) && !disabled
@@ -788,10 +790,10 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
         <!-- Multiple: Tags -->
         <template v-if="multiple && visibleTags.length > 0">
           <TransitionGroup
-            enter-active-class="transition-all duration-200 ease-out"
+            enter-active-class="transition-all duration-(--s-duration-normal) ease-out"
             enter-from-class="scale-90 opacity-0"
             enter-to-class="scale-100 opacity-100"
-            leave-active-class="transition-all duration-150 ease-in absolute"
+            leave-active-class="transition-all duration-(--s-duration-fast) ease-in absolute"
             leave-from-class="scale-100 opacity-100"
             leave-to-class="scale-90 opacity-0"
             tag="div"
@@ -912,12 +914,12 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
         <component
           v-if="!loading && isIconComponent(arrowIcon)"
           :is="arrowIcon"
-          class="text-muted-foreground transition-transform duration-200 shrink-0"
+          class="text-muted-foreground transition-transform duration-(--s-duration-normal) shrink-0"
           :class="[sizeConfig.icon, { 'rotate-180': isOpen }]"
         />
         <span
           v-else-if="!loading"
-          class="text-muted-foreground transition-transform duration-200 shrink-0"
+          class="text-muted-foreground transition-transform duration-(--s-duration-normal) shrink-0"
           :class="['mdi', `mdi-${arrowIcon}`, sizeConfig.icon, { 'rotate-180': isOpen }]"
         />
       </slot>
@@ -941,10 +943,10 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
     <!-- Dropdown -->
     <Teleport v-if="teleportTarget" :to="teleportTarget" :disabled="!teleportTarget">
       <Transition
-        enter-active-class="transition-all duration-200 ease-out"
+        enter-active-class="transition-all duration-(--s-duration-normal) ease-out"
         :enter-from-class="dropdownPosition.placement === 'top' ? 'opacity-0 translate-y-2' : 'opacity-0 -translate-y-2'"
         enter-to-class="opacity-100 translate-y-0"
-        leave-active-class="transition-all duration-150 ease-in"
+        leave-active-class="transition-all duration-(--s-duration-fast) ease-in"
         leave-from-class="opacity-100 translate-y-0"
         :leave-to-class="dropdownPosition.placement === 'top' ? 'opacity-0 translate-y-2' : 'opacity-0 -translate-y-2'"
       >
@@ -1012,11 +1014,11 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
                         role="option"
                         :aria-selected="isSelected(option.value)"
                         :aria-disabled="option.disabled"
-                        class="s-option relative flex items-center cursor-pointer transition-all duration-150 select-none"
+                        class="s-option relative flex items-center cursor-pointer transition-all duration-(--s-duration-fast) select-none"
                         :class="[
                           sizeConfig.option,
                           {
-                            'opacity-50 cursor-not-allowed': option.disabled,
+                            'opacity-(--s-opacity-disabled) cursor-not-allowed': option.disabled,
                             'text-foreground': isSelected(option.value),
                             'text-muted-foreground hover:text-foreground hover:bg-accent/50': !isSelected(option.value) && !option.disabled
                           }
@@ -1024,9 +1026,9 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
                         @click="!option.disabled && selectOption(option.value)"
                       >
                         <!-- Highlight background for selected -->
-                        <div 
+                        <div
                           v-if="isSelected(option.value)"
-                          class="absolute inset-0 transition-all duration-150 rounded-lg mx-1"
+                          class="absolute inset-0 transition-all duration-(--s-duration-fast) rounded-lg mx-1"
                           :style="{ backgroundColor: `color-mix(in srgb, ${option.color ?? resolvedColor} 15%, transparent)` }"
                         />
 
@@ -1081,11 +1083,11 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
                       role="option"
                       :aria-selected="isSelected(option.value)"
                       :aria-disabled="option.disabled"
-                      class="s-option relative flex items-center cursor-pointer transition-all duration-150 select-none"
+                      class="s-option relative flex items-center cursor-pointer transition-all duration-(--s-duration-fast) select-none"
                       :class="[
                         sizeConfig.option,
                         {
-                          'opacity-50 cursor-not-allowed': option.disabled,
+                          'opacity-(--s-opacity-disabled) cursor-not-allowed': option.disabled,
                           'text-foreground': highlightedIndex === index || isSelected(option.value),
                           'text-muted-foreground hover:text-foreground': highlightedIndex !== index && !isSelected(option.value) && !option.disabled
                         }
@@ -1094,9 +1096,9 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
                       @mouseenter="highlightedIndex = index"
                     >
                       <!-- Highlight background -->
-                      <div 
+                      <div
                         v-if="highlightedIndex === index || isSelected(option.value)"
-                        class="absolute inset-0 transition-all duration-150 rounded-lg mx-1"
+                        class="absolute inset-0 transition-all duration-(--s-duration-fast) rounded-lg mx-1"
                         :class="isSelected(option.value) ? 'opacity-100' : 'opacity-60'"
                         :style="{ 
                           backgroundColor: isSelected(option.value) 
@@ -1139,7 +1141,7 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
 
                       <!-- Check mark -->
                       <Transition
-                        enter-active-class="transition-all duration-150 ease-out"
+                        enter-active-class="transition-all duration-(--s-duration-fast) ease-out"
                         enter-from-class="scale-0 opacity-0"
                         enter-to-class="scale-100 opacity-100"
                         leave-active-class="transition-all duration-100 ease-in"
@@ -1159,7 +1161,7 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
                   <!-- Creatable option -->
                   <div 
                     v-if="showCreateOption"
-                    class="s-option relative flex items-center cursor-pointer transition-all duration-150 select-none border-t border-border mt-1 pt-1"
+                    class="s-option relative flex items-center cursor-pointer transition-all duration-(--s-duration-fast) select-none border-t border-border mt-1 pt-1"
                     :class="sizeConfig.option"
                     @click="createOption"
                   >
@@ -1209,10 +1211,10 @@ const resolvedColor = computed(() => props.color ?? 'var(--s-primary)')
     <!-- Non-teleported dropdown (fallback) -->
     <template v-else>
       <Transition
-        enter-active-class="transition-all duration-200 ease-out"
+        enter-active-class="transition-all duration-(--s-duration-normal) ease-out"
         enter-from-class="opacity-0 -translate-y-2"
         enter-to-class="opacity-100 translate-y-0"
-        leave-active-class="transition-all duration-150 ease-in"
+        leave-active-class="transition-all duration-(--s-duration-fast) ease-in"
         leave-from-class="opacity-100 translate-y-0"
         leave-to-class="opacity-0 -translate-y-2"
       >

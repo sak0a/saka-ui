@@ -20,7 +20,7 @@ export interface Props {
   // Visual
   size?: 'small' | 'medium' | 'large'
   orientation?: 'horizontal' | 'vertical'
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
   color?: string
   trackColor?: string
   activeTrackColor?: string
@@ -153,9 +153,10 @@ const handleSizeValue = computed(() => props.handleSize || sizeConfig.value.hand
 const roundedClasses = computed(() => {
   const radii = {
     none: 'rounded-none',
-    sm: 'rounded',
-    md: 'rounded-lg',
-    lg: 'rounded-xl',
+    sm: 'rounded-sm',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
     full: 'rounded-full'
   }
   return radii[props.rounded]
@@ -542,7 +543,7 @@ const maxHandleZIndex = computed(() => {
       <div 
         class="s-progress-range__handle absolute"
         :class="[
-          'transition-shadow duration-200',
+          'transition-shadow duration-(--s-duration-normal)',
           (isDragging && activeHandle === (range ? 'min' : 'single')) && 'ring-4 ring-opacity-30',
           disabled ? 'cursor-not-allowed' : 'cursor-grab'
         ]"
@@ -597,7 +598,7 @@ const maxHandleZIndex = computed(() => {
         v-if="range"
         class="s-progress-range__handle absolute"
         :class="[
-          'transition-shadow duration-200',
+          'transition-shadow duration-(--s-duration-normal)',
           (isDragging && activeHandle === 'max') && 'ring-4 ring-opacity-30',
           disabled ? 'cursor-not-allowed' : 'cursor-grab'
         ]"

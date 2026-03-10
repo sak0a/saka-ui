@@ -13,7 +13,7 @@ export interface Props {
   variant?: 'outlined' | 'filled' | 'ghost'
   size?: 'small' | 'medium' | 'large'
   color?: string
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
   
   // Formatting
   format?: string
@@ -786,9 +786,10 @@ const sizeConfig = computed(() => {
 const roundedConfig = computed(() => {
   const radii = {
     none: 'rounded-none',
-    sm: 'rounded',
-    md: 'rounded-lg',
-    lg: 'rounded-xl',
+    sm: 'rounded-sm',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
     full: 'rounded-full'
   }
   return radii[props.rounded]
@@ -859,13 +860,13 @@ const teleportTarget = computed(() => {
       role="combobox"
       :aria-expanded="isOpen"
       :aria-disabled="disabled"
-      class="s-datepicker-trigger relative flex items-center cursor-pointer transition-all duration-200 w-full"
+      class="s-datepicker-trigger relative flex items-center cursor-pointer transition-all duration-(--s-duration-normal) w-full"
       :class="[
         sizeConfig.trigger,
         sizeConfig.padding,
         roundedConfig,
         {
-          'opacity-50 cursor-not-allowed': disabled,
+          'opacity-(--s-opacity-disabled) cursor-not-allowed': disabled,
           'cursor-default': readonly
         }
       ]"
@@ -915,7 +916,7 @@ const teleportTarget = computed(() => {
       <!-- Dropdown arrow -->
       <span
         v-else
-        class="mdi transition-transform duration-200 text-muted-foreground"
+        class="mdi transition-transform duration-(--s-duration-normal) text-muted-foreground"
         :class="[sizeConfig.icon, isOpen ? 'mdi-chevron-up' : 'mdi-chevron-down']"
       />
     </div>
@@ -923,10 +924,10 @@ const teleportTarget = computed(() => {
     <!-- Calendar Dropdown -->
     <Teleport :to="teleportTarget" :disabled="!teleport">
       <Transition
-        enter-active-class="transition duration-200 ease-out"
+        enter-active-class="transition duration-(--s-duration-normal) ease-out"
         enter-from-class="opacity-0 scale-95"
         enter-to-class="opacity-100 scale-100"
-        leave-active-class="transition duration-150 ease-in"
+        leave-active-class="transition duration-(--s-duration-fast) ease-in"
         leave-from-class="opacity-100 scale-100"
         leave-to-class="opacity-0 scale-95"
       >
