@@ -1,8 +1,8 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { provide, reactive, computed } from 'vue'
 import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 export interface AvatarProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | number

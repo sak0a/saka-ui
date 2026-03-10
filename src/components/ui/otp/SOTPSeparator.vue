@@ -1,7 +1,7 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 </script>
 
 <template>

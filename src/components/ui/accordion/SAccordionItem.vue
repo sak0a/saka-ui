@@ -1,10 +1,10 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { inject, ref, computed, onMounted, onBeforeUnmount, watch, nextTick, provide } from 'vue'
 import { cn } from '~/lib/utils'
 import { type IconProp, isIconComponent } from '~/lib/icon'
 import { SAccordionContextKey, SAccordionItemContextKey, type SAccordionContext } from './context'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Unique identifier for this item */

@@ -1,48 +1,7 @@
-<script lang="ts">
-import { type InjectionKey, type Ref } from 'vue'
-
-// ─── Types ──────────────────────────────────────────────────────────────────────
-export type StepperOrientation = 'horizontal' | 'vertical'
-export type StepperSize = 'small' | 'medium' | 'large'
-export type StepperVariant = 'default' | 'line'
-
-export interface StepperItemInfo {
-  step: number
-  disabled: boolean
-  loading: boolean
-  error: boolean
-  optional: boolean
-}
-
-export interface SStepperContext {
-  modelValue: Ref<number>
-  orientation: StepperOrientation
-  variant: StepperVariant
-  linear: boolean
-  size: StepperSize
-  color: string
-  animated: boolean
-  clickable: boolean
-  totalSteps: Ref<number>
-  completedSteps: Ref<Set<number>>
-  items: Ref<Map<number, StepperItemInfo>>
-  registerItem: (item: StepperItemInfo) => void
-  unregisterItem: (step: number) => void
-  setStep: (step: number) => void
-  markCompleted: (step: number) => void
-  unmarkCompleted: (step: number) => void
-  isCompleted: (step: number) => boolean
-  isActive: (step: number) => boolean
-  getState: (step: number) => 'active' | 'completed' | 'inactive' | 'error' | 'loading'
-  canNavigateTo: (step: number) => boolean
-}
-
-export const SStepperContextKey: InjectionKey<SStepperContext> = Symbol('SStepperContext')
-</script>
-
 <script setup lang="ts">
-import { computed, provide, ref, watch } from 'vue'
+import { computed, provide, ref, watch, type Ref } from 'vue'
 import { cn } from '~/lib/utils'
+import { SStepperContextKey, type StepperOrientation, type StepperVariant, type StepperSize, type StepperItemInfo } from './context'
 
 // ─── Props ──────────────────────────────────────────────────────────────────────
 export interface Props {

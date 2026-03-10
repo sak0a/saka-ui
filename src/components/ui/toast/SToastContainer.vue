@@ -1,9 +1,9 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { computed, Teleport, TransitionGroup } from 'vue'
 import { getToasts, getToastConfig, type ToastPosition } from '../../../composables/useToast'
 import SToast from './SToast.vue'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Position to render toasts (defaults to global config) */

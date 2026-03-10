@@ -1,10 +1,10 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { inject, computed, useAttrs } from 'vue'
 import { cn } from '~/lib/utils'
 import { STabsContextKey, type STabsContext, type TabType } from './context'
 import { STabsListContextKey, type STabsListContext } from './list-context'
+
+defineOptions({ inheritAttrs: false })
 
 interface Props {
   value: string | number

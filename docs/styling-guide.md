@@ -285,9 +285,33 @@ This means users can override any Tailwind class:
 <SButton class="rounded-full">Pill</SButton>
 ```
 
+### The `type` Prop (Semantic Colors)
+
+Components that accept a `type` prop map semantic names to theme CSS variables. This is the recommended way to apply semantic colors:
+
+```vue
+<SButton type="primary">Primary</SButton>
+<SButton type="success">Success</SButton>
+<SButton type="warning">Warning</SButton>
+<SButton type="error">Error</SButton>
+<SButton type="info">Info</SButton>
+```
+
+| Type | Maps to | Foreground |
+|------|---------|------------|
+| `primary` | `--s-primary` | `--s-primary-foreground` |
+| `error` | `--s-destructive` | `--s-destructive-foreground` |
+| `success` | `--s-success` | `--s-success-foreground` |
+| `warning` | `--s-warning` | `--s-warning-foreground` |
+| `info` | `--s-info` | `--s-info-foreground` |
+
+> **Note:** The `error` type maps to `--s-destructive` (not `--s-error`) since the design token system uses "destructive" for danger/error semantics.
+
+The `type` prop takes precedence over `color` when both are set. When `type` is `'default'` or unset, the `color` prop is used instead.
+
 ### The `color` Prop
 
-Components that accept a `color` prop use it as an escape hatch for custom accent colors. When `color` is set, it injects a local CSS variable that overrides the token-based styling:
+Components that accept a `color` prop use it as an escape hatch for custom accent colors. When `color` is set, it injects inline styles that override the token-based styling:
 
 ```vue
 <!-- Uses the theme's --s-primary token (default) -->
@@ -296,6 +320,8 @@ Components that accept a `color` prop use it as an escape hatch for custom accen
 <!-- Uses a custom color -->
 <SButton color="#6366f1">Indigo</SButton>
 ```
+
+Prefer `type` for standard semantic colors and `color` for one-off custom colors.
 
 ---
 

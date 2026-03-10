@@ -1,71 +1,8 @@
-<script lang="ts">
-import { cva, type VariantProps } from 'class-variance-authority'
-import type { IconProp } from '~/lib/icon'
-
-export const buttonVariants = cva(
-  'relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out overflow-hidden select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-[1.5px] border-transparent',
-  {
-    variants: {
-      variant: {
-        filled: 'bg-primary text-primary-foreground hover:brightness-110 active:scale-[0.98]',
-        outlined: 'bg-transparent border-primary text-primary hover:bg-primary/10',
-        light: 'bg-primary/15 text-primary hover:bg-primary/25',
-        ghost: 'bg-transparent text-primary hover:bg-accent',
-        link: 'bg-transparent text-primary hover:underline',
-      },
-      size: {
-        xs: 'px-1.5 py-0.5 text-xs gap-1',
-        small: 'px-2 py-0.5 text-sm gap-1.5',
-        medium: 'px-2 py-0.5 text-sm gap-2',
-        large: 'px-2.5 py-0.5 text-base gap-2',
-        xl: 'px-3 py-0.5 text-lg gap-2.5',
-      },
-      rounded: {
-        none: 'rounded-none',
-        sm: 'rounded',
-        md: 'rounded-lg',
-        lg: 'rounded-xl',
-        full: 'rounded-full',
-      },
-    },
-    defaultVariants: {
-      variant: 'filled',
-      size: 'medium',
-      rounded: 'md',
-    },
-  }
-)
-
-export type ButtonVariants = VariantProps<typeof buttonVariants>
-
-export interface Props {
-  variant?: 'filled' | 'outlined' | 'light' | 'ghost' | 'link'
-  size?: 'xs' | 'small' | 'medium' | 'large' | 'xl'
-  color?: string
-  disabled?: boolean
-  loading?: boolean
-  preserveSize?: boolean
-  block?: boolean
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
-  iconLeft?: IconProp
-  iconRight?: IconProp
-  iconOnly?: boolean
-  tag?: string
-  href?: string
-  to?: string | object
-  type?: 'button' | 'submit' | 'reset'
-  ripple?: boolean
-  animationType?: 'slide' | 'vertical' | 'scale' | 'rotate'
-  animateInactive?: boolean
-  contentClass?: string
-  iconClass?: string
-}
-</script>
-
 <script setup lang="ts">
 import { computed, ref, useSlots, type CSSProperties } from 'vue'
 import { cn } from '~/lib/utils'
 import { isIconComponent } from '~/lib/icon'
+import { buttonVariants, type Props } from './button'
 
 const iconOnlySizes: Record<string, string> = {
   xs: 'w-6 h-6 text-xs',
@@ -79,6 +16,7 @@ const props = withDefaults(defineProps<Props>(), {
   variant: 'filled',
   size: 'medium',
   color: undefined,
+  type: undefined,
   disabled: false,
   loading: false,
   preserveSize: false,
@@ -90,13 +28,29 @@ const props = withDefaults(defineProps<Props>(), {
   tag: 'button',
   href: undefined,
   to: undefined,
-  type: 'button',
+  nativeType: 'button',
   ripple: true,
   animationType: 'slide',
   animateInactive: false,
   contentClass: undefined,
   iconClass: undefined,
 })
+
+const typeColorMap: Record<string, string> = {
+  primary: 'var(--s-primary)',
+  error: 'var(--s-destructive)',
+  success: 'var(--s-success)',
+  warning: 'var(--s-warning)',
+  info: 'var(--s-info)',
+}
+
+const typeForegroundMap: Record<string, string> = {
+  primary: 'var(--s-primary-foreground)',
+  error: 'var(--s-destructive-foreground)',
+  success: 'var(--s-success-foreground)',
+  warning: 'var(--s-warning-foreground)',
+  info: 'var(--s-info-foreground)',
+}
 
 defineOptions({ inheritAttrs: false })
 
@@ -167,14 +121,20 @@ const iconSizes = computed(() => {
   return sizes[props.size]
 })
 
-// Custom color override: when color prop is set, use inline styles for color-specific properties
-const colorStyle = computed<CSSProperties | undefined>(() => {
-  if (!props.color) return undefined
+const resolvedColor = computed(() => {
+  if (props.type && props.type !== 'default') return typeColorMap[props.type]
+  return props.color
+})
 
-  const c = props.color
+// Custom color override: when color/type is set, use inline styles for color-specific properties
+const colorStyle = computed<CSSProperties | undefined>(() => {
+  if (!resolvedColor.value) return undefined
+
+  const c = resolvedColor.value
 
   if (props.variant === 'filled') {
-    return { backgroundColor: c, color: '#fff', borderColor: 'transparent' }
+    const fg = props.type && props.type !== 'default' ? typeForegroundMap[props.type] ?? '#fff' : '#fff'
+    return { backgroundColor: c, color: fg, borderColor: 'transparent' }
   } else if (props.variant === 'outlined') {
     return { backgroundColor: 'transparent', borderColor: c, color: c }
   } else if (props.variant === 'light') {
@@ -184,6 +144,10 @@ const colorStyle = computed<CSSProperties | undefined>(() => {
     return { backgroundColor: 'transparent', color: c, borderColor: 'transparent' }
   } else if (props.variant === 'link') {
     return { backgroundColor: 'transparent', color: c, borderColor: 'transparent' }
+  } else if (props.variant === 'dashed') {
+    return { backgroundColor: 'transparent', borderColor: c, color: c, borderStyle: 'dashed' }
+  } else if (props.variant === 'glass') {
+    return { '--glass-glow-color': `${c}40`, color: c } as CSSProperties
   }
 
   return undefined
@@ -193,14 +157,15 @@ const buttonClasses = computed(() => {
   return cn(
     // Base + size + rounded from cva; skip variant when color is set (inline style handles it)
     buttonVariants({
-      variant: props.color ? null : props.variant,
+      variant: resolvedColor.value ? null : props.variant,
       size: props.iconOnly ? null : props.size,
       rounded: props.rounded,
     }),
     props.iconOnly && iconOnlySizes[props.size],
     // Hover/active interactions when color is set
-    props.color && props.variant === 'filled' && 'hover:brightness-110 active:scale-[0.98]',
-    props.color && props.variant === 'link' && 'hover:underline',
+    resolvedColor.value && props.variant === 'filled' && 'hover:brightness-110 active:scale-[0.98]',
+    resolvedColor.value && props.variant === 'link' && 'hover:underline',
+    props.variant === 'glass' && 's-button--glass',
     {
       'w-full': props.block,
       'opacity-50 cursor-not-allowed': props.disabled || props.loading,
@@ -216,7 +181,7 @@ const componentBindings = computed(() => {
 
   if (props.to) bindings.to = props.to
   if (props.href) bindings.href = props.href
-  if (componentTag.value === 'button') bindings.type = props.type
+  if (componentTag.value === 'button') bindings.type = props.nativeType
   if (props.disabled) bindings.disabled = true
 
   return bindings
@@ -385,5 +350,30 @@ const componentBindings = computed(() => {
 .s-button--animate-rotate:hover .s-button__animate--rotate {
   transform: rotate(0);
   opacity: 1;
+}
+
+/* Glass variant */
+.s-button--glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 4px 16px rgba(0, 0, 0, 0.35),
+    0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.s-button--glass:not(:disabled):not(.opacity-50):hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 8px 24px rgba(0, 0, 0, 0.45),
+    0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.s-button--glass:not(:disabled):not(.opacity-50):active {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 2px 8px rgba(0, 0, 0, 0.3);
 }
 </style>

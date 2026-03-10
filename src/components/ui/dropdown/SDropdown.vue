@@ -463,7 +463,7 @@ const handleKeydown = (event: KeyboardEvent) => {
     case ' ':
       event.preventDefault()
       if (highlightedIndex.value >= 0 && enabledItems[highlightedIndex.value]) {
-        selectItem(enabledItems[highlightedIndex.value].key)
+        selectItem(enabledItems[highlightedIndex.value]!.key)
       }
       break
     case 'Tab':

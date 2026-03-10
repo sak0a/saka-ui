@@ -1,10 +1,10 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { inject, ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { cn } from '~/lib/utils'
 import { type IconProp, isIconComponent } from '~/lib/icon'
 import { SDropdownContextKey, type SDropdownContext } from './context'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Unique key for the item */

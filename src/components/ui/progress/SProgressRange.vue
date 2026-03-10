@@ -1,8 +1,8 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
 import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 export interface RangeValue {
   min: number

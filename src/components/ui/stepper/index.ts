@@ -12,7 +12,7 @@ export type {
   StepperSize,
   StepperVariant,
   SStepperContext,
-} from './SStepper.vue'
+  SStepperItemContext,
+} from './context'
 
-export { SStepperContextKey } from './SStepper.vue'
-export { SStepperItemContextKey } from './SStepperItem.vue'
+export { SStepperContextKey, SStepperItemContextKey } from './context'

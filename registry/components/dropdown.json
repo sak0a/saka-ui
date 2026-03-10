@@ -2,7 +2,7 @@
   "name": "dropdown",
   "displayName": "SDropdown",
   "description": "Dropdown menu with items, groups, dividers, and keyboard navigation",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "files": [
     "components/ui/dropdown/index.ts",
     "components/ui/dropdown/context.ts",

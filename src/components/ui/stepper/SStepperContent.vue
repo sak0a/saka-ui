@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, ref, watch } from 'vue'
 import { cn } from '~/lib/utils'
-import { SStepperContextKey } from './SStepper.vue'
+import { SStepperContextKey } from './context'
 
 // ─── Props ──────────────────────────────────────────────────────────────────────
 export interface Props {

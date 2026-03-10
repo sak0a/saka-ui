@@ -1,7 +1,7 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { ref, inject, onMounted, watch } from 'vue'
+
+defineOptions({ inheritAttrs: false })
 
 interface Props {
   src?: string

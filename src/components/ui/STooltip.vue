@@ -208,7 +208,7 @@ function calculatePosition() {
     }
   }
 
-  const pos = positions[placement]
+  const pos = positions[placement]!
   top = pos.top
   left = pos.left
 
@@ -223,19 +223,19 @@ function calculatePosition() {
   // Flip placement if needed
   if (placement.startsWith('top') && overflow.top) {
     placement = placement.replace('top', 'bottom') as typeof props.placement
-    const newPos = positions[placement]
+    const newPos = positions[placement]!
     top = newPos.top
   } else if (placement.startsWith('bottom') && overflow.bottom) {
     placement = placement.replace('bottom', 'top') as typeof props.placement
-    const newPos = positions[placement]
+    const newPos = positions[placement]!
     top = newPos.top
   } else if (placement.startsWith('left') && overflow.left) {
     placement = placement.replace('left', 'right') as typeof props.placement
-    const newPos = positions[placement]
+    const newPos = positions[placement]!
     left = newPos.left
   } else if (placement.startsWith('right') && overflow.right) {
     placement = placement.replace('right', 'left') as typeof props.placement
-    const newPos = positions[placement]
+    const newPos = positions[placement]!
     left = newPos.left
   }
 

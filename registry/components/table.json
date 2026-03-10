@@ -2,7 +2,7 @@
   "name": "table",
   "displayName": "SDataTable",
   "description": "Data table with sorting, filtering, pagination, selection, expandable rows, and skeleton loading",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "files": [
     "components/ui/table/index.ts",
     "components/ui/table/useDataTable.ts",

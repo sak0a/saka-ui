@@ -1,24 +1,7 @@
-<script lang="ts">
-import { type InjectionKey, type Ref } from 'vue'
-
-// ─── Types ──────────────────────────────────────────────────────────────────────
-export interface SStepperItemContext {
-  step: number
-  state: Ref<'active' | 'completed' | 'inactive' | 'error' | 'loading'>
-  disabled: Ref<boolean>
-  loading: Ref<boolean>
-  error: Ref<boolean>
-  optional: Ref<boolean>
-  canNavigate: Ref<boolean>
-}
-
-export const SStepperItemContextKey: InjectionKey<SStepperItemContext> = Symbol('SStepperItemContext')
-</script>
-
 <script setup lang="ts">
 import { computed, inject, onMounted, onUnmounted, provide, watch } from 'vue'
 import { cn } from '~/lib/utils'
-import { SStepperContextKey } from './SStepper.vue'
+import { SStepperContextKey, SStepperItemContextKey } from './context'
 
 // ─── Props ──────────────────────────────────────────────────────────────────────
 export interface Props {

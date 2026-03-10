@@ -1,9 +1,9 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { ref, computed, watch, provide, onMounted, onBeforeUnmount, nextTick, type CSSProperties } from 'vue'
 import { cn } from '~/lib/utils'
 import { type IconProp, isIconComponent } from '~/lib/icon'
+
+defineOptions({ inheritAttrs: false })
 
 export interface SelectOption {
   value: any
@@ -382,7 +382,7 @@ const handleKeydown = (event: KeyboardEvent) => {
       if (!isOpen.value) {
         open()
       } else if (highlightedIndex.value >= 0 && allOptions[highlightedIndex.value]) {
-        selectOption(allOptions[highlightedIndex.value].value)
+        selectOption(allOptions[highlightedIndex.value]!.value)
       } else if (props.creatable && activeQuery.value.trim()) {
         createOption()
       }
@@ -397,7 +397,7 @@ const handleKeydown = (event: KeyboardEvent) => {
       if (!isOpen.value) {
         open()
       } else if (highlightedIndex.value >= 0 && allOptions[highlightedIndex.value]) {
-        selectOption(allOptions[highlightedIndex.value].value)
+        selectOption(allOptions[highlightedIndex.value]!.value)
       }
       break
       
@@ -445,7 +445,7 @@ const handleKeydown = (event: KeyboardEvent) => {
     case 'Home':
       event.preventDefault()
       if (isOpen.value) {
-        highlightedIndex.value = enabledOptions.length > 0 ? allOptions.indexOf(enabledOptions[0]) : 0
+        highlightedIndex.value = enabledOptions.length > 0 ? allOptions.indexOf(enabledOptions[0]!) : 0
       }
       break
       
@@ -453,7 +453,7 @@ const handleKeydown = (event: KeyboardEvent) => {
       event.preventDefault()
       if (isOpen.value) {
         highlightedIndex.value = enabledOptions.length > 0 
-          ? allOptions.indexOf(enabledOptions[enabledOptions.length - 1]) 
+          ? allOptions.indexOf(enabledOptions[enabledOptions.length - 1]!)
           : allOptions.length - 1
       }
       break

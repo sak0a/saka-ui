@@ -1,10 +1,10 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { inject, ref, computed, provide, onMounted, useAttrs } from 'vue'
 import { cn } from '~/lib/utils'
 import { STabsContextKey, type STabsContext, type TabType } from './context'
 import { STabsListContextKey } from './list-context'
+
+defineOptions({ inheritAttrs: false })
 
 interface Props {
   type?: TabType

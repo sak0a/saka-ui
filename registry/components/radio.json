@@ -2,7 +2,7 @@
   "name": "radio",
   "displayName": "SRadio",
   "description": "Radio button with radio group, sizes, colors, and label positioning",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "files": [
     "components/ui/radio/index.ts",
     "components/ui/radio/SRadio.vue",

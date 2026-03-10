@@ -2,7 +2,7 @@
   "name": "tabs",
   "displayName": "STabs",
   "description": "Tabs with tab panes, dynamic tab management, and customizable styling",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "files": [
     "components/ui/tabs/index.ts",
     "components/ui/tabs/context.ts",

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { inject, computed, type CSSProperties } from 'vue'
 import { cn } from '~/lib/utils'
 import { type IconProp, isIconComponent } from '~/lib/icon'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   value: any

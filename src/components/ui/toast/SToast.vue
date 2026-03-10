@@ -1,11 +1,11 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { computed, ref } from 'vue'
 import { cn } from '~/lib/utils'
 import type { ToastType } from '../../../composables/useToast'
 import { dismissToast, pauseToast, resumeToast } from '../../../composables/useToast'
 import SIcon from '../SIcon.vue'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Unique toast ID */

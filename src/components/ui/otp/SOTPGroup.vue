@@ -1,7 +1,7 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import type { SOTPGap } from './types'
+
+defineOptions({ inheritAttrs: false })
 
 interface Props {
   gap?: SOTPGap

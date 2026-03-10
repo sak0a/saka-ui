@@ -1,9 +1,9 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { inject, computed, useAttrs } from 'vue'
 import { cn } from '~/lib/utils'
 import { SAccordionItemContextKey, SAccordionContextKey, type SAccordionItemContext, type SAccordionContext } from './context'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   /** Hide the default arrow indicator */

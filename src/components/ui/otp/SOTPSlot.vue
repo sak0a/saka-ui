@@ -1,6 +1,4 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { computed } from 'vue'
 import { cn } from '~/lib/utils'
 import { useSOTPContext } from './useOTPContext'
@@ -9,6 +7,8 @@ import type {
   SOTPAnimation, SOTPEntryAnimation, SOTPInputAnimation,
   SOTPSuccessAnimation, SOTPErrorAnimation
 } from './types'
+
+defineOptions({ inheritAttrs: false })
 
 interface Props {
   index: number

@@ -58,22 +58,42 @@ const variantsCode = `<SButton variant="filled">Filled</SButton>
 <SButton variant="outlined">Outlined</SButton>
 <SButton variant="light">Light</SButton>
 <SButton variant="ghost">Ghost</SButton>
-<SButton variant="link">Link</SButton>`
+<SButton variant="link">Link</SButton>
+<SButton variant="dashed">Dashed</SButton>
+<SButton variant="glass">Glass</SButton>`
+
+const semanticTypesCode = `<SButton type="primary">Primary</SButton>
+<SButton type="success">Success</SButton>
+<SButton type="warning">Warning</SButton>
+<SButton type="error">Error</SButton>
+<SButton type="info">Info</SButton>
+
+<!-- Works with all variants -->
+<SButton type="error" variant="outlined">Outlined Error</SButton>
+<SButton type="success" variant="light">Light Success</SButton>
+<SButton type="warning" variant="dashed">Dashed Warning</SButton>
+<SButton type="info" variant="ghost">Ghost Info</SButton>`
 
 const variantColorsCode = `<SButton color="#8b5cf6" variant="filled">Filled</SButton>
 <SButton color="#8b5cf6" variant="outlined">Outlined</SButton>
 <SButton color="#8b5cf6" variant="light">Light</SButton>
 <SButton color="#8b5cf6" variant="ghost">Ghost</SButton>
+<SButton color="#8b5cf6" variant="dashed">Dashed</SButton>
+<SButton color="#8b5cf6" variant="glass">Glass</SButton>
 
 <SButton color="#ef4444" variant="filled">Filled</SButton>
 <SButton color="#ef4444" variant="outlined">Outlined</SButton>
 <SButton color="#ef4444" variant="light">Light</SButton>
 <SButton color="#ef4444" variant="ghost">Ghost</SButton>
+<SButton color="#ef4444" variant="dashed">Dashed</SButton>
+<SButton color="#ef4444" variant="glass">Glass</SButton>
 
 <SButton color="#06b6d4" variant="filled">Filled</SButton>
 <SButton color="#06b6d4" variant="outlined">Outlined</SButton>
 <SButton color="#06b6d4" variant="light">Light</SButton>
-<SButton color="#06b6d4" variant="ghost">Ghost</SButton>`
+<SButton color="#06b6d4" variant="ghost">Ghost</SButton>
+<SButton color="#06b6d4" variant="dashed">Dashed</SButton>
+<SButton color="#06b6d4" variant="glass">Glass</SButton>`
 
 const sizesCode = `<SButton size="xs">Extra Small</SButton>
 <SButton size="small">Small</SButton>
@@ -256,7 +276,7 @@ const kbdShortcutCode = `<SButton variant="outlined">
 // API Reference data
 const buttonProps: ApiProp[] = [
   // Appearance
-  { name: 'variant', type: "'filled' | 'outlined' | 'light' | 'ghost' | 'link'", default: "'filled'", description: 'Visual style variant', category: 'Appearance' },
+  { name: 'variant', type: "'filled' | 'outlined' | 'light' | 'ghost' | 'link' | 'dashed' | 'glass'", default: "'filled'", description: 'Visual style variant', category: 'Appearance' },
   { name: 'size', type: "'xs' | 'small' | 'medium' | 'large' | 'xl'", default: "'medium'", description: 'Button size', category: 'Appearance' },
   { name: 'color', type: 'string', default: "'var(--s-primary)'", description: 'Button color (CSS color or variable)', category: 'Appearance' },
   { name: 'rounded', type: "'none' | 'sm' | 'md' | 'lg' | 'full'", default: "'md'", description: 'Border radius variant', category: 'Appearance' },
@@ -277,7 +297,8 @@ const buttonProps: ApiProp[] = [
   { name: 'href', type: 'string', default: 'undefined', description: 'URL for anchor tag', category: 'Navigation' },
   { name: 'to', type: 'string | object', default: 'undefined', description: 'Vue Router destination', category: 'Navigation' },
   // HTML Attributes
-  { name: 'type', type: "'button' | 'submit' | 'reset'", default: "'button'", description: 'Button type attribute', category: 'HTML Attributes' },
+  { name: 'type', type: "'default' | 'primary' | 'error' | 'success' | 'info' | 'warning'", default: 'undefined', description: 'Semantic color type — maps to theme CSS variables', category: 'Appearance' },
+  { name: 'nativeType', type: "'button' | 'submit' | 'reset'", default: "'button'", description: 'Native HTML button type attribute', category: 'HTML Attributes' },
   { name: 'tag', type: 'string', default: "'button'", description: 'HTML tag to render', category: 'HTML Attributes' }
 ]
 
@@ -302,10 +323,10 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 <template>
   <div class="space-y-12 pb-20">
     <!-- @component SButton -->
-    <!-- @props variant, size, color, rounded, block, iconLeft, iconRight, iconOnly, disabled, loading, preserveSize, ripple, animationType, animateInactive, href, to, type, tag -->
+    <!-- @props variant, size, color, type, rounded, block, iconLeft, iconRight, iconOnly, disabled, loading, preserveSize, ripple, animationType, animateInactive, href, to, nativeType, tag -->
     <!-- @events @click -->
     <!-- @slots default, icon-left, icon-right, animate -->
-    <!-- @sections features, basic-usage, variants, variant-colors, sizes, border-radius, with-icons, loading-state, disabled-state, block-full-width, as-links, button-groups, combined-features, ripple-effect, hover-animations, with-keyboard-shortcuts, api-reference -->
+    <!-- @sections features, basic-usage, variants, semantic-types, variant-colors, sizes, border-radius, with-icons, loading-state, disabled-state, block-full-width, as-links, button-groups, combined-features, ripple-effect, hover-animations, with-keyboard-shortcuts, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Buttons</h1>
@@ -319,9 +340,9 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <Palette class="w-5 h-5 text-emerald-500" />
-            <h3 class="font-semibold text-(--s-text-primary)">Five Variants</h3>
+            <h3 class="font-semibold text-(--s-text-primary)">Seven Variants</h3>
           </div>
-          <p class="text-sm text-(--s-text-secondary)">Filled, outlined, light, ghost, and link variants with custom color support.</p>
+          <p class="text-sm text-(--s-text-secondary)">Filled, outlined, light, ghost, link, dashed, and glass variants with custom color support.</p>
         </div>
         <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
@@ -382,9 +403,9 @@ const keyboardShortcuts: KeyboardShortcut[] = [
     <!-- Variants -->
     <section id="variants">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
-      <DemoSection 
+      <DemoSection
         title="Button Variants"
-        description="Five variants available: filled (default), outlined, light, ghost, and link."
+        description="Seven variants available: filled (default), outlined, light, ghost, link, dashed, and glass."
         :code="variantsCode"
         language="vue"
       >
@@ -409,6 +430,41 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             <SButton variant="link">Link</SButton>
             <span class="text-xs font-mono text-(--s-text-secondary)">link</span>
           </div>
+          <div class="flex flex-col items-center gap-2">
+            <SButton variant="dashed">Dashed</SButton>
+            <span class="text-xs font-mono text-(--s-text-secondary)">dashed</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <SButton variant="glass">Glass</SButton>
+            <span class="text-xs font-mono text-(--s-text-secondary)">glass</span>
+          </div>
+        </div>
+      </DemoSection>
+    </section>
+
+    <!-- Semantic Types -->
+    <section id="semantic-types">
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Semantic Types</h2>
+      <DemoSection
+        title="Type Prop"
+        description="Use the type prop for semantic color mapping instead of passing raw CSS variables. Works with all variants."
+        :code="semanticTypesCode"
+        language="vue"
+      >
+        <div class="space-y-4">
+          <div class="flex flex-wrap gap-3 items-center">
+            <SButton type="primary">Primary</SButton>
+            <SButton type="success">Success</SButton>
+            <SButton type="warning">Warning</SButton>
+            <SButton type="error">Error</SButton>
+            <SButton type="info">Info</SButton>
+          </div>
+          <div class="flex flex-wrap gap-3 items-center">
+            <SButton type="error" variant="outlined">Outlined Error</SButton>
+            <SButton type="success" variant="light">Light Success</SButton>
+            <SButton type="warning" variant="dashed">Dashed Warning</SButton>
+            <SButton type="info" variant="ghost">Ghost Info</SButton>
+          </div>
         </div>
       </DemoSection>
     </section>
@@ -428,18 +484,24 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             <SButton color="#8b5cf6" variant="outlined">Outlined</SButton>
             <SButton color="#8b5cf6" variant="light">Light</SButton>
             <SButton color="#8b5cf6" variant="ghost">Ghost</SButton>
+            <SButton color="#8b5cf6" variant="dashed">Dashed</SButton>
+            <SButton color="#8b5cf6" variant="glass">Glass</SButton>
           </div>
           <div class="flex flex-wrap gap-3 items-center">
             <SButton color="#ef4444" variant="filled">Filled</SButton>
             <SButton color="#ef4444" variant="outlined">Outlined</SButton>
             <SButton color="#ef4444" variant="light">Light</SButton>
             <SButton color="#ef4444" variant="ghost">Ghost</SButton>
+            <SButton color="#ef4444" variant="dashed">Dashed</SButton>
+            <SButton color="#ef4444" variant="glass">Glass</SButton>
           </div>
           <div class="flex flex-wrap gap-3 items-center">
             <SButton color="#06b6d4" variant="filled">Filled</SButton>
             <SButton color="#06b6d4" variant="outlined">Outlined</SButton>
             <SButton color="#06b6d4" variant="light">Light</SButton>
             <SButton color="#06b6d4" variant="ghost">Ghost</SButton>
+            <SButton color="#06b6d4" variant="dashed">Dashed</SButton>
+            <SButton color="#06b6d4" variant="glass">Glass</SButton>
           </div>
         </div>
       </DemoSection>

@@ -2,7 +2,7 @@
   "name": "checkbox",
   "displayName": "SCheckbox",
   "description": "Checkbox with sizes, colors, indeterminate state, loading, and validation",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "files": [
     "components/ui/SCheckbox.vue"
   ],

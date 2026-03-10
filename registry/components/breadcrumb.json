@@ -2,7 +2,7 @@
   "name": "breadcrumb",
   "displayName": "SBreadcrumb",
   "description": "Composable breadcrumb navigation with list, item, link, page, separator, and ellipsis subcomponents.",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "files": [
     "components/ui/breadcrumb/index.ts",
     "components/ui/breadcrumb/SBreadcrumb.vue",

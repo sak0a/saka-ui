@@ -1,8 +1,8 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { computed, provide } from 'vue'
 import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 interface Props {
   max?: number

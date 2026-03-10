@@ -1,7 +1,7 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { inject, computed, ref, watchEffect } from 'vue'
+
+defineOptions({ inheritAttrs: false })
 
 interface Props {
   delayMs?: number

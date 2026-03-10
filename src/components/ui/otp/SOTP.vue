@@ -1,11 +1,11 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { ref, computed, watch, nextTick, onMounted, onUnmounted, provide, toRef } from 'vue'
 import { cn } from '~/lib/utils'
 import type { SOTPVariant, SOTPSize, SOTPRounded, SOTPGap, SOTPMode, SOTPAnimation, SOTPEntryAnimation, SOTPInputAnimation, SOTPSuccessAnimation, SOTPErrorAnimation, SOTPVisualDefaults } from './types'
 import { SOTP_INJECTION_KEY } from './useOTPContext'
 import type { SOTPContext } from './useOTPContext'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   // Core

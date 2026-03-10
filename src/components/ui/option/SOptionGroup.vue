@@ -1,8 +1,8 @@
 <script setup lang="ts">
-defineOptions({ inheritAttrs: false })
-
 import { ref, provide, computed } from 'vue'
 import { cn } from '~/lib/utils'
+
+defineOptions({ inheritAttrs: false })
 
 export interface Props {
   label: string
