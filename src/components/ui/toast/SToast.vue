@@ -88,44 +88,44 @@ const typeConfig = computed(() => {
     progress: string
   }> = {
     success: {
-      bg: 'bg-emerald-50 dark:bg-emerald-950/80',
-      border: 'border-emerald-200 dark:border-emerald-800',
-      text: 'text-emerald-800 dark:text-emerald-200',
+      bg: 'bg-success-light',
+      border: 'border-success-border',
+      text: 'text-success-light-foreground',
       icon: 'check-circle',
-      iconColor: 'text-emerald-600 dark:text-emerald-400',
-      progress: 'bg-emerald-500'
+      iconColor: 'text-success',
+      progress: 'bg-success'
     },
     error: {
-      bg: 'bg-red-50 dark:bg-red-950/80',
-      border: 'border-red-200 dark:border-red-800',
-      text: 'text-red-800 dark:text-red-200',
+      bg: 'bg-error-light',
+      border: 'border-error-border',
+      text: 'text-error-light-foreground',
       icon: 'alert-circle',
-      iconColor: 'text-red-600 dark:text-red-400',
-      progress: 'bg-red-500'
+      iconColor: 'text-error',
+      progress: 'bg-error'
     },
     warning: {
-      bg: 'bg-amber-50 dark:bg-amber-950/80',
-      border: 'border-amber-200 dark:border-amber-800',
-      text: 'text-amber-800 dark:text-amber-200',
+      bg: 'bg-warning-light',
+      border: 'border-warning-border',
+      text: 'text-warning-light-foreground',
       icon: 'alert',
-      iconColor: 'text-amber-600 dark:text-amber-400',
-      progress: 'bg-amber-500'
+      iconColor: 'text-warning',
+      progress: 'bg-warning'
     },
     info: {
-      bg: 'bg-blue-50 dark:bg-blue-950/80',
-      border: 'border-blue-200 dark:border-blue-800',
-      text: 'text-blue-800 dark:text-blue-200',
+      bg: 'bg-info-light',
+      border: 'border-info-border',
+      text: 'text-info-light-foreground',
       icon: 'information',
-      iconColor: 'text-blue-600 dark:text-blue-400',
-      progress: 'bg-blue-500'
+      iconColor: 'text-info',
+      progress: 'bg-info'
     },
     loading: {
-      bg: 'bg-slate-50 dark:bg-slate-900/80',
-      border: 'border-slate-200 dark:border-slate-700',
-      text: 'text-slate-800 dark:text-slate-200',
+      bg: 'bg-loading-light',
+      border: 'border-loading-border',
+      text: 'text-loading-light-foreground',
       icon: 'loading',
-      iconColor: 'text-slate-600 dark:text-slate-400',
-      progress: 'bg-slate-500'
+      iconColor: 'text-loading-light-foreground',
+      progress: 'bg-muted-foreground'
     },
     custom: {
       bg: 'bg-muted',
@@ -162,7 +162,7 @@ const isLoading = computed(() => props.type === 'loading')
   <div
     v-bind="$attrs"
     :class="cn(
-      's-toast relative flex items-start gap-3 p-4 rounded-xl border shadow-lg backdrop-blur-sm min-w-[320px] max-w-[420px] cursor-pointer transition-all duration-200',
+      's-toast relative flex items-start gap-3 p-4 rounded-xl border shadow-lg backdrop-blur-sm min-w-[320px] max-w-[420px] cursor-pointer transition-all duration-(--s-duration-normal)',
       typeConfig.bg,
       typeConfig.border,
       typeConfig.text,
@@ -245,7 +245,7 @@ const isLoading = computed(() => props.type === 'loading')
 
 <style scoped>
 .s-toast {
-  animation: toast-enter 0.3s ease-out;
+  animation: toast-enter var(--s-duration-slow) ease-out;
 }
 
 @keyframes toast-enter {

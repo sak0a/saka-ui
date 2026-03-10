@@ -40,7 +40,7 @@ const isVertical = computed(() => {
 })
 
 const wrapperClasses = computed(() => {
-  const base = 'relative flex transition-colors duration-300'
+  const base = 'relative flex transition-colors duration-(--s-duration-slow)'
   const dir = isVertical.value ? 'flex-col' : 'flex-row'
 
   const typeClasses: Record<TabType, string> = {

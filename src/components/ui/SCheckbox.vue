@@ -295,7 +295,7 @@ const rounded = computed(() => props.rounded)
 /* Bounce animation for check icon */
 .s-checkbox-box span[class*="mdi-check"],
 .s-checkbox-box span[class*="mdi-minus"] {
-  animation: checkBounce 0.2s ease-out;
+  animation: checkBounce var(--s-duration-normal) ease-out;
 }
 
 @keyframes checkBounce {

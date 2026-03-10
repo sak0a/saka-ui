@@ -392,7 +392,7 @@ const activeTextColor = computed(() => props.color === 'var(--s-primary)' ? 'tex
 const getButtonClasses = (isActive: boolean, isDisabled: boolean) => {
   const base = `
     relative flex items-center justify-center
-    font-medium transition-all duration-200 ease-out
+    font-medium transition-all duration-(--s-duration-normal) ease-out
     select-none cursor-pointer
     focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
     ${sizeClasses.value} ${shapeClasses.value}
@@ -776,7 +776,7 @@ watch(() => props.pageSize, (newVal) => {
       class="w-full h-1 mt-2 rounded-full bg-accent overflow-hidden"
     >
       <div 
-        class="h-full rounded-full transition-all duration-300 ease-out"
+        class="h-full rounded-full transition-all duration-(--s-duration-slow) ease-out"
         :style="{ 
           width: `${progressPercent}%`,
           backgroundColor: color 
@@ -812,7 +812,7 @@ button:focus-visible {
   background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
   opacity: 0;
   transform: scale(0);
-  transition: opacity 0.2s, transform 0.3s;
+  transition: opacity var(--s-duration-normal), transform var(--s-duration-slow);
 }
 
 .s-pagination button:active::after {
@@ -902,7 +902,7 @@ button:focus-visible {
 /* Fade transition */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s ease;
+  transition: opacity var(--s-duration-normal) ease;
 }
 
 .fade-enter-from,

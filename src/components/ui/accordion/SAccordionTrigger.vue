@@ -45,7 +45,7 @@ const headerClasses = computed(() => {
   const type = accordionContext?.type ?? 'default'
   const base = `
     w-full flex items-center gap-3 cursor-pointer select-none
-    transition-all duration-300 ease-out
+    transition-all duration-(--s-duration-slow) ease-out
     focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
   `
 
@@ -80,7 +80,7 @@ const arrowStyle = computed(() => {
   const rotation = isExpanded.value ? (accordionContext?.iconRotation ?? 180) : 0
   return {
     transform: `rotate(${rotation}deg)`,
-    transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    transition: 'transform var(--s-duration-slow) cubic-bezier(0.4, 0, 0.2, 1)',
     color: isExpanded.value && !disabled.value ? accordionContext?.color : undefined
   }
 })

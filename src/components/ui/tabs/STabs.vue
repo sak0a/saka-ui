@@ -218,7 +218,7 @@ const sizeClasses = computed(() => {
 
 // Type-specific classes for tabs wrapper (simple API)
 const wrapperClasses = computed(() => {
-  const base = 'relative flex transition-colors duration-300'
+  const base = 'relative flex transition-colors duration-(--s-duration-slow)'
   const placement = props.placement === 'left' || props.placement === 'right'
     ? 'flex-col'
     : 'flex-row'
@@ -250,7 +250,7 @@ const getTabClasses = (pane: TabPaneInfo) => {
   const base = `
     relative cursor-pointer
     flex items-center gap-2 whitespace-nowrap
-    transition-all duration-300 ease-out
+    transition-all duration-(--s-duration-slow) ease-out
     ${sizeClasses.value}
     ${props.tabClass}
     ${pane.tabClass || ''}
@@ -288,7 +288,7 @@ const getChipStyle = (pane: TabPaneInfo) => {
   const isActive = activeTab.value === pane.name
   return {
     backgroundColor: isActive ? props.chipActiveColor : props.chipColor,
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+    transition: 'all var(--s-duration-slow) cubic-bezier(0.4, 0, 0.2, 1)'
   }
 }
 
@@ -382,7 +382,7 @@ provide(STabsContextKey, {
             <component v-if="pane.icon && isIconComponent(pane.icon)" :is="pane.icon" :class="[{ 'scale-110': activeTab === pane.name }]" />
             <span
               v-else-if="pane.icon"
-              class="mdi transition-transform duration-300"
+              class="mdi transition-transform duration-(--s-duration-slow)"
               :class="[`mdi-${pane.icon}`, { 'scale-110': activeTab === pane.name }]"
             />
 
@@ -392,7 +392,7 @@ provide(STabsContextKey, {
             <!-- Close button -->
             <span
               v-if="(closable || pane.closable) && !pane.disabled"
-              class="ml-1 hover:bg-black/10 dark:hover:bg-white/10 rounded-full p-1 transition-all duration-200 hover:scale-110"
+              class="ml-1 hover:bg-black/10 dark:hover:bg-white/10 rounded-full p-1 transition-all duration-(--s-duration-normal) hover:scale-110"
               @click="handleClose(pane.name, $event)"
             >
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
