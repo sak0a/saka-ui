@@ -5,7 +5,7 @@ Debounce and throttle composables for Vue 3 with support for both values and cal
 ## Installation
 
 ```typescript
-import { useDebounce, useDebounceFn, useThrottle, useThrottleFn } from 'saka-ui'
+import { useDebounce, useDebounceFn, useThrottle, useThrottleFn } from '@sakoa/ui'
 ```
 
 ## Basic Usage
@@ -16,7 +16,7 @@ Debounce a reactive value - the returned value updates after the specified delay
 
 ```typescript
 import { ref } from 'vue'
-import { useDebounce } from 'saka-ui'
+import { useDebounce } from '@sakoa/ui'
 
 const searchTerm = ref('')
 const { value: debouncedSearch } = useDebounce(searchTerm, 300)
@@ -32,7 +32,7 @@ watch(debouncedSearch, (value) => {
 Create a debounced function that delays invoking until after the specified milliseconds have elapsed since the last call.
 
 ```typescript
-import { useDebounceFn } from 'saka-ui'
+import { useDebounceFn } from '@sakoa/ui'
 
 const debouncedSearch = useDebounceFn(() => {
   console.log('Searching...')
@@ -50,7 +50,7 @@ Throttle a value - the returned value updates at most once per specified interva
 
 ```typescript
 import { ref } from 'vue'
-import { useThrottle } from 'saka-ui'
+import { useThrottle } from '@sakoa/ui'
 
 const scrollY = ref(0)
 const { value: throttledScroll } = useThrottle(scrollY, 100)
@@ -66,7 +66,7 @@ window.addEventListener('scroll', () => {
 Create a throttled function that only invokes at most once per specified interval.
 
 ```typescript
-import { useThrottleFn } from 'saka-ui'
+import { useThrottleFn } from '@sakoa/ui'
 
 const throttledScroll = useThrottleFn(() => {
   console.log('Scrolled!')
@@ -285,7 +285,7 @@ interface UseThrottleReturn<T> {
 ```vue
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { useDebounce, useDebounceFn, useThrottleFn } from 'saka-ui'
+import { useDebounce, useDebounceFn, useThrottleFn } from '@sakoa/ui'
 
 // Search with debounced value
 const searchQuery = ref('')

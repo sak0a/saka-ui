@@ -42,7 +42,7 @@ async function handleCopyFromElement() {
 }
 
 // Code examples
-const basicCode = `import { useClipboard } from 'saka-ui'
+const basicCode = `import { useClipboard } from '@sakoa/ui'
 
 const clipboard = useClipboard()
 

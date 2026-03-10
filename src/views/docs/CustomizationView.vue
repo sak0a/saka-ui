@@ -110,7 +110,7 @@ const darkModeCode = `<!-- Add .dark class to <html> for dark mode -->
 
 <!-- Using the useTheme composable -->
 <script setup>
-import { useTheme } from 'saka-ui'
+import { useTheme } from '@sakoa/ui'
 
 const { theme, toggleTheme, setTheme } = useTheme()
 

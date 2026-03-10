@@ -5,8 +5,13 @@ import DemoSection from '../../components/DemoSection.vue'
 const installCode = `# Using bun
 bun add @sakoa/ui
 
+# Using pnpm
+pnpm add @sakoa/ui
+
 # Using npm
 npm install @sakoa/ui`
+
+const stylesCode = `import '@sakoa/ui/style.css'`
 
 const initCode = `npx saka-ui init`
 
@@ -29,6 +34,7 @@ const listCode = `npx saka-ui list`
 const diffCode = `npx saka-ui diff button`
 
 const npmUsageCode = `<script setup lang="ts">
+import '@sakoa/ui/style.css'
 import { SButton } from '@sakoa/ui'
 <\/script>
 
@@ -69,17 +75,19 @@ import SButton from '~/components/ui/SButton.vue'
 
     <DemoSection title="Install Package" :code="installCode" language="bash" code-only />
 
-    <SApiSection title="Peer Dependencies" id="peer-dependencies">
+    <SApiSection title="Package Mode Setup" id="package-mode">
       <div class="space-y-4 text-muted-foreground">
         <p>
-          Saka UI requires the following peer dependencies in your project:
+          Package mode needs the library styles imported once in your app entry before you render components.
         </p>
-        <div class="bg-accent rounded-lg p-4 font-mono text-sm text-foreground space-y-1">
-          <div>vue <span class="text-muted-foreground">^3.0.0</span></div>
-          <div>tailwindcss <span class="text-muted-foreground">^4.0.0</span></div>
-        </div>
+        <p class="text-sm">
+          The published package name is <code class="text-xs bg-accent px-1 py-0.5 rounded">@sakoa/ui</code> and it also exports
+          <code class="text-xs bg-accent px-1 py-0.5 rounded">@sakoa/ui/style.css</code>.
+        </p>
       </div>
     </SApiSection>
+
+    <DemoSection title="Import Styles Once" :code="stylesCode" language="typescript" code-only description="Add this in your app entry or root layout when using the published package." />
 
     <!-- CLI Setup -->
     <SApiSection title="CLI Setup" id="cli-setup">
@@ -128,7 +136,7 @@ import SButton from '~/components/ui/SButton.vue'
             <tr class="border-b border-border/50">
               <td class="py-2.5 px-2 font-mono text-xs text-foreground">typescript</td>
               <td class="py-2.5 px-2 font-mono text-xs text-muted-foreground">true</td>
-              <td class="py-2.5 px-2 text-muted-foreground">Generate TypeScript or JavaScript files</td>
+              <td class="py-2.5 px-2 text-muted-foreground">Project preference captured during init. The current CLI copies registry source files as-is.</td>
             </tr>
             <tr class="border-b border-border/50">
               <td class="py-2.5 px-2 font-mono text-xs text-foreground">overwrite</td>

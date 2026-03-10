@@ -140,7 +140,7 @@ async function showVariantDemo() {
 }
 
 // Code examples
-const confirmCode = `import { useDialog } from 'saka-ui'
+const confirmCode = `import { useDialog } from '@sakoa/ui'
 
 const dialog = useDialog()
 

@@ -44,7 +44,7 @@ const submitDemo = demoForm.handleSubmit(
 )
 
 // Code snippets
-const basicCode = `import { useForm, required, email, minLength } from 'saka-ui'
+const basicCode = `import { useForm, required, email, minLength } from '@sakoa/ui'
 
 const form = useForm({
   initialValues: {
@@ -81,7 +81,7 @@ hasLowercase()                 // Contains lowercase
 hasDigit()                     // Contains number
 hasSpecial()                   // Contains special char`
 
-const passwordStrengthCode = `import { passwordStrength, PasswordStrength } from 'saka-ui'
+const passwordStrengthCode = `import { passwordStrength, PasswordStrength } from '@sakoa/ui'
 
 // Strength levels:
 // WEAK        - 6+ chars
@@ -91,7 +91,7 @@ const passwordStrengthCode = `import { passwordStrength, PasswordStrength } from
 
 passwordStrength(PasswordStrength.STRONG, 'Password too weak')`
 
-const customCode = `import { custom } from 'saka-ui'
+const customCode = `import { custom } from '@sakoa/ui'
 
 // Simple boolean check
 custom((value) => value.startsWith('A'), 'Must start with A')
@@ -147,7 +147,7 @@ const form = useForm({
 })`
 
 const zodCode = `import { z } from 'zod'
-import { useForm } from 'saka-ui'
+import { useForm } from '@sakoa/ui'
 
 const form = useForm({
   schema: z.object({

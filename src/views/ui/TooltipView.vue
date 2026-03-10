@@ -26,7 +26,8 @@ const tooltipProps: ApiProp[] = [
   { name: 'interactive', type: 'boolean', default: 'false', description: 'Allow hovering over tooltip', category: 'State & Behavior' },
   { name: 'teleport', type: 'string', default: '\'body\'', description: 'Teleport target selector', category: 'Advanced' },
   { name: 'zIndex', type: 'number', default: '9999', description: 'Z-index value', category: 'Advanced' },
-  { name: 'transition', type: 'string', default: '\'tooltip-fade\'', description: 'Custom transition name', category: 'Advanced' }
+  { name: 'transition', type: 'string', default: '\'tooltip-fade\'', description: 'Custom transition name', category: 'Advanced' },
+  { name: 'tooltipClass', type: 'string', default: 'undefined', description: 'Additional classes applied to the tooltip panel', category: 'Advanced' }
 ]
 
 const tooltipEvents: ApiEvent[] = [
@@ -264,9 +265,9 @@ const interactiveCode = `<STooltip :interactive="true" trigger="hover" :hide-del
     <div class="space-y-2">
       <div class="font-semibold text-gray-800">Quick Links</div>
       <div class="space-y-1">
-        <a href="#" class="block text-sm text-blue-600 hover:text-blue-800 hover:underline">Documentation</a>
-        <a href="#" class="block text-sm text-blue-600 hover:text-blue-800 hover:underline">Examples</a>
-        <a href="#" class="block text-sm text-blue-600 hover:text-blue-800 hover:underline">API Reference</a>
+        <button type="button" class="block text-left text-sm text-blue-600 hover:text-blue-800 hover:underline">Documentation</button>
+        <button type="button" class="block text-left text-sm text-blue-600 hover:text-blue-800 hover:underline">Examples</button>
+        <button type="button" class="block text-left text-sm text-blue-600 hover:text-blue-800 hover:underline">API Reference</button>
       </div>
     </div>
   </template>
@@ -785,9 +786,9 @@ const advancedCode = `<!-- User profile preview -->
               <div class="space-y-2">
                 <div class="font-semibold text-gray-800">Quick Links</div>
                 <div class="space-y-1">
-                  <a href="#" class="block text-sm text-blue-600 hover:text-blue-800 hover:underline">Documentation</a>
-                  <a href="#" class="block text-sm text-blue-600 hover:text-blue-800 hover:underline">Examples</a>
-                  <a href="#" class="block text-sm text-blue-600 hover:text-blue-800 hover:underline">API Reference</a>
+                  <button type="button" class="block text-left text-sm text-blue-600 hover:text-blue-800 hover:underline">Documentation</button>
+                  <button type="button" class="block text-left text-sm text-blue-600 hover:text-blue-800 hover:underline">Examples</button>
+                  <button type="button" class="block text-left text-sm text-blue-600 hover:text-blue-800 hover:underline">API Reference</button>
                 </div>
               </div>
             </template>

@@ -331,8 +331,10 @@ Prefer `type` for standard semantic colors and `color` for one-off custom colors
 src/
 ├── style.css              # Token definitions + @theme mapping
 ├── lib/
-│   └── utils.ts           # cn() utility (clsx + tailwind-merge)
+│   ├── utils.ts           # cn() utility (clsx + tailwind-merge)
+│   └── icon.ts            # IconProp helpers for icon-capable components
 └── components/ui/
+    ├── button.ts          # cva variants
     └── SButton.vue        # Uses cva + cn + tokens
 ```
 
@@ -342,10 +344,10 @@ When using the open-code (copy) model, these packages are needed:
 
 ```json
 {
-  "clsx": "^2.1.0",
-  "tailwind-merge": "^3.0.0",
+  "clsx": "^2.1.1",
+  "tailwind-merge": "^3.5.0",
   "class-variance-authority": "^0.7.1"
 }
 ```
 
-These are automatically noted when running `saka-ui add <component>`.
+The CLI copies source files but does not install npm packages for you. Add any missing dependencies to your project when using open-code mode.

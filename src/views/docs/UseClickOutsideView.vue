@@ -58,7 +58,7 @@ useClickOutside(controlledRef, () => {
 
 // Code examples
 const basicCode = `import { ref } from 'vue'
-import { useClickOutside } from 'saka-ui'
+import { useClickOutside } from '@sakoa/ui'
 
 const targetRef = ref<HTMLElement>()
 
@@ -197,15 +197,15 @@ const optionsProps: ApiProp[] = [
               class="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 z-10 overflow-hidden"
             >
               <div class="py-1">
-                <a href="#" class="block px-4 py-2 text-sm text-(--s-text-primary) hover:bg-slate-100 dark:hover:bg-slate-700">
+                <button type="button" class="block w-full px-4 py-2 text-left text-sm text-(--s-text-primary) hover:bg-slate-100 dark:hover:bg-slate-700">
                   Profile
-                </a>
-                <a href="#" class="block px-4 py-2 text-sm text-(--s-text-primary) hover:bg-slate-100 dark:hover:bg-slate-700">
+                </button>
+                <button type="button" class="block w-full px-4 py-2 text-left text-sm text-(--s-text-primary) hover:bg-slate-100 dark:hover:bg-slate-700">
                   Settings
-                </a>
-                <a href="#" class="block px-4 py-2 text-sm text-(--s-text-primary) hover:bg-slate-100 dark:hover:bg-slate-700">
+                </button>
+                <button type="button" class="block w-full px-4 py-2 text-left text-sm text-(--s-text-primary) hover:bg-slate-100 dark:hover:bg-slate-700">
                   Sign out
-                </a>
+                </button>
               </div>
             </div>
           </Transition>

@@ -285,6 +285,8 @@ const buttonProps: ApiProp[] = [
   { name: 'iconLeft', type: 'string', default: 'undefined', description: 'MDI icon name for left icon', category: 'Icons' },
   { name: 'iconRight', type: 'string', default: 'undefined', description: 'MDI icon name for right icon', category: 'Icons' },
   { name: 'iconOnly', type: 'boolean', default: 'false', description: 'Icon-only button (square)', category: 'Icons' },
+  { name: 'contentClass', type: 'string', default: 'undefined', description: 'Additional classes for the inner content wrapper', category: 'Icons' },
+  { name: 'iconClass', type: 'string', default: 'undefined', description: 'Additional classes applied to rendered icons', category: 'Icons' },
   // State
   { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable button interaction', category: 'State' },
   { name: 'loading', type: 'boolean', default: 'false', description: 'Show loading spinner', category: 'State' },
@@ -323,7 +325,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 <template>
   <div class="space-y-12 pb-20">
     <!-- @component SButton -->
-    <!-- @props variant, size, color, type, rounded, block, iconLeft, iconRight, iconOnly, disabled, loading, preserveSize, ripple, animationType, animateInactive, href, to, nativeType, tag -->
+    <!-- @props variant, size, color, type, rounded, block, iconLeft, iconRight, iconOnly, contentClass, iconClass, disabled, loading, preserveSize, ripple, animationType, animateInactive, href, to, nativeType, tag -->
     <!-- @events @click -->
     <!-- @slots default, icon-left, icon-right, animate -->
     <!-- @sections features, basic-usage, variants, semantic-types, variant-colors, sizes, border-radius, with-icons, loading-state, disabled-state, block-full-width, as-links, button-groups, combined-features, ripple-effect, hover-animations, with-keyboard-shortcuts, api-reference -->

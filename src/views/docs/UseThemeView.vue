@@ -17,7 +17,7 @@ const isDark = computed(() => {
 })
 
 // Code snippets
-const basicCode = `import { useTheme } from 'saka-ui'
+const basicCode = `import { useTheme } from '@sakoa/ui'
 
 const { theme, toggleTheme, isDark } = useTheme()
 

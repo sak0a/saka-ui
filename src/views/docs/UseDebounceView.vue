@@ -65,7 +65,7 @@ function simulateScroll() {
 
 // Code examples
 const debounceValueCode = `import { ref, watch } from 'vue'
-import { useDebounce } from 'saka-ui'
+import { useDebounce } from '@sakoa/ui'
 
 const searchTerm = ref('')
 const { value: debouncedSearch, isPending } = useDebounce(searchTerm, 500)
@@ -75,7 +75,7 @@ watch(debouncedSearch, (value) => {
   fetchSearchResults(value)
 })`
 
-const debounceFnCode = `import { useDebounceFn } from 'saka-ui'
+const debounceFnCode = `import { useDebounceFn } from '@sakoa/ui'
 
 const debouncedSave = useDebounceFn(() => {
   saveToServer()
@@ -87,7 +87,7 @@ debouncedSave()
 debouncedSave() // Only this triggers the save`
 
 const throttleValueCode = `import { ref } from 'vue'
-import { useThrottle } from 'saka-ui'
+import { useThrottle } from '@sakoa/ui'
 
 const scrollY = ref(0)
 const { value: throttledScroll } = useThrottle(scrollY, 100)
@@ -97,7 +97,7 @@ window.addEventListener('scroll', () => {
   scrollY.value = window.scrollY
 })`
 
-const throttleFnCode = `import { useThrottleFn } from 'saka-ui'
+const throttleFnCode = `import { useThrottleFn } from '@sakoa/ui'
 
 const throttledLog = useThrottleFn(() => {
   console.log('Throttled!')

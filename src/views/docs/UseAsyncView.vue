@@ -79,7 +79,7 @@ const {
 })
 
 // Code examples
-const basicCode = `import { useAsync } from 'saka-ui'
+const basicCode = `import { useAsync } from '@sakoa/ui'
 
 async function fetchUsers() {
   const response = await fetch('/api/users')

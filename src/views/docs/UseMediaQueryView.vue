@@ -33,7 +33,7 @@ const { isMobile: isMobileDevice, isTablet, isDesktop, isTouch, prefersReducedMo
 const isLandscape = useBreakpoint('landscape')
 
 // Code examples
-const basicCode = `import { useMediaQuery } from 'saka-ui'
+const basicCode = `import { useMediaQuery } from '@sakoa/ui'
 
 // Single query
 const isMobile = useMediaQuery('(max-width: 768px)')
@@ -42,7 +42,7 @@ const isMobile = useMediaQuery('(max-width: 768px)')
 <MobileNav v-if="isMobile" />
 <DesktopNav v-else />`
 
-const multipleCode = `import { useMediaQueries } from 'saka-ui'
+const multipleCode = `import { useMediaQueries } from '@sakoa/ui'
 
 const { isMobile, isTablet, isDesktop } = useMediaQueries({
   isMobile: '(max-width: 767px)',
@@ -53,7 +53,7 @@ const { isMobile, isTablet, isDesktop } = useMediaQueries({
 // Each is a reactive ref
 console.log(isMobile.value)  // boolean`
 
-const breakpointsCode = `import { useBreakpoints, useBreakpoint, breakpoints } from 'saka-ui'
+const breakpointsCode = `import { useBreakpoints, useBreakpoint, breakpoints } from '@sakoa/ui'
 
 // Use the helper with common breakpoints
 const { isMobile, isTablet, isDesktop, isDark } = useBreakpoints()

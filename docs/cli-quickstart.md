@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - Node.js 18+
-- `saka-ui` installed in your project
+- A Vue project where you want to copy components
 
 ## Initialize
 
@@ -16,7 +16,8 @@ npx saka-ui init
 You'll be prompted for:
 - **Component directory** — where `.vue` files are copied (default: `src/components/ui`)
 - **Composable directory** — where shared composables are copied (default: `src/composables`)
-- **TypeScript** — auto-detected from `tsconfig.json`
+- **Lib/utils directory** — where shared helpers like `utils.ts` and `icon.ts` are copied (default: `src/lib`)
+- **TypeScript** — auto-detected from `tsconfig.json` and stored in the config
 - **Overwrite** — whether `add` should overwrite existing files (default: no)
 
 This creates `saka-ui.json` in your project root.
@@ -34,7 +35,7 @@ The CLI will:
 1. Resolve any transitive dependencies
 2. Show you what will be copied
 3. Ask for confirmation
-4. Copy files into your configured directories
+4. Copy component files, shared lib helpers, and any referenced composables into your configured directories
 5. Inject a provenance header for future `diff` support
 
 ## List Available Components
@@ -65,6 +66,7 @@ Shows a colored unified diff of any changes you've made. Useful before upgrading
 {
   "componentDir": "src/components/ui",
   "composableDir": "src/composables",
+  "libDir": "src/lib",
   "typescript": true,
   "overwrite": false
 }

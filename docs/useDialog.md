@@ -5,13 +5,13 @@ A programmatic dialog composable for Vue 3 with confirm, prompt, and alert dialo
 ## Installation
 
 ```typescript
-import { useDialog } from 'saka-ui'
+import { useDialog } from '@sakoa/ui'
 ```
 
 ## Basic Usage
 
 ```typescript
-import { useDialog } from 'saka-ui'
+import { useDialog } from '@sakoa/ui'
 
 const dialog = useDialog()
 
@@ -213,7 +213,7 @@ await dialog.confirm({
 For convenience, you can also import shorthand functions:
 
 ```typescript
-import { confirm, prompt, alertDialog } from 'saka-ui'
+import { confirm, prompt, alertDialog } from '@sakoa/ui'
 
 // Simple string usage
 const confirmed = await confirm('Are you sure?')
@@ -286,7 +286,7 @@ interface CustomDialogOptions<T = unknown> {
 
 ```vue
 <script setup lang="ts">
-import { useDialog, useToast } from 'saka-ui'
+import { useDialog, useToast } from '@sakoa/ui'
 
 const dialog = useDialog()
 const toast = useToast()

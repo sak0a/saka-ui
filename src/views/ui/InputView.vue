@@ -319,6 +319,7 @@ const inputProps: ApiProp[] = [
   { name: 'rows', type: 'number', default: '3', description: 'Textarea rows', category: 'Textarea' },
   { name: 'resize', type: "'none' | 'vertical' | 'horizontal' | 'both'", default: "'vertical'", description: 'Textarea resize', category: 'Textarea' },
   { name: 'autofocus', type: 'boolean', default: 'false', description: 'Auto focus on mount', category: 'Behavior' },
+  { name: 'autocomplete', type: 'string', default: '—', description: 'Native browser autocomplete attribute', category: 'Behavior' },
   { name: 'suggestions', type: 'string[]', default: '—', description: 'Autocomplete suggestions list', category: 'Suggestions' },
   { name: 'showSuggestionsOnFocus', type: 'boolean', default: 'true', description: 'Show suggestions when focused', category: 'Suggestions' },
   { name: 'allowOnly', type: "'digits' | 'letters' | 'alphanumeric' | RegExp | Function", default: '—', description: 'Restrict allowed characters', category: 'Input Filtering' },
@@ -351,7 +352,7 @@ const inputMethods: ApiMethod[] = [
 <template>
   <div class="space-y-12 pb-20">
     <!-- @component SInput -->
-    <!-- @props modelValue, type, variant, size, rounded, label, placeholder, labelPlacement, iconLeft, iconRight, prefix, suffix, disabled, readonly, loading, error, success, warning, hint, required, minLength, maxLength, pattern, validator, validateOn, clearable, showPasswordToggle, counter, rows, resize, autofocus, suggestions, showSuggestionsOnFocus, allowOnly, decimalPlaces -->
+    <!-- @props modelValue, type, variant, size, rounded, label, placeholder, labelPlacement, iconLeft, iconRight, prefix, suffix, disabled, readonly, loading, error, success, warning, hint, required, minLength, maxLength, pattern, validator, validateOn, clearable, showPasswordToggle, counter, rows, resize, autofocus, autocomplete, suggestions, showSuggestionsOnFocus, allowOnly, decimalPlaces -->
     <!-- @events @update:modelValue, @input, @change, @focus, @blur, @clear, @enter, @validate -->
     <!-- @slots prefix, suffix -->
     <!-- @sections features, basic-usage, variants, sizes, floating-labels, icons-and-affixes, validation-states, validation, advanced-features, email-autocomplete, input-filtering, real-world-examples, with-keyboard-shortcut, api-reference -->

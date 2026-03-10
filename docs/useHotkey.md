@@ -5,13 +5,13 @@ A keyboard shortcut composable for Vue 3 with support for key combinations, modi
 ## Installation
 
 ```typescript
-import { useHotkey, useHotkeys } from 'saka-ui'
+import { useHotkey, useHotkeys } from '@sakoa/ui'
 ```
 
 ## Basic Usage
 
 ```typescript
-import { useHotkey } from 'saka-ui'
+import { useHotkey } from '@sakoa/ui'
 
 // Simple hotkey
 useHotkey('escape', () => {
@@ -149,7 +149,7 @@ function startEditing() {
 Register multiple hotkeys at once:
 
 ```typescript
-import { useHotkeys } from 'saka-ui'
+import { useHotkeys } from '@sakoa/ui'
 
 useHotkeys({
   'ctrl+s': () => save(),
@@ -168,7 +168,7 @@ useHotkeys({
 Create a hotkey handler for use with `v-on`:
 
 ```typescript
-import { createHotkeyHandler } from 'saka-ui'
+import { createHotkeyHandler } from '@sakoa/ui'
 
 const onKeyDown = createHotkeyHandler({
   'enter': () => submit(),
@@ -192,7 +192,7 @@ const onKeyDown = createHotkeyHandler({
 Track whether a key combination is currently pressed:
 
 ```typescript
-import { useKeyPressed } from 'saka-ui'
+import { useKeyPressed } from '@sakoa/ui'
 
 const isCtrlPressed = useKeyPressed('ctrl')
 const isShiftCtrlK = useKeyPressed('ctrl+shift+k')
@@ -275,7 +275,7 @@ interface ParsedHotkey {
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useHotkey, useHotkeys, useKeyPressed, useToast } from 'saka-ui'
+import { useHotkey, useHotkeys, useKeyPressed, useToast } from '@sakoa/ui'
 
 const toast = useToast()
 const isCommandPaletteOpen = ref(false)

@@ -5,7 +5,7 @@ Reactive localStorage and sessionStorage composables for Vue 3 with cross-tab sy
 ## Installation
 
 ```typescript
-import { useLocalStorage, useSessionStorage } from 'saka-ui'
+import { useLocalStorage, useSessionStorage } from '@sakoa/ui'
 ```
 
 ## Basic Usage
@@ -13,7 +13,7 @@ import { useLocalStorage, useSessionStorage } from 'saka-ui'
 ### localStorage
 
 ```typescript
-import { useLocalStorage } from 'saka-ui'
+import { useLocalStorage } from '@sakoa/ui'
 
 // String value
 const { value: theme } = useLocalStorage('theme', 'light')
@@ -31,7 +31,7 @@ count.value++
 ### sessionStorage
 
 ```typescript
-import { useSessionStorage } from 'saka-ui'
+import { useSessionStorage } from '@sakoa/ui'
 
 // Session data (cleared when browser closes)
 const { value: session } = useSessionStorage('session', {
@@ -84,7 +84,7 @@ watch(cart, (newCart) => {
 By default, values are serialized using JSON. You can provide custom serializers:
 
 ```typescript
-import { useLocalStorage } from 'saka-ui'
+import { useLocalStorage } from '@sakoa/ui'
 
 // Date serializer
 const { value: lastVisit } = useLocalStorage('lastVisit', new Date(), {
@@ -111,7 +111,7 @@ import {
   stringSerializer,  // For plain strings
   numberSerializer,  // For numbers
   booleanSerializer  // For booleans
-} from 'saka-ui'
+} from '@sakoa/ui'
 
 // Use specific serializer
 const { value } = useLocalStorage('data', initialValue, {
@@ -188,7 +188,7 @@ refresh()
 Create a storage composable with a custom storage implementation:
 
 ```typescript
-import { createStorage } from 'saka-ui'
+import { createStorage } from '@sakoa/ui'
 
 // Custom memory storage
 const memoryStorage: Storage = {
@@ -233,7 +233,7 @@ interface UseStorageReturn<T> {
 
 ```vue
 <script setup lang="ts">
-import { useLocalStorage, useSessionStorage } from 'saka-ui'
+import { useLocalStorage, useSessionStorage } from '@sakoa/ui'
 
 // User preferences (persisted)
 const { value: preferences } = useLocalStorage('preferences', {

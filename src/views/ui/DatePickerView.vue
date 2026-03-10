@@ -44,6 +44,9 @@ const dateTime12h = ref<Date | null>(null)
 
 // Week config
 const weekDate = ref<Date | null>(null)
+const layoutDate = ref<Date | null>(null)
+const weekNumbersDate = ref<Date | null>(null)
+const layoutRangeDate = ref<[Date, Date] | null>(null)
 
 // States
 const loadingDate = ref<Date | null>(null)
@@ -145,6 +148,36 @@ const timeCode = `<SDatePicker
 const weekCode = `<SDatePicker v-model="weekDate" :first-day-of-week="0" label="Week starts Sunday" />
 <SDatePicker v-model="weekDate" :first-day-of-week="1" label="Week starts Monday" />`
 
+const layoutCode = `<SDatePicker
+  v-model="layoutDate"
+  format="dd.MM.yyyy"
+  rounded="full"
+  label="Rounded & Formatted"
+/>
+
+<SDatePicker
+  v-model="weekNumbersDate"
+  label="Week Numbers"
+  :show-week-numbers="true"
+  :show-today="false"
+/>
+
+<SDatePicker
+  v-model="layoutRangeDate"
+  mode="range"
+  label="Two-Month Range"
+  :months-to-show="2"
+  label-placement="left"
+/>
+
+<SDatePicker
+  v-model="dateTime"
+  :enable-time="true"
+  :minute-step="15"
+  teleport="#app"
+  label="15 Minute Steps"
+/>`
+
 const statesCode = `<SDatePicker v-model="disabledDate" disabled label="Disabled" />
 <SDatePicker v-model="loadingDate" loading label="Loading" />
 <SDatePicker v-model="disabledDate" readonly label="Read Only" />`
@@ -164,17 +197,27 @@ const datePickerProps: ApiProp[] = [
   { name: 'variant', type: "'outlined' | 'filled' | 'ghost'", default: "'outlined'", description: 'Visual variant', category: 'Display' },
   { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Size variant', category: 'Display' },
   { name: 'color', type: 'string', default: "'var(--s-primary)'", description: 'Accent color', category: 'Display' },
+  { name: 'rounded', type: "'none' | 'sm' | 'md' | 'lg' | 'full'", default: "'md'", description: 'Border radius for the trigger and inputs', category: 'Display' },
+  { name: 'format', type: 'string', default: "'MMM dd, yyyy'", description: 'Display format used in the trigger input', category: 'Display' },
+  { name: 'placeholder', type: 'string', default: "'Select date...'", description: 'Placeholder shown when no value is selected', category: 'Display' },
   { name: 'minDate', type: 'Date', default: 'undefined', description: 'Minimum selectable date', category: 'Constraints' },
   { name: 'maxDate', type: 'Date', default: 'undefined', description: 'Maximum selectable date', category: 'Constraints' },
   { name: 'disabledDates', type: 'Date[] | (date: Date) => boolean', default: 'undefined', description: 'Dates to disable', category: 'Constraints' },
   { name: 'disabledWeekdays', type: 'number[]', default: '[]', description: 'Weekdays to disable (0=Sun, 6=Sat)', category: 'Constraints' },
+  { name: 'readonly', type: 'boolean', default: 'false', description: 'Prevent editing while still displaying the value', category: 'Behavior' },
   { name: 'enableTime', type: 'boolean', default: 'false', description: 'Show time picker', category: 'Time Picker' },
   { name: 'timeFormat', type: "'12h' | '24h'", default: "'24h'", description: 'Time format', category: 'Time Picker' },
-  { name: 'firstDayOfWeek', type: '0-6', default: '0', description: 'First day of week (0=Sunday)', category: 'Time Picker' },
+  { name: 'minuteStep', type: 'number', default: '5', description: 'Minute increment used by time controls and mouse wheel input', category: 'Time Picker' },
+  { name: 'firstDayOfWeek', type: '0-6', default: '0', description: 'First day of week (0=Sunday)', category: 'Calendar' },
+  { name: 'showWeekNumbers', type: 'boolean', default: 'false', description: 'Display week numbers beside the calendar grid', category: 'Calendar' },
+  { name: 'monthsToShow', type: '1 | 2', default: '1', description: 'Render one or two calendar months at once', category: 'Calendar' },
+  { name: 'showToday', type: 'boolean', default: 'true', description: 'Show the Today quick action in the footer', category: 'Calendar' },
   { name: 'clearable', type: 'boolean', default: 'true', description: 'Show clear button', category: 'Behavior' },
   { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the picker', category: 'Behavior' },
   { name: 'loading', type: 'boolean', default: 'false', description: 'Show loading state', category: 'Behavior' },
+  { name: 'teleport', type: 'boolean | string', default: 'true', description: 'Teleport target for the floating calendar panel', category: 'Behavior' },
   { name: 'label', type: 'string', default: 'undefined', description: 'Input label', category: 'Labels' },
+  { name: 'labelPlacement', type: "'top' | 'left'", default: "'top'", description: 'Placement for the field label', category: 'Labels' },
 ]
 
 const datePickerEvents: ApiEvent[] = [
@@ -183,6 +226,7 @@ const datePickerEvents: ApiEvent[] = [
   { name: 'close', payload: '-', description: 'Calendar closed' },
   { name: 'clear', payload: '-', description: 'Selection cleared' },
   { name: 'monthChange', payload: '(month: number, year: number)', description: 'View month changed' },
+  { name: 'yearChange', payload: '(year: number)', description: 'View year changed' },
 ]
 
 const datePickerKeyboard: KeyboardShortcut[] = [
@@ -194,15 +238,15 @@ const datePickerKeyboard: KeyboardShortcut[] = [
 <template>
   <div class="space-y-12 pb-20">
     <!-- @component SDatePicker -->
-    <!-- @props modelValue, mode, variant, size, color, minDate, maxDate, disabledDates, disabledWeekdays, enableTime, timeFormat, firstDayOfWeek, clearable, disabled, loading, label -->
-    <!-- @events update:modelValue, open, close, clear, monthChange -->
-    <!-- @sections basic-usage, selection-modes, variants, sizes, colors, date-constraints, time-picker, week-configuration, states, real-world-examples, api-reference -->
+    <!-- @props modelValue, mode, variant, size, color, rounded, format, placeholder, minDate, maxDate, disabledDates, disabledWeekdays, readonly, enableTime, timeFormat, minuteStep, firstDayOfWeek, showWeekNumbers, monthsToShow, showToday, clearable, disabled, loading, teleport, label, labelPlacement -->
+    <!-- @events update:modelValue, open, close, clear, monthChange, yearChange -->
+    <!-- @sections basic-usage, selection-modes, variants, sizes, colors, date-constraints, time-picker, week-configuration, layout-and-formatting, states, real-world-examples, api-reference -->
     <!-- Header -->
     <header>
       <h1 class="text-4xl font-extrabold text-(--s-text-primary) mb-2">Date Picker</h1>
       <p class="text-lg text-(--s-text-secondary) max-w-3xl">
         A powerful, customizable date picker with single, range, and multiple selection modes.
-        Includes time picker integration, date constraints, and full keyboard navigation.
+        Includes time picker integration, date constraints, multi-month layouts, and full keyboard navigation.
       </p>
     </header>
 
@@ -469,6 +513,46 @@ const datePickerKeyboard: KeyboardShortcut[] = [
       </DemoSection>
     </section>
 
+    <!-- Layout & Formatting -->
+    <section id="layout-and-formatting">
+      <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Layout & Formatting</h2>
+      <DemoSection
+        title="Formatting, Multi-Month Layout, and Label Placement"
+        description="Use formatting, rounded styles, week numbers, left labels, and two-month layouts to fit different scheduling flows."
+        :code="layoutCode"
+        language="vue"
+      >
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          <SDatePicker
+            v-model="layoutDate"
+            format="dd.MM.yyyy"
+            rounded="full"
+            label="Rounded & Formatted"
+          />
+          <SDatePicker
+            v-model="weekNumbersDate"
+            label="Week Numbers"
+            :show-week-numbers="true"
+            :show-today="false"
+          />
+          <SDatePicker
+            v-model="layoutRangeDate"
+            mode="range"
+            label="Two-Month Range"
+            :months-to-show="2"
+            label-placement="left"
+          />
+          <SDatePicker
+            v-model="dateTime"
+            :enable-time="true"
+            :minute-step="15"
+            teleport="#app"
+            label="15 Minute Steps"
+          />
+        </div>
+      </DemoSection>
+    </section>
+
     <!-- States -->
     <section id="states">
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">States</h2>
@@ -524,4 +608,3 @@ const datePickerKeyboard: KeyboardShortcut[] = [
     </SApiSection>
   </div>
 </template>
-

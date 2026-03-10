@@ -157,7 +157,7 @@ const handleSelect = (key: string) => {
 
 // Code snippets - all computed for icon pack reactivity
 const basicCode = computed(() => `<script setup>${li('pencil', 'content-copy', 'archive', 'delete', 'menu')}
-import { SDropdown } from 'saka-ui'
+import { SDropdown } from '@sakoa/ui'
 
 const items = [
   { key: 'edit', label: 'Edit', icon: ${cv('pencil')} },
@@ -238,7 +238,7 @@ const searchableCode = computed(() => `<SDropdown
 
 const checkableCode = computed(() => `<script setup>${li('format-text')}
 import { ref } from 'vue'
-import { SDropdown } from 'saka-ui'
+import { SDropdown } from '@sakoa/ui'
 
 const items = ref([
   { key: 'bold', label: 'Bold', checked: true },

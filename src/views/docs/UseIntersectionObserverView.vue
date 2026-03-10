@@ -65,7 +65,7 @@ sections.forEach((section, index) => {
 
 // Code examples
 const basicCode = `import { ref } from 'vue'
-import { useIntersectionObserver } from 'saka-ui'
+import { useIntersectionObserver } from '@sakoa/ui'
 
 const targetRef = ref<HTMLElement>()
 const { isVisible, ratio } = useIntersectionObserver(targetRef)
@@ -93,7 +93,7 @@ const { isVisible } = useIntersectionObserver(targetRef, {
   rootMargin: '-50px'
 })`
 
-const hasBeenSeenCode = `import { useElementHasBeenSeen } from 'saka-ui'
+const hasBeenSeenCode = `import { useElementHasBeenSeen } from '@sakoa/ui'
 
 const targetRef = ref<HTMLElement>()
 const hasBeenSeen = useElementHasBeenSeen(targetRef)
@@ -104,7 +104,7 @@ const hasBeenSeen = useElementHasBeenSeen(targetRef)
   Content
 </div>`
 
-const lazyLoadCode = `import { useElementVisibility } from 'saka-ui'
+const lazyLoadCode = `import { useElementVisibility } from '@sakoa/ui'
 
 const imageRef = ref<HTMLElement>()
 const isVisible = useElementVisibility(imageRef, {

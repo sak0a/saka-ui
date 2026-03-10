@@ -8,7 +8,7 @@ A comprehensive Vue 3 composable for form management with validation, submission
 import { 
   useForm,
   required, minLength, email, passwordStrength, PasswordStrength, custom
-} from 'saka-ui'
+} from '@sakoa/ui'
 ```
 
 ## Basic Usage
@@ -110,7 +110,7 @@ form.setValue('email', 123)                  // ❌ Type error
 ## Password Strength
 
 ```typescript
-import { passwordStrength, PasswordStrength } from 'saka-ui'
+import { passwordStrength, PasswordStrength } from '@sakoa/ui'
 
 // Levels:
 // WEAK        - 6+ chars
@@ -124,7 +124,7 @@ passwordStrength(PasswordStrength.STRONG, 'Password too weak')
 ## Custom Validators
 
 ```typescript
-import { custom } from 'saka-ui'
+import { custom } from '@sakoa/ui'
 
 // Simple boolean check
 custom((value) => value.startsWith('A'), 'Must start with A')
@@ -281,7 +281,7 @@ Use a Zod schema instead of manual rule definitions for validation:
 
 ```typescript
 import { z } from 'zod'
-import { useForm } from 'saka-ui'
+import { useForm } from '@sakoa/ui'
 
 const schema = z.object({
   email: z.string().email('Invalid email format'),
@@ -401,7 +401,7 @@ form.submitCount.value        // Number of attempts
 
 ```vue
 <script setup lang="ts">
-import { useForm, SForm, SFormField, SInput, SButton, required, email } from 'saka-ui'
+import { useForm, SForm, SFormField, SInput, SButton, required, email } from '@sakoa/ui'
 
 const form = useForm({
   initialValues: { email: '', name: '' },
@@ -502,7 +502,7 @@ onUnmounted(() => {
 import { 
   useForm, SForm, SFormField, SInput, SButton, SAlert,
   required, email, sameAs, passwordStrength, PasswordStrength 
-} from 'saka-ui'
+} from '@sakoa/ui'
 
 interface RegistrationForm {
   email: string

@@ -56,7 +56,7 @@ useHotkey('/', () => {
 }, { scope: 'non-input', preventDefault: true })
 
 // Code examples
-const basicCode = `import { useHotkey } from 'saka-ui'
+const basicCode = `import { useHotkey } from '@sakoa/ui'
 
 // Simple hotkey
 useHotkey('escape', () => {
@@ -73,7 +73,7 @@ useHotkey('ctrl+shift+s', () => {
   saveAs()
 })`
 
-const multipleCode = `import { useHotkeys } from 'saka-ui'
+const multipleCode = `import { useHotkeys } from '@sakoa/ui'
 
 useHotkeys({
   'ctrl+s': () => save(),
@@ -111,7 +111,7 @@ useHotkey('escape', () => close(), {
   enabled: computed(() => isModalOpen.value)
 })`
 
-const keyPressedCode = `import { useKeyPressed } from 'saka-ui'
+const keyPressedCode = `import { useKeyPressed } from '@sakoa/ui'
 
 // Track if key is currently held down
 const isCtrlPressed = useKeyPressed('ctrl')

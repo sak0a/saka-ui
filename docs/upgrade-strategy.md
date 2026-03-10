@@ -4,7 +4,7 @@ When you copy components via `saka-ui add`, you take ownership of that code. Her
 
 ## Checking for Changes
 
-After updating the `saka-ui` package, check what changed in the registry:
+After updating the `@sakoa/ui` package, check what changed in the registry:
 
 ```bash
 npx saka-ui diff button
@@ -33,8 +33,8 @@ If you want the latest upstream version and are okay losing local changes:
 Each copied file includes a header like:
 
 ```
-// @saka-ui/registry v0.1.0 — button
-// Source: saka-ui@0.1.0
+// @saka-ui/registry v0.2.9 — button
+// Source: saka-ui@0.2.9
 // Do not remove this header if you want `saka-ui diff` to work.
 ```
 
@@ -44,5 +44,5 @@ This tells the `diff` command which registry version to compare against. If you 
 
 - **Keep changes minimal** — the less you change, the easier merges are
 - **Document your changes** — add comments explaining why you diverged
-- **Check diff before updating** `saka-ui` — know what's coming
+- **Check diff before updating** `@sakoa/ui` — know what's coming
 - **Consider CSS variables first** — many visual changes don't need source edits

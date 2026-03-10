@@ -84,7 +84,7 @@ function showPositioned(position: ToastPosition) {
 }
 
 // Code examples
-const basicCode = `import { useToast, SToastContainer } from 'saka-ui'
+const basicCode = `import { useToast, SToastContainer } from '@sakoa/ui'
 
 const toast = useToast()
 

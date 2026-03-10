@@ -54,7 +54,9 @@ Override design tokens globally:
 Or scope overrides to specific instances:
 
 ```vue
-<SButton style="--btn-bg: #6366f1; --btn-text: white" />
+<div style="--s-primary: #6366f1; --s-primary-foreground: white">
+  <SButton>Scoped Brand Button</SButton>
+</div>
 ```
 
 ## Level 3: Source Editing (Open-Code Mode)

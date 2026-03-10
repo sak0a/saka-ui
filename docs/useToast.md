@@ -5,7 +5,7 @@ A toast notification composable for Vue 3 with queue management, positioning, an
 ## Installation
 
 ```typescript
-import { useToast, SToastContainer } from 'saka-ui'
+import { useToast, SToastContainer } from '@sakoa/ui'
 ```
 
 ## Setup
@@ -32,7 +32,7 @@ You can have multiple containers for different positions:
 ## Basic Usage
 
 ```typescript
-import { useToast } from 'saka-ui'
+import { useToast } from '@sakoa/ui'
 
 const toast = useToast()
 
@@ -229,7 +229,7 @@ interface ToastInstance {
 
 ```vue
 <script setup lang="ts">
-import { useToast, SToastContainer } from 'saka-ui'
+import { useToast, SToastContainer } from '@sakoa/ui'
 
 const toast = useToast()
 

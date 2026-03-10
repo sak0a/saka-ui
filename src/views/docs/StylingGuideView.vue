@@ -566,12 +566,12 @@ const statePatterns = [
         When using the open-code (copy) installation model, these packages are required:
       </p>
       <div class="bg-accent rounded-lg p-4 font-mono text-sm text-foreground space-y-1">
-        <div>clsx <span class="text-muted-foreground">^2.1.0</span></div>
-        <div>tailwind-merge <span class="text-muted-foreground">^3.0.0</span></div>
+        <div>clsx <span class="text-muted-foreground">^2.1.1</span></div>
+        <div>tailwind-merge <span class="text-muted-foreground">^3.5.0</span></div>
         <div>class-variance-authority <span class="text-muted-foreground">^0.7.1</span></div>
       </div>
       <p class="text-sm text-muted-foreground mt-3">
-        These are automatically installed when using <code class="text-xs bg-accent px-1 py-0.5 rounded">saka-ui add &lt;component&gt;</code>.
+        The CLI copies source files but does not install npm packages for you. Add any missing dependencies to your project when using open-code mode.
       </p>
     </SApiSection>
   </div>

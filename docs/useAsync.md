@@ -5,13 +5,13 @@ A composable for handling async operations with automatic loading/error state ma
 ## Installation
 
 ```typescript
-import { useAsync } from 'saka-ui'
+import { useAsync } from '@sakoa/ui'
 ```
 
 ## Basic Usage
 
 ```typescript
-import { useAsync } from 'saka-ui'
+import { useAsync } from '@sakoa/ui'
 
 // Define your async function
 async function fetchUsers() {
@@ -123,7 +123,7 @@ await execute('user-456') // New API call
 ### Clear Cache
 
 ```typescript
-import { clearAsyncCache } from 'saka-ui'
+import { clearAsyncCache } from '@sakoa/ui'
 
 // Clear all cached results
 clearAsyncCache()
@@ -173,7 +173,7 @@ const { data, execute } = useAsync(saveData, {
 Alias for `useAsync` with `immediate: false`:
 
 ```typescript
-import { useLazyAsync } from 'saka-ui'
+import { useLazyAsync } from '@sakoa/ui'
 
 const { data, execute, loading } = useLazyAsync(fetchUser)
 
@@ -186,7 +186,7 @@ const user = await execute(userId)
 Simple loading state wrapper:
 
 ```typescript
-import { useAsyncState } from 'saka-ui'
+import { useAsyncState } from '@sakoa/ui'
 
 const { loading, error, run } = useAsyncState()
 
@@ -238,7 +238,7 @@ interface UseAsyncReturn<T, P extends any[]> {
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useAsync, useToast } from 'saka-ui'
+import { useAsync, useToast } from '@sakoa/ui'
 
 interface User {
   id: string

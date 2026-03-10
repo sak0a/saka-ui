@@ -4,11 +4,12 @@ Saka UI supports two ways to use components:
 
 ## Package Mode (default)
 
-Import components directly from the `saka-ui` npm package:
+Import components directly from the `@sakoa/ui` npm package:
 
 ```vue
 <script setup>
-import { SButton, SCard } from 'saka-ui'
+import '@sakoa/ui/style.css'
+import { SButton, SCard } from '@sakoa/ui'
 </script>
 ```
 
@@ -48,7 +49,8 @@ You can mix modes in the same project. Use package imports for components you do
 ```vue
 <script setup>
 // Package mode — standard badge, no customization needed
-import { SBadge } from 'saka-ui'
+import '@sakoa/ui/style.css'
+import { SBadge } from '@sakoa/ui'
 // Open-code mode — heavily customized button
 import SButton from '@/components/ui/SButton.vue'
 </script>
@@ -58,7 +60,7 @@ import SButton from '@/components/ui/SButton.vue'
 
 | | Package Mode | Open-Code Mode |
 |---|---|---|
-| Setup | `npm install saka-ui` | `saka-ui init` + `saka-ui add` |
+| Setup | `npm install @sakoa/ui` | `saka-ui init` + `saka-ui add` |
 | Updates | `npm update` | `saka-ui diff` + manual merge |
 | Customization | Props, slots, CSS vars | Full source editing |
 | Maintenance | Automatic | You maintain the copy |

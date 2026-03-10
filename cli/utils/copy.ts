@@ -109,6 +109,7 @@ export function copyComposableFiles(
   cwd: string
 ): CopyResult[] {
   const results: CopyResult[] = []
+  const registryVersion = readRegistryVersion(registrySourceRoot)
 
   for (const name of composableNames) {
     const fileName = `${name}.ts`
@@ -130,8 +131,8 @@ export function copyComposableFiles(
     let content = readFileSync(srcPath, 'utf-8')
 
     const header = [
-      `${PROVENANCE_PREFIX} v0.1.0 — composable:${name}`,
-      `// Source: saka-ui@0.1.0`,
+      `${PROVENANCE_PREFIX} v${registryVersion} — composable:${name}`,
+      `// Source: saka-ui@${registryVersion}`,
       `// Do not remove this header if you want \`saka-ui diff\` to work.`,
       '',
     ].join('\n')
@@ -144,6 +145,18 @@ export function copyComposableFiles(
   }
 
   return results
+}
+
+function readRegistryVersion(registrySourceRoot: string): string {
+  const indexPath = resolve(registrySourceRoot, '..', 'index.json')
+  if (!existsSync(indexPath)) return '0.0.0'
+
+  try {
+    const index = JSON.parse(readFileSync(indexPath, 'utf-8')) as { version?: string }
+    return index.version || '0.0.0'
+  } catch {
+    return '0.0.0'
+  }
 }
 
 function rewriteComposableImports(

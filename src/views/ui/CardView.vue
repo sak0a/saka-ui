@@ -1089,7 +1089,7 @@ const actionsSlots: ApiSlot[] = [
                 <SButton block class="mt-4!">Sign In</SButton>
               </div>
               <p class="text-center text-xs text-white/60 mt-4">
-                Don't have an account? <a href="#" class="text-white underline">Sign up</a>
+                Don't have an account? <a href="#" @click.prevent class="text-white underline">Sign up</a>
               </p>
             </SCard>
           </div>

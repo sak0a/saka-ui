@@ -5,14 +5,14 @@ A composable for detecting element visibility using the Intersection Observer AP
 ## Installation
 
 ```typescript
-import { useIntersectionObserver } from 'saka-ui'
+import { useIntersectionObserver } from '@sakoa/ui'
 ```
 
 ## Basic Usage
 
 ```typescript
 import { ref } from 'vue'
-import { useIntersectionObserver } from 'saka-ui'
+import { useIntersectionObserver } from '@sakoa/ui'
 
 const targetRef = ref<HTMLElement>()
 const { isVisible } = useIntersectionObserver(targetRef)
@@ -164,7 +164,7 @@ function handleComplete() {
 Observe multiple elements efficiently with a single observer:
 
 ```typescript
-import { useIntersectionObserverMultiple } from 'saka-ui'
+import { useIntersectionObserverMultiple } from '@sakoa/ui'
 
 const imageRefs = ref<HTMLImageElement[]>([])
 
@@ -191,7 +191,7 @@ const isFirstVisible = computed(() => {
 Simple boolean visibility check:
 
 ```typescript
-import { useElementVisibility } from 'saka-ui'
+import { useElementVisibility } from '@sakoa/ui'
 
 const targetRef = ref<HTMLElement>()
 const isVisible = useElementVisibility(targetRef)
@@ -209,7 +209,7 @@ watch(isVisible, (visible) => {
 Track when an element has been seen at least once (stays true after first visibility):
 
 ```typescript
-import { useElementHasBeenSeen } from 'saka-ui'
+import { useElementHasBeenSeen } from '@sakoa/ui'
 
 const targetRef = ref<HTMLElement>()
 const hasBeenSeen = useElementHasBeenSeen(targetRef)
@@ -266,7 +266,7 @@ import {
   useIntersectionObserver, 
   useIntersectionObserverMultiple,
   useElementHasBeenSeen 
-} from 'saka-ui'
+} from '@sakoa/ui'
 
 interface LazyImage {
   id: number
@@ -375,7 +375,7 @@ const sections = ref<HTMLElement[]>([])
 <!-- AnimatedSection.vue -->
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useElementHasBeenSeen } from 'saka-ui'
+import { useElementHasBeenSeen } from '@sakoa/ui'
 
 defineProps<{ title: string }>()
 

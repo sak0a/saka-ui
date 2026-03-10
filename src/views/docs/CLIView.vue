@@ -32,23 +32,25 @@ npx saka-ui add button -y`
 const addOutputCode = `$ npx saka-ui add button
 
 Components to add:
-  Button (2 files)
-
-Composables to copy:
-  useFormField.ts
+  SButton (2 files)
 
 ? Proceed? Yes
+
+✔ Copied: src/lib/utils.ts
+✔ Copied: src/lib/icon.ts
+✔ Copied: src/components/ui/button.ts
+✔ Copied: src/components/ui/SButton.vue
 
 ✔ Done! Components are ready to use and edit.`
 
 const listOutputCode = `$ npx saka-ui list
 
-Saka UI Registry — 30 components available
+Saka UI Registry — 32 components available
 
-  Button           A clickable button with variants ✓
-  Card             A container with header and content
-  Input            Text input with validation support (depends: button)
-  Select           Dropdown select component
+  SButton          Button with variants, sizes, icons, ripple effect, and loading state ✓
+  SCard            Card container with elevated, outlined, filled, ghost, and glass variants. Includes header, content, footer, media, and actions subcomponents.
+  SInput           Text input with variants, floating labels, validation, suggestions, and character filtering
+  SSelect          Select dropdown with search, multi-select, groups, virtual scrolling, and validation (depends: option)
   ...
 
 Run "saka-ui add <name>" to add a component.`
@@ -73,7 +75,7 @@ const configOptions = [
   { option: 'componentDir', default: '"src/components/ui"', desc: 'Directory where component .vue files are copied' },
   { option: 'composableDir', default: '"src/composables"', desc: 'Directory where shared composables are copied' },
   { option: 'libDir', default: '"src/lib"', desc: 'Directory for utility files like utils.ts (cn function)' },
-  { option: 'typescript', default: 'true', desc: 'Whether to use TypeScript. Auto-detected from tsconfig.json during init' },
+  { option: 'typescript', default: 'true', desc: 'Project preference detected from tsconfig.json and stored in the config. The current CLI copies source files as-is.' },
   { option: 'overwrite', default: 'false', desc: 'Whether saka-ui add should overwrite existing files without asking' },
 ]
 </script>
@@ -101,7 +103,7 @@ const configOptions = [
           </div>
           <div class="bg-muted rounded-xl p-4 border border-border">
             <div class="font-semibold text-foreground mb-1">No Lock-in</div>
-            <p class="text-sm">No runtime dependency on Saka UI. Remove the CLI after adding components.</p>
+            <p class="text-sm">No runtime dependency on the published component package. Remove the CLI after adding components.</p>
           </div>
           <div class="bg-muted rounded-xl p-4 border border-border">
             <div class="font-semibold text-foreground mb-1">Smart Imports</div>
@@ -157,6 +159,11 @@ const configOptions = [
         </div>
         <p class="text-sm">
           Use the <code class="text-xs bg-accent px-1 py-0.5 rounded">-y</code> flag to skip the confirmation prompt.
+        </p>
+        <p class="text-sm">
+          The CLI copies files only. If a copied component depends on packages such as <code class="text-xs bg-accent px-1 py-0.5 rounded">clsx</code>,
+          <code class="text-xs bg-accent px-1 py-0.5 rounded">tailwind-merge</code>, or <code class="text-xs bg-accent px-1 py-0.5 rounded">class-variance-authority</code>,
+          install those packages in your app separately.
         </p>
       </div>
     </SApiSection>

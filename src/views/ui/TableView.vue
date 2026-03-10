@@ -98,7 +98,7 @@ const emptyData = ref<User[]>([])
 // ============================================================================
 
 const basicCode = `<script setup>
-import { SDataTable } from 'saka-ui'
+import { SDataTable } from '@sakoa/ui'
 
 const columns = [
   { key: 'name', label: 'Name', sortable: true },
@@ -250,7 +250,7 @@ const stickyHeaderCode = `<SDataTable
 />`
 
 const headlessCode = `<script setup>
-import { useDataTable } from 'saka-ui'
+import { useDataTable } from '@sakoa/ui'
 
 const { 
   processedData,

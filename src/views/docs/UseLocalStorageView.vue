@@ -44,7 +44,7 @@ function addToCart(id: number, name: string) {
 const cartTotal = computed(() => cart.value.items.reduce((sum, item) => sum + item.qty, 0))
 
 // Code examples
-const basicCode = `import { useLocalStorage } from 'saka-ui'
+const basicCode = `import { useLocalStorage } from '@sakoa/ui'
 
 // String value
 const { value: userName } = useLocalStorage('username', '')
@@ -57,7 +57,7 @@ const { value: user } = useLocalStorage('user', {
 })
 user.value.name = 'John' // Deep changes also sync`
 
-const sessionCode = `import { useSessionStorage } from 'saka-ui'
+const sessionCode = `import { useSessionStorage } from '@sakoa/ui'
 
 // Session-only data (cleared on browser close)
 const { value: session } = useSessionStorage('auth', {

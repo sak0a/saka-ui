@@ -62,7 +62,7 @@ const simpleValue = ref('item-1')
 // Code snippets
 const basicCode = `<script setup>
 import { ref } from 'vue'
-import { SAccordion, SAccordionItem, SAccordionTrigger, SAccordionContent } from 'saka-ui'
+import { SAccordion, SAccordionItem, SAccordionTrigger, SAccordionContent } from '@sakoa/ui'
 
 const expanded = ref('item-1')
 <\/script>
