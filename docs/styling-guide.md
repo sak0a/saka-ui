@@ -32,14 +32,35 @@ All colors follow a **semantic naming** convention. Each color role has a base v
 | `--s-secondary-foreground` | `#18181b` | `text-secondary-foreground` | Text on secondary |
 | `--s-accent` | `#f4f4f5` | `bg-accent` | Highlighted/active items |
 | `--s-accent-foreground` | `#18181b` | `text-accent-foreground` | Text on accent |
-| `--s-destructive` | `#ef4444` | `bg-destructive` | Destructive/danger actions |
-| `--s-destructive-foreground` | `#fafafa` | `text-destructive-foreground` | Text on destructive |
+| `--s-error` | `#ef4444` | `bg-error` | Error/danger actions |
+| `--s-error-foreground` | `#fafafa` | `text-error-foreground` | Text on error |
 | `--s-success` | `#22c55e` | `bg-success` | Success states |
 | `--s-success-foreground` | `#fafafa` | `text-success-foreground` | Text on success |
 | `--s-warning` | `#f59e0b` | `bg-warning` | Warning states |
 | `--s-warning-foreground` | `#fafafa` | `text-warning-foreground` | Text on warning |
 | `--s-info` | `#3b82f6` | `bg-info` | Info states |
 | `--s-info-foreground` | `#fafafa` | `text-info-foreground` | Text on info |
+
+### Semantic State Surfaces
+
+For components that need tinted backgrounds (alerts, toasts, banners), use these derived tokens. They auto-adapt in dark mode via `color-mix()` — no `dark:` variants needed.
+
+| Token | Tailwind Class | Purpose |
+|-------|----------------|---------|
+| `--s-success-light` | `bg-success-light` | Success tinted background |
+| `--s-success-light-foreground` | `text-success-light-foreground` | Text on success background |
+| `--s-success-border` | `border-success-border` | Success accent border |
+| `--s-warning-light` | `bg-warning-light` | Warning tinted background |
+| `--s-warning-light-foreground` | `text-warning-light-foreground` | Text on warning background |
+| `--s-warning-border` | `border-warning-border` | Warning accent border |
+| `--s-error-light` | `bg-error-light` | Error tinted background |
+| `--s-error-light-foreground` | `text-error-light-foreground` | Text on error background |
+| `--s-error-border` | `border-error-border` | Error accent border |
+| `--s-info-light` | `bg-info-light` | Info tinted background |
+| `--s-info-light-foreground` | `text-info-light-foreground` | Text on info background |
+| `--s-info-border` | `border-info-border` | Info accent border |
+
+These tokens derive from base colors using `color-mix(in srgb, var(--s-<type>) <percentage>%, var(--s-background))`. Override the base color and all surface variants update automatically.
 
 ### Chrome (borders, inputs, focus)
 
@@ -64,7 +85,7 @@ Dark mode activates when the `<html>` element has a `.dark` class. All tokens au
 | `--s-secondary` | `#f4f4f5` | `#27272a` |
 | `--s-border` | `#e4e4e7` | `#27272a` |
 | `--s-ring` | `#18181b` | `#d4d4d8` |
-| `--s-destructive` | `#ef4444` | `#dc2626` |
+| `--s-error` | `#ef4444` | `#dc2626` |
 | `--s-success` | `#22c55e` | `#16a34a` |
 | `--s-warning` | `#f59e0b` | `#d97706` |
 | `--s-info` | `#3b82f6` | `#2563eb` |
@@ -212,8 +233,13 @@ Components follow a consistent spacing approach using Tailwind's default scale:
 Default transition for interactive elements:
 
 ```
-transition-all duration-200 ease-out
+transition-all duration-(--s-duration-normal) ease-out
 ```
+
+### Duration Guidelines
+
+- **Action components** (buttons, badges, kbd): `duration-(--s-duration-normal)` (200ms)
+- **Interactive controls** (switches, tabs, accordions): `duration-(--s-duration-slow)` (300ms)
 
 ---
 
@@ -224,10 +250,18 @@ transition-all duration-200 ease-out
 | Hover | Lighten/darken by 10% | `hover:bg-primary/90` |
 | Active/Pressed | Scale down slightly | `active:scale-[0.98]` |
 | Focus | Ring outline | `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2` |
-| Disabled | Reduced opacity + no pointer | `opacity-50 cursor-not-allowed` |
-| Loading | Reduced opacity + spinner | `opacity-50` + loading indicator |
+| Disabled | Reduced opacity + no pointer | `opacity-(--s-opacity-disabled) cursor-not-allowed` |
+| Loading | Reduced opacity + spinner | `opacity-(--s-opacity-disabled)` + loading indicator |
 
-Disabled opacity is controlled by `--s-opacity-disabled: 0.5`.
+### Disabled States
+
+All components use the `--s-opacity-disabled` token for consistent disabled appearance:
+
+```vue
+'opacity-(--s-opacity-disabled) cursor-not-allowed'
+```
+
+Override globally: `--s-opacity-disabled: 0.4;`
 
 ---
 
@@ -240,7 +274,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '~/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center font-medium transition-all duration-200 ease-out',
+  'inline-flex items-center justify-center font-medium transition-all duration-(--s-duration-normal) ease-out',
   {
     variants: {
       variant: {
@@ -300,12 +334,12 @@ Components that accept a `type` prop map semantic names to theme CSS variables. 
 | Type | Maps to | Foreground |
 |------|---------|------------|
 | `primary` | `--s-primary` | `--s-primary-foreground` |
-| `error` | `--s-destructive` | `--s-destructive-foreground` |
+| `error` | `--s-error` | `--s-error-foreground` |
 | `success` | `--s-success` | `--s-success-foreground` |
 | `warning` | `--s-warning` | `--s-warning-foreground` |
 | `info` | `--s-info` | `--s-info-foreground` |
 
-> **Note:** The `error` type maps to `--s-destructive` (not `--s-error`) since the design token system uses "destructive" for danger/error semantics.
+> **Note:** The `error` type maps directly to `--s-error` and `--s-error-foreground` design tokens.
 
 The `type` prop takes precedence over `color` when both are set. When `type` is `'default'` or unset, the `color` prop is used instead.
 
