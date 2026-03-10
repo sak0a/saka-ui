@@ -1,8 +1,32 @@
 <script setup lang="ts">
 import { computed, ref, useSlots, type CSSProperties } from 'vue'
 import { cn } from '~/lib/utils'
-import { isIconComponent } from '~/lib/icon'
-import { buttonVariants, type Props } from './button'
+import { type IconProp, isIconComponent } from '~/lib/icon'
+import { buttonVariants } from './button'
+
+export interface Props {
+  variant?: 'filled' | 'outlined' | 'light' | 'ghost' | 'link' | 'dashed' | 'glass'
+  size?: 'xs' | 'small' | 'medium' | 'large' | 'xl'
+  color?: string
+  type?: 'default' | 'primary' | 'error' | 'success' | 'info' | 'warning'
+  disabled?: boolean
+  loading?: boolean
+  preserveSize?: boolean
+  block?: boolean
+  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+  iconLeft?: IconProp
+  iconRight?: IconProp
+  iconOnly?: boolean
+  tag?: string
+  href?: string
+  to?: string | object
+  nativeType?: 'button' | 'submit' | 'reset'
+  ripple?: boolean
+  animationType?: 'slide' | 'vertical' | 'scale' | 'rotate'
+  animateInactive?: boolean
+  contentClass?: string
+  iconClass?: string
+}
 
 const iconOnlySizes: Record<string, string> = {
   xs: 'w-6 h-6 text-xs',

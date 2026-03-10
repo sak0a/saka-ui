@@ -2,7 +2,7 @@
   "name": "switch",
   "displayName": "SSwitch",
   "description": "Toggle switch with inset/outset types, sizes, colors, icons, and label text",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "files": [
     "components/ui/SSwitch.vue"
   ],

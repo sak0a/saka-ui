@@ -25,9 +25,3 @@ export const kbdVariants = cva(
 )
 
 export type KbdVariants = VariantProps<typeof kbdVariants>
-
-export interface Props {
-  variant?: 'default' | 'outlined' | 'flat' | 'ghost'
-  size?: 'xs' | 'sm' | 'md' | 'lg'
-  color?: string
-}

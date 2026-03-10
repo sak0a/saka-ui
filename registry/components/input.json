@@ -2,7 +2,7 @@
   "name": "input",
   "displayName": "SInput",
   "description": "Text input with variants, floating labels, validation, suggestions, and character filtering",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "files": [
     "components/ui/SInput.vue"
   ],

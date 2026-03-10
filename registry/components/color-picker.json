@@ -2,7 +2,7 @@
   "name": "color-picker",
   "displayName": "SColorPicker",
   "description": "Color picker with palette, spectrum, input modes, and opacity support",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "files": [
     "components/ui/color-picker/index.ts",
     "components/ui/color-picker/context.ts",

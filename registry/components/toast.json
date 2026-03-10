@@ -2,7 +2,7 @@
   "name": "toast",
   "displayName": "SToast",
   "description": "Toast notifications with container, auto-dismiss, stacking, and position variants",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "files": [
     "components/ui/toast/index.ts",
     "components/ui/toast/SToast.vue",

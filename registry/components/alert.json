@@ -2,7 +2,7 @@
   "name": "alert",
   "displayName": "SAlert",
   "description": "Alert notification with success, warning, error, info variants, auto-dismiss, progress bar, and positioning",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "files": [
     "components/ui/SAlert.vue"
   ],

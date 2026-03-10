@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { computed, useAttrs, type CSSProperties } from 'vue'
 import { cn } from '~/lib/utils'
-import { kbdVariants, type Props } from './kbd'
+import { kbdVariants } from './kbd'
+
+export interface Props {
+  variant?: 'default' | 'outlined' | 'flat' | 'ghost'
+  size?: 'xs' | 'sm' | 'md' | 'lg'
+  color?: string
+}
 
 defineOptions({ inheritAttrs: false })
 

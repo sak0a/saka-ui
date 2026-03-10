@@ -1,5 +1,4 @@
 import { cva, type VariantProps } from 'class-variance-authority'
-import type { IconProp } from '~/lib/icon'
 
 export const buttonVariants = cva(
   'relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out overflow-hidden select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-[1.5px] border-transparent',
@@ -38,27 +37,3 @@ export const buttonVariants = cva(
 )
 
 export type ButtonVariants = VariantProps<typeof buttonVariants>
-
-export interface Props {
-  variant?: 'filled' | 'outlined' | 'light' | 'ghost' | 'link' | 'dashed' | 'glass'
-  size?: 'xs' | 'small' | 'medium' | 'large' | 'xl'
-  color?: string
-  type?: 'default' | 'primary' | 'error' | 'success' | 'info' | 'warning'
-  disabled?: boolean
-  loading?: boolean
-  preserveSize?: boolean
-  block?: boolean
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
-  iconLeft?: IconProp
-  iconRight?: IconProp
-  iconOnly?: boolean
-  tag?: string
-  href?: string
-  to?: string | object
-  nativeType?: 'button' | 'submit' | 'reset'
-  ripple?: boolean
-  animationType?: 'slide' | 'vertical' | 'scale' | 'rotate'
-  animateInactive?: boolean
-  contentClass?: string
-  iconClass?: string
-}

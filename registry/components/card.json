@@ -2,7 +2,7 @@
   "name": "card",
   "displayName": "SCard",
   "description": "Card container with elevated, outlined, filled, ghost, and glass variants. Includes header, content, footer, media, and actions subcomponents.",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "files": [
     "components/ui/card/index.ts",
     "components/ui/card/SCard.vue",
