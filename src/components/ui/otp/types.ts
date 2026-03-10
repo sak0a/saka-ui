@@ -1,6 +1,6 @@
 export type SOTPVariant = 'outlined' | 'filled' | 'underlined' | 'ghost' | 'morphing'
 export type SOTPSize = 'small' | 'medium' | 'large' | 'xl'
-export type SOTPRounded = 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
+export type SOTPRounded = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
 export type SOTPGap = 'tight' | 'normal' | 'wide'
 export type SOTPMode = 'numeric' | 'alphanumeric' | 'alphabetic' | 'any'
 export type SOTPAnimation = 'none' | 'bounce' | 'shake' | 'pulse' | 'flip' | 'morph' | 'glow' | 'wave'

@@ -10,7 +10,7 @@ interface Props {
   /** Size preset affecting padding and spacing */
   size?: 'compact' | 'default' | 'comfortable'
   /** Border radius */
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
+  rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   /** Enable hover animation effects */
   hoverable?: boolean
   /** Enable press/click effect */
@@ -206,6 +206,7 @@ const sizeClasses = computed(() => {
 const radiusClasses = computed(() => {
   const radii = {
     none: 'rounded-none',
+    xs: 'rounded-xs',
     sm: 'rounded-sm',
     md: 'rounded-md',
     lg: 'rounded-lg',

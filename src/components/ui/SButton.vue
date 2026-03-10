@@ -13,7 +13,7 @@ export interface Props {
   loading?: boolean
   preserveSize?: boolean
   block?: boolean
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+  rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   iconLeft?: IconProp
   iconRight?: IconProp
   iconOnly?: boolean

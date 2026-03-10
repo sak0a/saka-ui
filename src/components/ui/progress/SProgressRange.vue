@@ -20,7 +20,7 @@ export interface Props {
   // Visual
   size?: 'small' | 'medium' | 'large'
   orientation?: 'horizontal' | 'vertical'
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
+  rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   color?: string
   trackColor?: string
   activeTrackColor?: string
@@ -153,10 +153,13 @@ const handleSizeValue = computed(() => props.handleSize || sizeConfig.value.hand
 const roundedClasses = computed(() => {
   const radii = {
     none: 'rounded-none',
+    xs: 'rounded-xs',
     sm: 'rounded-sm',
     md: 'rounded-md',
     lg: 'rounded-lg',
     xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
     full: 'rounded-full'
   }
   return radii[props.rounded]

@@ -28,7 +28,7 @@ export interface Props {
   size?: 'small' | 'medium' | 'large'
   color?: string
   variant?: 'outlined' | 'filled' | 'underlined'
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full'
+  rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   maxHeight?: string
   closeOnSelect?: boolean
   tagLimit?: number
@@ -587,10 +587,13 @@ const sizeConfig = computed(() => {
 const roundedConfig = computed(() => {
   const radii = {
     none: 'rounded-none',
+    xs: 'rounded-xs',
     sm: 'rounded-sm',
     md: 'rounded-md',
     lg: 'rounded-lg',
     xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
     full: 'rounded-full'
   }
   return radii[props.rounded]
@@ -600,10 +603,13 @@ const roundedConfig = computed(() => {
 const dropdownRoundedConfig = computed(() => {
   const radii = {
     none: 'rounded-none',
+    xs: 'rounded-xs',
     sm: 'rounded-sm',
     md: 'rounded-md',
     lg: 'rounded-lg',
     xl: 'rounded-xl',
+    '2xl': 'rounded-xl',  // Cap at xl for dropdown
+    '3xl': 'rounded-xl',  // Cap at xl for dropdown
     full: 'rounded-xl'  // Cap at xl for dropdown
   }
   return radii[props.rounded]

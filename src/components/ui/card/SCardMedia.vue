@@ -31,7 +31,7 @@ export interface Props {
   /** Position in card layout */
   position?: 'top' | 'bottom' | 'left' | 'right' | 'background'
   /** Border radius override */
-  rounded?: 'none' | 'inherit' | 'sm' | 'md' | 'lg' | 'xl'
+  rounded?: 'none' | 'inherit' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   /** Video autoplay */
   autoplay?: boolean
   /** Video loop */
@@ -112,10 +112,14 @@ const roundedClasses = computed(() => {
   const radii = {
     none: 'rounded-none',
     inherit: '',
+    xs: 'rounded-xs',
     sm: 'rounded-sm',
     md: 'rounded-md',
     lg: 'rounded-lg',
-    xl: 'rounded-xl'
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
   }
   return radii[props.rounded]
 })
@@ -249,7 +253,7 @@ const handleError = () => {
     <!-- Overlay -->
     <div 
       v-if="overlay || $slots.overlay"
-      class="absolute inset-0 flex items-end transition-opacity duration-300"
+      class="absolute inset-0 flex items-end transition-opacity duration-(--s-duration-slow)"
       :class="{
         'opacity-0': overlayMode === 'hover' && !isHovered,
         'opacity-100': overlayMode === 'always' || isHovered
@@ -278,7 +282,7 @@ const handleError = () => {
     <!-- Action slot (bottom) -->
     <div 
       v-if="$slots.actions" 
-      class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-300"
+      class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-(--s-duration-slow)"
       :class="{
         'opacity-0': overlayMode === 'hover' && !isHovered,
         'opacity-100': overlayMode === 'always' || isHovered
