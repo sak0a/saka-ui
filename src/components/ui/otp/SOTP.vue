@@ -652,7 +652,7 @@ watch(() => props.error, (hasError) => {
     v-bind="$attrs"
     :class="cn(
       's-otp-wrapper flex flex-col items-center w-fit',
-      disabled && 'opacity-50 pointer-events-none',
+      disabled && 'opacity-(--s-opacity-disabled) pointer-events-none',
       $attrs.class ?? ''
     )"
   >

@@ -167,7 +167,7 @@ const headerClasses = computed(() => {
   }
 
   const disabledStyles = props.disabled
-    ? 'opacity-50 cursor-not-allowed'
+    ? 'opacity-(--s-opacity-disabled) cursor-not-allowed'
     : ''
 
   const expandedStyles = isExpanded.value && !props.disabled

@@ -225,7 +225,7 @@ const containerClasses = computed(() => {
   }
   
   if (props.disabled) {
-    classes.push('opacity-50 cursor-not-allowed')
+    classes.push('opacity-(--s-opacity-disabled) cursor-not-allowed')
   }
   
   return classes.join(' ')

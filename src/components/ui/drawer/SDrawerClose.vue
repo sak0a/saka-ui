@@ -49,7 +49,7 @@ const variantClasses = {
     :class="cn(
       's-drawer-close flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150 outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-0',
       variantClasses[variant],
-      disabled ? 'opacity-50 cursor-not-allowed' : '',
+      disabled ? 'opacity-(--s-opacity-disabled) cursor-not-allowed' : '',
       closeClass,
       $attrs.class ?? ''
     )"

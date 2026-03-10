@@ -68,7 +68,7 @@ const triggerClasses = computed(() => {
   const base = `
     relative cursor-pointer
     flex items-center gap-2 whitespace-nowrap
-    transition-all duration-300 ease-out
+    transition-all duration-(--s-duration-slow) ease-out
     ${sizeClasses.value}
   `
 

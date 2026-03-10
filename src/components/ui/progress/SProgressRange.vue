@@ -447,7 +447,7 @@ const maxHandleZIndex = computed(() => {
     :class="cn(
       's-progress-range',
       orientation === 'vertical' ? 'flex flex-col items-center' : 'w-full',
-      disabled && 'opacity-50 cursor-not-allowed',
+      disabled && 'opacity-(--s-opacity-disabled) cursor-not-allowed',
       $attrs.class ?? ''
     )"
   >

@@ -399,7 +399,7 @@ const getButtonClasses = (isActive: boolean, isDisabled: boolean) => {
   `
 
   if (isDisabled) {
-    return `${base} opacity-40 cursor-not-allowed pointer-events-none`
+    return `${base} opacity-(--s-opacity-disabled) cursor-not-allowed pointer-events-none`
   }
 
   if (props.variant === 'default') {

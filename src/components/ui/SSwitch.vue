@@ -149,14 +149,14 @@ const checkedIconStyle = computed<CSSProperties | undefined>(() => {
 const wrapperClasses = computed(() => {
   return cn(
     'inline-flex items-center gap-2',
-    { 'opacity-50 cursor-not-allowed': props.disabled },
+    { 'opacity-(--s-opacity-disabled) cursor-not-allowed': props.disabled },
     (attrs as Record<string, unknown>).class as string,
   )
 })
 
 const trackClasses = computed(() => {
   return cn(
-    's-switch-track relative inline-flex items-center shrink-0 rounded-full transition-all duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
+    's-switch-track relative inline-flex items-center shrink-0 rounded-full transition-all duration-(--s-duration-slow) ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
     hasTrackText.value ? 'min-w-16 px-1' : sizeConfig.value.track,
     // Unchecked state uses accent background; checked uses primary (or inline style when color is set)
     isChecked.value && !props.color ? 'bg-primary' : '',
@@ -169,7 +169,7 @@ const trackClasses = computed(() => {
 
 const thumbClasses = computed(() => {
   return cn(
-    's-switch-thumb inline-flex items-center justify-center rounded-full shadow-md transition-all duration-300 ease-in-out z-10',
+    's-switch-thumb inline-flex items-center justify-center rounded-full shadow-md transition-all duration-(--s-duration-slow) ease-in-out z-10',
     isChecked.value && !props.color ? 'bg-primary-foreground' : 'bg-white',
     hasTrackText.value ? 'w-5 h-5' : sizeConfig.value.thumb,
     hasTrackText.value

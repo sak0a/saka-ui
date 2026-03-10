@@ -585,7 +585,7 @@ defineExpose({
           :class="[
             sizeConfig.trigger,
             disabled 
-              ? 'opacity-50 cursor-not-allowed bg-accent border-border text-muted-foreground' 
+              ? 'opacity-(--s-opacity-disabled) cursor-not-allowed bg-accent border-border text-muted-foreground'
               : 'bg-muted border-border text-foreground hover:bg-accent hover:border-input focus:ring-2 focus:ring-primary/20'
           ]"
           :disabled="disabled"
@@ -685,7 +685,7 @@ defineExpose({
                   :class="[
                     sizeConfig.item,
                     {
-                      'opacity-50 cursor-not-allowed': item.disabled,
+                      'opacity-(--s-opacity-disabled) cursor-not-allowed': item.disabled,
                       'text-red-500 hover:bg-red-500/10': item.danger && !item.disabled,
                       'text-foreground hover:bg-accent': !item.danger && !item.disabled,
                       'bg-accent': highlightedIndex === index && !item.disabled

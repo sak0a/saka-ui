@@ -58,7 +58,7 @@ const headerClasses = computed(() => {
   }
 
   const disabledStyles = disabled.value
-    ? 'opacity-50 cursor-not-allowed'
+    ? 'opacity-(--s-opacity-disabled) cursor-not-allowed'
     : ''
 
   const expandedStyles = isExpanded.value && !disabled.value

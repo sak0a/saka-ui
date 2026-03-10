@@ -172,7 +172,7 @@ const handleKeydown = (e: KeyboardEvent) => {
     :class="cn(
       's-radio-group',
       layoutClass,
-      { 'opacity-50': disabled }
+      { 'opacity-(--s-opacity-disabled)': disabled }
     )"
     :style="gridStyle"
     @keydown="handleKeydown"
