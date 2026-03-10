@@ -265,12 +265,12 @@ const rounded = computed(() => props.rounded)
       )"
     >
       <slot>{{ label }}</slot>
-      <span v-if="required" class="text-destructive ml-0.5">*</span>
+      <span v-if="required" class="text-error ml-0.5">*</span>
     </span>
   </label>
 
   <!-- Error message -->
-  <p v-if="error" class="mt-1 text-xs text-destructive flex items-center gap-1">
+  <p v-if="error" class="mt-1 text-xs text-error flex items-center gap-1">
     <span class="mdi mdi-alert-circle" />
     {{ error }}
   </p>

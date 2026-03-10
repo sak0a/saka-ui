@@ -22,7 +22,7 @@ const colorTokensCode = `:root {
   --s-accent-foreground: #18181b;
 
   /* Semantic */
-  --s-destructive: #ef4444;
+  --s-error: #ef4444;
   --s-success: #22c55e;
   --s-warning: #f59e0b;
   --s-info: #3b82f6;
@@ -45,7 +45,7 @@ const darkTokensCode = `:root.dark {
   --s-border: #27272a;
   --s-input: #27272a;
   --s-ring: #d4d4d8;
-  --s-destructive: #dc2626;
+  --s-error: #dc2626;
   --s-success: #16a34a;
   --s-warning: #d97706;
   --s-info: #2563eb;
@@ -134,7 +134,7 @@ const colorTokens = [
   { name: 'primary-foreground', light: '#fafafa', dark: '#18181b', tailwind: 'text-primary-foreground', desc: 'Text on primary' },
   { name: 'secondary', light: '#f4f4f5', dark: '#27272a', tailwind: 'bg-secondary', desc: 'Secondary actions' },
   { name: 'accent', light: '#f4f4f5', dark: '#27272a', tailwind: 'bg-accent', desc: 'Highlighted items' },
-  { name: 'destructive', light: '#ef4444', dark: '#dc2626', tailwind: 'bg-destructive', desc: 'Danger actions' },
+  { name: 'error', light: '#ef4444', dark: '#dc2626', tailwind: 'bg-error', desc: 'Danger actions' },
   { name: 'success', light: '#22c55e', dark: '#16a34a', tailwind: 'bg-success', desc: 'Success states' },
   { name: 'warning', light: '#f59e0b', dark: '#d97706', tailwind: 'bg-warning', desc: 'Warning states' },
   { name: 'info', light: '#3b82f6', dark: '#2563eb', tailwind: 'bg-info', desc: 'Info states' },
@@ -291,8 +291,8 @@ const statePatterns = [
           <div class="text-xs text-muted-foreground font-mono">accent</div>
         </div>
         <div class="space-y-1.5">
-          <div class="h-16 rounded-lg bg-destructive" />
-          <div class="text-xs text-muted-foreground font-mono">destructive</div>
+          <div class="h-16 rounded-lg bg-error" />
+          <div class="text-xs text-muted-foreground font-mono">error</div>
         </div>
         <div class="space-y-1.5">
           <div class="h-16 rounded-lg bg-success" />

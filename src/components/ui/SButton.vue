@@ -62,7 +62,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const typeColorMap: Record<string, string> = {
   primary: 'var(--s-primary)',
-  error: 'var(--s-destructive)',
+  error: 'var(--s-error)',
   success: 'var(--s-success)',
   warning: 'var(--s-warning)',
   info: 'var(--s-info)',
@@ -70,7 +70,7 @@ const typeColorMap: Record<string, string> = {
 
 const typeForegroundMap: Record<string, string> = {
   primary: 'var(--s-primary-foreground)',
-  error: 'var(--s-destructive-foreground)',
+  error: 'var(--s-error-foreground)',
   success: 'var(--s-success-foreground)',
   warning: 'var(--s-warning-foreground)',
   info: 'var(--s-info-foreground)',

@@ -29,7 +29,7 @@ const sizeClasses = computed(() => {
 // ─── Color Style ────────────────────────────────────────────────────────────────
 const colorStyle = computed<CSSProperties | undefined>(() => {
   const state = itemCtx?.state.value
-  if (state === 'error') return undefined // error uses destructive colors
+  if (state === 'error') return undefined // error uses error token colors
   if (!ctx?.color) return undefined
   if (state === 'active' || state === 'completed') {
     return {
@@ -51,7 +51,7 @@ const indicatorClasses = computed(() => {
     'transition-all duration-300',
     sizeClasses.value,
     // State-based colors (when no custom color)
-    state === 'error' && 'bg-destructive border-destructive text-white',
+    state === 'error' && 'bg-error border-error text-white',
     state === 'loading' && 'bg-muted border-primary text-primary animate-pulse',
     state !== 'error' && state !== 'loading' && !ctx?.color && (state === 'active' || state === 'completed')
       && 'bg-primary border-primary text-primary-foreground',

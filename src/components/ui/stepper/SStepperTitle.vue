@@ -33,7 +33,7 @@ const titleClasses = computed(() => {
     's-stepper-title',
     'block font-semibold transition-colors duration-200',
     sizeClasses.value,
-    state === 'error' ? 'text-destructive' : '',
+    state === 'error' ? 'text-error' : '',
     state !== 'error' && state === 'inactive' ? 'text-muted-foreground' : '',
     state !== 'error' && state !== 'inactive' ? 'text-foreground' : '',
     props.class,

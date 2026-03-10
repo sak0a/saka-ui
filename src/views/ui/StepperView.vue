@@ -1149,7 +1149,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
 
           <div class="relative mt-6 overflow-hidden">
             <SStepperContent :step="2">
-              <div class="rounded-xl border p-4" :class="hasPaymentError ? 'border-destructive/50 bg-destructive/5' : 'border-border'">
+              <div class="rounded-xl border p-4" :class="hasPaymentError ? 'border-error/50 bg-error/5' : 'border-border'">
                 <p class="text-sm text-muted-foreground mb-3">
                   {{ hasPaymentError ? 'Payment failed. Fix the error to continue.' : 'Payment details accepted.' }}
                 </p>
