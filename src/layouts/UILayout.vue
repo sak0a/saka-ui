@@ -35,9 +35,9 @@ const getThemeIcon = () => {
   <div class="h-screen bg-background text-foreground flex flex-col overflow-hidden transition-colors duration-300">
     <!-- Top Navigation Bar -->
     <header class="h-auto shrink-0 border-b border-border bg-card shadow-sm px-4 py-3 transition-colors duration-300 md:h-14 md:px-6 md:py-0">
-      <div class="flex flex-col gap-3 md:flex-row md:items-center">
+      <div class="flex flex-col gap-3 md:flex-row md:items-center md:gap-4">
       <!-- Logo -->
-        <router-link to="/ui" class="text-xl font-bold bg-linear-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity md:mr-8">
+        <router-link to="/ui" class="text-xl font-bold bg-linear-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity">
           Saka-UI
         </router-link>
 
@@ -59,18 +59,17 @@ const getThemeIcon = () => {
 
         <div class="md:flex-1"></div>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1.5">
           <SSiteSearch />
 
           <a
             :href="githubRepoUrl"
             target="_blank"
             rel="noreferrer"
-            class="inline-flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            class="p-2 rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             title="Open the GitHub repository"
           >
-            <span class="mdi mdi-github-circle text-lg"></span>
-            <span class="hidden sm:inline">GitHub</span>
+            <span class="mdi mdi-github text-xl"></span>
           </a>
 
           <button

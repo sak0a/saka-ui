@@ -253,6 +253,28 @@ const searchEntries: SearchEntry[] = [
   })),
 ]
 
+// Maps common synonyms/aliases to their canonical search terms
+const aliases: Record<string, string[]> = {
+  popup: ['modal', 'dialog', 'popover'],
+  overlay: ['modal', 'dialog', 'drawer'],
+  notification: ['toast', 'alerts'],
+  snackbar: ['toast'],
+  toggle: ['switch'],
+  combobox: ['select'],
+  picker: ['select', 'date picker', 'color picker'],
+  menu: ['dropdown'],
+  sheet: ['drawer'],
+  spinner: ['progress', 'skeleton'],
+  loader: ['progress', 'skeleton'],
+  tag: ['badges', 'chips'],
+  pill: ['badges', 'chips'],
+  navbar: ['breadcrumb', 'tabs'],
+  theme: ['use theme', 'customization', 'styling guide'],
+  dark: ['use theme'],
+  install: ['getting started', 'cli'],
+  setup: ['getting started', 'cli'],
+}
+
 function normalize(value: string): string {
   return value
     .toLowerCase()
@@ -295,9 +317,28 @@ function sectionForPath(path: string): SearchEntry['section'] {
   return 'ui'
 }
 
+function expandWithAliases(tokens: string[]): string[] {
+  const expanded = [...tokens]
+  for (const token of tokens) {
+    const mapped = aliases[token]
+    if (mapped) {
+      for (const alias of mapped) {
+        expanded.push(...tokenize(alias))
+      }
+    }
+  }
+  return [...new Set(expanded)]
+}
+
+function singularize(word: string): string {
+  if (word.endsWith('s') && word.length > 3) return word.slice(0, -1)
+  return word
+}
+
 export function searchSite(query: string, currentPath = '', limit = 10): SearchResult[] {
   const normalizedQuery = normalize(query)
-  const queryTokens = tokenize(query)
+  const rawTokens = tokenize(query)
+  const queryTokens = expandWithAliases(rawTokens)
   const currentSection = sectionForPath(currentPath)
 
   const ranked = searchEntries
@@ -328,27 +369,43 @@ export function searchSite(query: string, currentPath = '', limit = 10): SearchR
         reasons.push('Title contains your query')
       }
 
+      // Singular/plural matching (e.g. "button" matches "Buttons")
+      const singularQuery = singularize(normalizedQuery)
+      const singularTitle = singularize(title)
+      if (singularTitle === singularQuery && title !== normalizedQuery) {
+        score += 140
+        reasons.push('Exact title match')
+      }
+
       const fuzzyScore = isSubsequence(normalizedQuery.replace(/\s+/g, ''), title.replace(/\s+/g, ''))
       if (fuzzyScore > 0) {
         score += fuzzyScore
         reasons.push('Close fuzzy match')
       }
 
+      // Track if bonus came from alias expansion
+      let aliasBoost = false
+
       for (const token of queryTokens) {
         if (!token) continue
+        const isAlias = !rawTokens.includes(token)
+        const singular = singularize(token)
 
-        if (title.split(' ').some((word) => word.startsWith(token))) {
-          score += 28
-        } else if (title.includes(token)) {
-          score += 18
+        const titleWords = title.split(' ')
+        if (titleWords.some((word) => word.startsWith(token) || word.startsWith(singular))) {
+          score += isAlias ? 20 : 28
+          if (isAlias) aliasBoost = true
+        } else if (title.includes(token) || title.includes(singular)) {
+          score += isAlias ? 12 : 18
+          if (isAlias) aliasBoost = true
         }
 
-        if (keywords.some((word) => word.includes(token))) {
-          score += 14
+        if (keywords.some((word) => word.includes(token) || word.includes(singular))) {
+          score += isAlias ? 10 : 14
         }
 
-        if (description.includes(token)) {
-          score += 10
+        if (description.includes(token) || description.includes(singular)) {
+          score += isAlias ? 6 : 10
         }
 
         if (haystack.includes(token)) {
@@ -365,7 +422,7 @@ export function searchSite(query: string, currentPath = '', limit = 10): SearchR
       }
 
       if (score > 0 && reasons.length === 0) {
-        reasons.push('Relevant keywords and content')
+        reasons.push(aliasBoost ? 'Related component' : 'Relevant keywords and content')
       }
 
       return { ...entry, score, reasons }

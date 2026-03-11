@@ -126,14 +126,14 @@ useHotkey('ctrl+k', (event) => {
   <div class="contents">
     <button
       type="button"
-      class="inline-flex min-w-0 items-center gap-3 rounded-xl border border-border bg-background px-3 py-2 text-left text-sm text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground md:min-w-72"
+      class="inline-flex min-w-0 items-center gap-2 rounded-lg border border-border bg-background px-3 py-1.5 text-left text-sm text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground md:min-w-56"
       @click="openSearch"
       aria-label="Open site search"
     >
-      <span class="mdi mdi-magnify text-lg"></span>
-      <span class="min-w-0 flex-1 truncate hidden sm:inline">Search docs, components, examples...</span>
+      <span class="mdi mdi-magnify text-base"></span>
+      <span class="min-w-0 flex-1 truncate hidden sm:inline">Search...</span>
       <span class="sm:hidden">Search</span>
-      <span class="hidden rounded-md border border-border bg-card px-2 py-0.5 text-xs sm:inline">{{ shortcutLabel }}</span>
+      <span class="hidden rounded border border-border bg-card px-1.5 py-0.5 text-[11px] font-medium text-muted-foreground sm:inline">{{ shortcutLabel }}</span>
     </button>
 
     <teleport to="body">
@@ -164,50 +164,44 @@ useHotkey('ctrl+k', (event) => {
             </div>
           </div>
 
-          <div class="max-h-[70vh] overflow-y-auto p-3">
-            <div v-if="results.length" class="space-y-2">
+          <div class="max-h-[70vh] overflow-y-auto p-2">
+            <div v-if="results.length" class="space-y-0.5">
               <button
                 v-for="(result, index) in results"
                 :key="result.id"
                 type="button"
-                class="flex w-full items-start gap-4 rounded-2xl px-4 py-3 text-left transition-colors"
+                class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-colors"
                 :class="index === activeIndex
                   ? 'bg-primary/10 text-foreground'
-                  : 'hover:bg-muted/80 text-foreground'"
+                  : 'hover:bg-muted/60 text-foreground'"
                 @mouseenter="activeIndex = index"
                 @click="goToResult(index)"
               >
-                <div class="mt-0.5 rounded-xl bg-background px-2 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                <span class="shrink-0 rounded-md bg-background px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-muted-foreground ring-1 ring-border">
                   {{ result.category }}
-                </div>
+                </span>
 
                 <div class="min-w-0 flex-1">
-                  <div class="flex items-center gap-2">
-                    <p class="truncate text-sm font-semibold">{{ result.title }}</p>
-                    <span
-                      v-if="index === 0 && hasQuery"
-                      class="rounded-full bg-primary/15 px-2 py-0.5 text-[11px] font-medium text-primary"
-                    >
-                      Best match
-                    </span>
-                  </div>
-
-                  <p class="mt-1 text-sm text-muted-foreground">{{ result.description }}</p>
-
-                  <div class="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                    <span class="rounded-full bg-background px-2 py-1">{{ result.href }}</span>
-                    <span class="truncate">{{ result.reasons[0] }}</span>
-                  </div>
+                  <p class="truncate text-sm font-medium">{{ result.title }}</p>
+                  <p class="mt-0.5 truncate text-xs text-muted-foreground">{{ result.description }}</p>
                 </div>
 
-                <span class="mdi mdi-arrow-top-right text-lg text-muted-foreground"></span>
+                <span
+                  v-if="index === 0 && hasQuery"
+                  class="shrink-0 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-medium text-primary"
+                >
+                  Best
+                </span>
+
+                <span class="mdi mdi-chevron-right shrink-0 text-base text-muted-foreground/60"></span>
               </button>
             </div>
 
-            <div v-else class="rounded-2xl border border-dashed border-border px-6 py-12 text-center">
-              <p class="text-sm font-medium text-foreground">No results for "{{ query }}"</p>
-              <p class="mt-2 text-sm text-muted-foreground">
-                Try component names, composables, setup terms like "install" or "theme", or example flows like "auth".
+            <div v-else-if="hasQuery" class="rounded-xl border border-dashed border-border px-6 py-10 text-center">
+              <span class="mdi mdi-magnify-close text-3xl text-muted-foreground/40"></span>
+              <p class="mt-2 text-sm font-medium text-foreground">No results for "{{ query }}"</p>
+              <p class="mt-1 text-xs text-muted-foreground">
+                Try component names, composable hooks, or terms like "install", "theme", "auth".
               </p>
             </div>
           </div>
