@@ -166,6 +166,11 @@ const router = createRouter({
                     component: () => import('./views/ui/PaginationView.vue')
                 },
                 {
+                    path: 'popover',
+                    name: 'ui-popover',
+                    component: () => import('./views/ui/PopoverView.vue')
+                },
+                {
                     path: 'skeleton',
                     name: 'ui-skeleton',
                     component: () => import('./views/ui/SkeletonView.vue')
