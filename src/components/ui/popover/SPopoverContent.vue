@@ -225,7 +225,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <Teleport v-if="teleportTarget" :to="teleportTarget" :disabled="!teleportTarget">
+  <Teleport v-if="teleportTarget" :to="teleportTarget">
     <Transition
       :enter-active-class="animationClasses.enter"
       :enter-from-class="animationClasses.enterFrom"
@@ -256,6 +256,38 @@ onBeforeUnmount(() => {
       </div>
     </Transition>
   </Teleport>
+
+  <template v-else>
+    <Transition
+      :enter-active-class="animationClasses.enter"
+      :enter-from-class="animationClasses.enterFrom"
+      :enter-to-class="animationClasses.enterTo"
+      :leave-active-class="animationClasses.leave"
+      :leave-from-class="animationClasses.leaveFrom"
+      :leave-to-class="animationClasses.leaveTo"
+    >
+      <div
+        v-if="context.isOpen.value"
+        ref="contentRef"
+        v-bind="$attrs"
+        :id="context.contentId"
+        role="dialog"
+        :aria-labelledby="context.triggerId"
+        tabindex="-1"
+        :class="cn(
+          's-popover-content fixed p-4',
+          variantClasses,
+          roundedClasses,
+          $attrs.class ?? ''
+        )"
+        :style="contentStyle"
+        @mouseenter="handleContentMouseEnter"
+        @mouseleave="handleContentMouseLeave"
+      >
+        <slot />
+      </div>
+    </Transition>
+  </template>
 </template>
 
 <style scoped>
