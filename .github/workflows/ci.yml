@@ -24,6 +24,9 @@ jobs:
       - name: Type check
         run: bun run typecheck
 
+      - name: Run tests
+        run: bun run test
+
       - name: Build library bundle
         run: bun run build:lib:bundle
 
