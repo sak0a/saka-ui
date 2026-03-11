@@ -136,6 +136,17 @@ const calculatePosition = () => {
     top = trigger.bottom + offset
   }
 
+  // Left/right flip
+  if (placement.startsWith('right') && left !== undefined && left + contentWidth > viewport.width - 10) {
+    placement = placement.replace('right', 'left') as PopoverPlacement
+    left = undefined
+    right = viewport.width - trigger.left + offset
+  } else if (placement.startsWith('left') && right !== undefined && viewport.width - right + contentWidth > viewport.width - 10) {
+    placement = placement.replace('left', 'right') as PopoverPlacement
+    right = undefined
+    left = trigger.right + offset
+  }
+
   // Horizontal clamping
   if (left !== undefined && left + contentWidth > viewport.width - 10) {
     left = viewport.width - contentWidth - 10
@@ -171,8 +182,9 @@ const handleKeydown = (event: KeyboardEvent) => {
   }
 }
 
-// Focus management — move focus into content on open
+// Focus management — move focus into content on open (skip for hover/focus triggers)
 const focusContent = async () => {
+  if (context.trigger === 'hover' || context.trigger === 'focus') return
   await nextTick()
   if (!contentRef.value) return
   const focusable = contentRef.value.querySelector<HTMLElement>(
@@ -239,6 +251,7 @@ onBeforeUnmount(() => {
         ref="contentRef"
         v-bind="$attrs"
         :id="context.contentId"
+        :data-placement="context.actualPlacement.value"
         role="dialog"
         :aria-labelledby="context.triggerId"
         tabindex="-1"
@@ -271,6 +284,7 @@ onBeforeUnmount(() => {
         ref="contentRef"
         v-bind="$attrs"
         :id="context.contentId"
+        :data-placement="context.actualPlacement.value"
         role="dialog"
         :aria-labelledby="context.triggerId"
         tabindex="-1"
@@ -297,5 +311,22 @@ onBeforeUnmount(() => {
 
 .s-popover-content:focus-visible {
   outline: none;
+}
+
+/* Transform-origin based on placement for scale animation */
+.s-popover-content[data-placement^="bottom"] {
+  transform-origin: top;
+}
+
+.s-popover-content[data-placement^="top"] {
+  transform-origin: bottom;
+}
+
+.s-popover-content[data-placement^="left"] {
+  transform-origin: right;
+}
+
+.s-popover-content[data-placement^="right"] {
+  transform-origin: left;
 }
 </style>
