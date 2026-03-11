@@ -86,6 +86,9 @@ export {
   SMorphingModalImage
 } from './components/ui/modal'
 
+// Popover components
+export { SPopover, SPopoverTrigger, SPopoverContent, SPopoverClose } from './components/ui/popover'
+
 // Drawer exports
 export {
   SDrawer,
