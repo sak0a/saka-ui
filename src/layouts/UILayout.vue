@@ -4,16 +4,11 @@ import { useRoute } from 'vue-router'
 import { useTheme } from '../composables/useTheme'
 import STableOfContents from '../components/STableOfContents.vue'
 import SCustomizer from '../components/SCustomizer.vue'
+import SSiteSearch from '../components/SSiteSearch.vue'
+import { docsNavigation, examplesNavigation, githubRepoUrl, topics, uiNavigation } from '../data/siteNavigation'
 
 const route = useRoute()
 const { theme, toggleTheme } = useTheme()
-
-// Topic navigation
-const topics = [
-  { name: 'Components', href: '/ui', icon: 'puzzle', match: '/ui' },
-  { name: 'Docs', href: '/docs', icon: 'book-open-variant', match: '/docs' },
-  { name: 'Examples', href: '/examples/auth', icon: 'application-brackets', match: '/examples' },
-]
 
 // Current section based on route
 const currentSection = computed(() => {
@@ -21,72 +16,6 @@ const currentSection = computed(() => {
   if (route.path.startsWith('/examples')) return 'examples'
   return 'ui'
 })
-
-// Component navigation (for /ui)
-const uiNavigation = [
-  { name: 'Accordion', href: '/ui/accordion', icon: 'chevron-down-box-outline' },
-  { name: 'Alerts', href: '/ui/alerts', icon: 'alert-circle-outline' },
-  { name: 'Avatar', href: '/ui/avatar', icon: 'account-circle' },
-  { name: 'Badges', href: '/ui/badges', icon: 'tag-multiple' },
-  { name: 'Breadcrumb', href: '/ui/breadcrumb', icon: 'chevron-double-right' },
-  { name: 'Buttons', href: '/ui/buttons', icon: 'button-cursor' },
-  { name: 'Card', href: '/ui/card', icon: 'card-outline' },
-  { name: 'Carousel', href: '/ui/carousel', icon: 'view-carousel' },
-  { name: 'Checkbox', href: '/ui/checkbox', icon: 'checkbox-marked' },
-  { name: 'Chips', href: '/ui/chips', icon: 'label' },
-  { name: 'Color Picker', href: '/ui/color-picker', icon: 'palette' },
-  { name: 'Date Picker', href: '/ui/date-picker', icon: 'calendar' },
-  { name: 'Dialog', href: '/ui/dialog', icon: 'comment-question-outline' },
-  { name: 'Drawer', href: '/ui/drawer', icon: 'dock-bottom' },
-  { name: 'Dropdown', href: '/ui/dropdown', icon: 'menu-down' },
-  { name: 'Glass Button', href: '/ui/glass-button', icon: 'blur' },
-  { name: 'Glass Card', href: '/ui/glass-card', icon: 'blur' },
-  { name: 'Icons', href: '/ui/icons', icon: 'emoticon' },
-  { name: 'Input', href: '/ui/input', icon: 'form-textbox' },
-  { name: 'Kbd', href: '/ui/kbd', icon: 'keyboard' },
-  { name: 'Modal', href: '/ui/modal', icon: 'forum-outline' },
-  { name: 'OTP', href: '/ui/otp', icon: 'form-textbox-password' },
-  { name: 'Pagination', href: '/ui/pagination', icon: 'page-next' },
-  { name: 'Progress', href: '/ui/progress', icon: 'progress-check' },
-  { name: 'Morphing Card', href: '/ui/morphing-card', icon: 'card-outline' },
-  { name: 'Morphing Modal', href: '/ui/morphing-modal', icon: 'transition' },
-  { name: 'Radio', href: '/ui/radio', icon: 'radiobox-marked' },
-  { name: 'Select', href: '/ui/select', icon: 'form-dropdown' },
-  { name: 'Skeleton', href: '/ui/skeleton', icon: 'blur-linear' },
-  { name: 'Stepper', href: '/ui/stepper', icon: 'step-forward' },
-  { name: 'Switch', href: '/ui/switch', icon: 'toggle-switch' },
-  { name: 'Table', href: '/ui/table', icon: 'table' },
-  { name: 'Tabs', href: '/ui/tabs', icon: 'view-dashboard' },
-  { name: 'Toast', href: '/ui/toast', icon: 'bell-outline' },
-  { name: 'Tooltips', href: '/ui/tooltips', icon: 'tooltip-text' },
-]
-
-// Docs navigation (for /docs)
-const docsNavigation = [
-  { name: 'Getting Started', href: '/docs/getting-started', icon: 'rocket-launch' },
-  { name: 'CLI', href: '/docs/cli', icon: 'console' },
-  { name: 'Styling Guide', href: '/docs/styling-guide', icon: 'palette-swatch-variant' },
-  { name: 'Customization', href: '/docs/customization', icon: 'tune-variant' },
-  { name: 'Icons Guide', href: '/docs/icons-guide', icon: 'emoticon-outline' },
-  { name: 'Form Validation', href: '/docs/form-validation', icon: 'check-decagram' },
-  { name: 'useTheme', href: '/docs/use-theme', icon: 'palette-swatch' },
-  { name: 'useClipboard', href: '/docs/use-clipboard', icon: 'content-copy' },
-  { name: 'useClickOutside', href: '/docs/use-click-outside', icon: 'cursor-default-click-outline' },
-  { name: 'useMediaQuery', href: '/docs/use-media-query', icon: 'responsive' },
-  { name: 'useDebounce', href: '/docs/use-debounce', icon: 'timer-sand' },
-  { name: 'useLocalStorage', href: '/docs/use-local-storage', icon: 'database-outline' },
-  { name: 'useAsync', href: '/docs/use-async', icon: 'loading' },
-  { name: 'useHotkey', href: '/docs/use-hotkey', icon: 'keyboard' },
-  { name: 'useIntersectionObserver', href: '/docs/use-intersection-observer', icon: 'eye-outline' },
-]
-
-// Examples navigation (for /examples)
-const examplesNavigation = [
-  { name: 'Auth Form', href: '/examples/auth', icon: 'login' },
-  { name: 'Project Scaffold', href: '/examples/project', icon: 'rocket-launch' },
-  { name: 'Form Field', href: '/examples/form-field', icon: 'form-select' },
-  { name: 'Credit Card', href: '/examples/credit-card', icon: 'credit-card-outline' },
-]
 
 // Dynamic navigation based on section
 const navigation = computed(() => {
@@ -105,39 +34,54 @@ const getThemeIcon = () => {
 <template>
   <div class="h-screen bg-background text-foreground flex flex-col overflow-hidden transition-colors duration-300">
     <!-- Top Navigation Bar -->
-    <header class="h-14 shrink-0 border-b border-border bg-card shadow-sm flex items-center px-6 transition-colors duration-300">
+    <header class="h-auto shrink-0 border-b border-border bg-card shadow-sm px-4 py-3 transition-colors duration-300 md:h-14 md:px-6 md:py-0">
+      <div class="flex flex-col gap-3 md:flex-row md:items-center">
       <!-- Logo -->
-      <router-link to="/ui" class="text-xl font-bold bg-linear-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity mr-8">
-        Saka-UI
-      </router-link>
+        <router-link to="/ui" class="text-xl font-bold bg-linear-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity md:mr-8">
+          Saka-UI
+        </router-link>
 
       <!-- Section Links -->
-      <nav class="flex items-center gap-1">
-        <router-link
-          v-for="topic in topics"
-          :key="topic.name"
-          :to="topic.href"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors text-sm"
-          :class="route.path.startsWith(topic.match)
-            ? 'bg-primary/15 text-primary font-medium'
-            : 'text-muted-foreground hover:bg-muted hover:text-foreground'"
-        >
-          <span :class="['mdi mdi-' + topic.icon, 'text-base']"></span>
-          {{ topic.name }}
-        </router-link>
-      </nav>
+        <nav class="flex flex-wrap items-center gap-1">
+          <router-link
+            v-for="topic in topics"
+            :key="topic.name"
+            :to="topic.href"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors text-sm"
+            :class="route.path.startsWith(topic.match ?? topic.href)
+              ? 'bg-primary/15 text-primary font-medium'
+              : 'text-muted-foreground hover:bg-muted hover:text-foreground'"
+          >
+            <span :class="['mdi mdi-' + topic.icon, 'text-base']"></span>
+            {{ topic.name }}
+          </router-link>
+        </nav>
 
-      <!-- Spacer -->
-      <div class="flex-1"></div>
+        <div class="md:flex-1"></div>
 
-      <!-- Theme Toggle -->
-      <button
-        @click="toggleTheme"
-        class="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
-        :title="'Theme: ' + theme"
-      >
-        <span :class="['mdi', getThemeIcon(), 'text-xl']"></span>
-      </button>
+        <div class="flex items-center gap-2">
+          <SSiteSearch />
+
+          <a
+            :href="githubRepoUrl"
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            title="Open the GitHub repository"
+          >
+            <span class="mdi mdi-github-circle text-lg"></span>
+            <span class="hidden sm:inline">GitHub</span>
+          </a>
+
+          <button
+            @click="toggleTheme"
+            class="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+            :title="'Theme: ' + theme"
+          >
+            <span :class="['mdi', getThemeIcon(), 'text-xl']"></span>
+          </button>
+        </div>
+      </div>
     </header>
 
     <!-- Sidebar + Main Content -->
