@@ -30,7 +30,7 @@ const sizeClasses = computed(() => {
 const descClasses = computed(() =>
   cn(
     's-stepper-description',
-    'block transition-colors duration-200 mt-0.5',
+    'block transition-colors duration-(--s-duration-normal) mt-0.5',
     sizeClasses.value,
     itemCtx?.state.value === 'error' ? 'text-error/70' : 'text-muted-foreground',
     props.class,

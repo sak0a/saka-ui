@@ -52,20 +52,20 @@ const fullThemeCode = `/* Custom theme: Ocean */
   --s-ring: #38bdf8;
 }`
 
-const radiusOverrideCode = `/* Sharp corners theme */
-:root {
-  --s-radius-sm: 0.125rem;  /* 2px */
-  --s-radius-md: 0.25rem;   /* 4px */
-  --s-radius-lg: 0.375rem;  /* 6px */
-  --s-radius-xl: 0.5rem;    /* 8px */
+const radiusOverrideCode = `/* Customize border radius via Tailwind's built-in variables */
+@theme {
+  --radius-sm: 0.125rem;  /* 2px - sharp */
+  --radius-md: 0.25rem;   /* 4px */
+  --radius-lg: 0.375rem;  /* 6px */
+  --radius-xl: 0.5rem;    /* 8px */
 }
 
-/* Fully rounded theme */
-:root {
-  --s-radius-sm: 0.5rem;
-  --s-radius-md: 0.75rem;
-  --s-radius-lg: 1rem;
-  --s-radius-xl: 1.5rem;
+/* Or for a rounder feel */
+@theme {
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
 }`
 
 const classOverrideCode = `<!-- Override background -->
@@ -181,7 +181,7 @@ const presetColors = [
     <!-- Border Radius Override -->
     <SApiSection title="Border Radius" id="border-radius">
       <p class="text-muted-foreground mb-4">
-        Change the feel of all components from sharp to fully rounded by overriding the radius scale:
+        Components use Tailwind's <code class="text-xs bg-accent px-1 py-0.5 rounded">rounded-*</code> classes directly. To change the radius scale, override Tailwind's <code class="text-xs bg-accent px-1 py-0.5 rounded">--radius-*</code> variables in your project's CSS:
       </p>
     </SApiSection>
 

@@ -89,7 +89,7 @@ const handleError = () => {
       :src="src"
       :alt="alt"
       :loading="loading"
-      class="w-full h-full transition-opacity duration-300"
+      class="w-full h-full transition-opacity duration-(--s-duration-slow)"
       :class="[imageClass, isLoaded ? 'opacity-100' : 'opacity-0']"
       :style="imageStyle"
       @load="handleLoad"

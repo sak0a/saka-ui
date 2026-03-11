@@ -143,20 +143,23 @@ const colorTokens = [
   { name: 'ring', light: '#18181b', dark: '#d4d4d8', tailwind: 'ring-ring', desc: 'Focus rings' },
 ]
 
-const radiusTokens = [
-  { token: '--s-radius-sm', value: '0.375rem (6px)', tailwind: 'rounded-sm', usage: 'Badges, chips, small elements' },
-  { token: '--s-radius-md', value: '0.625rem (10px)', tailwind: 'rounded-md', usage: 'Buttons, inputs (default)' },
-  { token: '--s-radius-lg', value: '0.875rem (14px)', tailwind: 'rounded-lg', usage: 'Cards, modals' },
-  { token: '--s-radius-xl', value: '1.25rem (20px)', tailwind: 'rounded-xl', usage: 'Large panels, hero sections' },
-  { token: '--s-radius-full', value: '9999px', tailwind: 'rounded-full', usage: 'Pills, avatars, circular buttons' },
+const radiusScale = [
+  { tailwind: 'rounded-xs', usage: 'Subtle rounding, tight elements' },
+  { tailwind: 'rounded-sm', usage: 'Badges, chips, small elements' },
+  { tailwind: 'rounded-md', usage: 'Buttons, inputs (default)' },
+  { tailwind: 'rounded-lg', usage: 'Cards, modals' },
+  { tailwind: 'rounded-xl', usage: 'Large panels, hero sections' },
+  { tailwind: 'rounded-2xl', usage: 'Feature cards, large containers' },
+  { tailwind: 'rounded-3xl', usage: 'Hero sections, prominent cards' },
+  { tailwind: 'rounded-full', usage: 'Pills, avatars, circular buttons' },
 ]
 
-const shadowTokens = [
-  { token: '--s-shadow-xs', tailwind: 'shadow-xs', usage: 'Subtle lift (badges, chips)' },
-  { token: '--s-shadow-sm', tailwind: 'shadow-sm', usage: 'Slight elevation (cards)' },
-  { token: '--s-shadow-md', tailwind: 'shadow-md', usage: 'Medium elevation (dropdowns)' },
-  { token: '--s-shadow-lg', tailwind: 'shadow-lg', usage: 'High elevation (modals)' },
-  { token: '--s-shadow-xl', tailwind: 'shadow-xl', usage: 'Maximum elevation (notifications)' },
+const shadowScale = [
+  { tailwind: 'shadow-xs', usage: 'Subtle lift (badges, chips)' },
+  { tailwind: 'shadow-sm', usage: 'Slight elevation (cards)' },
+  { tailwind: 'shadow-md', usage: 'Medium elevation (dropdowns)' },
+  { tailwind: 'shadow-lg', usage: 'High elevation (modals)' },
+  { tailwind: 'shadow-xl', usage: 'Maximum elevation (notifications)' },
 ]
 
 const animationTokens = [
@@ -209,7 +212,7 @@ const statePatterns = [
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="bg-muted rounded-xl p-4 border border-border">
             <div class="font-semibold text-foreground mb-1">1. CSS Custom Properties</div>
-            <p class="text-sm">All design decisions live as <code class="text-xs bg-accent px-1 py-0.5 rounded">--s-*</code> tokens in <code class="text-xs bg-accent px-1 py-0.5 rounded">style.css</code>. Override any token to customize.</p>
+            <p class="text-sm">Semantic colors live as <code class="text-xs bg-accent px-1 py-0.5 rounded">--s-*</code> tokens in <code class="text-xs bg-accent px-1 py-0.5 rounded">style.css</code>. Radius, shadows, and fonts use Tailwind's built-in variables directly.</p>
           </div>
           <div class="bg-muted rounded-xl p-4 border border-border">
             <div class="font-semibold text-foreground mb-1">2. Tailwind @theme Mapping</div>
@@ -328,20 +331,19 @@ const statePatterns = [
 
     <!-- Border Radius -->
     <SApiSection title="Border Radius" id="border-radius">
+      <p class="text-muted-foreground mb-4">
+        Components use Tailwind's built-in <code class="text-xs bg-accent px-1 py-0.5 rounded">rounded-*</code> classes directly. Prop values map 1:1 to Tailwind suffixes (e.g. <code class="text-xs bg-accent px-1 py-0.5 rounded">rounded="md"</code> &rarr; <code class="text-xs bg-accent px-1 py-0.5 rounded">rounded-md</code>). To customize the radius scale, override Tailwind's <code class="text-xs bg-accent px-1 py-0.5 rounded">--radius-*</code> variables in your project.
+      </p>
       <div class="overflow-x-auto mb-6">
         <table class="w-full text-sm">
           <thead>
             <tr class="border-b border-border">
-              <th class="text-left py-3 px-2 text-foreground font-semibold">Token</th>
-              <th class="text-left py-3 px-2 text-foreground font-semibold">Value</th>
-              <th class="text-left py-3 px-2 text-foreground font-semibold">Tailwind</th>
+              <th class="text-left py-3 px-2 text-foreground font-semibold">Class</th>
               <th class="text-left py-3 px-2 text-foreground font-semibold">Usage</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="r in radiusTokens" :key="r.token" class="border-b border-border/50">
-              <td class="py-2.5 px-2 font-mono text-xs text-foreground">{{ r.token }}</td>
-              <td class="py-2.5 px-2 font-mono text-xs text-muted-foreground">{{ r.value }}</td>
+            <tr v-for="r in radiusScale" :key="r.tailwind" class="border-b border-border/50">
               <td class="py-2.5 px-2 font-mono text-xs text-primary">{{ r.tailwind }}</td>
               <td class="py-2.5 px-2 text-muted-foreground">{{ r.usage }}</td>
             </tr>
@@ -351,6 +353,10 @@ const statePatterns = [
 
       <!-- Radius visual -->
       <div class="flex items-end gap-4 flex-wrap">
+        <div class="text-center space-y-2">
+          <div class="w-16 h-16 bg-primary rounded-xs" />
+          <span class="text-xs text-muted-foreground font-mono">xs</span>
+        </div>
         <div class="text-center space-y-2">
           <div class="w-16 h-16 bg-primary rounded-sm" />
           <span class="text-xs text-muted-foreground font-mono">sm</span>
@@ -368,6 +374,14 @@ const statePatterns = [
           <span class="text-xs text-muted-foreground font-mono">xl</span>
         </div>
         <div class="text-center space-y-2">
+          <div class="w-16 h-16 bg-primary rounded-2xl" />
+          <span class="text-xs text-muted-foreground font-mono">2xl</span>
+        </div>
+        <div class="text-center space-y-2">
+          <div class="w-16 h-16 bg-primary rounded-3xl" />
+          <span class="text-xs text-muted-foreground font-mono">3xl</span>
+        </div>
+        <div class="text-center space-y-2">
           <div class="w-16 h-16 bg-primary rounded-full" />
           <span class="text-xs text-muted-foreground font-mono">full</span>
         </div>
@@ -376,18 +390,19 @@ const statePatterns = [
 
     <!-- Shadows -->
     <SApiSection title="Shadows" id="shadows">
+      <p class="text-muted-foreground mb-4">
+        Components use Tailwind's built-in <code class="text-xs bg-accent px-1 py-0.5 rounded">shadow-*</code> classes directly. To customize the shadow scale, override Tailwind's <code class="text-xs bg-accent px-1 py-0.5 rounded">--shadow-*</code> variables in your project.
+      </p>
       <div class="overflow-x-auto mb-6">
         <table class="w-full text-sm">
           <thead>
             <tr class="border-b border-border">
-              <th class="text-left py-3 px-2 text-foreground font-semibold">Token</th>
-              <th class="text-left py-3 px-2 text-foreground font-semibold">Tailwind</th>
+              <th class="text-left py-3 px-2 text-foreground font-semibold">Class</th>
               <th class="text-left py-3 px-2 text-foreground font-semibold">Usage</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="s in shadowTokens" :key="s.token" class="border-b border-border/50">
-              <td class="py-2.5 px-2 font-mono text-xs text-foreground">{{ s.token }}</td>
+            <tr v-for="s in shadowScale" :key="s.tailwind" class="border-b border-border/50">
               <td class="py-2.5 px-2 font-mono text-xs text-primary">{{ s.tailwind }}</td>
               <td class="py-2.5 px-2 text-muted-foreground">{{ s.usage }}</td>
             </tr>

@@ -61,7 +61,7 @@ onBeforeUnmount(() => {
   <div
     ref="triggerRef"
     v-bind="$attrs"
-    :class="cn('s-morphing-modal-trigger cursor-pointer outline-none', disabled ? 'opacity-50 cursor-not-allowed' : '', triggerClass, $attrs.class ?? '')"
+    :class="cn('s-morphing-modal-trigger cursor-pointer outline-none', disabled ? 'opacity-(--s-opacity-disabled) cursor-not-allowed' : '', triggerClass, $attrs.class ?? '')"
     :style="{ 
       opacity: triggerOpacity,
       transitionProperty: 'opacity',

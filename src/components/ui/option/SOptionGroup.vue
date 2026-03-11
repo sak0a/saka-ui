@@ -37,7 +37,7 @@ provide('s-option-group-disabled', computed(() => props.disabled))
         'flex items-center gap-2 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground',
         {
           'cursor-pointer hover:text-foreground': collapsible,
-          'opacity-50': disabled
+          'opacity-(--s-opacity-disabled)': disabled
         }
       )"
       @click="toggle"
@@ -47,14 +47,14 @@ provide('s-option-group-disabled', computed(() => props.disabled))
       </slot>
       <span
         v-if="collapsible"
-        class="mdi transition-transform duration-200"
+        class="mdi transition-transform duration-(--s-duration-normal)"
         :class="isCollapsed ? 'mdi-chevron-right' : 'mdi-chevron-down'"
       />
     </div>
 
     <!-- Group Content -->
     <Transition
-      enter-active-class="transition-all duration-200 ease-out"
+      enter-active-class="transition-all duration-(--s-duration-normal) ease-out"
       enter-from-class="opacity-0 max-h-0"
       enter-to-class="opacity-100 max-h-96"
       leave-active-class="transition-all duration-150 ease-in"

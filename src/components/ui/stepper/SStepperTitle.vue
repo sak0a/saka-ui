@@ -31,7 +31,7 @@ const titleClasses = computed(() => {
   const state = itemCtx?.state.value ?? 'inactive'
   return cn(
     's-stepper-title',
-    'block font-semibold transition-colors duration-200',
+    'block font-semibold transition-colors duration-(--s-duration-normal)',
     sizeClasses.value,
     state === 'error' ? 'text-error' : '',
     state !== 'error' && state === 'inactive' ? 'text-muted-foreground' : '',

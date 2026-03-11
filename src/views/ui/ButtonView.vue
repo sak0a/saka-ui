@@ -102,9 +102,12 @@ const sizesCode = `<SButton size="xs">Extra Small</SButton>
 <SButton size="xl">Extra Large</SButton>`
 
 const roundedCode = `<SButton rounded="none" color="#3b82f6">None</SButton>
+<SButton rounded="xs" color="#3b82f6">XS</SButton>
 <SButton rounded="sm" color="#3b82f6">Small</SButton>
 <SButton rounded="md" color="#3b82f6">Medium</SButton>
 <SButton rounded="lg" color="#3b82f6">Large</SButton>
+<SButton rounded="xl" color="#3b82f6">XL</SButton>
+<SButton rounded="2xl" color="#3b82f6">2XL</SButton>
 <SButton rounded="full" color="#3b82f6">Pill</SButton>`
 
 const iconsCode = computed(() => {
@@ -279,7 +282,7 @@ const buttonProps: ApiProp[] = [
   { name: 'variant', type: "'filled' | 'outlined' | 'light' | 'ghost' | 'link' | 'dashed' | 'glass'", default: "'filled'", description: 'Visual style variant', category: 'Appearance' },
   { name: 'size', type: "'xs' | 'small' | 'medium' | 'large' | 'xl'", default: "'medium'", description: 'Button size', category: 'Appearance' },
   { name: 'color', type: 'string', default: "'var(--s-primary)'", description: 'Button color (CSS color or variable)', category: 'Appearance' },
-  { name: 'rounded', type: "'none' | 'sm' | 'md' | 'lg' | 'full'", default: "'md'", description: 'Border radius variant', category: 'Appearance' },
+  { name: 'rounded', type: "'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'", default: "'md'", description: 'Border radius variant', category: 'Appearance' },
   { name: 'block', type: 'boolean', default: 'false', description: 'Full-width button', category: 'Appearance' },
   // Icons
   { name: 'iconLeft', type: 'string', default: 'undefined', description: 'MDI icon name for left icon', category: 'Icons' },
@@ -558,6 +561,10 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             <span class="text-xs font-mono text-(--s-text-secondary)">none</span>
           </div>
           <div class="flex flex-col items-center gap-2">
+            <SButton rounded="xs" color="#3b82f6">XS</SButton>
+            <span class="text-xs font-mono text-(--s-text-secondary)">xs</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
             <SButton rounded="sm" color="#3b82f6">Small</SButton>
             <span class="text-xs font-mono text-(--s-text-secondary)">sm</span>
           </div>
@@ -568,6 +575,14 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           <div class="flex flex-col items-center gap-2">
             <SButton rounded="lg" color="#3b82f6">Large</SButton>
             <span class="text-xs font-mono text-(--s-text-secondary)">lg</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <SButton rounded="xl" color="#3b82f6">XL</SButton>
+            <span class="text-xs font-mono text-(--s-text-secondary)">xl</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <SButton rounded="2xl" color="#3b82f6">2XL</SButton>
+            <span class="text-xs font-mono text-(--s-text-secondary)">2xl</span>
           </div>
           <div class="flex flex-col items-center gap-2">
             <SButton rounded="full" color="#3b82f6">Pill</SButton>

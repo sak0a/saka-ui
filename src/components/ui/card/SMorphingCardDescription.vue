@@ -29,7 +29,7 @@ const isVisible = computed(() => props.alwaysShow || (context?.isExpanded.value 
 <template>
   <Transition
     v-if="!alwaysShow"
-    enter-active-class="transition-all duration-300 ease-out delay-200"
+    enter-active-class="transition-all duration-(--s-duration-slow) ease-out delay-200"
     enter-from-class="opacity-0 translate-y-2"
     enter-to-class="opacity-100 translate-y-0"
     leave-active-class="transition-all duration-150 ease-in"

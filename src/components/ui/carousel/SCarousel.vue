@@ -603,7 +603,7 @@ defineExpose({
         }"
       >
         <button
-          class="s-carousel__arrow s-carousel__arrow--prev flex items-center justify-center bg-background/90 backdrop-blur-sm text-foreground shadow-lg transition-all duration-300 hover:scale-110 hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
+          class="s-carousel__arrow s-carousel__arrow--prev flex items-center justify-center bg-background/90 backdrop-blur-sm text-foreground shadow-lg transition-all duration-(--s-duration-slow) hover:scale-110 hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
           :class="[arrowSizeClasses, arrowStyleClasses]"
           :disabled="!canGoPrev"
           @click.stop="prev"
@@ -613,7 +613,7 @@ defineExpose({
         </button>
         
         <button
-          class="s-carousel__arrow s-carousel__arrow--next flex items-center justify-center bg-background/90 backdrop-blur-sm text-foreground shadow-lg transition-all duration-300 hover:scale-110 hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
+          class="s-carousel__arrow s-carousel__arrow--next flex items-center justify-center bg-background/90 backdrop-blur-sm text-foreground shadow-lg transition-all duration-(--s-duration-slow) hover:scale-110 hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
           :class="[arrowSizeClasses, arrowStyleClasses]"
           :disabled="!canGoNext"
           @click.stop="next"
@@ -626,7 +626,7 @@ defineExpose({
       <!-- Side Arrow Placement (classic left/right or top/bottom) -->
       <template v-else>
         <button
-          class="s-carousel__arrow s-carousel__arrow--prev absolute z-20 flex items-center justify-center bg-background/90 backdrop-blur-sm text-foreground shadow-lg transition-all duration-300 hover:scale-110 hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
+          class="s-carousel__arrow s-carousel__arrow--prev absolute z-20 flex items-center justify-center bg-background/90 backdrop-blur-sm text-foreground shadow-lg transition-all duration-(--s-duration-slow) hover:scale-110 hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
           :class="[
             arrowSizeClasses,
             arrowStyleClasses,
@@ -645,7 +645,7 @@ defineExpose({
         </button>
         
         <button
-          class="s-carousel__arrow s-carousel__arrow--next absolute z-20 flex items-center justify-center bg-background/90 backdrop-blur-sm text-foreground shadow-lg transition-all duration-300 hover:scale-110 hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
+          class="s-carousel__arrow s-carousel__arrow--next absolute z-20 flex items-center justify-center bg-background/90 backdrop-blur-sm text-foreground shadow-lg transition-all duration-(--s-duration-slow) hover:scale-110 hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
           :class="[
             arrowSizeClasses,
             arrowStyleClasses,
@@ -682,7 +682,7 @@ defineExpose({
         <button
           v-for="i in totalSlides"
           :key="i - 1"
-          class="s-carousel__dot w-2.5 h-2.5 rounded-full transition-all duration-300"
+          class="s-carousel__dot w-2.5 h-2.5 rounded-full transition-all duration-(--s-duration-slow)"
           :class="activeIndex === i - 1 
             ? 'bg-primary scale-125' 
             : 'bg-muted-foreground/50 hover:bg-muted-foreground'"
@@ -698,7 +698,7 @@ defineExpose({
         <button
           v-for="i in totalSlides"
           :key="i - 1"
-          class="s-carousel__bar h-1 rounded-full transition-all duration-300"
+          class="s-carousel__bar h-1 rounded-full transition-all duration-(--s-duration-slow)"
           :class="activeIndex === i - 1 
             ? 'bg-primary w-8' 
             : 'bg-muted-foreground/50 hover:bg-muted-foreground w-4'"
@@ -713,7 +713,7 @@ defineExpose({
         <button
           v-for="i in totalSlides"
           :key="i - 1"
-          class="s-carousel__num w-7 h-7 rounded-full text-xs font-medium flex items-center justify-center transition-all duration-300"
+          class="s-carousel__num w-7 h-7 rounded-full text-xs font-medium flex items-center justify-center transition-all duration-(--s-duration-slow)"
           :class="activeIndex === i - 1 
             ? 'bg-primary text-primary-foreground scale-110'
             : 'bg-accent/80 text-muted-foreground hover:bg-background'"
@@ -743,7 +743,7 @@ defineExpose({
       <button
         v-for="i in totalSlides"
         :key="i - 1"
-        class="s-carousel__thumb w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300"
+        class="s-carousel__thumb w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-(--s-duration-slow)"
         :class="activeIndex === i - 1 
           ? 'border-primary scale-105 opacity-100' 
           : 'border-transparent opacity-60 hover:opacity-80'"

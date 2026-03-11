@@ -48,7 +48,7 @@ const indicatorClasses = computed(() => {
     's-stepper-indicator',
     'relative z-10 inline-flex items-center justify-center rounded-full',
     'border-2 font-medium shrink-0',
-    'transition-all duration-300',
+    'transition-all duration-(--s-duration-slow)',
     sizeClasses.value,
     // State-based colors (when no custom color)
     state === 'error' && 'bg-error border-error text-white',

@@ -52,7 +52,7 @@ const triggerClasses = computed(() =>
   cn(
     's-stepper-trigger',
     'flex rounded-lg',
-    'transition-colors duration-200',
+    'transition-colors duration-(--s-duration-normal)',
     'outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
     sizeClasses.value,
     isLineVariant.value
@@ -62,7 +62,7 @@ const triggerClasses = computed(() =>
       ? 'cursor-pointer hover:bg-accent/50'
       : '',
     itemCtx?.disabled.value
-      ? 'opacity-50 cursor-not-allowed'
+      ? 'opacity-(--s-opacity-disabled) cursor-not-allowed'
       : '',
     props.class,
   ),

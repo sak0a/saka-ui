@@ -28,7 +28,7 @@ const isVisible = computed(() => context?.isExpanded.value ?? false)
 
 <template>
   <Transition
-    enter-active-class="transition-all duration-300 ease-out delay-150"
+    enter-active-class="transition-all duration-(--s-duration-slow) ease-out delay-150"
     enter-from-class="opacity-0 translate-y-2"
     enter-to-class="opacity-100 translate-y-0"
     leave-active-class="transition-all duration-150 ease-in"

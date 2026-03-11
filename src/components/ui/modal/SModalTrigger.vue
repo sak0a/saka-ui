@@ -40,7 +40,7 @@ const handleClick = (event: MouseEvent) => {
     :is="as"
     v-bind="$attrs"
     :type="as === 'button' ? 'button' : undefined"
-    :class="cn('s-modal-trigger inline-flex outline-none', disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer', triggerClass, $attrs.class ?? '')"
+    :class="cn('s-modal-trigger inline-flex outline-none', disabled ? 'opacity-(--s-opacity-disabled) cursor-not-allowed' : 'cursor-pointer', triggerClass, $attrs.class ?? '')"
     :disabled="disabled && as === 'button'"
     :aria-disabled="disabled"
     @click="handleClick"

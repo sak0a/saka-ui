@@ -63,7 +63,7 @@ onBeforeUnmount(() => {
     ref="triggerRef"
     v-bind="$attrs"
     :class="cn(
-      's-morphing-card-trigger relative rounded-2xl overflow-hidden bg-background border border-border shadow-lg transition-all duration-300',
+      's-morphing-card-trigger relative rounded-2xl overflow-hidden bg-background border border-border shadow-lg transition-all duration-(--s-duration-slow)',
       cursorClass,
       disabled ? 'opacity-60' : 'hover:shadow-xl hover:scale-[1.02] hover:border-input',
       triggerClass
@@ -81,7 +81,7 @@ onBeforeUnmount(() => {
     <!-- Invisible overlay that indicates the card is clickable -->
     <div
       v-if="!disabled"
-      class="absolute inset-0 bg-white/0 dark:bg-black/0 transition-colors duration-200 hover:bg-black/5 dark:hover:bg-white/5"
+      class="absolute inset-0 bg-white/0 dark:bg-black/0 transition-colors duration-(--s-duration-normal) hover:bg-black/5 dark:hover:bg-white/5"
       aria-hidden="true"
     />
   </div>
