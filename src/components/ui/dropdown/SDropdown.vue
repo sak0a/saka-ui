@@ -586,7 +586,7 @@ defineExpose({
             sizeConfig.trigger,
             disabled 
               ? 'opacity-(--s-opacity-disabled) cursor-not-allowed bg-accent border-border text-muted-foreground'
-              : 'bg-muted border-border text-foreground hover:bg-accent hover:border-input focus:ring-2 focus:ring-primary/20'
+              : 'bg-muted border-border text-foreground hover:bg-accent hover:border-input focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
           ]"
           :disabled="disabled"
         >

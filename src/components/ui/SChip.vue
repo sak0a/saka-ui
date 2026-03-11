@@ -110,6 +110,7 @@ const handleClick = () => {
     :class="chipClasses"
     :style="colorStyle"
     :tabindex="disabled ? -1 : 0"
+    role="button"
     @click="handleClick"
   >
     <span class="inline-flex items-center gap-1" :class="contentClass">
@@ -123,6 +124,7 @@ const handleClick = () => {
         'w-4.5 h-4.5 text-sm': size === 'medium',
         'w-5.5 h-5.5 text-base': size === 'large'
       }"
+      aria-label="Remove"
       @click="handleClose"
       :disabled="disabled"
     >
