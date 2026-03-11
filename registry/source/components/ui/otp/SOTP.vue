@@ -652,7 +652,7 @@ watch(() => props.error, (hasError) => {
     v-bind="$attrs"
     :class="cn(
       's-otp-wrapper flex flex-col items-center w-fit',
-      disabled && 'opacity-50 pointer-events-none',
+      disabled && 'opacity-(--s-opacity-disabled) pointer-events-none',
       $attrs.class ?? ''
     )"
   >
@@ -682,7 +682,7 @@ watch(() => props.error, (hasError) => {
         enter-active-class="transition-all duration-400 ease-out"
         enter-from-class="opacity-0 scale-50"
         enter-to-class="opacity-100 scale-100"
-        leave-active-class="transition-all duration-200 ease-in"
+        leave-active-class="transition-all duration-(--s-duration-normal) ease-in"
         leave-from-class="opacity-100 scale-100"
         leave-to-class="opacity-0 scale-50"
       >
@@ -708,7 +708,7 @@ watch(() => props.error, (hasError) => {
     <!-- Messages -->
     <div class="s-otp-messages mt-3 text-center min-h-5">
       <Transition
-        enter-active-class="transition-all duration-200 ease-out"
+        enter-active-class="transition-all duration-(--s-duration-normal) ease-out"
         enter-from-class="opacity-0 -translate-y-2"
         enter-to-class="opacity-100 translate-y-0"
         leave-active-class="transition-all duration-150 ease-in"
@@ -760,7 +760,7 @@ watch(() => props.error, (hasError) => {
       <slot name="resend">
         <button
           type="button"
-          class="text-sm transition-all duration-200"
+          class="text-sm transition-all duration-(--s-duration-normal)"
           :class="[
             countdownValue > 0
               ? 'text-muted-foreground cursor-not-allowed'

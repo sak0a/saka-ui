@@ -7,14 +7,14 @@ import { type IconProp, isIconComponent } from '../../lib/icon'
 defineOptions({ inheritAttrs: false })
 
 const alertVariants = cva(
-  'relative overflow-hidden transition-all duration-300 max-w-[600px] min-w-[300px]',
+  'relative overflow-hidden transition-all duration-(--s-duration-slow) max-w-[600px] min-w-[300px]',
   {
     variants: {
       variant: {
-        success: 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-200',
-        warning: 'bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-200',
-        error: 'bg-red-50 dark:bg-red-950/50 text-red-800 dark:text-red-200',
-        info: 'bg-blue-50 dark:bg-blue-950/50 text-blue-800 dark:text-blue-200',
+        success: 'bg-success-light text-success-light-foreground',
+        warning: 'bg-warning-light text-warning-light-foreground',
+        error: 'bg-error-light text-error-light-foreground',
+        info: 'bg-info-light text-info-light-foreground',
         custom: 'bg-muted text-foreground',
       },
       size: {
@@ -33,26 +33,26 @@ const alertVariants = cva(
 export type AlertVariants = VariantProps<typeof alertVariants>
 
 const variantIconColors: Record<string, string> = {
-  success: 'text-emerald-600 dark:text-emerald-400',
-  warning: 'text-amber-600 dark:text-amber-400',
-  error: 'text-red-600 dark:text-red-400',
-  info: 'text-blue-600 dark:text-blue-400',
+  success: 'text-success',
+  warning: 'text-warning',
+  error: 'text-error',
+  info: 'text-info',
   custom: 'text-current',
 }
 
 const variantBorderColors: Record<string, string> = {
-  success: 'border-emerald-500',
-  warning: 'border-amber-500',
-  error: 'border-red-500',
-  info: 'border-blue-500',
+  success: 'border-success',
+  warning: 'border-warning',
+  error: 'border-error',
+  info: 'border-info',
   custom: 'border-current',
 }
 
 const variantProgressColors: Record<string, string> = {
-  success: 'bg-emerald-500',
-  warning: 'bg-amber-500',
-  error: 'bg-red-500',
-  info: 'bg-blue-500',
+  success: 'bg-success',
+  warning: 'bg-warning',
+  error: 'bg-error',
+  info: 'bg-info',
   custom: 'bg-current',
 }
 
@@ -339,7 +339,7 @@ defineExpose({
           v-if="closable"
           type="button"
           :class="cn(
-            'shrink-0 inline-flex items-center justify-center rounded-md px-1 transition-colors hover:bg-black/5 dark:hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-offset-2',
+            'shrink-0 inline-flex items-center justify-center rounded-md px-1 transition-colors hover:bg-foreground/5 focus:outline-none focus:ring-2 focus:ring-offset-2',
             variantIconColors[variant]
           )"
           aria-label="Close alert"
@@ -364,7 +364,7 @@ defineExpose({
 /* Alert transitions */
 .alert-enter-active,
 .alert-leave-active {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--s-duration-slow) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .alert-enter-from {

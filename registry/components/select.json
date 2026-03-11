@@ -2,7 +2,7 @@
   "name": "select",
   "displayName": "SSelect",
   "description": "Select dropdown with search, multi-select, groups, virtual scrolling, and validation",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "files": [
     "components/ui/SSelect.vue"
   ],

@@ -231,7 +231,7 @@ const animationClasses = computed(() => {
 
   return {
     fade: {
-      enter: 'transition-opacity duration-200 ease-out',
+      enter: 'transition-opacity duration-(--s-duration-normal) ease-out',
       enterFrom: 'opacity-0',
       enterTo: 'opacity-100',
       leave: 'transition-opacity duration-150 ease-in',
@@ -239,7 +239,7 @@ const animationClasses = computed(() => {
       leaveTo: 'opacity-0'
     },
     slide: {
-      enter: 'transition-all duration-200 ease-out',
+      enter: 'transition-all duration-(--s-duration-normal) ease-out',
       enterFrom: `opacity-0 ${isTop ? 'translate-y-2' : isBottom ? '-translate-y-2' : isLeft ? 'translate-x-2' : '-translate-x-2'}`,
       enterTo: 'opacity-100 translate-x-0 translate-y-0',
       leave: 'transition-all duration-150 ease-in',
@@ -247,7 +247,7 @@ const animationClasses = computed(() => {
       leaveTo: `opacity-0 ${isTop ? 'translate-y-2' : isBottom ? '-translate-y-2' : isLeft ? 'translate-x-2' : '-translate-x-2'}`
     },
     scale: {
-      enter: 'transition-all duration-200 ease-out',
+      enter: 'transition-all duration-(--s-duration-normal) ease-out',
       enterFrom: 'opacity-0 scale-95',
       enterTo: 'opacity-100 scale-100',
       leave: 'transition-all duration-150 ease-in',
@@ -581,12 +581,12 @@ defineExpose({
         <!-- Default trigger button -->
         <button
           type="button"
-          class="s-dropdown-btn inline-flex items-center justify-center font-medium rounded-lg border transition-all duration-200 outline-none select-none"
+          class="s-dropdown-btn inline-flex items-center justify-center font-medium rounded-lg border transition-all duration-(--s-duration-normal) outline-none select-none"
           :class="[
             sizeConfig.trigger,
             disabled 
-              ? 'opacity-50 cursor-not-allowed bg-accent border-border text-muted-foreground' 
-              : 'bg-muted border-border text-foreground hover:bg-accent hover:border-input focus:ring-2 focus:ring-primary/20'
+              ? 'opacity-(--s-opacity-disabled) cursor-not-allowed bg-accent border-border text-muted-foreground'
+              : 'bg-muted border-border text-foreground hover:bg-accent hover:border-input focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
           ]"
           :disabled="disabled"
         >
@@ -595,7 +595,7 @@ defineExpose({
           <span v-if="label">{{ label }}</span>
           <span
             v-if="!hideArrow"
-            class="mdi mdi-chevron-down transition-transform duration-200"
+            class="mdi mdi-chevron-down transition-transform duration-(--s-duration-normal)"
             :class="{ 'rotate-180': isOpen }"
             :style="{ fontSize: sizeConfig.iconPx + 'px' }"
           />
@@ -685,7 +685,7 @@ defineExpose({
                   :class="[
                     sizeConfig.item,
                     {
-                      'opacity-50 cursor-not-allowed': item.disabled,
+                      'opacity-(--s-opacity-disabled) cursor-not-allowed': item.disabled,
                       'text-red-500 hover:bg-red-500/10': item.danger && !item.disabled,
                       'text-foreground hover:bg-accent': !item.danger && !item.disabled,
                       'bg-accent': highlightedIndex === index && !item.disabled

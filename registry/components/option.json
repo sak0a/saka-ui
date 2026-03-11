@@ -2,7 +2,7 @@
   "name": "option",
   "displayName": "SOption",
   "description": "Option and option group for use within SSelect",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "files": [
     "components/ui/option/index.ts",
     "components/ui/option/SOption.vue",

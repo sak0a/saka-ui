@@ -34,7 +34,7 @@ const handleClose = () => {
   <button
     type="button"
     v-bind="$attrs"
-    :class="cn('s-modal-close flex items-center justify-center w-8 h-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-all duration-150 outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-muted-foreground', closeClass, $attrs.class ?? '')"
+    :class="cn('s-modal-close flex items-center justify-center w-8 h-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-all duration-(--s-duration-fast) outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-(--s-opacity-disabled) disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-muted-foreground', closeClass, $attrs.class ?? '')"
     :disabled="disabled"
     aria-label="Close modal"
     @click="handleClose"

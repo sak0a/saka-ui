@@ -20,12 +20,14 @@ const cardVariants = cva('s-card relative overflow-hidden', {
     },
     rounded: {
       none: 'rounded-none',
+      xs: 'rounded-xs',
       sm: 'rounded-sm',
       md: 'rounded-md',
       lg: 'rounded-lg',
       xl: 'rounded-xl',
       '2xl': 'rounded-2xl',
-      full: 'rounded-3xl'
+      '3xl': 'rounded-3xl',
+      full: 'rounded-full'
     }
   },
   defaultVariants: {
@@ -41,7 +43,7 @@ interface Props {
   /** Size preset affecting padding and spacing */
   size?: 'compact' | 'default' | 'comfortable'
   /** Border radius */
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'
+  rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   /** Enable hover animation effects */
   hoverable?: boolean
   /** Enable press/click effect */
@@ -155,12 +157,14 @@ const componentBindings = computed(() => {
 const radiusClasses = computed(() => {
   const radii = {
     none: 'rounded-none',
+    xs: 'rounded-xs',
     sm: 'rounded-sm',
     md: 'rounded-md',
     lg: 'rounded-lg',
     xl: 'rounded-xl',
     '2xl': 'rounded-2xl',
-    full: 'rounded-3xl'
+    '3xl': 'rounded-3xl',
+    full: 'rounded-full'
   }
   return radii[props.rounded]
 })
@@ -274,7 +278,7 @@ defineExpose({
         
         // Interactive states
         'cursor-pointer': clickable || href || to,
-        'cursor-not-allowed opacity-50': disabled,
+        'cursor-not-allowed opacity-(--s-opacity-disabled)': disabled,
         
         // Hover effects - enhanced animations
         's-card-hoverable': hoverable && !disabled,
@@ -328,7 +332,7 @@ defineExpose({
     <!-- Spotlight effect -->
     <span 
       v-if="spotlight && isHovered" 
-      class="s-card-spotlight-effect absolute inset-0 pointer-events-none transition-opacity duration-300"
+      class="s-card-spotlight-effect absolute inset-0 pointer-events-none transition-opacity duration-(--s-duration-slow)"
       :class="{ 'opacity-100': isHovered, 'opacity-0': !isHovered }"
     />
     

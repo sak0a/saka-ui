@@ -6,7 +6,7 @@ defineOptions({ inheritAttrs: false })
 
 // Types
 export type PaginationVariant = 'default' | 'outlined' | 'ghost' | 'minimal' | 'dots'
-export type PaginationSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type PaginationSize = 'xs' | 'small' | 'medium' | 'large' | 'xl'
 export type PaginationShape = 'rounded' | 'square' | 'pill'
 export type AnimationType = 'none' | 'slide' | 'fade' | 'scale' | 'flip'
 
@@ -83,7 +83,7 @@ const props = withDefaults(defineProps<Props>(), {
   pageSize: 10,
   maxVisiblePages: 7,
   variant: 'default',
-  size: 'md',
+  size: 'medium',
   shape: 'rounded',
   color: 'var(--s-primary)',
   showFirstLast: false,
@@ -345,9 +345,9 @@ const handleKeydown = (event: KeyboardEvent) => {
 const sizeClasses = computed(() => {
   const sizes = {
     xs: 'h-6 min-w-6 text-xs px-1.5',
-    sm: 'h-8 min-w-8 text-sm px-2',
-    md: 'h-10 min-w-10 text-sm px-3',
-    lg: 'h-12 min-w-12 text-base px-4',
+    small: 'h-8 min-w-8 text-sm px-2',
+    medium: 'h-10 min-w-10 text-sm px-3',
+    large: 'h-12 min-w-12 text-base px-4',
     xl: 'h-14 min-w-14 text-lg px-5'
   }
   return sizes[props.size]
@@ -356,9 +356,9 @@ const sizeClasses = computed(() => {
 const iconSizes = computed(() => {
   const sizes = {
     xs: 'text-sm',
-    sm: 'text-base',
-    md: 'text-lg',
-    lg: 'text-xl',
+    small: 'text-base',
+    medium: 'text-lg',
+    large: 'text-xl',
     xl: 'text-2xl'
   }
   return sizes[props.size]
@@ -367,9 +367,9 @@ const iconSizes = computed(() => {
 const gapClasses = computed(() => {
   const gaps = {
     xs: 'gap-0.5',
-    sm: 'gap-1',
-    md: 'gap-1.5',
-    lg: 'gap-2',
+    small: 'gap-1',
+    medium: 'gap-1.5',
+    large: 'gap-2',
     xl: 'gap-2.5'
   }
   return gaps[props.size]
@@ -392,14 +392,14 @@ const activeTextColor = computed(() => props.color === 'var(--s-primary)' ? 'tex
 const getButtonClasses = (isActive: boolean, isDisabled: boolean) => {
   const base = `
     relative flex items-center justify-center
-    font-medium transition-all duration-200 ease-out
+    font-medium transition-all duration-(--s-duration-normal) ease-out
     select-none cursor-pointer
     focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
     ${sizeClasses.value} ${shapeClasses.value}
   `
 
   if (isDisabled) {
-    return `${base} opacity-40 cursor-not-allowed pointer-events-none`
+    return `${base} opacity-(--s-opacity-disabled) cursor-not-allowed pointer-events-none`
   }
 
   if (props.variant === 'default') {
@@ -776,7 +776,7 @@ watch(() => props.pageSize, (newVal) => {
       class="w-full h-1 mt-2 rounded-full bg-accent overflow-hidden"
     >
       <div 
-        class="h-full rounded-full transition-all duration-300 ease-out"
+        class="h-full rounded-full transition-all duration-(--s-duration-slow) ease-out"
         :style="{ 
           width: `${progressPercent}%`,
           backgroundColor: color 
@@ -812,7 +812,7 @@ button:focus-visible {
   background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
   opacity: 0;
   transform: scale(0);
-  transition: opacity 0.2s, transform 0.3s;
+  transition: opacity var(--s-duration-normal), transform var(--s-duration-slow);
 }
 
 .s-pagination button:active::after {
@@ -902,7 +902,7 @@ button:focus-visible {
 /* Fade transition */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s ease;
+  transition: opacity var(--s-duration-normal) ease;
 }
 
 .fade-enter-from,

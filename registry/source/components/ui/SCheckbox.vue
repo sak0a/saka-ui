@@ -7,7 +7,7 @@ import { type IconProp, isIconComponent } from '../../lib/icon'
 defineOptions({ inheritAttrs: false })
 
 const checkboxVariants = cva(
-  'relative inline-flex items-center justify-center shrink-0 border-2 transition-all duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
+  'relative inline-flex items-center justify-center shrink-0 border-2 transition-all duration-(--s-duration-normal) ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
   {
     variants: {
       size: {
@@ -188,7 +188,7 @@ const rounded = computed(() => props.rounded)
       :class="cn(
         'relative inline-flex items-center cursor-pointer select-none',
         sizeConfig.gap,
-        { 'opacity-50 cursor-not-allowed': disabled },
+        { 'opacity-(--s-opacity-disabled) cursor-not-allowed': disabled },
         { 'flex-row-reverse': labelPosition === 'left' }
       )"
   >
@@ -235,7 +235,7 @@ const rounded = computed(() => props.rounded)
 
       <!-- Check Icon / Indeterminate Icon -->
       <Transition
-        enter-active-class="transition-all duration-200 ease-out"
+        enter-active-class="transition-all duration-(--s-duration-normal) ease-out"
         enter-from-class="scale-0 opacity-0"
         enter-to-class="scale-100 opacity-100"
         leave-active-class="transition-all duration-150 ease-in"
@@ -265,12 +265,12 @@ const rounded = computed(() => props.rounded)
       )"
     >
       <slot>{{ label }}</slot>
-      <span v-if="required" class="text-destructive ml-0.5">*</span>
+      <span v-if="required" class="text-error ml-0.5">*</span>
     </span>
   </label>
 
   <!-- Error message -->
-  <p v-if="error" class="mt-1 text-xs text-destructive flex items-center gap-1">
+  <p v-if="error" class="mt-1 text-xs text-error flex items-center gap-1">
     <span class="mdi mdi-alert-circle" />
     {{ error }}
   </p>
@@ -295,7 +295,7 @@ const rounded = computed(() => props.rounded)
 /* Bounce animation for check icon */
 .s-checkbox-box span[class*="mdi-check"],
 .s-checkbox-box span[class*="mdi-minus"] {
-  animation: checkBounce 0.2s ease-out;
+  animation: checkBounce var(--s-duration-normal) ease-out;
 }
 
 @keyframes checkBounce {

@@ -154,7 +154,7 @@ const headerClasses = computed(() => {
   const type = context?.type ?? 'default'
   const base = `
     w-full flex items-center gap-3 cursor-pointer select-none
-    transition-all duration-300 ease-out
+    transition-all duration-(--s-duration-slow) ease-out
     focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
   `
 
@@ -167,7 +167,7 @@ const headerClasses = computed(() => {
   }
 
   const disabledStyles = props.disabled
-    ? 'opacity-50 cursor-not-allowed'
+    ? 'opacity-(--s-opacity-disabled) cursor-not-allowed'
     : ''
 
   const expandedStyles = isExpanded.value && !props.disabled
@@ -194,7 +194,7 @@ const expandIconStyle = computed(() => {
   const rotation = isExpanded.value ? context?.iconRotation ?? 180 : 0
   return {
     transform: `rotate(${rotation}deg)`,
-    transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    transition: 'transform var(--s-duration-slow) cubic-bezier(0.4, 0, 0.2, 1)',
     color: isExpanded.value && !props.disabled ? context?.color : undefined
   }
 })

@@ -596,7 +596,7 @@ defineExpose({
               
               <!-- Visual handle container -->
               <div class="s-drawer-handle flex items-center justify-center py-4 pt-5">
-                <div class="w-12 h-1.5 rounded-full bg-muted-foreground/40 transition-all duration-200 hover:bg-muted-foreground/60 hover:w-16 hover:scale-105" />
+                <div class="w-12 h-1.5 rounded-full bg-muted-foreground/40 transition-all duration-(--s-duration-normal) hover:bg-muted-foreground/60 hover:w-16 hover:scale-105" />
               </div>
             </div>
 
@@ -658,10 +658,10 @@ defineExpose({
   <!-- Non-teleported fallback -->
   <template v-else>
     <Transition
-      enter-active-class="transition-opacity duration-300 ease-out"
+      enter-active-class="transition-opacity duration-(--s-duration-slow) ease-out"
       enter-from-class="opacity-0"
       enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-200 ease-in"
+      leave-active-class="transition-opacity duration-(--s-duration-normal) ease-in"
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >

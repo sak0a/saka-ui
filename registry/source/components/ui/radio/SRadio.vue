@@ -175,14 +175,14 @@ const buttonStyle = computed<CSSProperties>(() => {
     :aria-disabled="isDisabled || loading"
     :disabled="isDisabled || loading"
     :class="cn(
-      's-radio-button relative inline-flex items-center justify-center border-2 rounded-lg font-medium transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring select-none',
+      's-radio-button relative inline-flex items-center justify-center border-2 rounded-lg font-medium transition-all duration-(--s-duration-slow) ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring select-none',
       sizeConfig.button,
       isChecked
         ? hasCustomColor
           ? 'border-transparent shadow-lg'
           : 'border-transparent shadow-lg bg-primary text-primary-foreground'
         : 'border-border bg-background text-muted-foreground hover:border-input hover:text-foreground',
-      { 'opacity-50 cursor-not-allowed': isDisabled || loading },
+      { 'opacity-(--s-opacity-disabled) cursor-not-allowed': isDisabled || loading },
       { 'cursor-pointer': !isDisabled && !loading }
     )"
     :style="buttonStyle"
@@ -220,7 +220,7 @@ const buttonStyle = computed<CSSProperties>(() => {
     :class="cn(
       's-radio-wrapper relative inline-flex items-center cursor-pointer select-none',
       sizeConfig.gap,
-      { 'opacity-50 cursor-not-allowed': isDisabled },
+      { 'opacity-(--s-opacity-disabled) cursor-not-allowed': isDisabled },
       { 'flex-row-reverse': labelPosition === 'left' }
     )"
   >
@@ -244,7 +244,7 @@ const buttonStyle = computed<CSSProperties>(() => {
       :aria-disabled="isDisabled || loading"
       tabindex="0"
       :class="cn(
-        's-radio-outer relative inline-flex items-center justify-center shrink-0 rounded-full border-2 transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
+        's-radio-outer relative inline-flex items-center justify-center shrink-0 rounded-full border-2 transition-all duration-(--s-duration-slow) ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring',
         sizeConfig.outer,
         isChecked
           ? hasCustomColor
@@ -271,7 +271,7 @@ const buttonStyle = computed<CSSProperties>(() => {
       <!-- Background for filled variant -->
       <span
         v-if="currentVariant === 'filled' && isChecked"
-        class="absolute inset-0 rounded-full transition-all duration-300"
+        class="absolute inset-0 rounded-full transition-all duration-(--s-duration-slow)"
         :style="hasCustomColor ? { backgroundColor: currentColor } : {}"
         :class="{ 'bg-primary': !hasCustomColor }"
       />
@@ -285,10 +285,10 @@ const buttonStyle = computed<CSSProperties>(() => {
 
       <!-- Inner Dot / Icon -->
       <Transition
-        enter-active-class="transition-all duration-300 ease-out"
+        enter-active-class="transition-all duration-(--s-duration-slow) ease-out"
         enter-from-class="scale-0 opacity-0"
         enter-to-class="scale-100 opacity-100"
-        leave-active-class="transition-all duration-200 ease-in"
+        leave-active-class="transition-all duration-(--s-duration-normal) ease-in"
         leave-from-class="scale-100 opacity-100"
         leave-to-class="scale-0 opacity-0"
       >
@@ -312,7 +312,7 @@ const buttonStyle = computed<CSSProperties>(() => {
             <span
               v-else
               :class="cn(
-                's-radio-inner block rounded-full transition-all duration-300',
+                's-radio-inner block rounded-full transition-all duration-(--s-duration-slow)',
                 sizeConfig.inner,
                 currentVariant === 'filled' ? (hasCustomColor ? 'bg-white' : 'bg-primary-foreground') : '',
                 currentVariant !== 'filled' && !hasCustomColor ? 'bg-primary' : ''
@@ -328,7 +328,7 @@ const buttonStyle = computed<CSSProperties>(() => {
     <span
       v-if="label || $slots.default"
       :class="cn(
-        's-radio-label text-muted-foreground transition-colors duration-200',
+        's-radio-label text-muted-foreground transition-colors duration-(--s-duration-normal)',
         sizeConfig.label,
         { 'text-foreground': isChecked },
         labelClass

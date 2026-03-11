@@ -15,7 +15,7 @@ export interface Props {
   variant?: 'outlined' | 'filled' | 'underlined' | 'ghost'
   size?: 'small' | 'medium' | 'large'
   color?: string
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+  rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   
   // Label & Placeholder
   label?: string
@@ -264,9 +264,13 @@ const sizeConfig = computed(() => {
 const roundedConfig = computed(() => {
   const radii = {
     none: 'rounded-none',
-    sm: 'rounded',
-    md: 'rounded-lg',
-    lg: 'rounded-xl',
+    xs: 'rounded-xs',
+    sm: 'rounded-sm',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
     full: 'rounded-full'
   }
   return radii[props.rounded]
@@ -736,7 +740,7 @@ watch(() => props.error, (newError) => {
         <!-- Prefix / Left Icon -->
         <span 
           v-if="iconLeft || prefix" 
-          class="absolute left-0 top-1/2 -translate-y-1/2 flex items-center gap-1 pointer-events-none transition-colors duration-200"
+          class="absolute left-0 top-1/2 -translate-y-1/2 flex items-center gap-1 pointer-events-none transition-colors duration-(--s-duration-normal)"
           :class="[
             sizeConfig.icon,
             iconColorClass,
@@ -774,7 +778,7 @@ watch(() => props.error, (newError) => {
           :aria-describedby="(displayError || displaySuccess || displayWarning || hint) ? messageId : ariaDescribedBy"
           :aria-invalid="!!displayError"
           :aria-required="required"
-          class="s-input w-full outline-none transition-all duration-200 text-foreground placeholder:text-muted-foreground"
+          class="s-input w-full outline-none transition-all duration-(--s-duration-normal) text-foreground placeholder:text-muted-foreground"
           :class="[
             inputPaddingClasses,
             roundedConfig,
@@ -783,7 +787,7 @@ watch(() => props.error, (newError) => {
             validationBorderClasses,
             inputClass,
             {
-              'opacity-50 cursor-not-allowed': disabled,
+              'opacity-(--s-opacity-disabled) cursor-not-allowed': disabled,
               'cursor-wait': loading,
               'py-2': isFloatingLabel
             }
@@ -816,7 +820,7 @@ watch(() => props.error, (newError) => {
           :aria-describedby="(displayError || displaySuccess || displayWarning || hint) ? messageId : ariaDescribedBy"
           :aria-invalid="!!displayError"
           :aria-required="required"
-          class="s-input w-full outline-none transition-all duration-200 text-foreground placeholder:text-muted-foreground"
+          class="s-input w-full outline-none transition-all duration-(--s-duration-normal) text-foreground placeholder:text-muted-foreground"
           :class="[
             sizeConfig.input,
             size === 'small' ? 'px-2.5 py-1.5' : size === 'large' ? 'px-4 py-2.5' : 'px-3 py-2',
@@ -826,7 +830,7 @@ watch(() => props.error, (newError) => {
             validationBorderClasses,
             inputClass,
             {
-              'opacity-50 cursor-not-allowed': disabled,
+              'opacity-(--s-opacity-disabled) cursor-not-allowed': disabled,
               'cursor-wait': loading,
               'resize-none': resize === 'none',
               'resize-y': resize === 'vertical',
@@ -845,7 +849,7 @@ watch(() => props.error, (newError) => {
         <label
           v-if="label && isFloatingLabel"
           :for="inputId"
-          class="s-input-label-floating absolute left-0 pointer-events-none transition-all duration-200 ease-out origin-left"
+          class="s-input-label-floating absolute left-0 pointer-events-none transition-all duration-(--s-duration-normal) ease-out origin-left"
           :class="[
             labelClass,
             size === 'small' ? 'left-2.5' : size === 'large' ? 'left-4' : 'left-3',
@@ -863,7 +867,7 @@ watch(() => props.error, (newError) => {
         <!-- Suffix / Right Icon / Actions -->
         <span 
           v-if="iconRight || suffix || clearable || showPasswordToggle || loading || validationIcon" 
-          class="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1 transition-colors duration-200"
+          class="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1 transition-colors duration-(--s-duration-normal)"
           :class="[
             sizeConfig.icon,
             size === 'small' ? 'pr-2.5' : size === 'large' ? 'pr-4' : 'pr-3'
@@ -926,7 +930,7 @@ watch(() => props.error, (newError) => {
         <!-- Animated border line (underlined variant) -->
         <div 
           v-if="variant === 'underlined'"
-          class="s-input-border-animated absolute bottom-0 left-1/2 h-0.5 transition-all duration-200 ease-out"
+          class="s-input-border-animated absolute bottom-0 left-1/2 h-0.5 transition-all duration-(--s-duration-normal) ease-out"
           :class="[color ? '' : 'bg-primary', isFocused ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2']"
           :style="color ? { backgroundColor: color } : undefined"
         />
@@ -981,7 +985,7 @@ watch(() => props.error, (newError) => {
       >
         <!-- Message -->
         <Transition
-          enter-active-class="transition-all duration-200 ease-out"
+          enter-active-class="transition-all duration-(--s-duration-normal) ease-out"
           enter-from-class="opacity-0 -translate-y-1"
           enter-to-class="opacity-100 translate-y-0"
           leave-active-class="transition-all duration-150 ease-in"
@@ -1026,7 +1030,7 @@ watch(() => props.error, (newError) => {
         <!-- Character counter -->
         <span 
           v-if="counter && maxLength"
-          class="text-xs shrink-0 tabular-nums transition-colors duration-200"
+          class="text-xs shrink-0 tabular-nums transition-colors duration-(--s-duration-normal)"
           :class="counterColorClass"
         >
           {{ currentLength }} / {{ maxLength }}

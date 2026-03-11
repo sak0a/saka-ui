@@ -6,7 +6,7 @@ defineOptions({ inheritAttrs: false })
 
 interface Props {
   max?: number
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | number
+  size?: 'xs' | 'small' | 'medium' | 'large' | 'xl' | '2xl' | number
   spacing?: 'tight' | 'normal' | 'loose' | number
   bordered?: boolean
   borderColor?: string
@@ -14,7 +14,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   max: undefined,
-  size: 'md',
+  size: 'medium',
   spacing: 'normal',
   bordered: true,
   borderColor: 'var(--s-background)'

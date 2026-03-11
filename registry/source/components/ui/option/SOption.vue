@@ -114,7 +114,7 @@ const bgClass = computed(() => {
       sizeConfig.padding,
       sizeConfig.gap,
       {
-        'opacity-50 cursor-not-allowed': disabled,
+        'opacity-(--s-opacity-disabled) cursor-not-allowed': disabled,
         'text-foreground': isHighlighted || isSelected,
         'text-muted-foreground hover:text-foreground': !isHighlighted && !isSelected && !disabled
       }

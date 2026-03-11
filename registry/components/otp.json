@@ -2,7 +2,7 @@
   "name": "otp",
   "displayName": "SOTP",
   "description": "Composable OTP input with headless root, visual slots, groups, and separators. Supports 5 animation systems, text morphing, masked input, countdown/resend.",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "files": [
     "components/ui/otp/index.ts",
     "components/ui/otp/SOTP.vue",

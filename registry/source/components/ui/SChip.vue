@@ -8,7 +8,7 @@ defineOptions({ inheritAttrs: false })
 const attrs = useAttrs()
 
 const chipVariants = cva(
-  'inline-flex items-center rounded-full font-medium transition-all duration-300 select-none border border-transparent',
+  'inline-flex items-center rounded-full font-medium transition-all duration-(--s-duration-slow) select-none border border-transparent',
   {
     variants: {
       variant: {
@@ -78,12 +78,13 @@ const chipClasses = computed(() => {
       size: props.size,
     }),
     // When color is set, skip variant styling (handled by inline style) but keep base classes
-    props.color && 'inline-flex items-center rounded-full font-medium transition-all duration-300 select-none border border-transparent',
+    props.color && 'inline-flex items-center rounded-full font-medium transition-all duration-(--s-duration-slow) select-none border border-transparent',
     // Hover/active interactions when color is set and filled
     props.color && props.variant === 'filled' && 'hover:brightness-110',
+    'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
     {
       'cursor-pointer hover:brightness-110 active:scale-95': !props.disabled,
-      'opacity-50 cursor-not-allowed': props.disabled,
+      'opacity-(--s-opacity-disabled) cursor-not-allowed': props.disabled,
     },
     (attrs as Record<string, unknown>).class as string,
   )
@@ -108,6 +109,8 @@ const handleClick = () => {
     v-bind="$attrs"
     :class="chipClasses"
     :style="colorStyle"
+    :tabindex="disabled ? -1 : 0"
+    role="button"
     @click="handleClick"
   >
     <span class="inline-flex items-center gap-1" :class="contentClass">
@@ -115,12 +118,13 @@ const handleClick = () => {
     </span>
     <button
       v-if="closable"
-      class="inline-flex items-center justify-center rounded-full border-none bg-transparent p-0 leading-none cursor-pointer hover:bg-black/10 dark:hover:bg-white/10 transition-colors disabled:cursor-not-allowed"
+      class="inline-flex items-center justify-center rounded-full border-none bg-transparent p-0 leading-none cursor-pointer hover:bg-foreground/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed"
       :class="{
         'w-3.5 h-3.5 text-xs': size === 'small',
         'w-4.5 h-4.5 text-sm': size === 'medium',
         'w-5.5 h-5.5 text-base': size === 'large'
       }"
+      aria-label="Remove"
       @click="handleClose"
       :disabled="disabled"
     >

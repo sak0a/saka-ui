@@ -161,42 +161,42 @@ const variantClasses = computed(() => ({
 const panelAnimations = computed(() => {
   const animations = {
     fade: {
-      enter: 'transition-all duration-300 ease-out',
+      enter: 'transition-all duration-(--s-duration-slow) ease-out',
       enterFrom: 'opacity-0',
       enterTo: 'opacity-100',
-      leave: 'transition-all duration-200 ease-in',
+      leave: 'transition-all duration-(--s-duration-normal) ease-in',
       leaveFrom: 'opacity-100',
       leaveTo: 'opacity-0'
     },
     scale: {
-      enter: 'transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]',
+      enter: 'transition-all duration-(--s-duration-slow) ease-[cubic-bezier(0.34,1.56,0.64,1)]',
       enterFrom: 'opacity-0 scale-90',
       enterTo: 'opacity-100 scale-100',
-      leave: 'transition-all duration-200 ease-in',
+      leave: 'transition-all duration-(--s-duration-normal) ease-in',
       leaveFrom: 'opacity-100 scale-100',
       leaveTo: 'opacity-0 scale-95'
     },
     'slide-up': {
-      enter: 'transition-all duration-300 ease-out',
+      enter: 'transition-all duration-(--s-duration-slow) ease-out',
       enterFrom: 'opacity-0 translate-y-12',
       enterTo: 'opacity-100 translate-y-0',
-      leave: 'transition-all duration-200 ease-in',
+      leave: 'transition-all duration-(--s-duration-normal) ease-in',
       leaveFrom: 'opacity-100 translate-y-0',
       leaveTo: 'opacity-0 translate-y-8'
     },
     'slide-down': {
-      enter: 'transition-all duration-300 ease-out',
+      enter: 'transition-all duration-(--s-duration-slow) ease-out',
       enterFrom: 'opacity-0 -translate-y-12',
       enterTo: 'opacity-100 translate-y-0',
-      leave: 'transition-all duration-200 ease-in',
+      leave: 'transition-all duration-(--s-duration-normal) ease-in',
       leaveFrom: 'opacity-100 translate-y-0',
       leaveTo: 'opacity-0 -translate-y-8'
     },
     zoom: {
-      enter: 'transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]',
+      enter: 'transition-all duration-(--s-duration-slow) ease-[cubic-bezier(0.16,1,0.3,1)]',
       enterFrom: 'opacity-0 scale-50',
       enterTo: 'opacity-100 scale-100',
-      leave: 'transition-all duration-200 ease-in',
+      leave: 'transition-all duration-(--s-duration-normal) ease-in',
       leaveFrom: 'opacity-100 scale-100',
       leaveTo: 'opacity-0 scale-75'
     },
@@ -204,7 +204,7 @@ const panelAnimations = computed(() => {
       enter: 'transition-all duration-400 ease-out [transform-style:preserve-3d]',
       enterFrom: 'opacity-0 [transform:rotateX(-15deg)_scale(0.95)]',
       enterTo: 'opacity-100 [transform:rotateX(0deg)_scale(1)]',
-      leave: 'transition-all duration-200 ease-in [transform-style:preserve-3d]',
+      leave: 'transition-all duration-(--s-duration-normal) ease-in [transform-style:preserve-3d]',
       leaveFrom: 'opacity-100 [transform:rotateX(0deg)_scale(1)]',
       leaveTo: 'opacity-0 [transform:rotateX(15deg)_scale(0.95)]'
     }
@@ -412,10 +412,10 @@ defineExpose({
 <template>
   <Teleport v-if="teleportTarget" :to="teleportTarget" :disabled="!teleportTarget">
     <Transition
-      enter-active-class="transition-opacity duration-300 ease-out"
+      enter-active-class="transition-opacity duration-(--s-duration-slow) ease-out"
       enter-from-class="opacity-0"
       enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-200 ease-in"
+      leave-active-class="transition-opacity duration-(--s-duration-normal) ease-in"
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
@@ -520,10 +520,10 @@ defineExpose({
   <!-- Non-teleported fallback -->
   <template v-else>
     <Transition
-      enter-active-class="transition-opacity duration-300 ease-out"
+      enter-active-class="transition-opacity duration-(--s-duration-slow) ease-out"
       enter-from-class="opacity-0"
       enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-200 ease-in"
+      leave-active-class="transition-opacity duration-(--s-duration-normal) ease-in"
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >

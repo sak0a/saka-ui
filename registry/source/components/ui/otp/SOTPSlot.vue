@@ -67,9 +67,13 @@ const sizeConfig = computed(() => {
 const roundedConfig = computed(() => {
   const radii: Record<SOTPRounded, string> = {
     none: 'rounded-none',
-    sm: 'rounded',
-    md: 'rounded-lg',
-    lg: 'rounded-xl',
+    xs: 'rounded-xs',
+    sm: 'rounded-sm',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
     full: 'rounded-full'
   }
   return radii[r.value.rounded]
@@ -104,7 +108,7 @@ const isMorphing = computed(() => ctx.morphingIndices.value.has(props.index))
     v-bind="$attrs"
     style="perspective: 500px;"
     :class="cn(
-      's-otp-box relative flex items-center justify-center overflow-hidden transition-all duration-200',
+      's-otp-box relative flex items-center justify-center overflow-hidden transition-all duration-(--s-duration-normal)',
       sizeConfig.box,
       roundedConfig,
       variantClasses,

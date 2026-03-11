@@ -6,7 +6,7 @@ import { cn } from '../../lib/utils'
 defineOptions({ inheritAttrs: false })
 
 const badgeVariants = cva(
-  'inline-flex items-center justify-center rounded-full font-medium transition-all duration-200 select-none whitespace-nowrap z-10',
+  'inline-flex items-center justify-center rounded-full font-medium transition-all duration-(--s-duration-normal) select-none whitespace-nowrap z-10',
   {
     variants: {
       variant: {
@@ -131,12 +131,12 @@ const borderedStyle = computed<CSSProperties | undefined>(() => {
 const badgeClasses = computed(() => {
   if (props.dot) {
     return cn(
-      'inline-flex rounded-full transition-all duration-200 select-none z-10',
+      'inline-flex rounded-full transition-all duration-(--s-duration-normal) select-none z-10',
       props.variant === 'filled' && !props.color && 'bg-primary',
       props.variant === 'outlined' && !props.color && 'border-[1.5px] border-primary bg-background',
       props.variant === 'light' && !props.color && 'bg-primary/15',
       dotSizeClasses[props.size],
-      { 'cursor-pointer hover:brightness-110': !!emit },
+      'cursor-pointer hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
       props.badgeClass,
     )
   }
@@ -144,8 +144,8 @@ const badgeClasses = computed(() => {
   return cn(
     badgeVariants({ variant: props.color ? undefined : props.variant, size: props.size }),
     // When color is set, skip variant styling (handled by inline style)
-    props.color && 'inline-flex items-center justify-center rounded-full font-medium transition-all duration-200 select-none whitespace-nowrap z-10',
-    { 'cursor-pointer hover:brightness-110': !!emit },
+    props.color && 'inline-flex items-center justify-center rounded-full font-medium transition-all duration-(--s-duration-normal) select-none whitespace-nowrap z-10',
+    'cursor-pointer hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
     props.badgeClass,
   )
 })
@@ -191,6 +191,8 @@ const handleClick = (e: MouseEvent) => {
       v-if="isVisible"
       :class="badgeClasses"
       :style="colorStyle ?? borderedStyle"
+      role="status"
+      tabindex="0"
       @click="handleClick"
     >
       <slot name="content">{{ displayContent }}</slot>
@@ -204,6 +206,8 @@ const handleClick = (e: MouseEvent) => {
       v-if="isVisible"
       :class="cn(badgeClasses, 'absolute', { 's-badge-pulse': pulse })"
       :style="{ ...(colorStyle ?? borderedStyle), ...positionStyle }"
+      role="status"
+      tabindex="0"
       @click="handleClick"
     >
       <slot name="content">{{ displayContent }}</slot>

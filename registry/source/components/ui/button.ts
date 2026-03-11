@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 
 export const buttonVariants = cva(
-  'relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out overflow-hidden select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-[1.5px] border-transparent',
+  'relative inline-flex items-center justify-center font-medium transition-all duration-(--s-duration-normal) ease-out overflow-hidden select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-[1.5px] border-transparent',
   {
     variants: {
       variant: {
@@ -22,9 +22,13 @@ export const buttonVariants = cva(
       },
       rounded: {
         none: 'rounded-none',
-        sm: 'rounded',
-        md: 'rounded-lg',
-        lg: 'rounded-xl',
+        xs: 'rounded-xs',
+        sm: 'rounded-sm',
+        md: 'rounded-md',
+        lg: 'rounded-lg',
+        xl: 'rounded-xl',
+        '2xl': 'rounded-2xl',
+        '3xl': 'rounded-3xl',
         full: 'rounded-full',
       },
     },

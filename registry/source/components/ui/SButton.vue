@@ -13,7 +13,7 @@ export interface Props {
   loading?: boolean
   preserveSize?: boolean
   block?: boolean
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+  rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   iconLeft?: IconProp
   iconRight?: IconProp
   iconOnly?: boolean
@@ -62,7 +62,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const typeColorMap: Record<string, string> = {
   primary: 'var(--s-primary)',
-  error: 'var(--s-destructive)',
+  error: 'var(--s-error)',
   success: 'var(--s-success)',
   warning: 'var(--s-warning)',
   info: 'var(--s-info)',
@@ -70,7 +70,7 @@ const typeColorMap: Record<string, string> = {
 
 const typeForegroundMap: Record<string, string> = {
   primary: 'var(--s-primary-foreground)',
-  error: 'var(--s-destructive-foreground)',
+  error: 'var(--s-error-foreground)',
   success: 'var(--s-success-foreground)',
   warning: 'var(--s-warning-foreground)',
   info: 'var(--s-info-foreground)',
@@ -192,7 +192,7 @@ const buttonClasses = computed(() => {
     props.variant === 'glass' && 's-button--glass',
     {
       'w-full': props.block,
-      'opacity-50 cursor-not-allowed': props.disabled || props.loading,
+      'opacity-(--s-opacity-disabled) cursor-not-allowed': props.disabled || props.loading,
       'cursor-pointer': !props.disabled && !props.loading,
       's-button--animate': hasAnimateSlot.value && !props.animateInactive,
       [`s-button--animate-${props.animationType}`]: hasAnimateSlot.value && !props.animateInactive,
@@ -218,6 +218,7 @@ const componentBindings = computed(() => {
     v-bind="{ ...componentBindings, ...$attrs }"
     :class="cn(buttonClasses, ($attrs.class as string))"
     :style="colorStyle"
+    :data-disabled="(props.disabled || props.loading) || undefined"
     @click="handleClick"
     @keydown="handleKeydown"
   >
@@ -303,7 +304,7 @@ const componentBindings = computed(() => {
 
 /* Button content wrapper */
 .s-button__content {
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform var(--s-duration-slow) ease, opacity var(--s-duration-slow) ease;
 }
 
 /* Animate slot - positioned absolute over content */
@@ -314,7 +315,7 @@ const componentBindings = computed(() => {
   top: 0;
   left: 0;
   pointer-events: none;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform var(--s-duration-slow) ease, opacity var(--s-duration-slow) ease;
 }
 
 /* Slide animation (default) */
@@ -388,14 +389,14 @@ const componentBindings = computed(() => {
     0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
-.s-button--glass:not(:disabled):not(.opacity-50):hover {
+.s-button--glass:not(:disabled):not([data-disabled]):hover {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
     0 8px 24px rgba(0, 0, 0, 0.45),
     0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
-.s-button--glass:not(:disabled):not(.opacity-50):active {
+.s-button--glass:not(:disabled):not([data-disabled]):active {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.14),
     0 2px 8px rgba(0, 0, 0, 0.3);

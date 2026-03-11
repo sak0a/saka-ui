@@ -12,7 +12,7 @@ export interface Props {
   loading?: boolean
   preserveSize?: boolean
   block?: boolean
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+  rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   iconLeft?: IconProp
   iconRight?: IconProp
   iconOnly?: boolean
@@ -231,9 +231,13 @@ const iconSizes = computed(() => {
 const radiusClasses = computed(() => {
   const radii = {
     none: 'rounded-none',
-    sm: 'rounded',
-    md: 'rounded-lg',
-    lg: 'rounded-xl',
+    xs: 'rounded-xs',
+    sm: 'rounded-sm',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
     full: 'rounded-full'
   }
   return radii[props.rounded]
@@ -315,7 +319,7 @@ const componentBindings = computed(() => {
       radiusClasses,
       {
         'w-full': block,
-        'opacity-50 cursor-not-allowed': disabled || loading,
+        'opacity-(--s-opacity-disabled) cursor-not-allowed': disabled || loading,
         'cursor-pointer': !disabled && !loading,
         's-glass-button--loading': loading,
         's-glass-button--animate': hasAnimateSlot && !animateInactive,

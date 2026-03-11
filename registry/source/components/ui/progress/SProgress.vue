@@ -14,7 +14,7 @@ export interface Props {
   variant?: 'default' | 'gradient' | 'striped' | 'buffer' | 'segments' | 'liquid'
   size?: 'xs' | 'small' | 'medium' | 'large' | 'xl'
   orientation?: 'horizontal' | 'vertical'
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+  rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   color?: string
   trackColor?: string
   gradientColors?: string[]
@@ -122,9 +122,13 @@ const sizeConfig = computed(() => {
 const roundedClasses = computed(() => {
   const radii = {
     none: 'rounded-none',
-    sm: 'rounded',
-    md: 'rounded-lg',
-    lg: 'rounded-xl',
+    xs: 'rounded-xs',
+    sm: 'rounded-sm',
+    md: 'rounded-md',
+    lg: 'rounded-lg',
+    xl: 'rounded-xl',
+    '2xl': 'rounded-2xl',
+    '3xl': 'rounded-3xl',
     full: 'rounded-full'
   }
   return radii[props.rounded]
@@ -225,7 +229,7 @@ const containerClasses = computed(() => {
   }
   
   if (props.disabled) {
-    classes.push('opacity-50 cursor-not-allowed')
+    classes.push('opacity-(--s-opacity-disabled) cursor-not-allowed')
   }
   
   return classes.join(' ')
@@ -295,7 +299,7 @@ watch(() => props.modelValue, (newVal) => {
         <!-- Buffer fill (buffer variant) -->
         <div 
           v-if="variant === 'buffer'"
-          class="s-progress__buffer absolute inset-0 transition-all duration-300 ease-out"
+          class="s-progress__buffer absolute inset-0 transition-all duration-(--s-duration-slow) ease-out"
           :class="roundedClasses"
           :style="bufferStyle"
         />
@@ -360,7 +364,7 @@ watch(() => props.modelValue, (newVal) => {
           :style="{ background: trackColor }"
         >
           <div 
-            class="h-full transition-all duration-300 ease-out"
+            class="h-full transition-all duration-(--s-duration-slow) ease-out"
             :class="roundedClasses"
             :style="{
               background: color,
