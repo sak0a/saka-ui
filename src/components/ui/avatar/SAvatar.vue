@@ -5,7 +5,7 @@ import { cn } from '~/lib/utils'
 defineOptions({ inheritAttrs: false })
 
 export interface AvatarProps {
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | number
+  size?: 'xs' | 'small' | 'medium' | 'large' | 'xl' | '2xl' | number
   shape?: 'circle' | 'square' | 'rounded'
   bordered?: boolean
   borderColor?: string
@@ -16,7 +16,7 @@ export interface AvatarProps {
 }
 
 const props = withDefaults(defineProps<AvatarProps>(), {
-  size: 'md',
+  size: 'medium',
   shape: 'circle',
   bordered: false,
   borderColor: 'var(--s-border)',
@@ -49,13 +49,13 @@ const sizeValue = computed(() => {
   }
   const sizes: Record<string, string> = {
     xs: '1.5rem',
-    sm: '2rem',
-    md: '2.5rem',
-    lg: '3rem',
+    small: '2rem',
+    medium: '2.5rem',
+    large: '3rem',
     xl: '4rem',
     '2xl': '5rem'
   }
-  return sizes[props.size] || sizes.md
+  return sizes[props.size] || sizes.medium
 })
 
 // Font size for fallback
@@ -65,13 +65,13 @@ const fontSizeValue = computed(() => {
   }
   const sizes: Record<string, string> = {
     xs: '0.625rem',
-    sm: '0.75rem',
-    md: '0.875rem',
-    lg: '1rem',
+    small: '0.75rem',
+    medium: '0.875rem',
+    large: '1rem',
     xl: '1.25rem',
     '2xl': '1.5rem'
   }
-  return sizes[props.size] || sizes.md
+  return sizes[props.size] || sizes.medium
 })
 
 // Shape classes
@@ -91,13 +91,13 @@ const statusSize = computed(() => {
   }
   const sizes: Record<string, string> = {
     xs: '0.375rem',
-    sm: '0.5rem',
-    md: '0.5rem',
-    lg: '0.625rem',
+    small: '0.5rem',
+    medium: '0.5rem',
+    large: '0.625rem',
     xl: '0.75rem',
     '2xl': '0.875rem'
   }
-  return sizes[props.size] || sizes.md
+  return sizes[props.size] || sizes.medium
 })
 
 // Status colors

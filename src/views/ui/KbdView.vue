@@ -18,9 +18,9 @@ const basicUsageCode = `<SKbd>Esc</SKbd>
 <SKbd>Del</SKbd>`
 
 const sizesCode = `<SKbd size="xs">Esc</SKbd>
-<SKbd size="sm">Esc</SKbd>
-<SKbd size="md">Esc</SKbd>
-<SKbd size="lg">Esc</SKbd>`
+<SKbd size="small">Esc</SKbd>
+<SKbd size="medium">Esc</SKbd>
+<SKbd size="large">Esc</SKbd>`
 
 const variantsCode = `<SKbd variant="default">Esc</SKbd>
 <SKbd variant="outlined">Esc</SKbd>
@@ -40,8 +40,8 @@ const colorsCode = `<SKbd color="#3b82f6">&#8984;</SKbd>
 <SKbd color="#ef4444">Esc</SKbd>`
 
 const inlineCode = `<p>
-  Press <SKbd size="sm">Esc</SKbd> to close the dialog,
-  or <SKbdShortcut :keys="['⌘', 'Enter']" size="sm" /> to confirm.
+  Press <SKbd size="small">Esc</SKbd> to close the dialog,
+  or <SKbdShortcut :keys="['⌘', 'Enter']" size="small" /> to confirm.
 </p>`
 
 const withComponentsCode = `<!-- Button with shortcut hint -->
@@ -64,7 +64,7 @@ const realWorldCode = `<!-- Command palette trigger -->
 <div class="flex items-center gap-3 px-4 py-2.5 rounded-xl border cursor-pointer hover:bg-(--s-bg-secondary)">
   <span class="mdi mdi-magnify text-(--s-text-secondary)"></span>
   <span class="text-sm text-(--s-text-secondary) flex-1">Search commands...</span>
-  <SKbdShortcut :keys="['⌘', 'K']" size="sm" />
+  <SKbdShortcut :keys="['⌘', 'K']" size="small" />
 </div>
 
 <!-- Menu item with shortcut -->
@@ -76,7 +76,7 @@ const realWorldCode = `<!-- Command palette trigger -->
 // API Reference data
 const kbdProps: ApiProp[] = [
   { name: 'variant', type: "'default' | 'outlined' | 'flat' | 'ghost'", default: "'default'", description: 'Visual style variant. Default renders a raised 3D keycap look.', category: 'Appearance' },
-  { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg'", default: "'md'", description: 'Key indicator size', category: 'Appearance' },
+  { name: 'size', type: "'xs' | 'small' | 'medium' | 'large'", default: "'medium'", description: 'Key indicator size', category: 'Appearance' },
   { name: 'color', type: 'string', default: 'undefined', description: 'Custom color override (CSS color value or variable)', category: 'Appearance' },
 ]
 
@@ -88,7 +88,7 @@ const shortcutProps: ApiProp[] = [
   { name: 'keys', type: 'string[]', default: '—', description: 'Array of key labels to display', category: 'Content' },
   { name: 'separator', type: 'string', default: "'+'", description: 'Separator string between keys', category: 'Content' },
   { name: 'variant', type: "'default' | 'outlined' | 'flat' | 'ghost'", default: "'default'", description: 'Passed to each SKbd instance', category: 'Appearance' },
-  { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg'", default: "'md'", description: 'Passed to each SKbd instance', category: 'Appearance' },
+  { name: 'size', type: "'xs' | 'small' | 'medium' | 'large'", default: "'medium'", description: 'Passed to each SKbd instance', category: 'Appearance' },
   { name: 'color', type: 'string', default: 'undefined', description: 'Custom color override, passed to each SKbd instance', category: 'Appearance' },
 ]
 </script>
@@ -185,7 +185,7 @@ const shortcutProps: ApiProp[] = [
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection
         title="Key Sizes"
-        description="Four size options: xs, sm, md (default), and lg."
+        description="Four size options: xs, small, medium (default), and large."
         :code="sizesCode"
         language="vue"
       >
@@ -195,16 +195,16 @@ const shortcutProps: ApiProp[] = [
             <span class="text-xs font-mono text-(--s-text-secondary)">xs</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SKbd size="sm">Esc</SKbd>
-            <span class="text-xs font-mono text-(--s-text-secondary)">sm</span>
+            <SKbd size="small">Esc</SKbd>
+            <span class="text-xs font-mono text-(--s-text-secondary)">small</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SKbd size="md">Esc</SKbd>
-            <span class="text-xs font-mono text-(--s-text-secondary)">md</span>
+            <SKbd size="medium">Esc</SKbd>
+            <span class="text-xs font-mono text-(--s-text-secondary)">medium</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SKbd size="lg">Esc</SKbd>
-            <span class="text-xs font-mono text-(--s-text-secondary)">lg</span>
+            <SKbd size="large">Esc</SKbd>
+            <span class="text-xs font-mono text-(--s-text-secondary)">large</span>
           </div>
         </div>
       </DemoSection>
@@ -309,9 +309,9 @@ const shortcutProps: ApiProp[] = [
             <p class="text-sm text-(--s-text-secondary) mb-3">With variants and sizes:</p>
             <div class="flex flex-wrap gap-6 items-center">
               <SKbdShortcut :keys="['⌘', 'K']" size="xs" variant="flat" />
-              <SKbdShortcut :keys="['⌘', 'K']" size="sm" variant="outlined" />
-              <SKbdShortcut :keys="['⌘', 'K']" size="md" variant="default" />
-              <SKbdShortcut :keys="['⌘', 'K']" size="lg" variant="default" />
+              <SKbdShortcut :keys="['⌘', 'K']" size="small" variant="outlined" />
+              <SKbdShortcut :keys="['⌘', 'K']" size="medium" variant="default" />
+              <SKbdShortcut :keys="['⌘', 'K']" size="large" variant="default" />
             </div>
           </div>
         </div>
@@ -363,13 +363,13 @@ const shortcutProps: ApiProp[] = [
       >
         <div class="space-y-4 max-w-xl">
           <p class="text-sm text-(--s-text-secondary) leading-relaxed">
-            Press <SKbd size="sm">Esc</SKbd> to close the dialog, or <SKbdShortcut :keys="['⌘', 'Enter']" size="sm" /> to confirm your changes.
+            Press <SKbd size="small">Esc</SKbd> to close the dialog, or <SKbdShortcut :keys="['⌘', 'Enter']" size="small" /> to confirm your changes.
           </p>
           <p class="text-sm text-(--s-text-secondary) leading-relaxed">
-            Use <SKbd size="sm">&#8593;</SKbd> and <SKbd size="sm">&#8595;</SKbd> to navigate between items, then press <SKbd size="sm">Enter</SKbd> to select.
+            Use <SKbd size="small">&#8593;</SKbd> and <SKbd size="small">&#8595;</SKbd> to navigate between items, then press <SKbd size="small">Enter</SKbd> to select.
           </p>
           <p class="text-sm text-(--s-text-secondary) leading-relaxed">
-            Hold <SKbd size="sm">Shift</SKbd> and click to select a range, or press <SKbdShortcut :keys="['⌘', 'A']" size="sm" /> to select all.
+            Hold <SKbd size="small">Shift</SKbd> and click to select a range, or press <SKbdShortcut :keys="['⌘', 'A']" size="small" /> to select all.
           </p>
         </div>
       </DemoSection>
@@ -491,7 +491,7 @@ const shortcutProps: ApiProp[] = [
             <div class="max-w-md flex items-center gap-3 px-4 py-2.5 rounded-xl border border-(--s-border) bg-(--s-bg-secondary)/30 cursor-pointer hover:bg-(--s-bg-secondary)/60 transition-colors">
               <span class="mdi mdi-magnify text-lg text-(--s-text-secondary)"></span>
               <span class="text-sm text-(--s-text-secondary) flex-1">Search commands...</span>
-              <SKbdShortcut :keys="['⌘', 'K']" size="sm" />
+              <SKbdShortcut :keys="['⌘', 'K']" size="small" />
             </div>
           </div>
 
@@ -512,16 +512,16 @@ const shortcutProps: ApiProp[] = [
             <p class="text-sm text-(--s-text-secondary) mb-3">Navigation hints:</p>
             <div class="max-w-sm flex items-center justify-center gap-6 p-4 rounded-xl border border-(--s-border) bg-(--s-bg-secondary)/30">
               <div class="flex items-center gap-2 text-sm text-(--s-text-secondary)">
-                <SKbd size="sm">&#8593;</SKbd>
-                <SKbd size="sm">&#8595;</SKbd>
+                <SKbd size="small">&#8593;</SKbd>
+                <SKbd size="small">&#8595;</SKbd>
                 <span>Navigate</span>
               </div>
               <div class="flex items-center gap-2 text-sm text-(--s-text-secondary)">
-                <SKbd size="sm">Enter</SKbd>
+                <SKbd size="small">Enter</SKbd>
                 <span>Select</span>
               </div>
               <div class="flex items-center gap-2 text-sm text-(--s-text-secondary)">
-                <SKbd size="sm">Esc</SKbd>
+                <SKbd size="small">Esc</SKbd>
                 <span>Close</span>
               </div>
             </div>

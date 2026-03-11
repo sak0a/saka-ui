@@ -13,10 +13,10 @@ Components use **inconsistent size naming** across the framework:
 |-------|-------------------|
 | `xs / small / medium / large / xl` | SButton, SGlassButton, SProgress, SOTP (uses `xl` too) |
 | `small / medium / large` | SInput, SSelect, SChip, SSwitch, SAlert, SCheckbox, SRadio, SDropdown, SAccordion, STabs, SOption, SDatePicker, SColorPicker, SCarousel (arrows only) |
-| `xs / sm / md / lg` | SKbd |
-| `xs / sm / md / lg / xl` | SPagination |
-| `xs / sm / md / lg / xl / 2xl` | SAvatar |
-| `sm / md / lg` | SDataTable |
+| `xs / small / medium / large` | SKbd |
+| `xs / small / medium / large / xl` | SPagination |
+| `xs / small / medium / large / xl / 2xl` | SAvatar |
+| `small / medium / large` | SDataTable |
 | `xs / sm / md / lg / xl / full` | SModal, SDrawer |
 | `compact / default / comfortable` | SCard, SGlassCard |
 | `small / medium / large` (dot-specific) | SBadge |
@@ -26,10 +26,10 @@ Components use **inconsistent size naming** across the framework:
 
 - **Mixed naming**: `small` vs `sm`, `medium` vs `md`, `large` vs `lg` — no single convention
 - **Button/GlassButton** use `xs / small / medium / large / xl` (5 tiers, word-based with `xs`/`xl` abbreviations)
-- **Kbd** uses `xs / sm / md / lg` (4 tiers, all abbreviated)
-- **Pagination** uses `xs / sm / md / lg / xl` (5 tiers, all abbreviated)
+- **Kbd** uses `xs / small / medium / large` (4 tiers, word-based with `xs` abbreviation)
+- **Pagination** uses `xs / small / medium / large / xl` (5 tiers, word-based with `xs`/`xl` abbreviations)
 - **Card** uses semantic names `compact / default / comfortable` (unique)
-- **Table** uses `sm / md / lg` (3 tiers, abbreviated)
+- **Table** uses `small / medium / large` (3 tiers, word-based)
 - **Form controls** (Input, Select, Checkbox, Radio, Switch) consistently use `small / medium / large`
 
 ---

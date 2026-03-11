@@ -5,7 +5,7 @@ import { kbdVariants } from './kbd'
 
 export interface Props {
   variant?: 'default' | 'outlined' | 'flat' | 'ghost'
-  size?: 'xs' | 'sm' | 'md' | 'lg'
+  size?: 'xs' | 'small' | 'medium' | 'large'
   color?: string
 }
 
@@ -15,7 +15,7 @@ const attrs = useAttrs()
 
 const props = withDefaults(defineProps<Props>(), {
   variant: 'default',
-  size: 'md',
+  size: 'medium',
   color: undefined,
 })
 

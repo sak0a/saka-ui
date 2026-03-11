@@ -15,9 +15,9 @@ const variantOptions: SelectOption[] = [
 
 const sizeOptions: SelectOption[] = [
   { value: 'xs', label: 'Extra Small' },
-  { value: 'sm', label: 'Small' },
-  { value: 'md', label: 'Medium' },
-  { value: 'lg', label: 'Large' },
+  { value: 'small', label: 'Small' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'large', label: 'Large' },
   { value: 'xl', label: 'Extra Large' }
 ]
 
@@ -35,7 +35,7 @@ const isLoading = ref(false)
 
 // Interactive demo
 const interactiveVariant = ref<PaginationVariant>('default')
-const interactiveSize = ref<PaginationSize>('md')
+const interactiveSize = ref<PaginationSize>('medium')
 const interactiveShape = ref<PaginationShape>('rounded')
 const interactiveColor = ref('#059669')
 const showFirstLast = ref(false)
@@ -88,9 +88,9 @@ const variantsCode = `<!-- Default -->
 <SPagination variant="dots" :total="50" :page-size="10" :model-value="3" />`
 
 const sizesCode = `<SPagination size="xs" :total="100" :model-value="3" />
-<SPagination size="sm" :total="100" :model-value="3" />
-<SPagination size="md" :total="100" :model-value="3" />
-<SPagination size="lg" :total="100" :model-value="3" />
+<SPagination size="small" :total="100" :model-value="3" />
+<SPagination size="medium" :total="100" :model-value="3" />
+<SPagination size="large" :total="100" :model-value="3" />
 <SPagination size="xl" :total="100" :model-value="3" />`
 
 const shapesCode = `<SPagination shape="rounded" :total="100" :model-value="3" />
@@ -167,7 +167,7 @@ const paginationProps: ApiProp[] = [
   { name: 'maxVisiblePages', type: 'number', default: '7', description: 'Maximum visible page buttons', category: 'Core' },
   // Appearance
   { name: 'variant', type: "'default' | 'outlined' | 'ghost' | 'minimal' | 'dots'", default: "'default'", description: 'Visual style variant', category: 'Appearance' },
-  { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Button size', category: 'Appearance' },
+  { name: 'size', type: "'xs' | 'small' | 'medium' | 'large' | 'xl'", default: "'medium'", description: 'Button size', category: 'Appearance' },
   { name: 'shape', type: "'rounded' | 'square' | 'pill'", default: "'rounded'", description: 'Button shape', category: 'Appearance' },
   { name: 'color', type: 'string', default: "'var(--s-primary)'", description: 'Primary color for active state', category: 'Appearance' },
   { name: 'background', type: 'boolean', default: 'false', description: 'Show background container', category: 'Appearance' },
@@ -409,7 +409,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection 
         title="Pagination Sizes"
-        description="Five size options: xs, sm, md, lg, and xl."
+        description="Five size options: xs, small, medium, large, and xl."
         :code="sizesCode"
         language="vue"
       >
@@ -419,16 +419,16 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             <SPagination size="xs" :total="100" :model-value="3" />
           </div>
           <div class="flex flex-col gap-2">
-            <span class="text-xs font-mono text-(--s-text-tertiary)">sm</span>
-            <SPagination size="sm" :total="100" :model-value="3" />
+            <span class="text-xs font-mono text-(--s-text-tertiary)">small</span>
+            <SPagination size="small" :total="100" :model-value="3" />
           </div>
           <div class="flex flex-col gap-2">
-            <span class="text-xs font-mono text-(--s-text-tertiary)">md</span>
-            <SPagination size="md" :total="100" :model-value="3" />
+            <span class="text-xs font-mono text-(--s-text-tertiary)">medium</span>
+            <SPagination size="medium" :total="100" :model-value="3" />
           </div>
           <div class="flex flex-col gap-2">
-            <span class="text-xs font-mono text-(--s-text-tertiary)">lg</span>
-            <SPagination size="lg" :total="100" :model-value="3" />
+            <span class="text-xs font-mono text-(--s-text-tertiary)">large</span>
+            <SPagination size="large" :total="100" :model-value="3" />
           </div>
           <div class="flex flex-col gap-2">
             <span class="text-xs font-mono text-(--s-text-tertiary)">xl</span>

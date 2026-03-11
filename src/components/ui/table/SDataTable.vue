@@ -76,7 +76,7 @@ const props = withDefaults(defineProps<Props>(), {
   columns: () => [],
   rowKey: undefined,
   variant: 'default',
-  size: 'md',
+  size: 'medium',
   selectionMode: 'none',
   hoverable: true,
   stickyHeader: false,
@@ -194,9 +194,9 @@ const tableClasses = computed(() => {
   }
   
   const sizes: Record<TableSize, string> = {
-    sm: 's-table-sm',
-    md: 's-table-md',
-    lg: 's-table-lg'
+    small: 's-table-sm',
+    medium: 's-table-md',
+    large: 's-table-lg'
   }
   
   return [
@@ -563,7 +563,7 @@ defineExpose({
         show-total
         show-page-size
         show-first-last
-        size="sm"
+        size="small"
         class="px-4 py-3 border-t border-border justify-between"
         @update:model-value="(page: number) => { table.goToPage(page); emit('page-change', page) }"
         @update:page-size="(size: number) => { table.setPageSize(size); emit('page-size-change', size) }"

@@ -6,7 +6,7 @@ defineOptions({ inheritAttrs: false })
 
 // Types
 export type PaginationVariant = 'default' | 'outlined' | 'ghost' | 'minimal' | 'dots'
-export type PaginationSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type PaginationSize = 'xs' | 'small' | 'medium' | 'large' | 'xl'
 export type PaginationShape = 'rounded' | 'square' | 'pill'
 export type AnimationType = 'none' | 'slide' | 'fade' | 'scale' | 'flip'
 
@@ -83,7 +83,7 @@ const props = withDefaults(defineProps<Props>(), {
   pageSize: 10,
   maxVisiblePages: 7,
   variant: 'default',
-  size: 'md',
+  size: 'medium',
   shape: 'rounded',
   color: 'var(--s-primary)',
   showFirstLast: false,
@@ -345,9 +345,9 @@ const handleKeydown = (event: KeyboardEvent) => {
 const sizeClasses = computed(() => {
   const sizes = {
     xs: 'h-6 min-w-6 text-xs px-1.5',
-    sm: 'h-8 min-w-8 text-sm px-2',
-    md: 'h-10 min-w-10 text-sm px-3',
-    lg: 'h-12 min-w-12 text-base px-4',
+    small: 'h-8 min-w-8 text-sm px-2',
+    medium: 'h-10 min-w-10 text-sm px-3',
+    large: 'h-12 min-w-12 text-base px-4',
     xl: 'h-14 min-w-14 text-lg px-5'
   }
   return sizes[props.size]
@@ -356,9 +356,9 @@ const sizeClasses = computed(() => {
 const iconSizes = computed(() => {
   const sizes = {
     xs: 'text-sm',
-    sm: 'text-base',
-    md: 'text-lg',
-    lg: 'text-xl',
+    small: 'text-base',
+    medium: 'text-lg',
+    large: 'text-xl',
     xl: 'text-2xl'
   }
   return sizes[props.size]
@@ -367,9 +367,9 @@ const iconSizes = computed(() => {
 const gapClasses = computed(() => {
   const gaps = {
     xs: 'gap-0.5',
-    sm: 'gap-1',
-    md: 'gap-1.5',
-    lg: 'gap-2',
+    small: 'gap-1',
+    medium: 'gap-1.5',
+    large: 'gap-2',
     xl: 'gap-2.5'
   }
   return gaps[props.size]

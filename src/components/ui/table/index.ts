@@ -8,7 +8,7 @@ import type { InjectionKey, Ref, ComputedRef } from 'vue'
 export type TableVariant = 'default' | 'compact' | 'bordered' | 'striped' | 'minimal'
 
 /** Table size presets */
-export type TableSize = 'sm' | 'md' | 'lg'
+export type TableSize = 'small' | 'medium' | 'large'
 
 /** Sort direction */
 export type SortDirection = 'asc' | 'desc' | null
