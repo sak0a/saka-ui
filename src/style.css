@@ -89,7 +89,7 @@
   /* --- Opacity --- */
   --s-opacity-disabled: 0.5;
 
-  /* --- Legacy Aliases (backward-compat, remove after full migration) --- */
+  /* --- Aliases (still referenced by components — migrate before removing) --- */
   --s-bg-primary: var(--s-background);
   --s-bg-secondary: var(--s-muted);
   --s-bg-tertiary: var(--s-accent);
@@ -98,7 +98,6 @@
   --s-text-tertiary: var(--s-muted-foreground);
   --s-border-hover: var(--s-input);
   --s-border-subtle: var(--s-border);
-  --s-primary-hover: var(--s-primary);
   --s-primary-alpha: color-mix(in srgb, var(--s-primary) 15%, transparent);
   --s-primary-rgb: 23, 23, 23;
 
