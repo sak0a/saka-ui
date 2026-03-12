@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import SButton from '~/components/ui/SButton.vue'
-import { buttonVariants } from '~/components/ui/button'
 
 describe('SButton', () => {
   it('renders with default props', () => {
@@ -20,7 +19,6 @@ describe('SButton', () => {
     })
 
     const classes = wrapper.classes().join(' ')
-    const expectedClasses = buttonVariants({ variant: 'filled' })
     // Filled variant should include bg-primary
     expect(classes).toContain('bg-primary')
     expect(classes).toContain('text-primary-foreground')
