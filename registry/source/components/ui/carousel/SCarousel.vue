@@ -50,7 +50,7 @@ export interface Props {
   height?: string
   aspectRatio?: string
   borderRadius?: string
-  arrowSize?: 'small' | 'medium' | 'large'
+  arrowSize?: 'sm' | 'md' | 'lg'
   mousewheel?: boolean
   grabCursor?: boolean
   watchSlidesProgress?: boolean
@@ -97,7 +97,7 @@ const props = withDefaults(defineProps<Props>(), {
   height: '400px',
   aspectRatio: '',
   borderRadius: '16px',
-  arrowSize: 'medium',
+  arrowSize: 'md',
   mousewheel: false,
   grabCursor: true,
   watchSlidesProgress: false,
@@ -181,9 +181,9 @@ const easingFunction = computed(() => {
 
 const arrowSizeClasses = computed(() => {
   const sizes = {
-    small: 'w-8 h-8 text-lg',
-    medium: 'w-10 h-10 text-xl',
-    large: 'w-12 h-12 text-2xl'
+    sm: 'w-8 h-8 text-lg',
+    md: 'w-10 h-10 text-xl',
+    lg: 'w-12 h-12 text-2xl'
   }
   return sizes[props.arrowSize]
 })

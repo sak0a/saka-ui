@@ -29,7 +29,7 @@ export interface Props {
   showEyeDropper?: boolean
   showRecent?: boolean
   maxRecent?: number
-  size?: 'small' | 'medium' | 'large'
+  size?: 'sm' | 'md' | 'lg'
   triggerStyle?: 'button' | 'swatch'
   disabled?: boolean
   readonly?: boolean
@@ -55,7 +55,7 @@ const props = withDefaults(defineProps<Props>(), {
   showEyeDropper: true,
   showRecent: true,
   maxRecent: 8,
-  size: 'medium',
+  size: 'md',
   triggerStyle: 'button',
   disabled: false,
   readonly: false,
@@ -83,7 +83,7 @@ const hsva = ref({ h: 210, s: 76, v: 96, a: 1 })
 
 // ──── Size configs ────
 const sizeConfig = computed(() => ({
-  small: {
+  sm: {
     panelWidth: 'w-52 min-w-52 max-w-full',
     spectrumHeight: 'h-32',
     slider: 'h-3',
@@ -91,7 +91,7 @@ const sizeConfig = computed(() => ({
     input: 'text-xs px-2 py-1',
     label: 'text-xs'
   },
-  medium: {
+  md: {
     panelWidth: 'w-72 min-w-64 max-w-full',
     spectrumHeight: 'h-44',
     slider: 'h-4',
@@ -99,7 +99,7 @@ const sizeConfig = computed(() => ({
     input: 'text-sm px-2.5 py-1.5',
     label: 'text-sm'
   },
-  large: {
+  lg: {
     panelWidth: 'w-80 min-w-72 max-w-full',
     spectrumHeight: 'h-52',
     slider: 'h-5',
@@ -698,12 +698,12 @@ onBeforeUnmount(() => {
 }
 
 /* Size adjustments */
-.s-color-picker--small .s-color-picker__panel {
+.s-color-picker--sm .s-color-picker__panel {
   padding: 0.75rem;
   gap: 0.5rem;
 }
 
-.s-color-picker--large .s-color-picker__panel {
+.s-color-picker--lg .s-color-picker__panel {
   padding: 1.25rem;
   gap: 1rem;
 }

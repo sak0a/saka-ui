@@ -17,14 +17,14 @@ const chipVariants = cva(
         light: 'bg-primary/15 text-primary',
       },
       size: {
-        small: 'text-xs px-2 py-0.5 gap-1',
-        medium: 'text-sm px-3 py-1 gap-1.5',
-        large: 'text-base px-4 py-1.5 gap-2',
+        sm: 'text-xs px-2 py-0.5 gap-1',
+        md: 'text-sm px-3 py-1 gap-1.5',
+        lg: 'text-base px-4 py-1.5 gap-2',
       },
     },
     defaultVariants: {
       variant: 'filled',
-      size: 'medium',
+      size: 'md',
     },
   }
 )
@@ -33,7 +33,7 @@ export type ChipVariants = VariantProps<typeof chipVariants>
 
 export interface Props {
   variant?: 'filled' | 'outlined' | 'light'
-  size?: 'small' | 'medium' | 'large'
+  size?: 'sm' | 'md' | 'lg'
   color?: string
   closable?: boolean
   disabled?: boolean
@@ -42,7 +42,7 @@ export interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   variant: 'filled',
-  size: 'medium',
+  size: 'md',
   color: undefined,
   closable: false,
   disabled: false
@@ -120,9 +120,9 @@ const handleClick = () => {
       v-if="closable"
       class="inline-flex items-center justify-center rounded-full border-none bg-transparent p-0 leading-none cursor-pointer hover:bg-foreground/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed"
       :class="{
-        'w-3.5 h-3.5 text-xs': size === 'small',
-        'w-4.5 h-4.5 text-sm': size === 'medium',
-        'w-5.5 h-5.5 text-base': size === 'large'
+        'w-3.5 h-3.5 text-xs': size === 'sm',
+        'w-4.5 h-4.5 text-sm': size === 'md',
+        'w-5.5 h-5.5 text-base': size === 'lg'
       }"
       aria-label="Remove"
       @click="handleClose"

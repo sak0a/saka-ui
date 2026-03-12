@@ -74,7 +74,7 @@ const props = withDefaults(defineProps<Props>(), {
   items: undefined,
   trigger: 'click',
   placement: 'bottom-start',
-  size: 'medium',
+  size: 'md',
   variant: 'default',
   color: 'var(--s-primary)',
   animation: 'scale',
@@ -190,7 +190,7 @@ const menuStyle = computed(() => {
 
 // Size configurations
 const sizeConfig = computed(() => ({
-  small: {
+  sm: {
     trigger: 'px-2 py-0.5 text-xs gap-1.5',
     menu: 'py-1 px-1',
     item: 'px-2 py-0.5 text-xs',
@@ -198,7 +198,7 @@ const sizeConfig = computed(() => ({
     iconPx: 14,
     search: 'text-xs px-2 py-0.5'
   },
-  medium: {
+  md: {
     trigger: 'px-2 py-0.5 text-sm gap-2',
     menu: 'py-1 px-1',
     item: 'px-2 py-0.5 text-sm',
@@ -206,7 +206,7 @@ const sizeConfig = computed(() => ({
     iconPx: 16,
     search: 'text-sm px-2 py-0.5'
   },
-  large: {
+  lg: {
     trigger: 'px-2.5 py-0.5 text-base gap-2.5',
     menu: 'py-1.5 px-1.5',
     item: 'px-2.5 py-0.5 text-base',

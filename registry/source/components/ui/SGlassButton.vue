@@ -7,7 +7,7 @@ defineOptions({ inheritAttrs: false })
 
 export interface Props {
   // SButton parity props
-  size?: 'xs' | 'small' | 'medium' | 'large' | 'xl'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   disabled?: boolean
   loading?: boolean
   preserveSize?: boolean
@@ -33,7 +33,7 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  size: 'medium',
+  size: 'md',
   disabled: false,
   loading: false,
   preserveSize: false,
@@ -198,9 +198,9 @@ const sizeClasses = computed(() => {
   if (props.iconOnly) {
     const iconOnlySizes = {
       xs: 'w-6 h-6 text-xs',
-      small: 'w-8 h-8 text-sm',
-      medium: 'w-10 h-10 text-base',
-      large: 'w-12 h-12 text-lg',
+      sm: 'w-8 h-8 text-sm',
+      md: 'w-10 h-10 text-base',
+      lg: 'w-12 h-12 text-lg',
       xl: 'w-14 h-14 text-xl'
     }
     return iconOnlySizes[props.size]
@@ -208,9 +208,9 @@ const sizeClasses = computed(() => {
 
   const sizes = {
     xs: 'px-1.5 py-0.5 text-xs gap-1',
-    small: 'px-2 py-0.5 text-sm gap-1.5',
-    medium: 'px-2 py-0.5 text-sm gap-2',
-    large: 'px-2.5 py-0.5 text-base gap-2',
+    sm: 'px-2 py-0.5 text-sm gap-1.5',
+    md: 'px-2 py-0.5 text-sm gap-2',
+    lg: 'px-2.5 py-0.5 text-base gap-2',
     xl: 'px-3 py-0.5 text-lg gap-2.5'
   }
   return sizes[props.size]
@@ -219,9 +219,9 @@ const sizeClasses = computed(() => {
 const iconSizes = computed(() => {
   const sizes = {
     xs: 'text-xs',
-    small: 'text-sm',
-    medium: 'text-base',
-    large: 'text-lg',
+    sm: 'text-sm',
+    md: 'text-base',
+    lg: 'text-lg',
     xl: 'text-xl'
   }
   return sizes[props.size]

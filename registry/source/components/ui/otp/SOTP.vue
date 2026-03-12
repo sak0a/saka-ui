@@ -67,7 +67,7 @@ const props = withDefaults(defineProps<Props>(), {
   maxlength: 6,
   mode: 'numeric',
   variant: 'outlined',
-  size: 'medium',
+  size: 'md',
   color: 'var(--s-primary)',
   rounded: 'md',
   gap: 'normal',
@@ -140,21 +140,21 @@ const inputMode = computed(() => {
 // Size configurations
 const sizeConfig = computed(() => {
   const sizes = {
-    small: {
+    sm: {
       box: 'w-9 h-10',
       text: 'text-lg',
       label: 'text-xs',
       hint: 'text-xs',
       icon: 'text-sm'
     },
-    medium: {
+    md: {
       box: 'w-12 h-14',
       text: 'text-2xl',
       label: 'text-sm',
       hint: 'text-xs',
       icon: 'text-base'
     },
-    large: {
+    lg: {
       box: 'w-14 h-16',
       text: 'text-3xl',
       label: 'text-base',
@@ -693,9 +693,9 @@ watch(() => props.error, (hasError) => {
           <div
             class="flex items-center justify-center bg-emerald-500 text-white rounded-full shadow-lg shadow-emerald-500/50 animate-check-bounce"
             :class="{
-              'w-12 h-12 text-2xl': defaults.size === 'small',
-              'w-16 h-16 text-3xl': defaults.size === 'medium',
-              'w-20 h-20 text-4xl': defaults.size === 'large',
+              'w-12 h-12 text-2xl': defaults.size === 'sm',
+              'w-16 h-16 text-3xl': defaults.size === 'md',
+              'w-20 h-20 text-4xl': defaults.size === 'lg',
               'w-24 h-24 text-5xl': defaults.size === 'xl'
             }"
           >

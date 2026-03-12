@@ -18,7 +18,7 @@ export interface Props {
   range?: boolean // Enable dual-handle range mode
   
   // Visual
-  size?: 'small' | 'medium' | 'large'
+  size?: 'sm' | 'md' | 'lg'
   orientation?: 'horizontal' | 'vertical'
   rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   color?: string
@@ -59,7 +59,7 @@ const props = withDefaults(defineProps<Props>(), {
   max: 100,
   step: 1,
   range: false,
-  size: 'medium',
+  size: 'md',
   orientation: 'horizontal',
   rounded: 'full',
   color: 'var(--s-primary)',
@@ -140,9 +140,9 @@ watch(() => props.modelValue, () => {
 // Computed
 const sizeConfig = computed(() => {
   const sizes = {
-    small: { track: 4, handle: 14, fontSize: 'text-xs' },
-    medium: { track: 6, handle: 18, fontSize: 'text-sm' },
-    large: { track: 8, handle: 24, fontSize: 'text-base' }
+    sm: { track: 4, handle: 14, fontSize: 'text-xs' },
+    md: { track: 6, handle: 18, fontSize: 'text-sm' },
+    lg: { track: 8, handle: 24, fontSize: 'text-base' }
   }
   return sizes[props.size]
 })

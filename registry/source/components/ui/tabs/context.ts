@@ -2,7 +2,7 @@ import { type InjectionKey, type Ref } from 'vue'
 import type { IconProp } from '../../../lib/icon'
 
 export type TabType = 'line' | 'card' | 'segment' | 'bar' | 'chip'
-export type TabSize = 'small' | 'medium' | 'large'
+export type TabSize = 'sm' | 'md' | 'lg'
 export type TabPlacement = 'top' | 'left' | 'right' | 'bottom'
 export type TabJustify = 'flex-start' | 'center' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly'
 

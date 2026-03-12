@@ -13,7 +13,7 @@ export interface Props {
   
   // Visual Design
   variant?: 'outlined' | 'filled' | 'underlined' | 'ghost'
-  size?: 'small' | 'medium' | 'large'
+  size?: 'sm' | 'md' | 'lg'
   color?: string
   rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   
@@ -87,7 +87,7 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: '',
   type: 'text',
   variant: 'outlined',
-  size: 'medium',
+  size: 'md',
   color: undefined,
   rounded: 'md',
   labelPlacement: 'top',
@@ -229,7 +229,7 @@ const shouldShowSuggestions = computed(() => {
 // Size configurations
 const sizeConfig = computed(() => {
   const sizes = {
-    small: {
+    sm: {
       input: 'min-h-8 text-xs',
       padding: 'px-2.5 py-1.5',
       paddingWithIcon: 'px-2.5',
@@ -238,7 +238,7 @@ const sizeConfig = computed(() => {
       floatLabel: 'text-xs',
       floatLabelActive: '-top-2 text-[10px]'
     },
-    medium: {
+    md: {
       input: 'min-h-10 text-sm',
       padding: 'px-3 py-2',
       paddingWithIcon: 'px-3',
@@ -247,7 +247,7 @@ const sizeConfig = computed(() => {
       floatLabel: 'text-sm',
       floatLabelActive: '-top-2.5 text-xs'
     },
-    large: {
+    lg: {
       input: 'min-h-12 text-base',
       padding: 'px-4 py-2.5',
       paddingWithIcon: 'px-4',
@@ -385,10 +385,10 @@ const inputPaddingClasses = computed(() => {
   
   let classes = sizeConfig.value.input
   
-  if (props.size === 'small') {
+  if (props.size === 'sm') {
     classes += hasLeft ? ' pl-8' : ' pl-2.5'
     classes += hasRight ? ' pr-8' : ' pr-2.5'
-  } else if (props.size === 'large') {
+  } else if (props.size === 'lg') {
     classes += hasLeft ? ' pl-12' : ' pl-4'
     classes += hasRight ? ' pr-12' : ' pr-4'
   } else {
@@ -744,7 +744,7 @@ watch(() => props.error, (newError) => {
           :class="[
             sizeConfig.icon,
             iconColorClass,
-            size === 'small' ? 'pl-2.5' : size === 'large' ? 'pl-4' : 'pl-3'
+            size === 'sm' ? 'pl-2.5' : size === 'lg' ? 'pl-4' : 'pl-3'
           ]"
           :style="iconColor ? { color: iconColor } : iconFocusStyle"
         >
@@ -823,7 +823,7 @@ watch(() => props.error, (newError) => {
           class="s-input w-full outline-none transition-all duration-(--s-duration-normal) text-foreground placeholder:text-muted-foreground"
           :class="[
             sizeConfig.input,
-            size === 'small' ? 'px-2.5 py-1.5' : size === 'large' ? 'px-4 py-2.5' : 'px-3 py-2',
+            size === 'sm' ? 'px-2.5 py-1.5' : size === 'lg' ? 'px-4 py-2.5' : 'px-3 py-2',
             roundedConfig,
             variantClasses,
             focusClasses,
@@ -852,8 +852,8 @@ watch(() => props.error, (newError) => {
           class="s-input-label-floating absolute left-0 pointer-events-none transition-all duration-(--s-duration-normal) ease-out origin-left"
           :class="[
             labelClass,
-            size === 'small' ? 'left-2.5' : size === 'large' ? 'left-4' : 'left-3',
-            iconLeft || prefix ? (size === 'small' ? 'left-8' : size === 'large' ? 'left-12' : 'left-10') : '',
+            size === 'sm' ? 'left-2.5' : size === 'lg' ? 'left-4' : 'left-3',
+            iconLeft || prefix ? (size === 'sm' ? 'left-8' : size === 'lg' ? 'left-12' : 'left-10') : '',
             isLabelFloated
               ? [sizeConfig.floatLabelActive, color ? '' : 'text-primary', 'bg-background px-1 -ml-1']
               : ['top-1/2 -translate-y-1/2', sizeConfig.floatLabel, 'text-muted-foreground']
@@ -870,7 +870,7 @@ watch(() => props.error, (newError) => {
           class="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1 transition-colors duration-(--s-duration-normal)"
           :class="[
             sizeConfig.icon,
-            size === 'small' ? 'pr-2.5' : size === 'large' ? 'pr-4' : 'pr-3'
+            size === 'sm' ? 'pr-2.5' : size === 'lg' ? 'pr-4' : 'pr-3'
           ]"
         >
           <!-- Loading spinner -->

@@ -22,10 +22,10 @@ const props = withDefaults(defineProps<Props>(), {
 const context = inject<SDropdownContext>(SDropdownContextKey)
 
 const sizeConfig = computed(() => ({
-  small: 'px-2 pt-1.5 pb-0.5 text-[10px]',
-  medium: 'px-2.5 pt-2 pb-1 text-[11px]',
-  large: 'px-3 pt-2.5 pb-1 text-xs'
-}[context?.size ?? 'medium']))
+  sm: 'px-2 pt-1.5 pb-0.5 text-[10px]',
+  md: 'px-2.5 pt-2 pb-1 text-[11px]',
+  lg: 'px-3 pt-2.5 pb-1 text-xs'
+}[context?.size ?? 'md']))
 </script>
 
 <template>

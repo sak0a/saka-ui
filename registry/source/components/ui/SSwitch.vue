@@ -10,7 +10,7 @@ const attrs = useAttrs()
 export interface Props {
   modelValue?: boolean | string | number
   type?: 'inset' | 'outset'
-  size?: 'small' | 'medium' | 'large'
+  size?: 'sm' | 'md' | 'lg'
   color?: string
   disabled?: boolean
   loading?: boolean
@@ -30,7 +30,7 @@ export interface Props {
 const props = withDefaults(defineProps<Props>(), {
   modelValue: false,
   type: 'inset',
-  size: 'medium',
+  size: 'md',
   color: undefined,
   disabled: false,
   loading: false,
@@ -71,7 +71,7 @@ const handleKeydown = (e: KeyboardEvent) => {
 
 // Size configurations for inset type (thumb inside track)
 const insetSizes = {
-  small: {
+  sm: {
     track: 'w-8 h-4',
     thumb: 'w-3 h-3',
     thumbTranslate: 'translate-x-4',
@@ -79,7 +79,7 @@ const insetSizes = {
     label: 'text-xs',
     trackText: 'text-[8px]'
   },
-  medium: {
+  md: {
     track: 'w-11 h-6',
     thumb: 'w-5 h-5',
     thumbTranslate: 'translate-x-5',
@@ -87,7 +87,7 @@ const insetSizes = {
     label: 'text-sm',
     trackText: 'text-[10px]'
   },
-  large: {
+  lg: {
     track: 'w-14 h-7',
     thumb: 'w-6 h-6',
     thumbTranslate: 'translate-x-7',
@@ -99,7 +99,7 @@ const insetSizes = {
 
 // Size configurations for outset type (thumb larger than track)
 const outsetSizes = {
-  small: {
+  sm: {
     track: 'w-7 h-3',
     thumb: 'w-4 h-4',
     thumbTranslate: 'translate-x-3',
@@ -107,7 +107,7 @@ const outsetSizes = {
     label: 'text-xs',
     trackText: 'text-[6px]'
   },
-  medium: {
+  md: {
     track: 'w-10 h-4',
     thumb: 'w-6 h-6',
     thumbTranslate: 'translate-x-4',
@@ -115,7 +115,7 @@ const outsetSizes = {
     label: 'text-sm',
     trackText: 'text-[8px]'
   },
-  large: {
+  lg: {
     track: 'w-12 h-5',
     thumb: 'w-7 h-7',
     thumbTranslate: 'translate-x-5',
@@ -162,7 +162,7 @@ const trackClasses = computed(() => {
     isChecked.value && !props.color ? 'bg-primary' : '',
     !isChecked.value ? 'bg-accent' : '',
     { 'cursor-pointer': !props.disabled && !props.loading, 'cursor-not-allowed': props.disabled || props.loading },
-    { 'h-6': hasTrackText.value && props.size === 'medium', 'h-5': hasTrackText.value && props.size === 'small', 'h-7': hasTrackText.value && props.size === 'large' },
+    { 'h-6': hasTrackText.value && props.size === 'md', 'h-5': hasTrackText.value && props.size === 'sm', 'h-7': hasTrackText.value && props.size === 'lg' },
     props.trackClass,
   )
 })

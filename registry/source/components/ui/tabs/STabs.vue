@@ -47,7 +47,7 @@ export interface Props {
 const props = withDefaults(defineProps<Props>(), {
   modelValue: undefined,
   type: 'line',
-  size: 'medium',
+  size: 'md',
   animated: false,
   placement: 'top',
   justifyContent: 'flex-start',
@@ -209,9 +209,9 @@ const handleClose = (name: string | number, event: Event) => {
 // Size classes
 const sizeClasses = computed(() => {
   const sizes = {
-    small: 'text-xs px-2.5 py-1.5',
-    medium: 'text-sm px-4 py-2',
-    large: 'text-base px-5 py-2.5'
+    sm: 'text-xs px-2.5 py-1.5',
+    md: 'text-sm px-4 py-2',
+    lg: 'text-base px-5 py-2.5'
   }
   return sizes[props.size]
 })

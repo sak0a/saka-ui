@@ -10,14 +10,14 @@ const attrs = useAttrs()
 interface Props {
   keys: string[]
   separator?: string
-  size?: 'xs' | 'small' | 'medium' | 'large'
+  size?: 'xs' | 'sm' | 'md' | 'lg'
   variant?: 'default' | 'outlined' | 'flat' | 'ghost'
   color?: string
 }
 
 withDefaults(defineProps<Props>(), {
   separator: '+',
-  size: 'medium',
+  size: 'md',
   variant: 'default',
   color: undefined,
 })

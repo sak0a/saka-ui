@@ -12,7 +12,7 @@ export interface Props {
   
   // Visual
   variant?: 'default' | 'gradient' | 'striped' | 'buffer' | 'segments' | 'liquid'
-  size?: 'xs' | 'small' | 'medium' | 'large' | 'xl'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   orientation?: 'horizontal' | 'vertical'
   rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   color?: string
@@ -53,7 +53,7 @@ const props = withDefaults(defineProps<Props>(), {
   min: 0,
   max: 100,
   variant: 'default',
-  size: 'medium',
+  size: 'md',
   orientation: 'horizontal',
   rounded: 'full',
   color: 'var(--s-primary)',
@@ -110,9 +110,9 @@ const displayValue = computed(() => {
 const sizeConfig = computed(() => {
   const sizes = {
     xs: { height: '4px', fontSize: '10px', labelSize: 'text-xs' },
-    small: { height: '6px', fontSize: '10px', labelSize: 'text-xs' },
-    medium: { height: '10px', fontSize: '11px', labelSize: 'text-sm' },
-    large: { height: '16px', fontSize: '12px', labelSize: 'text-sm' },
+    sm: { height: '6px', fontSize: '10px', labelSize: 'text-xs' },
+    md: { height: '10px', fontSize: '11px', labelSize: 'text-sm' },
+    lg: { height: '16px', fontSize: '12px', labelSize: 'text-sm' },
     xl: { height: '24px', fontSize: '14px', labelSize: 'text-base' }
   }
   return sizes[props.size]
@@ -317,7 +317,7 @@ watch(() => props.modelValue, (newVal) => {
         >
           <!-- Value inside -->
           <span 
-            v-if="showValue && valuePosition === 'inside' && size !== 'xs' && size !== 'small'"
+            v-if="showValue && valuePosition === 'inside' && size !== 'xs' && size !== 'sm'"
             :class="['absolute inset-0 flex items-center justify-center font-semibold drop-shadow-sm tabular-nums', color === 'var(--s-primary)' ? 'text-primary-foreground' : 'text-white']"
             :style="{ fontSize: sizeConfig.fontSize }"
           >

@@ -6,7 +6,7 @@ import { buttonVariants } from './button'
 
 export interface Props {
   variant?: 'filled' | 'outlined' | 'light' | 'ghost' | 'link' | 'dashed' | 'glass'
-  size?: 'xs' | 'small' | 'medium' | 'large' | 'xl'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   color?: string
   type?: 'default' | 'primary' | 'error' | 'success' | 'info' | 'warning'
   disabled?: boolean
@@ -30,15 +30,15 @@ export interface Props {
 
 const iconOnlySizes: Record<string, string> = {
   xs: 'w-6 h-6 text-xs',
-  small: 'w-8 h-8 text-sm',
-  medium: 'w-10 h-10 text-base',
-  large: 'w-12 h-12 text-lg',
+  sm: 'w-8 h-8 text-sm',
+  md: 'w-10 h-10 text-base',
+  lg: 'w-12 h-12 text-lg',
   xl: 'w-14 h-14 text-xl',
 }
 
 const props = withDefaults(defineProps<Props>(), {
   variant: 'filled',
-  size: 'medium',
+  size: 'md',
   color: undefined,
   type: undefined,
   disabled: false,
@@ -137,9 +137,9 @@ const componentTag = computed(() => {
 const iconSizes = computed(() => {
   const sizes: Record<string, string> = {
     xs: 'text-xs',
-    small: 'text-sm',
-    medium: 'text-base',
-    large: 'text-lg',
+    sm: 'text-sm',
+    md: 'text-base',
+    lg: 'text-lg',
     xl: 'text-xl',
   }
   return sizes[props.size]

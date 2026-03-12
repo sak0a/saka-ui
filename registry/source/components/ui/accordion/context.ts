@@ -1,7 +1,7 @@
 import { type InjectionKey, type Ref } from 'vue'
 
 export type AccordionType = 'default' | 'bordered' | 'separated' | 'card' | 'minimal'
-export type AccordionSize = 'small' | 'medium' | 'large'
+export type AccordionSize = 'sm' | 'md' | 'lg'
 export type IconPlacement = 'left' | 'right'
 
 export interface AccordionItemInfo {

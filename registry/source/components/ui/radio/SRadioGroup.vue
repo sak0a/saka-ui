@@ -16,7 +16,7 @@ export interface Props {
   modelValue?: any
   options?: RadioOption[]
   orientation?: 'horizontal' | 'vertical' | 'grid'
-  size?: 'small' | 'medium' | 'large'
+  size?: 'sm' | 'md' | 'lg'
   color?: string
   variant?: 'default' | 'filled' | 'outlined' | 'button'
   disabled?: boolean
@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: undefined,
   options: () => [],
   orientation: 'vertical',
-  size: 'medium',
+  size: 'md',
   color: undefined,
   variant: 'default',
   disabled: false,
