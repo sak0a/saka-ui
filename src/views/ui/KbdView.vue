@@ -185,7 +185,7 @@ const shortcutProps: ApiProp[] = [
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Sizes</h2>
       <DemoSection
         title="Key Sizes"
-        description="Four size options: xs, small, medium (default), and large."
+        description="Four size options: xs, sm, md (default), and lg."
         :code="sizesCode"
         language="vue"
       >

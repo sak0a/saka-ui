@@ -295,7 +295,7 @@ const tableProps: ApiProp[] = [
   { name: 'columns', type: 'TableColumn<T>[]', default: '[]', description: 'Column definitions array' },
   { name: 'rowKey', type: 'keyof T | ((row, index) => string | number)', default: '"id"', description: 'Unique key accessor for rows' },
   { name: 'variant', type: "'default' | 'compact' | 'bordered' | 'striped' | 'minimal'", default: "'default'", description: 'Visual style variant' },
-  { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Size preset for padding and typography' },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size preset for padding and typography' },
   { name: 'selectionMode', type: "'none' | 'single' | 'multiple'", default: "'none'", description: 'Row selection mode' },
   { name: 'hoverable', type: 'boolean', default: 'true', description: 'Enable hover effect on rows' },
   { name: 'stickyHeader', type: 'boolean', default: 'false', description: 'Make header sticky on scroll' },
@@ -587,7 +587,7 @@ const formatSalary = (value: number) => {
           <h4 class="text-sm font-medium text-(--s-text-secondary) mb-3">Compact</h4>
           <SDataTable
             variant="compact"
-            size="small"
+            size="sm"
             :data="sampleUsers.slice(0, 3)"
             :columns="basicColumns.slice(0, 3)"
           />

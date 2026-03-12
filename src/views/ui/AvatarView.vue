@@ -39,15 +39,15 @@ const sizesCode = `<SAvatar size="xs">
   <SAvatarImage src="..." />
   <SAvatarFallback>XS</SAvatarFallback>
 </SAvatar>
-<SAvatar size="small">
+<SAvatar size="sm">
   <SAvatarImage src="..." />
   <SAvatarFallback>SM</SAvatarFallback>
 </SAvatar>
-<SAvatar size="medium">
+<SAvatar size="md">
   <SAvatarImage src="..." />
   <SAvatarFallback>MD</SAvatarFallback>
 </SAvatar>
-<SAvatar size="large">
+<SAvatar size="lg">
   <SAvatarImage src="..." />
   <SAvatarFallback>LG</SAvatarFallback>
 </SAvatar>
@@ -64,55 +64,55 @@ const sizesCode = `<SAvatar size="xs">
   <SAvatarFallback>80</SAvatarFallback>
 </SAvatar>`
 
-const shapesCode = `<SAvatar shape="circle" size="large">
+const shapesCode = `<SAvatar shape="circle" size="lg">
   <SAvatarImage src="..." />
   <SAvatarFallback>JD</SAvatarFallback>
 </SAvatar>
-<SAvatar shape="rounded" size="large">
+<SAvatar shape="rounded" size="lg">
   <SAvatarImage src="..." />
   <SAvatarFallback>JS</SAvatarFallback>
 </SAvatar>
-<SAvatar shape="square" size="large">
+<SAvatar shape="square" size="lg">
   <SAvatarImage src="..." />
   <SAvatarFallback>MJ</SAvatarFallback>
 </SAvatar>`
 
 const fallbackCode = `<!-- With initials -->
-<SAvatar size="large">
+<SAvatar size="lg">
   <SAvatarImage src="/broken-link.jpg" />
   <SAvatarFallback>CN</SAvatarFallback>
 </SAvatar>
 
 <!-- With icon (default) -->
-<SAvatar size="large">
+<SAvatar size="lg">
   <SAvatarFallback />
 </SAvatar>
 
 <!-- With custom content -->
-<SAvatar size="large">
+<SAvatar size="lg">
   <SAvatarFallback>
     <span class="mdi mdi-account-group text-[1.2em]" />
   </SAvatarFallback>
 </SAvatar>
 
 <!-- Custom colors -->
-<SAvatar size="large">
+<SAvatar size="lg">
   <SAvatarFallback color="#fff" bgColor="#8b5cf6">AB</SAvatarFallback>
 </SAvatar>`
 
-const statusCode = `<SAvatar size="large" status="online">
+const statusCode = `<SAvatar size="lg" status="online">
   <SAvatarImage src="..." />
   <SAvatarFallback>JD</SAvatarFallback>
 </SAvatar>
-<SAvatar size="large" status="away">
+<SAvatar size="lg" status="away">
   <SAvatarImage src="..." />
   <SAvatarFallback>JS</SAvatarFallback>
 </SAvatar>
-<SAvatar size="large" status="busy">
+<SAvatar size="lg" status="busy">
   <SAvatarImage src="..." />
   <SAvatarFallback>MJ</SAvatarFallback>
 </SAvatar>
-<SAvatar size="large" status="offline">
+<SAvatar size="lg" status="offline">
   <SAvatarImage src="..." />
   <SAvatarFallback>SW</SAvatarFallback>
 </SAvatar>`
@@ -169,18 +169,18 @@ const groupCode = `<!-- Normal spacing -->
 
 <!-- Loose spacing (large size) -->
 <SAvatarGroup spacing="loose">
-  <SAvatar v-for="user in users" :key="user.name" size="large">
+  <SAvatar v-for="user in users" :key="user.name" size="lg">
     <SAvatarImage :src="user.src" :alt="user.name" />
     <SAvatarFallback>{{ user.initials }}</SAvatarFallback>
   </SAvatar>
 </SAvatarGroup>`
 
-const delayCode = `<SAvatar size="large">
+const delayCode = `<SAvatar size="lg">
   <SAvatarImage src="https://slow-loading-image.test/avatar.jpg" />
   <SAvatarFallback :delayMs="0">Instant</SAvatarFallback>
 </SAvatar>
 
-<SAvatar size="large">
+<SAvatar size="lg">
   <SAvatarImage src="https://slow-loading-image.test/avatar2.jpg" />
   <SAvatarFallback :delayMs="600">Delayed</SAvatarFallback>
 </SAvatar>`
@@ -197,7 +197,7 @@ const profileCardCode = `<SAvatar size="2xl" status="online" ring ringColor="var
 
 // API Reference data
 const avatarProps: ApiProp[] = [
-  { name: 'size', type: "'xs' | 'small' | 'medium' | 'large' | 'xl' | '2xl' | number", default: "'medium'", description: 'Avatar size, preset or custom pixels', category: 'Appearance' },
+  { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | number", default: "'md'", description: 'Avatar size, preset or custom pixels', category: 'Appearance' },
   { name: 'shape', type: "'circle' | 'square' | 'rounded'", default: "'circle'", description: 'Avatar shape', category: 'Appearance' },
   { name: 'bordered', type: 'boolean', default: 'false', description: 'Add a border ring', category: 'Border & Ring' },
   { name: 'borderColor', type: 'string', default: "'var(--s-border)'", description: 'Border color (CSS)', category: 'Border & Ring' },
@@ -345,21 +345,21 @@ const avatarSlots: ApiSlot[] = [
             <span class="text-xs font-mono text-(--s-text-secondary)">xs</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SAvatar size="small">
+            <SAvatar size="sm">
               <SAvatarImage :src="users[0].src" />
               <SAvatarFallback>SM</SAvatarFallback>
             </SAvatar>
             <span class="text-xs font-mono text-(--s-text-secondary)">small</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SAvatar size="medium">
+            <SAvatar size="md">
               <SAvatarImage :src="users[0].src" />
               <SAvatarFallback>MD</SAvatarFallback>
             </SAvatar>
             <span class="text-xs font-mono text-(--s-text-secondary)">medium</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SAvatar size="large">
+            <SAvatar size="lg">
               <SAvatarImage :src="users[0].src" />
               <SAvatarFallback>LG</SAvatarFallback>
             </SAvatar>
@@ -401,21 +401,21 @@ const avatarSlots: ApiSlot[] = [
       >
         <div class="flex flex-wrap gap-6 items-center">
           <div class="flex flex-col items-center gap-2">
-            <SAvatar shape="circle" size="large">
+            <SAvatar shape="circle" size="lg">
               <SAvatarImage :src="users[0].src" />
               <SAvatarFallback>JD</SAvatarFallback>
             </SAvatar>
             <span class="text-xs font-mono text-(--s-text-secondary)">circle</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SAvatar shape="rounded" size="large">
+            <SAvatar shape="rounded" size="lg">
               <SAvatarImage :src="users[1].src" />
               <SAvatarFallback>JS</SAvatarFallback>
             </SAvatar>
             <span class="text-xs font-mono text-(--s-text-secondary)">rounded</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SAvatar shape="square" size="large">
+            <SAvatar shape="square" size="lg">
               <SAvatarImage :src="users[2].src" />
               <SAvatarFallback>MJ</SAvatarFallback>
             </SAvatar>
@@ -436,20 +436,20 @@ const avatarSlots: ApiSlot[] = [
       >
         <div class="flex flex-wrap gap-6 items-center">
           <div class="flex flex-col items-center gap-2">
-            <SAvatar size="large">
+            <SAvatar size="lg">
               <SAvatarImage src="/broken-link.jpg" />
               <SAvatarFallback>CN</SAvatarFallback>
             </SAvatar>
             <span class="text-xs font-mono text-(--s-text-secondary)">Initials</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SAvatar size="large">
+            <SAvatar size="lg">
               <SAvatarFallback />
             </SAvatar>
             <span class="text-xs font-mono text-(--s-text-secondary)">Icon (default)</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SAvatar size="large">
+            <SAvatar size="lg">
               <SAvatarFallback>
                 <span class="mdi mdi-account-group text-[1.2em]" />
               </SAvatarFallback>
@@ -457,7 +457,7 @@ const avatarSlots: ApiSlot[] = [
             <span class="text-xs font-mono text-(--s-text-secondary)">Custom icon</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SAvatar size="large">
+            <SAvatar size="lg">
               <SAvatarFallback color="#fff" bgColor="#8b5cf6">AB</SAvatarFallback>
             </SAvatar>
             <span class="text-xs font-mono text-(--s-text-secondary)">Custom colors</span>
@@ -477,28 +477,28 @@ const avatarSlots: ApiSlot[] = [
       >
         <div class="flex flex-wrap gap-6 items-center">
           <div class="flex flex-col items-center gap-2">
-            <SAvatar size="large" status="online">
+            <SAvatar size="lg" status="online">
               <SAvatarImage :src="users[0].src" />
               <SAvatarFallback>JD</SAvatarFallback>
             </SAvatar>
             <span class="text-xs font-mono text-(--s-text-secondary)">online</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SAvatar size="large" status="away">
+            <SAvatar size="lg" status="away">
               <SAvatarImage :src="users[1].src" />
               <SAvatarFallback>JS</SAvatarFallback>
             </SAvatar>
             <span class="text-xs font-mono text-(--s-text-secondary)">away</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SAvatar size="large" status="busy">
+            <SAvatar size="lg" status="busy">
               <SAvatarImage :src="users[2].src" />
               <SAvatarFallback>MJ</SAvatarFallback>
             </SAvatar>
             <span class="text-xs font-mono text-(--s-text-secondary)">busy</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SAvatar size="large" status="offline">
+            <SAvatar size="lg" status="offline">
               <SAvatarImage :src="users[3].src" />
               <SAvatarFallback>SW</SAvatarFallback>
             </SAvatar>
@@ -622,7 +622,7 @@ const avatarSlots: ApiSlot[] = [
           
           <div class="flex flex-col gap-2">
             <SAvatarGroup spacing="loose">
-              <SAvatar v-for="(user, idx) in users" :key="idx" size="large">
+              <SAvatar v-for="(user, idx) in users" :key="idx" size="lg">
                 <SAvatarImage :src="user.src" :alt="user.name" />
                 <SAvatarFallback>{{ user.initials }}</SAvatarFallback>
               </SAvatar>
@@ -644,14 +644,14 @@ const avatarSlots: ApiSlot[] = [
       >
         <div class="flex flex-wrap gap-6 items-center">
           <div class="flex flex-col items-center gap-2">
-            <SAvatar size="large">
+            <SAvatar size="lg">
               <SAvatarImage src="https://slow-loading-image.test/avatar.jpg" />
               <SAvatarFallback :delayMs="0">Instant</SAvatarFallback>
             </SAvatar>
             <span class="text-xs font-mono text-(--s-text-secondary)">No delay</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SAvatar size="large">
+            <SAvatar size="lg">
               <SAvatarImage src="https://slow-loading-image.test/avatar2.jpg" />
               <SAvatarFallback :delayMs="600">Delayed</SAvatarFallback>
             </SAvatar>
@@ -719,7 +719,7 @@ const avatarSlots: ApiSlot[] = [
       <SApiTable title="Slots" type="slots" :slots="avatarSlots">
         <div class="mt-4 p-4 rounded-xl bg-(--s-bg-secondary)/50 border border-(--s-border)">
           <h4 class="text-sm font-semibold text-(--s-text-primary) mb-3">Example: Complete avatar with fallback</h4>
-          <pre class="text-xs bg-(--s-bg-tertiary) p-3 rounded-lg overflow-x-auto"><code class="text-(--s-text-secondary)">&lt;SAvatar size="large" status="online"&gt;
+          <pre class="text-xs bg-(--s-bg-tertiary) p-3 rounded-lg overflow-x-auto"><code class="text-(--s-text-secondary)">&lt;SAvatar size="lg" status="online"&gt;
   &lt;SAvatarImage src="https://example.com/avatar.jpg" alt="User" /&gt;
   &lt;SAvatarFallback color="#fff" bgColor="#8b5cf6"&gt;JD&lt;/SAvatarFallback&gt;
 &lt;/SAvatar&gt;</code></pre>

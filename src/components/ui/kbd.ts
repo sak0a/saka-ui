@@ -12,14 +12,14 @@ export const kbdVariants = cva(
       },
       size: {
         xs: 'text-[10px] px-1 py-0.5 min-w-4 h-4 rounded',
-        small: 'text-xs px-1.5 py-0.5 min-w-5 h-5 rounded-md',
-        medium: 'text-xs px-1.5 py-1 min-w-6 h-6 rounded-md',
-        large: 'text-sm px-2 py-1 min-w-7 h-7 rounded-md',
+        sm: 'text-xs px-1.5 py-0.5 min-w-5 h-5 rounded-md',
+        md: 'text-xs px-1.5 py-1 min-w-6 h-6 rounded-md',
+        lg: 'text-sm px-2 py-1 min-w-7 h-7 rounded-md',
       },
     },
     defaultVariants: {
       variant: 'default',
-      size: 'medium',
+      size: 'md',
     },
   }
 )
