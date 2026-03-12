@@ -50,13 +50,13 @@ const basicCode = `<!-- Success Alert -->
 <SAlert variant="custom" color="#8b5cf6" title="Custom" description="A custom colored alert." />`
 
 const sizesCode = `<!-- Small Alert -->
-<SAlert size="small" variant="success" title="Small" description="This is a small alert." />
+<SAlert size="sm" variant="success" title="Small" description="This is a small alert." />
 
 <!-- Medium Alert (default) -->
-<SAlert size="medium" variant="info" title="Medium" description="This is a medium alert." />
+<SAlert size="md" variant="info" title="Medium" description="This is a medium alert." />
 
 <!-- Large Alert -->
-<SAlert size="large" variant="warning" title="Large" description="This is a large alert." />`
+<SAlert size="lg" variant="warning" title="Large" description="This is a large alert." />`
 
 const titlesCode = `<!-- Alert with title only -->
 <SAlert variant="success" title="Operation completed successfully!" />
@@ -125,15 +125,15 @@ const bordersCode = `<!-- No border -->
 
 const actionsCode = `<SAlert variant="warning" title="Confirm Action" description="Are you sure you want to proceed?">
   <template #actions>
-    <SButton size="small" variant="light" color="#ef4444">Cancel</SButton>
-    <SButton size="small" variant="filled" color="#059669">Confirm</SButton>
+    <SButton size="sm" variant="light" color="#ef4444">Cancel</SButton>
+    <SButton size="sm" variant="filled" color="#059669">Confirm</SButton>
   </template>
 </SAlert>
 
 <SAlert variant="info" title="Update Available" description="A new version is ready.">
   <template #actions>
-    <SButton size="small" variant="link" color="#3b82f6">Learn More</SButton>
-    <SButton size="small" variant="filled" color="#3b82f6">Update Now</SButton>
+    <SButton size="sm" variant="link" color="#3b82f6">Learn More</SButton>
+    <SButton size="sm" variant="filled" color="#3b82f6">Update Now</SButton>
   </template>
 </SAlert>`
 
@@ -218,8 +218,8 @@ const richContentCode = computed(() => {
     </div>
   </template>
   <template #actions>
-    <SButton size="small" variant="ghost">Undo</SButton>
-    <SButton size="small" variant="filled" color="#059669">View Profile</SButton>
+    <SButton size="sm" variant="ghost">Undo</SButton>
+    <SButton size="sm" variant="filled" color="#059669">View Profile</SButton>
   </template>
 </SAlert>`
 })
@@ -267,7 +267,7 @@ const realWorldCode = `<SAlert variant="success" closable>
 // API Reference data
 const alertProps: ApiProp[] = [
   { name: 'variant', type: "'success' | 'warning' | 'error' | 'info' | 'custom'", default: "'info'", description: 'Visual style of the alert', category: 'Core' },
-  { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Size of the alert', category: 'Core' },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size of the alert', category: 'Core' },
   { name: 'color', type: 'string', default: '—', description: "Custom color for 'custom' variant", category: 'Core' },
   { name: 'title', type: 'string', default: '—', description: 'Alert title text', category: 'Content' },
   { name: 'description', type: 'string', default: '—', description: 'Alert description text', category: 'Content' },
@@ -399,9 +399,9 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="space-y-3">
-          <SAlert size="small" variant="success" title="Small" description="This is a small alert." />
-          <SAlert size="medium" variant="info" title="Medium" description="This is a medium alert." />
-          <SAlert size="large" variant="warning" title="Large" description="This is a large alert." />
+          <SAlert size="sm" variant="success" title="Small" description="This is a small alert." />
+          <SAlert size="md" variant="info" title="Medium" description="This is a medium alert." />
+          <SAlert size="lg" variant="warning" title="Large" description="This is a large alert." />
         </div>
       </DemoSection>
     </section>
@@ -515,15 +515,15 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <div class="space-y-3">
           <SAlert variant="warning" title="Confirm Action" description="Are you sure you want to proceed?">
             <template #actions>
-              <SButton size="small" variant="light" color="#ef4444">Cancel</SButton>
-              <SButton size="small" variant="filled" color="#059669">Confirm</SButton>
+              <SButton size="sm" variant="light" color="#ef4444">Cancel</SButton>
+              <SButton size="sm" variant="filled" color="#059669">Confirm</SButton>
             </template>
           </SAlert>
 
           <SAlert variant="info" title="Update Available" description="A new version is ready.">
             <template #actions>
-              <SButton size="small" variant="link" color="#3b82f6">Learn More</SButton>
-              <SButton size="small" variant="filled" color="#3b82f6">Update Now</SButton>
+              <SButton size="sm" variant="link" color="#3b82f6">Learn More</SButton>
+              <SButton size="sm" variant="filled" color="#3b82f6">Update Now</SButton>
             </template>
           </SAlert>
         </div>
@@ -616,8 +616,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </div>
           </template>
           <template #actions>
-            <SButton size="small" variant="ghost">Undo</SButton>
-            <SButton size="small" variant="filled" color="#059669">View Profile</SButton>
+            <SButton size="sm" variant="ghost">Undo</SButton>
+            <SButton size="sm" variant="filled" color="#059669">View Profile</SButton>
           </template>
         </SAlert>
       </DemoSection>
@@ -688,8 +688,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           <h4 class="text-sm font-semibold text-(--s-text-primary) mb-3">Example: Using the actions slot</h4>
           <pre class="text-xs bg-(--s-bg-tertiary) p-3 rounded-lg overflow-x-auto"><code class="text-(--s-text-secondary)">&lt;SAlert variant="warning" title="Confirm Action" description="Are you sure?"&gt;
   &lt;template #actions&gt;
-    &lt;SButton size="small" variant="light" color="#ef4444"&gt;Cancel&lt;/SButton&gt;
-    &lt;SButton size="small" variant="filled" color="#059669"&gt;Confirm&lt;/SButton&gt;
+    &lt;SButton size="sm" variant="light" color="#ef4444"&gt;Cancel&lt;/SButton&gt;
+    &lt;SButton size="sm" variant="filled" color="#059669"&gt;Confirm&lt;/SButton&gt;
   &lt;/template&gt;
 &lt;/SAlert&gt;</code></pre>
         </div>

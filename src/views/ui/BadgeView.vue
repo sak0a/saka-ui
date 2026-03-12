@@ -33,7 +33,7 @@ const overlayCode = `<SBadge :content="5">
   <SButton iconOnly iconLeft="message" />
 </SBadge>
 
-<SBadge content="NEW" color="#f59e0b" size="small">
+<SBadge content="NEW" color="#f59e0b" size="sm">
   <SButton iconOnly iconLeft="gift" />
 </SBadge>`
 
@@ -41,9 +41,9 @@ const variantsCode = `<SBadge :content="5" variant="filled" standalone />
 <SBadge :content="5" variant="outlined" standalone />
 <SBadge :content="5" variant="light" standalone />`
 
-const sizesCode = `<SBadge :content="5" size="small" standalone />
-<SBadge :content="5" size="medium" standalone />
-<SBadge :content="5" size="large" standalone />`
+const sizesCode = `<SBadge :content="5" size="sm" standalone />
+<SBadge :content="5" size="md" standalone />
+<SBadge :content="5" size="lg" standalone />`
 
 const dotCode = `<SBadge dot>
   <SButton iconOnly iconLeft="bell" />
@@ -57,7 +57,7 @@ const dotCode = `<SBadge dot>
   <div class="w-10 h-10 bg-linear-to-br from-blue-500 to-purple-600 rounded-full"></div>
 </SBadge>
 
-<SBadge dot color="#10b981" size="large">
+<SBadge dot color="#10b981" size="lg">
   <SButton iconOnly iconLeft="wifi" />
 </SBadge>`
 
@@ -94,7 +94,7 @@ const borderedCode = `<SBadge :content="5" bordered color="#ef4444">
   <div class="w-12 h-12 bg-linear-to-br from-blue-500 to-cyan-500 rounded-full"></div>
 </SBadge>
 
-<SBadge content="NEW" bordered color="#f59e0b" size="small">
+<SBadge content="NEW" bordered color="#f59e0b" size="sm">
   <div class="w-12 h-12 bg-linear-to-br from-orange-500 to-red-500 rounded-full"></div>
 </SBadge>
 
@@ -110,7 +110,7 @@ const pulseCode = `<SBadge dot pulse color="#ef4444">
   <SButton iconOnly iconLeft="email" />
 </SBadge>
 
-<SBadge dot pulse color="#10b981" size="large">
+<SBadge dot pulse color="#10b981" size="lg">
   <span class="mdi mdi-circle text-3xl text-(--s-text-secondary)"></span>
 </SBadge>`
 
@@ -125,7 +125,7 @@ const interactiveCode = `<SBadge :content="notificationCount" :showZero="true">
   <SButton iconOnly iconLeft="bell" />
 </SBadge>
 
-<SButton variant="ghost" size="small">Clear</SButton>`
+<SButton variant="ghost" size="sm">Clear</SButton>`
 
 const showZeroCode = `<SBadge :content="0" :showZero="false">
   <SButton iconOnly iconLeft="bell" />
@@ -150,7 +150,7 @@ const navigationCode = `<SBadge :content="3" color="#ef4444">
 // API Reference data
 const badgeProps: ApiProp[] = [
   { name: 'variant', type: "'filled' | 'outlined' | 'light'", default: "'filled'", description: 'Visual style variant', category: 'Appearance' },
-  { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Badge size', category: 'Appearance' },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Badge size', category: 'Appearance' },
   { name: 'color', type: 'string', default: "'var(--s-primary)'", description: 'Badge color (any valid CSS color)', category: 'Appearance' },
   { name: 'bordered', type: 'boolean', default: 'false', description: 'Add border around badge', category: 'Appearance' },
   { name: 'content', type: 'string | number', default: 'undefined', description: 'Badge content', category: 'Content' },
@@ -272,7 +272,7 @@ const badgeSlots: ApiSlot[] = [
           <SBadge :content="3" color="#3b82f6">
             <SButton iconOnly iconLeft="message" />
           </SBadge>
-          <SBadge content="NEW" color="#f59e0b" size="small">
+          <SBadge content="NEW" color="#f59e0b" size="sm">
             <SButton iconOnly iconLeft="gift" />
           </SBadge>
         </div>
@@ -316,15 +316,15 @@ const badgeSlots: ApiSlot[] = [
       >
         <div class="flex flex-wrap gap-6 items-center">
           <div class="flex flex-col items-center gap-2">
-            <SBadge :content="5" size="small" standalone />
+            <SBadge :content="5" size="sm" standalone />
             <span class="text-xs font-mono text-(--s-text-secondary)">small</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SBadge :content="5" size="medium" standalone />
+            <SBadge :content="5" size="md" standalone />
             <span class="text-xs font-mono text-(--s-text-secondary)">medium</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SBadge :content="5" size="large" standalone />
+            <SBadge :content="5" size="lg" standalone />
             <span class="text-xs font-mono text-(--s-text-secondary)">large</span>
           </div>
         </div>
@@ -370,7 +370,7 @@ const badgeSlots: ApiSlot[] = [
           <SBadge dot color="#ef4444">
             <div class="w-10 h-10 bg-linear-to-br from-blue-500 to-purple-600 rounded-full"></div>
           </SBadge>
-          <SBadge dot color="#10b981" size="large">
+          <SBadge dot color="#10b981" size="lg">
             <SButton iconOnly iconLeft="wifi" />
           </SBadge>
         </div>
@@ -463,7 +463,7 @@ const badgeSlots: ApiSlot[] = [
           <SBadge dot bordered color="#10b981">
             <div class="w-12 h-12 bg-linear-to-br from-blue-500 to-cyan-500 rounded-full"></div>
           </SBadge>
-          <SBadge content="NEW" bordered color="#f59e0b" size="small">
+          <SBadge content="NEW" bordered color="#f59e0b" size="sm">
             <div class="w-12 h-12 bg-linear-to-br from-orange-500 to-red-500 rounded-full"></div>
           </SBadge>
           <SBadge :content="99" bordered variant="outlined">
@@ -489,7 +489,7 @@ const badgeSlots: ApiSlot[] = [
           <SBadge :content="3" pulse color="#f59e0b">
             <SButton iconOnly iconLeft="email" />
           </SBadge>
-          <SBadge dot pulse color="#10b981" size="large">
+          <SBadge dot pulse color="#10b981" size="lg">
             <span class="mdi mdi-circle text-3xl text-(--s-text-secondary)"></span>
           </SBadge>
         </div>
@@ -513,7 +513,7 @@ const badgeSlots: ApiSlot[] = [
               @click="incrementNotifications"
             />
           </SBadge>
-          <SButton variant="ghost" size="small" @click="clearNotifications">
+          <SButton variant="ghost" size="sm" @click="clearNotifications">
             Clear
           </SButton>
           <span class="text-sm text-(--s-text-secondary)">

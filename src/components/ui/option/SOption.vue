@@ -60,26 +60,26 @@ const handleClick = () => {
 // Size configurations
 const sizeConfig = computed(() => {
   const sizes = {
-    small: {
+    sm: {
       padding: 'py-1.5 px-3',
       text: 'text-xs',
       icon: 'text-sm',
       gap: 'gap-2'
     },
-    medium: {
+    md: {
       padding: 'py-2 px-3',
       text: 'text-sm',
       icon: 'text-base',
       gap: 'gap-2.5'
     },
-    large: {
+    lg: {
       padding: 'py-2.5 px-4',
       text: 'text-base',
       icon: 'text-lg',
       gap: 'gap-3'
     }
   }
-  return sizes[selectContext?.size as keyof typeof sizes] ?? sizes.medium
+  return sizes[selectContext?.size as keyof typeof sizes] ?? sizes.md
 })
 
 // Background style for selection/highlight

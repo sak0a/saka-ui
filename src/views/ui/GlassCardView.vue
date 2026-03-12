@@ -37,8 +37,8 @@ const basicUsageCode = computed(() => `<SGlassCard tint="light">
     <p>A translucent card with backdrop blur, specular highlight, and barrel-distortion refraction.</p>
   </SCardContent>
   <SCardFooter>
-    <SButton size="small" variant="ghost">Cancel</SButton>
-    <SButton size="small">Learn More</SButton>
+    <SButton size="sm" variant="ghost">Cancel</SButton>
+    <SButton size="sm">Learn More</SButton>
   </SCardFooter>
 </SGlassCard>`)
 
@@ -195,8 +195,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                 <p>A translucent card with backdrop blur, specular highlight, and barrel-distortion refraction.</p>
               </SCardContent>
               <SCardFooter>
-                <SButton size="small" variant="ghost">Cancel</SButton>
-                <SButton size="small">Learn More</SButton>
+                <SButton size="sm" variant="ghost">Cancel</SButton>
+                <SButton size="sm">Learn More</SButton>
               </SCardFooter>
             </SGlassCard>
           </div>
@@ -402,7 +402,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                 <p>Manage your account settings and notification preferences.</p>
               </SCardContent>
               <SCardFooter>
-                <SButton size="small">Save Changes</SButton>
+                <SButton size="sm">Save Changes</SButton>
               </SCardFooter>
             </SGlassCard>
             <SGlassCard tint="dark">
@@ -411,7 +411,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                 <p>Enable two-factor authentication for enhanced account protection.</p>
               </SCardContent>
               <SCardFooter>
-                <SButton size="small">Enable 2FA</SButton>
+                <SButton size="sm">Enable 2FA</SButton>
               </SCardFooter>
             </SGlassCard>
           </div>
@@ -449,8 +449,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                           <p>Discover the serenity of alpine lakes and towering granite cliffs.</p>
                         </SCardContent>
                         <SCardFooter>
-                          <SButton size="small" variant="ghost">Details</SButton>
-                          <SButton size="small">Book Now</SButton>
+                          <SButton size="sm" variant="ghost">Details</SButton>
+                          <SButton size="sm">Book Now</SButton>
                         </SCardFooter>
                       </SGlassCard>
                     </div>
@@ -524,8 +524,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                 <p>Leading the frontend architecture team and mentoring junior developers.</p>
               </SCardContent>
               <SCardFooter divider>
-                <SButton size="small" variant="ghost">Message</SButton>
-                <SButton size="small">View Profile</SButton>
+                <SButton size="sm" variant="ghost">Message</SButton>
+                <SButton size="sm">View Profile</SButton>
               </SCardFooter>
             </SGlassCard>
             <!-- With icon header -->
@@ -548,7 +548,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                 </div>
               </SCardContent>
               <SCardFooter divider>
-                <SButton size="small">View Board</SButton>
+                <SButton size="sm">View Board</SButton>
               </SCardFooter>
             </SGlassCard>
           </div>

@@ -194,7 +194,7 @@ const cartCode = `<SDrawer
     </div>
   </SDrawerContent>
   <SDrawerFooter align="stretch">
-    <SButton size="large" class="w-full">Checkout</SButton>
+    <SButton size="lg" class="w-full">Checkout</SButton>
     <SButton variant="outlined" class="w-full">Continue Shopping</SButton>
   </SDrawerFooter>
 </SDrawer>`
@@ -302,7 +302,7 @@ const notificationsCode = `<SDrawer
 >
   <SDrawerHeader title="Notifications" closable>
     <template #extra>
-      <SButton variant="ghost" size="small">Mark all read</SButton>
+      <SButton variant="ghost" size="sm">Mark all read</SButton>
     </template>
   </SDrawerHeader>
   <SDrawerContent padding="none">
@@ -854,7 +854,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               >
                 <SIcon :icon="item.icon" :size="20" />
                 <span class="flex-1 text-left">{{ item.label }}</span>
-                <SBadge v-if="item.badge" size="small" color="red">{{ item.badge }}</SBadge>
+                <SBadge v-if="item.badge" size="sm" color="red">{{ item.badge }}</SBadge>
               </SButton>
             </nav>
           </SDrawerContent>
@@ -881,7 +881,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <SButton @click="cartDrawer = true">
           <SIcon :icon="ri('cart')" :size="20" class="mr-2" />
           View Cart
-          <SBadge size="small" class="ml-2">{{ cartItems.length }}</SBadge>
+          <SBadge size="sm" class="ml-2">{{ cartItems.length }}</SBadge>
         </SButton>
 
         <SDrawer
@@ -908,7 +908,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                   <p class="text-sm text-(--s-text-tertiary) mt-1">Qty: {{ item.qty }}</p>
                   <p class="font-semibold text-(--s-primary) mt-2">${{ (item.price * item.qty).toFixed(2) }}</p>
                 </div>
-                <SButton variant="ghost" size="small" :iconOnly="true" class="shrink-0 text-(--s-text-tertiary) hover:text-red-500 hover:bg-red-500/10">
+                <SButton variant="ghost" size="sm" :iconOnly="true" class="shrink-0 text-(--s-text-tertiary) hover:text-red-500 hover:bg-red-500/10">
                   <SIcon :icon="ri('delete')" :size="18" />
                 </SButton>
               </div>
@@ -920,7 +920,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               <span class="text-(--s-text-secondary)">Subtotal</span>
               <span class="text-xl font-bold text-(--s-text-primary)">${{ cartTotal().toFixed(2) }}</span>
             </div>
-            <SButton size="large" class="w-full">
+            <SButton size="lg" class="w-full">
               <SIcon :icon="ri('lock')" :size="20" class="mr-2" />
               Checkout
             </SButton>
@@ -1067,7 +1067,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <SButton @click="notificationDrawer = true">
           <SIcon :icon="ri('bell')" :size="20" class="mr-2" />
           Notifications
-          <SBadge size="small" color="red" class="ml-2">3</SBadge>
+          <SBadge size="sm" color="red" class="ml-2">3</SBadge>
         </SButton>
 
         <SDrawer
@@ -1078,7 +1078,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         >
           <SDrawerHeader title="Notifications" closable>
             <template #extra>
-              <SButton variant="ghost" size="small">
+              <SButton variant="ghost" size="sm">
                 Mark all read
               </SButton>
             </template>

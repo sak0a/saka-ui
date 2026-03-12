@@ -7,30 +7,24 @@ Generated from source code analysis of all 32 registry components.
 
 ## 1. Size Scale Naming Conventions
 
-Components use **inconsistent size naming** across the framework:
+Components use **standardized abbreviated size naming** across the framework:
 
 | Scale | Components Using It |
 |-------|-------------------|
-| `xs / small / medium / large / xl` | SButton, SGlassButton, SProgress, SOTP (uses `xl` too) |
-| `small / medium / large` | SInput, SSelect, SChip, SSwitch, SAlert, SCheckbox, SRadio, SDropdown, SAccordion, STabs, SOption, SDatePicker, SColorPicker, SCarousel (arrows only) |
-| `xs / small / medium / large` | SKbd |
-| `xs / small / medium / large / xl` | SPagination |
-| `xs / small / medium / large / xl / 2xl` | SAvatar |
-| `small / medium / large` | SDataTable |
+| `xs / sm / md / lg / xl` | SButton, SGlassButton, SProgress, SOTP (uses `xl` too), SPagination |
+| `sm / md / lg` | SInput, SSelect, SChip, SSwitch, SAlert, SCheckbox, SRadio, SDropdown, SAccordion, STabs, SOption, SDatePicker, SColorPicker, SCarousel (arrows only), SDataTable, SBadge |
+| `xs / sm / md / lg` | SKbd |
+| `xs / sm / md / lg / xl / 2xl` | SAvatar |
 | `xs / sm / md / lg / xl / full` | SModal, SDrawer |
-| `compact / default / comfortable` | SCard, SGlassCard |
-| `small / medium / large` (dot-specific) | SBadge |
+| `compact / default / comfortable` | SCard, SGlassCard (semantic sizing, intentionally different) |
 | No sizes (custom via props) | SIcon, SSkeleton, STooltip, SToast, SBreadcrumb, SCarousel (main) |
 
-### Inconsistencies Found
+### Convention
 
-- **Mixed naming**: `small` vs `sm`, `medium` vs `md`, `large` vs `lg` — no single convention
-- **Button/GlassButton** use `xs / small / medium / large / xl` (5 tiers, word-based with `xs`/`xl` abbreviations)
-- **Kbd** uses `xs / small / medium / large` (4 tiers, word-based with `xs` abbreviation)
-- **Pagination** uses `xs / small / medium / large / xl` (5 tiers, word-based with `xs`/`xl` abbreviations)
-- **Card** uses semantic names `compact / default / comfortable` (unique)
-- **Table** uses `small / medium / large` (3 tiers, word-based)
-- **Form controls** (Input, Select, Checkbox, Radio, Switch) consistently use `small / medium / large`
+All components use abbreviated size names (`xs`, `sm`, `md`, `lg`, `xl`, `2xl`) as the standard convention.
+
+- **Card/GlassCard** are the intentional exception, using semantic names (`compact / default / comfortable`) because they describe layout density rather than physical size.
+- **Modal/Drawer** already used abbreviated names and were not changed.
 
 ---
 
@@ -365,7 +359,7 @@ Card and GlassCard are perfectly aligned. Alert follows a simpler 3/4/5 scale.
 
 ### Critical (should fix for design system consistency):
 
-1. **Size naming**: Mix of `small/medium/large`, `sm/md/lg`, `xs/sm/md/lg/xl`, and semantic names. Recommend standardizing on one convention.
+1. **Size naming**: **RESOLVED** — All components now use abbreviated `sm/md/lg` convention (with `xs`, `xl`, `2xl` where applicable). Card/GlassCard intentionally use semantic names.
 2. **Alert/Toast use `dark:` variants**: **RESOLVED** — now uses semantic state surface tokens (`color-mix()` based) that auto-adapt in dark mode.
 3. **Disabled opacity hardcoded**: **RESOLVED** — now uses `opacity-(--s-opacity-disabled)` token.
 4. **Animation durations hardcoded**: **RESOLVED** — now uses `duration-(--s-duration-normal)` and `duration-(--s-duration-slow)` tokens.
@@ -386,9 +380,9 @@ Based on the most common patterns across components:
 
 ### Size Scale Standard:
 ```
-small  → text-xs,  icon: text-sm,   px-2.5, min-h-8  (32px), gap-1.5
-medium → text-sm,  icon: text-base, px-3,   min-h-10 (40px), gap-2
-large  → text-base, icon: text-lg,  px-4,   min-h-12 (48px), gap-2.5
+sm → text-xs,  icon: text-sm,   px-2.5, min-h-8  (32px), gap-1.5
+md → text-sm,  icon: text-base, px-3,   min-h-10 (40px), gap-2
+lg → text-base, icon: text-lg,  px-4,   min-h-12 (48px), gap-2.5
 ```
 
 ### Border Radius Standard:

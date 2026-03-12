@@ -72,42 +72,42 @@ const basicUsageCode = `<STooltip content="This is a tooltip">
 
 const placementsCode = `<!-- Main placements -->
 <STooltip content="Top placement" placement="top">
-  <SButton size="small">Top</SButton>
+  <SButton size="sm">Top</SButton>
 </STooltip>
 <STooltip content="Bottom placement" placement="bottom">
-  <SButton size="small">Bottom</SButton>
+  <SButton size="sm">Bottom</SButton>
 </STooltip>
 <STooltip content="Left placement" placement="left">
-  <SButton size="small">Left</SButton>
+  <SButton size="sm">Left</SButton>
 </STooltip>
 <STooltip content="Right placement" placement="right">
-  <SButton size="small">Right</SButton>
+  <SButton size="sm">Right</SButton>
 </STooltip>
 
 <!-- Start/End variants -->
 <STooltip content="Top Start" placement="top-start">
-  <SButton size="small" variant="outlined">Top Start</SButton>
+  <SButton size="sm" variant="outlined">Top Start</SButton>
 </STooltip>
 <STooltip content="Top End" placement="top-end">
-  <SButton size="small" variant="outlined">Top End</SButton>
+  <SButton size="sm" variant="outlined">Top End</SButton>
 </STooltip>
 <STooltip content="Bottom Start" placement="bottom-start">
-  <SButton size="small" variant="outlined">Bottom Start</SButton>
+  <SButton size="sm" variant="outlined">Bottom Start</SButton>
 </STooltip>
 <STooltip content="Bottom End" placement="bottom-end">
-  <SButton size="small" variant="outlined">Bottom End</SButton>
+  <SButton size="sm" variant="outlined">Bottom End</SButton>
 </STooltip>
 <STooltip content="Left Start" placement="left-start">
-  <SButton size="small" variant="outlined">Left Start</SButton>
+  <SButton size="sm" variant="outlined">Left Start</SButton>
 </STooltip>
 <STooltip content="Left End" placement="left-end">
-  <SButton size="small" variant="outlined">Left End</SButton>
+  <SButton size="sm" variant="outlined">Left End</SButton>
 </STooltip>
 <STooltip content="Right Start" placement="right-start">
-  <SButton size="small" variant="outlined">Right Start</SButton>
+  <SButton size="sm" variant="outlined">Right Start</SButton>
 </STooltip>
 <STooltip content="Right End" placement="right-end">
-  <SButton size="small" variant="outlined">Right End</SButton>
+  <SButton size="sm" variant="outlined">Right End</SButton>
 </STooltip>`
 
 const triggersCode = `<!-- Hover trigger (default) -->
@@ -377,7 +377,7 @@ const advancedCode = `<!-- User profile preview -->
   text-color="#ffffff"
   placement="top"
 >
-  <SButton variant="light" color="#ef4444" iconOnly size="small">
+  <SButton variant="light" color="#ef4444" iconOnly size="sm">
     <span class="mdi mdi-delete"></span>
   </SButton>
 </STooltip>
@@ -508,21 +508,21 @@ const advancedCode = `<!-- User profile preview -->
             <div class="relative inline-grid grid-cols-3 gap-4 items-center justify-items-center" style="width: 400px; height: 200px;">
               <div></div>
               <STooltip content="Top placement" placement="top">
-                <SButton size="small">Top</SButton>
+                <SButton size="sm">Top</SButton>
               </STooltip>
               <div></div>
               
               <STooltip content="Left placement" placement="left">
-                <SButton size="small">Left</SButton>
+                <SButton size="sm">Left</SButton>
               </STooltip>
               <div></div>
               <STooltip content="Right placement" placement="right">
-                <SButton size="small">Right</SButton>
+                <SButton size="sm">Right</SButton>
               </STooltip>
               
               <div></div>
               <STooltip content="Bottom placement" placement="bottom">
-                <SButton size="small">Bottom</SButton>
+                <SButton size="sm">Bottom</SButton>
               </STooltip>
               <div></div>
             </div>
@@ -533,28 +533,28 @@ const advancedCode = `<!-- User profile preview -->
             <div class="text-sm font-medium text-(--s-text-secondary) mb-3">Alignment Variants:</div>
             <div class="flex flex-wrap gap-3">
               <STooltip content="Top Start" placement="top-start">
-                <SButton size="small" variant="outlined">Top Start</SButton>
+                <SButton size="sm" variant="outlined">Top Start</SButton>
               </STooltip>
               <STooltip content="Top End" placement="top-end">
-                <SButton size="small" variant="outlined">Top End</SButton>
+                <SButton size="sm" variant="outlined">Top End</SButton>
               </STooltip>
               <STooltip content="Bottom Start" placement="bottom-start">
-                <SButton size="small" variant="outlined">Bottom Start</SButton>
+                <SButton size="sm" variant="outlined">Bottom Start</SButton>
               </STooltip>
               <STooltip content="Bottom End" placement="bottom-end">
-                <SButton size="small" variant="outlined">Bottom End</SButton>
+                <SButton size="sm" variant="outlined">Bottom End</SButton>
               </STooltip>
               <STooltip content="Left Start" placement="left-start">
-                <SButton size="small" variant="outlined">Left Start</SButton>
+                <SButton size="sm" variant="outlined">Left Start</SButton>
               </STooltip>
               <STooltip content="Left End" placement="left-end">
-                <SButton size="small" variant="outlined">Left End</SButton>
+                <SButton size="sm" variant="outlined">Left End</SButton>
               </STooltip>
               <STooltip content="Right Start" placement="right-start">
-                <SButton size="small" variant="outlined">Right Start</SButton>
+                <SButton size="sm" variant="outlined">Right Start</SButton>
               </STooltip>
               <STooltip content="Right End" placement="right-end">
-                <SButton size="small" variant="outlined">Right End</SButton>
+                <SButton size="sm" variant="outlined">Right End</SButton>
               </STooltip>
             </div>
           </div>
@@ -877,7 +877,7 @@ const advancedCode = `<!-- User profile preview -->
             text-color="#ffffff"
             placement="top"
           >
-            <SButton variant="light" color="#ef4444" iconOnly size="small">
+            <SButton variant="light" color="#ef4444" iconOnly size="sm">
               <span class="mdi mdi-delete"></span>
             </SButton>
           </STooltip>

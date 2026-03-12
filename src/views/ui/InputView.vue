@@ -99,9 +99,9 @@ const variantsCode = `<!-- Outlined (default) -->
 <!-- Ghost -->
 <SInput variant="ghost" label="Ghost" placeholder="Transparent" />`
 
-const sizesCode = `<SInput size="small" label="Small" placeholder="Small input" />
-<SInput size="medium" label="Medium" placeholder="Medium input" />
-<SInput size="large" label="Large" placeholder="Large input" />`
+const sizesCode = `<SInput size="sm" label="Small" placeholder="Small input" />
+<SInput size="md" label="Medium" placeholder="Medium input" />
+<SInput size="lg" label="Large" placeholder="Large input" />`
 
 const floatingCode = `<!-- Floating label -->
 <SInput
@@ -277,7 +277,7 @@ const loginFormCode = computed(() => `<script setup>${li('email', 'lock')}<\/scr
 const searchBarCode = computed(() => `<script setup>${li('magnify')}<\/script>
 
 <template>
-<SInput v-model='query' ${cp('magnify', 'icon-left')} placeholder='Search anything...' clearable variant='filled' rounded='full' size='large' />
+<SInput v-model='query' ${cp('magnify', 'icon-left')} placeholder='Search anything...' clearable variant='filled' rounded='full' size='lg' />
 </template>`)
 
 const creditCardCode = computed(() => `<script setup>${li('credit-card')}<\/script>
@@ -291,7 +291,7 @@ const inputProps: ApiProp[] = [
   { name: 'modelValue', type: 'string | number', default: "''", description: 'Input value (v-model)', category: 'Core' },
   { name: 'type', type: "'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search' | 'textarea'", default: "'text'", description: 'Input type', category: 'Core' },
   { name: 'variant', type: "'outlined' | 'filled' | 'underlined' | 'ghost'", default: "'outlined'", description: 'Visual style variant', category: 'Appearance' },
-  { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Input size', category: 'Appearance' },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Input size', category: 'Appearance' },
   { name: 'rounded', type: "'none' | 'sm' | 'md' | 'lg' | 'full'", default: "'md'", description: 'Border radius', category: 'Appearance' },
   { name: 'label', type: 'string', default: '—', description: 'Label text', category: 'Content' },
   { name: 'placeholder', type: 'string', default: '—', description: 'Placeholder text', category: 'Content' },
@@ -473,9 +473,9 @@ const inputMethods: ApiMethod[] = [
         language="vue"
       >
         <div class="flex flex-col md:flex-row items-end gap-6">
-          <SInput size="small" label="Small" placeholder="Small input" class="w-full md:w-48" />
-          <SInput size="medium" label="Medium" placeholder="Medium input" class="w-full md:w-56" />
-          <SInput size="large" label="Large" placeholder="Large input" class="w-full md:w-64" />
+          <SInput size="sm" label="Small" placeholder="Small input" class="w-full md:w-48" />
+          <SInput size="md" label="Medium" placeholder="Medium input" class="w-full md:w-56" />
+          <SInput size="lg" label="Large" placeholder="Large input" class="w-full md:w-64" />
         </div>
       </DemoSection>
     </section>
@@ -819,7 +819,7 @@ const inputMethods: ApiMethod[] = [
               clearable
               variant="filled"
               rounded="full"
-              size="large"
+              size="lg"
             />
           </div>
         </DemoSection>

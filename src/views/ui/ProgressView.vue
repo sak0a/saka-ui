@@ -69,9 +69,9 @@ onUnmounted(() => {
 const basicCode = `<SProgress v-model="basicProgress" />`
 
 const sizesCode = `<SProgress v-model="sizeProgress" size="xs" />
-<SProgress v-model="sizeProgress" size="small" />
-<SProgress v-model="sizeProgress" size="medium" />
-<SProgress v-model="sizeProgress" size="large" />
+<SProgress v-model="sizeProgress" size="sm" />
+<SProgress v-model="sizeProgress" size="md" />
+<SProgress v-model="sizeProgress" size="lg" />
 <SProgress v-model="sizeProgress" size="xl" show-value value-position="inside" />`
 
 const variantsCode = `<!-- Default -->
@@ -113,7 +113,7 @@ const variantsCode = `<!-- Default -->
 <SProgress
   v-model="liquidProgress"
   variant="liquid"
-  size="large"
+  size="lg"
   color="#8b5cf6"
 />`
 
@@ -252,7 +252,7 @@ const liveCode = `<SProgress
   v-model="animatedProgress"
   variant="gradient"
   :gradient-colors="['#06b6d4', '#3b82f6', '#8b5cf6']"
-  size="large"
+  size="lg"
   show-value
   value-position="inside"
   animated
@@ -382,15 +382,15 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
           </div>
           <div class="space-y-2">
             <span class="text-xs font-mono text-(--s-text-secondary)">small</span>
-            <SProgress v-model="sizeProgress" size="small" />
+            <SProgress v-model="sizeProgress" size="sm" />
           </div>
           <div class="space-y-2">
             <span class="text-xs font-mono text-(--s-text-secondary)">medium (default)</span>
-            <SProgress v-model="sizeProgress" size="medium" />
+            <SProgress v-model="sizeProgress" size="md" />
           </div>
           <div class="space-y-2">
             <span class="text-xs font-mono text-(--s-text-secondary)">large</span>
-            <SProgress v-model="sizeProgress" size="large" />
+            <SProgress v-model="sizeProgress" size="lg" />
           </div>
           <div class="space-y-2">
             <span class="text-xs font-mono text-(--s-text-secondary)">xl</span>
@@ -455,7 +455,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
             <SProgress 
               v-model="liquidProgress" 
               variant="liquid"
-              size="large"
+              size="lg"
               color="#8b5cf6"
             />
           </div>
@@ -766,7 +766,7 @@ const limitedRange = ref<RangeValue>({ min: 200, max: 600 })
             v-model="animatedProgress"
             variant="gradient"
             :gradient-colors="['#06b6d4', '#3b82f6', '#8b5cf6']"
-            size="large"
+            size="lg"
             show-value
             value-position="inside"
             animated

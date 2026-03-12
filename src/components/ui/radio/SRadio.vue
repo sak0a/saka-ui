@@ -8,7 +8,7 @@ defineOptions({ inheritAttrs: false })
 export interface Props {
   modelValue?: any
   value?: any
-  size?: 'small' | 'medium' | 'large'
+  size?: 'sm' | 'md' | 'lg'
   color?: string
   disabled?: boolean
   loading?: boolean
@@ -26,7 +26,7 @@ export interface Props {
 const props = withDefaults(defineProps<Props>(), {
   modelValue: undefined,
   value: undefined,
-  size: 'medium',
+  size: 'md',
   color: undefined,
   disabled: false,
   loading: false,
@@ -102,7 +102,7 @@ const handleKeydown = (e: KeyboardEvent) => {
 // Size configurations
 const sizeConfig = computed(() => {
   const sizes = {
-    small: {
+    sm: {
       outer: 'w-4 h-4',
       inner: 'w-1.5 h-1.5',
       icon: 'text-[8px]',
@@ -110,7 +110,7 @@ const sizeConfig = computed(() => {
       gap: 'gap-1.5',
       button: 'px-3 py-1.5 text-xs'
     },
-    medium: {
+    md: {
       outer: 'w-5 h-5',
       inner: 'w-2.5 h-2.5',
       icon: 'text-[10px]',
@@ -118,7 +118,7 @@ const sizeConfig = computed(() => {
       gap: 'gap-2',
       button: 'px-4 py-2 text-sm'
     },
-    large: {
+    lg: {
       outer: 'w-6 h-6',
       inner: 'w-3 h-3',
       icon: 'text-xs',

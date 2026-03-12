@@ -15,9 +15,9 @@ export const buttonVariants = cva(
       },
       size: {
         xs: 'px-1.5 py-0.5 text-xs gap-1',
-        small: 'px-2 py-0.5 text-sm gap-1.5',
-        medium: 'px-2 py-0.5 text-sm gap-2',
-        large: 'px-2.5 py-0.5 text-base gap-2',
+        sm: 'px-2 py-0.5 text-sm gap-1.5',
+        md: 'px-2 py-0.5 text-sm gap-2',
+        lg: 'px-2.5 py-0.5 text-base gap-2',
         xl: 'px-3 py-0.5 text-lg gap-2.5',
       },
       rounded: {
@@ -34,7 +34,7 @@ export const buttonVariants = cva(
     },
     defaultVariants: {
       variant: 'filled',
-      size: 'medium',
+      size: 'md',
       rounded: 'md',
     },
   }

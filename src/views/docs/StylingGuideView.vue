@@ -86,7 +86,7 @@ const buttonVariants = cva(
     },
     defaultVariants: {
       variant: 'filled',
-      size: 'medium',
+      size: 'md',
     },
   }
 )

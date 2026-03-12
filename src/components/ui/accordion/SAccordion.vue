@@ -39,7 +39,7 @@ export interface Props {
 const props = withDefaults(defineProps<Props>(), {
   modelValue: undefined,
   type: 'default',
-  size: 'medium',
+  size: 'md',
   multiple: false,
   collapsible: true,
   iconPlacement: 'right',

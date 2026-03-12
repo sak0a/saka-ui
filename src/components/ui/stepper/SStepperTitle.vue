@@ -19,11 +19,11 @@ const itemCtx = inject(SStepperItemContextKey)
 // ─── Size Config ────────────────────────────────────────────────────────────────
 const sizeClasses = computed(() => {
   const sizes: Record<string, string> = {
-    small: 'text-xs leading-tight',
-    medium: 'text-sm leading-tight',
-    large: 'text-base leading-tight',
+    sm: 'text-xs leading-tight',
+    md: 'text-sm leading-tight',
+    lg: 'text-base leading-tight',
   }
-  return sizes[ctx?.size ?? 'medium']
+  return sizes[ctx?.size ?? 'md']
 })
 
 // ─── Classes ────────────────────────────────────────────────────────────────────

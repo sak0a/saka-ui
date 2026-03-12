@@ -300,11 +300,11 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                   {{ demoImages[0].description }}
                 </SMorphingCardDescription>
                 <div class="mt-6 flex gap-3">
-                  <SButton size="small" variant="outlined">
+                  <SButton size="sm" variant="outlined">
                     <span class="mdi mdi-share-variant mr-2" />
                     Share
                   </SButton>
-                  <SButton size="small">
+                  <SButton size="sm">
                     <span class="mdi mdi-download mr-2" />
                     Download
                   </SButton>

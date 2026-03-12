@@ -58,8 +58,8 @@ const basicCode = computed(() => `<SCard>
     and actions on a single topic, making it easy to scan for relevant information.
   </SCardContent>
   <SCardFooter divider justify="end">
-    <SButton variant="ghost" size="small">Cancel</SButton>
-    <SButton size="small">Save</SButton>
+    <SButton variant="ghost" size="sm">Cancel</SButton>
+    <SButton size="sm">Save</SButton>
   </SCardFooter>
 </SCard>`)
 
@@ -135,8 +135,8 @@ const mediaCode = `<SCard hoverable>
     Breathtaking views of the Alps at dawn with golden light.
   </SCardContent>
   <SCardActions justify="between">
-    <SButton variant="ghost" size="small" icon-left="heart-outline">Like</SButton>
-    <SButton variant="ghost" size="small" icon-left="share-variant-outline">Share</SButton>
+    <SButton variant="ghost" size="sm" icon-left="heart-outline">Like</SButton>
+    <SButton variant="ghost" size="sm" icon-left="share-variant-outline">Share</SButton>
   </SCardActions>
 </SCard>`
 
@@ -153,7 +153,7 @@ const horizontalCode = `<!-- Media on the left -->
     </SCardContent>
     <SCardFooter justify="between">
       <span class="text-lg font-bold">$299</span>
-      <SButton size="small" icon-left="cart-outline">Add to Cart</SButton>
+      <SButton size="sm" icon-left="cart-outline">Add to Cart</SButton>
     </SCardFooter>
   </div>
 </SCard>
@@ -167,7 +167,7 @@ const horizontalCode = `<!-- Media on the left -->
     </SCardContent>
     <SCardFooter justify="between">
       <span class="text-lg font-bold">$449</span>
-      <SButton size="small" icon-left="cart-outline">Add to Cart</SButton>
+      <SButton size="sm" icon-left="cart-outline">Add to Cart</SButton>
     </SCardFooter>
   </div>
   <SCardMedia
@@ -415,8 +415,8 @@ const actionsSlots: ApiSlot[] = [
               This is the card content area. Cards are surfaces that display content and actions on a single topic, making it easy to scan for relevant information.
             </SCardContent>
             <SCardFooter divider justify="end">
-              <SButton variant="ghost" size="small">Cancel</SButton>
-              <SButton size="small">Save</SButton>
+              <SButton variant="ghost" size="sm">Cancel</SButton>
+              <SButton size="sm">Save</SButton>
             </SCardFooter>
           </SCard>
 
@@ -427,15 +427,15 @@ const actionsSlots: ApiSlot[] = [
               avatar="https://i.pravatar.cc/150?img=5"
             >
               <template #actions>
-                <SButton variant="ghost" size="small" icon-only :icon-left="ri('dots-vertical')" />
+                <SButton variant="ghost" size="sm" icon-only :icon-left="ri('dots-vertical')" />
               </template>
             </SCardHeader>
             <SCardContent class="mt-4">
               Responsible for design systems, UI/UX decisions, and maintaining visual consistency across products.
             </SCardContent>
             <SCardFooter divider justify="between">
-              <SChip size="small" color="#8b5cf6">Design</SChip>
-              <SButton variant="light" size="small" :icon-left="ri('message-outline')">Message</SButton>
+              <SChip size="sm" color="#8b5cf6">Design</SChip>
+              <SButton variant="light" size="sm" :icon-left="ri('message-outline')">Message</SButton>
             </SCardFooter>
           </SCard>
 
@@ -459,7 +459,7 @@ const actionsSlots: ApiSlot[] = [
               </div>
             </SCardContent>
             <SCardFooter divider>
-              <SButton variant="link" size="small" :icon-right="ri('arrow-right')">View Report</SButton>
+              <SButton variant="link" size="sm" :icon-right="ri('arrow-right')">View Report</SButton>
             </SCardFooter>
           </SCard>
         </div>
@@ -509,7 +509,7 @@ const actionsSlots: ApiSlot[] = [
               </div>
               <h4 class="font-semibold text-(--s-text-primary) text-sm mt-2">Filled</h4>
               <p class="text-xs text-(--s-text-secondary)">John Doe</p>
-              <SChip size="small" color="#8b5cf6" class="mt-2">Pro</SChip>
+              <SChip size="sm" color="#8b5cf6" class="mt-2">Pro</SChip>
             </div>
           </SCard>
           
@@ -615,14 +615,14 @@ const actionsSlots: ApiSlot[] = [
             <SCardActions class="mt-4" justify="between">
               <SButton 
                 variant="ghost" 
-                size="small" 
+                size="sm" 
                 :icon-left="likedCards.includes(1) ? 'heart' : 'heart-outline'"
                 :color="likedCards.includes(1) ? '#ef4444' : undefined"
                 @click="toggleLike(1)"
               >
                 {{ likedCards.includes(1) ? 'Liked' : 'Like' }}
               </SButton>
-              <SButton variant="ghost" size="small" :icon-left="ri('share-variant-outline')">Share</SButton>
+              <SButton variant="ghost" size="sm" :icon-left="ri('share-variant-outline')">Share</SButton>
             </SCardActions>
           </SCard>
 
@@ -644,7 +644,7 @@ const actionsSlots: ApiSlot[] = [
               Minimalist workspace design for maximum productivity.
             </SCardContent>
             <SCardActions class="mt-4">
-              <SButton size="small">Learn More</SButton>
+              <SButton size="sm">Learn More</SButton>
             </SCardActions>
           </SCard>
 
@@ -657,8 +657,8 @@ const actionsSlots: ApiSlot[] = [
             >
               <template #actions>
                 <div class="flex gap-2">
-                  <SButton size="small" variant="filled">Preview</SButton>
-                  <SButton size="small" variant="ghost" class="text-white!">Details</SButton>
+                  <SButton size="sm" variant="filled">Preview</SButton>
+                  <SButton size="sm" variant="ghost" class="text-white!">Details</SButton>
                 </div>
               </template>
             </SCardMedia>
@@ -695,7 +695,7 @@ const actionsSlots: ApiSlot[] = [
               </SCardContent>
               <SCardFooter class="mt-3" justify="between">
                 <span class="text-lg font-bold text-(--s-primary)">$299</span>
-                <SButton size="small" :icon-left="ri('cart-outline')">Add to Cart</SButton>
+                <SButton size="sm" :icon-left="ri('cart-outline')">Add to Cart</SButton>
               </SCardFooter>
             </div>
           </SCard>
@@ -708,7 +708,7 @@ const actionsSlots: ApiSlot[] = [
               </SCardContent>
               <SCardFooter class="mt-3" justify="between">
                 <span class="text-lg font-bold text-(--s-primary)">$449</span>
-                <SButton size="small" :icon-left="ri('cart-outline')">Add to Cart</SButton>
+                <SButton size="sm" :icon-left="ri('cart-outline')">Add to Cart</SButton>
               </SCardFooter>
             </div>
             <SCardMedia 
@@ -941,12 +941,12 @@ const actionsSlots: ApiSlot[] = [
               </template>
             </SCardHeader>
             <SCardActions class="mt-4" justify="center" gap="md">
-              <SButton variant="ghost" size="small" icon-only :icon-left="ri('twitter')" />
-              <SButton variant="ghost" size="small" icon-only :icon-left="ri('linkedin')" />
-              <SButton variant="ghost" size="small" icon-only :icon-left="ri('github')" />
+              <SButton variant="ghost" size="sm" icon-only :icon-left="ri('twitter')" />
+              <SButton variant="ghost" size="sm" icon-only :icon-left="ri('linkedin')" />
+              <SButton variant="ghost" size="sm" icon-only :icon-left="ri('github')" />
             </SCardActions>
             <SCardFooter class="mt-4" divider justify="center">
-              <SButton variant="light" size="small" :icon-left="ri('email-outline')">Contact</SButton>
+              <SButton variant="light" size="sm" :icon-left="ri('email-outline')">Contact</SButton>
             </SCardFooter>
           </SCard>
         </div>
@@ -985,8 +985,8 @@ const actionsSlots: ApiSlot[] = [
               <p class="text-xl font-bold text-(--s-primary) mt-1">{{ product.price }}</p>
             </SCardContent>
             <SCardActions class="mt-4" full-width gap="sm">
-              <SButton variant="outlined" size="small" icon-only :icon-left="ri('heart-outline')" />
-              <SButton size="small" :icon-left="ri('cart-outline')" block>Add to Cart</SButton>
+              <SButton variant="outlined" size="sm" icon-only :icon-left="ri('heart-outline')" />
+              <SButton size="sm" :icon-left="ri('cart-outline')" block>Add to Cart</SButton>
             </SCardActions>
           </SCard>
         </div>
@@ -1047,7 +1047,7 @@ const actionsSlots: ApiSlot[] = [
                   <span class="text-2xl">₿</span>
                   <span class="font-semibold">Bitcoin</span>
                 </div>
-                <SChip size="small" color="#22c55e">+5.2%</SChip>
+                <SChip size="sm" color="#22c55e">+5.2%</SChip>
               </div>
               <p class="text-3xl font-bold">$67,432<span class="text-lg font-normal text-white/60">.18</span></p>
               <div class="mt-4 flex items-end justify-between h-16">

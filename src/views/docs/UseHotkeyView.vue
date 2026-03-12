@@ -309,7 +309,7 @@ const supportedKeys: ApiProp[] = [
             <p class="text-sm text-(--s-text-secondary) mb-4">
               Press Escape to close this modal
             </p>
-            <SButton size="small" @click="isModalOpen = false">
+            <SButton size="sm" @click="isModalOpen = false">
               Close
             </SButton>
           </div>

@@ -107,7 +107,7 @@ const sizeConfig = computed(() => {
   const isDense = context?.dense ?? false
 
   const sizes = {
-    small: {
+    sm: {
       header: isDense ? 'py-1 px-2' : 'py-1 px-2',
       title: isDense ? 'text-xs' : 'text-sm',
       subtitle: 'text-[10px]',
@@ -115,7 +115,7 @@ const sizeConfig = computed(() => {
       content: isDense ? 'px-2 pt-1 pb-2 text-xs' : 'px-2 pt-1 pb-2 text-sm',
       expandIcon: 'text-base'
     },
-    medium: {
+    md: {
       header: isDense ? 'py-1 px-2' : 'py-1 px-3',
       title: isDense ? 'text-sm' : 'text-base',
       subtitle: isDense ? 'text-xs' : 'text-sm',
@@ -123,7 +123,7 @@ const sizeConfig = computed(() => {
       content: isDense ? 'px-2 pt-1 pb-2 text-sm' : 'px-2.5 pt-1.5 pb-2.5',
       expandIcon: isDense ? 'text-lg' : 'text-xl'
     },
-    large: {
+    lg: {
       header: isDense ? 'py-1 px-2.5' : 'py-1 px-2.5',
       title: isDense ? 'text-base' : 'text-lg',
       subtitle: isDense ? 'text-sm' : 'text-sm',
@@ -132,7 +132,7 @@ const sizeConfig = computed(() => {
       expandIcon: isDense ? 'text-xl' : 'text-2xl'
     }
   }
-  return sizes[context?.size ?? 'medium']
+  return sizes[context?.size ?? 'md']
 })
 
 // Type-based classes

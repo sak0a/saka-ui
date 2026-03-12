@@ -294,22 +294,22 @@ const toastEvents: ApiEvent[] = [
         language="typescript"
       >
         <div class="grid grid-cols-3 gap-2 max-w-md">
-          <SButton size="small" variant="outlined" @click="showPositioned('top-left')">
+          <SButton size="sm" variant="outlined" @click="showPositioned('top-left')">
             Top Left
           </SButton>
-          <SButton size="small" variant="outlined" @click="showPositioned('top-center')">
+          <SButton size="sm" variant="outlined" @click="showPositioned('top-center')">
             Top Center
           </SButton>
-          <SButton size="small" variant="outlined" @click="showPositioned('top-right')">
+          <SButton size="sm" variant="outlined" @click="showPositioned('top-right')">
             Top Right
           </SButton>
-          <SButton size="small" variant="outlined" @click="showPositioned('bottom-left')">
+          <SButton size="sm" variant="outlined" @click="showPositioned('bottom-left')">
             Bottom Left
           </SButton>
-          <SButton size="small" variant="outlined" @click="showPositioned('bottom-center')">
+          <SButton size="sm" variant="outlined" @click="showPositioned('bottom-center')">
             Bottom Center
           </SButton>
-          <SButton size="small" variant="outlined" @click="showPositioned('bottom-right')">
+          <SButton size="sm" variant="outlined" @click="showPositioned('bottom-right')">
             Bottom Right
           </SButton>
         </div>

@@ -142,9 +142,9 @@ const formatsCode = `<SColorPicker v-model="formatHex" format="hex" />
 <SColorPicker v-model="formatRgb" format="rgb" />
 <SColorPicker v-model="formatHsl" format="hsl" />`
 
-const sizesCode = `<SColorPicker v-model="sizeSmall" size="small" />
-<SColorPicker v-model="sizeMedium" size="medium" />
-<SColorPicker v-model="sizeLarge" size="large" />`
+const sizesCode = `<SColorPicker v-model="sizeSmall" size="sm" />
+<SColorPicker v-model="sizeMedium" size="md" />
+<SColorPicker v-model="sizeLarge" size="lg" />`
 
 const themeCustomizerCode = `<SColorPicker v-model="primaryColor" mode="dropdown" label="Primary" />
 <SColorPicker v-model="secondaryColor" mode="dropdown" label="Secondary" />
@@ -156,7 +156,7 @@ const colorPickerProps: ApiProp[] = [
   { name: 'modelValue', type: 'string', default: "'#3b82f6'", description: 'v-model color value (HEX, RGB, or HSL string)', category: 'Core' },
   { name: 'mode', type: "'inline' | 'dropdown'", default: "'inline'", description: 'Display mode (inline or dropdown popup)', category: 'Core' },
   { name: 'format', type: "'hex' | 'rgb' | 'hsl'", default: "'hex'", description: 'Output color format for v-model', category: 'Core' },
-  { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Component size (affects panel width & heights)', category: 'Core' },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Component size (affects panel width & heights)', category: 'Core' },
   { name: 'label', type: 'string', default: 'undefined', description: 'Label text above picker', category: 'Core' },
   { name: 'triggerStyle', type: "'button' | 'swatch'", default: "'button'", description: 'Built-in trigger style (simple API only)', category: 'Simple API' },
   { name: 'showSpectrum', type: 'boolean', default: 'true', description: 'Show the 2D saturation/brightness picker (simple API)', category: 'Simple API' },
@@ -488,15 +488,15 @@ const copySlots: ApiSlot[] = [
       >
         <div class="flex flex-wrap gap-8 items-start">
           <div class="flex flex-col items-center gap-3">
-            <SColorPicker v-model="sizeSmall" size="small" />
+            <SColorPicker v-model="sizeSmall" size="sm" />
             <span class="text-xs font-mono text-(--s-text-secondary)">small</span>
           </div>
           <div class="flex flex-col items-center gap-3">
-            <SColorPicker v-model="sizeMedium" size="medium" />
+            <SColorPicker v-model="sizeMedium" size="md" />
             <span class="text-xs font-mono text-(--s-text-secondary)">medium</span>
           </div>
           <div class="flex flex-col items-center gap-3">
-            <SColorPicker v-model="sizeLarge" size="large" />
+            <SColorPicker v-model="sizeLarge" size="lg" />
             <span class="text-xs font-mono text-(--s-text-secondary)">large</span>
           </div>
         </div>

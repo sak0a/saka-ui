@@ -25,7 +25,7 @@ export interface Props {
   disabled?: boolean
   loading?: boolean
   placeholder?: string
-  size?: 'small' | 'medium' | 'large'
+  size?: 'sm' | 'md' | 'lg'
   color?: string
   variant?: 'outlined' | 'filled' | 'underlined'
   rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
@@ -61,7 +61,7 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   loading: false,
   placeholder: 'Select...',
-  size: 'medium',
+  size: 'md',
   color: undefined,
   variant: 'outlined',
   rounded: 'md',
@@ -555,7 +555,7 @@ provide('s-select-context', {
 // Size configurations
 const sizeConfig = computed(() => {
   const sizes = {
-    small: {
+    sm: {
       trigger: 'min-h-8 text-xs',
       padding: 'px-2.5 py-0.5',
       icon: 'text-sm',
@@ -563,7 +563,7 @@ const sizeConfig = computed(() => {
       label: 'text-xs',
       option: 'py-0.5 px-3 my-0.5 text-xs'
     },
-    medium: {
+    md: {
       trigger: 'min-h-10 text-sm',
       padding: 'px-3 py-0.5',
       icon: 'text-base',
@@ -571,7 +571,7 @@ const sizeConfig = computed(() => {
       label: 'text-sm',
       option: 'py-1 px-3 my-0.5 text-sm'
     },
-    large: {
+    lg: {
       trigger: 'min-h-12 text-base',
       padding: 'px-4 py-0.5',
       icon: 'text-lg',

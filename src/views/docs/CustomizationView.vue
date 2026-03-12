@@ -214,10 +214,10 @@ const presetColors = [
             Pass a <code class="text-xs bg-accent px-1 py-0.5 rounded">color</code> prop to override the accent color for a single component instance.
           </p>
           <div class="flex gap-2 flex-wrap">
-            <SButton color="#ec4899" size="small">Pink</SButton>
-            <SButton color="#10b981" size="small">Green</SButton>
-            <SButton color="#f59e0b" size="small">Amber</SButton>
-            <SButton color="#8b5cf6" size="small">Violet</SButton>
+            <SButton color="#ec4899" size="sm">Pink</SButton>
+            <SButton color="#10b981" size="sm">Green</SButton>
+            <SButton color="#f59e0b" size="sm">Amber</SButton>
+            <SButton color="#8b5cf6" size="sm">Violet</SButton>
           </div>
         </div>
 
@@ -231,9 +231,9 @@ const presetColors = [
             Pass Tailwind classes directly. Thanks to <code class="text-xs bg-accent px-1 py-0.5 rounded">cn()</code> (tailwind-merge), your classes properly override defaults.
           </p>
           <div class="flex gap-2 flex-wrap">
-            <SButton class="bg-gradient-to-r from-purple-500 to-pink-500 border-none text-white" size="small">Gradient</SButton>
-            <SButton class="rounded-none" size="small">Sharp</SButton>
-            <SButton class="shadow-xl" size="small" variant="outlined">Elevated</SButton>
+            <SButton class="bg-gradient-to-r from-purple-500 to-pink-500 border-none text-white" size="sm">Gradient</SButton>
+            <SButton class="rounded-none" size="sm">Sharp</SButton>
+            <SButton class="shadow-xl" size="sm" variant="outlined">Elevated</SButton>
           </div>
         </div>
       </div>

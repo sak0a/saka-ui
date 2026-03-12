@@ -50,7 +50,7 @@ describe('SButton', () => {
 
   it('renders correct size classes', () => {
     const wrapper = mount(SButton, {
-      props: { size: 'large' },
+      props: { size: 'lg' },
       slots: { default: 'Large' },
     })
 

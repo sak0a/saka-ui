@@ -67,9 +67,9 @@ const isChecked = ref(false)
   <SCheckbox v-model="isChecked" label="Accept terms and conditions" />
 </template>`
 
-const sizesCode = `<SCheckbox v-model="small" size="small" label="Small" />
-<SCheckbox v-model="medium" size="medium" label="Medium" />
-<SCheckbox v-model="large" size="large" label="Large" />`
+const sizesCode = `<SCheckbox v-model="small" size="sm" label="Small" />
+<SCheckbox v-model="medium" size="md" label="Medium" />
+<SCheckbox v-model="large" size="lg" label="Large" />`
 
 const colorsCode = `<SCheckbox v-model="check1" color="#3b82f6" label="Blue" />
 <SCheckbox v-model="check2" color="#ec4899" label="Pink" />
@@ -87,7 +87,7 @@ const indeterminateCode = `<SCheckbox
   :model-value="allTasksDone"
   :indeterminate="someTasksDone"
   label="Select All Tasks"
-  size="large"
+  size="lg"
   color="#3b82f6"
   @change="toggleAllTasks"
 />
@@ -158,7 +158,7 @@ const tasks = ref([
 const checkboxProps: ApiProp[] = [
   { name: 'modelValue', type: 'boolean | string | number | any[]', default: 'false', description: 'v-model binding value', category: 'Core' },
   { name: 'value', type: 'any', default: 'undefined', description: 'Value for array-based checkbox groups', category: 'Core' },
-  { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Checkbox size', category: 'Appearance' },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Checkbox size', category: 'Appearance' },
   { name: 'color', type: 'string', default: "'var(--s-primary)'", description: 'Checked state background color', category: 'Appearance' },
   { name: 'rounded', type: 'boolean', default: 'false', description: 'Use circular/pill shape', category: 'Appearance' },
   { name: 'icon', type: 'string', default: "'check'", description: 'MDI icon name for checked state', category: 'Appearance' },
@@ -279,13 +279,13 @@ const checkboxKeyboard: KeyboardShortcut[] = [
       >
         <div class="flex flex-wrap gap-8 items-center">
           <div class="flex flex-col items-center gap-3">
-            <SCheckbox v-model="sizeSmall" size="small" label="Small" />
+            <SCheckbox v-model="sizeSmall" size="sm" label="Small" />
           </div>
           <div class="flex flex-col items-center gap-3">
-            <SCheckbox v-model="sizeMedium" size="medium" label="Medium" />
+            <SCheckbox v-model="sizeMedium" size="md" label="Medium" />
           </div>
           <div class="flex flex-col items-center gap-3">
-            <SCheckbox v-model="sizeLarge" size="large" label="Large" />
+            <SCheckbox v-model="sizeLarge" size="lg" label="Large" />
           </div>
         </div>
       </DemoSection>
@@ -340,7 +340,7 @@ const checkboxKeyboard: KeyboardShortcut[] = [
               :model-value="allTasksDone"
               :indeterminate="someTasksDone"
               label="Select All Tasks"
-              size="large"
+              size="lg"
               color="#3b82f6"
               @change="toggleAllTasks"
             />

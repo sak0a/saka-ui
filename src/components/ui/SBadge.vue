@@ -15,29 +15,29 @@ const badgeVariants = cva(
         light: 'bg-primary/15 text-primary',
       },
       size: {
-        small: 'text-[10px] min-w-4 h-4 px-1',
-        medium: 'text-xs min-w-5 h-5 px-1.5',
-        large: 'text-sm min-w-6 h-6 px-2',
+        sm: 'text-[10px] min-w-4 h-4 px-1',
+        md: 'text-xs min-w-5 h-5 px-1.5',
+        lg: 'text-sm min-w-6 h-6 px-2',
       },
     },
     defaultVariants: {
       variant: 'filled',
-      size: 'medium',
+      size: 'md',
     },
   }
 )
 
 const dotSizeClasses = {
-  small: 'w-1.5 h-1.5',
-  medium: 'w-2 h-2',
-  large: 'w-2.5 h-2.5',
+  sm: 'w-1.5 h-1.5',
+  md: 'w-2 h-2',
+  lg: 'w-2.5 h-2.5',
 }
 
 export type BadgeVariants = VariantProps<typeof badgeVariants>
 
 export interface Props {
   variant?: 'filled' | 'outlined' | 'light'
-  size?: 'small' | 'medium' | 'large'
+  size?: 'sm' | 'md' | 'lg'
   color?: string
   content?: string | number
   max?: number
@@ -53,7 +53,7 @@ export interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   variant: 'filled',
-  size: 'medium',
+  size: 'md',
   color: undefined,
   max: 99,
   showZero: false,

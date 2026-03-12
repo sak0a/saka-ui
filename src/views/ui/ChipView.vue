@@ -34,9 +34,9 @@ const variantsCode = `<SChip variant="filled" color="#10b981">Filled</SChip>
 <SChip variant="outlined" color="#10b981">Outlined</SChip>
 <SChip variant="light" color="#10b981">Light</SChip>`
 
-const sizesCode = `<SChip size="small" color="#8b5cf6">Small</SChip>
-<SChip size="medium" color="#8b5cf6">Medium</SChip>
-<SChip size="large" color="#8b5cf6">Large</SChip>`
+const sizesCode = `<SChip size="sm" color="#8b5cf6">Small</SChip>
+<SChip size="md" color="#8b5cf6">Medium</SChip>
+<SChip size="lg" color="#8b5cf6">Large</SChip>`
 
 const closableCode = `<SChip 
   v-for="(framework, index) in frameworks" 
@@ -76,7 +76,7 @@ const combinedCode = `<SChip
   :key="tag.name"
   variant="light"
   closable
-  size="medium"
+  size="md"
   :color="tag.color"
   @close="handleRemoveTag(index)"
   @click="handleChipClick(tag.name)"
@@ -101,15 +101,15 @@ const iconsCode = `<SChip color="#3b82f6">
   <span class="mdi mdi-bell ml-1"></span>
 </SChip>`
 
-const filterTagsCode = `<SChip color="#3b82f6" variant="light" closable size="small">Category: Electronics</SChip>
-<SChip color="#10b981" variant="light" closable size="small">Price: $50-$200</SChip>
-<SChip color="#f59e0b" variant="light" closable size="small">Rating: 4+ Stars</SChip>
-<SChip color="#8b5cf6" variant="light" closable size="small">In Stock</SChip>`
+const filterTagsCode = `<SChip color="#3b82f6" variant="light" closable size="sm">Category: Electronics</SChip>
+<SChip color="#10b981" variant="light" closable size="sm">Price: $50-$200</SChip>
+<SChip color="#f59e0b" variant="light" closable size="sm">Rating: 4+ Stars</SChip>
+<SChip color="#8b5cf6" variant="light" closable size="sm">In Stock</SChip>`
 
 // API Reference data
 const chipProps: ApiProp[] = [
   { name: 'variant', type: "'filled' | 'outlined' | 'light'", default: "'filled'", description: 'Visual style variant', category: 'Appearance' },
-  { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Chip size', category: 'Appearance' },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Chip size', category: 'Appearance' },
   { name: 'color', type: 'string', default: "'#63e2b7'", description: 'Chip color (any valid CSS color)', category: 'Appearance' },
   { name: 'closable', type: 'boolean', default: 'false', description: 'Show close button', category: 'Behavior' },
   { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable interaction', category: 'Behavior' },
@@ -272,15 +272,15 @@ const chipSlots: ApiSlot[] = [
       >
         <div class="flex flex-wrap gap-4 items-center">
           <div class="flex flex-col items-center gap-2">
-            <SChip size="small" color="#8b5cf6">Small</SChip>
+            <SChip size="sm" color="#8b5cf6">Small</SChip>
             <span class="text-xs font-mono text-(--s-text-secondary)">small</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SChip size="medium" color="#8b5cf6">Medium</SChip>
+            <SChip size="md" color="#8b5cf6">Medium</SChip>
             <span class="text-xs font-mono text-(--s-text-secondary)">medium</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SChip size="large" color="#8b5cf6">Large</SChip>
+            <SChip size="lg" color="#8b5cf6">Large</SChip>
             <span class="text-xs font-mono text-(--s-text-secondary)">large</span>
           </div>
         </div>
@@ -377,7 +377,7 @@ const chipSlots: ApiSlot[] = [
             :key="tag.name"
             variant="light"
             closable
-            size="medium"
+            size="md"
             :color="tag.color"
             @close="handleRemoveTag(index)"
             @click="handleChipClick(tag.name)"
@@ -403,10 +403,10 @@ const chipSlots: ApiSlot[] = [
         <div class="space-y-4">
           <p class="text-sm text-(--s-text-secondary)">Active Filters:</p>
           <div class="flex flex-wrap gap-2">
-            <SChip color="#3b82f6" variant="light" closable size="small">Category: Electronics</SChip>
-            <SChip color="#10b981" variant="light" closable size="small">Price: $50-$200</SChip>
-            <SChip color="#f59e0b" variant="light" closable size="small">Rating: 4+ Stars</SChip>
-            <SChip color="#8b5cf6" variant="light" closable size="small">In Stock</SChip>
+            <SChip color="#3b82f6" variant="light" closable size="sm">Category: Electronics</SChip>
+            <SChip color="#10b981" variant="light" closable size="sm">Price: $50-$200</SChip>
+            <SChip color="#f59e0b" variant="light" closable size="sm">Rating: 4+ Stars</SChip>
+            <SChip color="#8b5cf6" variant="light" closable size="sm">In Stock</SChip>
           </div>
         </div>
       </DemoSection>

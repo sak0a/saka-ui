@@ -19,7 +19,7 @@ const cp = (mdiName: string, attr = 'icon') => {
 const basicValue = ref('option1')
 
 // Sizes
-const sizeValue = ref('medium')
+const sizeValue = ref('md')
 
 // Colors
 const colorValue = ref('blue')
@@ -82,9 +82,9 @@ const selected = ref('option1')
   <SRadio v-model="selected" value="option3" label="Option 3" />
 </template>`
 
-const sizesCode = `<SRadio v-model="value" value="small" size="small" label="Small" />
-<SRadio v-model="value" value="medium" size="medium" label="Medium" />
-<SRadio v-model="value" value="large" size="large" label="Large" />`
+const sizesCode = `<SRadio v-model="value" value="small" size="sm" label="Small" />
+<SRadio v-model="value" value="medium" size="md" label="Medium" />
+<SRadio v-model="value" value="large" size="lg" label="Large" />`
 
 const colorsCode = `<SRadio v-model="v" value="blue" color="#3b82f6" label="Blue" />
 <SRadio v-model="v" value="pink" color="#ec4899" label="Pink" />
@@ -191,7 +191,7 @@ const methods = [
 const radioProps: ApiProp[] = [
   { name: 'modelValue', type: 'any', default: 'undefined', description: 'v-model binding value', category: 'Core' },
   { name: 'value', type: 'any', default: 'undefined', description: 'Value this radio represents', category: 'Core' },
-  { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Radio size', category: 'Appearance' },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Radio size', category: 'Appearance' },
   { name: 'color', type: 'string', default: "'var(--s-primary)'", description: 'Selected state color', category: 'Appearance' },
   { name: 'variant', type: "'default' | 'filled' | 'outlined' | 'button'", default: "'default'", description: 'Visual style variant', category: 'Appearance' },
   { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable interactions', category: 'State' },
@@ -210,7 +210,7 @@ const radioGroupProps: ApiProp[] = [
   { name: 'modelValue', type: 'any', default: 'undefined', description: 'v-model binding value', category: 'Core' },
   { name: 'options', type: '{ value, label, disabled?, icon? }[]', default: '[]', description: 'Array of radio options', category: 'Core' },
   { name: 'orientation', type: "'horizontal' | 'vertical' | 'grid'", default: "'vertical'", description: 'Layout direction', category: 'Layout' },
-  { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Inherited size for child radios', category: 'Appearance' },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Inherited size for child radios', category: 'Appearance' },
   { name: 'color', type: 'string', default: 'undefined', description: 'Inherited selected color for child radios', category: 'Appearance' },
   { name: 'variant', type: "'default' | 'filled' | 'outlined' | 'button'", default: "'default'", description: 'Inherited visual variant for child radios', category: 'Appearance' },
   { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the entire group', category: 'State' },
@@ -338,9 +338,9 @@ const radioKeyboard: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="flex flex-wrap items-center gap-8">
-          <SRadio v-model="sizeValue" value="small" size="small" label="Small" />
-          <SRadio v-model="sizeValue" value="medium" size="medium" label="Medium" />
-          <SRadio v-model="sizeValue" value="large" size="large" label="Large" />
+          <SRadio v-model="sizeValue" value="small" size="sm" label="Small" />
+          <SRadio v-model="sizeValue" value="medium" size="md" label="Medium" />
+          <SRadio v-model="sizeValue" value="large" size="lg" label="Large" />
         </div>
       </DemoSection>
     </section>

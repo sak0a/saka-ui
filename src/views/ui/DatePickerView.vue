@@ -92,9 +92,9 @@ const variantsCode = `<SDatePicker v-model="variantDate" variant="outlined" labe
 <SDatePicker v-model="variantDate" variant="filled" label="Filled" />
 <SDatePicker v-model="variantDate" variant="ghost" label="Ghost" />`
 
-const sizesCode = `<SDatePicker v-model="sizeDate" size="small" label="Small" />
-<SDatePicker v-model="sizeDate" size="medium" label="Medium" />
-<SDatePicker v-model="sizeDate" size="large" label="Large" />`
+const sizesCode = `<SDatePicker v-model="sizeDate" size="sm" label="Small" />
+<SDatePicker v-model="sizeDate" size="md" label="Medium" />
+<SDatePicker v-model="sizeDate" size="lg" label="Large" />`
 
 const colorsCode = `<SDatePicker v-model="colorDate" color="#f43f5e" label="Rose" />
 <SDatePicker v-model="colorDate" color="#8b5cf6" label="Violet" />
@@ -195,7 +195,7 @@ const datePickerProps: ApiProp[] = [
   { name: 'modelValue', type: 'Date | Date[] | [Date, Date] | null', default: 'null', description: 'Selected date(s)', category: 'Core' },
   { name: 'mode', type: "'single' | 'range' | 'multiple'", default: "'single'", description: 'Selection mode', category: 'Core' },
   { name: 'variant', type: "'outlined' | 'filled' | 'ghost'", default: "'outlined'", description: 'Visual variant', category: 'Display' },
-  { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Size variant', category: 'Display' },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size variant', category: 'Display' },
   { name: 'color', type: 'string', default: "'var(--s-primary)'", description: 'Accent color', category: 'Display' },
   { name: 'rounded', type: "'none' | 'sm' | 'md' | 'lg' | 'full'", default: "'md'", description: 'Border radius for the trigger and inputs', category: 'Display' },
   { name: 'format', type: 'string', default: "'MMM dd, yyyy'", description: 'Display format used in the trigger input', category: 'Display' },
@@ -392,9 +392,9 @@ const datePickerKeyboard: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="flex flex-col gap-4 max-w-xs">
-          <SDatePicker v-model="sizeDate" size="small" label="Small" />
-          <SDatePicker v-model="sizeDate" size="medium" label="Medium" />
-          <SDatePicker v-model="sizeDate" size="large" label="Large" />
+          <SDatePicker v-model="sizeDate" size="sm" label="Small" />
+          <SDatePicker v-model="sizeDate" size="md" label="Medium" />
+          <SDatePicker v-model="sizeDate" size="lg" label="Large" />
         </div>
       </DemoSection>
     </section>

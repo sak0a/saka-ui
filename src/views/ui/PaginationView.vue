@@ -15,9 +15,9 @@ const variantOptions: SelectOption[] = [
 
 const sizeOptions: SelectOption[] = [
   { value: 'xs', label: 'Extra Small' },
-  { value: 'small', label: 'Small' },
-  { value: 'medium', label: 'Medium' },
-  { value: 'large', label: 'Large' },
+  { value: 'sm', label: 'Small' },
+  { value: 'md', label: 'Medium' },
+  { value: 'lg', label: 'Large' },
   { value: 'xl', label: 'Extra Large' }
 ]
 
@@ -35,7 +35,7 @@ const isLoading = ref(false)
 
 // Interactive demo
 const interactiveVariant = ref<PaginationVariant>('default')
-const interactiveSize = ref<PaginationSize>('medium')
+const interactiveSize = ref<PaginationSize>('md')
 const interactiveShape = ref<PaginationShape>('rounded')
 const interactiveColor = ref('#059669')
 const showFirstLast = ref(false)
@@ -88,9 +88,9 @@ const variantsCode = `<!-- Default -->
 <SPagination variant="dots" :total="50" :page-size="10" :model-value="3" />`
 
 const sizesCode = `<SPagination size="xs" :total="100" :model-value="3" />
-<SPagination size="small" :total="100" :model-value="3" />
-<SPagination size="medium" :total="100" :model-value="3" />
-<SPagination size="large" :total="100" :model-value="3" />
+<SPagination size="sm" :total="100" :model-value="3" />
+<SPagination size="md" :total="100" :model-value="3" />
+<SPagination size="lg" :total="100" :model-value="3" />
 <SPagination size="xl" :total="100" :model-value="3" />`
 
 const shapesCode = `<SPagination shape="rounded" :total="100" :model-value="3" />
@@ -167,7 +167,7 @@ const paginationProps: ApiProp[] = [
   { name: 'maxVisiblePages', type: 'number', default: '7', description: 'Maximum visible page buttons', category: 'Core' },
   // Appearance
   { name: 'variant', type: "'default' | 'outlined' | 'ghost' | 'minimal' | 'dots'", default: "'default'", description: 'Visual style variant', category: 'Appearance' },
-  { name: 'size', type: "'xs' | 'small' | 'medium' | 'large' | 'xl'", default: "'medium'", description: 'Button size', category: 'Appearance' },
+  { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Button size', category: 'Appearance' },
   { name: 'shape', type: "'rounded' | 'square' | 'pill'", default: "'rounded'", description: 'Button shape', category: 'Appearance' },
   { name: 'color', type: 'string', default: "'var(--s-primary)'", description: 'Primary color for active state', category: 'Appearance' },
   { name: 'background', type: 'boolean', default: 'false', description: 'Show background container', category: 'Appearance' },
@@ -299,21 +299,21 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             v-model="interactiveVariant"
             :options="variantOptions"
             label="Variant"
-            size="small"
+            size="sm"
             :color="interactiveColor"
           />
           <SSelect
             v-model="interactiveSize"
             :options="sizeOptions"
             label="Size"
-            size="small"
+            size="sm"
             :color="interactiveColor"
           />
           <SSelect
             v-model="interactiveShape"
             :options="shapeOptions"
             label="Shape"
-            size="small"
+            size="sm"
             :color="interactiveColor"
           />
           <div>
@@ -324,12 +324,12 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         
         <!-- Toggle options -->
         <div class="flex flex-wrap gap-4 mb-6">
-          <SSwitch v-model="showFirstLast" label-after="First/Last" size="small" />
-          <SSwitch v-model="showTotal" label-after="Show Total" size="small" />
-          <SSwitch v-model="showQuickJump" label-after="Quick Jump" size="small" />
-          <SSwitch v-model="showProgress" label-after="Progress" size="small" />
-          <SSwitch v-model="isSimple" label-after="Simple Mode" size="small" />
-          <SSwitch v-model="hasBackground" label-after="Background" size="small" />
+          <SSwitch v-model="showFirstLast" label-after="First/Last" size="sm" />
+          <SSwitch v-model="showTotal" label-after="Show Total" size="sm" />
+          <SSwitch v-model="showQuickJump" label-after="Quick Jump" size="sm" />
+          <SSwitch v-model="showProgress" label-after="Progress" size="sm" />
+          <SSwitch v-model="isSimple" label-after="Simple Mode" size="sm" />
+          <SSwitch v-model="hasBackground" label-after="Background" size="sm" />
         </div>
         
         <!-- Pagination Preview -->
@@ -420,15 +420,15 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           </div>
           <div class="flex flex-col gap-2">
             <span class="text-xs font-mono text-(--s-text-tertiary)">small</span>
-            <SPagination size="small" :total="100" :model-value="3" />
+            <SPagination size="sm" :total="100" :model-value="3" />
           </div>
           <div class="flex flex-col gap-2">
             <span class="text-xs font-mono text-(--s-text-tertiary)">medium</span>
-            <SPagination size="medium" :total="100" :model-value="3" />
+            <SPagination size="md" :total="100" :model-value="3" />
           </div>
           <div class="flex flex-col gap-2">
             <span class="text-xs font-mono text-(--s-text-tertiary)">large</span>
-            <SPagination size="large" :total="100" :model-value="3" />
+            <SPagination size="lg" :total="100" :model-value="3" />
           </div>
           <div class="flex flex-col gap-2">
             <span class="text-xs font-mono text-(--s-text-tertiary)">xl</span>

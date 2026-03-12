@@ -577,7 +577,7 @@ onMounted(() => {
             <!-- Submit button -->
             <SButton
               block
-              size="large"
+              size="lg"
               :loading="form.isSubmitting.value"
               :disabled="!isFormValid || form.isSubmitting.value || isSuccess"
               @click="submit"

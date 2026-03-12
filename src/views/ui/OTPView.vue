@@ -134,19 +134,19 @@ const variantsCode = `<!-- Outlined (default) -->
   </SOTPGroup>
 </SOTP>`
 
-const sizesCode = `<SOTP v-model="otp" size="small" :auto-focus="false">
+const sizesCode = `<SOTP v-model="otp" size="sm" :auto-focus="false">
   <SOTPGroup>
     <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
   </SOTPGroup>
 </SOTP>
 
-<SOTP v-model="otp" size="medium" :auto-focus="false">
+<SOTP v-model="otp" size="md" :auto-focus="false">
   <SOTPGroup>
     <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
   </SOTPGroup>
 </SOTP>
 
-<SOTP v-model="otp" size="large" :auto-focus="false">
+<SOTP v-model="otp" size="lg" :auto-focus="false">
   <SOTPGroup>
     <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
   </SOTPGroup>
@@ -255,7 +255,7 @@ const featuresCode = `<!-- With separator (XXX-XXX format) -->
 </SOTP>`
 
 const compoundCode = `<!-- Simple: all slots share visual config from root -->
-<SOTP v-model="otp" variant="filled" size="large" :auto-focus="false">
+<SOTP v-model="otp" variant="filled" size="lg" :auto-focus="false">
   <SOTPGroup>
     <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
   </SOTPGroup>
@@ -330,7 +330,7 @@ const otpProps: ApiProp[] = [
   { name: 'maxlength', type: 'number', default: '6', description: 'Number of OTP digits (loop count for SOTPSlot must match)', category: 'Core' },
   { name: 'mode', type: "'numeric' | 'alphanumeric' | 'alphabetic' | 'any'", default: "'numeric'", description: 'Character type allowed', category: 'Core' },
   { name: 'variant', type: "'outlined' | 'filled' | 'underlined' | 'ghost' | 'morphing'", default: "'outlined'", description: 'Cascading default visual style for SOTPSlot children', category: 'Appearance' },
-  { name: 'size', type: "'small' | 'medium' | 'large' | 'xl'", default: "'medium'", description: 'Cascading default size for SOTPSlot children', category: 'Appearance' },
+  { name: 'size', type: "'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Cascading default size for SOTPSlot children', category: 'Appearance' },
   { name: 'color', type: 'string', default: 'var(--s-primary)', description: 'Cascading default color for focus/active states', category: 'Appearance' },
   { name: 'rounded', type: "'none' | 'sm' | 'md' | 'lg' | 'full'", default: "'md'", description: 'Cascading default border radius for SOTPSlot children', category: 'Appearance' },
   { name: 'gap', type: "'tight' | 'normal' | 'wide'", default: "'normal'", description: 'Spacing between boxes in the root container', category: 'Appearance' },
@@ -365,7 +365,7 @@ const otpProps: ApiProp[] = [
 const slotProps: ApiProp[] = [
   { name: 'index', type: 'number', default: '—', description: 'Zero-based digit index (required)', category: 'Core' },
   { name: 'variant', type: "'outlined' | 'filled' | 'underlined' | 'ghost' | 'morphing'", default: 'inherited', description: 'Per-slot variant override (falls back to SOTP root)', category: 'Appearance' },
-  { name: 'size', type: "'small' | 'medium' | 'large' | 'xl'", default: 'inherited', description: 'Per-slot size override', category: 'Appearance' },
+  { name: 'size', type: "'sm' | 'md' | 'lg' | 'xl'", default: 'inherited', description: 'Per-slot size override', category: 'Appearance' },
   { name: 'color', type: 'string', default: 'inherited', description: 'Per-slot color override', category: 'Appearance' },
   { name: 'rounded', type: "'none' | 'sm' | 'md' | 'lg' | 'full'", default: 'inherited', description: 'Per-slot border radius override', category: 'Appearance' },
   { name: 'animation', type: "'none' | 'bounce' | 'shake' | 'pulse' | 'flip' | 'morph' | 'glow' | 'wave'", default: 'inherited', description: 'Per-slot general animation override', category: 'Animation' },
@@ -655,7 +655,7 @@ const otpMethods: ApiMethod[] = [
         <div class="space-y-8">
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Small</p>
-            <SOTP v-model="smallOtp" size="small" :auto-focus="false">
+            <SOTP v-model="smallOtp" size="sm" :auto-focus="false">
               <SOTPGroup>
                 <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
               </SOTPGroup>
@@ -663,7 +663,7 @@ const otpMethods: ApiMethod[] = [
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Medium (default)</p>
-            <SOTP v-model="mediumOtp" size="medium" :auto-focus="false">
+            <SOTP v-model="mediumOtp" size="md" :auto-focus="false">
               <SOTPGroup>
                 <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
               </SOTPGroup>
@@ -671,7 +671,7 @@ const otpMethods: ApiMethod[] = [
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-3">Large</p>
-            <SOTP v-model="largeOtp" size="large" :auto-focus="false">
+            <SOTP v-model="largeOtp" size="lg" :auto-focus="false">
               <SOTPGroup>
                 <SOTPSlot v-for="i in 6" :key="i" :index="i - 1" />
               </SOTPGroup>
@@ -945,7 +945,7 @@ otpRef.value.triggerError('Invalid code')`"
         :code="`<SOTP
   v-model='otp'
   variant='morphing'
-  size='large'
+  size='lg'
   label='Verify your phone'
   hint='A 6-digit code was sent to +1 *** *** 1234'
   success-animation='celebrate'
@@ -974,7 +974,7 @@ otpRef.value.triggerError('Invalid code')`"
           <SOTP
             v-model="basicOtp"
             variant="morphing"
-            size="large"
+            size="lg"
             success-animation="celebrate"
             :countdown="60"
             @complete="handleComplete"

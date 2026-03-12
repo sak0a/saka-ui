@@ -2,7 +2,7 @@ import { type InjectionKey, type Ref } from 'vue'
 
 // ─── Stepper Types ───────────────────────────────────────────────────────────
 export type StepperOrientation = 'horizontal' | 'vertical'
-export type StepperSize = 'small' | 'medium' | 'large'
+export type StepperSize = 'sm' | 'md' | 'lg'
 export type StepperVariant = 'default' | 'line'
 
 export interface StepperItemInfo {

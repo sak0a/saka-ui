@@ -55,9 +55,9 @@ const r = computed(() => {
 // Size configurations
 const sizeConfig = computed(() => {
   const sizes: Record<SOTPSize, { box: string; text: string }> = {
-    small: { box: 'w-9 h-10', text: 'text-lg' },
-    medium: { box: 'w-12 h-14', text: 'text-2xl' },
-    large: { box: 'w-14 h-16', text: 'text-3xl' },
+    sm: { box: 'w-9 h-10', text: 'text-lg' },
+    md: { box: 'w-12 h-14', text: 'text-2xl' },
+    lg: { box: 'w-14 h-16', text: 'text-3xl' },
     xl: { box: 'w-18 h-20', text: 'text-4xl' }
   }
   return sizes[r.value.size]

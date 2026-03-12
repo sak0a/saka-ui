@@ -72,25 +72,25 @@ onBeforeUnmount(() => {
 
 // Size configurations - reduced padding for tighter, cleaner look
 const sizeConfig = computed(() => ({
-  small: {
+  sm: {
     item: 'px-2 py-1 text-xs',
     icon: 'text-sm',
     iconSize: 'w-3.5 h-3.5',
     iconPx: 14
   },
-  medium: {
+  md: {
     item: 'px-2.5 py-1.5 text-sm',
     icon: 'text-base',
     iconSize: 'w-4 h-4',
     iconPx: 16
   },
-  large: {
+  lg: {
     item: 'px-3 py-2 text-base',
     icon: 'text-lg',
     iconSize: 'w-5 h-5',
     iconPx: 20
   }
-}[context?.size ?? 'medium']))
+}[context?.size ?? 'md']))
 
 const accentColor = computed(() => props.color ?? context?.color ?? 'var(--s-primary)')
 

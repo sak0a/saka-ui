@@ -18,14 +18,14 @@ const alertVariants = cva(
         custom: 'bg-muted text-foreground',
       },
       size: {
-        small: 'p-3',
-        medium: 'p-4',
-        large: 'p-5',
+        sm: 'p-3',
+        md: 'p-4',
+        lg: 'p-5',
       },
     },
     defaultVariants: {
       variant: 'info',
-      size: 'medium',
+      size: 'md',
     },
   }
 )
@@ -57,14 +57,14 @@ const variantProgressColors: Record<string, string> = {
 }
 
 const sizeConfig: Record<string, { gap: string; iconSize: string; titleSize: string; textSize: string }> = {
-  small: { gap: 'gap-2', iconSize: 'text-lg', titleSize: 'text-sm font-semibold', textSize: 'text-xs' },
-  medium: { gap: 'gap-3', iconSize: 'text-xl', titleSize: 'text-base font-semibold', textSize: 'text-sm' },
-  large: { gap: 'gap-4', iconSize: 'text-2xl', titleSize: 'text-lg font-semibold', textSize: 'text-base' },
+  sm: { gap: 'gap-2', iconSize: 'text-lg', titleSize: 'text-sm font-semibold', textSize: 'text-xs' },
+  md: { gap: 'gap-3', iconSize: 'text-xl', titleSize: 'text-base font-semibold', textSize: 'text-sm' },
+  lg: { gap: 'gap-4', iconSize: 'text-2xl', titleSize: 'text-lg font-semibold', textSize: 'text-base' },
 }
 
 export interface Props {
   variant?: 'success' | 'warning' | 'error' | 'info' | 'custom'
-  size?: 'small' | 'medium' | 'large'
+  size?: 'sm' | 'md' | 'lg'
   title?: string
   description?: string
   icon?: IconProp | boolean
@@ -84,7 +84,7 @@ export interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   variant: 'info',
-  size: 'medium',
+  size: 'md',
   title: undefined,
   description: undefined,
   icon: true,

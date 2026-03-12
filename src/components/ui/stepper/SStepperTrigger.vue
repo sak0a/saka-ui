@@ -31,18 +31,18 @@ const sizeClasses = computed(() => {
   if (isLine) {
     // Line variant: vertical stack, no horizontal padding
     const sizes: Record<string, string> = {
-      small: 'gap-1.5 p-1',
-      medium: 'gap-2 p-1.5',
-      large: 'gap-2.5 p-2',
+      sm: 'gap-1.5 p-1',
+      md: 'gap-2 p-1.5',
+      lg: 'gap-2.5 p-2',
     }
-    return sizes[ctx?.size ?? 'medium']
+    return sizes[ctx?.size ?? 'md']
   }
   const sizes: Record<string, string> = {
-    small: 'gap-2 px-1.5 py-1',
-    medium: 'gap-3 px-2 py-1.5',
-    large: 'gap-3.5 px-2.5 py-2',
+    sm: 'gap-2 px-1.5 py-1',
+    md: 'gap-3 px-2 py-1.5',
+    lg: 'gap-3.5 px-2.5 py-2',
   }
-  return sizes[ctx?.size ?? 'medium']
+  return sizes[ctx?.size ?? 'md']
 })
 
 // ─── Classes ────────────────────────────────────────────────────────────────────

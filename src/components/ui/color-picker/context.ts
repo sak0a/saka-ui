@@ -11,7 +11,7 @@ export interface SColorPickerContext {
   showAlpha: ComputedRef<boolean>
   disabled: ComputedRef<boolean>
   readonly: ComputedRef<boolean>
-  size: ComputedRef<'small' | 'medium' | 'large'>
+  size: ComputedRef<'sm' | 'md' | 'lg'>
   sizeConfig: ComputedRef<{
     panelWidth: string
     spectrumHeight: string

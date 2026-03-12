@@ -96,9 +96,9 @@ const variantColorsCode = `<SButton color="#8b5cf6" variant="filled">Filled</SBu
 <SButton color="#06b6d4" variant="glass">Glass</SButton>`
 
 const sizesCode = `<SButton size="xs">Extra Small</SButton>
-<SButton size="small">Small</SButton>
-<SButton size="medium">Medium</SButton>
-<SButton size="large">Large</SButton>
+<SButton size="sm">Small</SButton>
+<SButton size="md">Medium</SButton>
+<SButton size="lg">Large</SButton>
 <SButton size="xl">Extra Large</SButton>`
 
 const roundedCode = `<SButton rounded="none" color="#3b82f6">None</SButton>
@@ -132,7 +132,7 @@ const loadingCode = computed(() => `<SButton :loading="isLoading">
 </SButton>
 <SButton loading variant="outlined">Loading...</SButton>
 <SButton loading variant="light" color="#8b5cf6">Processing</SButton>
-<SButton loading size="small" color="#ec4899">Wait</SButton>
+<SButton loading size="sm" color="#ec4899">Wait</SButton>
 
 <!-- With preserveSize to maintain button width -->
 <SButton :loading="isLoading" preserveSize>
@@ -151,10 +151,10 @@ const disabledCode = `<SButton disabled>Disabled Filled</SButton>
 <SButton disabled variant="ghost">Disabled Ghost</SButton>
 <SButton disabled variant="link">Disabled Link</SButton>`
 
-const rippleCode = `<SButton size="large" color="#3b82f6">Click me for ripple!</SButton>
-<SButton size="large" :ripple="false" variant="outlined">No Ripple</SButton>`
+const rippleCode = `<SButton size="lg" color="#3b82f6">Click me for ripple!</SButton>
+<SButton size="lg" :ripple="false" variant="outlined">No Ripple</SButton>`
 
-const blockCode = computed(() => `<SButton block size="large" ${cp('rocket-launch', 'iconLeft')}>Full Width Button</SButton>
+const blockCode = computed(() => `<SButton block size="lg" ${cp('rocket-launch', 'iconLeft')}>Full Width Button</SButton>
 <SButton block variant="outlined" color="#3b82f6">Full Width Outlined</SButton>
 <SButton block variant="light" color="#8b5cf6">Full Width Light</SButton>`)
 
@@ -170,7 +170,7 @@ const linksCode = computed(() => `<SButton href="https://google.com" target="_bl
 
 const combinedCode = computed(() => `<SButton
   variant="filled"
-  size="large"
+  size="lg"
   color="#8b5cf6"
   ${cp('rocket-launch', 'iconLeft')}
   rounded="lg"
@@ -180,7 +180,7 @@ const combinedCode = computed(() => `<SButton
 
 <SButton
   variant="outlined"
-  size="small"
+  size="sm"
   color="#10b981"
   ${cp('check', 'iconRight')}
   rounded="full"
@@ -207,7 +207,7 @@ const animateCode = computed(() => {
   const imports = li('home', 'email-send', 'heart', 'cog')
   const scriptBlock = imports ? `<script setup>${imports}\n<\/script>\n\n` : ''
   return `${scriptBlock}<!-- Slide animation (default) -->
-<SButton size="large">
+<SButton size="lg">
   Home
   <template #animate>
     ${si('home', 'mr-1')} Go Home
@@ -215,7 +215,7 @@ const animateCode = computed(() => {
 </SButton>
 
 <!-- Vertical animation -->
-<SButton size="large" animation-type="vertical" color="#10b981">
+<SButton size="lg" animation-type="vertical" color="#10b981">
   Message
   <template #animate>
     ${si('email-send', 'mr-1')} Send
@@ -223,7 +223,7 @@ const animateCode = computed(() => {
 </SButton>
 
 <!-- Scale animation -->
-<SButton size="large" animation-type="scale" color="#8b5cf6">
+<SButton size="lg" animation-type="scale" color="#8b5cf6">
   Like
   <template #animate>
     ${si('heart', 'text-lg')}
@@ -231,7 +231,7 @@ const animateCode = computed(() => {
 </SButton>
 
 <!-- Rotate animation -->
-<SButton size="large" animation-type="rotate" color="#f59e0b">
+<SButton size="lg" animation-type="rotate" color="#f59e0b">
   Settings
   <template #animate>
     ${si('cog', 'text-lg')}
@@ -280,7 +280,7 @@ const kbdShortcutCode = `<SButton variant="outlined">
 const buttonProps: ApiProp[] = [
   // Appearance
   { name: 'variant', type: "'filled' | 'outlined' | 'light' | 'ghost' | 'link' | 'dashed' | 'glass'", default: "'filled'", description: 'Visual style variant', category: 'Appearance' },
-  { name: 'size', type: "'xs' | 'small' | 'medium' | 'large' | 'xl'", default: "'medium'", description: 'Button size', category: 'Appearance' },
+  { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Button size', category: 'Appearance' },
   { name: 'color', type: 'string', default: "'var(--s-primary)'", description: 'Button color (CSS color or variable)', category: 'Appearance' },
   { name: 'rounded', type: "'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'", default: "'md'", description: 'Border radius variant', category: 'Appearance' },
   { name: 'block', type: 'boolean', default: 'false', description: 'Full-width button', category: 'Appearance' },
@@ -527,15 +527,15 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             <span class="text-xs font-mono text-(--s-text-secondary)">xs</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SButton size="small">Small</SButton>
+            <SButton size="sm">Small</SButton>
             <span class="text-xs font-mono text-(--s-text-secondary)">small</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SButton size="medium">Medium</SButton>
+            <SButton size="md">Medium</SButton>
             <span class="text-xs font-mono text-(--s-text-secondary)">medium</span>
           </div>
           <div class="flex flex-col items-center gap-2">
-            <SButton size="large">Large</SButton>
+            <SButton size="lg">Large</SButton>
             <span class="text-xs font-mono text-(--s-text-secondary)">large</span>
           </div>
           <div class="flex flex-col items-center gap-2">
@@ -634,7 +634,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </SButton>
             <SButton loading variant="outlined">Loading...</SButton>
             <SButton loading variant="light" color="#8b5cf6">Processing</SButton>
-            <SButton loading size="small" color="#ec4899">Wait</SButton>
+            <SButton loading size="sm" color="#ec4899">Wait</SButton>
           </div>
           <div>
             <p class="text-sm text-(--s-text-secondary) mb-2">With <code class="px-1.5 py-0.5 rounded bg-(--s-bg-tertiary) text-(--s-text-primary) text-xs">preserveSize</code> to maintain button width:</p>
@@ -683,7 +683,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="space-y-3 max-w-md">
-          <SButton block size="large" :iconLeft="ri('rocket-launch')">Full Width Button</SButton>
+          <SButton block size="lg" :iconLeft="ri('rocket-launch')">Full Width Button</SButton>
           <SButton block variant="outlined" color="#3b82f6">Full Width Outlined</SButton>
           <SButton block variant="light" color="#8b5cf6">Full Width Light</SButton>
         </div>
@@ -755,7 +755,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <div class="flex flex-wrap gap-4 items-center">
           <SButton
             variant="filled"
-            size="large"
+            size="lg"
             color="#8b5cf6"
             :iconLeft="ri('rocket-launch')"
             rounded="lg"
@@ -764,7 +764,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           </SButton>
           <SButton
             variant="outlined"
-            size="small"
+            size="sm"
             color="#10b981"
             :iconRight="ri('check')"
             rounded="full"
@@ -798,8 +798,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         language="vue"
       >
         <div class="flex flex-wrap gap-3 items-center">
-          <SButton size="large" color="#3b82f6">Click me for ripple!</SButton>
-          <SButton size="large" :ripple="false" variant="outlined">No Ripple</SButton>
+          <SButton size="lg" color="#3b82f6">Click me for ripple!</SButton>
+          <SButton size="lg" :ripple="false" variant="outlined">No Ripple</SButton>
         </div>
       </DemoSection>
     </section>
@@ -816,7 +816,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <div class="flex flex-wrap gap-4 items-center">
           <!-- Slide (default) -->
           <div class="flex flex-col items-center gap-2">
-            <SButton size="large">
+            <SButton size="lg">
               Home
               <template #animate>
                 <span class="mdi mdi-home mr-1"></span> Go Home
@@ -827,7 +827,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           
           <!-- Vertical -->
           <div class="flex flex-col items-center gap-2">
-            <SButton size="large" animation-type="vertical" color="#10b981">
+            <SButton size="lg" animation-type="vertical" color="#10b981">
               Message
               <template #animate>
                 <span class="mdi mdi-email-send mr-1"></span> Send
@@ -838,7 +838,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           
           <!-- Scale -->
           <div class="flex flex-col items-center gap-2">
-            <SButton size="large" animation-type="scale" color="#8b5cf6">
+            <SButton size="lg" animation-type="scale" color="#8b5cf6">
               Like
               <template #animate>
                 <span class="mdi mdi-heart text-lg"></span>
@@ -849,7 +849,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           
           <!-- Rotate -->
           <div class="flex flex-col items-center gap-2">
-            <SButton size="large" animation-type="rotate" color="#f59e0b">
+            <SButton size="lg" animation-type="rotate" color="#f59e0b">
               Settings
               <template #animate>
                 <span class="mdi mdi-cog text-lg"></span>

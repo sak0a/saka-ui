@@ -75,18 +75,18 @@ const copyCode = async () => {
       
       <!-- Action buttons -->
       <div class="flex items-center gap-2 ml-4">
-        <SButton variant="ghost" size="small" iconOnly title="Open in sandbox" class="text-muted-foreground">
+        <SButton variant="ghost" size="sm" iconOnly title="Open in sandbox" class="text-muted-foreground">
           <SIcon size="18"><span class="mdi mdi-cube-outline"></span></SIcon>
         </SButton>
-        <SButton variant="ghost" size="small" iconOnly title="Edit" class="text-muted-foreground">
+        <SButton variant="ghost" size="sm" iconOnly title="Edit" class="text-muted-foreground">
           <SIcon size="18"><span class="mdi mdi-pencil"></span></SIcon>
         </SButton>
-        <SButton variant="ghost" size="small" iconOnly title="Copy code" class="text-muted-foreground" @click="copyCode">
+        <SButton variant="ghost" size="sm" iconOnly title="Copy code" class="text-muted-foreground" @click="copyCode">
           <SIcon size="18"><span class="mdi mdi-content-copy"></span></SIcon>
         </SButton>
         <SButton
           variant="ghost"
-          size="small"
+          size="sm"
           iconOnly
           title="Show code"
           :class="isCodeVisible ? 'bg-accent text-foreground' : 'text-muted-foreground'"

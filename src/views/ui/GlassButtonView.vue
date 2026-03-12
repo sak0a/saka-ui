@@ -30,14 +30,14 @@ const tintModesCode = `<!-- Light tint (for dark backgrounds) -->
 <SGlassButton tint="auto">Auto Tint</SGlassButton>`
 
 const darkBgCode = `<SGlassButton tint="light">On Black</SGlassButton>
-<SGlassButton tint="light" size="large">Large Glass</SGlassButton>
+<SGlassButton tint="light" size="lg">Large Glass</SGlassButton>
 <SGlassButton tint="light" iconLeft="star">Starred</SGlassButton>
 <SGlassButton tint="light" iconOnly rounded="full">
   <span class="mdi mdi-heart"></span>
 </SGlassButton>`
 
 const lightBgCode = `<SGlassButton tint="dark">On White</SGlassButton>
-<SGlassButton tint="dark" size="large">Large Glass</SGlassButton>
+<SGlassButton tint="dark" size="lg">Large Glass</SGlassButton>
 <SGlassButton tint="dark" iconLeft="star">Starred</SGlassButton>
 <SGlassButton tint="dark" iconOnly rounded="full">
   <span class="mdi mdi-heart"></span>
@@ -59,9 +59,9 @@ const imageBgCode = `<!-- Scrollable image background with sticky glass buttons 
 </div>`
 
 const sizesCode = `<SGlassButton size="xs" tint="light">Extra Small</SGlassButton>
-<SGlassButton size="small" tint="light">Small</SGlassButton>
-<SGlassButton size="medium" tint="light">Medium</SGlassButton>
-<SGlassButton size="large" tint="light">Large</SGlassButton>
+<SGlassButton size="sm" tint="light">Small</SGlassButton>
+<SGlassButton size="md" tint="light">Medium</SGlassButton>
+<SGlassButton size="lg" tint="light">Large</SGlassButton>
 <SGlassButton size="xl" tint="light">Extra Large</SGlassButton>`
 
 const roundedCode = `<SGlassButton rounded="none" tint="light">None</SGlassButton>
@@ -87,7 +87,7 @@ const loadingCode = `<SGlassButton tint="light" :loading="isLoading">
   {{ isLoading ? 'Loading...' : 'Click to Load' }}
 </SGlassButton>
 <SGlassButton tint="light" loading>Loading...</SGlassButton>
-<SGlassButton tint="light" loading size="small">Wait</SGlassButton>
+<SGlassButton tint="light" loading size="sm">Wait</SGlassButton>
 <SGlassButton tint="light" :loading="isLoading" preserveSize>Submit Order</SGlassButton>
 <SGlassButton tint="light" loading preserveSize iconLeft="cloud-upload">Upload File</SGlassButton>`
 
@@ -96,7 +96,7 @@ const disabledCode = `<SGlassButton tint="light" disabled>Disabled Light</SGlass
 <SGlassButton tint="dark" disabled>Disabled Dark</SGlassButton>
 <SGlassButton tint="dark" disabled iconLeft="lock">Locked</SGlassButton>`
 
-const blockCode = `<SGlassButton block size="large" tint="light" iconLeft="rocket-launch">
+const blockCode = `<SGlassButton block size="lg" tint="light" iconLeft="rocket-launch">
   Full Width Glass Button
 </SGlassButton>
 <SGlassButton block tint="light" iconRight="arrow-right">Continue</SGlassButton>`
@@ -153,7 +153,7 @@ const glassButtonProps: ApiProp[] = [
   { name: 'saturation', type: 'number', default: '150', description: 'Backdrop saturation percentage', category: 'Glass Effect' },
   { name: 'highlightIntensity', type: 'number', default: '0.3', description: 'Specular highlight intensity (0 to 1)', category: 'Glass Effect' },
   // Appearance
-  { name: 'size', type: "'xs' | 'small' | 'medium' | 'large' | 'xl'", default: "'medium'", description: 'Button size', category: 'Appearance' },
+  { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Button size', category: 'Appearance' },
   { name: 'color', type: 'string', default: 'undefined', description: 'Accent color for text. If not set, text is white (light tint) or dark (dark tint)', category: 'Appearance' },
   { name: 'rounded', type: "'none' | 'sm' | 'md' | 'lg' | 'full'", default: "'md'", description: 'Border radius variant', category: 'Appearance' },
   { name: 'block', type: 'boolean', default: 'false', description: 'Full-width button', category: 'Appearance' },
@@ -300,7 +300,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               <div class="relative flex flex-wrap gap-3 items-center">
                 <SGlassButton tint="light">Light Tint</SGlassButton>
                 <SGlassButton tint="light" iconLeft="star">With Icon</SGlassButton>
-                <SGlassButton tint="light" size="large">Large</SGlassButton>
+                <SGlassButton tint="light" size="lg">Large</SGlassButton>
               </div>
             </div>
           </div>
@@ -311,7 +311,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               <div class="flex flex-wrap gap-3 items-center">
                 <SGlassButton tint="dark">Dark Tint</SGlassButton>
                 <SGlassButton tint="dark" iconLeft="star">With Icon</SGlassButton>
-                <SGlassButton tint="dark" size="large">Large</SGlassButton>
+                <SGlassButton tint="dark" size="lg">Large</SGlassButton>
               </div>
             </div>
           </div>
@@ -341,7 +341,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <div class="rounded-2xl p-8 bg-black">
           <div class="flex flex-wrap gap-3 items-center">
             <SGlassButton tint="light">On Black</SGlassButton>
-            <SGlassButton tint="light" size="large">Large Glass</SGlassButton>
+            <SGlassButton tint="light" size="lg">Large Glass</SGlassButton>
             <SGlassButton tint="light" iconLeft="star">Starred</SGlassButton>
             <SGlassButton tint="light" iconOnly rounded="full">
               <span class="mdi mdi-heart"></span>
@@ -363,7 +363,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <div class="rounded-2xl p-8 bg-white border border-gray-200">
           <div class="flex flex-wrap gap-3 items-center">
             <SGlassButton tint="dark">On White</SGlassButton>
-            <SGlassButton tint="dark" size="large">Large Glass</SGlassButton>
+            <SGlassButton tint="dark" size="lg">Large Glass</SGlassButton>
             <SGlassButton tint="dark" iconLeft="star">Starred</SGlassButton>
             <SGlassButton tint="dark" iconOnly rounded="full">
               <span class="mdi mdi-heart"></span>
@@ -397,7 +397,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                   <div class="sticky top-0 z-10 p-6 backdrop-blur-[1px]">
                     <p class="text-xs text-white/60 mb-3 drop-shadow-md">Scroll down to see glass over different parts of the image ↓</p>
                     <div class="flex flex-wrap gap-3">
-                      <SGlassButton tint="light" iconLeft="image-filter-hdr" size="large">Mountain View</SGlassButton>
+                      <SGlassButton tint="light" iconLeft="image-filter-hdr" size="lg">Mountain View</SGlassButton>
                       <SGlassButton tint="light" iconLeft="pine-tree">Explore</SGlassButton>
                       <SGlassButton tint="light" iconOnly rounded="full">
                         <span class="mdi mdi-heart"></span>
@@ -425,7 +425,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                   />
                   <div class="sticky top-0 z-10 p-6">
                     <div class="flex flex-wrap gap-3 items-center">
-                      <SGlassButton tint="light" iconLeft="city-variant" size="large">City Lights</SGlassButton>
+                      <SGlassButton tint="light" iconLeft="city-variant" size="lg">City Lights</SGlassButton>
                       <SGlassButton tint="light" iconLeft="map-marker">Navigate</SGlassButton>
                       <SGlassButton tint="light" iconLeft="camera">Capture</SGlassButton>
                     </div>
@@ -448,7 +448,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                   />
                   <div class="sticky top-0 z-10 p-6">
                     <div class="flex flex-wrap gap-3 items-center">
-                      <SGlassButton tint="light" iconLeft="waves" size="large">Beach Vibes</SGlassButton>
+                      <SGlassButton tint="light" iconLeft="waves" size="lg">Beach Vibes</SGlassButton>
                       <SGlassButton tint="light" iconLeft="white-balance-sunny">Book Trip</SGlassButton>
                       <SGlassButton tint="light" iconOnly rounded="full">
                         <span class="mdi mdi-compass"></span>
@@ -471,7 +471,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               />
               <div class="relative p-6 h-full flex items-end">
                 <div class="flex flex-wrap gap-3 items-center">
-                  <SGlassButton tint="light" iconLeft="weather-night-partly-cloudy" size="large">Northern Lights</SGlassButton>
+                  <SGlassButton tint="light" iconLeft="weather-night-partly-cloudy" size="lg">Northern Lights</SGlassButton>
                   <SGlassButton tint="light" iconLeft="star-shooting">Stargaze</SGlassButton>
                   <SGlassButton tint="light" iconOnly rounded="full">
                     <span class="mdi mdi-telescope"></span>
@@ -501,15 +501,15 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               <span class="text-xs font-mono text-white/60">xs</span>
             </div>
             <div class="flex flex-col items-center gap-2">
-              <SGlassButton size="small" tint="light">Small</SGlassButton>
+              <SGlassButton size="sm" tint="light">Small</SGlassButton>
               <span class="text-xs font-mono text-white/60">small</span>
             </div>
             <div class="flex flex-col items-center gap-2">
-              <SGlassButton size="medium" tint="light">Medium</SGlassButton>
+              <SGlassButton size="md" tint="light">Medium</SGlassButton>
               <span class="text-xs font-mono text-white/60">medium</span>
             </div>
             <div class="flex flex-col items-center gap-2">
-              <SGlassButton size="large" tint="light">Large</SGlassButton>
+              <SGlassButton size="lg" tint="light">Large</SGlassButton>
               <span class="text-xs font-mono text-white/60">large</span>
             </div>
             <div class="flex flex-col items-center gap-2">
@@ -604,7 +604,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                 {{ isLoading ? 'Loading...' : 'Click to Load' }}
               </SGlassButton>
               <SGlassButton tint="light" loading>Loading...</SGlassButton>
-              <SGlassButton tint="light" loading size="small">Wait</SGlassButton>
+              <SGlassButton tint="light" loading size="sm">Wait</SGlassButton>
             </div>
             <div>
               <p class="text-xs text-white/60 mb-2">With preserveSize:</p>
@@ -657,7 +657,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <div class="relative rounded-2xl overflow-hidden p-8">
           <div class="absolute inset-0 bg-gradient-to-br from-emerald-700 via-teal-600 to-cyan-600"></div>
           <div class="relative space-y-3 max-w-md">
-            <SGlassButton block size="large" tint="light" iconLeft="rocket-launch">Full Width Glass Button</SGlassButton>
+            <SGlassButton block size="lg" tint="light" iconLeft="rocket-launch">Full Width Glass Button</SGlassButton>
             <SGlassButton block tint="light" iconRight="arrow-right">Continue</SGlassButton>
           </div>
         </div>
@@ -722,7 +722,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           <div class="absolute inset-0 bg-gradient-to-br from-violet-700 via-purple-600 to-fuchsia-600"></div>
           <div class="relative flex flex-wrap gap-4 items-center">
             <div class="flex flex-col items-center gap-2">
-              <SGlassButton tint="light" size="large">
+              <SGlassButton tint="light" size="lg">
                 Home
                 <template #animate>
                   <span class="mdi mdi-home mr-1"></span> Go Home
@@ -731,7 +731,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               <span class="text-xs font-mono text-white/60">slide</span>
             </div>
             <div class="flex flex-col items-center gap-2">
-              <SGlassButton tint="light" size="large" animation-type="vertical">
+              <SGlassButton tint="light" size="lg" animation-type="vertical">
                 Message
                 <template #animate>
                   <span class="mdi mdi-email-send mr-1"></span> Send
@@ -740,7 +740,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               <span class="text-xs font-mono text-white/60">vertical</span>
             </div>
             <div class="flex flex-col items-center gap-2">
-              <SGlassButton tint="light" size="large" animation-type="scale">
+              <SGlassButton tint="light" size="lg" animation-type="scale">
                 Like
                 <template #animate>
                   <span class="mdi mdi-heart text-lg"></span>
@@ -749,7 +749,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               <span class="text-xs font-mono text-white/60">scale</span>
             </div>
             <div class="flex flex-col items-center gap-2">
-              <SGlassButton tint="light" size="large" animation-type="rotate">
+              <SGlassButton tint="light" size="lg" animation-type="rotate">
                 Settings
                 <template #animate>
                   <span class="mdi mdi-cog text-lg"></span>

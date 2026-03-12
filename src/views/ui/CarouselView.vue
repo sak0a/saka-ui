@@ -423,7 +423,7 @@ const carouselSlideSlots: ApiSlot[] = [
               v-for="effect in effects"
               :key="effect"
               :variant="currentEffect === effect ? 'light' : 'ghost'"
-              size="small"
+              size="sm"
               @click="currentEffect = effect; effectIndex = 0"
             >
               {{ effect.charAt(0).toUpperCase() + effect.slice(1) }}
@@ -470,7 +470,7 @@ const carouselSlideSlots: ApiSlot[] = [
               v-for="style in dotsStyles"
               :key="style"
               :variant="currentDotsStyle === style ? 'light' : 'ghost'"
-              size="small"
+              size="sm"
               @click="currentDotsStyle = style"
             >
               {{ style.charAt(0).toUpperCase() + style.slice(1) }}
@@ -511,7 +511,7 @@ const carouselSlideSlots: ApiSlot[] = [
               v-for="placement in arrowPlacements"
               :key="placement"
               :variant="currentArrowPlacement === placement ? 'light' : 'ghost'"
-              size="small"
+              size="sm"
               @click="currentArrowPlacement = placement"
             >
               {{ placement }}
@@ -555,7 +555,7 @@ const carouselSlideSlots: ApiSlot[] = [
               v-for="easing in easings"
               :key="easing"
               :variant="currentEasing === easing ? 'light' : 'ghost'"
-              size="small"
+              size="sm"
               @click="currentEasing = easing"
             >
               {{ easing }}
@@ -598,7 +598,7 @@ const carouselSlideSlots: ApiSlot[] = [
           <div class="flex items-center gap-4">
             <SButton
               :variant="autoplayEnabled ? 'light' : 'ghost'"
-              size="small"
+              size="sm"
               @click="autoplayEnabled = !autoplayEnabled"
             >
               {{ autoplayEnabled ? '⏸ Pause' : '▶ Play' }}
@@ -741,14 +741,14 @@ const carouselSlideSlots: ApiSlot[] = [
           <div class="flex flex-wrap gap-2">
             <SButton
               variant="ghost"
-              size="small"
+              size="sm"
               @click="carouselRef?.prev()"
             >
               ← Prev
             </SButton>
             <SButton
               variant="ghost"
-              size="small"
+              size="sm"
               @click="carouselRef?.next()"
             >
               Next →
@@ -757,7 +757,7 @@ const carouselSlideSlots: ApiSlot[] = [
               v-for="i in 5"
               :key="i"
               variant="ghost"
-              size="small"
+              size="sm"
               :class="customIndex === i - 1 ? 'ring-2 ring-primary' : ''"
               @click="carouselRef?.goTo(i - 1)"
             >

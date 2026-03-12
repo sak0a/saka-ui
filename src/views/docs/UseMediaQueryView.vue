@@ -297,13 +297,13 @@ const breakpointKeys: ApiProp[] = [
             </div>
             
             <div :class="isMobileDevice ? 'space-y-2' : 'flex gap-2 flex-wrap'">
-              <SButton :size="isMobileDevice ? 'small' : 'medium'" class="w-full sm:w-auto">
+              <SButton :size="isMobileDevice ? 'sm' : 'md'" class="w-full sm:w-auto">
                 Action 1
               </SButton>
-              <SButton :size="isMobileDevice ? 'small' : 'medium'" variant="outlined" class="w-full sm:w-auto">
+              <SButton :size="isMobileDevice ? 'sm' : 'md'" variant="outlined" class="w-full sm:w-auto">
                 Action 2
               </SButton>
-              <SButton v-if="!isMobileDevice" :size="isMobileDevice ? 'small' : 'medium'" variant="ghost">
+              <SButton v-if="!isMobileDevice" :size="isMobileDevice ? 'sm' : 'md'" variant="ghost">
                 More Options
               </SButton>
             </div>

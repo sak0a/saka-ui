@@ -249,7 +249,7 @@ const fullscreenCode = `<SModal v-model="fullscreenModal" fullscreen animation="
     </div>
   </SModalContent>
   <SModalFooter align="center">
-    <SButton size="large">Exit Fullscreen</SButton>
+    <SButton size="lg">Exit Fullscreen</SButton>
   </SModalFooter>
 </SModal>`
 
@@ -1006,7 +1006,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             </div>
           </SModalContent>
           <SModalFooter align="center">
-            <SButton size="large" @click="fullscreenModal = false">
+            <SButton size="lg" @click="fullscreenModal = false">
               <span class="mdi mdi-fullscreen-exit mr-2" />
               Exit Fullscreen
             </SButton>

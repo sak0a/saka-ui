@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
   orientation: 'horizontal',
   variant: 'default',
   linear: true,
-  size: 'medium',
+  size: 'md',
   color: undefined,
   animated: true,
   clickable: true,

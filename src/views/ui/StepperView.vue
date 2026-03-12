@@ -350,7 +350,7 @@ const loadingCode = `<SStepper v-model="loadingStep">
   </template>
 </SStepper>`
 
-const sizesCode = `<SStepper :model-value="2" size="small">
+const sizesCode = `<SStepper :model-value="2" size="sm">
   <template #default>
     <div class="flex items-center w-full">
       <SStepperItem :step="1" :completed="true">
@@ -386,7 +386,7 @@ const sizesCode = `<SStepper :model-value="2" size="small">
   </template>
 </SStepper>
 
-<!-- Also available: size="medium", size="large" -->`
+<!-- Also available: size="md", size="lg" -->`
 
 const customIndicatorCode = `<SStepper v-model="customStep">
   <template #default="{ nextStep, prevStep, canGoNext, canGoPrev, isLastStep }">
@@ -517,7 +517,7 @@ const stepperProps: ApiProp[] = [
   { name: 'variant', type: "'default' | 'line'", default: "'default'", description: "Visual variant. 'line' centers indicators on a track with labels below (like a progress bar).", category: 'Appearance' },
   { name: 'linear', type: 'boolean', default: 'true', description: 'Enforce sequential step completion. When false, any step can be clicked freely.', category: 'Behavior' },
   { name: 'clickable', type: 'boolean', default: 'true', description: 'Allow clicking step triggers to navigate. When false, navigation is only possible via slot methods.', category: 'Behavior' },
-  { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Controls the size of indicators, text, and spacing across all child components.', category: 'Appearance' },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Controls the size of indicators, text, and spacing across all child components.', category: 'Appearance' },
   { name: 'color', type: 'string', default: 'undefined', description: 'Custom color for active/completed indicators and separators. Accepts any CSS color value.', category: 'Theming' },
   { name: 'animated', type: 'boolean', default: 'true', description: 'Enable/disable transition animations on content panels and indicator state changes.', category: 'Behavior' },
 ]
@@ -667,10 +667,10 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           </div>
 
           <div class="flex justify-between mt-6">
-            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="small">
+            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="sm">
               <span class="mdi mdi-arrow-left mr-1.5" /> Back
             </SButton>
-            <SButton @click="nextStep" :disabled="!canGoNext" size="small">
+            <SButton @click="nextStep" :disabled="!canGoNext" size="sm">
               {{ isLastStep ? 'Done' : 'Next' }} <span v-if="!isLastStep" class="mdi mdi-arrow-right ml-1.5" />
             </SButton>
           </div>
@@ -752,8 +752,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           </div>
 
           <div class="flex justify-between mt-6">
-            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="small">Back</SButton>
-            <SButton @click="nextStep" :disabled="!canGoNext" size="small">Next</SButton>
+            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="sm">Back</SButton>
+            <SButton @click="nextStep" :disabled="!canGoNext" size="sm">Next</SButton>
           </div>
         </template>
       </SStepper>
@@ -786,7 +786,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
               <SStepperContent :step="1" class="mt-3">
                 <div class="rounded-xl border border-border p-4">
                   <p class="text-sm text-muted-foreground mb-4">Choose a username and password for your account.</p>
-                  <SButton @click="nextStep" size="small">Continue</SButton>
+                  <SButton @click="nextStep" size="sm">Continue</SButton>
                 </div>
               </SStepperContent>
             </div>
@@ -810,8 +810,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                 <div class="rounded-xl border border-border p-4">
                   <p class="text-sm text-muted-foreground mb-4">Add your name, bio, and profile picture.</p>
                   <div class="flex gap-2">
-                    <SButton @click="prevStep" variant="outlined" size="small">Back</SButton>
-                    <SButton @click="nextStep" size="small">Continue</SButton>
+                    <SButton @click="prevStep" variant="outlined" size="sm">Back</SButton>
+                    <SButton @click="nextStep" size="sm">Continue</SButton>
                   </div>
                 </div>
               </SStepperContent>
@@ -835,8 +835,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                 <div class="rounded-xl border border-border p-4">
                   <p class="text-sm text-muted-foreground mb-4">Everything looks good!</p>
                   <div class="flex gap-2">
-                    <SButton @click="prevStep" variant="outlined" size="small">Back</SButton>
-                    <SButton size="small" color="#22c55e">
+                    <SButton @click="prevStep" variant="outlined" size="sm">Back</SButton>
+                    <SButton size="sm" color="#22c55e">
                       <span class="mdi mdi-check mr-1.5" /> Submit
                     </SButton>
                   </div>
@@ -857,7 +857,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       :code="sizesCode"
     >
       <div class="space-y-10">
-        <div v-for="size in (['small', 'medium', 'large'] as const)" :key="size">
+        <div v-for="size in (['sm', 'md', 'lg'] as const)" :key="size">
           <p class="text-xs font-mono text-muted-foreground mb-4">size="{{ size }}"</p>
           <SStepper :model-value="2" :size="size">
             <template #default>
@@ -1033,8 +1033,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           </div>
 
           <div class="flex justify-between mt-6">
-            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="small">Back</SButton>
-            <SButton @click="nextStep" :disabled="isLastStep" size="small" color="#8b5cf6">Next</SButton>
+            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="sm">Back</SButton>
+            <SButton @click="nextStep" :disabled="isLastStep" size="sm" color="#8b5cf6">Next</SButton>
           </div>
         </template>
       </SStepper>
@@ -1098,8 +1098,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           </div>
 
           <div class="flex justify-between mt-6">
-            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="small">Back</SButton>
-            <SButton @click="nextStep" :disabled="!canGoNext" size="small">Next</SButton>
+            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="sm">Back</SButton>
+            <SButton @click="nextStep" :disabled="!canGoNext" size="sm">Next</SButton>
           </div>
         </template>
       </SStepper>
@@ -1153,7 +1153,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                 <p class="text-sm text-muted-foreground mb-3">
                   {{ hasPaymentError ? 'Payment failed. Fix the error to continue.' : 'Payment details accepted.' }}
                 </p>
-                <SButton size="small" :variant="hasPaymentError ? 'filled' : 'outlined'" @click="hasPaymentError = !hasPaymentError">
+                <SButton size="sm" :variant="hasPaymentError ? 'filled' : 'outlined'" @click="hasPaymentError = !hasPaymentError">
                   <span class="mdi mr-1.5" :class="hasPaymentError ? 'mdi-check' : 'mdi-alert-circle'" />
                   {{ hasPaymentError ? 'Fix Error' : 'Simulate Error' }}
                 </SButton>
@@ -1162,8 +1162,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           </div>
 
           <div class="flex justify-between mt-4">
-            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="small">Back</SButton>
-            <SButton @click="nextStep" :disabled="!canGoNext" size="small">Next</SButton>
+            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="sm">Back</SButton>
+            <SButton @click="nextStep" :disabled="!canGoNext" size="sm">Next</SButton>
           </div>
         </template>
       </SStepper>
@@ -1214,7 +1214,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
                 <p class="text-sm text-muted-foreground mb-3">
                   {{ isProcessing ? 'Processing in progress. Navigation is blocked.' : 'Processing complete. You may continue.' }}
                 </p>
-                <SButton size="small" @click="simulateLoading" :disabled="isProcessing">
+                <SButton size="sm" @click="simulateLoading" :disabled="isProcessing">
                   <span class="mdi mdi-refresh mr-1.5" /> {{ isProcessing ? 'Processing...' : 'Start Processing' }}
                 </SButton>
               </div>
@@ -1222,8 +1222,8 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           </div>
 
           <div class="flex justify-between mt-4">
-            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="small">Back</SButton>
-            <SButton @click="nextStep" :disabled="!canGoNext" size="small">Next</SButton>
+            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="sm">Back</SButton>
+            <SButton @click="nextStep" :disabled="!canGoNext" size="sm">Next</SButton>
           </div>
         </template>
       </SStepper>
@@ -1357,10 +1357,10 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           </div>
 
           <div class="flex justify-between mt-6">
-            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="small">
+            <SButton @click="prevStep" :disabled="!canGoPrev" variant="outlined" size="sm">
               <span class="mdi mdi-arrow-left mr-1.5" /> Back
             </SButton>
-            <SButton @click="nextStep" :disabled="!canGoNext" size="small">
+            <SButton @click="nextStep" :disabled="!canGoNext" size="sm">
               {{ isLastStep ? 'Submit' : 'Continue' }}
               <span v-if="!isLastStep" class="mdi mdi-arrow-right ml-1.5" />
               <span v-else class="mdi mdi-check ml-1.5" />

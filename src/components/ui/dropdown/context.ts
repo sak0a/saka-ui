@@ -8,7 +8,7 @@ export type DropdownPlacement =
   | 'bottom' | 'bottom-start' | 'bottom-end'
   | 'left' | 'left-start' | 'left-end'
   | 'right' | 'right-start' | 'right-end'
-export type DropdownSize = 'small' | 'medium' | 'large'
+export type DropdownSize = 'sm' | 'md' | 'lg'
 export type DropdownVariant = 'default' | 'filled' | 'glass'
 export type DropdownAnimation = 'fade' | 'slide' | 'scale' | 'reveal'
 

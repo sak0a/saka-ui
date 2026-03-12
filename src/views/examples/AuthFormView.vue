@@ -242,7 +242,7 @@ const submit = form.handleSubmit(
 
           <!-- Remember / Forgot (login only) -->
           <div v-if="isLoginMode" class="flex justify-between items-center my-2">
-            <SCheckbox v-model="rememberMe" size="small" :disabled="form.isSubmitting.value">
+            <SCheckbox v-model="rememberMe" size="sm" :disabled="form.isSubmitting.value">
               <span class="text-xs text-(--s-text-secondary)">Remember me</span>
             </SCheckbox>
             <a href="#" class="text-xs text-violet-500 hover:text-violet-400">Forgot password?</a>

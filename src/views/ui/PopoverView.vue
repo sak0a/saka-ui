@@ -130,7 +130,7 @@ const interactiveCode = `<SPopover trigger="click" placement="bottom">
         placeholder="you@example.com"
         class="w-full px-3 py-2 rounded-lg border text-sm"
       />
-      <SButton class="w-full" size="small">Submit</SButton>
+      <SButton class="w-full" size="sm">Submit</SButton>
     </div>
   </SPopoverContent>
 </SPopover>`
@@ -235,7 +235,7 @@ const roundedCode = `<SPopover rounded="sm">...</SPopover>
           <div class="flex flex-wrap gap-3 items-center">
             <SPopover trigger="click" placement="top">
               <SPopoverTrigger>
-                <SButton size="small">Top</SButton>
+                <SButton size="sm">Top</SButton>
               </SPopoverTrigger>
               <SPopoverContent>
                 <p class="text-sm">Top placement</p>
@@ -244,7 +244,7 @@ const roundedCode = `<SPopover rounded="sm">...</SPopover>
 
             <SPopover trigger="click" placement="bottom">
               <SPopoverTrigger>
-                <SButton size="small">Bottom</SButton>
+                <SButton size="sm">Bottom</SButton>
               </SPopoverTrigger>
               <SPopoverContent>
                 <p class="text-sm">Bottom placement</p>
@@ -253,7 +253,7 @@ const roundedCode = `<SPopover rounded="sm">...</SPopover>
 
             <SPopover trigger="click" placement="left">
               <SPopoverTrigger>
-                <SButton size="small">Left</SButton>
+                <SButton size="sm">Left</SButton>
               </SPopoverTrigger>
               <SPopoverContent>
                 <p class="text-sm">Left placement</p>
@@ -262,7 +262,7 @@ const roundedCode = `<SPopover rounded="sm">...</SPopover>
 
             <SPopover trigger="click" placement="right">
               <SPopoverTrigger>
-                <SButton size="small">Right</SButton>
+                <SButton size="sm">Right</SButton>
               </SPopoverTrigger>
               <SPopoverContent>
                 <p class="text-sm">Right placement</p>
@@ -274,7 +274,7 @@ const roundedCode = `<SPopover rounded="sm">...</SPopover>
           <div class="flex flex-wrap gap-3 items-center">
             <SPopover trigger="click" placement="top-start">
               <SPopoverTrigger>
-                <SButton size="small" variant="outlined">Top Start</SButton>
+                <SButton size="sm" variant="outlined">Top Start</SButton>
               </SPopoverTrigger>
               <SPopoverContent>
                 <p class="text-sm">Top Start</p>
@@ -283,7 +283,7 @@ const roundedCode = `<SPopover rounded="sm">...</SPopover>
 
             <SPopover trigger="click" placement="top-end">
               <SPopoverTrigger>
-                <SButton size="small" variant="outlined">Top End</SButton>
+                <SButton size="sm" variant="outlined">Top End</SButton>
               </SPopoverTrigger>
               <SPopoverContent>
                 <p class="text-sm">Top End</p>
@@ -292,7 +292,7 @@ const roundedCode = `<SPopover rounded="sm">...</SPopover>
 
             <SPopover trigger="click" placement="bottom-start">
               <SPopoverTrigger>
-                <SButton size="small" variant="outlined">Bottom Start</SButton>
+                <SButton size="sm" variant="outlined">Bottom Start</SButton>
               </SPopoverTrigger>
               <SPopoverContent>
                 <p class="text-sm">Bottom Start</p>
@@ -301,7 +301,7 @@ const roundedCode = `<SPopover rounded="sm">...</SPopover>
 
             <SPopover trigger="click" placement="bottom-end">
               <SPopoverTrigger>
-                <SButton size="small" variant="outlined">Bottom End</SButton>
+                <SButton size="sm" variant="outlined">Bottom End</SButton>
               </SPopoverTrigger>
               <SPopoverContent>
                 <p class="text-sm">Bottom End</p>
@@ -424,7 +424,7 @@ const roundedCode = `<SPopover rounded="sm">...</SPopover>
                   placeholder="you@example.com"
                   class="w-full px-3 py-2 rounded-lg border border-(--s-border) bg-(--s-bg-secondary) text-sm text-(--s-text-primary) outline-none focus:border-(--s-primary)"
                 />
-                <SButton class="w-full" size="small">Submit</SButton>
+                <SButton class="w-full" size="sm">Submit</SButton>
               </div>
             </SPopoverContent>
           </SPopover>
@@ -444,7 +444,7 @@ const roundedCode = `<SPopover rounded="sm">...</SPopover>
         <div class="flex flex-wrap gap-4 items-center">
           <SPopover trigger="click" rounded="sm">
             <SPopoverTrigger>
-              <SButton size="small">Small</SButton>
+              <SButton size="sm">Small</SButton>
             </SPopoverTrigger>
             <SPopoverContent>
               <p class="text-sm">rounded="sm"</p>
@@ -453,7 +453,7 @@ const roundedCode = `<SPopover rounded="sm">...</SPopover>
 
           <SPopover trigger="click" rounded="xl">
             <SPopoverTrigger>
-              <SButton size="small" variant="outlined">XL (default)</SButton>
+              <SButton size="sm" variant="outlined">XL (default)</SButton>
             </SPopoverTrigger>
             <SPopoverContent>
               <p class="text-sm">rounded="xl"</p>
@@ -462,7 +462,7 @@ const roundedCode = `<SPopover rounded="sm">...</SPopover>
 
           <SPopover trigger="click" rounded="full">
             <SPopoverTrigger>
-              <SButton size="small" variant="light">Full</SButton>
+              <SButton size="sm" variant="light">Full</SButton>
             </SPopoverTrigger>
             <SPopoverContent>
               <p class="text-sm">rounded="full"</p>

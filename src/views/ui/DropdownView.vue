@@ -566,15 +566,15 @@ const kbdCode = computed(() => `<SDropdown>
       <DemoSection
         title="Size Variants"
         description="Three size options: small, medium (default), and large."
-        :code="`<SDropdown :items='items' size='small' label='Small' />
-<SDropdown :items='items' size='medium' label='Medium' />
-<SDropdown :items='items' size='large' label='Large' />`"
+        :code="`<SDropdown :items='items' size='sm' label='Small' />
+<SDropdown :items='items' size='md' label='Medium' />
+<SDropdown :items='items' size='lg' label='Large' />`"
         language="vue"
       >
         <div class="flex flex-wrap items-center gap-4">
-          <SDropdown :items="basicItems" size="small" label="Small" />
-          <SDropdown :items="basicItems" size="medium" label="Medium" />
-          <SDropdown :items="basicItems" size="large" label="Large" />
+          <SDropdown :items="basicItems" size="sm" label="Small" />
+          <SDropdown :items="basicItems" size="md" label="Medium" />
+          <SDropdown :items="basicItems" size="lg" label="Large" />
         </div>
       </DemoSection>
     </section>
@@ -867,17 +867,17 @@ const kbdCode = computed(() => `<SDropdown>
         description="A typical desktop application menu bar with file, edit, and view menus."
         :code="`<SDropdown :items='fileActions' variant='filled' :width='240' hide-arrow>
   <template #trigger>
-    <SButton variant='ghost' size='small'>File</SButton>
+    <SButton variant='ghost' size='sm'>File</SButton>
   </template>
 </SDropdown>
 <SDropdown :items='editItems' variant='filled' :width='200' hide-arrow>
   <template #trigger>
-    <SButton variant='ghost' size='small'>Edit</SButton>
+    <SButton variant='ghost' size='sm'>Edit</SButton>
   </template>
 </SDropdown>
 <SDropdown :items='viewItems' variant='filled' :width='220' hide-arrow>
   <template #trigger>
-    <SButton variant='ghost' size='small'>View</SButton>
+    <SButton variant='ghost' size='sm'>View</SButton>
   </template>
 </SDropdown>`"
         language="vue"
@@ -891,7 +891,7 @@ const kbdCode = computed(() => `<SDropdown>
               hide-arrow
             >
               <template #trigger>
-                <SButton variant="ghost" size="small">File</SButton>
+                <SButton variant="ghost" size="sm">File</SButton>
               </template>
             </SDropdown>
             <SDropdown
@@ -901,7 +901,7 @@ const kbdCode = computed(() => `<SDropdown>
               hide-arrow
             >
               <template #trigger>
-                <SButton variant="ghost" size="small">Edit</SButton>
+                <SButton variant="ghost" size="sm">Edit</SButton>
               </template>
             </SDropdown>
             <SDropdown
@@ -911,7 +911,7 @@ const kbdCode = computed(() => `<SDropdown>
               hide-arrow
             >
               <template #trigger>
-                <SButton variant="ghost" size="small">View</SButton>
+                <SButton variant="ghost" size="sm">View</SButton>
               </template>
             </SDropdown>
           </div>

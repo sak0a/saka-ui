@@ -152,7 +152,7 @@ const returnProps: ApiProp[] = [
             <label class="text-sm font-medium text-(--s-text-primary)">Username (localStorage)</label>
             <div class="flex items-center gap-3">
               <SInput v-model="userName" placeholder="Enter your name..." class="flex-1" />
-              <SButton variant="outlined" size="small" @click="clearUserName">
+              <SButton variant="outlined" size="sm" @click="clearUserName">
                 Clear
               </SButton>
             </div>
@@ -165,10 +165,10 @@ const returnProps: ApiProp[] = [
           <div class="space-y-2">
             <label class="text-sm font-medium text-(--s-text-primary)">Counter (localStorage)</label>
             <div class="flex items-center gap-3">
-              <SButton size="small" @click="counter--">-</SButton>
+              <SButton size="sm" @click="counter--">-</SButton>
               <span class="w-12 text-center font-mono text-lg">{{ counter }}</span>
-              <SButton size="small" @click="counter++">+</SButton>
-              <SButton variant="outlined" size="small" @click="clearCounter">
+              <SButton size="sm" @click="counter++">+</SButton>
+              <SButton variant="outlined" size="sm" @click="clearCounter">
                 Reset
               </SButton>
             </div>
@@ -181,7 +181,7 @@ const returnProps: ApiProp[] = [
               <span class="text-(--s-text-secondary)">
                 Visits this session: <strong>{{ sessionData.visitCount }}</strong>
               </span>
-              <SButton variant="ghost" size="small" @click="clearSession">
+              <SButton variant="ghost" size="sm" @click="clearSession">
                 Clear Session
               </SButton>
             </div>
@@ -206,14 +206,14 @@ const returnProps: ApiProp[] = [
               <div class="flex items-center gap-2">
                 <SButton 
                   :variant="preferences.theme === 'light' ? 'filled' : 'outlined'" 
-                  size="small"
+                  size="sm"
                   @click="preferences.theme = 'light'"
                 >
                   Light
                 </SButton>
                 <SButton 
                   :variant="preferences.theme === 'dark' ? 'filled' : 'outlined'" 
-                  size="small"
+                  size="sm"
                   @click="preferences.theme = 'dark'"
                 >
                   Dark
@@ -253,10 +253,10 @@ const returnProps: ApiProp[] = [
         </SCardHeader>
         <SCardContent class="space-y-4">
           <div class="flex flex-wrap gap-2">
-            <SButton size="small" @click="addToCart(1, 'Widget A')">Add Widget A</SButton>
-            <SButton size="small" @click="addToCart(2, 'Widget B')">Add Widget B</SButton>
-            <SButton size="small" @click="addToCart(3, 'Widget C')">Add Widget C</SButton>
-            <SButton variant="outlined" size="small" @click="clearCart">Clear Cart</SButton>
+            <SButton size="sm" @click="addToCart(1, 'Widget A')">Add Widget A</SButton>
+            <SButton size="sm" @click="addToCart(2, 'Widget B')">Add Widget B</SButton>
+            <SButton size="sm" @click="addToCart(3, 'Widget C')">Add Widget C</SButton>
+            <SButton variant="outlined" size="sm" @click="clearCart">Clear Cart</SButton>
           </div>
           
           <div v-if="cart.items.length" class="space-y-2">

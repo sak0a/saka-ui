@@ -138,9 +138,9 @@ const variantsCode = `<!-- Default -->
 <!-- Minimal -->
 <SAccordion type="minimal">...</SAccordion>`
 
-const sizesCode = `<SAccordion size="small">...</SAccordion>
-<SAccordion size="medium">...</SAccordion>
-<SAccordion size="large">...</SAccordion>`
+const sizesCode = `<SAccordion size="sm">...</SAccordion>
+<SAccordion size="md">...</SAccordion>
+<SAccordion size="lg">...</SAccordion>`
 
 const customIconCode = `<SAccordion v-model="expanded" type="separated">
   <SAccordionItem name="settings">
@@ -283,7 +283,7 @@ const accordionProps: ApiProp[] = [
   { name: 'multiple', type: 'boolean', default: 'false', description: 'Allow multiple items open', category: 'Core' },
   { name: 'collapsible', type: 'boolean', default: 'true', description: 'Allow all items to be collapsed', category: 'Core' },
   { name: 'type', type: "'default' | 'bordered' | 'separated' | 'card' | 'minimal'", default: "'default'", description: 'Visual variant', category: 'Appearance' },
-  { name: 'size', type: "'small' | 'medium' | 'large'", default: "'medium'", description: 'Size variant', category: 'Appearance' },
+  { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size variant', category: 'Appearance' },
   { name: 'color', type: 'string', default: "'var(--s-primary)'", description: 'Accent color', category: 'Appearance' },
   { name: 'dense', type: 'boolean', default: 'false', description: 'Compact mode with reduced padding', category: 'Appearance' },
   { name: 'iconPlacement', type: "'left' | 'right'", default: "'right'", description: 'Expand icon position', category: 'Icons' },
@@ -700,7 +700,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           <div>
             <p class="text-sm text-muted-foreground mb-3">Small</p>
             <div class="max-w-md">
-              <SAccordion v-model="sizeValue" type="bordered" size="small">
+              <SAccordion v-model="sizeValue" type="bordered" size="sm">
                 <SAccordionItem name="item-1">
                   <SAccordionTrigger>Small Size</SAccordionTrigger>
                   <SAccordionContent>Compact accordion for tight spaces.</SAccordionContent>
@@ -711,7 +711,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           <div>
             <p class="text-sm text-muted-foreground mb-3">Medium (default)</p>
             <div class="max-w-md">
-              <SAccordion v-model="sizeValue" type="bordered" size="medium">
+              <SAccordion v-model="sizeValue" type="bordered" size="md">
                 <SAccordionItem name="item-1">
                   <SAccordionTrigger>Medium Size</SAccordionTrigger>
                   <SAccordionContent>Standard size for most use cases.</SAccordionContent>
@@ -722,7 +722,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           <div>
             <p class="text-sm text-muted-foreground mb-3">Large</p>
             <div class="max-w-md">
-              <SAccordion v-model="sizeValue" type="bordered" size="large">
+              <SAccordion v-model="sizeValue" type="bordered" size="lg">
                 <SAccordionItem name="item-1">
                   <SAccordionTrigger>Large Size</SAccordionTrigger>
                   <SAccordionContent>Larger padding for emphasis.</SAccordionContent>

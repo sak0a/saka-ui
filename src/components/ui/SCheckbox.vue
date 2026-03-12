@@ -11,13 +11,13 @@ const checkboxVariants = cva(
   {
     variants: {
       size: {
-        small: 'w-4 h-4',
-        medium: 'w-5 h-5',
-        large: 'w-6 h-6',
+        sm: 'w-4 h-4',
+        md: 'w-5 h-5',
+        lg: 'w-6 h-6',
       },
     },
     defaultVariants: {
-      size: 'medium',
+      size: 'md',
     },
   }
 )
@@ -27,7 +27,7 @@ export type CheckboxVariants = VariantProps<typeof checkboxVariants>
 export interface Props {
   modelValue?: boolean | string | number | any[]
   value?: any
-  size?: 'small' | 'medium' | 'large'
+  size?: 'sm' | 'md' | 'lg'
   color?: string
   disabled?: boolean
   loading?: boolean
@@ -46,7 +46,7 @@ export interface Props {
 const props = withDefaults(defineProps<Props>(), {
   modelValue: false,
   value: undefined,
-  size: 'medium',
+  size: 'md',
   color: undefined,
   disabled: false,
   loading: false,
@@ -124,17 +124,17 @@ const handleKeydown = (e: KeyboardEvent) => {
 // Size configurations for icon and label
 const sizeConfig = computed(() => {
   const sizes = {
-    small: {
+    sm: {
       icon: 'text-[10px]',
       label: 'text-xs',
       gap: 'gap-1.5'
     },
-    medium: {
+    md: {
       icon: 'text-xs',
       label: 'text-sm',
       gap: 'gap-2'
     },
-    large: {
+    lg: {
       icon: 'text-sm',
       label: 'text-base',
       gap: 'gap-2.5'

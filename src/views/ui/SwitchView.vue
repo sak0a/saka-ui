@@ -54,19 +54,19 @@ const isEnabled = ref(false)
   <SSwitch v-model="isEnabled" />
 </template>`
 
-const sizesCode = `<SSwitch v-model="small" size="small" />
-<SSwitch v-model="medium" size="medium" />
-<SSwitch v-model="large" size="large" />`
+const sizesCode = `<SSwitch v-model="small" size="sm" />
+<SSwitch v-model="medium" size="md" />
+<SSwitch v-model="large" size="lg" />`
 
 const typesCode = `<!-- Inset (default) -->
-<SSwitch v-model="value" type="inset" size="small" />
-<SSwitch v-model="value" type="inset" size="medium" />
-<SSwitch v-model="value" type="inset" size="large" />
+<SSwitch v-model="value" type="inset" size="sm" />
+<SSwitch v-model="value" type="inset" size="md" />
+<SSwitch v-model="value" type="inset" size="lg" />
 
 <!-- Outset - thumb larger than track -->
-<SSwitch v-model="value" type="outset" size="small" />
-<SSwitch v-model="value" type="outset" size="medium" />
-<SSwitch v-model="value" type="outset" size="large" />`
+<SSwitch v-model="value" type="outset" size="sm" />
+<SSwitch v-model="value" type="outset" size="md" />
+<SSwitch v-model="value" type="outset" size="lg" />`
 
 const colorsCode = `<SSwitch v-model="switch1" color="#3b82f6" />
 <SSwitch v-model="switch2" color="#ec4899" />
@@ -88,17 +88,17 @@ const iconsCode = computed(() => `<script setup>${li('check', 'close')}
     v-model="value"
     ${cp('check', 'checked-icon')}
     ${cp('close', 'unchecked-icon')}
-    size="large"
+    size="lg"
   />
 
   <!-- Using custom content via slots -->
-  <SSwitch v-model="value" size="large">
+  <SSwitch v-model="value" size="lg">
     <template #checked-icon>🤔</template>
     <template #unchecked-icon>➡️</template>
   </SSwitch>
 
   <!-- Emoji icons with custom color -->
-  <SSwitch v-model="value" size="large" color="#f59e0b">
+  <SSwitch v-model="value" size="lg" color="#f59e0b">
     <template #checked-icon>☀️</template>
     <template #unchecked-icon>🌙</template>
   </SSwitch>
@@ -252,15 +252,15 @@ const realWorldCode = computed(() => `<script setup>${li('weather-night', 'weath
       >
         <div class="flex flex-wrap gap-8 items-center">
           <div class="flex flex-col items-center gap-3">
-            <SSwitch v-model="sizeSmall" size="small" />
+            <SSwitch v-model="sizeSmall" size="sm" />
             <span class="text-xs font-mono text-(--s-text-secondary)">small</span>
           </div>
           <div class="flex flex-col items-center gap-3">
-            <SSwitch v-model="sizeMedium" size="medium" />
+            <SSwitch v-model="sizeMedium" size="md" />
             <span class="text-xs font-mono text-(--s-text-secondary)">medium</span>
           </div>
           <div class="flex flex-col items-center gap-3">
-            <SSwitch v-model="sizeLarge" size="large" />
+            <SSwitch v-model="sizeLarge" size="lg" />
             <span class="text-xs font-mono text-(--s-text-secondary)">large</span>
           </div>
         </div>
@@ -281,15 +281,15 @@ const realWorldCode = computed(() => `<script setup>${li('weather-night', 'weath
             <span class="text-sm font-semibold text-(--s-text-primary)">Inset (default)</span>
             <div class="flex flex-wrap gap-6 items-center">
               <div class="flex flex-col items-center gap-3">
-                <SSwitch v-model="sizeSmall" type="inset" size="small" />
+                <SSwitch v-model="sizeSmall" type="inset" size="sm" />
                 <span class="text-xs font-mono text-(--s-text-secondary)">small</span>
               </div>
               <div class="flex flex-col items-center gap-3">
-                <SSwitch v-model="sizeMedium" type="inset" size="medium" />
+                <SSwitch v-model="sizeMedium" type="inset" size="md" />
                 <span class="text-xs font-mono text-(--s-text-secondary)">medium</span>
               </div>
               <div class="flex flex-col items-center gap-3">
-                <SSwitch v-model="sizeLarge" type="inset" size="large" />
+                <SSwitch v-model="sizeLarge" type="inset" size="lg" />
                 <span class="text-xs font-mono text-(--s-text-secondary)">large</span>
               </div>
             </div>
@@ -298,15 +298,15 @@ const realWorldCode = computed(() => `<script setup>${li('weather-night', 'weath
             <span class="text-sm font-semibold text-(--s-text-primary)">Outset</span>
             <div class="flex flex-wrap gap-6 items-center">
               <div class="flex flex-col items-center gap-3">
-                <SSwitch v-model="outsetSmall" type="outset" size="small" />
+                <SSwitch v-model="outsetSmall" type="outset" size="sm" />
                 <span class="text-xs font-mono text-(--s-text-secondary)">small</span>
               </div>
               <div class="flex flex-col items-center gap-3">
-                <SSwitch v-model="outsetMedium" type="outset" size="medium" />
+                <SSwitch v-model="outsetMedium" type="outset" size="md" />
                 <span class="text-xs font-mono text-(--s-text-secondary)">medium</span>
               </div>
               <div class="flex flex-col items-center gap-3">
-                <SSwitch v-model="outsetLarge" type="outset" size="large" />
+                <SSwitch v-model="outsetLarge" type="outset" size="lg" />
                 <span class="text-xs font-mono text-(--s-text-secondary)">large</span>
               </div>
             </div>
@@ -372,14 +372,14 @@ const realWorldCode = computed(() => `<script setup>${li('weather-night', 'weath
               v-model="iconSwitch"
               :checked-icon="ri('check')"
               :unchecked-icon="ri('close')"
-              size="large"
+              size="lg"
             />
             <span class="text-xs font-mono text-(--s-text-secondary)">Icon props</span>
           </div>
           <div class="flex flex-col items-center gap-3">
             <SSwitch 
               v-model="customIconSwitch" 
-              size="large"
+              size="lg"
             >
               <template #checked-icon>🤔</template>
               <template #unchecked-icon>➡️</template>
@@ -389,7 +389,7 @@ const realWorldCode = computed(() => `<script setup>${li('weather-night', 'weath
           <div class="flex flex-col items-center gap-3">
             <SSwitch 
               v-model="customIconSwitch2" 
-              size="large"
+              size="lg"
               color="#f59e0b"
             >
               <template #checked-icon>☀️</template>

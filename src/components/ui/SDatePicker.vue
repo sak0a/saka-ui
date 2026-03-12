@@ -11,7 +11,7 @@ export interface Props {
   
   // Display
   variant?: 'outlined' | 'filled' | 'ghost'
-  size?: 'small' | 'medium' | 'large'
+  size?: 'sm' | 'md' | 'lg'
   color?: string
   rounded?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'
   
@@ -53,7 +53,7 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: null,
   mode: 'single',
   variant: 'outlined',
-  size: 'medium',
+  size: 'md',
   color: 'var(--s-primary)',
   rounded: 'md',
   format: 'MMM dd, yyyy',
@@ -758,21 +758,21 @@ onBeforeUnmount(() => {
 // Size configurations
 const sizeConfig = computed(() => {
   const sizes = {
-    small: {
+    sm: {
       trigger: 'min-h-8 text-xs',
       padding: 'px-2 py-0.5',
       icon: 'text-sm',
       day: 'w-7 h-7 text-xs',
       label: 'text-xs mb-1'
     },
-    medium: {
+    md: {
       trigger: 'min-h-10 text-sm',
       padding: 'px-2 py-0.5',
       icon: 'text-base',
       day: 'w-9 h-9 text-sm',
       label: 'text-sm mb-1.5'
     },
-    large: {
+    lg: {
       trigger: 'min-h-12 text-base',
       padding: 'px-2.5 py-0.5',
       icon: 'text-lg',

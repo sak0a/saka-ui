@@ -29,7 +29,7 @@ const basicOptions = [
 
 // Sizes demo
 const sizeSmall = ref(null)
-const sizeMedium = ref('medium')
+const sizeMedium = ref('md')
 const sizeLarge = ref(null)
 
 // Variants demo
@@ -207,9 +207,9 @@ const options = [
   <SSelect v-model="selected" :options="options" placeholder="Select a framework" />
 </template>`
 
-const sizesCode = `<SSelect v-model="small" :options="options" size="small" />
-<SSelect v-model="medium" :options="options" size="medium" />
-<SSelect v-model="large" :options="options" size="large" />`
+const sizesCode = `<SSelect v-model="small" :options="options" size="sm" />
+<SSelect v-model="medium" :options="options" size="md" />
+<SSelect v-model="large" :options="options" size="lg" />`
 
 const variantsCode = `<SSelect v-model="v1" :options="options" variant="outlined" />
 <SSelect v-model="v2" :options="options" variant="filled" />
@@ -506,7 +506,7 @@ const optionGroupSlots: ApiSlot[] = [
             <SSelect 
               v-model="sizeSmall" 
               :options="basicOptions" 
-              size="small"
+              size="sm"
               placeholder="Select..."
             />
           </div>
@@ -515,7 +515,7 @@ const optionGroupSlots: ApiSlot[] = [
             <SSelect 
               v-model="sizeMedium" 
               :options="basicOptions" 
-              size="medium"
+              size="md"
               placeholder="Select..."
             />
           </div>
@@ -524,7 +524,7 @@ const optionGroupSlots: ApiSlot[] = [
             <SSelect 
               v-model="sizeLarge" 
               :options="basicOptions" 
-              size="large"
+              size="lg"
               placeholder="Select..."
             />
           </div>
