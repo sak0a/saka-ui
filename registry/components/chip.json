@@ -2,7 +2,7 @@
   "name": "chip",
   "displayName": "SChip",
   "description": "Chip/tag with filled, outlined, and light variants, closable, and disabled states",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "files": [
     "components/ui/SChip.vue"
   ],

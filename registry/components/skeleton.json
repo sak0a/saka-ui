@@ -2,7 +2,7 @@
   "name": "skeleton",
   "displayName": "SSkeleton",
   "description": "Placeholder loading indicator with wave shimmer and pulse animations",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "files": [
     "components/ui/SSkeleton.vue"
   ],

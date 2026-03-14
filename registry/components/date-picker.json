@@ -2,7 +2,7 @@
   "name": "date-picker",
   "displayName": "SDatePicker",
   "description": "Date picker with calendar, range selection, time picker, and locale support",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "files": [
     "components/ui/SDatePicker.vue"
   ],

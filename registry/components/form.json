@@ -2,7 +2,7 @@
   "name": "form",
   "displayName": "SForm",
   "description": "Form container with field validation, error display, and form state management",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "files": [
     "components/ui/form/index.ts",
     "components/ui/form/SForm.vue",

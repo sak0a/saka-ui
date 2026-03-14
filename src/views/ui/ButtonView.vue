@@ -60,7 +60,8 @@ const variantsCode = `<SButton variant="filled">Filled</SButton>
 <SButton variant="ghost">Ghost</SButton>
 <SButton variant="link">Link</SButton>
 <SButton variant="dashed">Dashed</SButton>
-<SButton variant="glass">Glass</SButton>`
+<SButton variant="glass">Glass</SButton>
+<SButton variant="elevated">Elevated</SButton>`
 
 const semanticTypesCode = `<SButton type="primary">Primary</SButton>
 <SButton type="success">Success</SButton>
@@ -80,6 +81,7 @@ const variantColorsCode = `<SButton color="#8b5cf6" variant="filled">Filled</SBu
 <SButton color="#8b5cf6" variant="ghost">Ghost</SButton>
 <SButton color="#8b5cf6" variant="dashed">Dashed</SButton>
 <SButton color="#8b5cf6" variant="glass">Glass</SButton>
+<SButton color="#8b5cf6" variant="elevated">Elevated</SButton>
 
 <SButton color="#ef4444" variant="filled">Filled</SButton>
 <SButton color="#ef4444" variant="outlined">Outlined</SButton>
@@ -87,13 +89,15 @@ const variantColorsCode = `<SButton color="#8b5cf6" variant="filled">Filled</SBu
 <SButton color="#ef4444" variant="ghost">Ghost</SButton>
 <SButton color="#ef4444" variant="dashed">Dashed</SButton>
 <SButton color="#ef4444" variant="glass">Glass</SButton>
+<SButton color="#ef4444" variant="elevated">Elevated</SButton>
 
 <SButton color="#06b6d4" variant="filled">Filled</SButton>
 <SButton color="#06b6d4" variant="outlined">Outlined</SButton>
 <SButton color="#06b6d4" variant="light">Light</SButton>
 <SButton color="#06b6d4" variant="ghost">Ghost</SButton>
 <SButton color="#06b6d4" variant="dashed">Dashed</SButton>
-<SButton color="#06b6d4" variant="glass">Glass</SButton>`
+<SButton color="#06b6d4" variant="glass">Glass</SButton>
+<SButton color="#06b6d4" variant="elevated">Elevated</SButton>`
 
 const sizesCode = `<SButton size="xs">Extra Small</SButton>
 <SButton size="sm">Small</SButton>
@@ -279,7 +283,7 @@ const kbdShortcutCode = `<SButton variant="outlined">
 // API Reference data
 const buttonProps: ApiProp[] = [
   // Appearance
-  { name: 'variant', type: "'filled' | 'outlined' | 'light' | 'ghost' | 'link' | 'dashed' | 'glass'", default: "'filled'", description: 'Visual style variant', category: 'Appearance' },
+  { name: 'variant', type: "'filled' | 'outlined' | 'light' | 'ghost' | 'link' | 'dashed' | 'glass' | 'elevated'", default: "'filled'", description: 'Visual style variant', category: 'Appearance' },
   { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Button size', category: 'Appearance' },
   { name: 'color', type: 'string', default: "'var(--s-primary)'", description: 'Button color (CSS color or variable)', category: 'Appearance' },
   { name: 'rounded', type: "'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'full'", default: "'md'", description: 'Border radius variant', category: 'Appearance' },
@@ -345,9 +349,9 @@ const keyboardShortcuts: KeyboardShortcut[] = [
         <div class="p-4 rounded-xl bg-emerald-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
             <Palette class="w-5 h-5 text-emerald-500" />
-            <h3 class="font-semibold text-(--s-text-primary)">Seven Variants</h3>
+            <h3 class="font-semibold text-(--s-text-primary)">Eight Variants</h3>
           </div>
-          <p class="text-sm text-(--s-text-secondary)">Filled, outlined, light, ghost, link, dashed, and glass variants with custom color support.</p>
+          <p class="text-sm text-(--s-text-secondary)">Filled, outlined, light, ghost, link, dashed, glass, and elevated variants with custom color support.</p>
         </div>
         <div class="p-4 rounded-xl bg-blue-500/5 border border-(--s-border)">
           <div class="flex items-center gap-3 mb-2">
@@ -410,7 +414,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
       <h2 class="text-2xl font-bold text-(--s-text-primary) mb-6">Variants</h2>
       <DemoSection
         title="Button Variants"
-        description="Seven variants available: filled (default), outlined, light, ghost, link, dashed, and glass."
+        description="Eight variants available: filled (default), outlined, light, ghost, link, dashed, glass, and elevated."
         :code="variantsCode"
         language="vue"
       >
@@ -442,6 +446,10 @@ const keyboardShortcuts: KeyboardShortcut[] = [
           <div class="flex flex-col items-center gap-2">
             <SButton variant="glass">Glass</SButton>
             <span class="text-xs font-mono text-(--s-text-secondary)">glass</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <SButton variant="elevated">Elevated</SButton>
+            <span class="text-xs font-mono text-(--s-text-secondary)">elevated</span>
           </div>
         </div>
       </DemoSection>
@@ -491,6 +499,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             <SButton color="#8b5cf6" variant="ghost">Ghost</SButton>
             <SButton color="#8b5cf6" variant="dashed">Dashed</SButton>
             <SButton color="#8b5cf6" variant="glass">Glass</SButton>
+            <SButton color="#8b5cf6" variant="elevated">Elevated</SButton>
           </div>
           <div class="flex flex-wrap gap-3 items-center">
             <SButton color="#ef4444" variant="filled">Filled</SButton>
@@ -499,6 +508,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             <SButton color="#ef4444" variant="ghost">Ghost</SButton>
             <SButton color="#ef4444" variant="dashed">Dashed</SButton>
             <SButton color="#ef4444" variant="glass">Glass</SButton>
+            <SButton color="#ef4444" variant="elevated">Elevated</SButton>
           </div>
           <div class="flex flex-wrap gap-3 items-center">
             <SButton color="#06b6d4" variant="filled">Filled</SButton>
@@ -507,6 +517,7 @@ const keyboardShortcuts: KeyboardShortcut[] = [
             <SButton color="#06b6d4" variant="ghost">Ghost</SButton>
             <SButton color="#06b6d4" variant="dashed">Dashed</SButton>
             <SButton color="#06b6d4" variant="glass">Glass</SButton>
+            <SButton color="#06b6d4" variant="elevated">Elevated</SButton>
           </div>
         </div>
       </DemoSection>

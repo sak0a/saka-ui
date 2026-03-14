@@ -2,7 +2,7 @@
   "name": "accordion",
   "displayName": "SAccordion",
   "description": "Accordion with collapsible items, multiple/single mode, and customizable styling",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "files": [
     "components/ui/accordion/index.ts",
     "components/ui/accordion/context.ts",

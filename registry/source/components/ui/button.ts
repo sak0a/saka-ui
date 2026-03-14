@@ -12,6 +12,7 @@ export const buttonVariants = cva(
         link: 'bg-transparent text-primary hover:underline',
         dashed: 'bg-transparent border-primary text-primary border-dashed hover:bg-primary/10',
         glass: '',
+        elevated: '',
       },
       size: {
         xs: 'px-1.5 py-0.5 text-xs gap-1',

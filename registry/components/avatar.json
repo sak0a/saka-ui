@@ -2,7 +2,7 @@
   "name": "avatar",
   "displayName": "SAvatar",
   "description": "Avatar with image, fallback, and group layout support",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "files": [
     "components/ui/avatar/index.ts",
     "components/ui/avatar/SAvatar.vue",

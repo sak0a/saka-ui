@@ -2,7 +2,7 @@
   "name": "kbd",
   "displayName": "SKbd",
   "description": "Inline keyboard key indicator with raised 3D, outlined, flat, and ghost variants",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "files": [
     "components/ui/kbd.ts",
     "components/ui/SKbd.vue",

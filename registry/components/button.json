@@ -2,7 +2,7 @@
   "name": "button",
   "displayName": "SButton",
   "description": "Button with variants, sizes, icons, ripple effect, and loading state",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "files": [
     "components/ui/button.ts",
     "components/ui/SButton.vue"
